@@ -1,156 +1,231 @@
-<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta name=generator content="Hugo 0.164.0"><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>我的博客</title><meta name=keywords content="Linux,运维,自动化,Python,Teldrive,博客"><meta name=description content="记录 Linux、运维、自动化和我自己折腾过的项目"><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/><link crossorigin=anonymous href=/assets/css/stylesheet.17e11805d3075f44c706341eeb6b41c4243b7f0769a966362af6f3d10f0b1051.css integrity="sha256-F+EYBdMHX0THBjQe62tBxCQ7fwdpqWY2Kvbz0Q8LEFE=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate type=application/rss+xml href=https://dsduyopg.github.io/index.xml title=rss><link rel=alternate type=application/json href=https://dsduyopg.github.io/index.json title=json><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="我的博客"><meta property="og:description" content="记录 Linux、运维、自动化和我自己折腾过的项目"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="我的博客"><meta name=twitter:description content="记录 Linux、运维、自动化和我自己折腾过的项目"><script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"我的博客","url":"https://dsduyopg.github.io/","description":"记录 Linux、运维、自动化和我自己折腾过的项目","logo":"https://dsduyopg.github.io/favicon.ico","sameAs":["https://github.com/dsduyopg"]}</script></head><body class=list id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇5</h2></header><div class=entry-content><p>例题：
-下列程序段的输出结果为（ ）
-unsigned long pulArray[] = {6,7,8,9,10};
-unsigned long *pulPtr;
-pulPtr = pulArray;
-*(pulPtr + 3) += 3;
-printf("%d,%d\n",*pulPtr, *(pulPtr + 3)); 解释：pulPtr已经是数组的首元素6，而*(pulPtr + 3)是指针向后移动3位所得到的结果，同时把该结果再加上3所得的值是12，接下来再把12赋值给*(pulPtr + 3)，然后由于指针是数组的首地址那么的话，*pulPtr就是6，而(pulPtr + 3)自然就是12，接下来我们就可以选择6 12了，本题11就这样结束了。</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>31 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇5" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇6</h2></header><div class=entry-content><p>例题：实现一个函数，可以左旋字符串中的k个字符，用C语言写出。
+<!DOCTYPE html>
+<html lang="zh-cn" dir="auto" data-theme="auto">
+
+<head>
+	<meta name="generator" content="Hugo 0.164.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>我的博客</title>
+<meta name="keywords" content="Linux, 运维, 自动化, Python, Teldrive, 博客">
+<meta name="description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
+<meta name="author" content="dsduyopg">
+<link rel="canonical" href="http://localhost:1313/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.e43bd292f097a172cd3328da33b8b3c29d3a16aae8222db58d5654514ee9c77a.css" integrity="sha256-5DvSkvCXoXLNMyjaM7izwp06FqroIi21jVZUUU7px3o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml" title="rss">
+<link rel="alternate" type="application/json" href="http://localhost:1313/index.json" title="json">
+<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="我的博客">
+  <meta property="og:description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="我的博客">
+  <meta name="twitter:description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "我的博客",
+  "url": "http://localhost:1313/",
+  "description": "记录 Linux、运维、自动化和我自己折腾过的项目",
+  "logo": "http://localhost:1313/favicon.ico",
+  "sameAs": [
+      "https://github.com/dsduyopg"
+  ]
+}
+</script>
+</head>
+<body class="list" id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">C语言之讲解篇5
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>例题：
+下列程序段的输出结果为（ ）unsigned long pulArray[] = {6,7,8,9,10};unsigned long *pulPtr;pulPtr = pulArray;*(pulPtr &#43; 3) &#43;= 3;printf(&#34;%d,%d\n&#34;,*pulPtr, *(pulPtr &#43; 3)); 解释：pulPtr已经是数组的首元素6，而*(pulPtr &#43; 3)是指针向后移动3位所得到的结果，同时把该结果再加上3所得的值是12，接下来再把12赋值给*(pulPtr &#43; 3)，然后由于指针是数组的首地址那么的话，*pulPtr就是6，而(pulPtr &#43; 3)自然就是12，接下来我们就可以选择6 12了，本题11就这样结束了。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>31 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to C语言之讲解篇5" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">C语言之讲解篇6
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>例题：实现一个函数，可以左旋字符串中的k个字符，用C语言写出。
 每次可以把第一个字符存下来，接下来可以以此把每个字符向前移动一个位置，最后把最后一个字符赋值为刚开始存下的值，这样每次做到的就是翻转就是一个字符，那么将总共的大循环，设定为翻转得个数，那么就可以轻轻松松解决问题了，下面是我的代码示例：
-#include&lt;stdio.h>
-#include&lt;string.h>
-void programming(char * a,int n,int num);
-int main()
-{
-char num[50];
-int n,a;
-printf("请输入一些内容：\n");
-gets(num);
-a=strlen(num);
-printf("请输入你n的数值\n");
-scanf("%d",&amp;n);
-printf("左旋字符串中的n个字符\n");
-programming(num,n,a);
-printf("%s\n",num);
-return 0;
-}
-void programming(char * a,int n,int num)
-{
-int i=0;
-char temp;
-for(i=0;i&lt;n;i++)
-{
-temp=*a;
-for(int j=0;j&lt;num-1;j++)
-*(a+j)=*(a+1+j);
-*(a+num-1)=temp;
-}
-} 该代码的运行结果，是如下：</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>49 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇6" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇7</h2></header><div class=entry-content><p>例题：写一个函数，可以逆序一个字符串的内容。
-#include &lt;stdio.h>
-void reverse(char * letter);
-int main()
-{
-char num[50];
-int i;
-while(num[i]!='\0')
-{
-scanf("%c",&amp;num[i]);
-i++;
-}
-reverse(num);
-return 0;
-}
-void reverse(char * letter)
-{
-char * start=letter;
-while(*letter!='\0')
-{
-letter++;
-}
-while(letter>=start)
-{
-printf("%c",*letter);
-letter--;
-}
-} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：
-/*
-思路：该题比较简单，请参考代码
-*/
-#include&lt;stdio.h>
-void Reverse(char* str)
-{
-char* left = str;
-char* right = str + strlen(str)-1;
-while(left &lt; right)
-{
-char temp = *left;
-*left = *right;
-*right = temp;
-++left;
---right;
-}
-}
-int main()
-{
-char str[] = "hello bit";
-//在这里完成下面函数，参数自己设计，要求：使用指针
-Reverse(str);
-return 0;
-}
-// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，
-int main()
-{
-char str[101] = {0};
-while(gets(str))
-{
-Reverse(str);
-printf("%s\n", str);
-memset(str, 0, sizeof(str)/sizeof(str[0]));
-}
-return 0;
-} 接下来本题就宣告结束了。</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>113 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇7" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇8</h2></header><div class=entry-content><p>例题：
+#include&lt;stdio.h&gt;#include&lt;string.h&gt;void programming(char * a,int n,int num);int main(){char num[50];int n,a;printf(&#34;请输入一些内容：\n&#34;);gets(num);a=strlen(num);printf(&#34;请输入你n的数值\n&#34;);scanf(&#34;%d&#34;,&amp;n);printf(&#34;左旋字符串中的n个字符\n&#34;);programming(num,n,a);printf(&#34;%s\n&#34;,num);return 0;}void programming(char * a,int n,int num){int i=0;char temp;for(i=0;i&lt;n;i&#43;&#43;){temp=*a;for(int j=0;j&lt;num-1;j&#43;&#43;)*(a&#43;j)=*(a&#43;1&#43;j);*(a&#43;num-1)=temp;}} 该代码的运行结果，是如下：
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>49 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to C语言之讲解篇6" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">C语言之讲解篇7
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>例题：写一个函数，可以逆序一个字符串的内容。
+#include &lt;stdio.h&gt;void reverse(char * letter);int main(){char num[50];int i;while(num[i]!=&#39;\0&#39;){scanf(&#34;%c&#34;,&amp;num[i]);i&#43;&#43;;}reverse(num);return 0;}void reverse(char * letter){char * start=letter;while(*letter!=&#39;\0&#39;){letter&#43;&#43;;}while(letter&gt;=start){printf(&#34;%c&#34;,*letter);letter--;}} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：
+/*思路：该题比较简单，请参考代码*/#include&lt;stdio.h&gt;void Reverse(char* str){char* left = str;char* right = str &#43; strlen(str)-1;while(left &lt; right){char temp = *left;*left = *right;*right = temp;&#43;&#43;left;--right;}}int main(){char str[] = &#34;hello bit&#34;;//在这里完成下面函数，参数自己设计，要求：使用指针Reverse(str);return 0;}// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，int main(){char str[101] = {0};while(gets(str)){Reverse(str);printf(&#34;%s\n&#34;, str);memset(str, 0, sizeof(str)/sizeof(str[0]));}return 0;} 接下来本题就宣告结束了。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>113 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to C语言之讲解篇7" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">C语言之讲解篇8
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>例题：
 输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。
 1.首先设置一个逆序输出的函数。 由于他们是没有任何返回值的因此呢，我们可以设定一个没有一个返回值的函数，同时还需要做到，对原来的函数进行修改，因此我们考虑使用数组或者指针。所以结合以上，所设置的函数可以是：
 void swap_arr(int arr[], int sz); 2.其次呢再设定两个变量，left,right. 1.left,right的初始化 在这里，我们首先可以假定left是数组的最小者，而right是数组的最大者，由于数组的小标是从0开始的那么最大者就是数组的长度减去1，而求数组的长度就可以使用sz，那么的话，最大者就是：sz-1
-left 0;
-right sz-1; 2.left与right的具体实现 1.left的具体实现 是通过遇到偶数时停止循环造成的。
+left 0;right sz-1; 2.left与right的具体实现 1.left的具体实现 是通过遇到偶数时停止循环造成的。
 1.left的的执行功能 left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。
 2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left&lt;=right，当其为偶数时就跳出循环。
 基本语句如下：
-while(left&lt;right)
-{
-// 从前往后，找到一个偶数，找到后停止
-while((left&lt;right)&&(arr[left]%2==1))
-{
-left++;
-}
-} 2.right的具体实现 是通过遇到奇数时停止循环造成的。
+while(left&lt;right){// 从前往后，找到一个偶数，找到后停止while((left&lt;right)&amp;&amp;(arr[left]%2==1)){left&#43;&#43;;}} 2.right的具体实现 是通过遇到奇数时停止循环造成的。
 1.right的的执行功能 right首先是定义为寻找偶数数，而遇到奇数时就停止循环，并将那个偶数带回到right身上。
 2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left&lt;=right，当其为奇数时就跳出循环。
 基本语句如下：
-while((left&lt;right)&& (arr[right]%2==0))
-{
-right--;
-} 3.最后是left,ritht的交换与现实 最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：
-void swap_arr(int arr[], int sz)
-{
-int left = 0;
-int right = sz-1;
-int tmp = 0;
-while(left&lt;right)
-{
-// 从前往后，找到一个偶数，找到后停止
-while((left&lt;right)&&(arr[left]%2==1))
-{
-left++;
-}
-// 从后往前找，找一个奇数，找到后停止
-while((left&lt;right)&& (arr[right]%2==0))
-{
-right--;
-}
-// 如果偶数和奇数都找到，交换这两个数据的位置
-// 然后继续找，直到两个指针相遇
-if(left&lt;right)
-{
-tmp = arr[left];
-arr[left] = arr[right];
-arr[right] = tmp;
-}
-}
-} 3.最后就可完成函数了。 将函数部分搞定之后我们就可以，把整个代码搞定了，如下：
-...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>193 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇8" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之扫雷游戏</h2></header><div class=entry-content><p>C语言之扫雷游戏 1.扫雷游戏的准备工作
+while((left&lt;right)&amp;&amp; (arr[right]%2==0)){right--;} 3.最后是left,ritht的交换与现实 最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：
+void swap_arr(int arr[], int sz){int left = 0;int right = sz-1;int tmp = 0;while(left&lt;right){// 从前往后，找到一个偶数，找到后停止while((left&lt;right)&amp;&amp;(arr[left]%2==1)){left&#43;&#43;;}// 从后往前找，找一个奇数，找到后停止while((left&lt;right)&amp;&amp; (arr[right]%2==0)){right--;}// 如果偶数和奇数都找到，交换这两个数据的位置// 然后继续找，直到两个指针相遇if(left&lt;right){tmp = arr[left];arr[left] = arr[right];arr[right] = tmp;}}} 3.最后就可完成函数了。 将函数部分搞定之后我们就可以，把整个代码搞定了，如下：
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>193 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to C语言之讲解篇8" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">C语言之扫雷游戏
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>C语言之扫雷游戏 1.扫雷游戏的准备工作
 2.扫雷游戏的基本逻辑
 一.扫雷的基本框架
 二. 扫雷游戏的基本逻辑
@@ -165,19 +240,22 @@ arr[right] = tmp;
 1.扫雷游戏的准备工作 在进行扫雷工作时，我们需要做的是需要一个编译环境，在市面上有众多的编译器，在这里作为使用过VS的我来说，它简直太适合我们这样的初学者了，里面支持自动换行对于初学者非常友好，同时，最为关键的是，在这款编译器当中，我们使用调试功能，是极其的容易，并且它的调试功能也是极其强大的。 写到最后，我推荐大家观看B站鹏哥的视频，在那里鹏哥会给我们最为直观的讲解，会非常详细的指导大家的。
 2.扫雷游戏的基本逻辑 一.扫雷的基本框架 在扫雷游戏中时，首先需要我们在VS编译器当中准备三个文件，二个C文件一个头文件： 在这里大家可以参考一下我准备的文件 二. 扫雷游戏的基本逻辑 1.在C语言扫雷游戏之中，需要注意的是扫雷游戏时在选定的区域的附近八个点位统计雷的个数并输出在选定的区域之上，但是若果选定的区域是边上亦或是角上，那么就会导致无法遍历，超出应有的范围，这个问题我们可以假设棋盘的大小是9x9然而总共数组的大小可以设定11x11那么，就不是解决了问题吗？ 2.扫雷的基本思路是首先需要准备2个字符数组，一个数组存放排查出的雷的数量信息记录存储，并打印出来，而另一个数组则存放布置好雷的信息，这样就互不干扰了 3.同时为了保持神秘，show数组开始时初始化为字符 ‘*’，为了保持两个数组的类型一致，可以使用同一 套函数处理，mine数组最开始也初始化为字符’0’，布置雷改成’1’。如下如： 三.扫雷需要的所有函数 对于扫雷的实现需要用到，大量的函数，在这里我将为大家呈现出应当使用的具体函数：
 1.定义初始化函数 首先我们需要一个初始化棋盘的函数，而对于二个棋盘,一个接受‘0’的初始化，而另一个则接受‘*’的初始化，像这样的函数：
-void InitBoard(char board[ROWS][COLS], int rows, int cols, char set)
-{
-int i = 0;
-for (i = 0; i &lt; rows; i++)
-{
-int j = 0;
-for (j = 0; j &lt; cols; j++)
-{
-board[i][j] = set;
-}
-}
-} 2.定义打印棋盘函数 1.在使用中，我们需要看到棋盘显示在电脑上，那么显而易见的是我们可以使用打印棋盘这个函数。
-...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>845 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之扫雷游戏" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之指针篇第五</h2></header><div class=entry-content><p>在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。
+void InitBoard(char board[ROWS][COLS], int rows, int cols, char set){int i = 0;for (i = 0; i &lt; rows; i&#43;&#43;){int j = 0;for (j = 0; j &lt; cols; j&#43;&#43;){board[i][j] = set;}}} 2.定义打印棋盘函数 1.在使用中，我们需要看到棋盘显示在电脑上，那么显而易见的是我们可以使用打印棋盘这个函数。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>845 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to C语言之扫雷游戏" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">C语言之指针篇第五
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。
 C语言之指针篇第五 一.sizeof和strlen的对⽐
 1.sizeof
 1.sizeof含义
@@ -188,48 +266,31 @@ C语言之指针篇第五 一.sizeof和strlen的对⽐
 二.数组指针笔试题解析
 一.sizeof和strlen的对⽐ 首先在学习中时，我们通常会经常遇到sizeof，以及strlen函数，我们在使用时经常会分不清sizeof以及strlen，我们经常会用着用着，将两个函数用颠倒，大家对此简直是苦不堪言，因此呢，我将用这节为大家详细介绍两者区别，相信大家在听过我的讲解之后，一定会在今后的学习中，对两者运用的更加之熟练。
 1.sizeof 1.sizeof含义 sizeof 主要计算的是变量所占内存内存空间⼤⼩的，单位是字节，如果操作数是类型的话，计算的是使⽤类型创建的变量所占内存空间的⼤小，sizeof 只关注占⽤内存空间的⼤⼩，不在乎内存中存放什么数据。
-2.例子： int a=1;
-sizeof(a);//因此呢，算出的数值是4. 又有例子：
-int a=4;
-int * s=&amp;a;
-sizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者是32根地址线因此地址无论是整形或者是字符型亦或者是数组型
-//它们其实都是4或者8 2.strlen 1.strlen的含义 它的功能是，求字符的长度，遇到‘\0’则停止，否则会在内存中找到‘\0’,这样才会停下来，如此一番，求出的则是随机值。
-2.例子 char a="hello bit";
-int a=strlen(a);//由于“”省略了\0，因此求出的是8
-又有例子：
-char a[]={'hello','bit'};
-int a=strlen(a);//在这里，由于没有设置‘\0’,那么的话，结果就有可能是随机值。 二.数组指针笔试题解析 例题1：
-int a[] = {1,2,3,4};
-printf("%d\n",sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.
-printf("%d\n",sizeof(a+0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8
-printf("%d\n",sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4
-printf("%d\n",sizeof(a+1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.
-printf("%d\n",sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4
-printf("%d\n",sizeof(&amp;a));//这里是数组的地址，也就是说是4或者是8.
-printf("%d\n",sizeof(*&amp;a));//注意*&相当于没有因此该式子也就是sizeof(a)，注意是16
-12345678
-printf("%d\n",sizeof(&amp;a+1));//在这里的意思是指向数组的后面的地址，也就是4或者是8
-printf("%d\n",sizeof(&amp;a[0]));//这里是首元素的地址，是4或者是8
-printf("%d\n",sizeof(&amp;a[0]+1));//是第二个元素的地址是4或者是8. 例题2：
-char arr[] = {'a','b','c','d','e'};
-printf("%d\n", sizeof(arr));//由于没有‘\0’那么的话，就是5
-printf("%d\n", sizeof(arr+0));//这里是首元素的地址，那么是4或者是8
-printf("%d\n", sizeof(*arr));//是首元素那么就是1
-printf("%d\n", sizeof(arr[1]));//在这里也是首元素，那么是1
-printf("%d\n", sizeof(&amp;arr));//这里是数组的地址是4或者是8
-printf("%d\n", sizeof(&amp;arr+1));//这里是在数组之后的地址，也就是4或者是8
-printf("%d\n", sizeof(&amp;arr[0]+1));//是第二个元素地址是4或者是8 char arr[]="abcdef”；
-printf("%d\n",strlen(arr));//这里是说字符串的长度是6
-printf("%d\n",strlen(*arr);//在这里会出错。
-printf("%d\n",strlen(arr[1]));//在这里也会出错
-printf("%d\n",strlen(&amp;arr));//是6
-printf("%d\n",strlen(&amp;arr+1));//这会跳出这个数组，应该是0
-printf("%d\n",strlen(&amp;arr[0]+1));//这里第二个元素的地址是5 完（。）</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>88 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之指针篇第五" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言指针篇第一</h2></header><div class=entry-content><p>从这一节开始，我们就要开启学习指针之旅，我将此次指针的学习分为5次，今天是第一次学习，在学习指针的时候我们必定会遇到许多困难与挑战，我们会遇到一些比较抽象的概念，也会遇到一些复杂的代码，不管如何，我们能做的只有坚持，坚持只有这样，我们才可以真正搞懂所谓的指针，明白指针的确实含义，来开启我们今天的指针学习吧，亲爱的同学们！
+2.例子： int a=1;sizeof(a);//因此呢，算出的数值是4. 又有例子：
+int a=4;int * s=&amp;a;sizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者是32根地址线因此地址无论是整形或者是字符型亦或者是数组型//它们其实都是4或者8 2.strlen 1.strlen的含义 它的功能是，求字符的长度，遇到‘\0’则停止，否则会在内存中找到‘\0’,这样才会停下来，如此一番，求出的则是随机值。
+2.例子 char a=&#34;hello bit&#34;;int a=strlen(a);//由于“”省略了\0，因此求出的是8又有例子：char a[]={&#39;hello&#39;,&#39;bit&#39;};int a=strlen(a);//在这里，由于没有设置‘\0’,那么的话，结果就有可能是随机值。 二.数组指针笔试题解析 例题1：
+int a[] = {1,2,3,4};printf(&#34;%d\n&#34;,sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.printf(&#34;%d\n&#34;,sizeof(a&#43;0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8printf(&#34;%d\n&#34;,sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4printf(&#34;%d\n&#34;,sizeof(a&#43;1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.printf(&#34;%d\n&#34;,sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4printf(&#34;%d\n&#34;,sizeof(&amp;a));//这里是数组的地址，也就是说是4或者是8.printf(&#34;%d\n&#34;,sizeof(*&amp;a));//注意*&amp;相当于没有因此该式子也就是sizeof(a)，注意是1612345678printf(&#34;%d\n&#34;,sizeof(&amp;a&#43;1));//在这里的意思是指向数组的后面的地址，也就是4或者是8printf(&#34;%d\n&#34;,sizeof(&amp;a[0]));//这里是首元素的地址，是4或者是8printf(&#34;%d\n&#34;,sizeof(&amp;a[0]&#43;1));//是第二个元素的地址是4或者是8. 例题2：
+char arr[] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;};printf(&#34;%d\n&#34;, sizeof(arr));//由于没有‘\0’那么的话，就是5printf(&#34;%d\n&#34;, sizeof(arr&#43;0));//这里是首元素的地址，那么是4或者是8printf(&#34;%d\n&#34;, sizeof(*arr));//是首元素那么就是1printf(&#34;%d\n&#34;, sizeof(arr[1]));//在这里也是首元素，那么是1printf(&#34;%d\n&#34;, sizeof(&amp;arr));//这里是数组的地址是4或者是8printf(&#34;%d\n&#34;, sizeof(&amp;arr&#43;1));//这里是在数组之后的地址，也就是4或者是8printf(&#34;%d\n&#34;, sizeof(&amp;arr[0]&#43;1));//是第二个元素地址是4或者是8 char arr[]=&#34;abcdef”；printf(&#34;%d\n&#34;,strlen(arr));//这里是说字符串的长度是6printf(&#34;%d\n&#34;,strlen(*arr);//在这里会出错。printf(&#34;%d\n&#34;,strlen(arr[1]));//在这里也会出错printf(&#34;%d\n&#34;,strlen(&amp;arr));//是6printf(&#34;%d\n&#34;,strlen(&amp;arr&#43;1));//这会跳出这个数组，应该是0printf(&#34;%d\n&#34;,strlen(&amp;arr[0]&#43;1));//这里第二个元素的地址是5 完（。）
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>88 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to C语言之指针篇第五" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">C语言指针篇第一
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>从这一节开始，我们就要开启学习指针之旅，我将此次指针的学习分为5次，今天是第一次学习，在学习指针的时候我们必定会遇到许多困难与挑战，我们会遇到一些比较抽象的概念，也会遇到一些复杂的代码，不管如何，我们能做的只有坚持，坚持只有这样，我们才可以真正搞懂所谓的指针，明白指针的确实含义，来开启我们今天的指针学习吧，亲爱的同学们！
 C语言指针篇第一 1. 内存和地址
 1.内存与地址的介绍
 2.地址的一些性质
 2. 指针变量和地址
-1.取地址操作符（&）
+1.取地址操作符（&amp;）
 2.指针变量和解引⽤操作符（*）
 1.指针变量
 1.指针变量的含义
@@ -251,7 +312,7 @@ C语言指针篇第一 1. 内存和地址
 2.const加在*的后面
 5. 指针运算
 1.指针-指针
-2.指针+（-）整数
+2.指针&#43;（-）整数
 6. 野指针
 1.野指针是如何造成的
 1. 指针未初始化
@@ -261,12 +322,25 @@ C语言指针篇第一 1. 内存和地址
 首先呢，我将为大家介绍有关地址的知识点，接下来我们会学习到指针的运算，以及使用。
 1. 内存和地址 1.内存与地址的介绍 1.在宾馆当中，我们若果需要寻找需要的人时，在不知道对方的房间号时，我们能够做的是，一个房间一个房间挨着寻找，虽然这样可以找到我们需要的人，但是需要注意的是。这样寻找，注定了它的效率是不高的，是低效率的，因此呢，若果我们知道对方的房间号时，那么找到对方是一瞬间的事情。 2.在计算机中，信息也是按照宾馆，按照宿舍存储的，在计算机中信息是以字节为单位，这个字节就有点像宿舍，一个宿舍存储8个人，而一个字节有八个比特位，这样只要我们知道信息的房间号，在计算机中我们常说的是地址—-指针—内存单元的编号，我们就可以迅速的找到这个信息。 3.若果在32为环境下，地址是按照32位地址线发出电信号，进行编码的，此时地址拥有32个比特位，也就是说地址有4个字节 4.但是，若果在64位的环境下，那么就是地址按照64个地址线编码的，此时地址拥有64个比特位，也就是说地址现在拥有，8个字节。
 2.地址的一些性质 1.首先，在相同环境之下，地址的大小都是一样，要么是4个字节，要么是8个字节，这个同地址（指针）的类型是无关的。 2. 指针是有类型的，有字符型，整型，数组类型。 3. 在计算机存储当中时，是按照字节进行存储的，整型的话是4个字节，字符型是一个字节。
-2. 指针变量和地址 以下我们即将学到，操作符&，以及解引用操作符*，以及我们会学习到，指针的大小如何比较，下面就开启我们的学习之旅吧！
-1.取地址操作符（&） 首先呢，我们举一个例子：
-int a=12;
-int * pr=&amp;a; 在上例中，我们可以看到，按位与操作符加在变量之前就变成了，取地址操作符，通过以上代码，我们可以发现，我们使用了指针变量加以接收，a的地址，现在把a的地址就存储到pr当中了，通过上例的举出，大家对于取地址操作符，有新的了解与认识吗？似乎，没有非常的困难的样子，下面我就为大家开启以下的重头戏，上面只是本个知识点的开胃菜，下面才是真正的硬菜。
+2. 指针变量和地址 以下我们即将学到，操作符&amp;，以及解引用操作符*，以及我们会学习到，指针的大小如何比较，下面就开启我们的学习之旅吧！
+1.取地址操作符（&amp;） 首先呢，我们举一个例子：
+int a=12;int * pr=&amp;a; 在上例中，我们可以看到，按位与操作符加在变量之前就变成了，取地址操作符，通过以上代码，我们可以发现，我们使用了指针变量加以接收，a的地址，现在把a的地址就存储到pr当中了，通过上例的举出，大家对于取地址操作符，有新的了解与认识吗？似乎，没有非常的困难的样子，下面我就为大家开启以下的重头戏，上面只是本个知识点的开胃菜，下面才是真正的硬菜。
 2.指针变量和解引⽤操作符（*） 在下面我即将会学习到，解引用操作符以及指针变量，这个我希望大家可以认真，听我的讲解，来开启这个知识点的学习吧！
-...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>422 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言指针篇第一" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>DNS服务器</h2></header><div class=entry-content><p>文章目录 一.DNS服务器软件介绍
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>422 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to C语言指针篇第一" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">DNS服务器
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>文章目录 一.DNS服务器软件介绍
 1.. DNS的基本概念
 2.DNS结构
 1.根域 .（root）
@@ -289,34 +363,22 @@ int * pr=&amp;a; 在上例中，我们可以看到，按位与操作符加在变
 八.测试服务器是否正常
 九.如何清空
 十.总结
-一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域
-名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址
-不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。
-作⽤：
-• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到
-⽬标服务器。
-• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故
-障排查等⾮常重要。
-• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠
-性。
-• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不
-直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。
-根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9
-台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务
-器的信息。
-例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```
-• 常⻅的顶级域及国家
-.com 商业机构
-.net ⽹络
-.org ⾮商业机构 www.centos.org www.kernel.org
-.edu 教育机构
-.gov 政府机关
-.cn 中国域名
-.us 美国域名
-.ai ⼈⼯智能
-.io 云计算
-.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等
-...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>754 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to DNS服务器" href=https://dsduyopg.github.io/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>FTP服务</h2></header><div class=entry-content><p>文章目录 一.⽂件传输协议FTP
+一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。作⽤：• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到⽬标服务器。• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故障排查等⾮常重要。• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠性。• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务器的信息。例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```• 常⻅的顶级域及国家.com 商业机构.net ⽹络.org ⾮商业机构 www.centos.org www.kernel.org.edu 教育机构.gov 政府机关.cn 中国域名.us 美国域名.ai ⼈⼯智能.io 云计算.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>754 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to DNS服务器" href="http://localhost:1313/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">FTP服务
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>文章目录 一.⽂件传输协议FTP
 二.FTP的两种⼯作模式
 主动模式
 被动模式
@@ -346,12 +408,21 @@ int * pr=&amp;a; 在上例中，我们可以看到，按位与操作符加在变
 七.⽤⼾名单列表使⽤
 一.⽂件传输协议FTP FTP（File Transfer Protocol） 是⼀种⽤于在⽹络上进⾏⽂件传输的协议，允许⽤⼾通过客⼾端和 服务器之间上传、下载⽂件.
 二.FTP的两种⼯作模式 主动模式 主动模式，其实就是请求是由客户端发起的，但是数据传输过程则是由服务器发过来的
-1- 客⼾端与服务器之间建⽴ 控制连接，通常是通过端⼝ 21（即 FTP 的默认控制端⼝）
-2- 当客⼾端准备接收数据时，它会通过 随机端⼝（通常是 20 以外的端⼝）向服务器请求建⽴
-数据连接
-3- 服务器通过控制连接得知客⼾端的端⼝号后，从端⼝ 20（服务器的 FTP 数据端⼝） 发起⼀
-个连接到客⼾端指定的端⼝，⽤于数据传输 优势 1 服务器主动向客⼾端发起数据连接，通常对⼤多数服务器来说，这种⽅式较容易实现。 缺点 因为客⼾端通常位于防⽕墙或 NAT 后⾯，防⽕墙可能阻⽌来⾃服务器的外部连接，所以这种模式
-可能会受到⽹络环境的限制，尤其在客⼾端位于 NAT 后时，可能⽆法建⽴连接。 ...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>279 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to FTP服务" href=https://dsduyopg.github.io/posts/ftp%E6%9C%8D%E5%8A%A1/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>nfs服务器的相关知识</h2></header><div class=entry-content><p>nfs服务器的相关知识 一.NFS基本介绍
+1- 客⼾端与服务器之间建⽴ 控制连接，通常是通过端⼝ 21（即 FTP 的默认控制端⼝）2- 当客⼾端准备接收数据时，它会通过 随机端⼝（通常是 20 以外的端⼝）向服务器请求建⽴数据连接3- 服务器通过控制连接得知客⼾端的端⼝号后，从端⼝ 20（服务器的 FTP 数据端⼝） 发起⼀个连接到客⼾端指定的端⼝，⽤于数据传输 优势 1 服务器主动向客⼾端发起数据连接，通常对⼤多数服务器来说，这种⽅式较容易实现。 缺点 因为客⼾端通常位于防⽕墙或 NAT 后⾯，防⽕墙可能阻⽌来⾃服务器的外部连接，所以这种模式可能会受到⽹络环境的限制，尤其在客⼾端位于 NAT 后时，可能⽆法建⽴连接。 ...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>279 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to FTP服务" href="http://localhost:1313/posts/ftp%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">nfs服务器的相关知识
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>nfs服务器的相关知识 一.NFS基本介绍
 二.安装软件包
 三.在node2创建共享⽬录
 四.修改配置文件
@@ -363,25 +434,110 @@ int * pr=&amp;a; 在上例中，我们可以看到，按位与操作符加在变
 4.查看挂载是否成功
 5.检查是否可以共享文件
 一.NFS基本介绍 CentOS Stream 9中的NFS（⽹络⽂件系统）是⼀种允许不同计算机通过⽹络共享⽂件和⽬录的协 议，使得远程主机能够像本地磁盘⼀样访问和操作⽂件。 它基于客⼾端-服务器架构，NFS服务器将本地⽂件系统共享给客⼾端，客⼾端可以通过⽹络挂载 这些共享⽬录，像访问本地⽂件⼀样进⾏操作。 NFS主要应⽤于Linux/Unix系统之间的⽂件共享，虽然也⽀持跨操作系统，但其兼容性⼀般较差 二.安装软件包 node2 作为 NFS服务端 node1 作为客⼾端，获取共享⽬录信息
-客⼾端安装：
-dnf install nfs-utils
-服务端安装：
-dnf install nfs-utils
-在node2放行端口
-执⾏开放端⼝:
-firewall-cmd --add-service=nfs --permanent # 核⼼, 有了这个, NFS即可使⽤共享操作
-firewall-cmd --reload 三.在node2创建共享⽬录 mkdir -p /export/software 四.修改配置文件 vi /etc/exports 然后保存文件，并重启服务就可以了
-systemctl restart nfs-server
-systemctl status
-systemctl enable 六.验证是否成功共享 服务端执⾏: 查看服务端NFS共享信息
-showmount -e （早期版本兼容）
-exportfs 七.挂载使⽤ 1.客户端下载软件包 dnf install -y nfs-utils ...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>90 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to nfs服务器的相关知识" href=https://dsduyopg.github.io/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=https://dsduyopg.github.io/ title=上一页>&#171;</a>
-<a class=page-link href=https://dsduyopg.github.io/>1</a>
-<a class="page-link active" href=https://dsduyopg.github.io/page/2/>2</a>
-<a class=page-link href=https://dsduyopg.github.io/page/3/>3</a>
-<a class=page-link href=https://dsduyopg.github.io/page/4/>4</a>
-<a class=next href=https://dsduyopg.github.io/page/3/ title=下一页>&#187;</a></nav></footer></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
-<span>Powered by
-<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
-访问量 <span id=busuanzi_value_site_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>
+客⼾端安装：dnf install nfs-utils服务端安装：dnf install nfs-utils在node2放行端口执⾏开放端⼝:firewall-cmd --add-service=nfs --permanent # 核⼼, 有了这个, NFS即可使⽤共享操作firewall-cmd --reload 三.在node2创建共享⽬录 mkdir -p /export/software 四.修改配置文件 vi /etc/exports 然后保存文件，并重启服务就可以了
+systemctl restart nfs-serversystemctl statussystemctl enable 六.验证是否成功共享 服务端执⾏: 查看服务端NFS共享信息showmount -e （早期版本兼容）exportfs 七.挂载使⽤ 1.客户端下载软件包 dnf install -y nfs-utils ...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>90 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to nfs服务器的相关知识" href="http://localhost:1313/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="http://localhost:1313/" title="上一页">&laquo;</a>
+    <a class="page-link" href="http://localhost:1313/">1</a>
+    <a class="page-link active" href="http://localhost:1313/page/2/">2</a>
+    <a class="page-link" href="http://localhost:1313/page/3/">3</a>
+    <a class="page-link" href="http://localhost:1313/page/4/">4</a>
+    <a class="next" href="http://localhost:1313/page/3/" title="下一页">&raquo;</a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+<div class="busuanzi">
+  本站访客 <span id="busuanzi_value_site_uv"></span> ·
+  访问量 <span id="busuanzi_value_site_pv"></span>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -268,6 +268,34 @@ details.toc {
   color: var(--secondary);
 }
 
+.busuanzi {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--secondary);
+}
+
+.comments {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.comments h2 {
+  margin-bottom: 12px;
+  font-size: 20px;
+  color: var(--primary);
+}
+
+.searchbox input {
+  border-radius: 10px;
+  background: var(--entry);
+  border: 1px solid var(--border);
+}
+
+.searchResults li {
+  border-radius: 10px;
+}
+
 @media (max-width: 768px) {
   .hero-banner {
     min-height: 260px;

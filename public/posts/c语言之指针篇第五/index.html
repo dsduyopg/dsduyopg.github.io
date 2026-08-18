@@ -1,4 +1,13 @@
-<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>C语言之指针篇第五 | 我的博客</title><meta name=keywords content><meta name=description content='在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。
+<!DOCTYPE html>
+<html lang="zh-cn" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>C语言之指针篇第五 | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。
 C语言之指针篇第五
 
 
@@ -43,7 +52,7 @@ sizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者
 1.strlen的含义
 它的功能是，求字符的长度，遇到‘\0’则停止，否则会在内存中找到‘\0’,这样才会停下来，如此一番，求出的则是随机值。
 2.例子
-char a="hello bit";
+char a=&#34;hello bit&#34;;
 int a=strlen(a);//由于“”省略了\0，因此求出的是8
 又有例子：
 char a[]={&#39;hello&#39;,&#39;bit&#39;};
@@ -51,34 +60,94 @@ int a=strlen(a);//在这里，由于没有设置‘\0’,那么的话，结果�
 二.数组指针笔试题解析
 例题1：
 int a[] = {1,2,3,4};
-printf("%d\n",sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.
-printf("%d\n",sizeof(a+0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8
-printf("%d\n",sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4
-printf("%d\n",sizeof(a+1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.
-printf("%d\n",sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4
-printf("%d\n",sizeof(&amp;a));//这里是数组的地址，也就是说是4或者是8.
-printf("%d\n",sizeof(*&amp;a));//注意*&相当于没有因此该式子也就是sizeof(a)，注意是16
+printf(&#34;%d\n&#34;,sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.
+printf(&#34;%d\n&#34;,sizeof(a&#43;0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8
+printf(&#34;%d\n&#34;,sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4
+printf(&#34;%d\n&#34;,sizeof(a&#43;1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.
+printf(&#34;%d\n&#34;,sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4
+printf(&#34;%d\n&#34;,sizeof(&amp;a));//这里是数组的地址，也就是说是4或者是8.
+printf(&#34;%d\n&#34;,sizeof(*&amp;a));//注意*&amp;相当于没有因此该式子也就是sizeof(a)，注意是16
 12345678
-printf("%d\n",sizeof(&amp;a+1));//在这里的意思是指向数组的后面的地址，也就是4或者是8
-printf("%d\n",sizeof(&amp;a[0]));//这里是首元素的地址，是4或者是8
-printf("%d\n",sizeof(&amp;a[0]+1));//是第二个元素的地址是4或者是8.
+printf(&#34;%d\n&#34;,sizeof(&amp;a&#43;1));//在这里的意思是指向数组的后面的地址，也就是4或者是8
+printf(&#34;%d\n&#34;,sizeof(&amp;a[0]));//这里是首元素的地址，是4或者是8
+printf(&#34;%d\n&#34;,sizeof(&amp;a[0]&#43;1));//是第二个元素的地址是4或者是8.
 例题2：
 char arr[] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;};
-printf("%d\n", sizeof(arr));//由于没有‘\0’那么的话，就是5
-printf("%d\n", sizeof(arr+0));//这里是首元素的地址，那么是4或者是8
-printf("%d\n", sizeof(*arr));//是首元素那么就是1
-printf("%d\n", sizeof(arr[1]));//在这里也是首元素，那么是1
-printf("%d\n", sizeof(&amp;arr));//这里是数组的地址是4或者是8
-printf("%d\n", sizeof(&amp;arr+1));//这里是在数组之后的地址，也就是4或者是8
-printf("%d\n", sizeof(&amp;arr[0]+1));//是第二个元素地址是4或者是8
-char arr[]="abcdef”；
-printf("%d\n",strlen(arr));//这里是说字符串的长度是6
-printf("%d\n",strlen(*arr);//在这里会出错。
-printf("%d\n",strlen(arr[1]));//在这里也会出错
-printf("%d\n",strlen(&amp;arr));//是6
-printf("%d\n",strlen(&amp;arr+1));//这会跳出这个数组，应该是0
-printf("%d\n",strlen(&amp;arr[0]+1));//这里第二个元素的地址是5
-完（。）'><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/><link crossorigin=anonymous href=/assets/css/stylesheet.17e11805d3075f44c706341eeb6b41c4243b7f0769a966362af6f3d10f0b1051.css integrity="sha256-F+EYBdMHX0THBjQe62tBxCQ7fwdpqWY2Kvbz0Q8LEFE=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="C语言之指针篇第五"><meta property="og:description" content='在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。
+printf(&#34;%d\n&#34;, sizeof(arr));//由于没有‘\0’那么的话，就是5
+printf(&#34;%d\n&#34;, sizeof(arr&#43;0));//这里是首元素的地址，那么是4或者是8
+printf(&#34;%d\n&#34;, sizeof(*arr));//是首元素那么就是1
+printf(&#34;%d\n&#34;, sizeof(arr[1]));//在这里也是首元素，那么是1
+printf(&#34;%d\n&#34;, sizeof(&amp;arr));//这里是数组的地址是4或者是8
+printf(&#34;%d\n&#34;, sizeof(&amp;arr&#43;1));//这里是在数组之后的地址，也就是4或者是8
+printf(&#34;%d\n&#34;, sizeof(&amp;arr[0]&#43;1));//是第二个元素地址是4或者是8
+char arr[]=&#34;abcdef”；
+printf(&#34;%d\n&#34;,strlen(arr));//这里是说字符串的长度是6
+printf(&#34;%d\n&#34;,strlen(*arr);//在这里会出错。
+printf(&#34;%d\n&#34;,strlen(arr[1]));//在这里也会出错
+printf(&#34;%d\n&#34;,strlen(&amp;arr));//是6
+printf(&#34;%d\n&#34;,strlen(&amp;arr&#43;1));//这会跳出这个数组，应该是0
+printf(&#34;%d\n&#34;,strlen(&amp;arr[0]&#43;1));//这里第二个元素的地址是5
+完（。）">
+<meta name="author" content="dsduyopg">
+<link rel="canonical" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.e43bd292f097a172cd3328da33b8b3c29d3a16aae8222db58d5654514ee9c77a.css" integrity="sha256-5DvSkvCXoXLNMyjaM7izwp06FqroIi21jVZUUU7px3o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="C语言之指针篇第五">
+  <meta property="og:description" content="在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。
 C语言之指针篇第五 一.sizeof和strlen的对⽐
 1.sizeof
 1.sizeof含义
@@ -91,9 +160,18 @@ C语言之指针篇第五 一.sizeof和strlen的对⽐
 1.sizeof 1.sizeof含义 sizeof 主要计算的是变量所占内存内存空间⼤⼩的，单位是字节，如果操作数是类型的话，计算的是使⽤类型创建的变量所占内存空间的⼤小，sizeof 只关注占⽤内存空间的⼤⼩，不在乎内存中存放什么数据。
 2.例子： int a=1;sizeof(a);//因此呢，算出的数值是4. 又有例子：
 int a=4;int * s=&amp;a;sizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者是32根地址线因此地址无论是整形或者是字符型亦或者是数组型//它们其实都是4或者8 2.strlen 1.strlen的含义 它的功能是，求字符的长度，遇到‘\0’则停止，否则会在内存中找到‘\0’,这样才会停下来，如此一番，求出的则是随机值。
-2.例子 char a="hello bit";int a=strlen(a);//由于“”省略了\0，因此求出的是8又有例子：char a[]={&#39;hello&#39;,&#39;bit&#39;};int a=strlen(a);//在这里，由于没有设置‘\0’,那么的话，结果就有可能是随机值。 二.数组指针笔试题解析 例题1：
-int a[] = {1,2,3,4};printf("%d\n",sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.printf("%d\n",sizeof(a+0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8printf("%d\n",sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4printf("%d\n",sizeof(a+1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.printf("%d\n",sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4printf("%d\n",sizeof(&amp;a));//这里是数组的地址，也就是说是4或者是8.printf("%d\n",sizeof(*&amp;a));//注意*&相当于没有因此该式子也就是sizeof(a)，注意是1612345678printf("%d\n",sizeof(&amp;a+1));//在这里的意思是指向数组的后面的地址，也就是4或者是8printf("%d\n",sizeof(&amp;a[0]));//这里是首元素的地址，是4或者是8printf("%d\n",sizeof(&amp;a[0]+1));//是第二个元素的地址是4或者是8. 例题2：
-char arr[] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;};printf("%d\n", sizeof(arr));//由于没有‘\0’那么的话，就是5printf("%d\n", sizeof(arr+0));//这里是首元素的地址，那么是4或者是8printf("%d\n", sizeof(*arr));//是首元素那么就是1printf("%d\n", sizeof(arr[1]));//在这里也是首元素，那么是1printf("%d\n", sizeof(&amp;arr));//这里是数组的地址是4或者是8printf("%d\n", sizeof(&amp;arr+1));//这里是在数组之后的地址，也就是4或者是8printf("%d\n", sizeof(&amp;arr[0]+1));//是第二个元素地址是4或者是8 char arr[]="abcdef”；printf("%d\n",strlen(arr));//这里是说字符串的长度是6printf("%d\n",strlen(*arr);//在这里会出错。printf("%d\n",strlen(arr[1]));//在这里也会出错printf("%d\n",strlen(&amp;arr));//是6printf("%d\n",strlen(&amp;arr+1));//这会跳出这个数组，应该是0printf("%d\n",strlen(&amp;arr[0]+1));//这里第二个元素的地址是5 完（。）'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="C语言之指针篇第五"><meta name=twitter:description content='在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。
+2.例子 char a=&#34;hello bit&#34;;int a=strlen(a);//由于“”省略了\0，因此求出的是8又有例子：char a[]={&#39;hello&#39;,&#39;bit&#39;};int a=strlen(a);//在这里，由于没有设置‘\0’,那么的话，结果就有可能是随机值。 二.数组指针笔试题解析 例题1：
+int a[] = {1,2,3,4};printf(&#34;%d\n&#34;,sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.printf(&#34;%d\n&#34;,sizeof(a&#43;0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8printf(&#34;%d\n&#34;,sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4printf(&#34;%d\n&#34;,sizeof(a&#43;1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.printf(&#34;%d\n&#34;,sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4printf(&#34;%d\n&#34;,sizeof(&amp;a));//这里是数组的地址，也就是说是4或者是8.printf(&#34;%d\n&#34;,sizeof(*&amp;a));//注意*&amp;相当于没有因此该式子也就是sizeof(a)，注意是1612345678printf(&#34;%d\n&#34;,sizeof(&amp;a&#43;1));//在这里的意思是指向数组的后面的地址，也就是4或者是8printf(&#34;%d\n&#34;,sizeof(&amp;a[0]));//这里是首元素的地址，是4或者是8printf(&#34;%d\n&#34;,sizeof(&amp;a[0]&#43;1));//是第二个元素的地址是4或者是8. 例题2：
+char arr[] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;};printf(&#34;%d\n&#34;, sizeof(arr));//由于没有‘\0’那么的话，就是5printf(&#34;%d\n&#34;, sizeof(arr&#43;0));//这里是首元素的地址，那么是4或者是8printf(&#34;%d\n&#34;, sizeof(*arr));//是首元素那么就是1printf(&#34;%d\n&#34;, sizeof(arr[1]));//在这里也是首元素，那么是1printf(&#34;%d\n&#34;, sizeof(&amp;arr));//这里是数组的地址是4或者是8printf(&#34;%d\n&#34;, sizeof(&amp;arr&#43;1));//这里是在数组之后的地址，也就是4或者是8printf(&#34;%d\n&#34;, sizeof(&amp;arr[0]&#43;1));//是第二个元素地址是4或者是8 char arr[]=&#34;abcdef”；printf(&#34;%d\n&#34;,strlen(arr));//这里是说字符串的长度是6printf(&#34;%d\n&#34;,strlen(*arr);//在这里会出错。printf(&#34;%d\n&#34;,strlen(arr[1]));//在这里也会出错printf(&#34;%d\n&#34;,strlen(&amp;arr));//是6printf(&#34;%d\n&#34;,strlen(&amp;arr&#43;1));//这会跳出这个数组，应该是0printf(&#34;%d\n&#34;,strlen(&amp;arr[0]&#43;1));//这里第二个元素的地址是5 完（。）">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="C语言之指针篇第五">
+  <meta name="twitter:description" content="在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。
 C语言之指针篇第五 一.sizeof和strlen的对⽐
 1.sizeof
 1.sizeof含义
@@ -106,25 +184,226 @@ C语言之指针篇第五 一.sizeof和strlen的对⽐
 1.sizeof 1.sizeof含义 sizeof 主要计算的是变量所占内存内存空间⼤⼩的，单位是字节，如果操作数是类型的话，计算的是使⽤类型创建的变量所占内存空间的⼤小，sizeof 只关注占⽤内存空间的⼤⼩，不在乎内存中存放什么数据。
 2.例子： int a=1;sizeof(a);//因此呢，算出的数值是4. 又有例子：
 int a=4;int * s=&amp;a;sizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者是32根地址线因此地址无论是整形或者是字符型亦或者是数组型//它们其实都是4或者8 2.strlen 1.strlen的含义 它的功能是，求字符的长度，遇到‘\0’则停止，否则会在内存中找到‘\0’,这样才会停下来，如此一番，求出的则是随机值。
-2.例子 char a="hello bit";int a=strlen(a);//由于“”省略了\0，因此求出的是8又有例子：char a[]={&#39;hello&#39;,&#39;bit&#39;};int a=strlen(a);//在这里，由于没有设置‘\0’,那么的话，结果就有可能是随机值。 二.数组指针笔试题解析 例题1：
-int a[] = {1,2,3,4};printf("%d\n",sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.printf("%d\n",sizeof(a+0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8printf("%d\n",sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4printf("%d\n",sizeof(a+1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.printf("%d\n",sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4printf("%d\n",sizeof(&amp;a));//这里是数组的地址，也就是说是4或者是8.printf("%d\n",sizeof(*&amp;a));//注意*&相当于没有因此该式子也就是sizeof(a)，注意是1612345678printf("%d\n",sizeof(&amp;a+1));//在这里的意思是指向数组的后面的地址，也就是4或者是8printf("%d\n",sizeof(&amp;a[0]));//这里是首元素的地址，是4或者是8printf("%d\n",sizeof(&amp;a[0]+1));//是第二个元素的地址是4或者是8. 例题2：
-char arr[] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;};printf("%d\n", sizeof(arr));//由于没有‘\0’那么的话，就是5printf("%d\n", sizeof(arr+0));//这里是首元素的地址，那么是4或者是8printf("%d\n", sizeof(*arr));//是首元素那么就是1printf("%d\n", sizeof(arr[1]));//在这里也是首元素，那么是1printf("%d\n", sizeof(&amp;arr));//这里是数组的地址是4或者是8printf("%d\n", sizeof(&amp;arr+1));//这里是在数组之后的地址，也就是4或者是8printf("%d\n", sizeof(&amp;arr[0]+1));//是第二个元素地址是4或者是8 char arr[]="abcdef”；printf("%d\n",strlen(arr));//这里是说字符串的长度是6printf("%d\n",strlen(*arr);//在这里会出错。printf("%d\n",strlen(arr[1]));//在这里也会出错printf("%d\n",strlen(&amp;arr));//是6printf("%d\n",strlen(&amp;arr+1));//这会跳出这个数组，应该是0printf("%d\n",strlen(&amp;arr[0]+1));//这里第二个元素的地址是5 完（。）'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"C语言之指针篇第五","item":"https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"C语言之指针篇第五","name":"C语言之指针篇第五","description":"在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。\nC语言之指针篇第五 一.sizeof和strlen的对⽐\n1.sizeof\n1.sizeof含义\n2.例子：\n2.strlen\n1.strlen的含义\n2.例子\n二.数组指针笔试题解析\n一.sizeof和strlen的对⽐ 首先在学习中时，我们通常会经常遇到sizeof，以及strlen函数，我们在使用时经常会分不清sizeof以及strlen，我们经常会用着用着，将两个函数用颠倒，大家对此简直是苦不堪言，因此呢，我将用这节为大家详细介绍两者区别，相信大家在听过我的讲解之后，一定会在今后的学习中，对两者运用的更加之熟练。\n1.sizeof 1.sizeof含义 sizeof 主要计算的是变量所占内存内存空间⼤⼩的，单位是字节，如果操作数是类型的话，计算的是使⽤类型创建的变量所占内存空间的⼤小，sizeof 只关注占⽤内存空间的⼤⼩，不在乎内存中存放什么数据。\n2.例子： int a=1;\rsizeof(a);//因此呢，算出的数值是4. 又有例子：\nint a=4;\rint * s=\u0026amp;a;\rsizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者是32根地址线因此地址无论是整形或者是字符型亦或者是数组型\r//它们其实都是4或者8 2.strlen 1.strlen的含义 它的功能是，求字符的长度，遇到‘\\0’则停止，否则会在内存中找到‘\\0’,这样才会停下来，如此一番，求出的则是随机值。\n2.例子 char a=\u0026#34;hello bit\u0026#34;;\rint a=strlen(a);//由于“”省略了\\0，因此求出的是8\r又有例子：\rchar a[]={\u0026#39;hello\u0026#39;,\u0026#39;bit\u0026#39;};\rint a=strlen(a);//在这里，由于没有设置‘\\0’,那么的话，结果就有可能是随机值。 二.数组指针笔试题解析 例题1：\nint a[] = {1,2,3,4};\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(a+0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(a+1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(\u0026amp;a));//这里是数组的地址，也就是说是4或者是8.\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(*\u0026amp;a));//注意*\u0026amp;相当于没有因此该式子也就是sizeof(a)，注意是16\r12345678\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(\u0026amp;a+1));//在这里的意思是指向数组的后面的地址，也就是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(\u0026amp;a[0]));//这里是首元素的地址，是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(\u0026amp;a[0]+1));//是第二个元素的地址是4或者是8. 例题2：\nchar arr[] = {\u0026#39;a\u0026#39;,\u0026#39;b\u0026#39;,\u0026#39;c\u0026#39;,\u0026#39;d\u0026#39;,\u0026#39;e\u0026#39;};\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(arr));//由于没有‘\\0’那么的话，就是5\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(arr+0));//这里是首元素的地址，那么是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(*arr));//是首元素那么就是1\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(arr[1]));//在这里也是首元素，那么是1\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(\u0026amp;arr));//这里是数组的地址是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(\u0026amp;arr+1));//这里是在数组之后的地址，也就是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(\u0026amp;arr[0]+1));//是第二个元素地址是4或者是8 char arr[]=\u0026#34;abcdef”；\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(arr));//这里是说字符串的长度是6\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(*arr);//在这里会出错。\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(arr[1]));//在这里也会出错\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(\u0026amp;arr));//是6\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(\u0026amp;arr+1));//这会跳出这个数组，应该是0\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(\u0026amp;arr[0]+1));//这里第二个元素的地址是5 完（。）\n","keywords":[],"articleBody":"在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。\nC语言之指针篇第五 一.sizeof和strlen的对⽐\n1.sizeof\n1.sizeof含义\n2.例子：\n2.strlen\n1.strlen的含义\n2.例子\n二.数组指针笔试题解析\n一.sizeof和strlen的对⽐ 首先在学习中时，我们通常会经常遇到sizeof，以及strlen函数，我们在使用时经常会分不清sizeof以及strlen，我们经常会用着用着，将两个函数用颠倒，大家对此简直是苦不堪言，因此呢，我将用这节为大家详细介绍两者区别，相信大家在听过我的讲解之后，一定会在今后的学习中，对两者运用的更加之熟练。\n1.sizeof 1.sizeof含义 sizeof 主要计算的是变量所占内存内存空间⼤⼩的，单位是字节，如果操作数是类型的话，计算的是使⽤类型创建的变量所占内存空间的⼤小，sizeof 只关注占⽤内存空间的⼤⼩，不在乎内存中存放什么数据。\n2.例子： int a=1;\rsizeof(a);//因此呢，算出的数值是4. 又有例子：\nint a=4;\rint * s=\u0026a;\rsizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者是32根地址线因此地址无论是整形或者是字符型亦或者是数组型\r//它们其实都是4或者8 2.strlen 1.strlen的含义 它的功能是，求字符的长度，遇到‘\\0’则停止，否则会在内存中找到‘\\0’,这样才会停下来，如此一番，求出的则是随机值。\n2.例子 char a=\"hello bit\";\rint a=strlen(a);//由于“”省略了\\0，因此求出的是8\r又有例子：\rchar a[]={'hello','bit'};\rint a=strlen(a);//在这里，由于没有设置‘\\0’,那么的话，结果就有可能是随机值。 二.数组指针笔试题解析 例题1：\nint a[] = {1,2,3,4};\rprintf(\"%d\\n\",sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.\rprintf(\"%d\\n\",sizeof(a+0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8\rprintf(\"%d\\n\",sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4\rprintf(\"%d\\n\",sizeof(a+1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.\rprintf(\"%d\\n\",sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4\rprintf(\"%d\\n\",sizeof(\u0026a));//这里是数组的地址，也就是说是4或者是8.\rprintf(\"%d\\n\",sizeof(*\u0026a));//注意*\u0026相当于没有因此该式子也就是sizeof(a)，注意是16\r12345678\rprintf(\"%d\\n\",sizeof(\u0026a+1));//在这里的意思是指向数组的后面的地址，也就是4或者是8\rprintf(\"%d\\n\",sizeof(\u0026a[0]));//这里是首元素的地址，是4或者是8\rprintf(\"%d\\n\",sizeof(\u0026a[0]+1));//是第二个元素的地址是4或者是8. 例题2：\nchar arr[] = {'a','b','c','d','e'};\rprintf(\"%d\\n\", sizeof(arr));//由于没有‘\\0’那么的话，就是5\rprintf(\"%d\\n\", sizeof(arr+0));//这里是首元素的地址，那么是4或者是8\rprintf(\"%d\\n\", sizeof(*arr));//是首元素那么就是1\rprintf(\"%d\\n\", sizeof(arr[1]));//在这里也是首元素，那么是1\rprintf(\"%d\\n\", sizeof(\u0026arr));//这里是数组的地址是4或者是8\rprintf(\"%d\\n\", sizeof(\u0026arr+1));//这里是在数组之后的地址，也就是4或者是8\rprintf(\"%d\\n\", sizeof(\u0026arr[0]+1));//是第二个元素地址是4或者是8 char arr[]=\"abcdef”；\rprintf(\"%d\\n\",strlen(arr));//这里是说字符串的长度是6\rprintf(\"%d\\n\",strlen(*arr);//在这里会出错。\rprintf(\"%d\\n\",strlen(arr[1]));//在这里也会出错\rprintf(\"%d\\n\",strlen(\u0026arr));//是6\rprintf(\"%d\\n\",strlen(\u0026arr+1));//这会跳出这个数组，应该是0\rprintf(\"%d\\n\",strlen(\u0026arr[0]+1));//这里第二个元素的地址是5 完（。）\n","wordCount":"88","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
-<a href=/posts/>Posts</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">C语言之指针篇第五</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>88 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><ul><ul><li><a href=#c%e8%af%ad%e8%a8%80%e4%b9%8b%e6%8c%87%e9%92%88%e7%af%87%e7%ac%ac%e4%ba%94 aria-label=C语言之指针篇第五>C语言之指针篇第五</a></li></ul></ul><li><a href=#%e4%b8%80sizeof%e5%92%8cstrlen%e7%9a%84%e5%af%b9 aria-label=一.sizeof和strlen的对⽐>一.sizeof和strlen的对⽐</a><ul><li><a href=#1sizeof aria-label=1.sizeof>1.sizeof</a><ul><li><a href=#1sizeof%e5%90%ab%e4%b9%89 aria-label=1.sizeof含义>1.sizeof含义</a></li><li><a href=#2%e4%be%8b%e5%ad%90 aria-label=2.例子：>2.例子：</a></li></ul></li><li><a href=#2strlen aria-label=2.strlen>2.strlen</a><ul><li><a href=#1strlen%e7%9a%84%e5%90%ab%e4%b9%89 aria-label=1.strlen的含义>1.strlen的含义</a></li><li><a href=#2%e4%be%8b%e5%ad%90-1 aria-label=2.例子>2.例子</a></li></ul></li></ul></li><li><a href=#%e4%ba%8c%e6%95%b0%e7%bb%84%e6%8c%87%e9%92%88%e7%ac%94%e8%af%95%e9%a2%98%e8%a7%a3%e6%9e%90 aria-label=二.数组指针笔试题解析>二.数组指针笔试题解析</a></li></ul></div></details><div class="post-content md-content"><p>在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。</p><h4 id=c语言之指针篇第五>C语言之指针篇第五<a hidden class=anchor aria-hidden=true href=#c语言之指针篇第五>#</a></h4><ul><li><p><a href=#sizeofstrlen_3>一.sizeof和strlen的对⽐</a></p></li><li><p><a href=#1sizeof_5>1.sizeof</a></p></li><li><p><a href=#1sizeof_6>1.sizeof含义</a></p></li><li><p><a href=#2_8>2.例子：</a></p></li><li><p><a href=#2strlen_20>2.strlen</a></p></li><li><p><a href=#1strlen_21>1.strlen的含义</a></p></li><li><p><a href=#2_23>2.例子</a></p></li><li><p><a href=#_31>二.数组指针笔试题解析</a></p></li></ul><h2 id=一sizeof和strlen的对>一.sizeof和strlen的对⽐<a hidden class=anchor aria-hidden=true href=#一sizeof和strlen的对>#</a></h2><p>首先在学习中时，我们通常会经常遇到sizeof，以及strlen函数，我们在使用时经常会分不清sizeof以及strlen，我们经常会用着用着，将两个函数用颠倒，大家对此简直是苦不堪言，因此呢，我将用这节为大家详细介绍两者区别，相信大家在听过我的讲解之后，一定会在今后的学习中，对两者运用的更加之熟练。</p><h3 id=1sizeof>1.sizeof<a hidden class=anchor aria-hidden=true href=#1sizeof>#</a></h3><h4 id=1sizeof含义>1.sizeof含义<a hidden class=anchor aria-hidden=true href=#1sizeof含义>#</a></h4><p>sizeof 主要计算的是变量所占内存内存空间⼤⼩的，单位是字节，如果操作数是类型的话，计算的是使⽤类型创建的变量所占内存空间的⼤小，sizeof 只关注占⽤内存空间的⼤⼩，不在乎内存中存放什么数据。</p><h4 id=2例子>2.例子：<a hidden class=anchor aria-hidden=true href=#2例子>#</a></h4><pre tabindex=0><code>int a=1;
+2.例子 char a=&#34;hello bit&#34;;int a=strlen(a);//由于“”省略了\0，因此求出的是8又有例子：char a[]={&#39;hello&#39;,&#39;bit&#39;};int a=strlen(a);//在这里，由于没有设置‘\0’,那么的话，结果就有可能是随机值。 二.数组指针笔试题解析 例题1：
+int a[] = {1,2,3,4};printf(&#34;%d\n&#34;,sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.printf(&#34;%d\n&#34;,sizeof(a&#43;0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8printf(&#34;%d\n&#34;,sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4printf(&#34;%d\n&#34;,sizeof(a&#43;1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.printf(&#34;%d\n&#34;,sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4printf(&#34;%d\n&#34;,sizeof(&amp;a));//这里是数组的地址，也就是说是4或者是8.printf(&#34;%d\n&#34;,sizeof(*&amp;a));//注意*&amp;相当于没有因此该式子也就是sizeof(a)，注意是1612345678printf(&#34;%d\n&#34;,sizeof(&amp;a&#43;1));//在这里的意思是指向数组的后面的地址，也就是4或者是8printf(&#34;%d\n&#34;,sizeof(&amp;a[0]));//这里是首元素的地址，是4或者是8printf(&#34;%d\n&#34;,sizeof(&amp;a[0]&#43;1));//是第二个元素的地址是4或者是8. 例题2：
+char arr[] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;};printf(&#34;%d\n&#34;, sizeof(arr));//由于没有‘\0’那么的话，就是5printf(&#34;%d\n&#34;, sizeof(arr&#43;0));//这里是首元素的地址，那么是4或者是8printf(&#34;%d\n&#34;, sizeof(*arr));//是首元素那么就是1printf(&#34;%d\n&#34;, sizeof(arr[1]));//在这里也是首元素，那么是1printf(&#34;%d\n&#34;, sizeof(&amp;arr));//这里是数组的地址是4或者是8printf(&#34;%d\n&#34;, sizeof(&amp;arr&#43;1));//这里是在数组之后的地址，也就是4或者是8printf(&#34;%d\n&#34;, sizeof(&amp;arr[0]&#43;1));//是第二个元素地址是4或者是8 char arr[]=&#34;abcdef”；printf(&#34;%d\n&#34;,strlen(arr));//这里是说字符串的长度是6printf(&#34;%d\n&#34;,strlen(*arr);//在这里会出错。printf(&#34;%d\n&#34;,strlen(arr[1]));//在这里也会出错printf(&#34;%d\n&#34;,strlen(&amp;arr));//是6printf(&#34;%d\n&#34;,strlen(&amp;arr&#43;1));//这会跳出这个数组，应该是0printf(&#34;%d\n&#34;,strlen(&amp;arr[0]&#43;1));//这里第二个元素的地址是5 完（。）">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "C语言之指针篇第五",
+      "item": "http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C语言之指针篇第五",
+  "name": "C语言之指针篇第五",
+  "description": "在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。\nC语言之指针篇第五 一.sizeof和strlen的对⽐\n1.sizeof\n1.sizeof含义\n2.例子：\n2.strlen\n1.strlen的含义\n2.例子\n二.数组指针笔试题解析\n一.sizeof和strlen的对⽐ 首先在学习中时，我们通常会经常遇到sizeof，以及strlen函数，我们在使用时经常会分不清sizeof以及strlen，我们经常会用着用着，将两个函数用颠倒，大家对此简直是苦不堪言，因此呢，我将用这节为大家详细介绍两者区别，相信大家在听过我的讲解之后，一定会在今后的学习中，对两者运用的更加之熟练。\n1.sizeof 1.sizeof含义 sizeof 主要计算的是变量所占内存内存空间⼤⼩的，单位是字节，如果操作数是类型的话，计算的是使⽤类型创建的变量所占内存空间的⼤小，sizeof 只关注占⽤内存空间的⼤⼩，不在乎内存中存放什么数据。\n2.例子： int a=1;\rsizeof(a);//因此呢，算出的数值是4. 又有例子：\nint a=4;\rint * s=\u0026amp;a;\rsizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者是32根地址线因此地址无论是整形或者是字符型亦或者是数组型\r//它们其实都是4或者8 2.strlen 1.strlen的含义 它的功能是，求字符的长度，遇到‘\\0’则停止，否则会在内存中找到‘\\0’,这样才会停下来，如此一番，求出的则是随机值。\n2.例子 char a=\u0026#34;hello bit\u0026#34;;\rint a=strlen(a);//由于“”省略了\\0，因此求出的是8\r又有例子：\rchar a[]={\u0026#39;hello\u0026#39;,\u0026#39;bit\u0026#39;};\rint a=strlen(a);//在这里，由于没有设置‘\\0’,那么的话，结果就有可能是随机值。 二.数组指针笔试题解析 例题1：\nint a[] = {1,2,3,4};\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(a+0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(a+1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(\u0026amp;a));//这里是数组的地址，也就是说是4或者是8.\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(*\u0026amp;a));//注意*\u0026amp;相当于没有因此该式子也就是sizeof(a)，注意是16\r12345678\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(\u0026amp;a+1));//在这里的意思是指向数组的后面的地址，也就是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(\u0026amp;a[0]));//这里是首元素的地址，是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;,sizeof(\u0026amp;a[0]+1));//是第二个元素的地址是4或者是8. 例题2：\nchar arr[] = {\u0026#39;a\u0026#39;,\u0026#39;b\u0026#39;,\u0026#39;c\u0026#39;,\u0026#39;d\u0026#39;,\u0026#39;e\u0026#39;};\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(arr));//由于没有‘\\0’那么的话，就是5\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(arr+0));//这里是首元素的地址，那么是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(*arr));//是首元素那么就是1\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(arr[1]));//在这里也是首元素，那么是1\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(\u0026amp;arr));//这里是数组的地址是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(\u0026amp;arr+1));//这里是在数组之后的地址，也就是4或者是8\rprintf(\u0026#34;%d\\n\u0026#34;, sizeof(\u0026amp;arr[0]+1));//是第二个元素地址是4或者是8 char arr[]=\u0026#34;abcdef”；\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(arr));//这里是说字符串的长度是6\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(*arr);//在这里会出错。\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(arr[1]));//在这里也会出错\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(\u0026amp;arr));//是6\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(\u0026amp;arr+1));//这会跳出这个数组，应该是0\rprintf(\u0026#34;%d\\n\u0026#34;,strlen(\u0026amp;arr[0]+1));//这里第二个元素的地址是5 完（。）\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。\nC语言之指针篇第五 一.sizeof和strlen的对⽐\n1.sizeof\n1.sizeof含义\n2.例子：\n2.strlen\n1.strlen的含义\n2.例子\n二.数组指针笔试题解析\n一.sizeof和strlen的对⽐ 首先在学习中时，我们通常会经常遇到sizeof，以及strlen函数，我们在使用时经常会分不清sizeof以及strlen，我们经常会用着用着，将两个函数用颠倒，大家对此简直是苦不堪言，因此呢，我将用这节为大家详细介绍两者区别，相信大家在听过我的讲解之后，一定会在今后的学习中，对两者运用的更加之熟练。\n1.sizeof 1.sizeof含义 sizeof 主要计算的是变量所占内存内存空间⼤⼩的，单位是字节，如果操作数是类型的话，计算的是使⽤类型创建的变量所占内存空间的⼤小，sizeof 只关注占⽤内存空间的⼤⼩，不在乎内存中存放什么数据。\n2.例子： int a=1;\rsizeof(a);//因此呢，算出的数值是4. 又有例子：\nint a=4;\rint * s=\u0026a;\rsizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者是32根地址线因此地址无论是整形或者是字符型亦或者是数组型\r//它们其实都是4或者8 2.strlen 1.strlen的含义 它的功能是，求字符的长度，遇到‘\\0’则停止，否则会在内存中找到‘\\0’,这样才会停下来，如此一番，求出的则是随机值。\n2.例子 char a=\"hello bit\";\rint a=strlen(a);//由于“”省略了\\0，因此求出的是8\r又有例子：\rchar a[]={'hello','bit'};\rint a=strlen(a);//在这里，由于没有设置‘\\0’,那么的话，结果就有可能是随机值。 二.数组指针笔试题解析 例题1：\nint a[] = {1,2,3,4};\rprintf(\"%d\\n\",sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.\rprintf(\"%d\\n\",sizeof(a+0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8\rprintf(\"%d\\n\",sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4\rprintf(\"%d\\n\",sizeof(a+1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.\rprintf(\"%d\\n\",sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4\rprintf(\"%d\\n\",sizeof(\u0026a));//这里是数组的地址，也就是说是4或者是8.\rprintf(\"%d\\n\",sizeof(*\u0026a));//注意*\u0026相当于没有因此该式子也就是sizeof(a)，注意是16\r12345678\rprintf(\"%d\\n\",sizeof(\u0026a+1));//在这里的意思是指向数组的后面的地址，也就是4或者是8\rprintf(\"%d\\n\",sizeof(\u0026a[0]));//这里是首元素的地址，是4或者是8\rprintf(\"%d\\n\",sizeof(\u0026a[0]+1));//是第二个元素的地址是4或者是8. 例题2：\nchar arr[] = {'a','b','c','d','e'};\rprintf(\"%d\\n\", sizeof(arr));//由于没有‘\\0’那么的话，就是5\rprintf(\"%d\\n\", sizeof(arr+0));//这里是首元素的地址，那么是4或者是8\rprintf(\"%d\\n\", sizeof(*arr));//是首元素那么就是1\rprintf(\"%d\\n\", sizeof(arr[1]));//在这里也是首元素，那么是1\rprintf(\"%d\\n\", sizeof(\u0026arr));//这里是数组的地址是4或者是8\rprintf(\"%d\\n\", sizeof(\u0026arr+1));//这里是在数组之后的地址，也就是4或者是8\rprintf(\"%d\\n\", sizeof(\u0026arr[0]+1));//是第二个元素地址是4或者是8 char arr[]=\"abcdef”；\rprintf(\"%d\\n\",strlen(arr));//这里是说字符串的长度是6\rprintf(\"%d\\n\",strlen(*arr);//在这里会出错。\rprintf(\"%d\\n\",strlen(arr[1]));//在这里也会出错\rprintf(\"%d\\n\",strlen(\u0026arr));//是6\rprintf(\"%d\\n\",strlen(\u0026arr+1));//这会跳出这个数组，应该是0\rprintf(\"%d\\n\",strlen(\u0026arr[0]+1));//这里第二个元素的地址是5 完（。）\n",
+  "wordCount" : "88",
+  "inLanguage": "zh-cn",
+  "datePublished": "2026-08-18T00:00:00Z",
+  "dateModified": "2026-08-18T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "dsduyopg"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">主页</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/posts/">Posts</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      C语言之指针篇第五
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>88 字</span>&nbsp;·&nbsp;<span>dsduyopg</span>
+
+</div>
+  </header> <details class="toc" >
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">目录</span>
+    </summary>
+
+    <div class="inner"><ul><ul><ul>
+            <li>
+                <a href="#c%e8%af%ad%e8%a8%80%e4%b9%8b%e6%8c%87%e9%92%88%e7%af%87%e7%ac%ac%e4%ba%94" aria-label="C语言之指针篇第五">C语言之指针篇第五</a></li></ul>
+                </ul>
+                
+            <li>
+                <a href="#%e4%b8%80sizeof%e5%92%8cstrlen%e7%9a%84%e5%af%b9" aria-label="一.sizeof和strlen的对⽐">一.sizeof和strlen的对⽐</a><ul>
+                    
+            <li>
+                <a href="#1sizeof" aria-label="1.sizeof">1.sizeof</a><ul>
+                    
+            <li>
+                <a href="#1sizeof%e5%90%ab%e4%b9%89" aria-label="1.sizeof含义">1.sizeof含义</a></li>
+            <li>
+                <a href="#2%e4%be%8b%e5%ad%90" aria-label="2.例子：">2.例子：</a></li></ul>
+            </li>
+            <li>
+                <a href="#2strlen" aria-label="2.strlen">2.strlen</a><ul>
+                    
+            <li>
+                <a href="#1strlen%e7%9a%84%e5%90%ab%e4%b9%89" aria-label="1.strlen的含义">1.strlen的含义</a></li>
+            <li>
+                <a href="#2%e4%be%8b%e5%ad%90-1" aria-label="2.例子">2.例子</a></li></ul>
+            </li></ul>
+            </li>
+            <li>
+                <a href="#%e4%ba%8c%e6%95%b0%e7%bb%84%e6%8c%87%e9%92%88%e7%ac%94%e8%af%95%e9%a2%98%e8%a7%a3%e6%9e%90" aria-label="二.数组指针笔试题解析">二.数组指针笔试题解析</a>
+            </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><p>在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。</p>
+<h4 id="c语言之指针篇第五">C语言之指针篇第五<a hidden class="anchor" aria-hidden="true" href="#c语言之指针篇第五">#</a></h4>
+<ul>
+<li>
+<p><a href="#sizeofstrlen_3">一.sizeof和strlen的对⽐</a></p>
+</li>
+<li>
+<p><a href="#1sizeof_5">1.sizeof</a></p>
+</li>
+<li>
+<p><a href="#1sizeof_6">1.sizeof含义</a></p>
+</li>
+<li>
+<p><a href="#2_8">2.例子：</a></p>
+</li>
+<li>
+<p><a href="#2strlen_20">2.strlen</a></p>
+</li>
+<li>
+<p><a href="#1strlen_21">1.strlen的含义</a></p>
+</li>
+<li>
+<p><a href="#2_23">2.例子</a></p>
+</li>
+<li>
+<p><a href="#_31">二.数组指针笔试题解析</a></p>
+</li>
+</ul>
+<h2 id="一sizeof和strlen的对">一.sizeof和strlen的对⽐<a hidden class="anchor" aria-hidden="true" href="#一sizeof和strlen的对">#</a></h2>
+<p>首先在学习中时，我们通常会经常遇到sizeof，以及strlen函数，我们在使用时经常会分不清sizeof以及strlen，我们经常会用着用着，将两个函数用颠倒，大家对此简直是苦不堪言，因此呢，我将用这节为大家详细介绍两者区别，相信大家在听过我的讲解之后，一定会在今后的学习中，对两者运用的更加之熟练。</p>
+<h3 id="1sizeof">1.sizeof<a hidden class="anchor" aria-hidden="true" href="#1sizeof">#</a></h3>
+<h4 id="1sizeof含义">1.sizeof含义<a hidden class="anchor" aria-hidden="true" href="#1sizeof含义">#</a></h4>
+<p>sizeof 主要计算的是变量所占内存内存空间⼤⼩的，单位是字节，如果操作数是类型的话，计算的是使⽤类型创建的变量所占内存空间的⼤小，sizeof 只关注占⽤内存空间的⼤⼩，不在乎内存中存放什么数据。</p>
+<h4 id="2例子">2.例子：<a hidden class="anchor" aria-hidden="true" href="#2例子">#</a></h4>
+<pre tabindex="0"><code>int a=1;
 sizeof(a);//因此呢，算出的数值是4.
-</code></pre><p>又有例子：</p><pre tabindex=0><code>int a=4;
+</code></pre><p>又有例子：</p>
+<pre tabindex="0"><code>int a=4;
 int * s=&amp;a;
 sizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者是32根地址线因此地址无论是整形或者是字符型亦或者是数组型
 //它们其实都是4或者8
-</code></pre><h3 id=2strlen>2.strlen<a hidden class=anchor aria-hidden=true href=#2strlen>#</a></h3><h4 id=1strlen的含义>1.strlen的含义<a hidden class=anchor aria-hidden=true href=#1strlen的含义>#</a></h4><p>它的功能是，求字符的长度，遇到‘\0’则停止，否则会在内存中找到‘\0’,这样才会停下来，如此一番，求出的则是随机值。</p><h4 id=2例子-1>2.例子<a hidden class=anchor aria-hidden=true href=#2例子-1>#</a></h4><pre tabindex=0><code>char a=&#34;hello bit&#34;;
+</code></pre><h3 id="2strlen">2.strlen<a hidden class="anchor" aria-hidden="true" href="#2strlen">#</a></h3>
+<h4 id="1strlen的含义">1.strlen的含义<a hidden class="anchor" aria-hidden="true" href="#1strlen的含义">#</a></h4>
+<p>它的功能是，求字符的长度，遇到‘\0’则停止，否则会在内存中找到‘\0’,这样才会停下来，如此一番，求出的则是随机值。</p>
+<h4 id="2例子-1">2.例子<a hidden class="anchor" aria-hidden="true" href="#2例子-1">#</a></h4>
+<pre tabindex="0"><code>char a=&#34;hello bit&#34;;
 int a=strlen(a);//由于“”省略了\0，因此求出的是8
 又有例子：
 char a[]={&#39;hello&#39;,&#39;bit&#39;};
 int a=strlen(a);//在这里，由于没有设置‘\0’,那么的话，结果就有可能是随机值。
-</code></pre><h2 id=二数组指针笔试题解析>二.数组指针笔试题解析<a hidden class=anchor aria-hidden=true href=#二数组指针笔试题解析>#</a></h2><p>例题1：</p><pre tabindex=0><code>int a[] = {1,2,3,4};
+</code></pre><h2 id="二数组指针笔试题解析">二.数组指针笔试题解析<a hidden class="anchor" aria-hidden="true" href="#二数组指针笔试题解析">#</a></h2>
+<p>例题1：</p>
+<pre tabindex="0"><code>int a[] = {1,2,3,4};
 printf(&#34;%d\n&#34;,sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.
 printf(&#34;%d\n&#34;,sizeof(a+0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8
 printf(&#34;%d\n&#34;,sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4
@@ -136,7 +415,8 @@ printf(&#34;%d\n&#34;,sizeof(*&amp;a));//注意*&amp;相当于没有因此该式
 printf(&#34;%d\n&#34;,sizeof(&amp;a+1));//在这里的意思是指向数组的后面的地址，也就是4或者是8
 printf(&#34;%d\n&#34;,sizeof(&amp;a[0]));//这里是首元素的地址，是4或者是8
 printf(&#34;%d\n&#34;,sizeof(&amp;a[0]+1));//是第二个元素的地址是4或者是8.
-</code></pre><p>例题2：</p><pre tabindex=0><code>char arr[] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;};
+</code></pre><p>例题2：</p>
+<pre tabindex="0"><code>char arr[] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;};
 printf(&#34;%d\n&#34;, sizeof(arr));//由于没有‘\0’那么的话，就是5
 printf(&#34;%d\n&#34;, sizeof(arr+0));//这里是首元素的地址，那么是4或者是8
 printf(&#34;%d\n&#34;, sizeof(*arr));//是首元素那么就是1
@@ -144,18 +424,180 @@ printf(&#34;%d\n&#34;, sizeof(arr[1]));//在这里也是首元素，那么是1
 printf(&#34;%d\n&#34;, sizeof(&amp;arr));//这里是数组的地址是4或者是8
 printf(&#34;%d\n&#34;, sizeof(&amp;arr+1));//这里是在数组之后的地址，也就是4或者是8
 printf(&#34;%d\n&#34;, sizeof(&amp;arr[0]+1));//是第二个元素地址是4或者是8
-</code></pre><pre tabindex=0><code>char arr[]=&#34;abcdef”；
+</code></pre><pre tabindex="0"><code>char arr[]=&#34;abcdef”；
 printf(&#34;%d\n&#34;,strlen(arr));//这里是说字符串的长度是6
 printf(&#34;%d\n&#34;,strlen(*arr);//在这里会出错。
 printf(&#34;%d\n&#34;,strlen(arr[1]));//在这里也会出错
 printf(&#34;%d\n&#34;,strlen(&amp;arr));//是6
 printf(&#34;%d\n&#34;,strlen(&amp;arr+1));//这会跳出这个数组，应该是0
 printf(&#34;%d\n&#34;,strlen(&amp;arr[0]+1));//这里第二个元素的地址是5
-</code></pre><p>完（。）</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/><span class=title>« 上一页</span>
-<span>C语言之扫雷游戏</span>
-</a><a class=next href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/><span class=title>下一页 »</span>
-<span>C语言指针篇第一</span></a></nav></footer><div class=comments><h2>评论</h2><script src=https://utteranc.es/client.js repo=dsduyopg/dsduyopg.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script><noscript>请启用 JavaScript 查看评论。</noscript></div></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
-<span>Powered by
-<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
-访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
+</code></pre><p>完（。）</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/">
+    <span class="title">« 上一页</span>
+    <span>C语言之扫雷游戏</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/">
+    <span class="title">下一页 »</span>
+    <span>C语言指针篇第一</span>
+  </a>
+</nav>
+
+  </footer>
+<div class="comments">
+  <h2>评论</h2>
+  <script src="https://utteranc.es/client.js"
+          repo="dsduyopg/dsduyopg.github.io"
+          issue-term="pathname"
+          label="comment"
+          theme="preferred-color-scheme"
+          crossorigin="anonymous"
+          async>
+  </script>
+  <noscript>请启用 JavaScript 查看评论。</noscript>
+</div>
+
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+<div class="busuanzi">
+  本站访客 <span id="busuanzi_value_site_uv"></span> ·
+  访问量 <span id="busuanzi_value_site_pv"></span> · 本文阅读 <span id="busuanzi_value_page_pv"></span>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
