@@ -296,6 +296,109 @@ details.toc {
   border-radius: 10px;
 }
 
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.hero-link:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.30);
+  color: #fff;
+}
+
+.post-entry {
+  animation: card-in 0.4s ease both;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.md-content blockquote {
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent-soft);
+  padding: 10px 16px;
+}
+
+.post-content img,
+.md-content img {
+  border-radius: 10px;
+}
+
+.not-found-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.not-found-card {
+  max-width: 480px;
+  padding: 44px 36px;
+  text-align: center;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+}
+
+.not-found-card h1 {
+  margin: 0 0 8px;
+  font-size: 72px;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.not-found-card p {
+  margin: 0 0 22px;
+  color: var(--secondary);
+}
+
+.not-found-card a {
+  display: inline-flex;
+  min-height: 38px;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 @media (max-width: 768px) {
   .hero-banner {
     min-height: 260px;
