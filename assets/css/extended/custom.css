@@ -286,6 +286,41 @@ details.toc {
   color: var(--primary);
 }
 
+.like-box {
+  margin-bottom: 18px;
+}
+
+.like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--entry);
+  color: var(--primary);
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.like-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.like-btn.liked {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.like-heart {
+  font-size: 18px;
+  line-height: 1;
+}
+
 .searchbox input {
   border-radius: 10px;
   background: var(--entry);
