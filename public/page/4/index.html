@@ -1,158 +1,6 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head>
-	<meta name="generator" content="Hugo 0.164.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>我的博客</title>
-<meta name="keywords" content="Linux, 运维, 自动化, Python, Teldrive, 博客">
-<meta name="description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
-<meta name="author" content="dsduyopg">
-<link rel="canonical" href="http://localhost:1313/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.f1cdeee24dd67e29ab18ab272d03ede22cca7acc6a7d0f667758db194a1a517f.css" integrity="sha256-8c3u4k3WfimrGKsnLQPt4izKesxqfQ9md1jbGUoaUX8=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml" title="rss">
-<link rel="alternate" type="application/json" href="http://localhost:1313/index.json" title="json">
-<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="http://localhost:1313/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="我的博客">
-  <meta property="og:description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="我的博客">
-  <meta name="twitter:description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "我的博客",
-  "url": "http://localhost:1313/",
-  "description": "记录 Linux、运维、自动化和我自己折腾过的项目",
-  "logo": "http://localhost:1313/favicon.ico",
-  "sameAs": [
-      "https://github.com/dsduyopg"
-  ]
-}
-</script>
-</head>
-<body class="list" id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="http://localhost:1313/search/" title="搜索">
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/about/" title="关于">
-                    <span>关于</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main"> 
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">关于ftp与SELinux的冲突问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>关于ftp与SELinux的冲突问题 1.问题背景
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta name=generator content="Hugo 0.164.0"><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>我的博客</title><meta name=keywords content="Linux,运维,自动化,Python,Teldrive,博客"><meta name=description content="记录 Linux、运维、自动化和我自己折腾过的项目"><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/><link crossorigin=anonymous href=/assets/css/stylesheet.f1cdeee24dd67e29ab18ab272d03ede22cca7acc6a7d0f667758db194a1a517f.css integrity="sha256-8c3u4k3WfimrGKsnLQPt4izKesxqfQ9md1jbGUoaUX8=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate type=application/rss+xml href=https://dsduyopg.github.io/index.xml title=rss><link rel=alternate type=application/json href=https://dsduyopg.github.io/index.json title=json><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="我的博客"><meta property="og:description" content="记录 Linux、运维、自动化和我自己折腾过的项目"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="我的博客"><meta name=twitter:description content="记录 Linux、运维、自动化和我自己折腾过的项目"><script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"我的博客","url":"https://dsduyopg.github.io/","description":"记录 Linux、运维、自动化和我自己折腾过的项目","logo":"https://dsduyopg.github.io/favicon.ico","sameAs":["https://github.com/dsduyopg"]}</script></head><body class=list id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg.github.io/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>关于ftp与SELinux的冲突问题</h2></header><div class=entry-content><p>关于ftp与SELinux的冲突问题 1.问题背景
 2.遇到的问题
 3.问题解决的方法
 1.ai的方法
@@ -170,23 +18,9 @@
 1.问题背景 首先这个问题诞生于如此条件下，我在跟随佳乐老师创建完lisi，zhangsan，wangwu之后呢，我就用lisi作为用户登录服务器node1，这里面设置了禁锢操作，路径是/export/public，而public里面拥有2个文件夹.一个是logs，另一个是src，同时设置了黑白名单,张三设置在黑名单，王五和李四设置在白名单
 2.遇到的问题 1.遇到的问题其实就是，在我用lisi把客户端的根目录下的a.log，发送给服务器的logs目录，无法操作 2.后来，我在logs目录下创建文件夹也是无法操作的，也是显示权限不足 但是呢，我在服务器的这个logs目录下创建文件夹是可以创建的 3.就很奇怪，再去服务器是可以搞定的，是可以创建文件夹的，但是在客户端是没有办法进行创建的，我当时以为是logs的权限设置的不对，用的是root创建，权限大的缘故，但是其实并不是如此的,后面我在服务器用了lisi照样是可以创建的 4.后来，我仔细检查了这些文件夹的权限，并再次赋权,这次显然也是不行的 3.问题解决的方法 解决的办法，后来，我把我的问题，这些比较奇怪的地方，我问了千文，后来，在他的帮助之下我成功了，在客户端我成功的在服务器的logs上面创建了文件夹，这意味着什么呢，显然这意味着，我可以把客户端家目录的a.log上传给服务器的logs里面，结果显然和我想的一样 下面是千文告诉我的解决方案，让我一步一步排查，最后成功找到了问题关键所咋
 1.ai的方法 这个对比信息非常关键！它直接帮我们排除了文件系统权限问题。
-为什么本地能写、FTP 不能写？ 本质区别在于执行写入的&#34;身份&#34;不同：
-场景 执行者 受什么约束 本地 mkdir lisi 自己的 shell 进程 只看文件系统的 rwx 权限 ✅ FTP mkdir vsftpd 守护进程代为执行 受 vsftpd.conf 开关 &#43; SELinux 对 ftpd 的策略双重约束 ❌ 所以本地能写，完全不能证明 FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>391 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 关于ftp与SELinux的冲突问题" href="http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">数据结构链表当中的头结点问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）
+为什么本地能写、FTP 不能写？ 本质区别在于执行写入的"身份"不同：
+场景 执行者 受什么约束 本地 mkdir lisi 自己的 shell 进程 只看文件系统的 rwx 权限 ✅ FTP mkdir vsftpd 守护进程代为执行 受 vsftpd.conf 开关 + SELinux 对 ftpd 的策略双重约束 ❌ 所以本地能写，完全不能证明 FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>391 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 关于ftp与SELinux的冲突问题" href=https://dsduyopg.github.io/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>数据结构链表当中的头结点问题</h2></header><div class=entry-content><p>数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）
 给出自己原来写的代码及源码
 2.出现的问题
 出现的问题分类，代码里的哪些函数出错了。
@@ -195,22 +29,74 @@
 给出自己修改过的代码
 给予大家的警示 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。
 给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：
-#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;// 定义链表节点结构struct ListNode {int value;struct ListNode* next;};// 反转链表函数struct ListNode* reverseList(struct ListNode* head) {struct ListNode* prev = NULL;struct ListNode* current = head;struct ListNode* nextNode = NULL;while (current != NULL) {nextNode = current-&gt;next; // 暂存下一个节点current-&gt;next = prev; // 反转当前节点的指针prev = current; // 前移 prevcurrent = nextNode; // 前移 current}return prev; // 返回新的头节点}// 辅助函数，用于创建新节点struct ListNode* createNode() {struct ListNode* head; // 初始化头节点为空head=(struct ListNode*)malloc(sizeof(struct ListNode));head-&gt;next=NULL; // 用于记录链表的尾节点int x; // x为链表数据域中的数据while (scanf(&#34;%d&#34;, &amp;x) != EOF) {struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));newNode-&gt;value = x;newNode-&gt;next =head-&gt;next; // 将新节点链接到尾节点之后head-&gt;next=newNode; // 更新尾节点}return head;}// 辅助函数，用于打印链表void printList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {printf(&#34;%d -&gt; &#34;, current-&gt;value);current = current-&gt;next;}printf(&#34;NULL\n&#34;);}// 辅助函数，用于释放链表内存void freeList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {struct ListNode* next = current-&gt;next;free(current);current = next;}}// 主函数，用于测试反转链表int main() {// 创建链表printf(&#34;请输入链表节点值，以EOF结束：\n&#34;);struct ListNode* head = createNode();printf(&#34;原链表: &#34;);printList(head);// 反转链表struct ListNode* reversedHead = reverseList(head);printf(&#34;反转后的链表: &#34;);printList(reversedHead);// 释放内存freeList(reversedHead);return 0;} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>664 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 数据结构链表当中的头结点问题" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">数据同步服务
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>文章目录 一.数据同步服务的基本介绍
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+// 定义链表节点结构
+struct ListNode {
+int value;
+struct ListNode* next;
+};
+// 反转链表函数
+struct ListNode* reverseList(struct ListNode* head) {
+struct ListNode* prev = NULL;
+struct ListNode* current = head;
+struct ListNode* nextNode = NULL;
+while (current != NULL) {
+nextNode = current->next; // 暂存下一个节点
+current->next = prev; // 反转当前节点的指针
+prev = current; // 前移 prev
+current = nextNode; // 前移 current
+}
+return prev; // 返回新的头节点
+}
+// 辅助函数，用于创建新节点
+struct ListNode* createNode() {
+struct ListNode* head; // 初始化头节点为空
+head=(struct ListNode*)malloc(sizeof(struct ListNode));
+head->next=NULL; // 用于记录链表的尾节点
+int x; // x为链表数据域中的数据
+while (scanf("%d", &amp;x) != EOF) {
+struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+newNode->value = x;
+newNode->next =head->next; // 将新节点链接到尾节点之后
+head->next=newNode; // 更新尾节点
+}
+return head;
+}
+// 辅助函数，用于打印链表
+void printList(struct ListNode* head) {
+struct ListNode* current = head;
+while (current != NULL) {
+printf("%d -> ", current->value);
+current = current->next;
+}
+printf("NULL\n");
+}
+// 辅助函数，用于释放链表内存
+void freeList(struct ListNode* head) {
+struct ListNode* current = head;
+while (current != NULL) {
+struct ListNode* next = current->next;
+free(current);
+current = next;
+}
+}
+// 主函数，用于测试反转链表
+int main() {
+// 创建链表
+printf("请输入链表节点值，以EOF结束：\n");
+struct ListNode* head = createNode();
+printf("原链表: ");
+printList(head);
+// 反转链表
+struct ListNode* reversedHead = reverseList(head);
+printf("反转后的链表: ");
+printList(reversedHead);
+// 释放内存
+freeList(reversedHead);
+return 0;
+} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>664 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 数据结构链表当中的头结点问题" href=https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>数据同步服务</h2></header><div class=entry-content><p>文章目录 一.数据同步服务的基本介绍
 1.什么是数据同步？
 2.如何进行实时同步
 3.特点
@@ -250,40 +136,24 @@
 3给文件加权以及启动脚本文件
 4.最后测试一下
 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
-2.如何进行实时同步 常⽤选项：• -v ：详细模式输出，显⽰传输过程中的⽂件信息。• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。• -z ：对备份的⽂件在传输时进⾏压缩处理。• -P ：显⽰进度条。• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh端⼝本地同步：rsync -av /src/directory/ /dest/directory/远程同步：rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/拉取远程数据到本地：rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 数据同步服务" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">数学---等价无穷小问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>题目如下：limit as x approaches 0 of (cosx)/(x^2)-(sinx)/(x ^3) 中，可以用等价无穷小写吗？ 我们考虑 𝑥趋近于 0 的情况，用 x 的泰勒展开式来近似 cos(𝑥)cos(x) 和sin(𝑥)sin(x)：
+2.如何进行实时同步 常⽤选项：
+• -v ：详细模式输出，显⽰传输过程中的⽂件信息。
+• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。
+• -z ：对备份的⽂件在传输时进⾏压缩处理。
+• -P ：显⽰进度条。
+• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）
+• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh
+端⼝
+本地同步：
+rsync -av /src/directory/ /dest/directory/
+远程同步：
+rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/
+拉取远程数据到本地：
+rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 数据同步服务" href=https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>数学---等价无穷小问题</h2></header><div class=entry-content><p>题目如下：limit as x approaches 0 of (cosx)/(x^2)-(sinx)/(x ^3) 中，可以用等价无穷小写吗？ 我们考虑 𝑥趋近于 0 的情况，用 x 的泰勒展开式来近似 cos(𝑥)cos(x) 和sin(𝑥)sin(x)：
 在处理极限时，使用等价无穷小是一种常用的方法，但在特定情况下需要特别小心。虽然 (sin(x) 在 (x) 趋近于 0 时的等价无穷小确实是 (x)，但在这个题目中，仅仅使用 (sin(x)作为近似并不足以获得正确的结果。这是因为表达式中的每一项都涉及较高次的项，这些项对最终的极限值有重要影响。具体来说，如果只将 (sin(x)) 近似为 (x)，我们会得到：
 这允许我们保留表达式中所有对极限有显著贡献的项，从而准确地计算出极限值。总结来说，简单地将 ( sin(x) 近似为 ( x ) 忽略了 ( x^3/6) 这类高阶项，而这些项在本题目中对最终结果是至关重要的，因此不能仅用 sin(x) ~x 来处理该问题。
-大家好，资料来源于GPT-4，我整理了GPT的回答，若果有错误，还请各位大佬指正出来，感谢感谢！！！
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>44 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 数学---等价无穷小问题" href="http://localhost:1313/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">这个是关于ssh的相关问题这个是关于ssh的相关问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>这个是关于ssh的相关问题这个是关于ssh的相关问题 一.首先问题是：局域网内的两台主机如何可以相互登录
+大家好，资料来源于GPT-4，我整理了GPT的回答，若果有错误，还请各位大佬指正出来，感谢感谢！！！</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>44 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 数学---等价无穷小问题" href=https://dsduyopg.github.io/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>这个是关于ssh的相关问题这个是关于ssh的相关问题</h2></header><div class=entry-content><p>这个是关于ssh的相关问题这个是关于ssh的相关问题 一.首先问题是：局域网内的两台主机如何可以相互登录
 一.检查网络的连通性
 二. 检查了是否安装了ssh服务
 二.如何配置SSH免密登录
@@ -305,22 +175,9 @@
 二. 检查了是否安装了ssh服务 在这里呢，我们开始进入Linux里面，开始真正意义上的操作的
 首先就是我们查询是否安装了ssh相关服务，相比大家都知道的是，我们要安装ssh的客户端和服务端两个服务的，以下是查询的命令 ssh -V # 这个是检查SSH客⼾端版本，如果安装会显⽰版本信息 systemctl status sshd # 这个是检查SSH服务状态，如果服务正在运⾏则说明已安装SSH服务器 如果提⽰： command not found或类似的， 说明SSH服务未安装， 需要安装服务
 此时呢，就需要安装这几个服务了
-1.安装客户端 dnf install -y openssh-clients 2.安装服务端 dnf install -y openssh-service 3.启动ssh服务 systemctl start sshd # 启动服务systemctl enable sshd # 将服务添加到⾃启动项，下次开机就⾃动启动了 这一步，到这里，我们也就结束了
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>111 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 这个是关于ssh的相关问题这个是关于ssh的相关问题" href="http://localhost:1313/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">整数和浮点数在内存中存储
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！
+1.安装客户端 dnf install -y openssh-clients 2.安装服务端 dnf install -y openssh-service 3.启动ssh服务 systemctl start sshd # 启动服务
+systemctl enable sshd # 将服务添加到⾃启动项，下次开机就⾃动启动了 这一步，到这里，我们也就结束了
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>111 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 这个是关于ssh的相关问题这个是关于ssh的相关问题" href=https://dsduyopg.github.io/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>整数和浮点数在内存中存储</h2></header><div class=entry-content><p>大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！
 整数和浮点数在内存中存储 1.整数与浮点数在内存中存储是否一样
 整数与浮点数在内存中存储的例子
 2.整数在内存中的存储
@@ -332,23 +189,33 @@ IEEE754的详细相关规定
 3.讲解上例当中的题目
 1.整数与浮点数在内存中存储是否一样 首先我们大家都有一个疑问，在内存中数据的存储不都是以二进制形式存储的吗？还有什么不同呢？其实我在学习本节课之前我和大家的认知是一样的，都是认为他们的存储都是一样的，但是今天我可以告诉给大家，在内存中存储其实并不一样，下面我为大家详细的介绍一下。
 整数与浮点数在内存中存储的例子 下面我为大家举出一个关于他们在内存存储的例子，如下：
-int main(){int n = 9;//整型的存储方式，补码//00000000000000000000000000001001 9的补码//float* pFloat = (float*)&amp;n;printf(&#34;n的值为：%d\n&#34;, n);//9printf(&#34;*pFloat的值为：%f\n&#34;, *pFloat);//0 00000000 00000000000000000001001//E 为全0//(-1)^0 * 0.00000000000000000001001 * 2^-126//1*//0.000000*pFloat = 9.0;//1001.0//(-1)^0 * 1.001*2^3//S=0//M=1.001//E = 3//01000001000100000000000000000000//printf(&#34;num的值为：%d\n&#34;, n);printf(&#34;*pFloat的值为：%f\n&#34;, *pFloat);//9.0return 0;} 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。
-2.整数在内存中的存储 这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码&#43;1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>135 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 整数和浮点数在内存中存储" href="http://localhost:1313/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">字符串中删除后导星号的问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>字符串中删除后导星号的问题 一.题目分析
+int main()
+{
+int n = 9;//整型的存储方式，补码
+//00000000000000000000000000001001 9的补码
+//
+float* pFloat = (float*)&amp;n;
+printf("n的值为：%d\n", n);//9
+printf("*pFloat的值为：%f\n", *pFloat);
+//0 00000000 00000000000000000001001
+//E 为全0
+//(-1)^0 * 0.00000000000000000001001 * 2^-126
+//1*
+//0.000000
+*pFloat = 9.0;
+//1001.0
+//(-1)^0 * 1.001*2^3
+//S=0
+//M=1.001
+//E = 3
+//01000001000100000000000000000000
+//
+printf("num的值为：%d\n", n);
+printf("*pFloat的值为：%f\n", *pFloat);//9.0
+return 0;
+} 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。
+2.整数在内存中的存储 这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>135 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 整数和浮点数在内存中存储" href=https://dsduyopg.github.io/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>字符串中删除后导星号的问题</h2></header><div class=entry-content><p>字符串中删除后导星号的问题 一.题目分析
 二.我所犯的错误
 2.1我的代码
 2.1我的错误的代码运行的结果
@@ -363,21 +230,49 @@ int main(){int n = 9;//整型的存储方式，补码//0000000000000000000000
 3.3 修正好后的代码运行结果如下：
 3.4 我的修正后的代码如下：
 四.总结
-一.题目分析 二.我所犯的错误 2.1我的代码 #include &lt;stdio.h&gt;void fun( char *a ){int count=0,count_a=0,i,j=0;while(*a!=&#39;\0&#39;){a&#43;&#43;;count&#43;&#43;;}a=a-1;while(*a==&#39;*&#39;){a--;count_a&#43;&#43;;}for(i=0;i&lt;count-count_a;i&#43;&#43;){a[j&#43;&#43;]=a[i];}a[j]=&#39;\0&#39;;}main(){ char s[81];void NONO ();printf(&#34;Enter a string:\n&#34;);gets(s);fun( s );printf(&#34;The string after deleted:\n&#34;);puts(s);NONO();getchar();}void NONO (){/* 本函数用于打开文件，输入数据，调用函数，输出数据，关闭文件。 */FILE *in, *out ;int i ; char s[81] ;in = fopen(&#34;in.dat&#34;,&#34;r&#34;) ;out = fopen(&#34;out.dat&#34;,&#34;w&#34;) ;for(i = 0 ; i &lt; 10 ; i&#43;&#43;) {fscanf(in, &#34;%s&#34;, s) ;fun(s) ;fprintf(out, &#34;%s\n&#34;, s) ;}fclose(in) ;fclose(out) ;} 2.1我的错误的代码运行的结果 ...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>333 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 字符串中删除后导星号的问题" href="http://localhost:1313/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">字符函数和字符串函数
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。
+一.题目分析 二.我所犯的错误 2.1我的代码 #include &lt;stdio.h>
+void fun( char *a )
+{
+int count=0,count_a=0,i,j=0;
+while(*a!='\0')
+{
+a++;
+count++;
+}
+a=a-1;
+while(*a=='*')
+{
+a--;
+count_a++;
+}
+for(i=0;i&lt;count-count_a;i++)
+{
+a[j++]=a[i];
+}
+a[j]='\0';
+}
+main()
+{ char s[81];void NONO ();
+printf("Enter a string:\n");gets(s);
+fun( s );
+printf("The string after deleted:\n");puts(s);
+NONO();
+getchar();
+}
+void NONO ()
+{/* 本函数用于打开文件，输入数据，调用函数，输出数据，关闭文件。 */
+FILE *in, *out ;
+int i ; char s[81] ;
+in = fopen("in.dat","r") ;
+out = fopen("out.dat","w") ;
+for(i = 0 ; i &lt; 10 ; i++) {
+fscanf(in, "%s", s) ;
+fun(s) ;
+fprintf(out, "%s\n", s) ;
+}
+fclose(in) ;
+fclose(out) ;
+} 2.1我的错误的代码运行的结果 ...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>333 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 字符串中删除后导星号的问题" href=https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>字符函数和字符串函数</h2></header><div class=entry-content><p>在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。
 字符函数和字符串函数 一.字符函数
 1.字符分类函数
 1.字符分类函种类及作用
@@ -399,123 +294,35 @@ int main(){int n = 9;//整型的存储方式，补码//0000000000000000000000
 1.字符分类函数 1.字符分类函种类及作用 iscntrl 判断是否输入控制字符 isspace 输入空白字符返回真 isdigit 输入数字字符返回真 isxdigit 输入16进制数字字符返回真 islower 输入小写字符返回真 isupper 输入大写字符返回真 isalpha 输入字母字符返回真 isalnum 输入数字或者字母字符返回真 ispunct 输入标点字符返回真 isgraph 输入图形字符返回真 isprint 输入可打印字符返回真 2.字符转换函数 字符转化函数具体有，大写字符转化成小写字符，另有小写字符转化为大写字符，当然这些都是针对的是输入的是字母字符时方可使用的，但是若果使用的是非字母字符那么的话可能会导致错误，从而程序无法运行。
 1.字符转换函数包括哪些 1.大写字符转化为小写字符 1.大写字符转化为小写字符函数的具体诠释 形如以下形式：
 int tolower ( int c ); 给大家举出一下例子，我们一起看一下：
-#include &lt;stdio.h&gt;#include &lt;ctype.h&gt;int main (){int i=0;char str[]=&#34;Test String.\n&#34;;char c;while (str[i]){c=str[i];putchar (tolower(c));i&#43;&#43;;}return 0;} 当然这样写没有什么问题，但是我们也可以这样子写如下：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>439 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 字符函数和字符串函数" href="http://localhost:1313/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>@TOC
+#include &lt;stdio.h>
+#include &lt;ctype.h>
+int main ()
+{
+int i=0;
+char str[]="Test String.\n";
+char c;
+while (str[i])
+{
+c=str[i];
+putchar (tolower(c));
+i++;
+}
+return 0;
+} 当然这样写没有什么问题，但是我们也可以这样子写如下：
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>439 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 字符函数和字符串函数" href=https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent></h2></header><div class=entry-content><p>@TOC
 1.问题背景 首先这个问题诞生于如此条件下，我在跟随佳乐老师创建完lisi，zhangsan，wangwu之后呢，我就用lisi作为用户登录服务器node1，这里面设置了禁锢操作，路径是/export/public，而public里面拥有2个文件夹.一个是logs，另一个是src，同时设置了黑白名单,张三设置在黑名单，王五和李四设置在白名单
 2.遇到的问题 1.遇到的问题其实就是，在我用lisi把客户端的根目录下的a.log，发送给服务器的logs目录，无法操作 2.后来，我在logs目录下创建文件夹也是无法操作的，也是显示权限不足 ==但是呢，我在服务器的这个logs目录下创建文件夹是可以创建的== 3.就很奇怪，再去服务器是可以搞定的，是可以创建文件夹的，但是在客户端是没有办法进行创建的，我当时以为是logs的权限设置的不对，用的是root创建，权限大的缘故，但是其实并不是如此的,后面我在服务器用了lisi照样是可以创建的 4.后来，我仔细检查了这些文件夹的权限，并再次赋权,这次显然也是不行的 3.问题解决的方法 解决的办法，后来，我把我的问题，这些比较奇怪的地方，我问了千文，后来，在他的帮助之下我成功了，在客户端我成功的在服务器的logs上面创建了文件夹，这意味着什么呢，显然这意味着，我可以把客户端家目录的a.log上传给服务器的logs里面，结果显然和我想的一样 下面是千文告诉我的解决方案，让我一步一步排查，最后成功找到了问题关键所咋
 1.ai的方法 这个对比信息非常关键！它直接帮我们排除了文件系统权限问题。
-为什么本地能写、FTP 不能写？ 本质区别在于执行写入的&#34;身份&#34;不同：
-场景 执行者 受什么约束 本地 mkdir lisi 自己的 shell 进程 只看文件系统的 rwx 权限 ✅ FTP mkdir vsftpd 守护进程代为执行 受 vsftpd.conf 开关 &#43; SELinux 对 ftpd 的策略双重约束 ❌ 所以本地能写，完全不能证明 FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。
+为什么本地能写、FTP 不能写？ 本质区别在于执行写入的"身份"不同：
+场景 执行者 受什么约束 本地 mkdir lisi 自己的 shell 进程 只看文件系统的 rwx 权限 ✅ FTP mkdir vsftpd 守护进程代为执行 受 vsftpd.conf 开关 + SELinux 对 ftpd 的策略双重约束 ❌ 所以本地能写，完全不能证明 FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。
 嫌疑一：write_enable 没开（最常见！） vsftpd 的 write_enable 默认是 NO。如果配置文件里没显式写 write_enable=YES，那么所有写操作（上传、mkdir、删除、改名）一律拒绝，正好对应你看到的 533 和 550。而它不影响读和 ls，所以你能登录、能列目录。
 grep -i write_enable /etc/vsftpd/vsftpd.conf 如果没有这一行，或显示 write_enable=NO → 就是它！ 修复：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>2 分钟</span>&nbsp;·&nbsp;<span>364 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/posts/%E5%85%B6%E4%BB%96%E5%8D%9A%E5%AE%A2/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/"></a>
-</article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="prev" href="http://localhost:1313/page/3/">
-      «&nbsp;上一页&nbsp;
-    </a>
-  </nav>
-</footer>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-</body>
-
-</html>
+...</p></div><footer class=entry-footer><span>2 分钟</span>&nbsp;·&nbsp;<span>364 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to " href=https://dsduyopg.github.io/posts/%E5%85%B6%E4%BB%96%E5%8D%9A%E5%AE%A2/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=https://dsduyopg.github.io/page/3/ title=上一页>&#171;</a>
+<a class=page-link href=https://dsduyopg.github.io/>1</a>
+<a class=page-link href=https://dsduyopg.github.io/page/2/>2</a>
+<a class=page-link href=https://dsduyopg.github.io/page/3/>3</a>
+<a class="page-link active" href=https://dsduyopg.github.io/page/4/>4</a></nav></footer></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>(function(){var e,t,n,s,a,r,o="blog_views",i="blog_titles",l=document.querySelector(".post-entry")&&!document.querySelector(".hero-banner"),c=document.getElementById("hot-posts");if(l){if(n=location.pathname,a=(document.title||"").replace(/\s*\|.*$/,"").trim(),!n||!a)return;e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),e[n]=(e[n]||0)+1,t[n]=a,localStorage.setItem(o,JSON.stringify(e)),localStorage.setItem(i,JSON.stringify(t));return}if(!c)return;if(e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),r=Object.keys(e).filter(function(e){return t[e]}).sort(function(t,n){return e[n]-e[t]}).slice(0,5),!r.length)return;s='<h3>热门文章</h3><ol class="hot-list">',r.forEach(function(e){s+='<li><a href="'+e+'">'+t[e]+"</a></li>"}),s+="</ol>",c.innerHTML=s})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>
