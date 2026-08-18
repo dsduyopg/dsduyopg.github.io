@@ -28,15 +28,24 @@ hugo new posts/文章标题/index.md
 ## 部署到 Cloudflare Pages
 
 1. 把本目录推送到任意 GitHub 仓库
-2. Cloudflare Pages 创建项目，连接该仓库
+2. Cloudflare 控制台：Workers & Pages -> Create -> Pages -> Connect to Git，选择该仓库
 3. 构建配置：
 
 ```text
-Build command: hugo
+Build command: hugo --baseURL https://你的项目名.pages.dev/ --minify
 Build output directory: public
 ```
 
-4. 部署完成后，把 `hugo.toml` 里的 `baseURL` 改成你的真实域名
+可选环境变量：
+
+```text
+HUGO_VERSION = 0.164.0
+```
+
+4. 把 `你的项目名` 换成你实际的 Cloudflare Pages 项目名
+5. 部署完成后，访问 `https://你的项目名.pages.dev`
+
+注意：这个构建命令只对 Cloudflare 生效，不会影响 GitHub Pages 的 `baseURL`。
 
 ## 注意
 
