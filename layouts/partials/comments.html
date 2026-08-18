@@ -1,6 +1,12 @@
 {{- if not (.Param "hideComments") }}
 <div class="comments">
   <h2>评论</h2>
+  <div class="like-box">
+    <button class="like-btn" type="button" data-like-path="{{ .RelPermalink }}">
+      <span class="like-heart">♡</span>
+      <span class="like-count">0</span>
+    </button>
+  </div>
   <script src="https://utteranc.es/client.js"
           repo="dsduyopg/dsduyopg.github.io"
           issue-term="pathname"
@@ -12,3 +18,27 @@
   <noscript>请启用 JavaScript 查看评论。</noscript>
 </div>
 {{- end }}
+
+<script>
+  (function () {
+    var btn = document.querySelector('.like-btn');
+    if (!btn) return;
+    var key = 'like:' + btn.getAttribute('data-like-path');
+    var count = parseInt(localStorage.getItem(key) || '0', 10);
+    var liked = count > 0;
+    var heart = btn.querySelector('.like-heart');
+    var num = btn.querySelector('.like-count');
+    function render() {
+      num.textContent = count;
+      heart.textContent = liked ? '♥' : '♡';
+      btn.classList.toggle('liked', liked);
+    }
+    btn.addEventListener('click', function () {
+      liked = !liked;
+      count = liked ? 1 : 0;
+      localStorage.setItem(key, String(count));
+      render();
+    });
+    render();
+  })();
+</script>
