@@ -1,216 +1,42 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head>
-	<meta name="generator" content="Hugo 0.164.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>我的博客</title>
-<meta name="keywords" content="Linux, 运维, 自动化, Python, Teldrive, 博客">
-<meta name="description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
-<meta name="author" content="dsduyopg">
-<link rel="canonical" href="http://localhost:1313/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.acb0281697426877b365afae9c3f98c3d059da7386a3e319a7edbfa64c40383c.css" integrity="sha256-rLAoFpdCaHezZa&#43;unD&#43;Yw9BZ2nOGo&#43;MZp&#43;2/pkxAODw=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml" title="rss">
-<link rel="alternate" type="application/json" href="http://localhost:1313/index.json" title="json">
-<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="http://localhost:1313/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="我的博客">
-  <meta property="og:description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="我的博客">
-  <meta name="twitter:description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "我的博客",
-  "url": "http://localhost:1313/",
-  "description": "记录 Linux、运维、自动化和我自己折腾过的项目",
-  "logo": "http://localhost:1313/favicon.ico",
-  "sameAs": [
-      "https://github.com/dsduyopg"
-  ]
-}
-</script>
-</head>
-<body class="list" id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="http://localhost:1313/search/" title="搜索">
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/about/" title="关于">
-                    <span>关于</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main"> 
-<article class="first-entry home-info hero-banner">
-  <img class="hero-banner-img" src="/images/hero.jpg" alt="博客横幅" />
-  <div class="hero-banner-overlay"></div>
-  <div class="hero-banner-content">
-    <header class="entry-header">
-      <h1>欢迎来到我的博客</h1>
-    </header>
-    <div class="entry-content md-content">
-      
-      <p>记录 Linux、运维、自动化，还有我自己折腾过的项目。这里会持续更新。</p>
-
-    </div>
-    <div class="hero-links">
-      <a class="hero-link" href="/search/">搜索</a>
-      <a class="hero-link" href="/archives/">归档</a>
-      <a class="hero-link" href="/tags/">标签</a>
-      <a class="hero-link" href="/about/">关于</a>
-    </div>
-    <footer class="entry-footer">
-      <div class="social-icons" align="left">
-    <a href="https://github.com/dsduyopg" target="_blank" rel="noopener noreferrer me"
-        title="Github">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-    stroke-linecap="round" stroke-linejoin="round">
-    <path
-        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-    </path>
-</svg>
-    </a>
-</div>
-
-    </footer>
-  </div>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">【分支和循环（下）】
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>1.分支和循环（下) 一.随机数生成 (1).rand (2).srand (3)time (4)设置随机数的范围 二.猜数字游戏实现 分支和循环（下) 在本节内容当中，主要讨论了关于随机函数相关的知识点并做一些应用，也就是说讨论关于猜数字的游戏。
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta name=generator content="Hugo 0.164.0"><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>我的博客</title><meta name=keywords content="Linux,运维,自动化,Python,Teldrive,博客"><meta name=description content="记录 Linux、运维、自动化和我自己折腾过的项目"><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/><link crossorigin=anonymous href=/assets/css/stylesheet.acb0281697426877b365afae9c3f98c3d059da7386a3e319a7edbfa64c40383c.css integrity="sha256-rLAoFpdCaHezZa+unD+Yw9BZ2nOGo+MZp+2/pkxAODw=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate type=application/rss+xml href=https://dsduyopg.github.io/index.xml title=rss><link rel=alternate type=application/json href=https://dsduyopg.github.io/index.json title=json><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="我的博客"><meta property="og:description" content="记录 Linux、运维、自动化和我自己折腾过的项目"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="我的博客"><meta name=twitter:description content="记录 Linux、运维、自动化和我自己折腾过的项目"><script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"我的博客","url":"https://dsduyopg.github.io/","description":"记录 Linux、运维、自动化和我自己折腾过的项目","logo":"https://dsduyopg.github.io/favicon.ico","sameAs":["https://github.com/dsduyopg"]}</script></head><body class=list id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg.github.io/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class="first-entry home-info hero-banner"><img class=hero-banner-img src=/images/hero.jpg alt=博客横幅><div class=hero-banner-overlay></div><div class=hero-banner-content><header class=entry-header><h1>欢迎来到我的博客</h1></header><div class="entry-content md-content"><p>记录 Linux、运维、自动化，还有我自己折腾过的项目。这里会持续更新。</p></div><div class=hero-links><a class=hero-link href=/search/>搜索</a>
+<a class=hero-link href=/archives/>归档</a>
+<a class=hero-link href=/tags/>标签</a>
+<a class=hero-link href=/about/>关于</a></div><footer class=entry-footer><div class=social-icons align=left><a href=https://github.com/dsduyopg target=_blank rel="noopener noreferrer me" title=Github><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></div></footer></div></article><div id=hot-posts class=hot-posts></div><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>【分支和循环（下）】</h2></header><div class=entry-content><p>1.分支和循环（下) 一.随机数生成 (1).rand (2).srand (3)time (4)设置随机数的范围 二.猜数字游戏实现 分支和循环（下) 在本节内容当中，主要讨论了关于随机函数相关的知识点并做一些应用，也就是说讨论关于猜数字的游戏。
 一.随机数生成 随机函数主要有rand,srand,函数，我们将会讨论什么是随机数种子，为何说rand函数不是我们的随机函数，以及用time函数实现srand的随机种子，进而实现了对于随机数的求解。
 (1).rand C语言提供了求解随机数的方法：
 int rand(void); 但是呢，由于rand函数是为随机函数是通过某种算法生成的随机数，不是真正的随机数，下面就为大家试一下:
-#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;int main(){printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());return 0; )
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+int main()
+{
+printf("%d\n", rand());
+printf("%d\n", rand());
+printf("%d\n", rand());
+printf("%d\n", rand());
+printf("%d\n", rand());
+return 0; )
 由此可以知道的，是rand两次所生成的结果是一样的，那么可以说，rand不是一个正常的生成随机数的函数，因为他默认的随机种子数是1，如果要生成不同的随机数，就要让种子是变化的。
 (2).srand 下面我就介绍关于srand函数，只要在使用rand之前，使用srand函数，通过 srand函数的参数seed来设置rand函数生成随机数的时候的种子，只要种子在变化，每次生成的随机数序列也就变化起来了, 那也就是说给srand的种子是如果是随机的，rand就能生成随机数；在生成随机数的时候又需要一个随 机数，这就矛盾了.
 (3)time 因为时间是经常变化的，在c当中有一个函数是time,因此我们可以使用它时间作为随机数种子。在C当中的定义如下：
 time_t time (time_t* timer); 如果 timer 是NULL，就只返回这个时间的差值。time函数返回的这个时间差也被叫做：时间戳。 使用time函数的时候，需要包含头文件：time.h 书写生成随机函数的代码如下：
-#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;time.h&gt;int main(){//使用time函数的返回值设置种子//因为srand的参数是unsigned int类型，我们将time函数的返回值强制类型转换srand((unsigned int)time(NULL));printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());return 0;} 得到的结果是： 可以知道的是，两次得到的随机数并不像第一次那样—二次得到的，是一样的，这个函数可以成功的实现对于随机数的求解，这就是我们需要的函数。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>299 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 【分支和循环（下）】" href="http://localhost:1313/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">【实战】DNS建设案例_
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>【实战】DNS建设案例: 0.需求
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+#include &lt;time.h>
+int main()
+{
+//使用time函数的返回值设置种子
+//因为srand的参数是unsigned int类型，我们将time函数的返回值强制类型转换
+srand((unsigned int)time(NULL));
+printf("%d\n", rand());
+printf("%d\n", rand());
+printf("%d\n", rand());
+printf("%d\n", rand());
+printf("%d\n", rand());
+return 0;
+} 得到的结果是： 可以知道的是，两次得到的随机数并不像第一次那样—二次得到的，是一样的，这个函数可以成功的实现对于随机数的求解，这就是我们需要的函数。
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>299 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 【分支和循环（下）】" href=https://dsduyopg.github.io/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>【实战】DNS建设案例_</h2></header><div class=entry-content><p>【实战】DNS建设案例: 0.需求
 1.准备工作
 2.进行标准化的服务器配置
 1.修改ip
@@ -253,47 +79,28 @@ time_t time (time_t* timer); 如果 timer 是NULL，就只返回这个时间的�
 6.测试操作
 6.总结
 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问
-NFS服务器域名： nfs.itcast.localFTP服务器域名： ftp.itcast.localtomcat服务器域名： www.itcast.localFTP服务器要求:1- 禁锢FTP目录： /export/ftp2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器windows中，建议使用filezilla.exe 软件来连接NFS服务器：共享目录： /export/nfs要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可） 1.准备工作 我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>524 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 【实战】DNS建设案例_" href="http://localhost:1313/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">CSDN 博客本地化工具使用说明
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
+NFS服务器域名： nfs.itcast.local
+FTP服务器域名： ftp.itcast.local
+tomcat服务器域名： www.itcast.local
+FTP服务器要求:
+1- 禁锢FTP目录： /export/ftp
+2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可
+3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器
+windows中，建议使用filezilla.exe 软件来连接
+NFS服务器：
+共享目录： /export/nfs
+要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可） 1.准备工作 我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>524 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 【实战】DNS建设案例_" href=https://dsduyopg.github.io/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>CSDN 博客本地化工具使用说明</h2></header><div class=entry-content><p>CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
 ![图片](https://img-blog.csdnimg.cn/xxxx.png) 如果图床失效或文章被删除，图片就找不回来了。
 这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：
 ![图片](images/xxxx.png) 这样博客的正文和图片就能一起保存、迁移、备份。
 使用方法 1. 准备 本机需要安装 Python 3.11 或更高版本。
 检查：
-python --version 2. 下载图片 python download_images.py &#34;D:\博客\文章.md&#34; 执行后会在文章同目录生成：
+python --version 2. 下载图片 python download_images.py "D:\博客\文章.md" 执行后会在文章同目录生成：
 D:\博客\ ├─ 文章.md └─ images\ └─ xxxx.png 文章.md 里的图片链接会自动改写为：
 ![图片](images/xxxx.png) 3. 可选参数 指定图片目录名：
-python download_images.py &#34;D:\博客\文章.md&#34; --out 图片 只预览，不实际下载：
-python download_images.py &#34;D:\博客\文章.md&#34; --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>77 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to CSDN 博客本地化工具使用说明" href="http://localhost:1313/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言的分支与循环上
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>if语句 在if语句中他的语法是if(表达式)
+python download_images.py "D:\博客\文章.md" --out 图片 只预览，不实际下载：
+python download_images.py "D:\博客\文章.md" --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>77 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to CSDN 博客本地化工具使用说明" href=https://dsduyopg.github.io/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言的分支与循环上</h2></header><div class=entry-content><p>if语句 在if语句中他的语法是if(表达式)
 语句
 表达式成立那么语句执行，不成立那么语句不执行。
 在if语句中只要是true就执行，false不执行。
@@ -302,23 +109,8 @@ python download_images.py &#34;D:\博客\文章.md&#34; --dry-run 注意事项 �
 在if语句中if语句只可以跟着一条语句，但是如果过于多的话可以调整为大括号
 由此我们可以知道这样的道理，else是在一些情况可以省略的，不必再写像
 if(num%2)
-printf(&#34;%d 是奇数&#34;，num);
-printf(&#34;%d 是偶数&#34;,num);
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>14 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to C语言的分支与循环上" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之操作符（上）
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>C语言之操作符（上） 一.二进制，八进制，十六进制
+printf("%d 是奇数"，num);
+printf("%d 是偶数",num);</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>14 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言的分支与循环上" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之操作符（上）</h2></header><div class=entry-content><p>C语言之操作符（上） 一.二进制，八进制，十六进制
 1.二进制
 2.八进制与十六进制
 二.原码，反码，补码
@@ -341,21 +133,7 @@ printf(&#34;%d 是偶数&#34;,num);
 1.二进制 1.首先，需要注意的是，二进制是什么。二进制是是计算机在存储信息之中时以1，0对信息加以存储和表达，满2进1对的。 2.其次我们需要注意的是，二进制的转化： 1.二进制同十进制之间的转化：首先需要明确一下的是权重，求值，以十进制数字：123为例。
 10进制的位 1 2 3 权重 10^2 10^1 10^0 权重值 100 10 1 求值 1*100 2*10 3*1 = 123 1.由此可以看出，权重，权重值,的关系，对这个概念可以运用到二进制·之上，对于二进制数如：110.
 二进制的位 1 1 0 权重 2^2 2^1 2^0 权重值 4 2 1 求值 4*1 2*1 0*1= 6 2.这样我们就完成了对二进制与十进制数相互进行转化。而对于十进制数转化为二进制数字，比如说一个十进制数字125将他转化成二进制数字，可以采用短除法，具体操作如下：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>226 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之操作符（上）" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之操作符【下】
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>C语言之操作符【下】 一.下标访问[],函数调用()
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>226 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之操作符（上）" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之操作符【下】</h2></header><div class=entry-content><p>C语言之操作符【下】 一.下标访问[],函数调用()
 1.下标访问[]
 1.什么是下标访问[]
 2.下标访问操作符[]的应用与举例
@@ -374,7 +152,14 @@ printf(&#34;%d 是偶数&#34;,num);
 在上一节中，我们已经学习了操作符的一些相关知识，我们对C语言的操作符有了新的认识与理解，那么在本节C语言中，我们将继续上一次的讲解，为大家呈现更加有趣并且深刻的讲解，来开启我们的操作符之旅吧！
 一.下标访问[],函数调用() 1.下标访问[] 1.什么是下标访问[] 1.在C语言学习中，我们会经常用到下标访问操作符，那么相信在屏幕前的你们一定很想知道什么是下标访问操作符吧？下面我就为大家详细的道来：其实下标访问操作符，是数组里面的一个知识点，下标访问操作符是数组遍历当中经常使用的，数组在遍历[]里面会有一些数字，而那些数字其实就可以表示数组的内容，因此就可以对数组进行遍历了。 2.形式是[]里面的数字从数字0开始，到最后的数字结束。
 2.下标访问操作符[]的应用与举例 1.下标访问操作符的应用：下标访问操作符，应用到数组当中，对于数组内容的访问有着极其重要的意义。 2.下标访问操作符的举例：如在下面的函数当中，我们就用到了下标访问操作符。
-#include&lt;stdio.h&gt;int main(){int a[5]={1,2,3,4,5};for(int i=0; i&lt;5;i&#43;&#43;)printf(&#34;%d&#34;,a[i]);return 0;} 3.在上例当中，a[i]里面的i其实就是数组里面的内容，它的意思是说数组里面的的i-1个元素，因此我们通过这个方法对其进行遍历。
+#include&lt;stdio.h>
+int main()
+{
+int a[5]={1,2,3,4,5};
+for(int i=0; i&lt;5;i++)
+printf("%d",a[i]);
+return 0;
+} 3.在上例当中，a[i]里面的i其实就是数组里面的内容，它的意思是说数组里面的的i-1个元素，因此我们通过这个方法对其进行遍历。
 2.函数调用() 1.函数调用操作符是小括号。 2.形式如下：
 int add(int x,int y); 在上例之中，小括号之前的是，函数名；在小括号之后的是形参，可以看出该函数有两个形参：一个是int x，另一个是int y，该函数的返回类型是int形。
 二.操作符的属性：优先级、结合性 1.优先级 1.每种同类型的运算符都有内部的运算符优先级，不同类型的运算符之间也有相应的优先级顺序。一个表达式中既可以包括相同类型的运算符，也可以包括不同类型的运算符或者函数。当多种运算符出现在同一个表达式中时，应该先按照不同类型运算符间的优先级进行运算。各种运算符间的优先级如下：数值运算符、字符串运算符、关系运算符、逻辑运算符。可以用括号改变优先级顺序，使得括号内的运算优先于括号外的运算。对于多重括号，总是由内到外强制表达式的某些部分优先运行。括号内的运算总是最优先计算。 2.操作符的优先级如下： 2.结合性 结合性是，对于多个优先级是一样的操作符的一个表达式，此时他们的就需要用到，结合性，如下：
@@ -384,174 +169,114 @@ int add(int x,int y); 在上例之中，小括号之前的是，函数名；在�
 2.整形提升的意义 整型提升的意义是在表达式中，各种长度可能小于int长度的整型值，都必须先转换为int或unsigned int，然后才能送入CPU去执行运算12。C的整型算术运算总是至少以缺省整型类型的精度来进行的。为了获得这个精度，表达式中的字符和短整型操作数在使用之前被转换为普通整型，这种转换称为整型提升。比如：即使两个char类型（1个字节==8个比特字节）的相加，在CPU执行时实际上也要先转换为CPU内整型操作数的标准长度.
 3.如何进行整型提升 有符号整数提升是按照变量的数据类型的符号位来提升的
 无符号整数提升，高位补0
-例子如下： int main(){char - signed charunsigned charchar a = 5;//char只有一个字节，那么的话char有8个比特位。//a 的二进制位是：00000101 - a (截断后存储a中)//由于a是无符号类型的，可以整型提升，提升为int类型，以二进制位表示如下：000000000000000000000000 00000101char b = 127;//类似char a，一些步骤缺省，因此将他转换为int类型以二进制表示如下：0000000000000000000000000111111101111111 - b (截断后存储到b中)char c = a &#43; b;//发生整型提升00000000000000000000000000000101 - a00000000000000000000000001111111 - b00000000000000000000000010000100 - a&#43;b10000100 - c//由于char c的最高位是1因此我们用1char c提升为整形，如下：printf(&#34;%d\n&#34;, c);//这里c还是要整型提升11111111111111111111111110000100//c的整型提升的原码10000000000000000000000001111011//c的反码10000000000000000000000001111100//c的补码-124%d 是按照10进制的形式打印有符号的整数return 0;} 四.算术转换 如果某个操作符的各个操作数属于不同的类型，那么除非其中一个操作数的转换为另一个操作数的类型，否则操作就无法进行。下面的层次体系称为寻常算术转换：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>226 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之操作符【下】" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之讲解篇
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>例题：
-下面代码的结果是：#include &lt;stdio.h&gt;int i;int main(){i--;if (i &gt; sizeof(i)){printf(&#34;&gt;\n&#34;);}else{printf(&#34;&lt;\n&#34;);}return 0;} A.&gt;
+例子如下： int main()
+{
+char - signed char
+unsigned char
+char a = 5;//char只有一个字节，那么的话char有8个比特位。
+//a 的二进制位是：00000101 - a (截断后存储a中)
+//由于a是无符号类型的，可以整型提升，提升为int类型，以二进制位表示如下：000000000000000000000000 00000101
+char b = 127;
+//类似char a，一些步骤缺省，因此将他转换为int类型以二进制表示如下：00000000000000000000000001111111
+01111111 - b (截断后存储到b中)
+char c = a + b;//发生整型提升
+00000000000000000000000000000101 - a
+00000000000000000000000001111111 - b
+00000000000000000000000010000100 - a+b
+10000100 - c//由于char c的最高位是1因此我们用1char c提升为整形，如下：
+printf("%d\n", c);
+//这里c还是要整型提升
+11111111111111111111111110000100//c的整型提升的原码
+10000000000000000000000001111011//c的反码
+10000000000000000000000001111100//c的补码
+-124
+%d 是按照10进制的形式打印有符号的整数
+return 0;
+} 四.算术转换 如果某个操作符的各个操作数属于不同的类型，那么除非其中一个操作数的转换为另一个操作数的类型，否则操作就无法进行。下面的层次体系称为寻常算术转换：
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>226 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之操作符【下】" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇</h2></header><div class=entry-content><p>例题：
+下面代码的结果是：
+#include &lt;stdio.h>
+int i;
+int main()
+{
+i--;
+if (i > sizeof(i))
+{
+printf(">\n");
+}
+else
+{
+printf("&lt;\n");
+}
+return 0;
+} A.>
 B.&lt;
 C.不输出
 D.程序有问题
 首先，我可以明确一点的是，这道题不选择D和C，在本函数中，由于int i 是一个全局变量，它存放的是静态区，
-C标准是要求全局变量要被初始化为零值，因此即使你没有初始化该值那么依然会被系统初始化为0，然而，sizeof类型是属于unsigned int 类型，也就是说，-1需要进行一拨转换，然而-1转换为无符号整形数字是比较大的，那么的话，明显是&gt;,那么就选则的是A
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>34 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之讲解篇" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%87/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之讲解篇2
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>例题：获取一个整数二进制序列中所有的偶数位和奇数位，分别打印出二进制序列。
-对于这个题我想的是，由于1&amp;二进制的数字，他的意思是判断最低位是否为1，是的话那么就是1，否则就不是1而是0，这样如果我在进行一番右移操做，那么的话，就可以把这个二进制打印出来。
+C标准是要求全局变量要被初始化为零值，因此即使你没有初始化该值那么依然会被系统初始化为0，然而，sizeof类型是属于unsigned int 类型，也就是说，-1需要进行一拨转换，然而-1转换为无符号整形数字是比较大的，那么的话，明显是>,那么就选则的是A</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>34 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%87/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇2</h2></header><div class=entry-content><p>例题：获取一个整数二进制序列中所有的偶数位和奇数位，分别打印出二进制序列。
+对于这个题我想的是，由于1&二进制的数字，他的意思是判断最低位是否为1，是的话那么就是1，否则就不是1而是0，这样如果我在进行一番右移操做，那么的话，就可以把这个二进制打印出来。
 若是需要奇偶位打印的话，那么可能是在每次右移奇数个位或者是偶数个位，就可以求出二进制的奇数位，以及偶数位，下面我就为大家展示一番。
-#include&lt;stdio.h&gt;int main() {int num = 0;printf(&#34;请输入一个数:&#34;);scanf(&#34;%d&#34;, &amp;num);printf(&#34;奇数位：&#34;);for (int i = 31; i &gt;= 1; i -= 2) {printf(&#34;%d &#34;, (num &gt;&gt; i) &amp; 1);}printf(&#34;\n&#34;);printf(&#34;偶数位：&#34;);for (int i = 30; i &gt;= 0; i -= 2) {printf(&#34;%d &#34;, (num &gt;&gt; i) &amp; 1);}printf(&#34;\n&#34;);return 0;} 这个是运行结果：
-因此这就是本题的代码。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>63 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之讲解篇2" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之讲解篇3
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>例题：求两个数二进制中不同位的个数，写出C代码。
+#include&lt;stdio.h>
+int main() {
+int num = 0;
+printf("请输入一个数:");
+scanf("%d", &amp;num);
+printf("奇数位：");
+for (int i = 31; i >= 1; i -= 2) {
+printf("%d ", (num >> i) & 1);
+}
+printf("\n");
+printf("偶数位：");
+for (int i = 30; i >= 0; i -= 2) {
+printf("%d ", (num >> i) & 1);
+}
+printf("\n");
+return 0;
+} 这个是运行结果：
+因此这就是本题的代码。</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>63 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇2" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇3</h2></header><div class=entry-content><p>例题：求两个数二进制中不同位的个数，写出C代码。
 在我的讲解篇2中可以看到：由于每次右移1位并对1按位与那么就可以将二进制位分离出来，得出与原来一样二进制位。
 思路一样，那么我们可以用上一篇中提到的方法，那么接下来我们就需要对每个二进制位进行比较就可以了，以此类推，若是不同的话统计其个数并将其统计的个数，返回，所求的便是其值，我所写的代码，如下：
-#include&lt;stdio.h&gt;int main(){int x = 0;int y = 0;int count = 0;printf(&#34;输入两个整数:&#34;);scanf(&#34;%d %d&#34;, &amp;x, &amp;y);for (int i = 0; i &lt; 32; i&#43;&#43;){if (((x &gt;&gt; i) &amp; 1) != ((y &gt;&gt; i) &amp; 1)){count&#43;&#43;;}}printf(&#34;有:%d位数不同&#34;, count);return 0;} 下面是我的代码的运行结果：
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>56 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之讲解篇3" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之讲解篇4
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>例题：
-下面代码的结果是：（ ）#include &lt;stdio.h&gt;int main(){int arr[] = {1,2,3,4,5};short *p = (short*)arr;int i = 0;for(i=0; i&lt;4; i&#43;&#43;){*(p&#43;i) = 0;}for(i=0; i&lt;5; i&#43;&#43;){printf(&#34;%d &#34;, arr[i]);}return 0;} 由于short是短整型的，那么其，因此p每次只能得到两个字节，而由于原来是4次循环那么其实是相当于4/2=2个数，也就是说对原来的前两个数赋值为0，那么打印出来得话，自然是：0,0，3,4，5
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>40 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之讲解篇4" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%874/"></a>
-</article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="next" href="http://localhost:1313/page/2/">下一页&nbsp;&nbsp;»
-    </a>
-  </nav>
-</footer>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-</body>
-
-</html>
+#include&lt;stdio.h>
+int main()
+{
+int x = 0;
+int y = 0;
+int count = 0;
+printf("输入两个整数:");
+scanf("%d %d", &amp;x, &amp;y);
+for (int i = 0; i &lt; 32; i++)
+{
+if (((x >> i) & 1) != ((y >> i) & 1))
+{
+count++;
+}
+}
+printf("有:%d位数不同", count);
+return 0;
+} 下面是我的代码的运行结果：</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>56 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇3" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇4</h2></header><div class=entry-content><p>例题：
+下面代码的结果是：（ ）
+#include &lt;stdio.h>
+int main()
+{
+int arr[] = {1,2,3,4,5};
+short *p = (short*)arr;
+int i = 0;
+for(i=0; i&lt;4; i++)
+{
+*(p+i) = 0;
+}
+for(i=0; i&lt;5; i++)
+{
+printf("%d ", arr[i]);
+}
+return 0;
+} 由于short是短整型的，那么其，因此p每次只能得到两个字节，而由于原来是4次循环那么其实是相当于4/2=2个数，也就是说对原来的前两个数赋值为0，那么打印出来得话，自然是：0,0，3,4，5</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>40 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇4" href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%874/></a></article><footer class=page-footer><nav class=pagination><a class="page-link active" href=https://dsduyopg.github.io/>1</a>
+<a class=page-link href=https://dsduyopg.github.io/page/2/>2</a>
+<a class=page-link href=https://dsduyopg.github.io/page/3/>3</a>
+<a class=page-link href=https://dsduyopg.github.io/page/4/>4</a>
+<a class=next href=https://dsduyopg.github.io/page/2/ title=下一页>&#187;</a></nav></footer></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>(function(){var e,t,n,s,a,r,o="blog_views",i="blog_titles",l=document.querySelector(".post-entry")&&!document.querySelector(".hero-banner"),c=document.getElementById("hot-posts");if(l){if(n=location.pathname,a=(document.title||"").replace(/\s*\|.*$/,"").trim(),!n||!a)return;e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),e[n]=(e[n]||0)+1,t[n]=a,localStorage.setItem(o,JSON.stringify(e)),localStorage.setItem(i,JSON.stringify(t));return}if(!c)return;if(e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),r=Object.keys(e).filter(function(e){return t[e]}).sort(function(t,n){return e[n]-e[t]}).slice(0,5),!r.length)return;s='<h3>热门文章</h3><ol class="hot-list">',r.forEach(function(e){s+='<li><a href="'+e+'">'+t[e]+"</a></li>"}),s+="</ol>",c.innerHTML=s})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>
