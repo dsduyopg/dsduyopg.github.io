@@ -1,0 +1,61 @@
+{{- /* 漂亮数字分页组件：页码智能折叠 + 上一页/下一页 */ -}}
+{{- $pag := $.Paginator }}
+{{- if gt $pag.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination" aria-label="分页">
+    {{- /* 上一页 */ -}}
+    {{- if $pag.HasPrev }}
+    <a class="page-btn prev" href="{{ $pag.Prev.URL }}" title="上一页" aria-label="上一页">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </a>
+    {{- else }}
+    <span class="page-btn prev disabled" title="上一页" aria-disabled="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </span>
+    {{- end }}
+
+    {{- /* 页码（智能折叠） */ -}}
+    {{- $current := $pag.PageNumber }}
+    {{- $total := $pag.TotalPages }}
+    {{- $start := 1 }}
+    {{- $end := $total }}
+    {{- if gt $total 7 }}
+      {{- $start = math.Max 1 (sub $current 2) }}
+      {{- $end = math.Min $total (add $current 2) }}
+      {{- if eq $current 1 }}{{ $end = 4 }}{{ end }}
+      {{- if eq $current $total }}{{ $start = sub $total 3 }}{{ end }}
+    {{- end }}
+
+    {{- if gt $start 1 }}
+    <a class="page-btn num" href="{{ $pag.First.URL }}" aria-label="第 1 页">1</a>
+    {{- if gt $start 2 }}
+    <span class="page-btn ellipsis" aria-hidden="true">…</span>
+    {{- end }}
+    {{- end }}
+
+    {{- range $pag.Pagers }}
+      {{- if and (ge .PageNumber $start) (le .PageNumber $end) }}
+      <a class="page-btn num{{ if eq .PageNumber $current }} active{{ end }}" href="{{ .URL }}" aria-label="第 {{ .PageNumber }} 页"{{ if eq .PageNumber $current }} aria-current="page"{{ end }}>{{ .PageNumber }}</a>
+      {{- end }}
+    {{- end }}
+
+    {{- if lt $end $total }}
+    {{- if lt $end (sub $total 1) }}
+    <span class="page-btn ellipsis" aria-hidden="true">…</span>
+    {{- end }}
+    <a class="page-btn num" href="{{ $pag.Last.URL }}" aria-label="第 {{ $total }} 页">{{ $total }}</a>
+    {{- end }}
+
+    {{- /* 下一页 */ -}}
+    {{- if $pag.HasNext }}
+    <a class="page-btn next" href="{{ $pag.Next.URL }}" title="下一页" aria-label="下一页">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </a>
+    {{- else }}
+    <span class="page-btn next disabled" title="下一页" aria-disabled="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </span>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}

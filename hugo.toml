@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://dsduyopg-github-io.pages.dev/'
 locale = 'zh-cn'
 title = 'My_blog'
 theme = 'PaperMod'
@@ -34,9 +34,8 @@ enableRobotsTXT = true
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
 
-[menu.main]
-  [[menu.main]]
-    identifier = "home"
+[[menu.main]]
+  identifier = "home"
     name = "首页"
     url = "/"
     weight = 1

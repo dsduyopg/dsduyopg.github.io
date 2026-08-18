@@ -11,7 +11,6 @@
   <div class="hero-content">
     <p class="hero-kicker">HELLO &amp; WELCOME</p>
     <h1 class="hero-title">{{ site.Title }}</h1>
-    <p class="hero-sub">记录 Linux、运维、自动化和我自己折腾过的项目</p>
     <div class="hero-actions">
       <a class="hero-btn primary" href="{{ "posts/" | relURL }}">📚 全部文章</a>
       <a class="hero-btn ghost" href="{{ "tags/" | relURL }}">🏷️ 标签</a>
@@ -63,16 +62,7 @@
   </div>
 
   {{- if gt $paginator.TotalPages 1 }}
-  <footer class="page-footer">
-    <nav class="pagination">
-      {{- if $paginator.HasPrev }}
-      <a class="prev" href="{{ $paginator.Prev.URL | relURL }}">« 上一页</a>
-      {{- end }}
-      {{- if $paginator.HasNext }}
-      <a class="next" href="{{ $paginator.Next.URL | relURL }}">下一页 »</a>
-      {{- end }}
-    </nav>
-  </footer>
+  {{- partial "pagination.html" . }}
   {{- end }}
 </section>
 
