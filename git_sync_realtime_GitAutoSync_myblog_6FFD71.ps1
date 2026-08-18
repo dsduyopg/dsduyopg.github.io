@@ -50,8 +50,33 @@ function Should-Ignore {
     return $false
 }
 
+function Test-GitBusy {
+    # 是否有其他 git 进程正在使用本仓库
+    $procs = Get-CimInstance Win32_Process -Filter "Name='git.exe'" -ErrorAction SilentlyContinue
+    foreach ($p in $procs) {
+        if ($p.CommandLine -and ($p.CommandLine -match [regex]::Escape($RepoPath))) { return $true }
+    }
+    return $false
+}
+
+function Clear-StaleLock {
+    # 清理残留的 index.lock（无活跃 git 进程时才清理）
+    $lock = Join-Path $RepoPath '.git\index.lock'
+    if (Test-Path $lock) {
+        if (Test-GitBusy) {
+            Write-Log "index.lock 存在但 git 进程忙碌，等待其释放..."
+            return $false
+        }
+        Write-Log "检测到残留 index.lock，正在清理..."
+        Remove-Item $lock -Force -ErrorAction SilentlyContinue
+        if (-not (Test-Path $lock)) { Write-Log "残留锁已清理" }
+    }
+    return $true
+}
+
 function Sync-Now {
     try {
+        Clear-StaleLock
         $addOut = git -C $RepoPath add -A 2>&1
         if ($LASTEXITCODE -ne 0) { Write-Log "git add 失败：$addOut"; return }
         $status = git -C $RepoPath status --porcelain
@@ -67,8 +92,10 @@ function Sync-Now {
             Start-Sleep -Seconds $RetryWaitSec
         }
         Write-Log '推送失败，超过重试次数，将在下次变化时重试'
+        Clear-StaleLock
     } catch {
         Write-Log "同步出错：$_"
+        Clear-StaleLock
     }
 }
 
