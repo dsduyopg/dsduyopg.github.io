@@ -6,3 +6,41 @@
 </div>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 {{- end }}
+
+<script>
+  (function () {
+    var keyViews = 'blog_views';
+    var keyTitles = 'blog_titles';
+    var isArticle = document.querySelector('.post-entry') && !document.querySelector('.hero-banner');
+    var hotEl = document.getElementById('hot-posts');
+
+    if (isArticle) {
+      var path = location.pathname;
+      var title = (document.title || '').replace(/\s*\|.*$/, '').trim();
+      if (!path || !title) return;
+      var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
+      var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
+      views[path] = (views[path] || 0) + 1;
+      titles[path] = title;
+      localStorage.setItem(keyViews, JSON.stringify(views));
+      localStorage.setItem(keyTitles, JSON.stringify(titles));
+      return;
+    }
+
+    if (!hotEl) return;
+    var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
+    var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
+    var rows = Object.keys(views)
+      .filter(function (p) { return titles[p]; })
+      .sort(function (a, b) { return views[b] - views[a]; })
+      .slice(0, 5);
+    if (!rows.length) return;
+
+    var html = '<h3>热门文章</h3><ol class="hot-list">';
+    rows.forEach(function (p) {
+      html += '<li><a href="' + p + '">' + titles[p] + '</a></li>';
+    });
+    html += '</ol>';
+    hotEl.innerHTML = html;
+  })();
+</script>
