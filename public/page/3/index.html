@@ -1,158 +1,6 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head>
-	<meta name="generator" content="Hugo 0.164.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>我的博客</title>
-<meta name="keywords" content="Linux, 运维, 自动化, Python, Teldrive, 博客">
-<meta name="description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
-<meta name="author" content="dsduyopg">
-<link rel="canonical" href="http://localhost:1313/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.acb0281697426877b365afae9c3f98c3d059da7386a3e319a7edbfa64c40383c.css" integrity="sha256-rLAoFpdCaHezZa&#43;unD&#43;Yw9BZ2nOGo&#43;MZp&#43;2/pkxAODw=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml" title="rss">
-<link rel="alternate" type="application/json" href="http://localhost:1313/index.json" title="json">
-<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="http://localhost:1313/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="我的博客">
-  <meta property="og:description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="我的博客">
-  <meta name="twitter:description" content="记录 Linux、运维、自动化和我自己折腾过的项目">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "我的博客",
-  "url": "http://localhost:1313/",
-  "description": "记录 Linux、运维、自动化和我自己折腾过的项目",
-  "logo": "http://localhost:1313/favicon.ico",
-  "sameAs": [
-      "https://github.com/dsduyopg"
-  ]
-}
-</script>
-</head>
-<body class="list" id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="http://localhost:1313/search/" title="搜索">
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/about/" title="关于">
-                    <span>关于</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main"> 
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">rm -rf 删掉日志文件后，为什么 service restart 才能恢复？
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta name=generator content="Hugo 0.164.0"><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>我的博客</title><meta name=keywords content="Linux,运维,自动化,Python,Teldrive,博客"><meta name=description content="记录 Linux、运维、自动化和我自己折腾过的项目"><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/><link crossorigin=anonymous href=/assets/css/stylesheet.acb0281697426877b365afae9c3f98c3d059da7386a3e319a7edbfa64c40383c.css integrity="sha256-rLAoFpdCaHezZa+unD+Yw9BZ2nOGo+MZp+2/pkxAODw=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate type=application/rss+xml href=https://dsduyopg.github.io/index.xml title=rss><link rel=alternate type=application/json href=https://dsduyopg.github.io/index.json title=json><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="我的博客"><meta property="og:description" content="记录 Linux、运维、自动化和我自己折腾过的项目"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="我的博客"><meta name=twitter:description content="记录 Linux、运维、自动化和我自己折腾过的项目"><script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"我的博客","url":"https://dsduyopg.github.io/","description":"记录 Linux、运维、自动化和我自己折腾过的项目","logo":"https://dsduyopg.github.io/favicon.ico","sameAs":["https://github.com/dsduyopg"]}</script></head><body class=list id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg.github.io/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？</h2></header><div class=entry-content><p>rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景
 1.打开系统⽇志的配置⽂件
 2.在规则模块中， 配置需求要求的内容
 3.进行测试
@@ -169,24 +17,15 @@
 我自己总结
 我查阅资料总结
 1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中
-1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log*.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;)# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert &#34;12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info &#34;12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因
+1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log
+*.crit action(type="omfile" file="/var/log/alert.log")
+# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert "12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info "12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因
 1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 问题2：是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的 理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点 3.问题原因 1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说
-1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。3.命令的级别不够高：执行的命令是 logger -p crit &#34;...&#34;。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;) 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>253 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to rm -rf 删掉日志文件后，为什么 service restart 才能恢复？" href="http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">samba服务器
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>samba服务器 一.SAMBA基本介绍
+1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。
+2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。
+3.命令的级别不够高：执行的命令是 logger -p crit "..."。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。
+4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type="omfile" file="/var/log/alert.log") 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>253 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to rm -rf 删掉日志文件后，为什么 service restart 才能恢复？" href=https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>samba服务器</h2></header><div class=entry-content><p>samba服务器 一.SAMBA基本介绍
 二.安装SAMBA服务
 一.服务端
 二.客户端
@@ -200,22 +39,13 @@
 2.开放端口
 七.在Linux主机访问
 八. 在windows主机访问
-一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是Windows 操作系统⽤于⽂件共享和打印服务的主要协议。Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>170 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to samba服务器" href="http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">SSh的相关操作
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>SSh的相关操作
+一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访
+问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。
+它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是
+Windows 操作系统⽤于⽂件共享和打印服务的主要协议。
+Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家
+庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>170 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to samba服务器" href=https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>SSh的相关操作</h2></header><div class=entry-content><p>SSh的相关操作
 文章目录 一.基于SSH实现发送命令到远程服务器
 二.基于SSH进⾏免密数据传输
 三.综合案例基于JDK的安装和操作
@@ -228,22 +58,25 @@
 综述
 一.基于SSH实现发送命令到远程服务器 SSH远程执⾏命令是通过SSH协议连接到远程服务器，并在远程服务器上执⾏指定的命令或脚本， ⽽⽆需直接登录到服务器的终端
 相关的命令是
-ssh [选项] username@remote_host &#34;command [&amp;&amp;] conmmad&#34;说明：username：远程服务器的⽤⼾名。remote_host：远程服务器的IP地址或域名。command：要在远程服务器上执⾏的命令&amp; ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接选项：-t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项-p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝-o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）-A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项需求⼀： 在node1中远程查看node2的主机名ssh root@192.168.88.102 &#34;hostname&#34;需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件说明：如果是执⾏多个命令，可以使⽤分号 或 &amp;&amp; 来分隔命令分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏&amp;&amp; ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏ssh root@192.168.88.102 &#34;cd ~ &amp;&amp; touch a.txt&#34; ``这里面我为大家看一下我所在操作过程之中遇到的问题`
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>298 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to SSh的相关操作" href="http://localhost:1313/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">warp导致的日志发送node2失败
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>warp导致的日志发送node2失败 1.问题背景
+ssh [选项] username@remote_host "command [&&] conmmad"
+说明：
+username：远程服务器的⽤⼾名。
+remote_host：远程服务器的IP地址或域名。
+command：要在远程服务器上执⾏的命令
+& ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接
+选项：
+-t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项
+-p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝
+-o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）
+-A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项
+需求⼀： 在node1中远程查看node2的主机名
+ssh root@192.168.88.102 "hostname"
+需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件
+说明：如果是执⾏多个命令，可以使⽤分号 或 && 来分隔命令
+分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏
+&& ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏
+ssh root@192.168.88.102 "cd ~ && touch a.txt" ``这里面我为大家看一下我所在操作过程之中遇到的问题`
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>298 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to SSh的相关操作" href=https://dsduyopg.github.io/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>warp导致的日志发送node2失败</h2></header><div class=entry-content><p>warp导致的日志发送node2失败 1.问题背景
 1.案例内容
 2.案例思路
 2.出现的问题
@@ -253,32 +86,27 @@ ssh [选项] username@remote_host &#34;command [&amp;&amp;] conmmad&#34;说明�
 4.node3端口和服务放行
 5.出现问题
 3.问题原因
-核心原因剖析：用了 TCP，日志为什么还会&#34;凭空消失&#34;？
+核心原因剖析：用了 TCP，日志为什么还会"凭空消失"？
 1. 环境层：Cloudflare 客户端重置宿主机网络（根本诱因）
 2. 链路层：虚拟机网卡被连带闪断（触发条件）
-3. 传输/应用层：TCP 握手失败 &#43; rsyslog 默认不缓存（直接原因）
+3. 传输/应用层：TCP 握手失败 + rsyslog 默认不缓存（直接原因）
 💡 一句话总结根因
 4.解决问题
 解决对策
 5.总结
 写在最后
 1.问题背景 这个是一个操作，以下是案例
-1.案例内容 需求：基于node1中的/var/log/下的messages和secure日志， 完成将日志发送到日志服务器（node3）， 进行统一保存，要求保存到node3服务器的/var/log/messages和/var/log/secure思路： 2.案例思路 第一步： 修改 node1的日志配置文件， 将对应写入到messages和secure日志对应规则配置， 将其目的地变更为发送到远端服务器方案 【建议选择：TCP方案】第二步： 重启node1的系统日志服务第三步： 修改 node3的日志配置文件， 将用于接收远程日志的模块打开【tcp模块】第四步： 重启node3的系统日志服务第五步： 在node3中开放端口号第六步：测试message日志： 在node1中通过logger生成日志数据， 分别观察node1的系统日志和node3的系统日志， 哪个日志文件中会产生新的日志【正常:node3打印】测试安全日志： 通过MX连接下node1，然后在关闭， 观察在这个过程中， node1和node3的安全日志谁会打印新的日志【正常:node3打印】 2.出现的问题 我当时用的是node2和node3，把node1替换成node2了
-1.node2配置文件 打开vi /etc/rsyslog.conf这个文件，然后修改一些地方，图中红圈有一个地方圈错了，应该圈的是有@@的那几行，也是要追加的 2.重启日志文件 systemctl restart rsyslogststemctl status rsyslog ...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>298 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to warp导致的日志发送node2失败" href="http://localhost:1313/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Windows 上让 Git 自动同步：NSSM 服务 &#43; 实时监听实战
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 1. 引言
+1.案例内容 需求：基于node1中的/var/log/下的messages和secure日志， 完成将日志发送到日志服务器（node3）， 进行统一保存，要求保存到node3服务器的/var/log/messages和/var/log/secure
+思路： 2.案例思路 第一步： 修改 node1的日志配置文件， 将对应写入到messages和secure日志对应规则配置， 将其目的地变更为发送到远端服务器方案 【建议选择：TCP方案】
+第二步： 重启node1的系统日志服务
+第三步： 修改 node3的日志配置文件， 将用于接收远程日志的模块打开【tcp模块】
+第四步： 重启node3的系统日志服务
+第五步： 在node3中开放端口号
+第六步：
+测试message日志： 在node1中通过logger生成日志数据， 分别观察node1的系统日志和node3的系统日志， 哪个日志文件中会产生新的日志【正常:node3打印】
+测试安全日志： 通过MX连接下node1，然后在关闭， 观察在这个过程中， node1和node3的安全日志谁会打印新的日志【正常:node3打印】 2.出现的问题 我当时用的是node2和node3，把node1替换成node2了
+1.node2配置文件 打开vi /etc/rsyslog.conf这个文件，然后修改一些地方，图中红圈有一个地方圈错了，应该圈的是有@@的那几行，也是要追加的 2.重启日志文件 systemctl restart rsyslog
+ststemctl status rsyslog ...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>298 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to warp导致的日志发送node2失败" href=https://dsduyopg.github.io/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Windows 上让 Git 自动同步：NSSM 服务 + 实时监听实战</h2></header><div class=entry-content><p>1. 引言
 1.1 自动化 Git 的介绍
 1.2 传统手动推送痛点
 1.3 我为何需要自动同步
@@ -308,36 +136,7 @@ ssh [选项] username@remote_host &#34;command [&amp;&amp;] conmmad&#34;说明�
 公钥添加到平台
 GitHub 走 443 端口
 8.2 底层一步一步是怎么实现的
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>10 分钟</span>&nbsp;·&nbsp;<span>2076 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to Windows 上让 Git 自动同步：NSSM 服务 &#43; 实时监听实战" href="http://localhost:1313/posts/ai-%E8%BE%85%E5%8A%A9%E4%B8%8Bwindows-%E4%B8%8A%E8%AE%A9-git-%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5nssm-%E6%9C%8D%E5%8A%A1-&#43;-%E5%AE%9E%E6%97%B6%E7%9B%91%E5%90%AC%E5%AE%9E%E6%88%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">博客日记与我的看法
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>大家好，我是一个对于技术绝对热爱的人，其实呢我我对于技术学习有着强烈而浓厚的热爱，尤其是对于C语言的学习，在学习C当中，我决定必须用每日的坚持来践实我对于他的热爱，具体是每天抽出大约3个小时左右时间来阅读C方面的书籍，以及呢我同时注意维护我的gitee，使其成为我简历上亮眼的一部分，说到最后了我决定必须为进入像百度这样的大公司而奋发努力
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>1 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 博客日记与我的看法" href="http://localhost:1313/posts/%E5%8D%9A%E5%AE%A2%E6%97%A5%E8%AE%B0%E4%B8%8E%E6%88%91%E7%9A%84%E7%9C%8B%E6%B3%95/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">磁盘的使用以及挂载
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>磁盘的使用以及挂载
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>10 分钟</span>&nbsp;·&nbsp;<span>2076 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to Windows 上让 Git 自动同步：NSSM 服务 + 实时监听实战" href=https://dsduyopg.github.io/posts/ai-%E8%BE%85%E5%8A%A9%E4%B8%8Bwindows-%E4%B8%8A%E8%AE%A9-git-%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5nssm-%E6%9C%8D%E5%8A%A1-+-%E5%AE%9E%E6%97%B6%E7%9B%91%E5%90%AC%E5%AE%9E%E6%88%98/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>博客日记与我的看法</h2></header><div class=entry-content><p>大家好，我是一个对于技术绝对热爱的人，其实呢我我对于技术学习有着强烈而浓厚的热爱，尤其是对于C语言的学习，在学习C当中，我决定必须用每日的坚持来践实我对于他的热爱，具体是每天抽出大约3个小时左右时间来阅读C方面的书籍，以及呢我同时注意维护我的gitee，使其成为我简历上亮眼的一部分，说到最后了我决定必须为进入像百度这样的大公司而奋发努力</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>1 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 博客日记与我的看法" href=https://dsduyopg.github.io/posts/%E5%8D%9A%E5%AE%A2%E6%97%A5%E8%AE%B0%E4%B8%8E%E6%88%91%E7%9A%84%E7%9C%8B%E6%B3%95/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>磁盘的使用以及挂载</h2></header><div class=entry-content><p>磁盘的使用以及挂载
 文章目录 一.准备工作
 二.查看新添加磁盘
 三.分区
@@ -349,30 +148,22 @@ GitHub 走 443 端口
 一.准备工作 在这一步当中，我们应当先关闭虚拟机，从设置里面添加一块磁盘，并设置合理的磁盘大小,随后呢，我们重新开启虚拟机就可以了，并登录mx,进行下一步操作
 二.查看新添加磁盘 我们在这一步当中使用lsblk 查看新添加的磁盘
 lsblk #查看新添加的磁盘 三.分区 fdisk /dev/sdb 然后，我们使用n来追加磁盘
-注意，再最后一个扇区的时候我们也可以指定其特定大小&#43;20G也是可以的
+注意，再最后一个扇区的时候我们也可以指定其特定大小+20G也是可以的
 我们要使用w保存信息
 我们再次使用命令df -h 查看分区
 四.格式化 格式化，我们使用的是mkfs.格式
-#格式化所支持的格式有mkfs.ext4 是⼀个⽤来格式化分区为 EXT4 ⽂件系统 的命令。EXT4（第四代扩展⽂件系统）是#Linux 系统中使⽤最⼴泛的⽂件系统类型，兼具性能、可靠性和兼容性，适⽤于⼤多数场景。#XFS 是⼀种⾼性能的⽇志⽂件系统，⼴泛⽤于企业级场景，特别是对⼤⽂件和⾼并发 I/O 的处理有#明显优势。它是 CentOS Stream 9 等现代 Linux 发⾏版的默认⽂件系统类型mkfs.xfs /dev/sdb 五.挂载 这一步，比较麻烦了，需要修改配置文件,修改的方式有两种
+#格式化所支持的格式有mkfs.ext4 是⼀个⽤来格式化分区为 EXT4 ⽂件系统 的命令。EXT4（第四代扩展⽂件系统）是
+#Linux 系统中使⽤最⼴泛的⽂件系统类型，兼具性能、可靠性和兼容性，适⽤于⼤多数场景。
+#XFS 是⼀种⾼性能的⽇志⽂件系统，⼴泛⽤于企业级场景，特别是对⼤⽂件和⾼并发 I/O 的处理有
+#明显优势。它是 CentOS Stream 9 等现代 Linux 发⾏版的默认⽂件系统类型
+mkfs.xfs /dev/sdb 五.挂载 这一步，比较麻烦了，需要修改配置文件,修改的方式有两种
 1.临时挂载 我们使用mount进行临时挂载
-mount /dev/sdb1 /mnt/sdb1mount /dev/sdb2 /mnt/sdb2 2.长期挂载 uuid修改 如果我们需要一直挂载，就需要修改配置文件，/etc/fstab
-blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后打开配置文件，进行修改就可以了
+mount /dev/sdb1 /mnt/sdb1
+mount /dev/sdb2 /mnt/sdb2 2.长期挂载 uuid修改 如果我们需要一直挂载，就需要修改配置文件，/etc/fstab
+blkid /dev/sdb1
+blkid /dev/sdb2 先在，我们得到了他们的uuid，然后打开配置文件，进行修改就可以了
 磁盘路径修改 除了，这种方式还有利用路径挂载的
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>75 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 磁盘的使用以及挂载" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">磁盘的综合案例
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>磁盘的综合案例 1.修改网络配置
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>75 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 磁盘的使用以及挂载" href=https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>磁盘的综合案例</h2></header><div class=entry-content><p>磁盘的综合案例 1.修改网络配置
 1.改成88网段
 情况一：全局迁移至 88 网段（推荐彻底解决）
 第一步：修改 VMware 底层配置
@@ -413,21 +204,7 @@ blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后�
 1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172
 1.改成88网段 注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下 这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。
 情况一：全局迁移至 88 网段（推荐彻底解决） 如果你想把所有机器都规范到 88 网段，请按以下步骤操作：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>477 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 磁盘的综合案例" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">磁盘管理的相关知识
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>磁盘管理 1.文件系统
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>477 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 磁盘的综合案例" href=https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>磁盘管理的相关知识</h2></header><div class=entry-content><p>磁盘管理 1.文件系统
 常见文件系统对比
 一、主流文件系统横向对比
 2.常用的磁盘管理命令
@@ -455,21 +232,7 @@ blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后�
 2. 查看目录大小
 3. 找出占用空间最大的目录（实战排障）
 2.6 LVM 逻辑卷管理
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>7 分钟</span>&nbsp;·&nbsp;<span>1416 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 磁盘管理的相关知识" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">高数学习中的常系数非齐次线性微分方程的问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>非齐次方程当中的代入数值问题 一.遇到的问题
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>7 分钟</span>&nbsp;·&nbsp;<span>1416 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 磁盘管理的相关知识" href=https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>高数学习中的常系数非齐次线性微分方程的问题</h2></header><div class=entry-content><p>非齐次方程当中的代入数值问题 一.遇到的问题
 0.0那个数学公式在梨米特讲义的位置
 0.1那个公式在梨米特讲义上的例题
 0.2那道数学公式在同济课本的地方
@@ -488,103 +251,13 @@ blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后�
 0.0那个数学公式在梨米特讲义的位置 0.1那个公式在梨米特讲义上的例题 0.2那道数学公式在同济课本的地方 1.那道题目 2.我算的结果和答案给的区别 1.我算的结果 2.答案给的是这样子的 二.解决的方案 当时我在淘宝问了一下，然后，我就知道我的问题在哪里了，
 1.我的错误分析 通过和淘宝上的那位老师探究，我明白了，我的问题正是没有将二阶导的系数化为1，所导致的问题，老师，说，你可以方程俩边都除以2，将2阶导的系数化为1，就可以就解决问题了，我一想这个形式不正是和书上给的形式一样吗？那结果一个是对的，然后我就用symbol这个网站测试了一下，下面是测试结果。
 2.测试的结果分析 1.首先是在网站symbol这个网站测试的结果，如下，大家有兴趣可以试一下。 2.然后答案给的看一下 3.分析结果 通过这些结果我们很清楚的看到，通过把二阶导的系数化为1，算出来是对的
-三.我的建议 通过以上的分析相信大家都认识到了，这个公式的适用范围，那就是二阶导的系数必须为1，其他的倒是没有要求。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>36 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 高数学习中的常系数非齐次线性微分方程的问题" href="http://localhost:1313/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/"></a>
-</article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="prev" href="http://localhost:1313/page/2/">
-      «&nbsp;上一页&nbsp;
-    </a>
-    <a class="next" href="http://localhost:1313/page/4/">下一页&nbsp;&nbsp;»
-    </a>
-  </nav>
-</footer>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-</body>
-
-</html>
+三.我的建议 通过以上的分析相信大家都认识到了，这个公式的适用范围，那就是二阶导的系数必须为1，其他的倒是没有要求。</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>36 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer><a class=entry-link aria-label="post link to 高数学习中的常系数非齐次线性微分方程的问题" href=https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=https://dsduyopg.github.io/page/2/ title=上一页>&#171;</a>
+<a class=page-link href=https://dsduyopg.github.io/>1</a>
+<a class=page-link href=https://dsduyopg.github.io/page/2/>2</a>
+<a class="page-link active" href=https://dsduyopg.github.io/page/3/>3</a>
+<a class=page-link href=https://dsduyopg.github.io/page/4/>4</a>
+<a class=next href=https://dsduyopg.github.io/page/4/ title=下一页>&#187;</a></nav></footer></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>(function(){var e,t,n,s,a,r,o="blog_views",i="blog_titles",l=!!document.querySelector(".post-single"),c=document.getElementById("hot-posts");if(l){if(n=location.pathname,a=(document.title||"").replace(/\s*\|.*$/,"").trim(),!n||!a)return;e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),e[n]=(e[n]||0)+1,t[n]=a,localStorage.setItem(o,JSON.stringify(e)),localStorage.setItem(i,JSON.stringify(t));return}if(!c)return;if(e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),r=Object.keys(e).filter(function(e){return e.indexOf("/posts/")===0&&e.indexOf("/page/")===-1&&t[e]&&t[e]!=="我的博客"}).sort(function(t,n){return e[n]-e[t]}).slice(0,5),!r.length)return;s='<h3>热门文章</h3><ol class="hot-list">',r.forEach(function(e){s+='<li><a href="'+e+'">'+t[e]+"</a></li>"}),s+="</ol>",c.innerHTML=s})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>
