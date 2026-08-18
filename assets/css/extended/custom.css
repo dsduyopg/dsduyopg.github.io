@@ -45,11 +45,7 @@ body {
 
 body.list,
 body.single {
-  background-image: var(--page-overlay), var(--page-bg-image);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: var(--page-overlay), var(--page-bg-image) center / cover no-repeat fixed !important;
 }
 
 ::selection {
