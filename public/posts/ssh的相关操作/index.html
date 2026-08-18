@@ -1,0 +1,153 @@
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>SSh的相关操作 | 我的博客</title><meta name=keywords content><meta name=description content='SSh的相关操作
+文章目录
+
+
+一.基于SSH实现发送命令到远程服务器
+
+
+二.基于SSH进⾏免密数据传输
+
+
+三.综合案例基于JDK的安装和操作
+
+
+一.台机器的jdk的安装和配置
+
+
+二.把这个软件和相应的配置文件通过scp发送出去
+
+
+四.基于Ubuntu完成SSH服务配置
+
+
+一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器
+
+
+二.第二步: 需要让三台服务器都要配置免密操作
+
+
+三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码
+
+
+综述
+
+
+一.基于SSH实现发送命令到远程服务器
+SSH远程执⾏命令是通过SSH协议连接到远程服务器，并在远程服务器上执⾏指定的命令或脚本， ⽽⽆需直接登录到服务器的终端
+相关的命令是
+ssh [选项] username@remote_host "command [&&] conmmad"
+说明：
+username：远程服务器的⽤⼾名。
+remote_host：远程服务器的IP地址或域名。
+command：要在远程服务器上执⾏的命令
+& ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接
+选项：
+-t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项
+-p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝
+-o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）
+-A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项
+需求⼀： 在node1中远程查看node2的主机名
+ssh root@192.168.88.102 "hostname"
+需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件
+说明：如果是执⾏多个命令，可以使⽤分号 或 && 来分隔命令
+分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏
+&& ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏
+ssh root@192.168.88.102 "cd ~ && touch a.txt"
+``这里面我为大家看一下我所在操作过程之中遇到的问题`'><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/><link crossorigin=anonymous href=/assets/css/stylesheet.17e11805d3075f44c706341eeb6b41c4243b7f0769a966362af6f3d10f0b1051.css integrity="sha256-F+EYBdMHX0THBjQe62tBxCQ7fwdpqWY2Kvbz0Q8LEFE=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="SSh的相关操作"><meta property="og:description" content='SSh的相关操作
+文章目录 一.基于SSH实现发送命令到远程服务器
+二.基于SSH进⾏免密数据传输
+三.综合案例基于JDK的安装和操作
+一.台机器的jdk的安装和配置
+二.把这个软件和相应的配置文件通过scp发送出去
+四.基于Ubuntu完成SSH服务配置
+一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器
+二.第二步: 需要让三台服务器都要配置免密操作
+三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码
+综述
+一.基于SSH实现发送命令到远程服务器 SSH远程执⾏命令是通过SSH协议连接到远程服务器，并在远程服务器上执⾏指定的命令或脚本， ⽽⽆需直接登录到服务器的终端
+相关的命令是
+ssh [选项] username@remote_host "command [&&] conmmad"说明：username：远程服务器的⽤⼾名。remote_host：远程服务器的IP地址或域名。command：要在远程服务器上执⾏的命令& ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接选项：-t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项-p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝-o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）-A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项需求⼀： 在node1中远程查看node2的主机名ssh root@192.168.88.102 "hostname"需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件说明：如果是执⾏多个命令，可以使⽤分号 或 && 来分隔命令分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏&& ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏ssh root@192.168.88.102 "cd ~ && touch a.txt" ``这里面我为大家看一下我所在操作过程之中遇到的问题`'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="SSh的相关操作"><meta name=twitter:description content='SSh的相关操作
+文章目录 一.基于SSH实现发送命令到远程服务器
+二.基于SSH进⾏免密数据传输
+三.综合案例基于JDK的安装和操作
+一.台机器的jdk的安装和配置
+二.把这个软件和相应的配置文件通过scp发送出去
+四.基于Ubuntu完成SSH服务配置
+一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器
+二.第二步: 需要让三台服务器都要配置免密操作
+三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码
+综述
+一.基于SSH实现发送命令到远程服务器 SSH远程执⾏命令是通过SSH协议连接到远程服务器，并在远程服务器上执⾏指定的命令或脚本， ⽽⽆需直接登录到服务器的终端
+相关的命令是
+ssh [选项] username@remote_host "command [&&] conmmad"说明：username：远程服务器的⽤⼾名。remote_host：远程服务器的IP地址或域名。command：要在远程服务器上执⾏的命令& ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接选项：-t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项-p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝-o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）-A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项需求⼀： 在node1中远程查看node2的主机名ssh root@192.168.88.102 "hostname"需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件说明：如果是执⾏多个命令，可以使⽤分号 或 && 来分隔命令分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏&& ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏ssh root@192.168.88.102 "cd ~ && touch a.txt" ``这里面我为大家看一下我所在操作过程之中遇到的问题`'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"SSh的相关操作","item":"https://dsduyopg.github.io/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"SSh的相关操作","name":"SSh的相关操作","description":"SSh的相关操作\n文章目录 一.基于SSH实现发送命令到远程服务器\n二.基于SSH进⾏免密数据传输\n三.综合案例基于JDK的安装和操作\n一.台机器的jdk的安装和配置\n二.把这个软件和相应的配置文件通过scp发送出去\n四.基于Ubuntu完成SSH服务配置\n一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器\n二.第二步: 需要让三台服务器都要配置免密操作\n三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码\n综述\n一.基于SSH实现发送命令到远程服务器 SSH远程执⾏命令是通过SSH协议连接到远程服务器，并在远程服务器上执⾏指定的命令或脚本， ⽽⽆需直接登录到服务器的终端\n相关的命令是\nssh [选项] username@remote_host \u0026#34;command [\u0026amp;\u0026amp;] conmmad\u0026#34;\r说明：\rusername：远程服务器的⽤⼾名。\rremote_host：远程服务器的IP地址或域名。\rcommand：要在远程服务器上执⾏的命令\r\u0026amp; ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接\r选项：\r-t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项\r-p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝\r-o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）\r-A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项\r需求⼀： 在node1中远程查看node2的主机名\rssh root@192.168.88.102 \u0026#34;hostname\u0026#34;\r需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件\r说明：如果是执⾏多个命令，可以使⽤分号 或 \u0026amp;\u0026amp; 来分隔命令\r分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏\r\u0026amp;\u0026amp; ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏\rssh root@192.168.88.102 \u0026#34;cd ~ \u0026amp;\u0026amp; touch a.txt\u0026#34; ``这里面我为大家看一下我所在操作过程之中遇到的问题`\n","keywords":[],"articleBody":"SSh的相关操作\n文章目录 一.基于SSH实现发送命令到远程服务器\n二.基于SSH进⾏免密数据传输\n三.综合案例基于JDK的安装和操作\n一.台机器的jdk的安装和配置\n二.把这个软件和相应的配置文件通过scp发送出去\n四.基于Ubuntu完成SSH服务配置\n一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器\n二.第二步: 需要让三台服务器都要配置免密操作\n三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码\n综述\n一.基于SSH实现发送命令到远程服务器 SSH远程执⾏命令是通过SSH协议连接到远程服务器，并在远程服务器上执⾏指定的命令或脚本， ⽽⽆需直接登录到服务器的终端\n相关的命令是\nssh [选项] username@remote_host \"command [\u0026\u0026] conmmad\"\r说明：\rusername：远程服务器的⽤⼾名。\rremote_host：远程服务器的IP地址或域名。\rcommand：要在远程服务器上执⾏的命令\r\u0026 ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接\r选项：\r-t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项\r-p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝\r-o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）\r-A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项\r需求⼀： 在node1中远程查看node2的主机名\rssh root@192.168.88.102 \"hostname\"\r需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件\r说明：如果是执⾏多个命令，可以使⽤分号 或 \u0026\u0026 来分隔命令\r分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏\r\u0026\u0026 ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏\rssh root@192.168.88.102 \"cd ~ \u0026\u0026 touch a.txt\" ``这里面我为大家看一下我所在操作过程之中遇到的问题`\n首先呢，就是要注意的是目标主机的IP地址之后是务必要要加上引号的，我当时就没有加上的，然后命令没有跑通，我查了一些资料，之后明白了，其实就是没有加上引号，意思就是连接到目标主机之后，然后执行\u0026\u0026前面的命令然后断开了，在本地的主机执行\u0026\u0026之后的指令 在这里其实，目标主机并没有执行 这个所带来的效果其实是，连接远程主机然后在远程主机里面执行cd /home 命令，之后就断开了，在本地主机执行touch test.txt这个是第一句的指令，然后呢，我在本地主机执行了第二句指令，其实是前面的意思与第一句带来的效果一样，但是呢后面的是在本地主机创建了一个test1.txt，然后呢，我在ubuntu查看是俩个都没有的，其实就是因为我没有加上引号导致的，之后\n之后，我加上了引号，就发现了是可以进行操作的。 之后呢，我就没有遇到了什么问题了，这个方面就解决了，然后，就开始了下一个进展了。\n二.基于SSH进⾏免密数据传输 SCP（Secure Copy Protocol）是基于 SSH 协议的安全⽂件传输⼯具，可⽤于在本地和远程服务 器之间传输⽂件或⽬录。通过 SCP，数据在传输过程中会被加密，确保安全性\n其基本的语法结构是:\n源⽂件路径：本地⽂件或远程服务器上的⽂件。\r⽬标路径：本地路径或远程服务器上的路径。\r常⽤选项：\r-r 递归复制整个⽬录（传输⽬录时必⽤）\r-P 指定 SSH 连接的端⼝号（默认是 22）\r-i 指定 SSH 使⽤的私钥⽂件（⽤于免密登录）\r-q 静默模式，不显⽰进度条和调试信息\r-C 开启压缩传输，提⾼传输速度（适合⼤⽂件或低速⽹络）\r-l 限制传输速度（单位为 Kbit/s，例如 -l 1000 表⽰限制为 1Mbps） SCP的基本语法是\n1. `从本地传输到远程`\r`scp /local/path/file.txt user@remote:/remote/path/`\r2. `从远程传输到本地`\r`scp user@remote:/remote/path/file.txt /local/path/`\r3. `递归传输整个⽬录`\rscp -r /local/path/dir user@remote:/remote/path/ 下面是我操作出来的，大家可以看一下 在这里面呢，其实还有一个问题:这个是远程给ubuntu发送消息的时候是不能发送到根目录下的，由于ubuntu的权限就是远程登录只可以由普通用户的，也就是说普通用户只可以访问~，对于根目录是没有访问权限的，所以我只能用scp信息给家目录传递\n三.综合案例基于JDK的安装和操作 一.台机器的jdk的安装和配置 在这里面呢，首先呢，我们应当先从网上下载jdk的rpm包，然后再把其传输到本主机就可以了，当然了，在这里我遇到一些问题，我其实在把这个rpm上传到linux的时候发现了一个问题，就是无论如何上传其实都是会报错的。 然后呢，我研究了一下这个问题，发现了其实就是由于，我当时以为我当时Linux所在的系统权限是root所以在上传文件时也是root这个权限可以对于文件夹拥有读写权限，但是呢，其实就是在上传的时候，是默认了普通用户的权限，所以我们要做的其实就是赋权,用命令chmod 777 software就可以了 真正原因：MobaXterm 不是用 root 身份传文件的 你 SSH 终端里确实是 root（# 提示符），但 MobaXterm 左侧那个 SFTP 文件浏览器，走的是另一个会话，它不一定继承你终端的 root 身份： MobaXterm 建立 SFTP 连接时，可能用的是你最开始填的那个普通用户（比如 admins），而不是 root。 哪怕你终端 su - 切到 root 了，SFTP 面板那边还是原来那个连接，不会自动升级。 所以 SFTP 侧对 software 目录的身份是 “other”（其他人），而 other 只有 r-x，没写权限 → 报 Permission denied。 你 chmod 777 后，other 也拿到了 rwx，所以\"其他人\"（也就是 SFTP 那个连接）就能写了——问题消失\n然后我们用rpm -ivh对于rpm进行安装操作就可以了\n然后还有一个注意的是我们需要修改配置文件vim /etc/profile\n这个是要在文末加上的。\n最后呢，我们重载一下服务：source /etc/profile\n然后，我们在屏幕上输入java javac测试一下就可以了： 二.把这个软件和相应的配置文件通过scp发送出去 1.我们先发送软件包，cd /opt \u0026\u0026 scp -r jdk1.8.0_241/ root@192.168.88.102:$PWD 说明： $PWD 常量值 表⽰当前所在的路径\n2.SCP /etc/profile root@192.168.88.102:/etc/ 这里面其实就是opt路径下的，不可以使用$PWD了，\n3.最后我们重启一下服务就可以：source /etc/profile 在这里，我们测试一下： 发现成功了。就可以下一步了\n四.基于Ubuntu完成SSH服务配置 一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器 首先呢我们需要都同时打开三台服务器，务必要要保证要小于我们电脑的内存，否则会打不开的\n接着我们打开了之后，使用以下命令增加账户itheima\nuseradd itheima\rpasswd itheima\r123456 然后呢，三台主机都同时输入这几行命令就可以了\n最后呢，我们使用三台主机所对应的IP地址在mx上面只要把主机名修改为itheima，登录就可以了 就像如此的\n二.第二步: 需要让三台服务器都要配置免密操作 这个和我的上一个博客是一样的，内容也一样的，只不过操作起来比较麻烦的，\n我们首先是在每台主机里面下载对应的公钥和私钥，然后呢，再以此把对应的公钥发送三分，操作三次就可以了\n下载对应的公钥和私钥 ssh-keygen -f ~/.ssh/id_rsa -P '' -q \u0026\u0026 ll ~/.ssh 二.我们开始把对应的公钥发送三分 ssh 192.168.149.128\rssh 192.168.149.129\rssh 192.168.149.131 三台主机其实都是如此写的，只不过我们要注意的是需要一行一行操作的\n三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码 依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码\r建议⽅案， ⼀个节点 ⼀个节点依次测试， 确保不漏测\r以node1为例：\rssh 192.168.88.101\r通过exit退回 --\u003e node1\rssh 192.168.88.102\r通过exit退回 --\u003e node1\rssh 192.168.88.130\r通过exit退回 --\u003e node1 这个地方是没有上面难度的，和之前的博客一样的，我把我其中一台主机样图给展示出来\n综述 今天在操作的时候，其实是和之前的ssh命令一样的，只不过扩充了一些其他的内容，比如scp，ssh远程传输命令等等,最后我们在综合的案例当中发现了，这个其实我在最后进行网络测试的时候是瞎弄的，就比如是我们不是在测完一个ip的时候不是应该回退测试下一个ip对吧，但是呢，我当时没有注意，就想当然的操作了，这是一点,其实也挺好的，这个命令这些天学习了，博客其实也写了，公钥，私钥其实也明白了，关键是这个命令对于以后的脚本操作有积极意义的。\n","wordCount":"298","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/posts/>Posts</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">SSh的相关操作</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>298 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><ul><ul><li><a href=#%e6%96%87%e7%ab%a0%e7%9b%ae%e5%bd%95 aria-label=文章目录>文章目录</a></li></ul></ul><li><a href=#%e4%b8%80%e5%9f%ba%e4%ba%8essh%e5%ae%9e%e7%8e%b0%e5%8f%91%e9%80%81%e5%91%bd%e4%bb%a4%e5%88%b0%e8%bf%9c%e7%a8%8b%e6%9c%8d%e5%8a%a1%e5%99%a8 aria-label=一.基于SSH实现发送命令到远程服务器>一.基于SSH实现发送命令到远程服务器</a></li><li><a href=#%e4%ba%8c%e5%9f%ba%e4%ba%8essh%e8%bf%9b%e5%85%8d%e5%af%86%e6%95%b0%e6%8d%ae%e4%bc%a0%e8%be%93 aria-label=二.基于SSH进⾏免密数据传输>二.基于SSH进⾏免密数据传输</a></li><li><a href=#%e4%b8%89%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b%e5%9f%ba%e4%ba%8ejdk%e7%9a%84%e5%ae%89%e8%a3%85%e5%92%8c%e6%93%8d%e4%bd%9c aria-label=三.综合案例基于JDK的安装和操作>三.综合案例基于JDK的安装和操作</a><ul><li><a href=#%e4%b8%80%e5%8f%b0%e6%9c%ba%e5%99%a8%e7%9a%84jdk%e7%9a%84%e5%ae%89%e8%a3%85%e5%92%8c%e9%85%8d%e7%bd%ae aria-label=一.台机器的jdk的安装和配置>一.台机器的jdk的安装和配置</a></li><li><a href=#%e4%ba%8c%e6%8a%8a%e8%bf%99%e4%b8%aa%e8%bd%af%e4%bb%b6%e5%92%8c%e7%9b%b8%e5%ba%94%e7%9a%84%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%e9%80%9a%e8%bf%87scp%e5%8f%91%e9%80%81%e5%87%ba%e5%8e%bb aria-label=二.把这个软件和相应的配置文件通过scp发送出去>二.把这个软件和相应的配置文件通过scp发送出去</a></li></ul></li><li><a href=#%e5%9b%9b%e5%9f%ba%e4%ba%8eubuntu%e5%ae%8c%e6%88%90ssh%e6%9c%8d%e5%8a%a1%e9%85%8d%e7%bd%ae aria-label=四.基于Ubuntu完成SSH服务配置>四.基于Ubuntu完成SSH服务配置</a><ul><li><a href=#%e4%b8%80%e7%ac%ac%e6%ad%a5-%e9%9c%80%e8%a6%81%e8%ae%a9%e4%b8%89%e4%b8%aa%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%85%a8%e9%83%a8%e9%83%bd%e4%bd%bfitheima%e7%99%bb%e5%bd%95%e6%9c%8d%e5%8a%a1%e5%99%a8 aria-label="一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器">一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器</a></li><li><a href=#%e4%ba%8c%e7%ac%ac%e4%ba%8c%e6%ad%a5-%e9%9c%80%e8%a6%81%e8%ae%a9%e4%b8%89%e5%8f%b0%e6%9c%8d%e5%8a%a1%e5%99%a8%e9%83%bd%e8%a6%81%e9%85%8d%e7%bd%ae%e5%85%8d%e5%af%86%e6%93%8d%e4%bd%9c aria-label="二.第二步: 需要让三台服务器都要配置免密操作">二.第二步: 需要让三台服务器都要配置免密操作</a></li><li><a href=#%e4%b8%89%e7%ac%ac%e4%b8%89%e6%ad%a5%e4%be%9d%e6%ac%a1%e9%80%9a%e8%bf%87-ssh-%e4%b8%bb%e6%9c%ba%e5%9c%b0%e5%9d%80-%e8%bf%9e%e6%8e%a5%e5%90%84%e4%b8%aa%e6%9c%8d%e5%8a%a1%e5%99%a8-%e8%a7%82%e5%af%9f%e6%98%af%e5%90%a6%e9%9c%80%e8%a6%81%e8%be%93%e5%af%86%e7%a0%81 aria-label="三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码">三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码</a></li></ul></li><li><a href=#%e7%bb%bc%e8%bf%b0 aria-label=综述>综述</a></li></ul></div></details><div class="post-content md-content"><p>SSh的相关操作</p><h4 id=文章目录>文章目录<a hidden class=anchor aria-hidden=true href=#文章目录>#</a></h4><ul><li><p><a href=#SSH_3>一.基于SSH实现发送命令到远程服务器</a></p></li><li><p><a href=#SSH_54>二.基于SSH进⾏免密数据传输</a></p></li><li><p><a href=#JDK_94>三.综合案例基于JDK的安装和操作</a></p></li><li><p><a href=#jdk_98>一.台机器的jdk的安装和配置</a></p></li><li><p><a href=#scp_130>二.把这个软件和相应的配置文件通过scp发送出去</a></p></li><li><p><a href=#UbuntuSSH_153>四.基于Ubuntu完成SSH服务配置</a></p></li><li><p><a href=#_itheima_157>一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器</a></p></li><li><p><a href=#___177>二.第二步: 需要让三台服务器都要配置免密操作</a></p></li><li><p><a href=#_ssh____217>三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码</a></p></li><li><p><a href=#_236>综述</a></p></li></ul><h2 id=一基于ssh实现发送命令到远程服务器>一.基于SSH实现发送命令到远程服务器<a hidden class=anchor aria-hidden=true href=#一基于ssh实现发送命令到远程服务器>#</a></h2><p><code>SSH远程执⾏命令是通过SSH协议连接到远程服务器，并在远程服务器上执⾏指定的命令或脚本， ⽽⽆需直接登录到服务器的终端</code></p><p>相关的命令是</p><pre tabindex=0><code>ssh [选项] username@remote_host &#34;command [&amp;&amp;] conmmad&#34;
+说明：
+username：远程服务器的⽤⼾名。
+remote_host：远程服务器的IP地址或域名。
+command：要在远程服务器上执⾏的命令
+&amp; ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接
+选项：
+-t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项
+-p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝
+-o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）
+-A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项
+需求⼀： 在node1中远程查看node2的主机名
+ssh root@192.168.88.102 &#34;hostname&#34;
+需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件
+说明：如果是执⾏多个命令，可以使⽤分号 或 &amp;&amp; 来分隔命令
+分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏
+&amp;&amp; ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏
+ssh root@192.168.88.102 &#34;cd ~ &amp;&amp; touch a.txt&#34;
+</code></pre><p>``这里面我为大家看一下我所在操作过程之中遇到的问题`</p><ul><li>首先呢，就是要注意的是目标主机的IP地址之后是务必要要加上引号的，我当时就没有加上的，然后命令没有跑通，我查了一些资料，之后明白了，其实就是没有加上引号，意思就是连接到目标主机之后，然后执行&&前面的命令然后断开了，在本地的主机执行&&之后的指令</li></ul><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/ba5a438ab12a4e2e8052f87813bdf244.png></p><ul><li>在这里其实，目标主机并没有执行
+<img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/ce70ec3c8efe47acb95d662a5b88c2d7.png></li></ul><p><code>这个所带来的效果其实是，连接远程主机然后在远程主机里面执行cd /home 命令，之后就断开了，在本地主机执行touch test.txt这个是第一句的指令，然后呢，我在本地主机执行了第二句指令，其实是前面的意思与第一句带来的效果一样，但是呢后面的是在本地主机创建了一个test1.txt，然后呢，我在ubuntu查看是俩个都没有的，其实就是因为我没有加上引号导致的，之后</code></p><ul><li>之后，我加上了引号，就发现了是可以进行操作的。</li></ul><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/12e71f98f2664d83b7dd31fdd328ea1d.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/9cacaad76e4043b0b64578cdc0a493de.png></p><p><strong>之后呢，我就没有遇到了什么问题了，这个方面就解决了，然后，就开始了下一个进展了。</strong></p><h2 id=二基于ssh进免密数据传输>二.基于SSH进⾏免密数据传输<a hidden class=anchor aria-hidden=true href=#二基于ssh进免密数据传输>#</a></h2><p><code>SCP（Secure Copy Protocol）是基于 SSH 协议的安全⽂件传输⼯具，可⽤于在本地和远程服务 器之间传输⽂件或⽬录。通过 SCP，数据在传输过程中会被加密，确保安全性</code></p><p>其基本的语法结构是:</p><pre tabindex=0><code>源⽂件路径：本地⽂件或远程服务器上的⽂件。
+⽬标路径：本地路径或远程服务器上的路径。
+常⽤选项：
+-r 递归复制整个⽬录（传输⽬录时必⽤）
+-P 指定 SSH 连接的端⼝号（默认是 22）
+-i 指定 SSH 使⽤的私钥⽂件（⽤于免密登录）
+-q 静默模式，不显⽰进度条和调试信息
+-C 开启压缩传输，提⾼传输速度（适合⼤⽂件或低速⽹络）
+-l 限制传输速度（单位为 Kbit/s，例如 -l 1000 表⽰限制为 1Mbps）
+</code></pre><p>SCP的基本语法是</p><pre tabindex=0><code>1. `从本地传输到远程`
+   `scp /local/path/file.txt user@remote:/remote/path/`
+2. `从远程传输到本地`
+   `scp user@remote:/remote/path/file.txt /local/path/`
+3. `递归传输整个⽬录`
+   scp -r /local/path/dir user@remote:/remote/path/
+</code></pre><p><code>下面是我操作出来的，大家可以看一下</code>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/be39308204014fc59f3ce56acd003e4b.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/0565b4bb8cc147d5aa159fd4b1a0953f.png></p><p><code>在这里面呢，其实还有一个问题:这个是远程给ubuntu发送消息的时候是不能发送到根目录下的，由于ubuntu的权限就是远程登录只可以由普通用户的，也就是说普通用户只可以访问~，对于根目录是没有访问权限的，所以我只能用scp信息给家目录传递</code></p><h2 id=三综合案例基于jdk的安装和操作>三.综合案例基于JDK的安装和操作<a hidden class=anchor aria-hidden=true href=#三综合案例基于jdk的安装和操作>#</a></h2><h3 id=一台机器的jdk的安装和配置>一.台机器的jdk的安装和配置<a hidden class=anchor aria-hidden=true href=#一台机器的jdk的安装和配置>#</a></h3><ul><li>在这里面呢，首先呢，我们应当先从网上下载jdk的rpm包，然后再把其传输到本主机就可以了，当然了，在这里我遇到一些问题，我其实在把这个rpm上传到linux的时候发现了一个问题，就是无论如何上传其实都是会报错的。</li></ul><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/fd527d5b4bd44dbda779b2aabd401b4c.png></p><ul><li>然后呢，我研究了一下这个问题，发现了其实就是由于，我当时以为我当时Linux所在的系统权限是root所以在上传文件时也是root这个权限可以对于文件夹拥有读写权限，但是呢，其实就是在上传的时候，是默认了普通用户的权限，所以我们要做的其实就是赋权,用命令chmod 777 software就可以了</li></ul><p><strong>真正原因：MobaXterm 不是用 root 身份传文件的</strong>
+<strong>你 SSH 终端里确实是 root（<code>#</code> 提示符），但 MobaXterm 左侧那个 SFTP 文件浏览器，走的是另一个会话，它不一定继承你终端的 root 身份：</strong>
+<strong>MobaXterm 建立 SFTP 连接时，可能用的是你最开始填的那个普通用户（比如 <code>admins</code>），而不是 root。</strong>
+<strong>哪怕你终端 <code>su -</code> 切到 root 了，SFTP 面板那边还是原来那个连接，不会自动升级。</strong>
+<strong>所以 SFTP 侧对 <code>software</code> 目录的身份是 “other”（其他人），而 other 只有 r-x，没写权限 → 报 <code>Permission denied</code>。</strong>
+<strong>你 <code>chmod 777</code> 后，other 也拿到了 rwx，所以"其他人"（也就是 SFTP 那个连接）就能写了——问题消失</strong></p><ul><li><p>然后我们用rpm -ivh对于rpm进行安装操作就可以了</p></li><li><p>然后还有一个注意的是我们需要修改配置文件vim /etc/profile</p></li></ul><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/02a53d37e1984234b7a7e93e39b77603.png></p><p><strong>这个是要在文末加上的</strong>。</p><ul><li><p>最后呢，我们重载一下服务：source /etc/profile</p></li><li><p>然后，我们在屏幕上输入java javac测试一下就可以了：
+<img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/633a6938733844c69fd74de9927354a5.png></p></li></ul><h3 id=二把这个软件和相应的配置文件通过scp发送出去>二.把这个软件和相应的配置文件通过scp发送出去<a hidden class=anchor aria-hidden=true href=#二把这个软件和相应的配置文件通过scp发送出去>#</a></h3><ul><li>1.我们先发送软件包，cd /opt && scp -r jdk1.8.0_241/ <a href=mailto:root@192.168.88.102>root@192.168.88.102</a>:$PWD</li></ul><p><strong>说明： $PWD 常量值 表⽰当前所在的路径</strong></p><ul><li>2.SCP /etc/profile <a href=mailto:root@192.168.88.102>root@192.168.88.102</a>:/etc/</li></ul><p>这里面其实就是opt路径下的，不可以使用$PWD了，</p><ul><li>3.最后我们重启一下服务就可以：source /etc/profile</li></ul><p>在这里，我们测试一下：
+<img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/96b08c4108964473af1e4f88977a79e2.png></p><p><code>发现成功了。就可以下一步了</code></p><h2 id=四基于ubuntu完成ssh服务配置>四.基于Ubuntu完成SSH服务配置<a hidden class=anchor aria-hidden=true href=#四基于ubuntu完成ssh服务配置>#</a></h2><h3 id=一第步-需要让三个服务器全部都使itheima登录服务器>一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器<a hidden class=anchor aria-hidden=true href=#一第步-需要让三个服务器全部都使itheima登录服务器>#</a></h3><ul><li><p>首先呢我们需要都同时打开三台服务器，务必要要保证要小于我们电脑的内存，否则会打不开的</p></li><li><p>接着我们打开了之后，使用以下命令增加账户itheima</p></li></ul><pre tabindex=0><code>useradd itheima
+passwd itheima
+123456
+</code></pre><p><code>然后呢，三台主机都同时输入这几行命令就可以了</code></p><ul><li>最后呢，我们使用三台主机所对应的IP地址在mx上面只要把主机名修改为itheima，登录就可以了</li></ul><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/8936dfd965f740b49adc1e019c347906.png></p><p><strong>就像如此的</strong></p><h3 id=二第二步-需要让三台服务器都要配置免密操作>二.第二步: 需要让三台服务器都要配置免密操作<a hidden class=anchor aria-hidden=true href=#二第二步-需要让三台服务器都要配置免密操作>#</a></h3><p><code>这个和我的上一个博客是一样的，内容也一样的，只不过操作起来比较麻烦的，</code></p><p><strong>我们首先是在每台主机里面下载对应的公钥和私钥，然后呢，再以此把对应的公钥发送三分，操作三次就可以了</strong></p><ul><li>下载对应的公钥和私钥</li></ul><pre tabindex=0><code>ssh-keygen -f ~/.ssh/id_rsa -P &#39;&#39; -q &amp;&amp; ll ~/.ssh
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/4d93dc9ab8ad4b8a87ce3a466abf7efd.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/7a6f91cadb69498c8a58f47d250d536a.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/0913d1b277b242049db9cb94e4dbb765.png></p><ul><li>二.我们开始把对应的公钥发送三分</li></ul><pre tabindex=0><code>ssh 192.168.149.128
+ssh 192.168.149.129
+ssh 192.168.149.131
+</code></pre><p><code>三台主机其实都是如此写的，只不过我们要注意的是需要一行一行操作的</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/63aecb242cad4ae2863e30d5a05ed8eb.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/6e94e1ebd9a54f90afa5e5f75d559480.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/4c4cd2574dc440da9faff2a24794453b.png></p><h3 id=三第三步依次通过-ssh-主机地址-连接各个服务器-观察是否需要输密码>三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码<a hidden class=anchor aria-hidden=true href=#三第三步依次通过-ssh-主机地址-连接各个服务器-观察是否需要输密码>#</a></h3><pre tabindex=0><code>依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码
+建议⽅案， ⼀个节点 ⼀个节点依次测试， 确保不漏测
+以node1为例：
+ssh 192.168.88.101
+通过exit退回 --&gt; node1
+ssh 192.168.88.102
+通过exit退回 --&gt; node1
+ssh 192.168.88.130
+ 通过exit退回 --&gt; node1
+</code></pre><p><code>这个地方是没有上面难度的，和之前的博客一样的，我把我其中一台主机样图给展示出来</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/images/2bb53deac4c145a783da0ae4bd6412dc.png></p><h2 id=综述>综述<a hidden class=anchor aria-hidden=true href=#综述>#</a></h2><p><code>今天在操作的时候，其实是和之前的ssh命令一样的，只不过扩充了一些其他的内容，比如scp，ssh远程传输命令等等,最后我们在综合的案例当中发现了，这个其实我在最后进行网络测试的时候是瞎弄的，就比如是我们不是在测完一个ip的时候不是应该回退测试下一个ip对吧，但是呢，我当时没有注意，就想当然的操作了，这是一点,其实也挺好的，这个命令这些天学习了，博客其实也写了，公钥，私钥其实也明白了，关键是这个命令对于以后的脚本操作有积极意义的。</code></p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/><span class=title>« 上一页</span>
+<span>samba服务器</span>
+</a><a class=next href=https://dsduyopg.github.io/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/><span class=title>下一页 »</span>
+<span>warp导致的日志发送node2失败</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

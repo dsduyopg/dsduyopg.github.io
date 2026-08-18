@@ -1,0 +1,2793 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>我的博客</title><link>https://dsduyopg.github.io/</link><description>Recent content on 我的博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Tue, 18 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://dsduyopg.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【分支和循环（下）】</title><link>https://dsduyopg.github.io/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/</guid><description>&lt;h2 id="1分支和循环下"&gt;1.分支和循环（下)&lt;/h2&gt;
+&lt;h3 id="一随机数生成"&gt;一.随机数生成&lt;/h3&gt;
+&lt;h4 id="1rand"&gt;(1).rand&lt;/h4&gt;
+&lt;h4 id="2srand"&gt;(2).srand&lt;/h4&gt;
+&lt;h4 id="3time"&gt;(3)time&lt;/h4&gt;
+&lt;h4 id="4设置随机数的范围"&gt;(4)设置随机数的范围&lt;/h4&gt;
+&lt;h3 id="二猜数字游戏实现"&gt;二.猜数字游戏实现&lt;/h3&gt;
+&lt;h2 id="分支和循环下"&gt;&lt;strong&gt;分支和循环（下)&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;strong&gt;在本节内容当中，主要讨论了关于随机函数相关的知识点并做一些应用，也就是说讨论关于猜数字的游戏&lt;/strong&gt;&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id="一随机数生成-1"&gt;&lt;code&gt; 一.随机数生成&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;随机函数主要有rand,srand,函数，我们将会讨论什么是随机数种子，为何说rand函数不是我们的随机函数，以及用time函数实现srand的随机种子，进而实现了对于随机数的求解&lt;/em&gt;。&lt;/p&gt;
+&lt;h4 id="1rand-1"&gt;(1).rand&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;C语言提供了求解随机数的方法：&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;int rand(void);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;但是呢，由于rand函数是为随机函数是通过某种算法生成的随机数，不是真正的随机数，下面就为大家试一下:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+int main()
+{
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+return 0;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/images/0d91b1a346e3767ef41cbdc09424ff4c.png"&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/images/a09ac5388163d77441b0a368dbdc7331.png"&gt;
+由此可以知道的，是rand两次所生成的结果是一样的，那么可以说，&lt;code&gt;rand&lt;/code&gt;不是一个正常的生成随机数的函数，因为他默认的随机种子数是1，如果要生成不同的随机数，就要让种子是变化的。&lt;/p&gt;
+&lt;h4 id="2srand-1"&gt;(2).srand&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;下面我就介绍关于&lt;code&gt;srand&lt;/code&gt;函数&lt;/strong&gt;，只要在使用&lt;code&gt;rand&lt;/code&gt;之前，使用&lt;code&gt;srand&lt;/code&gt;函数，通过 &lt;code&gt;srand&lt;/code&gt;函数的参数&lt;code&gt;seed&lt;/code&gt;来设置&lt;code&gt;rand&lt;/code&gt;函数生成随机数的时候的种子，只要种子在变化，每次生成的随机数序列也就变化起来了,
+那也就是说给&lt;code&gt;srand&lt;/code&gt;的种子是如果是随机的，&lt;code&gt;rand&lt;/code&gt;就能生成随机数；在生成随机数的时候又需要一个随
+机数，这就矛盾了.&lt;/p&gt;
+&lt;h4 id="3time-1"&gt;(3)time&lt;/h4&gt;
+&lt;p&gt;因为时间是经常变化的，在&lt;code&gt;c&lt;/code&gt;当中有一个函数是&lt;code&gt;time&lt;/code&gt;,因此我们可以使用它时间作为随机数种子。在&lt;code&gt;C&lt;/code&gt;当中的定义如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;time_t time (time_t* timer);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;如果 timer 是NULL，就只返回这个时间的差值。time函数返回的这个时间差也被叫做：时间戳。
+使用time函数的时候，需要包含头文件：time.h&lt;/strong&gt;
+书写生成随机函数的代码如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;time.h&amp;gt;
+int main()
+{
+//使用time函数的返回值设置种子
+//因为srand的参数是unsigned int类型，我们将time函数的返回值强制类型转换
+srand((unsigned int)time(NULL));
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;得到的结果是：
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/images/f9cdebfc5425f8c1103f26e10c95c9f9.png"&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/images/1616a81838c5a7b9d4957404d50ffa74.png"&gt;
+可以知道的是，两次得到的随机数并不像第一次那样—二次得到的，是一样的，这个函数可以成功的实现对于随机数的求解，这就是我们需要的函数。&lt;/p&gt;</description></item><item><title>【实战】DNS建设案例_</title><link>https://dsduyopg.github.io/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/</guid><description>&lt;h4 id="实战dns建设案例"&gt;【实战】DNS建设案例:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#0_1"&gt;0.需求&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_21"&gt;1.准备工作&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_24"&gt;2.进行标准化的服务器配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1ip_32"&gt;1.修改ip&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_42"&gt;2.修改主机名&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3hosts_49"&gt;3.修改hosts文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_66"&gt;4.免密配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_89"&gt;3.实操流程&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4node1node2_109"&gt;4.在node1和node2中安装相关服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1node1_111"&gt;1.node1上面安装相关软件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1node1jdk_112"&gt;1.先在node1上面安装jdk软件包&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_120"&gt;1.环境变量配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_130"&gt;2.任意目录测试一下&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2tomcat_139"&gt;2.最后安装tomcat服务器&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1tar_140"&gt;1,从官网下载阿帕奇的tar的包&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_144"&gt;2.解压这个包&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_149"&gt;3.运行这个软件，并在浏览器查看&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2node2_159"&gt;2.在node2安装相关软件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1NFS_160"&gt;1.安装NFS&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_174"&gt;1.开启服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_180"&gt;2.开放端口&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_187"&gt;3.创建共享目录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_191"&gt;4.修改配置文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5_205"&gt;5.验证是否成功共享&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#6_216"&gt;6.挂载使用&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#7_221"&gt;7.验证&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3ftp_228"&gt;3安装ftp软件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_230"&gt;1.创建文件夹&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_238"&gt;2.安装软件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_252"&gt;3.修改配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_vsftpd__264"&gt;4.启动并配置 vsftpd 服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5_272"&gt;5.配置防⽕墙&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#6FTP_281"&gt;6.连接FTP服务器&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5node3dns_305"&gt;5.在node3中配置dns服务器&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1namedconf_310"&gt;1.修改named.conf这个文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2vi_etcnamedrfc1912zones_314"&gt;2.修改vi /etc/named.rfc1912.zones&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3varnameditcastlocaldb_329"&gt;3.修改/var/named/itcast.local.db&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4varnamed192168149rev_348"&gt;4.修改/var/named/192.168.149.rev文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5_367"&gt;5.检测&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#6_386"&gt;6.启动服务以及开放端口&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#6_408"&gt;6.测试操作&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#6_420"&gt;6.总结&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="0需求"&gt;0.需求&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;NFS服务器域名： nfs.itcast.local
+FTP服务器域名： ftp.itcast.local
+tomcat服务器域名： www.itcast.local
+FTP服务器要求:
+1- 禁锢FTP目录： /export/ftp
+2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可
+3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器
+windows中，建议使用filezilla.exe 软件来连接
+NFS服务器：
+共享目录： /export/nfs
+要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可）
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="1准备工作"&gt;1.准备工作&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3&lt;/code&gt;
+而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了&lt;/p&gt;</description></item><item><title>C语言的分支与循环上</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/</guid><description>&lt;h2 id="if语句"&gt;if语句&lt;/h2&gt;
+&lt;p&gt;在if语句中他的语法是if(表达式)&lt;/p&gt;
+&lt;p&gt;                                       语句&lt;/p&gt;
+&lt;p&gt;表达式成立那么语句执行，不成立那么语句不执行。&lt;/p&gt;
+&lt;p&gt;在if语句中只要是true就执行，false不执行。&lt;/p&gt;
+&lt;p&gt;那么true通常是1，而false则是0，比如nun%2==1，它执行的是判断num是否是奇数，其实这样写也可以，但是不是更很直观&lt;/p&gt;
+&lt;p&gt;没有前者更加直观一些。&lt;/p&gt;
+&lt;p&gt;在if语句中if语句只可以跟着一条语句，但是如果过于多的话可以调整为大括号&lt;/p&gt;
+&lt;p&gt;由此我们可以知道这样的道理，else是在一些情况可以省略的，不必再写像&lt;/p&gt;
+&lt;p&gt;if(num%2)&lt;/p&gt;
+&lt;p&gt;   printf(&amp;quot;%d 是奇数&amp;quot;，num);&lt;/p&gt;
+&lt;p&gt;printf(&amp;quot;%d 是偶数&amp;quot;,num);&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;h2&gt;&lt;/h2&gt;</description></item><item><title>C语言之操作符（上）</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/</guid><description>&lt;h4 id="c语言之操作符上"&gt;C语言之操作符（上）&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_3"&gt;一.二进制，八进制，十六进制&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_5"&gt;&lt;code&gt;1.二进制&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_27"&gt;&lt;code&gt;2.八进制与十六进制&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_35"&gt;二.原码，反码，补码&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_37"&gt;&lt;code&gt;1.原码&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_45"&gt;&lt;code&gt;2.反码&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_53"&gt;&lt;code&gt;3.补码&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_60"&gt;三.移位操作符&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_64"&gt;&lt;code&gt;1.左移操作符&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_69"&gt;&lt;code&gt;2.右移操作符&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_71"&gt;1.逻辑右移&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_73"&gt;2.算术右移&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_75"&gt;四.位操作符&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_78"&gt;&lt;code&gt;1.按位与&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_82"&gt;&lt;code&gt;2.按位或&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_84"&gt;&lt;code&gt;3.按位异或&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_89"&gt;4.运用&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_92"&gt;五.逗号表达式&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在C语言之中，操作符也是极其重要的，不不仅仅C语言会用到，同时最为关键的是学会操作符，会对于我们学习单片机起到奠基石的作用，对于单片机的学习起到引领的作用，会非常有助于我们学习单片机的，会让我们对于单片机的一些基础操作可以看的懂。&lt;/p&gt;
+&lt;h2 id="一二进制八进制十六进制"&gt;一.二进制，八进制，十六进制&lt;/h2&gt;
+&lt;p&gt;在计算机当中信息是以二进制的形式存储的，而我们在日常生活当中使用的最为多的，其实就是十进制，然而我们对于十进制的转化可以说是手到擒来。但是对于二进制相信一些伙伴，连听都没有听过，更不要说二进制之间的转化，不同进制之间的转化。由于二进制表达的数字太过于庞大了，我们不习惯使用二进制，因此我们需要学习八进制，十六进制，在接下来的讲解中我将为大家娓娓道来，并力求做到，看过我写的便学会，懂得了。&lt;/p&gt;
+&lt;h3 id="1二进制"&gt;&lt;code&gt;1.二进制&lt;/code&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.首先，需要注意的是，二进制是什么。二进制是是计算机在存储信息之中时以1，0对信息加以存储和表达，满2进1对的。
+2.其次我们需要注意的是，二进制的转化：
+&lt;code&gt;1.二进制同十进制之间的转化：&lt;/code&gt;首先需要明确一下的是权重，求值，以十进制数字：123为例。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;10进制的位&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;权重&lt;/td&gt;
+&lt;td&gt;10^2&lt;/td&gt;
+&lt;td&gt;10^1&lt;/td&gt;
+&lt;td&gt;10^0&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;权重值&lt;/td&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;求值&lt;/td&gt;
+&lt;td&gt;1*100&lt;/td&gt;
+&lt;td&gt;2*10&lt;/td&gt;
+&lt;td&gt;3*1 =&lt;/td&gt;
+&lt;td&gt;123&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.由此可以看出，权重，权重值,的关系，对这个概念可以运用到二进制·之上，对于二进制数如：110.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;二进制的位&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;权重&lt;/td&gt;
+&lt;td&gt;2^2&lt;/td&gt;
+&lt;td&gt;2^1&lt;/td&gt;
+&lt;td&gt;2^0&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;权重值&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;求值&lt;/td&gt;
+&lt;td&gt;4*1&lt;/td&gt;
+&lt;td&gt;2*1&lt;/td&gt;
+&lt;td&gt;0*1=&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2.这样我们就完成了对二进制与十进制数相互进行转化。而对于十进制数转化为二进制数字，比如说一个十进制数字125将他转化成二进制数字，可以采用短除法，具体操作如下：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/images/9072ce77b60a39dcb414d5023bb22df6.png"&gt;&lt;/p&gt;</description></item><item><title>C语言之操作符【下】</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/</guid><description>&lt;h4 id="c语言之操作符下"&gt;C语言之操作符【下】&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_2"&gt;一.下标访问[],函数调用()&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_3"&gt;1.下标访问[]&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_4"&gt;1.什么是下标访问[]&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_7"&gt;2.下标访问操作符[]的应用与举例&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_22"&gt;2.函数调用()&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_29"&gt;二.操作符的属性：优先级、结合性&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_30"&gt;1.优先级&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_37"&gt;2.结合性&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_43"&gt;3.俩者之间的应用&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_45"&gt;三.整型提升&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_46"&gt;1.整型提升&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_48"&gt;2.整形提升的意义&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_50"&gt;3.如何进行整型提升&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_53"&gt;例子如下：&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_82"&gt;四.算术转换&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_94"&gt;五.表达式求值&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;在上一节中，我们已经学习了操作符的一些相关知识，我们对C语言的操作符有了新的认识与理解，那么在本节C语言中，我们将继续上一次的讲解，为大家呈现更加有趣并且深刻的讲解，来开启我们的操作符之旅吧！&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="一下标访问函数调用"&gt;一.下标访问[],函数调用()&lt;/h2&gt;
+&lt;h3 id="1下标访问"&gt;1.下标访问[]&lt;/h3&gt;
+&lt;h4 id="1什么是下标访问"&gt;1.什么是下标访问[]&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.在C语言学习中，我们会经常用到下标访问操作符，那么相信在屏幕前的你们一定很想知道什么是下标访问操作符吧？下面我就为大家详细的道来：其实下标访问操作符，是数组里面的一个知识点，下标访问操作符是数组遍历当中经常使用的，数组在遍历[]里面会有一些数字，而那些数字其实就可以表示数组的内容，因此就可以对数组进行遍历了。
+&lt;code&gt;2.形式是[]里面的数字从数字0开始，到最后的数字结束。&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id="2下标访问操作符的应用与举例"&gt;2.下标访问操作符[]的应用与举例&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.下标访问操作符的应用：下标访问操作符，应用到数组当中，对于数组内容的访问有着极其重要的意义。
+2.下标访问操作符的举例：如在下面的函数当中，我们就用到了下标访问操作符。&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#include&amp;lt;stdio.h&amp;gt;
+int main()
+{
+int a[5]={1,2,3,4,5};
+for(int i=0; i&amp;lt;5;i++)
+printf(&amp;#34;%d&amp;#34;,a[i]);
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3.在上例当中，a[i]里面的i其实就是数组里面的内容，它的意思是说数组里面的的i-1个元素，因此我们通过这个方法对其进行遍历。&lt;/p&gt;
+&lt;h3 id="2函数调用"&gt;2.函数调用()&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;1.函数调用操作符是小括号。&lt;/code&gt;
+2.形式如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;int add(int x,int y);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在上例之中，小括号之前的是，函数名；在小括号之后的是形参，可以看出该函数有两个形参：一个是int x，另一个是int y，该函数的返回类型是int形。&lt;/p&gt;
+&lt;h2 id="二操作符的属性优先级结合性"&gt;二.操作符的属性：优先级、结合性&lt;/h2&gt;
+&lt;h3 id="1优先级"&gt;1.优先级&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.每种同类型的运算符都有内部的运算符优先级，不同类型的运算符之间也有相应的优先级顺序。一个表达式中既可以包括相同类型的运算符，也可以包括不同类型的运算符或者函数。当多种运算符出现在同一个表达式中时，应该先按照不同类型运算符间的优先级进行运算。各种运算符间的优先级如下：数值运算符、字符串运算符、关系运算符、逻辑运算符。可以用括号改变优先级顺序，使得括号内的运算优先于括号外的运算。对于多重括号，总是由内到外强制表达式的某些部分优先运行。括号内的运算总是最优先计算。
+2.操作符的优先级如下：
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/images/45b5283c219699081fe2ad0d959574f3.png"&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/images/a1778a520d624963904ef18d82039467.png"&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/images/8826b16df4a51812dbdd2c290e8259df.png"&gt;&lt;/p&gt;
+&lt;h3 id="2结合性"&gt;2.结合性&lt;/h3&gt;
+&lt;p&gt;结合性是，对于多个优先级是一样的操作符的一个表达式，此时他们的就需要用到，结合性，如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;2*3/5
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时他们的优先级是一样的，因此我们选择使用结合性，因为，乘法和除法的结合性是做结合的因此该表达式是从左到右计算的。&lt;/p&gt;
+&lt;h3 id="3俩者之间的应用"&gt;3.俩者之间的应用&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;因为在上文的优先级表格中，小括号的优先级是最高的，使用小括号可以提高算术的优先级。因此呢，当有一些表达式的优先级是一样的时候，我们就可以使用小括号，这样小括号括起来的地方，优先级是比较高的，可以达到我们想要的结果&lt;/p&gt;
+&lt;h2 id="三整型提升"&gt;三.整型提升&lt;/h2&gt;
+&lt;h3 id="1整型提升"&gt;1.整型提升&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;C语言中整型算术运算总是至少以缺省整型类型的精度来进行的。为了获得这个精度，表达式中的字符和短整型操作数在使用之前被转换为普通整型,这种转换称为整型提升。&lt;/p&gt;
+&lt;h3 id="2整形提升的意义"&gt;2.整形提升的意义&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;整型提升的意义是在表达式中，各种长度可能小于int长度的整型值，都必须先转换为int或unsigned int，然后才能送入CPU去执行运算12。C的整型算术运算总是至少以缺省整型类型的精度来进行的。为了获得这个精度，表达式中的字符和短整型操作数在使用之前被转换为普通整型，这种转换称为整型提升。比如：即使两个char类型（1个字节==8个比特字节）的相加，在CPU执行时实际上也要先转换为CPU内整型操作数的标准长度.&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="3如何进行整型提升"&gt;3.如何进行整型提升&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;有符号整数提升是按照变量的数据类型的符号位来提升的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;无符号整数提升，高位补0&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="例子如下"&gt;例子如下：&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;int main()
+{
+char - signed char
+unsigned char
+char a = 5;//char只有一个字节，那么的话char有8个比特位。
+//a 的二进制位是：00000101 - a (截断后存储a中)
+//由于a是无符号类型的，可以整型提升，提升为int类型，以二进制位表示如下：000000000000000000000000 00000101
+char b = 127;
+//类似char a，一些步骤缺省，因此将他转换为int类型以二进制表示如下：00000000000000000000000001111111
+01111111 - b (截断后存储到b中)
+char c = a + b;//发生整型提升
+00000000000000000000000000000101 - a
+00000000000000000000000001111111 - b
+00000000000000000000000010000100 - a+b
+10000100 - c//由于char c的最高位是1因此我们用1char c提升为整形，如下：
+printf(&amp;#34;%d\n&amp;#34;, c);
+//这里c还是要整型提升
+11111111111111111111111110000100//c的整型提升的原码
+10000000000000000000000001111011//c的反码
+10000000000000000000000001111100//c的补码
+-124
+%d 是按照10进制的形式打印有符号的整数
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="四算术转换"&gt;四.算术转换&lt;/h2&gt;
+&lt;p&gt;如果某个操作符的各个操作数属于不同的类型，那么除非其中一个操作数的转换为另一个操作数的类型，否则操作就无法进行。下面的层次体系称为寻常算术转换：&lt;/p&gt;</description></item><item><title>C语言之讲解篇</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%87/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%87/</guid><description>&lt;p&gt;例题：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;下面代码的结果是：
+#include &amp;lt;stdio.h&amp;gt;
+int i;
+int main()
+{
+i--;
+if (i &amp;gt; sizeof(i))
+{
+printf(&amp;#34;&amp;gt;\n&amp;#34;);
+}
+else
+{
+printf(&amp;#34;&amp;lt;\n&amp;#34;);
+}
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A.&amp;gt;&lt;/p&gt;
+&lt;p&gt;B.&amp;lt;&lt;/p&gt;
+&lt;p&gt;C.不输出&lt;/p&gt;
+&lt;p&gt;D.程序有问题&lt;/p&gt;
+&lt;p&gt;首先，我可以明确一点的是，这道题不选择D和C，在本函数中，由于int i 是一个全局变量，它存放的是静态区，&lt;/p&gt;
+&lt;p&gt;C标准是要求全局变量要被初始化为零值，因此即使你没有初始化该值那么依然会被系统初始化为0，然而，sizeof类型是属于unsigned int 类型，也就是说，-1需要进行一拨转换，然而-1转换为无符号整形数字是比较大的，那么的话，明显是&amp;gt;,那么就选则的是A&lt;/p&gt;</description></item><item><title>C语言之讲解篇2</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/</guid><description>&lt;p&gt;例题：获取一个整数二进制序列中所有的偶数位和奇数位，分别打印出二进制序列。&lt;/p&gt;
+&lt;p&gt;对于这个题我想的是，由于1&amp;amp;二进制的数字，他的意思是判断最低位是否为1，是的话那么就是1，否则就不是1而是0，这样如果我在进行一番右移操做，那么的话，就可以把这个二进制打印出来。&lt;/p&gt;
+&lt;p&gt;若是需要奇偶位打印的话，那么可能是在每次右移奇数个位或者是偶数个位，就可以求出二进制的奇数位，以及偶数位，下面我就为大家展示一番。&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#include&amp;lt;stdio.h&amp;gt;
+int main() {
+int num = 0;
+printf(&amp;#34;请输入一个数:&amp;#34;);
+scanf(&amp;#34;%d&amp;#34;, &amp;amp;num);
+printf(&amp;#34;奇数位：&amp;#34;);
+for (int i = 31; i &amp;gt;= 1; i -= 2) {
+printf(&amp;#34;%d &amp;#34;, (num &amp;gt;&amp;gt; i) &amp;amp; 1);
+}
+printf(&amp;#34;\n&amp;#34;);
+printf(&amp;#34;偶数位：&amp;#34;);
+for (int i = 30; i &amp;gt;= 0; i -= 2) {
+printf(&amp;#34;%d &amp;#34;, (num &amp;gt;&amp;gt; i) &amp;amp; 1);
+}
+printf(&amp;#34;\n&amp;#34;);
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个是运行结果：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/images/2a48580f851b401c7918f0011416a13e.png"&gt;&lt;/p&gt;
+&lt;p&gt;因此这就是本题的代码。&lt;/p&gt;</description></item><item><title>C语言之讲解篇3</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/</guid><description>&lt;p&gt;例题：求两个数二进制中不同位的个数，写出C代码。&lt;/p&gt;
+&lt;p&gt;在我的讲解篇2中可以看到：由于每次右移1位并对1按位与那么就可以将二进制位分离出来，得出与原来一样二进制位。&lt;/p&gt;
+&lt;p&gt;思路一样，那么我们可以用上一篇中提到的方法，那么接下来我们就需要对每个二进制位进行比较就可以了，以此类推，若是不同的话统计其个数并将其统计的个数，返回，所求的便是其值，我所写的代码，如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#include&amp;lt;stdio.h&amp;gt;
+int main()
+{
+int x = 0;
+int y = 0;
+int count = 0;
+printf(&amp;#34;输入两个整数:&amp;#34;);
+scanf(&amp;#34;%d %d&amp;#34;, &amp;amp;x, &amp;amp;y);
+for (int i = 0; i &amp;lt; 32; i++)
+{
+if (((x &amp;gt;&amp;gt; i) &amp;amp; 1) != ((y &amp;gt;&amp;gt; i) &amp;amp; 1))
+{
+count++;
+}
+}
+printf(&amp;#34;有:%d位数不同&amp;#34;, count);
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;下面是我的代码的运行结果：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/images/eed7ecde0d51f68f49631ef528cd1cbf.png"&gt;&lt;/p&gt;</description></item><item><title>C语言之讲解篇4</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%874/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%874/</guid><description>&lt;p&gt;例题：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;下面代码的结果是：（ ）
+#include &amp;lt;stdio.h&amp;gt;
+int main()
+{
+int arr[] = {1,2,3,4,5};
+short *p = (short*)arr;
+int i = 0;
+for(i=0; i&amp;lt;4; i++)
+{
+*(p+i) = 0;
+}
+for(i=0; i&amp;lt;5; i++)
+{
+printf(&amp;#34;%d &amp;#34;, arr[i]);
+}
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;由于short是短整型的，那么其，因此p每次只能得到两个字节，而由于原来是4次循环那么其实是相当于4/2=2个数，也就是说对原来的前两个数赋值为0，那么打印出来得话，自然是：0,0，3,4，5&lt;/p&gt;</description></item><item><title>C语言之讲解篇5</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/</guid><description>&lt;p&gt;例题：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;下列程序段的输出结果为（ ）
+unsigned long pulArray[] = {6,7,8,9,10};
+unsigned long *pulPtr;
+pulPtr = pulArray;
+*(pulPtr + 3) += 3;
+printf(&amp;#34;%d,%d\n&amp;#34;,*pulPtr, *(pulPtr + 3));
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;解释：pulPtr已经是数组的首元素6，而*(pulPtr + 3)是指针向后移动3位所得到的结果，同时把该结果再加上3所得的值是12，接下来再把12赋值给*(pulPtr + 3)，然后由于指针是数组的首地址那么的话，*pulPtr就是6，而(pulPtr + 3)自然就是12，接下来我们就可以选择6 12了，本题11就这样结束了。&lt;/p&gt;</description></item><item><title>C语言之讲解篇6</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/</guid><description>&lt;p&gt;例题：实现一个函数，可以左旋字符串中的k个字符，用C语言写出。&lt;/p&gt;
+&lt;p&gt;每次可以把第一个字符存下来，接下来可以以此把每个字符向前移动一个位置，最后把最后一个字符赋值为刚开始存下的值，这样每次做到的就是翻转就是一个字符，那么将总共的大循环，设定为翻转得个数，那么就可以轻轻松松解决问题了，下面是我的代码示例：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#include&amp;lt;stdio.h&amp;gt;
+#include&amp;lt;string.h&amp;gt;
+void programming(char * a,int n,int num);
+int main()
+{
+char num[50];
+int n,a;
+printf(&amp;#34;请输入一些内容：\n&amp;#34;);
+gets(num);
+a=strlen(num);
+printf(&amp;#34;请输入你n的数值\n&amp;#34;);
+scanf(&amp;#34;%d&amp;#34;,&amp;amp;n);
+printf(&amp;#34;左旋字符串中的n个字符\n&amp;#34;);
+programming(num,n,a);
+printf(&amp;#34;%s\n&amp;#34;,num);
+return 0;
+}
+void programming(char * a,int n,int num)
+{
+int i=0;
+char temp;
+for(i=0;i&amp;lt;n;i++)
+{
+temp=*a;
+for(int j=0;j&amp;lt;num-1;j++)
+*(a+j)=*(a+1+j);
+*(a+num-1)=temp;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;该代码的运行结果，是如下：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/images/d435635e1a3789bb4f9cbaef253b8d82.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/images/da4d462074a6440025d3452d7ca7a044.png"&gt;&lt;/p&gt;</description></item><item><title>C语言之讲解篇7</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/</guid><description>&lt;p&gt;例题：写一个函数，可以逆序一个字符串的内容。&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+void reverse(char * letter);
+int main()
+{
+char num[50];
+int i;
+while(num[i]!=&amp;#39;\0&amp;#39;)
+{
+scanf(&amp;#34;%c&amp;#34;,&amp;amp;num[i]);
+i++;
+}
+reverse(num);
+return 0;
+}
+void reverse(char * letter)
+{
+char * start=letter;
+while(*letter!=&amp;#39;\0&amp;#39;)
+{
+letter++;
+}
+while(letter&amp;gt;=start)
+{
+printf(&amp;#34;%c&amp;#34;,*letter);
+letter--;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/images/9b1592125a58301e5b1633e39c3c0ae7.png"&gt;&lt;/p&gt;
+&lt;p&gt;在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/images/4aa164b2ff9d1b2072697e4c0a063a3d.png"&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;/*
+思路：该题比较简单，请参考代码
+*/
+#include&amp;lt;stdio.h&amp;gt;
+void Reverse(char* str)
+{
+char* left = str;
+char* right = str + strlen(str)-1;
+while(left &amp;lt; right)
+{
+char temp = *left;
+*left = *right;
+*right = temp;
+++left;
+--right;
+}
+}
+int main()
+{
+char str[] = &amp;#34;hello bit&amp;#34;;
+//在这里完成下面函数，参数自己设计，要求：使用指针
+Reverse(str);
+return 0;
+}
+// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，
+int main()
+{
+char str[101] = {0};
+while(gets(str))
+{
+Reverse(str);
+printf(&amp;#34;%s\n&amp;#34;, str);
+memset(str, 0, sizeof(str)/sizeof(str[0]));
+}
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来本题就宣告结束了。&lt;/p&gt;</description></item><item><title>C语言之讲解篇8</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/</guid><description>&lt;p&gt;例题：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。&lt;/p&gt;
+&lt;h2 id="1首先设置一个逆序输出的函数"&gt;1.首先设置一个逆序输出的函数。&lt;/h2&gt;
+&lt;p&gt;由于他们是没有任何返回值的因此呢，我们可以设定一个没有一个返回值的函数，同时还需要做到，对原来的函数进行修改，因此我们考虑使用数组或者指针。所以结合以上，所设置的函数可以是：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;void swap_arr(int arr[], int sz);
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="2其次呢再设定两个变量leftright"&gt;2.其次呢再设定两个变量，left,right.&lt;/h2&gt;
+&lt;h3 id="1leftright的初始化"&gt;1.left,right的初始化&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在这里，我们首先可以假定left是数组的最小者，而right是数组的最大者，由于数组的小标是从0开始的那么最大者就是数组的长度减去1，而求数组的长度就可以使用sz，那么的话，最大者就是：sz-1&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;left 0;
+right sz-1;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2left与right的具体实现"&gt;2.left与right的具体实现&lt;/h3&gt;
+&lt;h4 id="1left的具体实现"&gt;1.left的具体实现&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;是通过遇到偶数时停止循环造成的。&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id="1left的的执行功能"&gt;1.left的的执行功能&lt;/h5&gt;
+&lt;p&gt;left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。&lt;/p&gt;
+&lt;h4 id="2实现操作与基本逻辑"&gt;2.实现操作与基本逻辑&lt;/h4&gt;
+&lt;p&gt;我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left&amp;lt;=right，当其为偶数时就跳出循环。&lt;/p&gt;
+&lt;p&gt;基本语句如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;while(left&amp;lt;right)
+{
+// 从前往后，找到一个偶数，找到后停止
+while((left&amp;lt;right)&amp;amp;&amp;amp;(arr[left]%2==1))
+{
+left++;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="2right的具体实现"&gt;2.right的具体实现&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;是通过遇到奇数时停止循环造成的。&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id="1right的的执行功能"&gt;1.right的的执行功能&lt;/h5&gt;
+&lt;p&gt;right首先是定义为寻找偶数数，而遇到奇数时就停止循环，并将那个偶数带回到right身上。&lt;/p&gt;
+&lt;h4 id="2实现操作与基本逻辑-1"&gt;2.实现操作与基本逻辑&lt;/h4&gt;
+&lt;p&gt;我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left&amp;lt;=right，当其为奇数时就跳出循环。&lt;/p&gt;
+&lt;p&gt;基本语句如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;while((left&amp;lt;right)&amp;amp;&amp;amp; (arr[right]%2==0))
+{
+right--;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="3最后是leftritht的交换与现实"&gt;3.最后是left,ritht的交换与现实&lt;/h3&gt;
+&lt;p&gt;最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;void swap_arr(int arr[], int sz)
+{
+int left = 0;
+int right = sz-1;
+int tmp = 0;
+while(left&amp;lt;right)
+{
+// 从前往后，找到一个偶数，找到后停止
+while((left&amp;lt;right)&amp;amp;&amp;amp;(arr[left]%2==1))
+{
+left++;
+}
+// 从后往前找，找一个奇数，找到后停止
+while((left&amp;lt;right)&amp;amp;&amp;amp; (arr[right]%2==0))
+{
+right--;
+}
+// 如果偶数和奇数都找到，交换这两个数据的位置
+// 然后继续找，直到两个指针相遇
+if(left&amp;lt;right)
+{
+tmp = arr[left];
+arr[left] = arr[right];
+arr[right] = tmp;
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="3最后就可完成函数了"&gt;3.最后就可完成函数了。&lt;/h2&gt;
+&lt;p&gt;将函数部分搞定之后我们就可以，把整个代码搞定了，如下：&lt;/p&gt;</description></item><item><title>C语言之扫雷游戏</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/</guid><description>&lt;h4 id="c语言之扫雷游戏"&gt;C语言之扫雷游戏&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_3"&gt;1.扫雷游戏的准备工作&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_6"&gt;2.扫雷游戏的基本逻辑&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_7"&gt;一.扫雷的基本框架&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#__11"&gt;二. 扫雷游戏的基本逻辑&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_18"&gt;三.扫雷需要的所有函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_20"&gt;1.定义初始化函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_37"&gt;2.定义打印棋盘函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_63"&gt;3.定义布置雷的函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_87"&gt;4.定义寻找雷的函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_138"&gt;三.头文件得声明&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_162"&gt;3.扫雷游戏的具体实现&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_333"&gt;写到最后&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1扫雷游戏的准备工作"&gt;1.扫雷游戏的准备工作&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在进行扫雷工作时，我们需要做的是需要一个编译环境，在市面上有众多的编译器，在这里作为使用过VS的我来说，它简直太适合我们这样的初学者了，里面支持自动换行对于初学者非常友好，同时，最为关键的是，在这款编译器当中，我们使用调试功能，是极其的容易，并且它的调试功能也是极其强大的。
+写到最后，我推荐大家观看B站鹏哥的视频，在那里鹏哥会给我们最为直观的讲解，会非常详细的指导大家的。&lt;/p&gt;
+&lt;h2 id="2扫雷游戏的基本逻辑"&gt;2.扫雷游戏的基本逻辑&lt;/h2&gt;
+&lt;h3 id="一扫雷的基本框架"&gt;一.扫雷的基本框架&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;在扫雷游戏中时，首先需要我们在VS编译器当中准备三个文件，二个C文件一个头文件：&lt;/strong&gt;
+在这里大家可以参考一下我准备的文件
+&lt;img alt="C语言扫雷游戏的准备工作" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/images/7f7f24f22c1d4aa16a9abae396f7d3d3.png"&gt;&lt;/p&gt;
+&lt;h3 id="二-扫雷游戏的基本逻辑"&gt;二. 扫雷游戏的基本逻辑&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.在C语言扫雷游戏之中，需要注意的是扫雷游戏时在选定的区域的附近八个点位统计雷的个数并输出在选定的区域之上，但是若果选定的区域是边上亦或是角上，那么就会导致无法遍历，超出应有的范围，这个问题我们可以假设棋盘的大小是9x9然而总共数组的大小可以设定11x11那么，就不是解决了问题吗？
+&lt;code&gt;2.扫雷的基本思路是首先需要准备2个字符数组，一个数组存放排查出的雷的数量信息记录存储，并打印出来，而另一个数组则存放布置好雷的信息，这样就互不干扰了&lt;/code&gt;
+3.同时为了保持神秘，show数组开始时初始化为字符 ‘*’，为了保持两个数组的类型一致，可以使用同一
+套函数处理，mine数组最开始也初始化为字符’0’，布置雷改成’1’。如下如：
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/images/e246c041422930b6e18256de91167949.png"&gt;&lt;/p&gt;
+&lt;h3 id="三扫雷需要的所有函数"&gt;三.扫雷需要的所有函数&lt;/h3&gt;
+&lt;p&gt;对于扫雷的实现需要用到，大量的函数，在这里我将为大家呈现出应当使用的具体函数：&lt;/p&gt;
+&lt;h4 id="1定义初始化函数"&gt;1.定义初始化函数&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;首先我们需要一个初始化棋盘的函数，而对于二个棋盘,一个接受‘0’的初始化，而另一个则接受‘*’的初始化，像这样的函数：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;void InitBoard(char board[ROWS][COLS], int rows, int cols, char set)
+{
+int i = 0;
+for (i = 0; i &amp;lt; rows; i++)
+{
+int j = 0;
+for (j = 0; j &amp;lt; cols; j++)
+{
+board[i][j] = set;
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="2定义打印棋盘函数"&gt;2.定义打印棋盘函数&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.在使用中，我们需要看到棋盘显示在电脑上，那么显而易见的是我们可以使用打印棋盘这个函数。&lt;/p&gt;</description></item><item><title>C语言之指针篇第五</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/</guid><description>&lt;p&gt;在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。&lt;/p&gt;
+&lt;h4 id="c语言之指针篇第五"&gt;C语言之指针篇第五&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#sizeofstrlen_3"&gt;一.sizeof和strlen的对⽐&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1sizeof_5"&gt;1.sizeof&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1sizeof_6"&gt;1.sizeof含义&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_8"&gt;2.例子：&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2strlen_20"&gt;2.strlen&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1strlen_21"&gt;1.strlen的含义&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_23"&gt;2.例子&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_31"&gt;二.数组指针笔试题解析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一sizeof和strlen的对"&gt;一.sizeof和strlen的对⽐&lt;/h2&gt;
+&lt;p&gt;首先在学习中时，我们通常会经常遇到sizeof，以及strlen函数，我们在使用时经常会分不清sizeof以及strlen，我们经常会用着用着，将两个函数用颠倒，大家对此简直是苦不堪言，因此呢，我将用这节为大家详细介绍两者区别，相信大家在听过我的讲解之后，一定会在今后的学习中，对两者运用的更加之熟练。&lt;/p&gt;
+&lt;h3 id="1sizeof"&gt;1.sizeof&lt;/h3&gt;
+&lt;h4 id="1sizeof含义"&gt;1.sizeof含义&lt;/h4&gt;
+&lt;p&gt;sizeof 主要计算的是变量所占内存内存空间⼤⼩的，单位是字节，如果操作数是类型的话，计算的是使⽤类型创建的变量所占内存空间的⼤小，sizeof 只关注占⽤内存空间的⼤⼩，不在乎内存中存放什么数据。&lt;/p&gt;
+&lt;h4 id="2例子"&gt;2.例子：&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;int a=1;
+sizeof(a);//因此呢，算出的数值是4.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;又有例子：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;int a=4;
+int * s=&amp;amp;a;
+sizeof(s);//可以看出由于地址的存储在内存中是64根地址线或者是32根地址线因此地址无论是整形或者是字符型亦或者是数组型
+//它们其实都是4或者8
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2strlen"&gt;2.strlen&lt;/h3&gt;
+&lt;h4 id="1strlen的含义"&gt;1.strlen的含义&lt;/h4&gt;
+&lt;p&gt;它的功能是，求字符的长度，遇到‘\0’则停止，否则会在内存中找到‘\0’,这样才会停下来，如此一番，求出的则是随机值。&lt;/p&gt;
+&lt;h4 id="2例子-1"&gt;2.例子&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;char a=&amp;#34;hello bit&amp;#34;;
+int a=strlen(a);//由于“”省略了\0，因此求出的是8
+又有例子：
+char a[]={&amp;#39;hello&amp;#39;,&amp;#39;bit&amp;#39;};
+int a=strlen(a);//在这里，由于没有设置‘\0’,那么的话，结果就有可能是随机值。
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="二数组指针笔试题解析"&gt;二.数组指针笔试题解析&lt;/h2&gt;
+&lt;p&gt;例题1：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;int a[] = {1,2,3,4};
+printf(&amp;#34;%d\n&amp;#34;,sizeof(a));//sizeof加数组名指的是整个数组的大小，也就是说打印出来的是16.
+printf(&amp;#34;%d\n&amp;#34;,sizeof(a+0));//在这里的意思是，数组的首元素的地址而地址的大小则是4或者8，因此打印出来的是4或者是8
+printf(&amp;#34;%d\n&amp;#34;,sizeof(*a));//在这里指的是数组的首元素，因此答案也就是4
+printf(&amp;#34;%d\n&amp;#34;,sizeof(a+1));//在这里的意思是数组的第二个元素的地址也就是说答案是4或者是8.
+printf(&amp;#34;%d\n&amp;#34;,sizeof(a[1]));//这里是数组的第二个元素，也就是说答案是4
+printf(&amp;#34;%d\n&amp;#34;,sizeof(&amp;amp;a));//这里是数组的地址，也就是说是4或者是8.
+printf(&amp;#34;%d\n&amp;#34;,sizeof(*&amp;amp;a));//注意*&amp;amp;相当于没有因此该式子也就是sizeof(a)，注意是16
+12345678
+printf(&amp;#34;%d\n&amp;#34;,sizeof(&amp;amp;a+1));//在这里的意思是指向数组的后面的地址，也就是4或者是8
+printf(&amp;#34;%d\n&amp;#34;,sizeof(&amp;amp;a[0]));//这里是首元素的地址，是4或者是8
+printf(&amp;#34;%d\n&amp;#34;,sizeof(&amp;amp;a[0]+1));//是第二个元素的地址是4或者是8.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;例题2：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;char arr[] = {&amp;#39;a&amp;#39;,&amp;#39;b&amp;#39;,&amp;#39;c&amp;#39;,&amp;#39;d&amp;#39;,&amp;#39;e&amp;#39;};
+printf(&amp;#34;%d\n&amp;#34;, sizeof(arr));//由于没有‘\0’那么的话，就是5
+printf(&amp;#34;%d\n&amp;#34;, sizeof(arr+0));//这里是首元素的地址，那么是4或者是8
+printf(&amp;#34;%d\n&amp;#34;, sizeof(*arr));//是首元素那么就是1
+printf(&amp;#34;%d\n&amp;#34;, sizeof(arr[1]));//在这里也是首元素，那么是1
+printf(&amp;#34;%d\n&amp;#34;, sizeof(&amp;amp;arr));//这里是数组的地址是4或者是8
+printf(&amp;#34;%d\n&amp;#34;, sizeof(&amp;amp;arr+1));//这里是在数组之后的地址，也就是4或者是8
+printf(&amp;#34;%d\n&amp;#34;, sizeof(&amp;amp;arr[0]+1));//是第二个元素地址是4或者是8
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;char arr[]=&amp;#34;abcdef”；
+printf(&amp;#34;%d\n&amp;#34;,strlen(arr));//这里是说字符串的长度是6
+printf(&amp;#34;%d\n&amp;#34;,strlen(*arr);//在这里会出错。
+printf(&amp;#34;%d\n&amp;#34;,strlen(arr[1]));//在这里也会出错
+printf(&amp;#34;%d\n&amp;#34;,strlen(&amp;amp;arr));//是6
+printf(&amp;#34;%d\n&amp;#34;,strlen(&amp;amp;arr+1));//这会跳出这个数组，应该是0
+printf(&amp;#34;%d\n&amp;#34;,strlen(&amp;amp;arr[0]+1));//这里第二个元素的地址是5
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;完（。）&lt;/p&gt;</description></item><item><title>C语言指针篇第一</title><link>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/</guid><description>&lt;p&gt;从这一节开始，我们就要开启学习指针之旅，我将此次指针的学习分为5次，今天是第一次学习，在学习指针的时候我们必定会遇到许多困难与挑战，我们会遇到一些比较抽象的概念，也会遇到一些复杂的代码，不管如何，我们能做的只有坚持，坚持只有这样，我们才可以真正搞懂所谓的指针，明白指针的确实含义，来开启我们今天的指针学习吧，亲爱的同学们！&lt;/p&gt;
+&lt;h4 id="c语言指针篇第一"&gt;C语言指针篇第一&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1__3"&gt;1. 内存和地址&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_4"&gt;1.内存与地址的介绍&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_9"&gt;2.地址的一些性质&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2__15"&gt;2. 指针变量和地址&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_17"&gt;1.取地址操作符（&amp;amp;）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_24"&gt;2.指针变量和解引⽤操作符（*）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_26"&gt;1.指针变量&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_27"&gt;1.指针变量的含义&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_29"&gt;2.指针变量的意义&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_31"&gt;2.解引⽤操作符（*）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_32"&gt;1.解引用操作符的含义&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_39"&gt;2.理解指针变量&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_46"&gt;3.解引用操作符的意义&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_50"&gt;3.指针变量的⼤⼩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__68"&gt;3. 指针变量类型的意义&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_69"&gt;1.指针变量类型的含义&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_71"&gt;2.指针变量类型的举例&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__73"&gt;3. 指针变量类型的意义&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_const_99"&gt;4. const修饰指针&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1const1_100"&gt;1.const修饰变量（1）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2const2_107"&gt;2.const修饰变量（2）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3const_115"&gt;3.const修饰指针&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1const_117"&gt;1.const加在*的前面&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2const_132"&gt;2.const加在*的后面&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5__147"&gt;5. 指针运算&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_148"&gt;1.指针-指针&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_166"&gt;2.指针+（-）整数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#6__186"&gt;6. 野指针&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_187"&gt;1.野指针是如何造成的&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1__189"&gt;1. 指针未初始化&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2__200"&gt;2. 指针越界访问&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__217"&gt;3. 指针指向的空间释放&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_233"&gt;2.如何规避野指针&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;首先呢，我将为大家介绍有关地址的知识点，接下来我们会学习到指针的运算，以及使用。&lt;/p&gt;
+&lt;h2 id="1-内存和地址"&gt;1. 内存和地址&lt;/h2&gt;
+&lt;h3 id="1内存与地址的介绍"&gt;1.内存与地址的介绍&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.在宾馆当中，我们若果需要寻找需要的人时，在不知道对方的房间号时，我们能够做的是，一个房间一个房间挨着寻找，虽然这样可以找到我们需要的人，但是需要注意的是。这样寻找，注定了它的效率是不高的，是低效率的，因此呢，若果我们知道对方的房间号时，那么找到对方是一瞬间的事情。
+2.在计算机中，信息也是按照宾馆，按照宿舍存储的，在计算机中信息是以字节为单位，这个字节就有点像宿舍，一个宿舍存储8个人，而一个字节有八个比特位，这样只要我们知道信息的房间号，在计算机中我们常说的是地址&amp;mdash;-指针—内存单元的编号，我们就可以迅速的找到这个信息。
+3.若果在32为环境下，地址是按照32位地址线发出电信号，进行编码的，此时地址拥有32个比特位，也就是说地址有4个字节
+4.但是，若果在64位的环境下，那么就是地址按照64个地址线编码的，此时地址拥有64个比特位，也就是说地址现在拥有，8个字节。&lt;/p&gt;
+&lt;h3 id="2地址的一些性质"&gt;2.地址的一些性质&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;1.首先，在相同环境之下，地址的大小都是一样，要么是4个字节，要么是8个字节，这个同地址（指针）的类型是无关的。&lt;/code&gt;
+2. 指针是有类型的，有字符型，整型，数组类型。
+&lt;strong&gt;3. 在计算机存储当中时，是按照字节进行存储的，整型的话是4个字节，字符型是一个字节。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="2-指针变量和地址"&gt;2. 指针变量和地址&lt;/h2&gt;
+&lt;p&gt;以下我们即将学到，操作符&amp;amp;，以及解引用操作符*，以及我们会学习到，指针的大小如何比较，下面就开启我们的学习之旅吧！&lt;/p&gt;
+&lt;h3 id="1取地址操作符"&gt;1.取地址操作符（&amp;amp;）&lt;/h3&gt;
+&lt;p&gt;首先呢，我们举一个例子：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;int a=12;
+int * pr=&amp;amp;a;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在上例中，我们可以看到，按位与操作符加在变量之前就变成了，取地址操作符，通过以上代码，我们可以发现，我们使用了指针变量加以接收，a的地址，现在把a的地址就存储到pr当中了，通过上例的举出，大家对于取地址操作符，有新的了解与认识吗？似乎，没有非常的困难的样子，下面我就为大家开启以下的重头戏，上面只是本个知识点的开胃菜，下面才是真正的硬菜。&lt;/p&gt;
+&lt;h3 id="2指针变量和解引操作符"&gt;2.指针变量和解引⽤操作符（*）&lt;/h3&gt;
+&lt;p&gt;在下面我即将会学习到，解引用操作符以及指针变量，这个我希望大家可以认真，听我的讲解，来开启这个知识点的学习吧！&lt;/p&gt;</description></item><item><title>DNS服务器</title><link>https://dsduyopg.github.io/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid><description>&lt;h4 id="文章目录"&gt;文章目录&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#DNS_3"&gt;一.DNS服务器软件介绍&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_DNS_7"&gt;1.. DNS的基本概念&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2DNS_23"&gt;2.DNS结构&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_root_28"&gt;1.根域 .（root）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2DNSTLD_DNS_Servers_37"&gt;2.顶级域DNS服务器(TLD DNS Servers)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3DNSAuthoritative_DNS_Servers_59"&gt;3.权威DNS服务器（Authoritative DNS Servers）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3DNS_63"&gt;3.DNS服务器软件介绍&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#DNSBIND_121"&gt;二.在DNS服务器上安装BIND&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#BIND_137"&gt;三.配置BIND主配置⽂件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_147"&gt;四.配置内部区域注册⽂件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_154"&gt;1.正向解析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_156"&gt;1.添加正向解析声明&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_194"&gt;2.添加正向解析内容&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_267"&gt;2.反向解析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_269"&gt;1.添加反向解析的声明&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_304"&gt;2.添加反向解析的内容&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_334"&gt;3.语法检测&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#BIND_362"&gt;五.启动BIND服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_377"&gt;六.配置防⽕墙&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#node1_404"&gt;七.客⼾端配置操作【node1】&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_452"&gt;八.测试服务器是否正常&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_481"&gt;九.如何清空&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_500"&gt;十.总结&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一dns服务器软件介绍"&gt;一.DNS服务器软件介绍&lt;/h2&gt;
+&lt;h3 id="1-dns的基本概念"&gt;1… DNS的基本概念&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域
+名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址
+不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。
+作⽤：
+• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到
+⽬标服务器。
+• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故
+障排查等⾮常重要。
+• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠
+性。
+• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2dns结构"&gt;2.DNS结构&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/172e794e0a404cd78fab9914d1449c84.png"&gt;&lt;/p&gt;
+&lt;h4 id="1根域-root"&gt;1.根域 .（root）&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不
+直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。
+根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9
+台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。）
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="2顶级域dns服务器tld-dns-servers"&gt;2.顶级域DNS服务器(TLD DNS Servers)&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务
+器的信息。
+例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```
+• 常⻅的顶级域及国家
+.com 商业机构
+.net ⽹络
+.org ⾮商业机构 www.centos.org www.kernel.org
+.edu 教育机构
+.gov 政府机关
+.cn 中国域名
+.us 美国域名
+.ai ⼈⼯智能
+.io 云计算
+.mil 军事机构
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等&lt;/code&gt;&lt;/p&gt;</description></item><item><title>FTP服务</title><link>https://dsduyopg.github.io/posts/ftp%E6%9C%8D%E5%8A%A1/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/ftp%E6%9C%8D%E5%8A%A1/</guid><description>&lt;h4 id="文章目录"&gt;文章目录&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#FTP_3"&gt;一.⽂件传输协议FTP&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#FTP_11"&gt;二.FTP的两种⼯作模式&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_13"&gt;主动模式&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_43"&gt;被动模式&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#FTP_87"&gt;三.FTP服务器搭建&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_89"&gt;1.准备&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_93"&gt;2.服务端配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1vsftp_95"&gt;1.安装软件vsftp&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_vsftpd__103"&gt;2.启动并配置 vsftpd 服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__113"&gt;3. 配置防⽕墙&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_132"&gt;4.基本访问配置修改配置文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_138"&gt;准备工作&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_147"&gt;修改配置文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_164"&gt;3.客⼾端配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_168"&gt;1.安装软件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2ftp_176"&gt;2.连接ftp服务器&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_windows_188"&gt;4. windows浏览器访问&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_232"&gt;1根目录是不能放权的&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_244"&gt;四.禁⽌匿名⽤⼾访问&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_246"&gt;1.修改配置文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2FTP_258"&gt;2.创建⼀个普通⽤⼾⽤于后续访问FTP&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3node1__262"&gt;3.node1 客⼾端访问查看&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_279"&gt;五.禁锢在指定的数据⽬录中&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_281"&gt;1.创建⼀个本地⽤⼾的数据⽬录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_290"&gt;2.修改配置⽂件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__303"&gt;3.创建⽤⼾， 指定⽤⼾的家⽬录为禁锢的数据⽬录下&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_307"&gt;4.客⼾端测试访问&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_311"&gt;七.⽤⼾名单列表使⽤&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一件传输协议ftp"&gt;一.⽂件传输协议FTP&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;FTP（File Transfer Protocol） 是⼀种⽤于在⽹络上进⾏⽂件传输的协议，允许⽤⼾通过客⼾端和
+服务器之间上传、下载⽂件.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/ftp%E6%9C%8D%E5%8A%A1/images/83e9af719357492fa331d2d8183b5234.png"&gt;&lt;/p&gt;
+&lt;h2 id="二ftp的两种作模式"&gt;二.FTP的两种⼯作模式&lt;/h2&gt;
+&lt;h3 id="主动模式"&gt;主动模式&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;主动模式，其实就是请求是由客户端发起的，但是数据传输过程则是由服务器发过来的&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;1- 客⼾端与服务器之间建⽴ 控制连接，通常是通过端⼝ 21（即 FTP 的默认控制端⼝）
+2- 当客⼾端准备接收数据时，它会通过 随机端⼝（通常是 20 以外的端⼝）向服务器请求建⽴
+数据连接
+3- 服务器通过控制连接得知客⼾端的端⼝号后，从端⼝ 20（服务器的 FTP 数据端⼝） 发起⼀
+个连接到客⼾端指定的端⼝，⽤于数据传输
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;优势&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;1 服务器主动向客⼾端发起数据连接，通常对⼤多数服务器来说，这种⽅式较容易实现。
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;缺点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;因为客⼾端通常位于防⽕墙或 NAT 后⾯，防⽕墙可能阻⽌来⾃服务器的外部连接，所以这种模式
+可能会受到⽹络环境的限制，尤其在客⼾端位于 NAT 后时，可能⽆法建⽴连接。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/ftp%E6%9C%8D%E5%8A%A1/images/9f4b1f259e854013a1bbd34c0f159f19.png"&gt;&lt;/p&gt;</description></item><item><title>nfs服务器的相关知识</title><link>https://dsduyopg.github.io/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid><description>&lt;h4 id="nfs服务器的相关知识"&gt;nfs服务器的相关知识&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#NFS_2"&gt;一.NFS基本介绍&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_10"&gt;二.安装软件包&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#node2_24"&gt;三.在node2创建共享⽬录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_28"&gt;四.修改配置文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_41"&gt;六.验证是否成功共享&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_49"&gt;七.挂载使⽤&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_51"&gt;1.客户端下载软件包&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_57"&gt;2.建立挂载点&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_62"&gt;3.进行挂载&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_70"&gt;4.查看挂载是否成功&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5_75"&gt;5.检查是否可以共享文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一nfs基本介绍"&gt;一.NFS基本介绍&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;CentOS Stream 9中的NFS（⽹络⽂件系统）是⼀种允许不同计算机通过⽹络共享⽂件和⽬录的协 议，使得远程主机能够像本地磁盘⼀样访问和操作⽂件。 它基于客⼾端-服务器架构，NFS服务器将本地⽂件系统共享给客⼾端，客⼾端可以通过⽹络挂载 这些共享⽬录，像访问本地⽂件⼀样进⾏操作。 NFS主要应⽤于Linux/Unix系统之间的⽂件共享，虽然也⽀持跨操作系统，但其兼容性⼀般较差&lt;/code&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/0b621a9d80f145c1beb3a56cd2072de8.png"&gt;&lt;/p&gt;
+&lt;h2 id="二安装软件包"&gt;二.安装软件包&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;node2 作为 NFS服务端 node1 作为客⼾端，获取共享⽬录信息&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt; 客⼾端安装：
+dnf install nfs-utils
+服务端安装：
+dnf install nfs-utils
+在node2放行端口
+执⾏开放端⼝:
+firewall-cmd --add-service=nfs --permanent # 核⼼, 有了这个, NFS即可使⽤共享操作
+firewall-cmd --reload
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="三在node2创建共享录"&gt;三.在node2创建共享⽬录&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;mkdir -p /export/software
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="四修改配置文件"&gt;四.修改配置文件&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;vi /etc/exports
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/5b6e57b0368a4dc6bb1e6c431f571d1f.png"&gt;
+&lt;code&gt;然后保存文件，并重启服务就可以了&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;systemctl restart nfs-server
+systemctl status
+systemctl enable
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/da2bd4cb8a90441b9c975405064020b6.png"&gt;&lt;/p&gt;
+&lt;h2 id="六验证是否成功共享"&gt;六.验证是否成功共享&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;服务端执⾏: 查看服务端NFS共享信息
+showmount -e （早期版本兼容）
+exportfs
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/698860533bf1417aaf5675d902e6e0a9.png"&gt;&lt;/p&gt;
+&lt;h2 id="七挂载使"&gt;七.挂载使⽤&lt;/h2&gt;
+&lt;h3 id="1客户端下载软件包"&gt;1.客户端下载软件包&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;dnf install -y nfs-utils
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/8c4b2b359a404bb69fa80010c7daf70b.png"&gt;&lt;/p&gt;</description></item><item><title>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？</title><link>https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/</guid><description>&lt;h4 id="rm--rf-删掉日志文件后为什么重启服务能恢复"&gt;rm -rf 删掉日志文件后，为什么重启服务能恢复？&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_1"&gt;1.问题背景&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_5"&gt;1.打开系统⽇志的配置⽂件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2__9"&gt;2.在规则模块中， 配置需求要求的内容&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_22"&gt;3.进行测试&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_23"&gt;1.测试优先级大于这个的&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_32"&gt;2.测试优先级小于这个的&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_43"&gt;2.出现问题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_46"&gt;1.删除日志文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_50"&gt;2.出现问题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_63"&gt;3.问题原因&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_80"&gt;4.解决问题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_82"&gt;1.重启服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_88"&gt;2.测试&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5_102"&gt;5.总结&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_104"&gt;我自己总结&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_109"&gt;我查阅资料总结&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1问题背景"&gt;1.问题背景&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="1打开系统志的配置件"&gt;1.打开系统⽇志的配置⽂件&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;vi /etc/rsyslog.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2在规则模块中-配置需求要求的内容"&gt;2.在规则模块中， 配置需求要求的内容&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;# ALL SERVICE CRIT TO /var/log/alert.log
+*.crit action(type=&amp;#34;omfile&amp;#34; file=&amp;#34;/var/log/alert.log&amp;#34;)
+# 这个需要在本某块上面，规则模块下面
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/8124e4a0880a4a1eb2b8e77088e04fc0.png"&gt;
+&lt;code&gt;顺便给服务打开&lt;/code&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/931446c550144ec692235d5db9a7145a.png"&gt;&lt;/p&gt;
+&lt;h3 id="3进行测试"&gt;3.进行测试&lt;/h3&gt;
+&lt;h4 id="1测试优先级大于这个的"&gt;1.测试优先级大于这个的&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;logger -p alert &amp;#34;12324 249nc90ju90nj-0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;看测试结果
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/ad4b49e551c343d7828f2a69afb8ffa5.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/a4e5830517654c02bc964f5ebaa704a8.png"&gt;&lt;/p&gt;
+&lt;h4 id="2测试优先级小于这个的"&gt;2.测试优先级小于这个的&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;logger -p info &amp;#34;12324 249nc90ju90nj-0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/e629038b05424584aa457685404be575.png"&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/268522bf9fa34ad485cd24ac8c1a94aa.png"&gt;&lt;/p&gt;
+&lt;h2 id="2出现问题"&gt;2.出现问题&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="1删除日志文件"&gt;1.删除日志文件&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2出现问题-1"&gt;2.出现问题&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;问题1：&lt;strong&gt;是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/c62a8936613647339a8bd3d6e93b7120.png"&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/6777fb84f29d4548a854d0a07e7d8d50.png"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题2：&lt;strong&gt;是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的&lt;/strong&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/c4236b3b35724e69b5135775f047e203.png"&gt;
+&lt;strong&gt;理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="3问题原因"&gt;3.问题原因&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。
+2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。
+3.命令的级别不够高：执行的命令是 logger -p crit &amp;#34;...&amp;#34;。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。
+4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=&amp;#34;omfile&amp;#34; file=&amp;#34;/var/log/alert.log&amp;#34;) 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放&lt;/code&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/6583a39f858f4117b744cf100241b68c.jpeg"&gt;
+&lt;code&gt;3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计&lt;/code&gt;
+&lt;strong&gt;这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>samba服务器</title><link>https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid><description>&lt;h4 id="samba服务器"&gt;samba服务器&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#SAMBA_1"&gt;一.SAMBA基本介绍&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#SAMBA_13"&gt;二.安装SAMBA服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_16"&gt;一.服务端&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_21"&gt;二.客户端&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_33"&gt;三.创建共享⽬录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_38"&gt;四.修改配置⽂件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_44"&gt;五.配置⽤⼾信息&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1user01_46"&gt;1.添加用户user01&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2samba_54"&gt;2.把用户追加到samba&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#samba_62"&gt;六.启动samba服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1samba_63"&gt;1.启动samba服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_75"&gt;2.开放端口&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#Linux_82"&gt;七.在Linux主机访问&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_windows_97"&gt;八. 在windows主机访问&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一samba基本介绍"&gt;一.SAMBA基本介绍&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访
+问该共享⽬录
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。
+它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是
+Windows 操作系统⽤于⽂件共享和打印服务的主要协议。
+Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家
+庭、企业和跨平台环境中。
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="二安装samba服务"&gt;二.安装SAMBA服务&lt;/h2&gt;
+&lt;h3 id="一服务端"&gt;一.服务端&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;node2执⾏: dnf -y install samba
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4e9cbe84fda6474ea45a60cfe7998596.png"&gt;&lt;/p&gt;
+&lt;h3 id="二客户端"&gt;二.客户端&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;dnf install -y samba-client
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c31cf89e084446b8a7b2703cdb5265b3.png"&gt;
+说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的
+Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block)
+和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务
+Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析
+服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例
+如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显
+⽰的能⼒，使其在⽹络浏览器中可⻅。&lt;/p&gt;</description></item><item><title>SSh的相关操作</title><link>https://dsduyopg.github.io/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</guid><description>&lt;p&gt;SSh的相关操作&lt;/p&gt;
+&lt;h4 id="文章目录"&gt;文章目录&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#SSH_3"&gt;一.基于SSH实现发送命令到远程服务器&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#SSH_54"&gt;二.基于SSH进⾏免密数据传输&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#JDK_94"&gt;三.综合案例基于JDK的安装和操作&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#jdk_98"&gt;一.台机器的jdk的安装和配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#scp_130"&gt;二.把这个软件和相应的配置文件通过scp发送出去&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#UbuntuSSH_153"&gt;四.基于Ubuntu完成SSH服务配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_itheima_157"&gt;一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#___177"&gt;二.第二步: 需要让三台服务器都要配置免密操作&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_ssh____217"&gt;三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_236"&gt;综述&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一基于ssh实现发送命令到远程服务器"&gt;一.基于SSH实现发送命令到远程服务器&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;SSH远程执⾏命令是通过SSH协议连接到远程服务器，并在远程服务器上执⾏指定的命令或脚本， ⽽⽆需直接登录到服务器的终端&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;相关的命令是&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ssh [选项] username@remote_host &amp;#34;command [&amp;amp;&amp;amp;] conmmad&amp;#34;
+说明：
+username：远程服务器的⽤⼾名。
+remote_host：远程服务器的IP地址或域名。
+command：要在远程服务器上执⾏的命令
+&amp;amp; ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接
+选项：
+-t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项
+-p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝
+-o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）
+-A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项
+需求⼀： 在node1中远程查看node2的主机名
+ssh root@192.168.88.102 &amp;#34;hostname&amp;#34;
+需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件
+说明：如果是执⾏多个命令，可以使⽤分号 或 &amp;amp;&amp;amp; 来分隔命令
+分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏
+&amp;amp;&amp;amp; ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏
+ssh root@192.168.88.102 &amp;#34;cd ~ &amp;amp;&amp;amp; touch a.txt&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;``这里面我为大家看一下我所在操作过程之中遇到的问题`&lt;/p&gt;</description></item><item><title>warp导致的日志发送node2失败</title><link>https://dsduyopg.github.io/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/</guid><description>&lt;h4 id="warp导致的日志发送node2失败"&gt;warp导致的日志发送node2失败&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_1"&gt;1.问题背景&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_3"&gt;1.案例内容&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_9"&gt;2.案例思路&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_28"&gt;2.出现的问题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1node2_30"&gt;1.node2配置文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_34"&gt;2.重启日志文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3node3_41"&gt;3.node3文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4node3_45"&gt;4.node3端口和服务放行&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5_58"&gt;5.出现问题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_64"&gt;3.问题原因&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_TCP_69"&gt;核心原因剖析：用了 TCP，日志为什么还会&amp;quot;凭空消失&amp;quot;？&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_Cloudflare__73"&gt;1. 环境层：Cloudflare 客户端重置宿主机网络（根本诱因）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2__77"&gt;2. 链路层：虚拟机网卡被连带闪断（触发条件）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_TCP___rsyslog__88"&gt;3. 传输/应用层：TCP 握手失败 + rsyslog 默认不缓存（直接原因）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#__95"&gt;💡 一句话总结根因&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_100"&gt;4.解决问题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_107"&gt;解决对策&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5_133"&gt;5.总结&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_136"&gt;写在最后&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1问题背景"&gt;1.问题背景&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;这个是一个操作，以下是案例&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="1案例内容"&gt;1.案例内容&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;需求：基于node1中的/var/log/下的messages和secure日志， 完成将日志发送到日志服务器（node3）， 进行统一保存，要求保存到node3服务器的/var/log/messages和/var/log/secure
+思路：
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2案例思路"&gt;2.案例思路&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;第一步： 修改 node1的日志配置文件， 将对应写入到messages和secure日志对应规则配置， 将其目的地变更为发送到远端服务器方案 【建议选择：TCP方案】
+第二步： 重启node1的系统日志服务
+第三步： 修改 node3的日志配置文件， 将用于接收远程日志的模块打开【tcp模块】
+第四步： 重启node3的系统日志服务
+第五步： 在node3中开放端口号
+第六步：
+测试message日志： 在node1中通过logger生成日志数据， 分别观察node1的系统日志和node3的系统日志， 哪个日志文件中会产生新的日志【正常:node3打印】
+测试安全日志： 通过MX连接下node1，然后在关闭， 观察在这个过程中， node1和node3的安全日志谁会打印新的日志【正常:node3打印】
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="2出现的问题"&gt;2.出现的问题&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;我当时用的是node2和node3，把node1替换成node2了&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="1node2配置文件"&gt;1.node2配置文件&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;打开vi /etc/rsyslog.conf这个文件，然后修改一些地方，图中红圈有一个地方圈错了，应该圈的是有@@的那几行，也是要追加的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/f2c4680116e04c009aceb90192dcf5d1.png"&gt;&lt;/p&gt;
+&lt;h3 id="2重启日志文件"&gt;2.重启日志文件&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;systemctl restart rsyslog
+ststemctl status rsyslog
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/cd2a18ecf0fa4b0fb43fdd7ca4db01a2.png"&gt;&lt;/p&gt;</description></item><item><title>Windows 上让 Git 自动同步：NSSM 服务 + 实时监听实战</title><link>https://dsduyopg.github.io/posts/ai-%E8%BE%85%E5%8A%A9%E4%B8%8Bwindows-%E4%B8%8A%E8%AE%A9-git-%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5nssm-%E6%9C%8D%E5%8A%A1-+-%E5%AE%9E%E6%97%B6%E7%9B%91%E5%90%AC%E5%AE%9E%E6%88%98/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/ai-%E8%BE%85%E5%8A%A9%E4%B8%8Bwindows-%E4%B8%8A%E8%AE%A9-git-%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5nssm-%E6%9C%8D%E5%8A%A1-+-%E5%AE%9E%E6%97%B6%E7%9B%91%E5%90%AC%E5%AE%9E%E6%88%98/</guid><description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1__8"&gt;1. 引言&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#11__Git__10"&gt;1.1 自动化 Git 的介绍&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#12__33"&gt;1.2 传统手动推送痛点&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#13__44"&gt;1.3 我为何需要自动同步&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2__70"&gt;2. 如何想到这个方案&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#21_Linux__72"&gt;2.1 背景：Linux 学习带来的启发&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#22__OpenClaw__NSSM__80"&gt;2.2 一段经历：用 OpenClaw 部署 NSSM 服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#221__82"&gt;2.2.1 原因&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#222__95"&gt;2.2.2 解决问题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#223__116"&gt;2.2.3 开始执行步骤&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_1_118"&gt;步骤 1：实施步骤流程&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_2_134"&gt;步骤 2：注册服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_3_145"&gt;步骤 3：配置服务账户（第一次踩坑）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_4_LocalSystem_177"&gt;步骤 4：关键一步：给 LocalSystem“指路”&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_5_190"&gt;步骤 5：启动与验证&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_6_204"&gt;步骤 6：总结&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__220"&gt;3. 思路与方案定型&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4__230"&gt;4. 需求分析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5__244"&gt;5. 验证方案可行性&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#6__252"&gt;6. 列出可行的方案&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#7__269"&gt;7. 项目实施的大纲&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#8__290"&gt;8. 详细步骤&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#81__292"&gt;8.1 一次性准备&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#811__294"&gt;8.1.1 在本地建一个仓库&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#812__Git_298"&gt;8.1.2 安装 Git&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#813_SSH__304"&gt;8.1.3 SSH 准备&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_306"&gt;生成无口令密钥&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_312"&gt;公钥添加到平台&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#GitHub__443__323"&gt;GitHub 走 443 端口&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#82__331"&gt;8.2 底层一步一步是怎么实现的&lt;/a&gt;&lt;/p&gt;</description></item><item><title>博客日记与我的看法</title><link>https://dsduyopg.github.io/posts/%E5%8D%9A%E5%AE%A2%E6%97%A5%E8%AE%B0%E4%B8%8E%E6%88%91%E7%9A%84%E7%9C%8B%E6%B3%95/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E5%8D%9A%E5%AE%A2%E6%97%A5%E8%AE%B0%E4%B8%8E%E6%88%91%E7%9A%84%E7%9C%8B%E6%B3%95/</guid><description>&lt;p&gt;大家好，我是一个对于技术绝对热爱的人，其实呢我我对于技术学习有着强烈而浓厚的热爱，尤其是对于C语言的学习，在学习C当中，我决定必须用每日的坚持来践实我对于他的热爱，具体是每天抽出大约3个小时左右时间来阅读C方面的书籍，以及呢我同时注意维护我的gitee，使其成为我简历上亮眼的一部分，说到最后了我决定必须为进入像百度这样的大公司而奋发努力&lt;/p&gt;</description></item><item><title>磁盘的使用以及挂载</title><link>https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/</guid><description>&lt;p&gt;磁盘的使用以及挂载&lt;/p&gt;
+&lt;h4 id="文章目录"&gt;文章目录&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_3"&gt;一.准备工作&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_9"&gt;二.查看新添加磁盘&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_21"&gt;三.分区&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_51"&gt;四.格式化&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_63"&gt;五.挂载&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_67"&gt;1.临时挂载&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_76"&gt;2.长期挂载&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_106"&gt;六.重启并查看&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一准备工作"&gt;一.准备工作&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;在这一步当中，我们应当先关闭虚拟机，从设置里面添加一块磁盘，并设置合理的磁盘大小,随后呢，我们重新开启虚拟机就可以了，并登录mx,进行下一步操作&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="二查看新添加磁盘"&gt;二.查看新添加磁盘&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;我们在这一步当中使用lsblk 查看新添加的磁盘&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;lsblk #查看新添加的磁盘
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/0a99a6fc298341e9a3b5cc8b878f6d21.png"&gt;&lt;/p&gt;
+&lt;h2 id="三分区"&gt;三.分区&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;fdisk /dev/sdb
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/4f9b3037f8e041279e65509f0090bd81.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;然后，我们使用n来追加磁盘&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/69de7f653f474ada8fbe882760c9884e.png"&gt;&lt;/p&gt;
+&lt;p&gt;注意，再最后一个扇区的时候我们也可以指定其特定大小+20G也是可以的&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/ed070ba2ef934f5a80de0302d402764c.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;我们要使用w保存信息&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/6a2aa4daa1ab49708199f3963dfae6f9.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;我们再次使用命令df -h 查看分区&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="四格式化"&gt;四.格式化&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;格式化，我们使用的是mkfs.格式&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#格式化所支持的格式有mkfs.ext4 是⼀个⽤来格式化分区为 EXT4 ⽂件系统 的命令。EXT4（第四代扩展⽂件系统）是
+#Linux 系统中使⽤最⼴泛的⽂件系统类型，兼具性能、可靠性和兼容性，适⽤于⼤多数场景。
+#XFS 是⼀种⾼性能的⽇志⽂件系统，⼴泛⽤于企业级场景，特别是对⼤⽂件和⾼并发 I/O 的处理有
+#明显优势。它是 CentOS Stream 9 等现代 Linux 发⾏版的默认⽂件系统类型
+mkfs.xfs /dev/sdb
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="五挂载"&gt;五.挂载&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;这一步，比较麻烦了，需要修改配置文件,修改的方式有两种&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="1临时挂载"&gt;1.临时挂载&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;我们使用mount进行临时挂载&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;mount /dev/sdb1 /mnt/sdb1
+mount /dev/sdb2 /mnt/sdb2
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2长期挂载"&gt;2.长期挂载&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;uuid修改&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;如果我们需要一直挂载，就需要修改配置文件，/etc/fstab&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;blkid /dev/sdb1
+blkid /dev/sdb2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/f18c10da20b64c668081bb8480ce2afa.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;先在，我们得到了他们的uuid，然后打开配置文件，进行修改就可以了&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/4805e4fe84664eb48b248f5b152242c5.png"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;磁盘路径修改&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;除了，这种方式还有利用路径挂载的&lt;/code&gt;&lt;/p&gt;</description></item><item><title>磁盘的综合案例</title><link>https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/</guid><description>&lt;h4 id="磁盘的综合案例"&gt;磁盘的综合案例&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_1"&gt;1.修改网络配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#188_3"&gt;1.改成88网段&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_88__7"&gt;情况一：全局迁移至 88 网段（推荐彻底解决）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_VMware__11"&gt;第一步：修改 VMware 底层配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_21"&gt;第二步：修改虚拟机内部配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_55"&gt;第三步：验证连通性&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_69"&gt;情况二：临时恢复连接（最省事）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2ssh_80"&gt;2.ssh免密登录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#0hosts_81"&gt;0.对于hosts文件进行修改&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_97"&gt;1.生成私钥和公钥&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_105"&gt;2.发送公钥&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_111"&gt;3.测试一下&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2DNS_116"&gt;2.DNS配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_117"&gt;1.要求&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_119"&gt;2.配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_121"&gt;1.正解析文件的配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_138"&gt;3.反解析文件配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_157"&gt;3.测试&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_159"&gt;4.开放端口&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5_165"&gt;5.开启服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#6dns_171"&gt;6.修改客户端dns&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#7_187"&gt;7.测试&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__197"&gt;3. 日志的配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1__198"&gt;1. 要求&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_rsyslogconf_200"&gt;2. 修改rsyslog.conf&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__215"&gt;3. 重启服务与放行端口&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_226"&gt;4.测试&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_233"&gt;4.磁盘配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#0_234"&gt;0.需求&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1100G_237"&gt;1.添加一个100G大容量磁盘&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_239"&gt;2.添加到物理卷&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_245"&gt;2.添加到卷组&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_253"&gt;3.添加到逻辑卷&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_261"&gt;4.格式化分区的格式&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5_266"&gt;5.挂载到指定路径&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#615G_293"&gt;6.添加剩下的15G&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_299"&gt;1.设置让扩容生效&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_306"&gt;2.查看是否配置生效&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1修改网络配置"&gt;1.修改网络配置&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="1改成88网段"&gt;1.改成88网段&lt;/h3&gt;
+&lt;p&gt;注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下
+这个问题是因为 &lt;strong&gt;VMware 的虚拟交换机（VMnet8）底层网段&lt;/strong&gt; 与 &lt;strong&gt;虚拟机操作系统内部配置的 IP 网段&lt;/strong&gt; 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。&lt;/p&gt;
+&lt;h4 id="情况一全局迁移至-88-网段推荐彻底解决"&gt;情况一：全局迁移至 88 网段（推荐彻底解决）&lt;/h4&gt;
+&lt;p&gt;如果你想把所有机器都规范到 88 网段，请按以下步骤操作：&lt;/p&gt;</description></item><item><title>磁盘管理的相关知识</title><link>https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid><description>&lt;h4 id="磁盘管理"&gt;磁盘管理&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_1"&gt;1.文件系统&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_3"&gt;常见文件系统对比&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_5"&gt;一、主流文件系统横向对比&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_22"&gt;2.常用的磁盘管理命令&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#21__25"&gt;2.1 查看磁盘与分区信息&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_lsblk___27"&gt;1. lsblk —— 查看块设备（推荐首选）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_fdisk___36"&gt;2. fdisk —— 查看分区表&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_parted___43"&gt;3. parted —— 高级分区查看&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_blkid___UUID__50"&gt;4. blkid —— 查看 UUID 和文件系统类型&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5__57"&gt;5. 其他硬件信息&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#22__67"&gt;2.2 分区管理命令&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_fdisk__MBR__69"&gt;1. fdisk —— MBR 分区（交互式）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_gdisk__GPT__85"&gt;2. gdisk —— GPT 分区（交互式）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_parted___95"&gt;3. parted —— 高级分区工具&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4__109"&gt;4. 刷新内核分区表&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#23__119"&gt;2.3 文件系统格式化&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1__121"&gt;1. 创建文件系统&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2__132"&gt;2. 格式化时指定参数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__145"&gt;3. 查看文件系统信息&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#24__155"&gt;2.4 挂载与卸载&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1__157"&gt;1. 临时挂载&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2__167"&gt;2. 卸载&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__176"&gt;3. 查看挂载信息&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#25__187"&gt;2.5 磁盘空间监控&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1__189"&gt;1. 查看磁盘使用情况&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2__198"&gt;2. 查看目录大小&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3__207"&gt;3. 找出占用空间最大的目录（实战排障）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#26_LVM__220"&gt;2.6 LVM 逻辑卷管理&lt;/a&gt;&lt;/p&gt;</description></item><item><title>高数学习中的常系数非齐次线性微分方程的问题</title><link>https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/</guid><description>&lt;h4 id="非齐次方程当中的代入数值问题"&gt;非齐次方程当中的代入数值问题&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_1"&gt;一.遇到的问题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#00_4"&gt;0.0那个数学公式在梨米特讲义的位置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#01_8"&gt;0.1那个公式在梨米特讲义上的例题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#02_13"&gt;0.2那道数学公式在同济课本的地方&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_18"&gt;1.那道题目&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_20"&gt;2.我算的结果和答案给的区别&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_21"&gt;1.我算的结果&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_23"&gt;2.答案给的是这样子的&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_26"&gt;二.解决的方案&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_28"&gt;1.我的错误分析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_30"&gt;2.测试的结果分析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1symbol_31"&gt;1.首先是在网站symbol这个网站测试的结果，如下，大家有兴趣可以试一下。&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_33"&gt;2.然后答案给的看一下&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_35"&gt;3.分析结果&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_37"&gt;三.我的建议&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一遇到的问题"&gt;一.遇到的问题&lt;/h2&gt;
+&lt;p&gt;首先我在写数学题的时候，遇到了一个问题，就是我用非齐次方程的代入数值的公式进行操作的时候，遇到了，一个问题，就是，我用公式算的竟然和答案给的不一样，当时我就有一点困惑，然后，我一点一点研究，探明这个公式的使用范围。&lt;/p&gt;
+&lt;h3 id="00那个数学公式在梨米特讲义的位置"&gt;0.0那个数学公式在梨米特讲义的位置&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/5d230e8d0e1f4933ae887ea03abd272e.png"&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/100a52cb58ed4ccca1bb533e77dded34.png"&gt;&lt;/p&gt;
+&lt;h3 id="01那个公式在梨米特讲义上的例题"&gt;0.1那个公式在梨米特讲义上的例题&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/27762776699a4a6f8b4b90f0ee344fc9.png"&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/56d470883fea4a55b880a4be5af441fe.png"&gt;&lt;/p&gt;
+&lt;h3 id="02那道数学公式在同济课本的地方"&gt;0.2那道数学公式在同济课本的地方&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/5dd57640c7b24ad28154cb37395b8fa2.png"&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/b0ef15ab9fc1472bab2d77fd7861c1f0.png"&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/b2b05bc72cde4aa2ac55360e34165245.png"&gt;&lt;/p&gt;
+&lt;h3 id="1那道题目"&gt;1.那道题目&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/3bbd06245b1143ba8e7a22c28ee944e9.png"&gt;&lt;/p&gt;
+&lt;h3 id="2我算的结果和答案给的区别"&gt;2.我算的结果和答案给的区别&lt;/h3&gt;
+&lt;h4 id="1我算的结果"&gt;1.我算的结果&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/d07ee4b0c6eb41cf8a56dad33fa46308.png"&gt;&lt;/p&gt;
+&lt;h4 id="2答案给的是这样子的"&gt;2.答案给的是这样子的&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/87deddfe4bc8479eb00a02cc80df3e69.png"&gt;&lt;/p&gt;
+&lt;h2 id="二解决的方案"&gt;二.解决的方案&lt;/h2&gt;
+&lt;p&gt;当时我在淘宝问了一下，然后，我就知道我的问题在哪里了，&lt;/p&gt;
+&lt;h3 id="1我的错误分析"&gt;1.我的错误分析&lt;/h3&gt;
+&lt;p&gt;通过和淘宝上的那位老师探究，我明白了，我的问题正是没有将二阶导的系数化为1，所导致的问题，老师，说，你可以方程俩边都除以2，将2阶导的系数化为1，就可以就解决问题了，我一想这个形式不正是和书上给的形式一样吗？那结果一个是对的，然后我就用symbol这个网站测试了一下，下面是测试结果。&lt;/p&gt;
+&lt;h3 id="2测试的结果分析"&gt;2.测试的结果分析&lt;/h3&gt;
+&lt;h4 id="1首先是在网站symbol这个网站测试的结果如下大家有兴趣可以试一下"&gt;1.首先是在网站symbol这个网站测试的结果，如下，大家有兴趣可以试一下。&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/be077d78062647098f5200b9e871c307.png"&gt;&lt;/p&gt;
+&lt;h4 id="2然后答案给的看一下"&gt;2.然后答案给的看一下&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/images/bee85b53074f45afa8d6cb2fff2c9833.png"&gt;&lt;/p&gt;
+&lt;h3 id="3分析结果"&gt;3.分析结果&lt;/h3&gt;
+&lt;p&gt;通过这些结果我们很清楚的看到，通过把二阶导的系数化为1，算出来是对的&lt;/p&gt;
+&lt;h2 id="三我的建议"&gt;三.我的建议&lt;/h2&gt;
+&lt;p&gt;通过以上的分析相信大家都认识到了，这个公式的适用范围，那就是二阶导的系数必须为1，其他的倒是没有要求。&lt;/p&gt;</description></item><item><title>关于ftp与SELinux的冲突问题</title><link>https://dsduyopg.github.io/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</guid><description>&lt;h4 id="关于ftp与selinux的冲突问题"&gt;关于ftp与SELinux的冲突问题&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_3"&gt;1.问题背景&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_5"&gt;2.遇到的问题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_18"&gt;3.问题解决的方法&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1ai_21"&gt;1.ai的方法&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#FTP__28"&gt;为什么本地能写、FTP 不能写？&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#write_enable__41"&gt;嫌疑一：&lt;code&gt;write_enable&lt;/code&gt; 没开（最常见！）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#SELinux__ftpd_59"&gt;嫌疑二：SELinux 拦住了 ftpd&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_78"&gt;兜底：看日志，让服务器自己告诉你原因&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_93"&gt;建议的排查顺序&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_102"&gt;2.我看出了什么&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_2__SELinux__124"&gt;第 2 步：临时关掉 SELinux 做隔离测试&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_3__lftp__131"&gt;第 3 步：回客户端 lftp 重试&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_139"&gt;看结果分支判断&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_169"&gt;3.我的解决方案&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_174"&gt;4.给我们的警示&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1问题背景"&gt;1.问题背景&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;首先这个问题诞生于如此条件下，我在跟随佳乐老师创建完lisi，zhangsan，wangwu之后呢，我就用lisi作为用户登录服务器node1，这里面设置了禁锢操作，路径是/export/public，而public里面拥有2个文件夹.一个是logs，另一个是src，同时设置了黑白名单,张三设置在黑名单，王五和李四设置在白名单&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="2遇到的问题"&gt;2.遇到的问题&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1.遇到的问题其实就是，在我用lisi把客户端的根目录下的a.log，发送给服务器的logs目录，无法操作&lt;/strong&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/31d543a0e0d74a2facd0b57caacd8359.png"&gt;
+&lt;strong&gt;2.后来，我在logs目录下创建文件夹也是无法操作的，也是显示权限不足&lt;/strong&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/55c072190ed842009aa2962c3868c3fc.png"&gt;
+但是呢，我在服务器的这个logs目录下创建文件夹是可以创建的
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/96f60e65512b4a38be2d95aa4d888fd8.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;3.就很奇怪，再去服务器是可以搞定的，是可以创建文件夹的，但是在客户端是没有办法进行创建的，我当时以为是logs的权限设置的不对，用的是root创建，权限大的缘故，但是其实并不是如此的,后面我在服务器用了lisi照样是可以创建的&lt;/code&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/5596133494e8476a96424bbf30353246.png"&gt;
+4.&lt;code&gt;后来，我仔细检查了这些文件夹的权限，并再次赋权,这次显然也是不行的&lt;/code&gt;
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/ed81cf0aff1743229e25473bf7b232d7.png"&gt;&lt;/p&gt;
+&lt;h2 id="3问题解决的方法"&gt;3.问题解决的方法&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;解决的办法，后来，我把我的问题，这些比较奇怪的地方，我问了千文，后来，在他的帮助之下我成功了，在客户端我成功的在服务器的logs上面创建了文件夹，这意味着什么呢，显然这意味着，我可以把客户端家目录的a.log上传给服务器的logs里面，结果显然和我想的一样&lt;/code&gt;
+&lt;strong&gt;下面是千文告诉我的解决方案，让我一步一步排查，最后成功找到了问题关键所咋&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id="1ai的方法"&gt;1.ai的方法&lt;/h3&gt;
+&lt;p&gt;这个对比信息非常关键！它直接帮我们&lt;strong&gt;排除了文件系统权限问题&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id="为什么本地能写ftp-不能写"&gt;为什么本地能写、FTP 不能写？&lt;/h3&gt;
+&lt;p&gt;本质区别在于&lt;strong&gt;执行写入的&amp;quot;身份&amp;quot;不同&lt;/strong&gt;：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;场景&lt;/th&gt;
+&lt;th&gt;执行者&lt;/th&gt;
+&lt;th&gt;受什么约束&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;本地 mkdir&lt;/td&gt;
+&lt;td&gt;lisi 自己的 shell 进程&lt;/td&gt;
+&lt;td&gt;只看文件系统的 rwx 权限 ✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FTP mkdir&lt;/td&gt;
+&lt;td&gt;vsftpd 守护进程代为执行&lt;/td&gt;
+&lt;td&gt;受 vsftpd.conf 开关 + SELinux 对 ftpd 的策略双重约束 ❌&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;所以本地能写，&lt;strong&gt;完全不能证明&lt;/strong&gt; FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。&lt;/p&gt;</description></item><item><title>数据结构链表当中的头结点问题</title><link>https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/</guid><description>&lt;h4 id="数据结构链表当中的头结点问题"&gt;数据结构链表当中的头结点问题&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;==示例举证==&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;出现的什么例子（单链表的表头节点）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;给出自己原来写的代码及源码&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2.出现的问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;出现的问题分类，代码里的哪些函数出错了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;我的解决方案&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从网上chatgpt查找得到的解决方案&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自己研究得出的方案&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;给出自己修改过的代码&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start="4"&gt;
+&lt;li&gt;给予大家的警示&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1-示例举证"&gt;1. 示例举证&lt;/h2&gt;
+&lt;h3 id="出现的什么例子单链表的表头节点"&gt;出现的什么例子（单链表的表头节点）&lt;/h3&gt;
+&lt;p&gt;首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。&lt;/p&gt;
+&lt;h3 id="给出自己原来写的代码及源码"&gt;给出自己原来写的代码及源码&lt;/h3&gt;
+&lt;p&gt;下面我将给出大家我首先第一次写的代码如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+// 定义链表节点结构
+struct ListNode {
+int value;
+struct ListNode* next;
+};
+// 反转链表函数
+struct ListNode* reverseList(struct ListNode* head) {
+struct ListNode* prev = NULL;
+struct ListNode* current = head;
+struct ListNode* nextNode = NULL;
+while (current != NULL) {
+nextNode = current-&amp;gt;next; // 暂存下一个节点
+current-&amp;gt;next = prev; // 反转当前节点的指针
+prev = current; // 前移 prev
+current = nextNode; // 前移 current
+}
+return prev; // 返回新的头节点
+}
+// 辅助函数，用于创建新节点
+struct ListNode* createNode() {
+struct ListNode* head; // 初始化头节点为空
+head=(struct ListNode*)malloc(sizeof(struct ListNode));
+head-&amp;gt;next=NULL; // 用于记录链表的尾节点
+int x; // x为链表数据域中的数据
+while (scanf(&amp;#34;%d&amp;#34;, &amp;amp;x) != EOF) {
+struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+newNode-&amp;gt;value = x;
+newNode-&amp;gt;next =head-&amp;gt;next; // 将新节点链接到尾节点之后
+head-&amp;gt;next=newNode; // 更新尾节点
+}
+return head;
+}
+// 辅助函数，用于打印链表
+void printList(struct ListNode* head) {
+struct ListNode* current = head;
+while (current != NULL) {
+printf(&amp;#34;%d -&amp;gt; &amp;#34;, current-&amp;gt;value);
+current = current-&amp;gt;next;
+}
+printf(&amp;#34;NULL\n&amp;#34;);
+}
+// 辅助函数，用于释放链表内存
+void freeList(struct ListNode* head) {
+struct ListNode* current = head;
+while (current != NULL) {
+struct ListNode* next = current-&amp;gt;next;
+free(current);
+current = next;
+}
+}
+// 主函数，用于测试反转链表
+int main() {
+// 创建链表
+printf(&amp;#34;请输入链表节点值，以EOF结束：\n&amp;#34;);
+struct ListNode* head = createNode();
+printf(&amp;#34;原链表: &amp;#34;);
+printList(head);
+// 反转链表
+struct ListNode* reversedHead = reverseList(head);
+printf(&amp;#34;反转后的链表: &amp;#34;);
+printList(reversedHead);
+// 释放内存
+freeList(reversedHead);
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="2出现的问题"&gt;2.出现的问题&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>数据同步服务</title><link>https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/</guid><description>&lt;h4 id="文章目录"&gt;文章目录&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_3"&gt;一.数据同步服务的基本介绍&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_5"&gt;1.什么是数据同步？&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_9"&gt;2.如何进行实时同步&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_28"&gt;3.特点&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_34"&gt;4.怎么实现仅同步变化的数据呢？&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#5_42"&gt;5.同步方式&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_dnf_y_install_rsync_50"&gt;二.如何安装数据同步服务： dnf -y install rsync&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_60"&gt;三.综合案例&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1__62"&gt;1. 本地同步操作:&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_85"&gt;2.远程同步操作:&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_98"&gt;3.综合案例,实现定时与增量备份&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#INOTIFY_118"&gt;四.结合INOTIFY实现数据实时同步&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1node2_153"&gt;1.对node2进行配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_155"&gt;1.创建用户&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_168"&gt;2.修改配置文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_193"&gt;3.创建密码⽂件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_rsync_201"&gt;4. 启动rsync服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_220"&gt;五.设置开机自启动&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_222"&gt;1.杀死进程&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_234"&gt;2.设置开机⾃启动&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#RSYNC_300"&gt;六.基于RSYNC服务完成⼿动同步&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_302"&gt;1.格式&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_314"&gt;2.基于⼿动同步⽅式完成数据同步&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_320"&gt;3.创建日志文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_329"&gt;4.开始传输文件了&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_346"&gt;解决方案&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_350"&gt;找到根本原因了！&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_358"&gt;解决方案&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_SELinux_360"&gt;方案1：临时关闭 SELinux（快速验证）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_SELinux_381"&gt;方案2：永久关闭 SELinux&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_SELinux__398"&gt;方案3：设置正确的 SELinux 上下文（推荐，更安全）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_417"&gt;建议&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#__457"&gt;七,使⽤密码⽂件， 实现不需要输⼊密码&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_486"&gt;八.使用主机名&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_508"&gt;九.使用脚本自动配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_510"&gt;1.安装使用的软件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_526"&gt;2.编写脚本&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_552"&gt;3给文件加权以及启动脚本文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4_557"&gt;4.最后测试一下&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一数据同步服务的基本介绍"&gt;一.数据同步服务的基本介绍&lt;/h2&gt;
+&lt;h3 id="1什么是数据同步"&gt;1.什么是数据同步？&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="2如何进行实时同步"&gt;2.如何进行实时同步&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;常⽤选项：
+• -v ：详细模式输出，显⽰传输过程中的⽂件信息。
+• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。
+• -z ：对备份的⽂件在传输时进⾏压缩处理。
+• -P ：显⽰进度条。
+• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）
+• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh
+端⼝
+本地同步：
+rsync -av /src/directory/ /dest/directory/
+远程同步：
+rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/
+拉取远程数据到本地：
+rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="3特点"&gt;3.特点&lt;/h3&gt;
+&lt;p&gt;• ⽀持增量同步：只传输发⽣变化的数据部分。
+• ⽀持 SSH 加密传输。
+• 可保持⽂件权限、时间戳、连接和等元数据。&lt;/p&gt;</description></item><item><title>数学---等价无穷小问题</title><link>https://dsduyopg.github.io/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/</guid><description>&lt;h2 id="题目如下limit-as-x-approaches-0-of-cosxx2-sinxx-3-中可以用等价无穷小写吗"&gt;题目如下：limit as x approaches 0 of (cosx)/(x^2)-(sinx)/(x ^3) 中，可以用等价无穷小写吗？&lt;/h2&gt;
+&lt;p&gt;我们考虑 𝑥趋近于 0 的情况，用 x 的泰勒展开式来近似 cos(𝑥)cos(x) 和sin(𝑥)sin(x)：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/images/06a1785fcde34fe998527c8341058ff2.png"&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/images/86dc8791739241308a86f5d526f9e900.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在处理极限时，使用等价无穷小是一种常用的方法，但在特定情况下需要特别小心。虽然 (sin(x) 在 (x) 趋近于 0 时的等价无穷小确实是 (x)，但在这个题目中，仅仅使用 (sin(x)作为近似并不足以获得正确的结果。这是因为表达式中的每一项都涉及较高次的项，这些项对最终的极限值有重要影响。具体来说，如果只将 (sin(x)) 近似为 (x)，我们会得到：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/images/56031de23ca742fe976846d27d96ba42.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这允许我们保留表达式中所有对极限有显著贡献的项，从而准确地计算出极限值。总结来说，简单地将 ( sin(x) 近似为 ( x ) 忽略了 ( x^3/6) 这类高阶项，而这些项在本题目中对最终结果是至关重要的，因此不能仅用 sin(x) ~x 来处理该问题。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;大家好，资料来源于GPT-4，我整理了GPT的回答，若果有错误，还请各位大佬指正出来，感谢感谢！！！&lt;/p&gt;</description></item><item><title>这个是关于ssh的相关问题这个是关于ssh的相关问题</title><link>https://dsduyopg.github.io/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</guid><description>&lt;h4 id="这个是关于ssh的相关问题这个是关于ssh的相关问题"&gt;这个是关于ssh的相关问题这个是关于ssh的相关问题&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_1"&gt;一.首先问题是：局域网内的两台主机如何可以相互登录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_9"&gt;一.检查网络的连通性&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#__ssh_31"&gt;二. 检查了是否安装了ssh服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#SSH_81"&gt;二.如何配置SSH免密登录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#root_85"&gt;一.root用户的登录配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_89"&gt;1.修改配置文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2ssh_103"&gt;2.重启ssh服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_110"&gt;二.免密钥登录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_116"&gt;1.安装私钥和公钥&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_126"&gt;2.发送公钥&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一首先问题是局域网内的两台主机如何可以相互登录"&gt;一.首先问题是：局域网内的两台主机如何可以相互登录&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;在这里面的话，我们其实是分成了2步的步骤流程：&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;首先第一步是检查是否我们局域网内的两台主机是否可以ping通&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;第二步其实就是检查我们的这两台主机，是否安装了ssh服务&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;接下来呢，我们将在这2个方面探究第一个的问题，这里面我会将我遇到的问题都写出来，并给予解决方案&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="一检查网络的连通性"&gt;一.检查网络的连通性&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;其实，在这里面，大家务必要小心，不要觉得这个简单，就不好好看了，这个也是开始的时候困扰了我很久，后来才知道，了是这个问题没有解决，以下我就为大家详细的说一下吧：&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;首先呢，大家务必确定两台Linux是NAT模式，这个模式对于后续操作是有帮助的，否则的话，后面大家就会遇到各种各样的麻烦的，这里我就给大家说一下给如何进行NAT设置吧&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;首先呢，大家要点击虚拟机里面的主机当中的设置按钮&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/3d39734c50c845b1a3dca94f9d54d26d.png"&gt;&lt;/p&gt;
+&lt;p&gt;接下来，在里面出现的界面我们选择网络适配器，选择NAT就可以了&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/dc4cf5b90f0745e4adcce11cd8f03886.png"&gt;&lt;/p&gt;
+&lt;p&gt;然后，接下来的一台Linux的系统也是同理的，在这里我就不赘述了，操作到这里，其实两台主机就具有连通行了，我们可以ping一下的
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/3ddf11ca5ee34c9faa74d73d95b0bf6c.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/8357eaf939444b7bae739442e507c10a.png"&gt;
+这一步，到这里就结束了，然后我们进行下一步操作的的.&lt;/p&gt;
+&lt;h3 id="二-检查了是否安装了ssh服务"&gt;二. 检查了是否安装了ssh服务&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt; 在这里呢，我们开始进入Linux里面，开始真正意义上的操作的&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;首先就是我们查询是否安装了ssh相关服务，相比大家都知道的是，我们要安装ssh的客户端和服务端两个服务的，以下是查询的命令&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ssh -V # 这个是检查SSH客⼾端版本，如果安装会显⽰版本信息
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/ba6760b2476d4378a5896bca27def448.png"&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;systemctl status sshd # 这个是检查SSH服务状态，如果服务正在运⾏则说明已安装SSH服务器
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/50c753ae2698405ab406a8ae7dd025c4.png"&gt;&lt;/p&gt;
+&lt;p&gt;如果提⽰： command not found或类似的， 说明SSH服务未安装， 需要安装服务&lt;/p&gt;
+&lt;p&gt;&lt;img alt="![[Pasted image 20260712225903.png]]" loading="lazy" src="https://i-blog.csdnimg.cn/direct/8df8e7b8cc384d2883e169ae05d52064.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt; 此时呢，就需要安装这几个服务了&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1.安装客户端&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;dnf install -y openssh-clients
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;2.安装服务端&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;dnf install -y openssh-service
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;3.启动ssh服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;systemctl start sshd # 启动服务
+systemctl enable sshd # 将服务添加到⾃启动项，下次开机就⾃动启动了
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;这一步，到这里，我们也就结束了&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>整数和浮点数在内存中存储</title><link>https://dsduyopg.github.io/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/</guid><description>&lt;p&gt;&lt;code&gt;大家好，今天我为大家介绍关于整数与浮点数在内存中的存储&lt;/code&gt;，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！&lt;/p&gt;
+&lt;h4 id="整数和浮点数在内存中存储"&gt;整数和浮点数在内存中存储&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_2"&gt;1.整数与浮点数在内存中存储是否一样&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_5"&gt;整数与浮点数在内存中存储的例子&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_40"&gt;2.整数在内存中的存储&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_42"&gt;整数在内存中存储的具体例子&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_49"&gt;3.浮点数在内存中的存储&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_50"&gt;1.规定相关东西&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#IEEE754_56"&gt;IEEE754的详细相关规定&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_70"&gt;2.浮点数在内存中的具体示例&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3_74"&gt;3.讲解上例当中的题目&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1整数与浮点数在内存中存储是否一样"&gt;1.整数与浮点数在内存中存储是否一样&lt;/h2&gt;
+&lt;p&gt;首先我们大家都有一个疑问，在内存中数据的存储不都是以二进制形式存储的吗？还有什么不同呢？其实我在学习本节课之前我和大家的认知是一样的，都是认为他们的存储都是一样的，但是今天我可以告诉给大家，在内存中存储其实并不一样，下面我为大家详细的介绍一下。&lt;/p&gt;
+&lt;h3 id="整数与浮点数在内存中存储的例子"&gt;整数与浮点数在内存中存储的例子&lt;/h3&gt;
+&lt;p&gt;下面我为大家举出一个关于他们在内存存储的例子，如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;
+int main()
+{
+int n = 9;//整型的存储方式，补码
+//00000000000000000000000000001001 9的补码
+//
+float* pFloat = (float*)&amp;amp;n;
+printf(&amp;#34;n的值为：%d\n&amp;#34;, n);//9
+printf(&amp;#34;*pFloat的值为：%f\n&amp;#34;, *pFloat);
+//0 00000000 00000000000000000001001
+//E 为全0
+//(-1)^0 * 0.00000000000000000001001 * 2^-126
+//1*
+//0.000000
+*pFloat = 9.0;
+//1001.0
+//(-1)^0 * 1.001*2^3
+//S=0
+//M=1.001
+//E = 3
+//01000001000100000000000000000000
+//
+printf(&amp;#34;num的值为：%d\n&amp;#34;, n);
+printf(&amp;#34;*pFloat的值为：%f\n&amp;#34;, *pFloat);//9.0
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0
+&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/images/4b360db0fd17a82162a9734848396396.png"&gt;
+因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。&lt;/p&gt;
+&lt;h2 id="2整数在内存中的存储"&gt;2.整数在内存中的存储&lt;/h2&gt;
+&lt;p&gt;这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。&lt;/p&gt;</description></item><item><title>字符串中删除后导星号的问题</title><link>https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/</guid><description>&lt;h4 id="字符串中删除后导星号的问题"&gt;字符串中删除后导星号的问题&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_1"&gt;一.题目分析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_4"&gt;二.我所犯的错误&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#21_5"&gt;2.1我的代码&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#21_54"&gt;2.1我的错误的代码运行的结果&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#211_56"&gt;2.1.1我的结果分析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_58"&gt;三.错误分析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#31__59"&gt;3.1 我总结的错误缘由&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_71"&gt;主要问题总结：&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#32__77"&gt;3.2 修改的意见&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_79"&gt;改进点解释：&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_91"&gt;举个例子：&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_99"&gt;测试：&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#33__117"&gt;3.3 修正好后的代码运行结果如下：&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#34__119"&gt;3.4 我的修正后的代码如下：&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_171"&gt;四.总结&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一题目分析"&gt;一.题目分析&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/images/8774c783cdc14135aa464ad771ff5fc6.png"&gt;&lt;/p&gt;
+&lt;h2 id="二我所犯的错误"&gt;二.我所犯的错误&lt;/h2&gt;
+&lt;h3 id="21我的代码"&gt;2.1我的代码&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+void fun( char *a )
+{
+int count=0,count_a=0,i,j=0;
+while(*a!=&amp;#39;\0&amp;#39;)
+{
+a++;
+count++;
+}
+a=a-1;
+while(*a==&amp;#39;*&amp;#39;)
+{
+a--;
+count_a++;
+}
+for(i=0;i&amp;lt;count-count_a;i++)
+{
+a[j++]=a[i];
+}
+a[j]=&amp;#39;\0&amp;#39;;
+}
+main()
+{ char s[81];void NONO ();
+printf(&amp;#34;Enter a string:\n&amp;#34;);gets(s);
+fun( s );
+printf(&amp;#34;The string after deleted:\n&amp;#34;);puts(s);
+NONO();
+getchar();
+}
+void NONO ()
+{/* 本函数用于打开文件，输入数据，调用函数，输出数据，关闭文件。 */
+FILE *in, *out ;
+int i ; char s[81] ;
+in = fopen(&amp;#34;in.dat&amp;#34;,&amp;#34;r&amp;#34;) ;
+out = fopen(&amp;#34;out.dat&amp;#34;,&amp;#34;w&amp;#34;) ;
+for(i = 0 ; i &amp;lt; 10 ; i++) {
+fscanf(in, &amp;#34;%s&amp;#34;, s) ;
+fun(s) ;
+fprintf(out, &amp;#34;%s\n&amp;#34;, s) ;
+}
+fclose(in) ;
+fclose(out) ;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="21我的错误的代码运行的结果"&gt;2.1我的错误的代码运行的结果&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/images/b9e2d83c241e4609b894240ba88389f4.png"&gt;&lt;/p&gt;</description></item><item><title>字符函数和字符串函数</title><link>https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/</guid><description>&lt;p&gt;在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。&lt;/p&gt;
+&lt;h4 id="字符函数和字符串函数"&gt;字符函数和字符串函数&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_2"&gt;一.字符函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_4"&gt;1.字符分类函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_5"&gt;1.字符分类函种类及作用&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_19"&gt;2.字符转换函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_21"&gt;1.字符转换函数包括哪些&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_22"&gt;1.大写字符转化为小写字符&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_23"&gt;1.大写字符转化为小写字符函数的具体诠释&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_67"&gt;2.大写字符转化为小写字符函数的模拟实现&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_79"&gt;2.小写字符转化为大写字符的函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_80"&gt;1.小写字符转化为大写字符函数的具体诠释&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2_124"&gt;2.小写字符转化为大写字符函数的模拟实现&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#_135"&gt;二.字符串函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1_137"&gt;1.字符串函数包括哪些&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#1strlen_139"&gt;1.strlen函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#2strcpy_165"&gt;2.strcpy函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#3strcat_194"&gt;3.strcat函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="#4strcmp_226"&gt;4.strcmp函数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一字符函数"&gt;一.字符函数&lt;/h2&gt;
+&lt;p&gt;字符是组成字符串的根本，那么学好字符函数对我们今后的学习起到了重要的作用，而在众多的字符函数当中有两种类型一个是判断的那种函数也就是字符分类函数，另一种则是转化大小写的那种，下面就为大家具体的诠释其中的奥妙。&lt;/p&gt;
+&lt;h3 id="1字符分类函数"&gt;1.字符分类函数&lt;/h3&gt;
+&lt;h4 id="1字符分类函种类及作用"&gt;1.字符分类函种类及作用&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;iscntrl&lt;/th&gt;
+&lt;th&gt;判断是否输入控制字符&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;isspace&lt;/td&gt;
+&lt;td&gt;输入空白字符返回真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;isdigit&lt;/td&gt;
+&lt;td&gt;输入数字字符返回真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;isxdigit&lt;/td&gt;
+&lt;td&gt;输入16进制数字字符返回真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;islower&lt;/td&gt;
+&lt;td&gt;输入小写字符返回真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;isupper&lt;/td&gt;
+&lt;td&gt;输入大写字符返回真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;isalpha&lt;/td&gt;
+&lt;td&gt;输入字母字符返回真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;isalnum&lt;/td&gt;
+&lt;td&gt;输入数字或者字母字符返回真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ispunct&lt;/td&gt;
+&lt;td&gt;输入标点字符返回真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;isgraph&lt;/td&gt;
+&lt;td&gt;输入图形字符返回真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;isprint&lt;/td&gt;
+&lt;td&gt;输入可打印字符返回真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="2字符转换函数"&gt;2.字符转换函数&lt;/h3&gt;
+&lt;p&gt;字符转化函数具体有，大写字符转化成小写字符，另有小写字符转化为大写字符，当然这些都是针对的是输入的是字母字符时方可使用的，但是若果使用的是非字母字符那么的话可能会导致错误，从而程序无法运行。&lt;/p&gt;
+&lt;h4 id="1字符转换函数包括哪些"&gt;1.字符转换函数包括哪些&lt;/h4&gt;
+&lt;h5 id="1大写字符转化为小写字符"&gt;1.大写字符转化为小写字符&lt;/h5&gt;
+&lt;h6 id="1大写字符转化为小写字符函数的具体诠释"&gt;1.大写字符转化为小写字符函数的具体诠释&lt;/h6&gt;
+&lt;p&gt;形如以下形式：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;int tolower ( int c );
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;给大家举出一下例子，我们一起看一下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;ctype.h&amp;gt;
+int main ()
+{
+int i=0;
+char str[]=&amp;#34;Test String.\n&amp;#34;;
+char c;
+while (str[i])
+{
+c=str[i];
+putchar (tolower(c));
+i++;
+}
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当然这样写没有什么问题，但是我们也可以这样子写如下：&lt;/p&gt;</description></item></channel></rss>

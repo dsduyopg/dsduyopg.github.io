@@ -1,0 +1,414 @@
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>数据同步服务 | 我的博客</title><meta name=keywords content><meta name=description content="文章目录
+
+
+一.数据同步服务的基本介绍
+
+
+1.什么是数据同步？
+
+
+2.如何进行实时同步
+
+
+3.特点
+
+
+4.怎么实现仅同步变化的数据呢？
+
+
+5.同步方式
+
+
+二.如何安装数据同步服务： dnf -y install rsync
+
+
+三.综合案例
+
+
+1. 本地同步操作:
+
+
+2.远程同步操作:
+
+
+3.综合案例,实现定时与增量备份
+
+
+四.结合INOTIFY实现数据实时同步
+
+
+1.对node2进行配置
+
+
+1.创建用户
+
+
+2.修改配置文件
+
+
+3.创建密码⽂件
+
+
+4. 启动rsync服务
+
+
+五.设置开机自启动
+
+
+1.杀死进程
+
+
+2.设置开机⾃启动
+
+
+六.基于RSYNC服务完成⼿动同步
+
+
+1.格式
+
+
+2.基于⼿动同步⽅式完成数据同步
+
+
+3.创建日志文件
+
+
+4.开始传输文件了
+
+
+解决方案
+
+
+找到根本原因了！
+
+
+解决方案
+
+
+方案1：临时关闭 SELinux（快速验证）
+
+
+方案2：永久关闭 SELinux
+
+
+方案3：设置正确的 SELinux 上下文（推荐，更安全）
+
+
+建议
+
+
+七,使⽤密码⽂件， 实现不需要输⼊密码
+
+
+八.使用主机名
+
+
+九.使用脚本自动配置
+
+
+1.安装使用的软件
+
+
+2.编写脚本
+
+
+3给文件加权以及启动脚本文件
+
+
+4.最后测试一下
+
+
+一.数据同步服务的基本介绍
+1.什么是数据同步？
+指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
+2.如何进行实时同步
+常⽤选项：
+• -v ：详细模式输出，显⽰传输过程中的⽂件信息。
+• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。
+• -z ：对备份的⽂件在传输时进⾏压缩处理。
+• -P ：显⽰进度条。
+• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）
+• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh
+端⼝
+本地同步：
+rsync -av /src/directory/ /dest/directory/
+远程同步：
+rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/
+拉取远程数据到本地：
+rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
+3.特点
+• ⽀持增量同步：只传输发⽣变化的数据部分。
+• ⽀持 SSH 加密传输。
+• 可保持⽂件权限、时间戳、连接和等元数据。"><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/><link crossorigin=anonymous href=/assets/css/stylesheet.17e11805d3075f44c706341eeb6b41c4243b7f0769a966362af6f3d10f0b1051.css integrity="sha256-F+EYBdMHX0THBjQe62tBxCQ7fwdpqWY2Kvbz0Q8LEFE=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="数据同步服务"><meta property="og:description" content="文章目录 一.数据同步服务的基本介绍
+1.什么是数据同步？
+2.如何进行实时同步
+3.特点
+4.怎么实现仅同步变化的数据呢？
+5.同步方式
+二.如何安装数据同步服务： dnf -y install rsync
+三.综合案例
+1. 本地同步操作:
+2.远程同步操作:
+3.综合案例,实现定时与增量备份
+四.结合INOTIFY实现数据实时同步
+1.对node2进行配置
+1.创建用户
+2.修改配置文件
+3.创建密码⽂件
+4. 启动rsync服务
+五.设置开机自启动
+1.杀死进程
+2.设置开机⾃启动
+六.基于RSYNC服务完成⼿动同步
+1.格式
+2.基于⼿动同步⽅式完成数据同步
+3.创建日志文件
+4.开始传输文件了
+解决方案
+找到根本原因了！
+解决方案
+方案1：临时关闭 SELinux（快速验证）
+方案2：永久关闭 SELinux
+方案3：设置正确的 SELinux 上下文（推荐，更安全）
+建议
+七,使⽤密码⽂件， 实现不需要输⼊密码
+八.使用主机名
+九.使用脚本自动配置
+1.安装使用的软件
+2.编写脚本
+3给文件加权以及启动脚本文件
+4.最后测试一下
+一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
+2.如何进行实时同步 常⽤选项：• -v ：详细模式输出，显⽰传输过程中的⽂件信息。• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。• -z ：对备份的⽂件在传输时进⾏压缩处理。• -P ：显⽰进度条。• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh端⼝本地同步：rsync -av /src/directory/ /dest/directory/远程同步：rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/拉取远程数据到本地：rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="数据同步服务"><meta name=twitter:description content="文章目录 一.数据同步服务的基本介绍
+1.什么是数据同步？
+2.如何进行实时同步
+3.特点
+4.怎么实现仅同步变化的数据呢？
+5.同步方式
+二.如何安装数据同步服务： dnf -y install rsync
+三.综合案例
+1. 本地同步操作:
+2.远程同步操作:
+3.综合案例,实现定时与增量备份
+四.结合INOTIFY实现数据实时同步
+1.对node2进行配置
+1.创建用户
+2.修改配置文件
+3.创建密码⽂件
+4. 启动rsync服务
+五.设置开机自启动
+1.杀死进程
+2.设置开机⾃启动
+六.基于RSYNC服务完成⼿动同步
+1.格式
+2.基于⼿动同步⽅式完成数据同步
+3.创建日志文件
+4.开始传输文件了
+解决方案
+找到根本原因了！
+解决方案
+方案1：临时关闭 SELinux（快速验证）
+方案2：永久关闭 SELinux
+方案3：设置正确的 SELinux 上下文（推荐，更安全）
+建议
+七,使⽤密码⽂件， 实现不需要输⼊密码
+八.使用主机名
+九.使用脚本自动配置
+1.安装使用的软件
+2.编写脚本
+3给文件加权以及启动脚本文件
+4.最后测试一下
+一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
+2.如何进行实时同步 常⽤选项：• -v ：详细模式输出，显⽰传输过程中的⽂件信息。• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。• -z ：对备份的⽂件在传输时进⾏压缩处理。• -P ：显⽰进度条。• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh端⼝本地同步：rsync -av /src/directory/ /dest/directory/远程同步：rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/拉取远程数据到本地：rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"数据同步服务","item":"https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"数据同步服务","name":"数据同步服务","description":"文章目录 一.数据同步服务的基本介绍\n1.什么是数据同步？\n2.如何进行实时同步\n3.特点\n4.怎么实现仅同步变化的数据呢？\n5.同步方式\n二.如何安装数据同步服务： dnf -y install rsync\n三.综合案例\n1. 本地同步操作:\n2.远程同步操作:\n3.综合案例,实现定时与增量备份\n四.结合INOTIFY实现数据实时同步\n1.对node2进行配置\n1.创建用户\n2.修改配置文件\n3.创建密码⽂件\n4. 启动rsync服务\n五.设置开机自启动\n1.杀死进程\n2.设置开机⾃启动\n六.基于RSYNC服务完成⼿动同步\n1.格式\n2.基于⼿动同步⽅式完成数据同步\n3.创建日志文件\n4.开始传输文件了\n解决方案\n找到根本原因了！\n解决方案\n方案1：临时关闭 SELinux（快速验证）\n方案2：永久关闭 SELinux\n方案3：设置正确的 SELinux 上下文（推荐，更安全）\n建议\n七,使⽤密码⽂件， 实现不需要输⼊密码\n八.使用主机名\n九.使用脚本自动配置\n1.安装使用的软件\n2.编写脚本\n3给文件加权以及启动脚本文件\n4.最后测试一下\n一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程\n2.如何进行实时同步 常⽤选项：\r• -v ：详细模式输出，显⽰传输过程中的⽂件信息。\r• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。\r• -z ：对备份的⽂件在传输时进⾏压缩处理。\r• -P ：显⽰进度条。\r• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）\r• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh\r端⼝\r本地同步：\rrsync -av /src/directory/ /dest/directory/\r远程同步：\rrsync -avz /src/directory/ root@192.168.88.102:/dest/directory/\r拉取远程数据到本地：\rrsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。\n","keywords":[],"articleBody":"文章目录 一.数据同步服务的基本介绍\n1.什么是数据同步？\n2.如何进行实时同步\n3.特点\n4.怎么实现仅同步变化的数据呢？\n5.同步方式\n二.如何安装数据同步服务： dnf -y install rsync\n三.综合案例\n1. 本地同步操作:\n2.远程同步操作:\n3.综合案例,实现定时与增量备份\n四.结合INOTIFY实现数据实时同步\n1.对node2进行配置\n1.创建用户\n2.修改配置文件\n3.创建密码⽂件\n4. 启动rsync服务\n五.设置开机自启动\n1.杀死进程\n2.设置开机⾃启动\n六.基于RSYNC服务完成⼿动同步\n1.格式\n2.基于⼿动同步⽅式完成数据同步\n3.创建日志文件\n4.开始传输文件了\n解决方案\n找到根本原因了！\n解决方案\n方案1：临时关闭 SELinux（快速验证）\n方案2：永久关闭 SELinux\n方案3：设置正确的 SELinux 上下文（推荐，更安全）\n建议\n七,使⽤密码⽂件， 实现不需要输⼊密码\n八.使用主机名\n九.使用脚本自动配置\n1.安装使用的软件\n2.编写脚本\n3给文件加权以及启动脚本文件\n4.最后测试一下\n一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程\n2.如何进行实时同步 常⽤选项：\r• -v ：详细模式输出，显⽰传输过程中的⽂件信息。\r• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。\r• -z ：对备份的⽂件在传输时进⾏压缩处理。\r• -P ：显⽰进度条。\r• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）\r• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh\r端⼝\r本地同步：\rrsync -av /src/directory/ /dest/directory/\r远程同步：\rrsync -avz /src/directory/ root@192.168.88.102:/dest/directory/\r拉取远程数据到本地：\rrsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。\n4.怎么实现仅同步变化的数据呢？ 1.会对需要同步的数据文件进行分块(底层)\r2.每一个数据块会基于数据生成校验码，只要数据发生变化 这个校验码也会发生改变\r3.在同步文件的时候， 只需要监测哪些数据块的校验码发生变化， 就可以指定那个块数据改变了， 此时仅需要同步这些变化数据块即可 5.同步方式 手动同步–\u003e 定时同步\n实时同步\n二.如何安装数据同步服务： dnf -y install rsync dnf install rsync -y 三.综合案例 1. 本地同步操作: 准备⼯作\r1- 在node1节点的 /usr/local⽬录下,创建⼀个nginx-1.8.0⽬录,并在此⽬录下构建⼀个\rhtml⽬录\r2- 在html⽬录下,创建index.html、favicon.ico、logo.png⽂件，以及assets⽬录\r3- 在assets⽬录下，创建index.js、index.css⽂件\r4- 给各个⽂件随机写⼊⼀些内容\r需求：对html⽬录进⾏同步操作。 将其同步到/usr/local/nginx-1.8.0/backup/下，并且如果\r源⽬录下已经删除的，在⽬标⽬录下也应该被删除 我们应当用rsync命令进行相应的操作，下面就是我操作出来的\n2.远程同步操作: 需求：对/usr/local/nginx-1.8.0/html⽬录进⾏操作，将其同步到node2的家⽬录的backup的⽬\r录中\r注意： 需要双⽅均安装rsync，同时配置了SSH密钥（否则需要输⼊密码） 这个案例也是没有什么太大的问题的，下面是我在这个案例中做出的\n3.综合案例,实现定时与增量备份 需求说明：\r在centos stream 9的 /var/log⽬录下， 存储了⼤量的关于系统的⽇志：如messages⽂件存储⼤量\r的系统⽇志信息，secure⽇志⽂件存储了⼤量的与系统安全的⽇志。请对此⽬录中的messages、\rsecure⽇志⽂件进⾏定时的备份到node2节点的/export/data/node1_backup_system_log⽬录中，\r要求每⽇凌晨2点进⾏备份⼀次。 在这案例之中我们可以使用定时任务进行操作的\n四.结合INOTIFY实现数据实时同步 ⾸先将⼆个路径分别创建出来， 便于后续演⽰\rnode1执⾏： mkdir -p /export/data/logs\rnode2执⾏： mkdir -p /export/data/node1_exe_backup_log 优势： ⾼效性: rsyncd 的守护进程模式可以避免每次连接都启动 SSH 进程，因此在某些情况下可能会⽐\rSSH ⽅式略微提⾼性能。\r简化配置: ⼀旦配置好 rsyncd，⽆需每次都输⼊ SSH 密码，适合⽤于定时备份等⾃动化任务。 缺点： 安全性问题: rsyncd 是基于开放端⼝的⽅式进⾏⽂件同步，默认情况下并不加密传输的数据。这使\r得数据传输过程可能暴露给中间⼈攻击（MITM）。虽然可以配置 rsyncd 使⽤ --password-file\r来限制访问，但仍然不如 SSH 安全。\r需要开放端⼝: 您需要在防⽕墙上开放 rsync 服务使⽤的端⼝（通常是 873），这可能增加潜在的\r安全⻛险。\r配置复杂: 需要在服务器上配置 rsyncd.conf，并管理模块、权限、⽤⼾等细节。 1.对node2进行配置 1.创建用户 在这里面呢，我们需要在node2中创建2个用户，一个是backup_user,一个是rsync用户\nuseradd backup_user\ruseradd rsync\rpasswd backup_user\rpasswd rsync 注意密码，都设置为123456\n2.修改配置文件 注意，这个配置文件要是在node2中修改的，以下是修改命令\n# 全局设置\ruid = rsync\rgid = rsync\ruse chroot = no\rport = 873\rmax connections = 200\rpid file = /var/run/rsyncd.pid\rlog file = /var/log/rsyncd.log\rtransfer logging = yes\rignore nonreadable = yes\r[node1_logs]\rpath = /export/data/node1_exe_backup_log\rcomment = Backup Directory\rread only = no\rsecrets file = /etc/rsyncd.passwd\rhosts allow = 192.168.149.0/24\rhosts deny = *\rauth users = backup_user 3.创建密码⽂件 echo \"backup_user:123456\" \u003e /etc/rsyncd.passwd\r# 设置密码⽂件的权限为600，确保该⽂件只有 RSYNC 服务可以读取\rchmod 600 /etc/rsyncd.passwd 4. 启动rsync服务 1 rsync --daemon 测试是否可以正常访问： 在node1执⾏\rrsync rsync://backup_user@192.168.88.102/node1_logs\r注意在node2需要开放端⼝：\rfirewall-cmd --permanent --add-port=873/tcp 五.设置开机自启动 1.杀死进程 -- 查看进程\rps -ef | grep rsync -- 查看进程ID\r-- 杀死进程\rkill -9 rsync的进程ID 2.设置开机⾃启动 由于rsync并不是⼀个系统服务（简单判断：通过systemctl启动和关闭的服务），故需要先 设置为系统服务后才可以设置\n修改配置文件 [Unit]\rDescription=Rsync Daemon\rAfter=network.target\r[Service]\rExecStart=/usr/bin/rsync --daemon --config=/etc/rsyncd.conf --no-detach\rExecReload=/bin/kill -HUP $MAINPID\rRestart=always\r[Install]\rWantedBy=multi-user.target\r特殊说明：\rExecReload=/bin/kill -HUP $MAINPID：通过发送 SIGHUP 信号，告诉 rsync 守护进程重新\r加载其配置⽂件，⽽⽆需停⽌并重新启动进程。 这个时候，我们需要把旧的日志文件给删掉 因为我们可能在操作的时候会产出一些错误的日志，就是由于这些错误的文件会导致，我们后续无法成功启动rsync服务\n就像我这样的错误一样，这个时候，我们就要学会查看日志文件了，因为一些错误会记录在日志里面\n其实，当我把旧的日志文件给删掉之后哦，成功了，应该是之前启动失败过一次，日志文件，没有删除，然后再次启动，通过对比这个日志文件，发现有问题，就无法启动，删除文件意思是把里面的的错误清理掉，之后相当于重新启动，所以可以成功启动后\n总结这次成功的逻辑\r这次能成功，其实是两个动作配合的结果：\r清理现场：rm -f /var/run/rsyncd.pid 清除了旧的工作证，扫清了路障。\r修正配置：你之前（或者在我们的排查中）修正了 /etc/rsyncd.conf 里的错误（比如把密码文件的路径写对了，或者模块路径建好了）。\r所以，并不是“这样修改就可以”这么简单，而是“清理了旧障碍 + 配置本身正确”共同作用的结果。\r💡 小贴士：以后遇到类似问题怎么办？\r下次如果再遇到服务启动失败，且提示 already running、permission denied 或 status=11，可以尝试这个“万能重启三部曲”：\r查日志：journalctl -xeu 服务名 看具体报错。\r删 pid 文件：rm -f /var/run/服务名.pid 清理旧状态。\r重启服务：systemctl restart 服务名。\r记住，日志是你最好的朋友，它能告诉你服务到底是哪里不舒服。现在你的 rsync 服务已经稳稳运行了，可以去客户端测试同步啦！ 六.基于RSYNC服务完成⼿动同步 1.格式 ⽤⼾名@主机地址::模块名称 或 rsync://⽤⼾名@主机地址/模块名称\r说明：\r模块名： 指的是配置到rsync.conf 中 【】的内容\r⽤⼾名： 指的是模块中指定的⽤⼾名， 如果没有指定， 可以是主机存在的⽤⼾名即可（前提\r是该⽤⼾需要有权限）\r例如：\rbackup_user@192.168.88.102::node1_logs 2.基于⼿动同步⽅式完成数据同步 rsync -avz /export/data/logs/ backup_user@node2::node1_logs 3.创建日志文件 在创建的日志文件里面录入数据\ncd /export/data/logs\rtouch log.txt \u0026\u0026 echo \"2491 797 1243124 9127\"\u003e\u003elog.txt 4.开始传输文件了 在这一步里面呢，我们需要注意上下文，把这个权限给关掉，否则，后面传输就像我一样不会成功的\n大家可以看到，我通过传送指令，无法发送成功，但是文件的权限都是开的，是最大的权限\n当时，我就比较迷了，不知道该如何办，然后我问了千问，它给予了我很大的帮助了，我明白了其实是我Linux的上下文的权限比较严格，需要将其关闭\n解决方案 以下是千问告诉我的\n找到根本原因了！ SELinux 处于 Enforcing（强制）模式，这就是 rsync 报 Permission denied 的真正原因。**\n即使目录权限是 drwxrwxrwx（777），SELinux 的安全策略仍然会阻止 rsync 进程写入文件。\n解决方案 方案1：临时关闭 SELinux（快速验证） 在远程服务器 192.168.149.131 上执行：\n# 临时设置为 Permissive 模式（不需要重启）\rsudo setenforce 0\r# 验证\rgetenforce\r# 应该输出: Permissive 然后重新执行 rsync 命令，应该就能成功了。\n⚠️ 这只是临时生效，重启后会恢复为 Enforcing。\n方案2：永久关闭 SELinux # 编辑 SELinux 配置文件\rsudo vi /etc/selinux/config\r# 将 SELINUX=enforcing 改为：\rSELINUX=disabled\r# 重启服务器生效\rsudo reboot 方案3：设置正确的 SELinux 上下文（推荐，更安全） 如果不想关闭 SELinux，可以给目录设置正确的标签：\n# 查看当前目录的 SELinux 上下文\rls -Zd /export/data/node1_exe_backup_log/\r# 设置 rsync 可以写入的上下文\rsudo chcon -Rt public_content_rw_t /export/data/node1_exe_backup_log/\r# 如果 rsync 以守护进程方式运行，还需要：\rsudo setsebool -P rsync_full_access on 建议 先用方案1快速验证，确认是 SELinux 的问题后，再决定用方案2还是方案3长期解决。\n# 在远程服务器上执行\rsudo setenforce 0 然后回到本地重新执行 rsync 命令即可。\n这个是我按照，他的提示放权的步骤\n接下来，很明显，我再次发送文件，直接成功了\n注意，ai说的是下一次重启还会权限不足，因此我们需要修改配置文件\n将SELINUX修改为disabled就可以了\n然后，我们重启一起机器，是配置生效，就可以了。\n七,使⽤密码⽂件， 实现不需要输⼊密码 步骤⼀： 配置密码⽂件 echo '123456' \u003e /etc/rsync.password\rchmod 600 /etc/rsync.password\r注意： 权限必须是600，否则会报错 步骤⼆： 使⽤密码⽂件， 实现不需要输⼊密码 rsync -avz --password-file=/etc/rsync.password /export/data/logs/\rbackup_user@node2::node1_logs 查看node2机器\n八.使用主机名 这个应该修改配置文件hosts\necho \"192.168.149.128 node1 node1.itcast.cn\"\u003e\u003e/etc/hosts\recho \"192.168.149.131 node2 node2.itcast.cn\"\u003e\u003e/etc/hosts 九.使用脚本自动配置 1.安装使用的软件 安装第三方源 ⾸先启⽤EPEL仓库：\rdnf install epel-release 安装监视软件 安装inotify-tools\rdnf install -y inotify-tools 2.编写脚本 1.vi /root/real_time_sync.sh 创建sh脚本文件\n#!/bin/bash\r# 定义源⽬录和⽬标⽬录（⽬标⽬录是远程服务器的⽬录）\rSOURCE_DIR=\"/export/data/logs\"\rTARGET_DIR=\"root@192.168.88.102:/export/data/node1_exe_backup_log\" # 替换为⽬\r标服务器的⽤⼾名和⽬录\r# ⽇志⽂件\rLOG_FILE=\"/var/log/rsync_realtime_sync.log\"\r# 使⽤inotifywait监听${WATCH_DIR}⽬录中的⽂件变化\rinotifywait -m -r -e modify,create,delete,move \"${SOURCE_DIR}\" | while read\rpath action file; do\recho \"Detected ${action} on ${file} in ${path}. Starting rsync...\" \u003e\u003e\r\"$LOG_FILE\"\r# 执⾏rsync同步操作\rrsync -avz --port=873 --delete -e ssh \"${SOURCE_DIR}/\" \"${TARGET_DIR}\"\r\u003e\u003e \"$LOG_FILE\" 2\u003e\u00261\recho \"Sync completed for ${file} in ${path}.\" \u003e\u003e \"$LOG_FILE\"\rdone 3给文件加权以及启动脚本文件 4.最后测试一下 在node1的/export/data/logs 里面上传几个文件，然后再打开一个node1服务器开启tail -100f监听文件，查看是否有修改，以及node2是否也跟着变化呢\n最后，发现成功在node2里面显示，这个实验就完成了\n","wordCount":"649","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/posts/>Posts</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">数据同步服务</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><ul><ul><li><a href=#%e6%96%87%e7%ab%a0%e7%9b%ae%e5%bd%95 aria-label=文章目录>文章目录</a></li></ul></ul><li><a href=#%e4%b8%80%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1%e7%9a%84%e5%9f%ba%e6%9c%ac%e4%bb%8b%e7%bb%8d aria-label=一.数据同步服务的基本介绍>一.数据同步服务的基本介绍</a><ul><li><a href=#1%e4%bb%80%e4%b9%88%e6%98%af%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5 aria-label=1.什么是数据同步？>1.什么是数据同步？</a></li><li><a href=#2%e5%a6%82%e4%bd%95%e8%bf%9b%e8%a1%8c%e5%ae%9e%e6%97%b6%e5%90%8c%e6%ad%a5 aria-label=2.如何进行实时同步>2.如何进行实时同步</a></li><li><a href=#3%e7%89%b9%e7%82%b9 aria-label=3.特点>3.特点</a></li><li><a href=#4%e6%80%8e%e4%b9%88%e5%ae%9e%e7%8e%b0%e4%bb%85%e5%90%8c%e6%ad%a5%e5%8f%98%e5%8c%96%e7%9a%84%e6%95%b0%e6%8d%ae%e5%91%a2 aria-label=4.怎么实现仅同步变化的数据呢？>4.怎么实现仅同步变化的数据呢？</a></li><li><a href=#5%e5%90%8c%e6%ad%a5%e6%96%b9%e5%bc%8f aria-label=5.同步方式>5.同步方式</a></li></ul></li><li><a href=#%e4%ba%8c%e5%a6%82%e4%bd%95%e5%ae%89%e8%a3%85%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1-dnf--y-install-rsync aria-label="二.如何安装数据同步服务： dnf -y install rsync">二.如何安装数据同步服务： dnf -y install rsync</a></li><li><a href=#%e4%b8%89%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b aria-label=三.综合案例>三.综合案例</a><ul><li><a href=#1-%e6%9c%ac%e5%9c%b0%e5%90%8c%e6%ad%a5%e6%93%8d%e4%bd%9c aria-label="1. 本地同步操作:">1. 本地同步操作:</a></li><li><a href=#2%e8%bf%9c%e7%a8%8b%e5%90%8c%e6%ad%a5%e6%93%8d%e4%bd%9c aria-label=2.远程同步操作:>2.远程同步操作:</a></li><li><a href=#3%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b%e5%ae%9e%e7%8e%b0%e5%ae%9a%e6%97%b6%e4%b8%8e%e5%a2%9e%e9%87%8f%e5%a4%87%e4%bb%bd aria-label=3.综合案例,实现定时与增量备份>3.综合案例,实现定时与增量备份</a></li></ul></li><li><a href=#%e5%9b%9b%e7%bb%93%e5%90%88inotify%e5%ae%9e%e7%8e%b0%e6%95%b0%e6%8d%ae%e5%ae%9e%e6%97%b6%e5%90%8c%e6%ad%a5 aria-label=四.结合INOTIFY实现数据实时同步>四.结合INOTIFY实现数据实时同步</a><ul><li><a href=#1%e5%af%b9node2%e8%bf%9b%e8%a1%8c%e9%85%8d%e7%bd%ae aria-label=1.对node2进行配置>1.对node2进行配置</a><ul><li><a href=#1%e5%88%9b%e5%bb%ba%e7%94%a8%e6%88%b7 aria-label=1.创建用户>1.创建用户</a></li><li><a href=#2%e4%bf%ae%e6%94%b9%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6 aria-label=2.修改配置文件>2.修改配置文件</a></li><li><a href=#3%e5%88%9b%e5%bb%ba%e5%af%86%e7%a0%81%e4%bb%b6 aria-label=3.创建密码⽂件>3.创建密码⽂件</a></li><li><a href=#4-%e5%90%af%e5%8a%a8rsync%e6%9c%8d%e5%8a%a1 aria-label="4. 启动rsync服务">4. 启动rsync服务</a></li></ul></li></ul></li><li><a href=#%e4%ba%94%e8%ae%be%e7%bd%ae%e5%bc%80%e6%9c%ba%e8%87%aa%e5%90%af%e5%8a%a8 aria-label=五.设置开机自启动>五.设置开机自启动</a><ul><li><a href=#1%e6%9d%80%e6%ad%bb%e8%bf%9b%e7%a8%8b aria-label=1.杀死进程>1.杀死进程</a></li><li><a href=#2%e8%ae%be%e7%bd%ae%e5%bc%80%e6%9c%ba%e5%90%af%e5%8a%a8 aria-label=2.设置开机⾃启动>2.设置开机⾃启动</a></li></ul></li><li><a href=#%e5%85%ad%e5%9f%ba%e4%ba%8ersync%e6%9c%8d%e5%8a%a1%e5%ae%8c%e6%88%90%e5%8a%a8%e5%90%8c%e6%ad%a5 aria-label=六.基于RSYNC服务完成⼿动同步>六.基于RSYNC服务完成⼿动同步</a><ul><li><a href=#1%e6%a0%bc%e5%bc%8f aria-label=1.格式>1.格式</a></li><li><a href=#2%e5%9f%ba%e4%ba%8e%e5%8a%a8%e5%90%8c%e6%ad%a5%e5%bc%8f%e5%ae%8c%e6%88%90%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5 aria-label=2.基于⼿动同步⽅式完成数据同步>2.基于⼿动同步⽅式完成数据同步</a></li></ul></li><li><a href=#3%e5%88%9b%e5%bb%ba%e6%97%a5%e5%bf%97%e6%96%87%e4%bb%b6 aria-label=3.创建日志文件>3.创建日志文件</a><ul><li><a href=#4%e5%bc%80%e5%a7%8b%e4%bc%a0%e8%be%93%e6%96%87%e4%bb%b6%e4%ba%86 aria-label=4.开始传输文件了>4.开始传输文件了</a><ul><li><a href=#%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88 aria-label=解决方案>解决方案</a></li></ul></li><li><a href=#%e6%89%be%e5%88%b0%e6%a0%b9%e6%9c%ac%e5%8e%9f%e5%9b%a0%e4%ba%86 aria-label=找到根本原因了！>找到根本原因了！</a></li><li><a href=#%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88-1 aria-label=解决方案>解决方案</a><ul><li><a href=#%e6%96%b9%e6%a1%881%e4%b8%b4%e6%97%b6%e5%85%b3%e9%97%ad-selinux%e5%bf%ab%e9%80%9f%e9%aa%8c%e8%af%81 aria-label="方案1：临时关闭 SELinux（快速验证）">方案1：临时关闭 SELinux（快速验证）</a></li><li><a href=#%e6%96%b9%e6%a1%882%e6%b0%b8%e4%b9%85%e5%85%b3%e9%97%ad-selinux aria-label="方案2：永久关闭 SELinux">方案2：永久关闭 SELinux</a></li><li><a href=#%e6%96%b9%e6%a1%883%e8%ae%be%e7%bd%ae%e6%ad%a3%e7%a1%ae%e7%9a%84-selinux-%e4%b8%8a%e4%b8%8b%e6%96%87%e6%8e%a8%e8%8d%90%e6%9b%b4%e5%ae%89%e5%85%a8 aria-label="方案3：设置正确的 SELinux 上下文（推荐，更安全）">方案3：设置正确的 SELinux 上下文（推荐，更安全）</a></li><li><a href=#%e5%bb%ba%e8%ae%ae aria-label=建议>建议</a></li></ul></li></ul></li><li><a href=#%e4%b8%83%e4%bd%bf%e5%af%86%e7%a0%81%e4%bb%b6-%e5%ae%9e%e7%8e%b0%e4%b8%8d%e9%9c%80%e8%a6%81%e8%be%93%e5%af%86%e7%a0%81 aria-label="七,使⽤密码⽂件， 实现不需要输⼊密码">七,使⽤密码⽂件， 实现不需要输⼊密码</a></li><li><a href=#%e5%85%ab%e4%bd%bf%e7%94%a8%e4%b8%bb%e6%9c%ba%e5%90%8d aria-label=八.使用主机名>八.使用主机名</a></li><li><a href=#%e4%b9%9d%e4%bd%bf%e7%94%a8%e8%84%9a%e6%9c%ac%e8%87%aa%e5%8a%a8%e9%85%8d%e7%bd%ae aria-label=九.使用脚本自动配置>九.使用脚本自动配置</a><ul><li><a href=#1%e5%ae%89%e8%a3%85%e4%bd%bf%e7%94%a8%e7%9a%84%e8%bd%af%e4%bb%b6 aria-label=1.安装使用的软件>1.安装使用的软件</a></li><li><a href=#2%e7%bc%96%e5%86%99%e8%84%9a%e6%9c%ac aria-label=2.编写脚本>2.编写脚本</a></li><li><a href=#3%e7%bb%99%e6%96%87%e4%bb%b6%e5%8a%a0%e6%9d%83%e4%bb%a5%e5%8f%8a%e5%90%af%e5%8a%a8%e8%84%9a%e6%9c%ac%e6%96%87%e4%bb%b6 aria-label=3给文件加权以及启动脚本文件>3给文件加权以及启动脚本文件</a></li><li><a href=#4%e6%9c%80%e5%90%8e%e6%b5%8b%e8%af%95%e4%b8%80%e4%b8%8b aria-label=4.最后测试一下>4.最后测试一下</a></li></ul></li></ul></div></details><div class="post-content md-content"><h4 id=文章目录>文章目录<a hidden class=anchor aria-hidden=true href=#文章目录>#</a></h4><ul><li><p><a href=#_3>一.数据同步服务的基本介绍</a></p></li><li><p><a href=#1_5>1.什么是数据同步？</a></p></li><li><p><a href=#2_9>2.如何进行实时同步</a></p></li><li><p><a href=#3_28>3.特点</a></p></li><li><p><a href=#4_34>4.怎么实现仅同步变化的数据呢？</a></p></li><li><p><a href=#5_42>5.同步方式</a></p></li><li><p><a href=#_dnf_y_install_rsync_50>二.如何安装数据同步服务： dnf -y install rsync</a></p></li><li><p><a href=#_60>三.综合案例</a></p></li><li><p><a href=#1__62>1. 本地同步操作:</a></p></li><li><p><a href=#2_85>2.远程同步操作:</a></p></li><li><p><a href=#3_98>3.综合案例,实现定时与增量备份</a></p></li><li><p><a href=#INOTIFY_118>四.结合INOTIFY实现数据实时同步</a></p></li><li><p><a href=#1node2_153>1.对node2进行配置</a></p></li><li><p><a href=#1_155>1.创建用户</a></p></li><li><p><a href=#2_168>2.修改配置文件</a></p></li><li><p><a href=#3_193>3.创建密码⽂件</a></p></li><li><p><a href=#4_rsync_201>4. 启动rsync服务</a></p></li><li><p><a href=#_220>五.设置开机自启动</a></p></li><li><p><a href=#1_222>1.杀死进程</a></p></li><li><p><a href=#2_234>2.设置开机⾃启动</a></p></li><li><p><a href=#RSYNC_300>六.基于RSYNC服务完成⼿动同步</a></p></li><li><p><a href=#1_302>1.格式</a></p></li><li><p><a href=#2_314>2.基于⼿动同步⽅式完成数据同步</a></p></li><li><p><a href=#3_320>3.创建日志文件</a></p></li><li><p><a href=#4_329>4.开始传输文件了</a></p></li><li><p><a href=#_346>解决方案</a></p></li><li><p><a href=#_350>找到根本原因了！</a></p></li><li><p><a href=#_358>解决方案</a></p></li><li><p><a href=#1_SELinux_360>方案1：临时关闭 SELinux（快速验证）</a></p></li><li><p><a href=#2_SELinux_381>方案2：永久关闭 SELinux</a></p></li><li><p><a href=#3_SELinux__398>方案3：设置正确的 SELinux 上下文（推荐，更安全）</a></p></li><li><p><a href=#_417>建议</a></p></li><li><p><a href=#__457>七,使⽤密码⽂件， 实现不需要输⼊密码</a></p></li><li><p><a href=#_486>八.使用主机名</a></p></li><li><p><a href=#_508>九.使用脚本自动配置</a></p></li><li><p><a href=#1_510>1.安装使用的软件</a></p></li><li><p><a href=#2_526>2.编写脚本</a></p></li><li><p><a href=#3_552>3给文件加权以及启动脚本文件</a></p></li><li><p><a href=#4_557>4.最后测试一下</a></p></li></ul><h2 id=一数据同步服务的基本介绍>一.数据同步服务的基本介绍<a hidden class=anchor aria-hidden=true href=#一数据同步服务的基本介绍>#</a></h2><h3 id=1什么是数据同步>1.什么是数据同步？<a hidden class=anchor aria-hidden=true href=#1什么是数据同步>#</a></h3><p><code>指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程</code></p><h3 id=2如何进行实时同步>2.如何进行实时同步<a hidden class=anchor aria-hidden=true href=#2如何进行实时同步>#</a></h3><pre tabindex=0><code>常⽤选项：
+• -v ：详细模式输出，显⽰传输过程中的⽂件信息。
+• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。
+• -z ：对备份的⽂件在传输时进⾏压缩处理。
+• -P ：显⽰进度条。
+• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）
+• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh
+端⼝
+本地同步：
+rsync -av /src/directory/ /dest/directory/
+远程同步：
+rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/
+拉取远程数据到本地：
+rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
+</code></pre><h3 id=3特点>3.特点<a hidden class=anchor aria-hidden=true href=#3特点>#</a></h3><p>• ⽀持增量同步：只传输发⽣变化的数据部分。
+• ⽀持 SSH 加密传输。
+• 可保持⽂件权限、时间戳、连接和等元数据。</p><h3 id=4怎么实现仅同步变化的数据呢>4.怎么实现仅同步变化的数据呢？<a hidden class=anchor aria-hidden=true href=#4怎么实现仅同步变化的数据呢>#</a></h3><pre tabindex=0><code>1.会对需要同步的数据文件进行分块(底层)
+2.每一个数据块会基于数据生成校验码，只要数据发生变化 这个校验码也会发生改变
+3.在同步文件的时候， 只需要监测哪些数据块的校验码发生变化， 就可以指定那个块数据改变了， 此时仅需要同步这些变化数据块即可
+</code></pre><h3 id=5同步方式>5.同步方式<a hidden class=anchor aria-hidden=true href=#5同步方式>#</a></h3><p>手动同步–> 定时同步</p><p>实时同步</p><h2 id=二如何安装数据同步服务-dnf--y-install-rsync>二.如何安装数据同步服务： dnf -y install rsync<a hidden class=anchor aria-hidden=true href=#二如何安装数据同步服务-dnf--y-install-rsync>#</a></h2><pre tabindex=0><code>dnf install rsync -y
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3797614224cc49d5a3fca322dfdf0d27.png></p><h2 id=三综合案例>三.综合案例<a hidden class=anchor aria-hidden=true href=#三综合案例>#</a></h2><h3 id=1-本地同步操作>1. 本地同步操作:<a hidden class=anchor aria-hidden=true href=#1-本地同步操作>#</a></h3><pre tabindex=0><code>准备⼯作
+1- 在node1节点的 /usr/local⽬录下,创建⼀个nginx-1.8.0⽬录,并在此⽬录下构建⼀个
+html⽬录
+2- 在html⽬录下,创建index.html、favicon.ico、logo.png⽂件，以及assets⽬录
+3- 在assets⽬录下，创建index.js、index.css⽂件
+4- 给各个⽂件随机写⼊⼀些内容
+需求：对html⽬录进⾏同步操作。 将其同步到/usr/local/nginx-1.8.0/backup/下，并且如果
+源⽬录下已经删除的，在⽬标⽬录下也应该被删除
+</code></pre><p><strong>我们应当用rsync命令进行相应的操作，下面就是我操作出来的</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f24199616bd64be2976432f00501fdf4.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ee2ff999ecb64ec7ba949b4a0a56e145.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8cc454aa2c71417ebc9f1743d69fef13.png></p><h3 id=2远程同步操作>2.远程同步操作:<a hidden class=anchor aria-hidden=true href=#2远程同步操作>#</a></h3><pre tabindex=0><code>需求：对/usr/local/nginx-1.8.0/html⽬录进⾏操作，将其同步到node2的家⽬录的backup的⽬
+录中
+注意： 需要双⽅均安装rsync，同时配置了SSH密钥（否则需要输⼊密码）
+</code></pre><p><code>这个案例也是没有什么太大的问题的，下面是我在这个案例中做出的</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d911be837ebe4112a5553e21e165097d.png></p><h3 id=3综合案例实现定时与增量备份>3.综合案例,实现定时与增量备份<a hidden class=anchor aria-hidden=true href=#3综合案例实现定时与增量备份>#</a></h3><pre tabindex=0><code>需求说明：
+在centos stream 9的 /var/log⽬录下， 存储了⼤量的关于系统的⽇志：如messages⽂件存储⼤量
+的系统⽇志信息，secure⽇志⽂件存储了⼤量的与系统安全的⽇志。请对此⽬录中的messages、
+secure⽇志⽂件进⾏定时的备份到node2节点的/export/data/node1_backup_system_log⽬录中，
+要求每⽇凌晨2点进⾏备份⼀次。
+</code></pre><p>在这案例之中我们可以使用定时任务进行操作的</p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/e43fc2f70dfe4cd6907dc89ceece0657.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f75359b85d11467499f187989fb51ff5.png></p><h2 id=四结合inotify实现数据实时同步>四.结合INOTIFY实现数据实时同步<a hidden class=anchor aria-hidden=true href=#四结合inotify实现数据实时同步>#</a></h2><pre tabindex=0><code>⾸先将⼆个路径分别创建出来， 便于后续演⽰
+node1执⾏： mkdir -p /export/data/logs
+node2执⾏： mkdir -p /export/data/node1_exe_backup_log
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/48b53dc5870544e39fc4c082d68c6b12.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/84ef413258f549afb18c49aaee593a27.png></p><ul><li>优势：</li></ul><pre tabindex=0><code>⾼效性: rsyncd 的守护进程模式可以避免每次连接都启动 SSH 进程，因此在某些情况下可能会⽐
+SSH ⽅式略微提⾼性能。
+简化配置: ⼀旦配置好 rsyncd，⽆需每次都输⼊ SSH 密码，适合⽤于定时备份等⾃动化任务。
+</code></pre><ul><li>缺点：</li></ul><pre tabindex=0><code>安全性问题: rsyncd 是基于开放端⼝的⽅式进⾏⽂件同步，默认情况下并不加密传输的数据。这使
+得数据传输过程可能暴露给中间⼈攻击（MITM）。虽然可以配置 rsyncd 使⽤ --password-file
+来限制访问，但仍然不如 SSH 安全。
+需要开放端⼝: 您需要在防⽕墙上开放 rsync 服务使⽤的端⼝（通常是 873），这可能增加潜在的
+安全⻛险。
+配置复杂: 需要在服务器上配置 rsyncd.conf，并管理模块、权限、⽤⼾等细节。
+</code></pre><h3 id=1对node2进行配置>1.对node2进行配置<a hidden class=anchor aria-hidden=true href=#1对node2进行配置>#</a></h3><h4 id=1创建用户>1.创建用户<a hidden class=anchor aria-hidden=true href=#1创建用户>#</a></h4><p><code>在这里面呢，我们需要在node2中创建2个用户，一个是backup_user,一个是rsync用户</code></p><pre tabindex=0><code>useradd backup_user
+useradd rsync
+passwd backup_user
+passwd rsync
+</code></pre><p>注意密码，都设置为123456</p><h4 id=2修改配置文件>2.修改配置文件<a hidden class=anchor aria-hidden=true href=#2修改配置文件>#</a></h4><p><strong>注意，这个配置文件要是在node2中修改的，以下是修改命令</strong></p><pre tabindex=0><code># 全局设置
+uid = rsync
+gid = rsync
+use chroot = no
+port = 873
+max connections = 200
+pid file = /var/run/rsyncd.pid
+log file = /var/log/rsyncd.log
+transfer logging = yes
+ignore nonreadable = yes
+[node1_logs]
+path = /export/data/node1_exe_backup_log
+comment = Backup Directory
+read only = no
+secrets file = /etc/rsyncd.passwd
+hosts allow = 192.168.149.0/24
+hosts deny = *
+auth users = backup_user
+</code></pre><h4 id=3创建密码件>3.创建密码⽂件<a hidden class=anchor aria-hidden=true href=#3创建密码件>#</a></h4><pre tabindex=0><code>echo &#34;backup_user:123456&#34; &gt; /etc/rsyncd.passwd
+# 设置密码⽂件的权限为600，确保该⽂件只有 RSYNC 服务可以读取
+chmod 600 /etc/rsyncd.passwd
+</code></pre><h4 id=4-启动rsync服务>4. 启动rsync服务<a hidden class=anchor aria-hidden=true href=#4-启动rsync服务>#</a></h4><pre tabindex=0><code>1 rsync --daemon
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/58dee05eaabd4dc49891471c76545a6b.png></p><pre tabindex=0><code>测试是否可以正常访问： 在node1执⾏
+rsync rsync://backup_user@192.168.88.102/node1_logs
+注意在node2需要开放端⼝：
+firewall-cmd --permanent --add-port=873/tcp
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d1989d021bb6426380e6f51e57bf0034.png></p><h2 id=五设置开机自启动>五.设置开机自启动<a hidden class=anchor aria-hidden=true href=#五设置开机自启动>#</a></h2><h3 id=1杀死进程>1.杀死进程<a hidden class=anchor aria-hidden=true href=#1杀死进程>#</a></h3><pre tabindex=0><code>-- 查看进程
+ps -ef | grep rsync -- 查看进程ID
+-- 杀死进程
+kill -9 rsync的进程ID
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/fcd3fe2f9e22479d8e444903657b882b.png></p><h3 id=2设置开机启动>2.设置开机⾃启动<a hidden class=anchor aria-hidden=true href=#2设置开机启动>#</a></h3><p>由于rsync并不是⼀个系统服务（简单判断：通过systemctl启动和关闭的服务），故需要先
+设置为系统服务后才可以设置</p><ul><li>修改配置文件</li></ul><pre tabindex=0><code>[Unit]
+Description=Rsync Daemon
+After=network.target
+[Service]
+ExecStart=/usr/bin/rsync --daemon --config=/etc/rsyncd.conf --no-detach
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+[Install]
+WantedBy=multi-user.target
+特殊说明：
+ExecReload=/bin/kill -HUP $MAINPID：通过发送 SIGHUP 信号，告诉 rsync 守护进程重新
+加载其配置⽂件，⽽⽆需停⽌并重新启动进程。
+</code></pre><ul><li>这个时候，我们需要把旧的日志文件给删掉</li></ul><p><code>因为我们可能在操作的时候会产出一些错误的日志，就是由于这些错误的文件会导致，我们后续无法成功启动rsync服务</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/0f536eb514064a138a47535825883933.png></p><p><strong>就像我这样的错误一样，这个时候，我们就要学会查看日志文件了，因为一些错误会记录在日志里面</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/5022578e0a2041e0bf82f35ec95129eb.png></p><p><strong>其实，当我把旧的日志文件给删掉之后哦，成功了，应该是之前启动失败过一次，日志文件，没有删除，然后再次启动，通过对比这个日志文件，发现有问题，就无法启动，删除文件意思是把里面的的错误清理掉，之后相当于重新启动，所以可以成功启动后</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f9265c47416648689835d494fc49a1b0.png></p><pre tabindex=0><code>总结这次成功的逻辑
+
+这次能成功，其实是两个动作配合的结果：
+
+清理现场：rm -f /var/run/rsyncd.pid 清除了旧的工作证，扫清了路障。
+
+修正配置：你之前（或者在我们的排查中）修正了 /etc/rsyncd.conf 里的错误（比如把密码文件的路径写对了，或者模块路径建好了）。
+
+所以，并不是“这样修改就可以”这么简单，而是“清理了旧障碍 + 配置本身正确”共同作用的结果。
+
+💡 小贴士：以后遇到类似问题怎么办？
+
+下次如果再遇到服务启动失败，且提示 already running、permission denied 或 status=11，可以尝试这个“万能重启三部曲”：
+
+查日志：journalctl -xeu 服务名 看具体报错。
+
+删 pid 文件：rm -f /var/run/服务名.pid 清理旧状态。
+
+重启服务：systemctl restart 服务名。
+
+记住，日志是你最好的朋友，它能告诉你服务到底是哪里不舒服。现在你的 rsync 服务已经稳稳运行了，可以去客户端测试同步啦！
+</code></pre><h2 id=六基于rsync服务完成动同步>六.基于RSYNC服务完成⼿动同步<a hidden class=anchor aria-hidden=true href=#六基于rsync服务完成动同步>#</a></h2><h3 id=1格式>1.格式<a hidden class=anchor aria-hidden=true href=#1格式>#</a></h3><pre tabindex=0><code>⽤⼾名@主机地址::模块名称 或 rsync://⽤⼾名@主机地址/模块名称
+说明：
+模块名： 指的是配置到rsync.conf 中 【】的内容
+⽤⼾名： 指的是模块中指定的⽤⼾名， 如果没有指定， 可以是主机存在的⽤⼾名即可（前提
+是该⽤⼾需要有权限）
+例如：
+backup_user@192.168.88.102::node1_logs
+</code></pre><h3 id=2基于动同步式完成数据同步>2.基于⼿动同步⽅式完成数据同步<a hidden class=anchor aria-hidden=true href=#2基于动同步式完成数据同步>#</a></h3><pre tabindex=0><code>rsync -avz /export/data/logs/ backup_user@node2::node1_logs
+</code></pre><h2 id=3创建日志文件>3.创建日志文件<a hidden class=anchor aria-hidden=true href=#3创建日志文件>#</a></h2><p><code>在创建的日志文件里面录入数据</code></p><pre tabindex=0><code>cd /export/data/logs
+touch log.txt &amp;&amp; echo &#34;2491 797 1243124 9127&#34;&gt;&gt;log.txt
+</code></pre><h3 id=4开始传输文件了>4.开始传输文件了<a hidden class=anchor aria-hidden=true href=#4开始传输文件了>#</a></h3><p><strong>在这一步里面呢，我们需要注意上下文，把这个权限给关掉，否则，后面传输就像我一样不会成功的</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/26b6693e93574eaeb136bf6615bb7331.png></p><p><strong>大家可以看到，我通过传送指令，无法发送成功，但是文件的权限都是开的，是最大的权限</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/7bd43237e0a94a5e85851f1e8df8701f.png></p><p><strong>当时，我就比较迷了，不知道该如何办，然后我问了千问，它给予了我很大的帮助了，我明白了其实是我Linux的上下文的权限比较严格，需要将其关闭</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3145c85ef4da49e682952ce1a8cd7c91.png></p><h4 id=解决方案>解决方案<a hidden class=anchor aria-hidden=true href=#解决方案>#</a></h4><p>以下是千问告诉我的</p><h3 id=找到根本原因了>找到根本原因了！<a hidden class=anchor aria-hidden=true href=#找到根本原因了>#</a></h3><p><strong>SELinux 处于 <code>Enforcing</code>（强制）模式</strong>，这就是 rsync 报 Permission denied 的真正原因。**</p><p><strong>即使目录权限是 <code>drwxrwxrwx</code>（777），SELinux 的安全策略仍然会阻止 rsync 进程写入文件。</strong></p><h3 id=解决方案-1>解决方案<a hidden class=anchor aria-hidden=true href=#解决方案-1>#</a></h3><h4 id=方案1临时关闭-selinux快速验证>方案1：临时关闭 SELinux（快速验证）<a hidden class=anchor aria-hidden=true href=#方案1临时关闭-selinux快速验证>#</a></h4><p>在远程服务器 <strong>192.168.149.131</strong> 上执行：</p><pre tabindex=0><code># 临时设置为 Permissive 模式（不需要重启）
+sudo setenforce 0
+
+# 验证
+getenforce
+# 应该输出: Permissive
+</code></pre><p>然后重新执行 rsync 命令，应该就能成功了。</p><blockquote></blockquote><p>⚠️ 这只是临时生效，重启后会恢复为 Enforcing。</p><h4 id=方案2永久关闭-selinux>方案2：永久关闭 SELinux<a hidden class=anchor aria-hidden=true href=#方案2永久关闭-selinux>#</a></h4><pre tabindex=0><code># 编辑 SELinux 配置文件
+sudo vi /etc/selinux/config
+
+# 将 SELINUX=enforcing 改为：
+SELINUX=disabled
+
+# 重启服务器生效
+sudo reboot
+</code></pre><h4 id=方案3设置正确的-selinux-上下文推荐更安全>方案3：设置正确的 SELinux 上下文（推荐，更安全）<a hidden class=anchor aria-hidden=true href=#方案3设置正确的-selinux-上下文推荐更安全>#</a></h4><p>如果不想关闭 SELinux，可以给目录设置正确的标签：</p><pre tabindex=0><code># 查看当前目录的 SELinux 上下文
+ls -Zd /export/data/node1_exe_backup_log/
+
+# 设置 rsync 可以写入的上下文
+sudo chcon -Rt public_content_rw_t /export/data/node1_exe_backup_log/
+
+# 如果 rsync 以守护进程方式运行，还需要：
+sudo setsebool -P rsync_full_access on
+</code></pre><h4 id=建议>建议<a hidden class=anchor aria-hidden=true href=#建议>#</a></h4><p><strong>先用方案1快速验证</strong>，确认是 SELinux 的问题后，再决定用方案2还是方案3长期解决。</p><pre tabindex=0><code># 在远程服务器上执行
+sudo setenforce 0
+</code></pre><p>然后回到本地重新执行 rsync 命令即可。</p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8ac5ac380cb84c8b830486665919aec8.png></p><p>这个是我按照，他的提示放权的步骤</p><p>接下来，很明显，我再次发送文件，直接成功了</p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/c0fe09d45589427297a0a688bc37e0c6.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ed077686afe346e781c59d27d34c3cde.png></p><p>注意，ai说的是下一次重启还会权限不足，因此我们需要修改配置文件</p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/7d67a5255e75406eb847e4906821e88e.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f92ca092e180417783c914bd90e3baee.png></p><p>将SELINUX修改为disabled就可以了</p><p><strong>然后，我们重启一起机器，是配置生效，就可以了。</strong></p><h2 id=七使密码件-实现不需要输密码>七,使⽤密码⽂件， 实现不需要输⼊密码<a hidden class=anchor aria-hidden=true href=#七使密码件-实现不需要输密码>#</a></h2><ul><li>步骤⼀： 配置密码⽂件</li></ul><pre tabindex=0><code>echo &#39;123456&#39; &gt; /etc/rsync.password
+chmod 600 /etc/rsync.password
+注意： 权限必须是600，否则会报错
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/857d0a1c14e14c63a92ea65f3571f9c3.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ca3460eb710546a2931a082130f17f37.png></p><ul><li>步骤⼆： 使⽤密码⽂件， 实现不需要输⼊密码</li></ul><pre tabindex=0><code>rsync -avz --password-file=/etc/rsync.password /export/data/logs/
+backup_user@node2::node1_logs
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/a048b4827a54434d90f3e299169ea317.png></p><p><strong>查看node2机器</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8d3571647e68489d9f3a1b3b008bc18e.png></p><h2 id=八使用主机名>八.使用主机名<a hidden class=anchor aria-hidden=true href=#八使用主机名>#</a></h2><p><code>这个应该修改配置文件hosts</code></p><pre tabindex=0><code>echo &#34;192.168.149.128 node1 node1.itcast.cn&#34;&gt;&gt;/etc/hosts
+echo &#34;192.168.149.131 node2 node2.itcast.cn&#34;&gt;&gt;/etc/hosts
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3303e84e3cbe403e9965e5879badb87e.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f1130277e6c8406db368a0cdefc6898c.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d1a4486386194c5abf53c8b1c2081410.png></p><h2 id=九使用脚本自动配置>九.使用脚本自动配置<a hidden class=anchor aria-hidden=true href=#九使用脚本自动配置>#</a></h2><h3 id=1安装使用的软件>1.安装使用的软件<a hidden class=anchor aria-hidden=true href=#1安装使用的软件>#</a></h3><ul><li>安装第三方源</li></ul><pre tabindex=0><code>⾸先启⽤EPEL仓库：
+dnf install epel-release
+</code></pre><ul><li>安装监视软件</li></ul><pre tabindex=0><code>安装inotify-tools
+dnf install -y inotify-tools
+</code></pre><h3 id=2编写脚本>2.编写脚本<a hidden class=anchor aria-hidden=true href=#2编写脚本>#</a></h3><ul><li>1.vi /root/real_time_sync.sh</li></ul><p>创建sh脚本文件</p><pre tabindex=0><code>#!/bin/bash
+# 定义源⽬录和⽬标⽬录（⽬标⽬录是远程服务器的⽬录）
+SOURCE_DIR=&#34;/export/data/logs&#34;
+TARGET_DIR=&#34;root@192.168.88.102:/export/data/node1_exe_backup_log&#34; # 替换为⽬
+标服务器的⽤⼾名和⽬录
+# ⽇志⽂件
+LOG_FILE=&#34;/var/log/rsync_realtime_sync.log&#34;
+# 使⽤inotifywait监听${WATCH_DIR}⽬录中的⽂件变化
+inotifywait -m -r -e modify,create,delete,move &#34;${SOURCE_DIR}&#34; | while read
+path action file; do
+echo &#34;Detected ${action} on ${file} in ${path}. Starting rsync...&#34; &gt;&gt;
+&#34;$LOG_FILE&#34;
+# 执⾏rsync同步操作
+rsync -avz --port=873 --delete -e ssh &#34;${SOURCE_DIR}/&#34; &#34;${TARGET_DIR}&#34;
+&gt;&gt; &#34;$LOG_FILE&#34; 2&gt;&amp;1
+echo &#34;Sync completed for ${file} in ${path}.&#34; &gt;&gt; &#34;$LOG_FILE&#34;
+done
+</code></pre><h3 id=3给文件加权以及启动脚本文件>3给文件加权以及启动脚本文件<a hidden class=anchor aria-hidden=true href=#3给文件加权以及启动脚本文件>#</a></h3><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/de9435f016924ec7a193db2c87b0f598.png></p><h3 id=4最后测试一下>4.最后测试一下<a hidden class=anchor aria-hidden=true href=#4最后测试一下>#</a></h3><p><code>在node1的/export/data/logs 里面上传几个文件，然后再打开一个node1服务器开启tail -100f监听文件，查看是否有修改，以及node2是否也跟着变化呢</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/bc1f71e8ed5b48b184532f40235ca967.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/00130a2aac85493ba709bdcd56ab6698.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/983dcb33b3f14c33990ab42f6cabe000.png></p><p><strong>最后，发现成功在node2里面显示，这个实验就完成了</strong></p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/><span class=title>« 上一页</span>
+<span>数据结构链表当中的头结点问题</span>
+</a><a class=next href=https://dsduyopg.github.io/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/><span class=title>下一页 »</span>
+<span>数学---等价无穷小问题</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
