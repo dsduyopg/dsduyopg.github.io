@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "磁盘的使用以及挂载"
 date: 2026-08-18
 draft: false

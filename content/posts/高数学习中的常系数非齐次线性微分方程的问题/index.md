@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "高数学习中的常系数非齐次线性微分方程的问题"
 date: 2026-08-18
 draft: false

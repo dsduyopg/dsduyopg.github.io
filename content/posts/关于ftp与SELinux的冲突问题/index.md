@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "关于ftp与SELinux的冲突问题"
 date: 2026-08-18
 draft: false

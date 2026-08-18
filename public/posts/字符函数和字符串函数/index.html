@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>字符函数和字符串函数 | 我的博客</title>
-<meta name="keywords" content="">
-<meta name="description" content="在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>字符函数和字符串函数 | 我的博客</title><meta name=keywords content><meta name=description content='在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。
 字符函数和字符串函数
 
 
@@ -124,82 +115,22 @@
 形如以下形式：
 int tolower ( int c );
 给大家举出一下例子，我们一起看一下：
-#include &lt;stdio.h&gt;
-#include &lt;ctype.h&gt;
+#include <stdio.h>
+#include <ctype.h>
 int main ()
 {
   int i=0;
-  char str[]=&#34;Test String.\n&#34;;
+  char str[]="Test String.\n";
   char c;
   while (str[i])
   {
     c=str[i];
     putchar (tolower(c));
-    i&#43;&#43;;
+    i++;
   }
   return 0;
 }
-当然这样写没有什么问题，但是我们也可以这样子写如下：">
-<meta name="author" content="dsduyopg">
-<link rel="canonical" href="http://localhost:1313/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.17e11805d3075f44c706341eeb6b41c4243b7f0769a966362af6f3d10f0b1051.css" integrity="sha256-F&#43;EYBdMHX0THBjQe62tBxCQ7fwdpqWY2Kvbz0Q8LEFE=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="http://localhost:1313/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="字符函数和字符串函数">
-  <meta property="og:description" content="在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。
+当然这样写没有什么问题，但是我们也可以这样子写如下：'><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/><link crossorigin=anonymous href=/assets/css/stylesheet.17e11805d3075f44c706341eeb6b41c4243b7f0769a966362af6f3d10f0b1051.css integrity="sha256-F+EYBdMHX0THBjQe62tBxCQ7fwdpqWY2Kvbz0Q8LEFE=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="字符函数和字符串函数"><meta property="og:description" content='在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。
 字符函数和字符串函数 一.字符函数
 1.字符分类函数
 1.字符分类函种类及作用
@@ -221,16 +152,7 @@ int main ()
 1.字符分类函数 1.字符分类函种类及作用 iscntrl 判断是否输入控制字符 isspace 输入空白字符返回真 isdigit 输入数字字符返回真 isxdigit 输入16进制数字字符返回真 islower 输入小写字符返回真 isupper 输入大写字符返回真 isalpha 输入字母字符返回真 isalnum 输入数字或者字母字符返回真 ispunct 输入标点字符返回真 isgraph 输入图形字符返回真 isprint 输入可打印字符返回真 2.字符转换函数 字符转化函数具体有，大写字符转化成小写字符，另有小写字符转化为大写字符，当然这些都是针对的是输入的是字母字符时方可使用的，但是若果使用的是非字母字符那么的话可能会导致错误，从而程序无法运行。
 1.字符转换函数包括哪些 1.大写字符转化为小写字符 1.大写字符转化为小写字符函数的具体诠释 形如以下形式：
 int tolower ( int c ); 给大家举出一下例子，我们一起看一下：
-#include &lt;stdio.h&gt;#include &lt;ctype.h&gt;int main (){int i=0;char str[]=&#34;Test String.\n&#34;;char c;while (str[i]){c=str[i];putchar (tolower(c));i&#43;&#43;;}return 0;} 当然这样写没有什么问题，但是我们也可以这样子写如下：">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="字符函数和字符串函数">
-  <meta name="twitter:description" content="在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。
+#include <stdio.h>#include <ctype.h>int main (){int i=0;char str[]="Test String.\n";char c;while (str[i]){c=str[i];putchar (tolower(c));i++;}return 0;} 当然这样写没有什么问题，但是我们也可以这样子写如下：'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="字符函数和字符串函数"><meta name=twitter:description content='在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。
 字符函数和字符串函数 一.字符函数
 1.字符分类函数
 1.字符分类函种类及作用
@@ -252,319 +174,13 @@ int tolower ( int c ); 给大家举出一下例子，我们一起看一下：
 1.字符分类函数 1.字符分类函种类及作用 iscntrl 判断是否输入控制字符 isspace 输入空白字符返回真 isdigit 输入数字字符返回真 isxdigit 输入16进制数字字符返回真 islower 输入小写字符返回真 isupper 输入大写字符返回真 isalpha 输入字母字符返回真 isalnum 输入数字或者字母字符返回真 ispunct 输入标点字符返回真 isgraph 输入图形字符返回真 isprint 输入可打印字符返回真 2.字符转换函数 字符转化函数具体有，大写字符转化成小写字符，另有小写字符转化为大写字符，当然这些都是针对的是输入的是字母字符时方可使用的，但是若果使用的是非字母字符那么的话可能会导致错误，从而程序无法运行。
 1.字符转换函数包括哪些 1.大写字符转化为小写字符 1.大写字符转化为小写字符函数的具体诠释 形如以下形式：
 int tolower ( int c ); 给大家举出一下例子，我们一起看一下：
-#include &lt;stdio.h&gt;#include &lt;ctype.h&gt;int main (){int i=0;char str[]=&#34;Test String.\n&#34;;char c;while (str[i]){c=str[i];putchar (tolower(c));i&#43;&#43;;}return 0;} 当然这样写没有什么问题，但是我们也可以这样子写如下：">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "http://localhost:1313/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "字符函数和字符串函数",
-      "item": "http://localhost:1313/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "字符函数和字符串函数",
-  "name": "字符函数和字符串函数",
-  "description": "在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。\n字符函数和字符串函数 一.字符函数\n1.字符分类函数\n1.字符分类函种类及作用\n2.字符转换函数\n1.字符转换函数包括哪些\n1.大写字符转化为小写字符\n1.大写字符转化为小写字符函数的具体诠释\n2.大写字符转化为小写字符函数的模拟实现\n2.小写字符转化为大写字符的函数\n1.小写字符转化为大写字符函数的具体诠释\n2.小写字符转化为大写字符函数的模拟实现\n二.字符串函数\n1.字符串函数包括哪些\n1.strlen函数\n2.strcpy函数\n3.strcat函数\n4.strcmp函数\n一.字符函数 字符是组成字符串的根本，那么学好字符函数对我们今后的学习起到了重要的作用，而在众多的字符函数当中有两种类型一个是判断的那种函数也就是字符分类函数，另一种则是转化大小写的那种，下面就为大家具体的诠释其中的奥妙。\n1.字符分类函数 1.字符分类函种类及作用 iscntrl 判断是否输入控制字符 isspace 输入空白字符返回真 isdigit 输入数字字符返回真 isxdigit 输入16进制数字字符返回真 islower 输入小写字符返回真 isupper 输入大写字符返回真 isalpha 输入字母字符返回真 isalnum 输入数字或者字母字符返回真 ispunct 输入标点字符返回真 isgraph 输入图形字符返回真 isprint 输入可打印字符返回真 2.字符转换函数 字符转化函数具体有，大写字符转化成小写字符，另有小写字符转化为大写字符，当然这些都是针对的是输入的是字母字符时方可使用的，但是若果使用的是非字母字符那么的话可能会导致错误，从而程序无法运行。\n1.字符转换函数包括哪些 1.大写字符转化为小写字符 1.大写字符转化为小写字符函数的具体诠释 形如以下形式：\nint tolower ( int c ); 给大家举出一下例子，我们一起看一下：\n#include \u0026lt;stdio.h\u0026gt;\r#include \u0026lt;ctype.h\u0026gt;\rint main ()\r{\rint i=0;\rchar str[]=\u0026#34;Test String.\\n\u0026#34;;\rchar c;\rwhile (str[i])\r{\rc=str[i];\rputchar (tolower(c));\ri++;\r}\rreturn 0;\r} 当然这样写没有什么问题，但是我们也可以这样子写如下：\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。\n字符函数和字符串函数 一.字符函数\n1.字符分类函数\n1.字符分类函种类及作用\n2.字符转换函数\n1.字符转换函数包括哪些\n1.大写字符转化为小写字符\n1.大写字符转化为小写字符函数的具体诠释\n2.大写字符转化为小写字符函数的模拟实现\n2.小写字符转化为大写字符的函数\n1.小写字符转化为大写字符函数的具体诠释\n2.小写字符转化为大写字符函数的模拟实现\n二.字符串函数\n1.字符串函数包括哪些\n1.strlen函数\n2.strcpy函数\n3.strcat函数\n4.strcmp函数\n一.字符函数 字符是组成字符串的根本，那么学好字符函数对我们今后的学习起到了重要的作用，而在众多的字符函数当中有两种类型一个是判断的那种函数也就是字符分类函数，另一种则是转化大小写的那种，下面就为大家具体的诠释其中的奥妙。\n1.字符分类函数 1.字符分类函种类及作用 iscntrl 判断是否输入控制字符 isspace 输入空白字符返回真 isdigit 输入数字字符返回真 isxdigit 输入16进制数字字符返回真 islower 输入小写字符返回真 isupper 输入大写字符返回真 isalpha 输入字母字符返回真 isalnum 输入数字或者字母字符返回真 ispunct 输入标点字符返回真 isgraph 输入图形字符返回真 isprint 输入可打印字符返回真 2.字符转换函数 字符转化函数具体有，大写字符转化成小写字符，另有小写字符转化为大写字符，当然这些都是针对的是输入的是字母字符时方可使用的，但是若果使用的是非字母字符那么的话可能会导致错误，从而程序无法运行。\n1.字符转换函数包括哪些 1.大写字符转化为小写字符 1.大写字符转化为小写字符函数的具体诠释 形如以下形式：\nint tolower ( int c ); 给大家举出一下例子，我们一起看一下：\n#include #include int main ()\r{\rint i=0;\rchar str[]=\"Test String.\\n\";\rchar c;\rwhile (str[i])\r{\rc=str[i];\rputchar (tolower(c));\ri++;\r}\rreturn 0;\r} 当然这样写没有什么问题，但是我们也可以这样子写如下：\n#define _CRT_SECURE_NO_WARNINGS 1\r#include #include int main()\r{\rint i = 0;\rchar str[] = \"Test String.\\n\";\rchar c;\rwhile (str[i])\r{\r//c = str[i];\rputchar(tolower(str[i]));\ri++;\r}\rreturn 0;\r} 因为int 与 char 都是整型的因此两种写法是没有什么问题的，但是我们平常在书写的时候要尽量采用第二种写法，因为这样可能更快一些，下面是在VS上运行的结果，如下： 2.大写字符转化为小写字符函数的模拟实现 int my_tolower(int a)\r{\rif (a \u003e= 'A' \u0026\u0026 a \u003c= 'Z')\ra = a + 32;\rreturn a;\r} 这个模拟实现出来的代码与库里面的代码是一模一样的。\n2.小写字符转化为大写字符的函数 1.小写字符转化为大写字符函数的具体诠释 形如以下形式：\nint toupper ( int c ); 给大家举出一下例子，我们一起看一下：\n#include #include int main ()\r{\rint i=0;\rchar str[]=\"Test String.\\n\";\rchar c;\rwhile (str[i])\r{\rc=str[i];\rputchar (toupper(c));\ri++;\r}\rreturn 0;\r} 当然这样写没有什么问题，但是我们也可以这样子写如下：\n#define _CRT_SECURE_NO_WARNINGS 1\r#include #include int main()\r{\rint i = 0;\rchar str[] = \"Test String.\\n\";\rchar c;\rwhile (str[i])\r{\r//c = str[i];\rputchar(toupper(str[i]));\ri++;\r}\rreturn 0;\r} 因为int 与 char 都是整型的因此两种写法是没有什么问题的，但是我们平常在书写的时候要尽量采用第二种写法，因为这样可能更快一些，下面是在VS上运行的结果，如下： 2.小写字符转化为大写字符函数的模拟实现 int my_upper(int a)\r{\rif (a \u003e= 'a' \u0026\u0026 a \u003c= 'z')\ra = a - 32;\rreturn a;\r} 这个模拟实现出来的代码与库里面的代码是一模一样的\n二.字符串函数 在这里面我们会遇到比较多的字符串函数，但是你会发现这些函数其实都差不多，所以当我为各位介绍一下函数时，请各位不要过于惊慌，不要太害怕，我们会在今后的学习中会经常遇到这些函数，所以我会用我最大的努力为大家详细的介绍这些有用的函数，望大家喜欢，下面就开始我们的字符串函数之旅。\n1.字符串函数包括哪些 其实字符串函数是比较多的，那么今天我就为大家介绍几种字符串函数，余下的函数，等以后再为大家介绍，我今天为大家介绍的函数是一下几种：strlen函数，strcpy函数，strcat函数，strcmp函数。\n1.strlen函数 这个函数主要的功能是求字符串的长度的。 我给大家举出例子如下：\n#include #include int main ()\r{\rchar szInput[256];\rprintf (\"Enter a sentence: \");\rgets (szInput);\rprintf (\"The sentence entered is %u characters long.\\n\",(unsigned)strlen(szInput));\rreturn 0;\r} 对于这个函数，我模拟实现如下：\nint my_strlen(char* a)\r{\rchar* b = a;\rwhile (*a++);\rreturn a - b-1;\r} 其余地方都是差不多的，我可以相信大家对于这个函数一定有更加深刻的认识与了解。\n2.strcpy函数 这个函数的主要功能是将一个字符串复制到另一个字符串当中，如下我给大家举出下面的例子：\n#include #include int main ()\r{\rchar str1[]=\"Sample string\";\rchar str2[40];\rchar str3[40];\rstrcpy (str2,str1);\rstrcpy (str3,\"copy successful\");\rprintf (\"str1: %s\\nstr2: %s\\nstr3: %s\\n\",str1,str2,str3);\rreturn 0;\r} 对于这个函数我模拟实现如下：\nchar* my_strcpy(char* a,const char *b)\r{\rchar* ret = a;\rassert(a);\rassert(a);\rwhile (*a++ = *b++);\rreturn ret;\r} 通过我对于这个函数的模拟我有理由相信大家一定会对于这个函数会有新的认识与了解，知道其中实现的具体的逻辑，对这个函数使用会更加的熟练。\n3.strcat函数 这个函数是将一个字符串复制到另一个字符串的末尾，具体的例子如下：\n#include #include int main ()\r{\rchar str[80];\rstrcpy (str,\"these \");\rstrcat (str,\"strings \");\rstrcat (str,\"are \");\rstrcat (str,\"concatenated.\");\rputs (str);\rreturn 0;\r} 大家好这个程序的运行结果如下所示： 那么接下来，大家好我将为大家展示出我对于这个函数的模拟实现，下面就是具体的例子如下：\nchar* my_strcat(char* a, const char* b)\r{\rchar* ret = a;\rassert(a);\rassert(b);\rwhile (*a++);\rwhile (*a++ = *b++);\rreturn ret;\r} 大家好，我的这个函数实现的基本逻辑与库函数里面的逻辑可以说是一样的，那么大家对于该函数的阅读，一定会在一定程度上增进对于库函数strcat的了解与认识，今后我们会对该函数的使用会愈加的频繁，下面我就为大家介绍今天的最后一个函数。\n4.strcmp函数 这个函数是比较俩个字符串是否都是一样的，下面我就为大家举出具体的例子；\n#include #include int main ()\r{\rchar key[] = \"apple\";\rchar buffer[80];\rdo {\rprintf (\"Guess my favorite fruit? \");\rfflush (stdout);\rscanf (\"%79s\",buffer);\r} while (strcmp (key,buffer) != 0);\rputs (\"Correct answer!\");\rreturn 0;\r} 大家好这个函数的具体运行结果如下： 大家只要脊柱这个库函数就可以了，具体的实现我今天就不为大家介绍了，大家若果有兴趣的话可观看一些视频，例如鹏哥的视频，鹏哥会为大家详细的介绍这个函数的具体实现及基本逻辑的，很遗憾今天我为大家讲解的知识点结束了，若果大家感兴趣的话，可以关注的账号，我会定期的为大家讲解的。 完（结束）\n",
-  "wordCount" : "439",
-  "inLanguage": "zh-cn",
-  "datePublished": "2026-08-18T00:00:00Z",
-  "dateModified": "2026-08-18T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": "dsduyopg"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="http://localhost:1313/search/" title="搜索">
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
-            <a href="/">主页</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/posts/">Posts</a>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-</nav>
-    <h1 class="post-title entry-hint-parent">
-      字符函数和字符串函数
-    </h1>
-    <div class="post-meta">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>439 字</span>&nbsp;·&nbsp;<span>dsduyopg</span>
-
-</div>
-  </header> <details class="toc" >
-    <summary accesskey="c" title="(Alt + C)">
-        <span class="title">目录</span>
-    </summary>
-
-    <div class="inner"><ul><ul><ul>
-            <li>
-                <a href="#%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0%e5%92%8c%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%87%bd%e6%95%b0" aria-label="字符函数和字符串函数">字符函数和字符串函数</a></li></ul>
-                </ul>
-                
-            <li>
-                <a href="#%e4%b8%80%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0" aria-label="一.字符函数">一.字符函数</a><ul>
-                    
-            <li>
-                <a href="#1%e5%ad%97%e7%ac%a6%e5%88%86%e7%b1%bb%e5%87%bd%e6%95%b0" aria-label="1.字符分类函数">1.字符分类函数</a><ul>
-                    
-            <li>
-                <a href="#1%e5%ad%97%e7%ac%a6%e5%88%86%e7%b1%bb%e5%87%bd%e7%a7%8d%e7%b1%bb%e5%8f%8a%e4%bd%9c%e7%94%a8" aria-label="1.字符分类函种类及作用">1.字符分类函种类及作用</a></li></ul>
-            </li>
-            <li>
-                <a href="#2%e5%ad%97%e7%ac%a6%e8%bd%ac%e6%8d%a2%e5%87%bd%e6%95%b0" aria-label="2.字符转换函数">2.字符转换函数</a><ul>
-                    
-            <li>
-                <a href="#1%e5%ad%97%e7%ac%a6%e8%bd%ac%e6%8d%a2%e5%87%bd%e6%95%b0%e5%8c%85%e6%8b%ac%e5%93%aa%e4%ba%9b" aria-label="1.字符转换函数包括哪些">1.字符转换函数包括哪些</a><ul>
-                    
-            <li>
-                <a href="#1%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6" aria-label="1.大写字符转化为小写字符">1.大写字符转化为小写字符</a><ul>
-                    
-            <li>
-                <a href="#1%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0%e7%9a%84%e5%85%b7%e4%bd%93%e8%af%a0%e9%87%8a" aria-label="1.大写字符转化为小写字符函数的具体诠释">1.大写字符转化为小写字符函数的具体诠释</a></li>
-            <li>
-                <a href="#2%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0%e7%9a%84%e6%a8%a1%e6%8b%9f%e5%ae%9e%e7%8e%b0" aria-label="2.大写字符转化为小写字符函数的模拟实现">2.大写字符转化为小写字符函数的模拟实现</a></li></ul>
-            </li>
-            <li>
-                <a href="#2%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e7%9a%84%e5%87%bd%e6%95%b0" aria-label="2.小写字符转化为大写字符的函数">2.小写字符转化为大写字符的函数</a><ul>
-                    
-            <li>
-                <a href="#1%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0%e7%9a%84%e5%85%b7%e4%bd%93%e8%af%a0%e9%87%8a" aria-label="1.小写字符转化为大写字符函数的具体诠释">1.小写字符转化为大写字符函数的具体诠释</a></li>
-            <li>
-                <a href="#2%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0%e7%9a%84%e6%a8%a1%e6%8b%9f%e5%ae%9e%e7%8e%b0" aria-label="2.小写字符转化为大写字符函数的模拟实现">2.小写字符转化为大写字符函数的模拟实现</a></li></ul>
-            </li></ul>
-            </li></ul>
-            </li></ul>
-            </li>
-            <li>
-                <a href="#%e4%ba%8c%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%87%bd%e6%95%b0" aria-label="二.字符串函数">二.字符串函数</a><ul>
-                    
-            <li>
-                <a href="#1%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%87%bd%e6%95%b0%e5%8c%85%e6%8b%ac%e5%93%aa%e4%ba%9b" aria-label="1.字符串函数包括哪些">1.字符串函数包括哪些</a><ul>
-                    
-            <li>
-                <a href="#1strlen%e5%87%bd%e6%95%b0" aria-label="1.strlen函数">1.strlen函数</a></li>
-            <li>
-                <a href="#2strcpy%e5%87%bd%e6%95%b0" aria-label="2.strcpy函数">2.strcpy函数</a></li>
-            <li>
-                <a href="#3strcat%e5%87%bd%e6%95%b0" aria-label="3.strcat函数">3.strcat函数</a></li>
-            <li>
-                <a href="#4strcmp%e5%87%bd%e6%95%b0" aria-label="4.strcmp函数">4.strcmp函数</a>
-            </li>
-        </ul>
-        </li>
-        </ul>
-        </li>
-        </ul>
-    </div>
-</details>
-
-  <div class="post-content md-content"><p>在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。</p>
-<h4 id="字符函数和字符串函数">字符函数和字符串函数<a hidden class="anchor" aria-hidden="true" href="#字符函数和字符串函数">#</a></h4>
-<ul>
-<li>
-<p><a href="#_2">一.字符函数</a></p>
-</li>
-<li>
-<p><a href="#1_4">1.字符分类函数</a></p>
-</li>
-<li>
-<p><a href="#1_5">1.字符分类函种类及作用</a></p>
-</li>
-<li>
-<p><a href="#2_19">2.字符转换函数</a></p>
-</li>
-<li>
-<p><a href="#1_21">1.字符转换函数包括哪些</a></p>
-</li>
-<li>
-<p><a href="#1_22">1.大写字符转化为小写字符</a></p>
-</li>
-<li>
-<p><a href="#1_23">1.大写字符转化为小写字符函数的具体诠释</a></p>
-</li>
-<li>
-<p><a href="#2_67">2.大写字符转化为小写字符函数的模拟实现</a></p>
-</li>
-<li>
-<p><a href="#2_79">2.小写字符转化为大写字符的函数</a></p>
-</li>
-<li>
-<p><a href="#1_80">1.小写字符转化为大写字符函数的具体诠释</a></p>
-</li>
-<li>
-<p><a href="#2_124">2.小写字符转化为大写字符函数的模拟实现</a></p>
-</li>
-<li>
-<p><a href="#_135">二.字符串函数</a></p>
-</li>
-<li>
-<p><a href="#1_137">1.字符串函数包括哪些</a></p>
-</li>
-<li>
-<p><a href="#1strlen_139">1.strlen函数</a></p>
-</li>
-<li>
-<p><a href="#2strcpy_165">2.strcpy函数</a></p>
-</li>
-<li>
-<p><a href="#3strcat_194">3.strcat函数</a></p>
-</li>
-<li>
-<p><a href="#4strcmp_226">4.strcmp函数</a></p>
-</li>
-</ul>
-<h2 id="一字符函数">一.字符函数<a hidden class="anchor" aria-hidden="true" href="#一字符函数">#</a></h2>
-<p>字符是组成字符串的根本，那么学好字符函数对我们今后的学习起到了重要的作用，而在众多的字符函数当中有两种类型一个是判断的那种函数也就是字符分类函数，另一种则是转化大小写的那种，下面就为大家具体的诠释其中的奥妙。</p>
-<h3 id="1字符分类函数">1.字符分类函数<a hidden class="anchor" aria-hidden="true" href="#1字符分类函数">#</a></h3>
-<h4 id="1字符分类函种类及作用">1.字符分类函种类及作用<a hidden class="anchor" aria-hidden="true" href="#1字符分类函种类及作用">#</a></h4>
-<table>
-	<thead>
-			<tr>
-					<th>iscntrl</th>
-					<th>判断是否输入控制字符</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>isspace</td>
-					<td>输入空白字符返回真</td>
-			</tr>
-			<tr>
-					<td>isdigit</td>
-					<td>输入数字字符返回真</td>
-			</tr>
-			<tr>
-					<td>isxdigit</td>
-					<td>输入16进制数字字符返回真</td>
-			</tr>
-			<tr>
-					<td>islower</td>
-					<td>输入小写字符返回真</td>
-			</tr>
-			<tr>
-					<td>isupper</td>
-					<td>输入大写字符返回真</td>
-			</tr>
-			<tr>
-					<td>isalpha</td>
-					<td>输入字母字符返回真</td>
-			</tr>
-			<tr>
-					<td>isalnum</td>
-					<td>输入数字或者字母字符返回真</td>
-			</tr>
-			<tr>
-					<td>ispunct</td>
-					<td>输入标点字符返回真</td>
-			</tr>
-			<tr>
-					<td>isgraph</td>
-					<td>输入图形字符返回真</td>
-			</tr>
-			<tr>
-					<td>isprint</td>
-					<td>输入可打印字符返回真</td>
-			</tr>
-	</tbody>
-</table>
-<h3 id="2字符转换函数">2.字符转换函数<a hidden class="anchor" aria-hidden="true" href="#2字符转换函数">#</a></h3>
-<p>字符转化函数具体有，大写字符转化成小写字符，另有小写字符转化为大写字符，当然这些都是针对的是输入的是字母字符时方可使用的，但是若果使用的是非字母字符那么的话可能会导致错误，从而程序无法运行。</p>
-<h4 id="1字符转换函数包括哪些">1.字符转换函数包括哪些<a hidden class="anchor" aria-hidden="true" href="#1字符转换函数包括哪些">#</a></h4>
-<h5 id="1大写字符转化为小写字符">1.大写字符转化为小写字符<a hidden class="anchor" aria-hidden="true" href="#1大写字符转化为小写字符">#</a></h5>
-<h6 id="1大写字符转化为小写字符函数的具体诠释">1.大写字符转化为小写字符函数的具体诠释<a hidden class="anchor" aria-hidden="true" href="#1大写字符转化为小写字符函数的具体诠释">#</a></h6>
-<p>形如以下形式：</p>
-<pre tabindex="0"><code>int tolower ( int c );
-</code></pre><p>给大家举出一下例子，我们一起看一下：</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+#include <stdio.h>#include <ctype.h>int main (){int i=0;char str[]="Test String.\n";char c;while (str[i]){c=str[i];putchar (tolower(c));i++;}return 0;} 当然这样写没有什么问题，但是我们也可以这样子写如下：'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"字符函数和字符串函数","item":"https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"字符函数和字符串函数","name":"字符函数和字符串函数","description":"在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。\n字符函数和字符串函数 一.字符函数\n1.字符分类函数\n1.字符分类函种类及作用\n2.字符转换函数\n1.字符转换函数包括哪些\n1.大写字符转化为小写字符\n1.大写字符转化为小写字符函数的具体诠释\n2.大写字符转化为小写字符函数的模拟实现\n2.小写字符转化为大写字符的函数\n1.小写字符转化为大写字符函数的具体诠释\n2.小写字符转化为大写字符函数的模拟实现\n二.字符串函数\n1.字符串函数包括哪些\n1.strlen函数\n2.strcpy函数\n3.strcat函数\n4.strcmp函数\n一.字符函数 字符是组成字符串的根本，那么学好字符函数对我们今后的学习起到了重要的作用，而在众多的字符函数当中有两种类型一个是判断的那种函数也就是字符分类函数，另一种则是转化大小写的那种，下面就为大家具体的诠释其中的奥妙。\n1.字符分类函数 1.字符分类函种类及作用 iscntrl 判断是否输入控制字符 isspace 输入空白字符返回真 isdigit 输入数字字符返回真 isxdigit 输入16进制数字字符返回真 islower 输入小写字符返回真 isupper 输入大写字符返回真 isalpha 输入字母字符返回真 isalnum 输入数字或者字母字符返回真 ispunct 输入标点字符返回真 isgraph 输入图形字符返回真 isprint 输入可打印字符返回真 2.字符转换函数 字符转化函数具体有，大写字符转化成小写字符，另有小写字符转化为大写字符，当然这些都是针对的是输入的是字母字符时方可使用的，但是若果使用的是非字母字符那么的话可能会导致错误，从而程序无法运行。\n1.字符转换函数包括哪些 1.大写字符转化为小写字符 1.大写字符转化为小写字符函数的具体诠释 形如以下形式：\nint tolower ( int c ); 给大家举出一下例子，我们一起看一下：\n#include \u0026lt;stdio.h\u0026gt;\r#include \u0026lt;ctype.h\u0026gt;\rint main ()\r{\rint i=0;\rchar str[]=\u0026#34;Test String.\\n\u0026#34;;\rchar c;\rwhile (str[i])\r{\rc=str[i];\rputchar (tolower(c));\ri++;\r}\rreturn 0;\r} 当然这样写没有什么问题，但是我们也可以这样子写如下：\n","keywords":[],"articleBody":"在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。\n字符函数和字符串函数 一.字符函数\n1.字符分类函数\n1.字符分类函种类及作用\n2.字符转换函数\n1.字符转换函数包括哪些\n1.大写字符转化为小写字符\n1.大写字符转化为小写字符函数的具体诠释\n2.大写字符转化为小写字符函数的模拟实现\n2.小写字符转化为大写字符的函数\n1.小写字符转化为大写字符函数的具体诠释\n2.小写字符转化为大写字符函数的模拟实现\n二.字符串函数\n1.字符串函数包括哪些\n1.strlen函数\n2.strcpy函数\n3.strcat函数\n4.strcmp函数\n一.字符函数 字符是组成字符串的根本，那么学好字符函数对我们今后的学习起到了重要的作用，而在众多的字符函数当中有两种类型一个是判断的那种函数也就是字符分类函数，另一种则是转化大小写的那种，下面就为大家具体的诠释其中的奥妙。\n1.字符分类函数 1.字符分类函种类及作用 iscntrl 判断是否输入控制字符 isspace 输入空白字符返回真 isdigit 输入数字字符返回真 isxdigit 输入16进制数字字符返回真 islower 输入小写字符返回真 isupper 输入大写字符返回真 isalpha 输入字母字符返回真 isalnum 输入数字或者字母字符返回真 ispunct 输入标点字符返回真 isgraph 输入图形字符返回真 isprint 输入可打印字符返回真 2.字符转换函数 字符转化函数具体有，大写字符转化成小写字符，另有小写字符转化为大写字符，当然这些都是针对的是输入的是字母字符时方可使用的，但是若果使用的是非字母字符那么的话可能会导致错误，从而程序无法运行。\n1.字符转换函数包括哪些 1.大写字符转化为小写字符 1.大写字符转化为小写字符函数的具体诠释 形如以下形式：\nint tolower ( int c ); 给大家举出一下例子，我们一起看一下：\n#include #include int main ()\r{\rint i=0;\rchar str[]=\"Test String.\\n\";\rchar c;\rwhile (str[i])\r{\rc=str[i];\rputchar (tolower(c));\ri++;\r}\rreturn 0;\r} 当然这样写没有什么问题，但是我们也可以这样子写如下：\n#define _CRT_SECURE_NO_WARNINGS 1\r#include #include int main()\r{\rint i = 0;\rchar str[] = \"Test String.\\n\";\rchar c;\rwhile (str[i])\r{\r//c = str[i];\rputchar(tolower(str[i]));\ri++;\r}\rreturn 0;\r} 因为int 与 char 都是整型的因此两种写法是没有什么问题的，但是我们平常在书写的时候要尽量采用第二种写法，因为这样可能更快一些，下面是在VS上运行的结果，如下： 2.大写字符转化为小写字符函数的模拟实现 int my_tolower(int a)\r{\rif (a \u003e= 'A' \u0026\u0026 a \u003c= 'Z')\ra = a + 32;\rreturn a;\r} 这个模拟实现出来的代码与库里面的代码是一模一样的。\n2.小写字符转化为大写字符的函数 1.小写字符转化为大写字符函数的具体诠释 形如以下形式：\nint toupper ( int c ); 给大家举出一下例子，我们一起看一下：\n#include #include int main ()\r{\rint i=0;\rchar str[]=\"Test String.\\n\";\rchar c;\rwhile (str[i])\r{\rc=str[i];\rputchar (toupper(c));\ri++;\r}\rreturn 0;\r} 当然这样写没有什么问题，但是我们也可以这样子写如下：\n#define _CRT_SECURE_NO_WARNINGS 1\r#include #include int main()\r{\rint i = 0;\rchar str[] = \"Test String.\\n\";\rchar c;\rwhile (str[i])\r{\r//c = str[i];\rputchar(toupper(str[i]));\ri++;\r}\rreturn 0;\r} 因为int 与 char 都是整型的因此两种写法是没有什么问题的，但是我们平常在书写的时候要尽量采用第二种写法，因为这样可能更快一些，下面是在VS上运行的结果，如下： 2.小写字符转化为大写字符函数的模拟实现 int my_upper(int a)\r{\rif (a \u003e= 'a' \u0026\u0026 a \u003c= 'z')\ra = a - 32;\rreturn a;\r} 这个模拟实现出来的代码与库里面的代码是一模一样的\n二.字符串函数 在这里面我们会遇到比较多的字符串函数，但是你会发现这些函数其实都差不多，所以当我为各位介绍一下函数时，请各位不要过于惊慌，不要太害怕，我们会在今后的学习中会经常遇到这些函数，所以我会用我最大的努力为大家详细的介绍这些有用的函数，望大家喜欢，下面就开始我们的字符串函数之旅。\n1.字符串函数包括哪些 其实字符串函数是比较多的，那么今天我就为大家介绍几种字符串函数，余下的函数，等以后再为大家介绍，我今天为大家介绍的函数是一下几种：strlen函数，strcpy函数，strcat函数，strcmp函数。\n1.strlen函数 这个函数主要的功能是求字符串的长度的。 我给大家举出例子如下：\n#include #include int main ()\r{\rchar szInput[256];\rprintf (\"Enter a sentence: \");\rgets (szInput);\rprintf (\"The sentence entered is %u characters long.\\n\",(unsigned)strlen(szInput));\rreturn 0;\r} 对于这个函数，我模拟实现如下：\nint my_strlen(char* a)\r{\rchar* b = a;\rwhile (*a++);\rreturn a - b-1;\r} 其余地方都是差不多的，我可以相信大家对于这个函数一定有更加深刻的认识与了解。\n2.strcpy函数 这个函数的主要功能是将一个字符串复制到另一个字符串当中，如下我给大家举出下面的例子：\n#include #include int main ()\r{\rchar str1[]=\"Sample string\";\rchar str2[40];\rchar str3[40];\rstrcpy (str2,str1);\rstrcpy (str3,\"copy successful\");\rprintf (\"str1: %s\\nstr2: %s\\nstr3: %s\\n\",str1,str2,str3);\rreturn 0;\r} 对于这个函数我模拟实现如下：\nchar* my_strcpy(char* a,const char *b)\r{\rchar* ret = a;\rassert(a);\rassert(a);\rwhile (*a++ = *b++);\rreturn ret;\r} 通过我对于这个函数的模拟我有理由相信大家一定会对于这个函数会有新的认识与了解，知道其中实现的具体的逻辑，对这个函数使用会更加的熟练。\n3.strcat函数 这个函数是将一个字符串复制到另一个字符串的末尾，具体的例子如下：\n#include #include int main ()\r{\rchar str[80];\rstrcpy (str,\"these \");\rstrcat (str,\"strings \");\rstrcat (str,\"are \");\rstrcat (str,\"concatenated.\");\rputs (str);\rreturn 0;\r} 大家好这个程序的运行结果如下所示： 那么接下来，大家好我将为大家展示出我对于这个函数的模拟实现，下面就是具体的例子如下：\nchar* my_strcat(char* a, const char* b)\r{\rchar* ret = a;\rassert(a);\rassert(b);\rwhile (*a++);\rwhile (*a++ = *b++);\rreturn ret;\r} 大家好，我的这个函数实现的基本逻辑与库函数里面的逻辑可以说是一样的，那么大家对于该函数的阅读，一定会在一定程度上增进对于库函数strcat的了解与认识，今后我们会对该函数的使用会愈加的频繁，下面我就为大家介绍今天的最后一个函数。\n4.strcmp函数 这个函数是比较俩个字符串是否都是一样的，下面我就为大家举出具体的例子；\n#include #include int main ()\r{\rchar key[] = \"apple\";\rchar buffer[80];\rdo {\rprintf (\"Guess my favorite fruit? \");\rfflush (stdout);\rscanf (\"%79s\",buffer);\r} while (strcmp (key,buffer) != 0);\rputs (\"Correct answer!\");\rreturn 0;\r} 大家好这个函数的具体运行结果如下： 大家只要脊柱这个库函数就可以了，具体的实现我今天就不为大家介绍了，大家若果有兴趣的话可观看一些视频，例如鹏哥的视频，鹏哥会为大家详细的介绍这个函数的具体实现及基本逻辑的，很遗憾今天我为大家讲解的知识点结束了，若果大家感兴趣的话，可以关注的账号，我会定期的为大家讲解的。 完（结束）\n","wordCount":"439","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/posts/>Posts</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">字符函数和字符串函数</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>439 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><ul><ul><li><a href=#%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0%e5%92%8c%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%87%bd%e6%95%b0 aria-label=字符函数和字符串函数>字符函数和字符串函数</a></li></ul></ul><li><a href=#%e4%b8%80%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0 aria-label=一.字符函数>一.字符函数</a><ul><li><a href=#1%e5%ad%97%e7%ac%a6%e5%88%86%e7%b1%bb%e5%87%bd%e6%95%b0 aria-label=1.字符分类函数>1.字符分类函数</a><ul><li><a href=#1%e5%ad%97%e7%ac%a6%e5%88%86%e7%b1%bb%e5%87%bd%e7%a7%8d%e7%b1%bb%e5%8f%8a%e4%bd%9c%e7%94%a8 aria-label=1.字符分类函种类及作用>1.字符分类函种类及作用</a></li></ul></li><li><a href=#2%e5%ad%97%e7%ac%a6%e8%bd%ac%e6%8d%a2%e5%87%bd%e6%95%b0 aria-label=2.字符转换函数>2.字符转换函数</a><ul><li><a href=#1%e5%ad%97%e7%ac%a6%e8%bd%ac%e6%8d%a2%e5%87%bd%e6%95%b0%e5%8c%85%e6%8b%ac%e5%93%aa%e4%ba%9b aria-label=1.字符转换函数包括哪些>1.字符转换函数包括哪些</a><ul><li><a href=#1%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6 aria-label=1.大写字符转化为小写字符>1.大写字符转化为小写字符</a><ul><li><a href=#1%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0%e7%9a%84%e5%85%b7%e4%bd%93%e8%af%a0%e9%87%8a aria-label=1.大写字符转化为小写字符函数的具体诠释>1.大写字符转化为小写字符函数的具体诠释</a></li><li><a href=#2%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0%e7%9a%84%e6%a8%a1%e6%8b%9f%e5%ae%9e%e7%8e%b0 aria-label=2.大写字符转化为小写字符函数的模拟实现>2.大写字符转化为小写字符函数的模拟实现</a></li></ul></li><li><a href=#2%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e7%9a%84%e5%87%bd%e6%95%b0 aria-label=2.小写字符转化为大写字符的函数>2.小写字符转化为大写字符的函数</a><ul><li><a href=#1%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0%e7%9a%84%e5%85%b7%e4%bd%93%e8%af%a0%e9%87%8a aria-label=1.小写字符转化为大写字符函数的具体诠释>1.小写字符转化为大写字符函数的具体诠释</a></li><li><a href=#2%e5%b0%8f%e5%86%99%e5%ad%97%e7%ac%a6%e8%bd%ac%e5%8c%96%e4%b8%ba%e5%a4%a7%e5%86%99%e5%ad%97%e7%ac%a6%e5%87%bd%e6%95%b0%e7%9a%84%e6%a8%a1%e6%8b%9f%e5%ae%9e%e7%8e%b0 aria-label=2.小写字符转化为大写字符函数的模拟实现>2.小写字符转化为大写字符函数的模拟实现</a></li></ul></li></ul></li></ul></li></ul></li><li><a href=#%e4%ba%8c%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%87%bd%e6%95%b0 aria-label=二.字符串函数>二.字符串函数</a><ul><li><a href=#1%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%87%bd%e6%95%b0%e5%8c%85%e6%8b%ac%e5%93%aa%e4%ba%9b aria-label=1.字符串函数包括哪些>1.字符串函数包括哪些</a><ul><li><a href=#1strlen%e5%87%bd%e6%95%b0 aria-label=1.strlen函数>1.strlen函数</a></li><li><a href=#2strcpy%e5%87%bd%e6%95%b0 aria-label=2.strcpy函数>2.strcpy函数</a></li><li><a href=#3strcat%e5%87%bd%e6%95%b0 aria-label=3.strcat函数>3.strcat函数</a></li><li><a href=#4strcmp%e5%87%bd%e6%95%b0 aria-label=4.strcmp函数>4.strcmp函数</a></li></ul></li></ul></li></ul></div></details><div class="post-content md-content"><p>在本节中我将为大家介绍一些关于字符函数以及字符串函数，在本节中我将为大家详细介绍某些重要函数的模拟实现，使大家更好的了解这些函数的具体逻辑，下面就开启了本次的学习之旅，希望大家都有所收获。</p><h4 id=字符函数和字符串函数>字符函数和字符串函数<a hidden class=anchor aria-hidden=true href=#字符函数和字符串函数>#</a></h4><ul><li><p><a href=#_2>一.字符函数</a></p></li><li><p><a href=#1_4>1.字符分类函数</a></p></li><li><p><a href=#1_5>1.字符分类函种类及作用</a></p></li><li><p><a href=#2_19>2.字符转换函数</a></p></li><li><p><a href=#1_21>1.字符转换函数包括哪些</a></p></li><li><p><a href=#1_22>1.大写字符转化为小写字符</a></p></li><li><p><a href=#1_23>1.大写字符转化为小写字符函数的具体诠释</a></p></li><li><p><a href=#2_67>2.大写字符转化为小写字符函数的模拟实现</a></p></li><li><p><a href=#2_79>2.小写字符转化为大写字符的函数</a></p></li><li><p><a href=#1_80>1.小写字符转化为大写字符函数的具体诠释</a></p></li><li><p><a href=#2_124>2.小写字符转化为大写字符函数的模拟实现</a></p></li><li><p><a href=#_135>二.字符串函数</a></p></li><li><p><a href=#1_137>1.字符串函数包括哪些</a></p></li><li><p><a href=#1strlen_139>1.strlen函数</a></p></li><li><p><a href=#2strcpy_165>2.strcpy函数</a></p></li><li><p><a href=#3strcat_194>3.strcat函数</a></p></li><li><p><a href=#4strcmp_226>4.strcmp函数</a></p></li></ul><h2 id=一字符函数>一.字符函数<a hidden class=anchor aria-hidden=true href=#一字符函数>#</a></h2><p>字符是组成字符串的根本，那么学好字符函数对我们今后的学习起到了重要的作用，而在众多的字符函数当中有两种类型一个是判断的那种函数也就是字符分类函数，另一种则是转化大小写的那种，下面就为大家具体的诠释其中的奥妙。</p><h3 id=1字符分类函数>1.字符分类函数<a hidden class=anchor aria-hidden=true href=#1字符分类函数>#</a></h3><h4 id=1字符分类函种类及作用>1.字符分类函种类及作用<a hidden class=anchor aria-hidden=true href=#1字符分类函种类及作用>#</a></h4><table><thead><tr><th>iscntrl</th><th>判断是否输入控制字符</th></tr></thead><tbody><tr><td>isspace</td><td>输入空白字符返回真</td></tr><tr><td>isdigit</td><td>输入数字字符返回真</td></tr><tr><td>isxdigit</td><td>输入16进制数字字符返回真</td></tr><tr><td>islower</td><td>输入小写字符返回真</td></tr><tr><td>isupper</td><td>输入大写字符返回真</td></tr><tr><td>isalpha</td><td>输入字母字符返回真</td></tr><tr><td>isalnum</td><td>输入数字或者字母字符返回真</td></tr><tr><td>ispunct</td><td>输入标点字符返回真</td></tr><tr><td>isgraph</td><td>输入图形字符返回真</td></tr><tr><td>isprint</td><td>输入可打印字符返回真</td></tr></tbody></table><h3 id=2字符转换函数>2.字符转换函数<a hidden class=anchor aria-hidden=true href=#2字符转换函数>#</a></h3><p>字符转化函数具体有，大写字符转化成小写字符，另有小写字符转化为大写字符，当然这些都是针对的是输入的是字母字符时方可使用的，但是若果使用的是非字母字符那么的话可能会导致错误，从而程序无法运行。</p><h4 id=1字符转换函数包括哪些>1.字符转换函数包括哪些<a hidden class=anchor aria-hidden=true href=#1字符转换函数包括哪些>#</a></h4><h5 id=1大写字符转化为小写字符>1.大写字符转化为小写字符<a hidden class=anchor aria-hidden=true href=#1大写字符转化为小写字符>#</a></h5><h6 id=1大写字符转化为小写字符函数的具体诠释>1.大写字符转化为小写字符函数的具体诠释<a hidden class=anchor aria-hidden=true href=#1大写字符转化为小写字符函数的具体诠释>#</a></h6><p>形如以下形式：</p><pre tabindex=0><code>int tolower ( int c );
+</code></pre><p>给大家举出一下例子，我们一起看一下：</p><pre tabindex=0><code>#include &lt;stdio.h&gt;
 #include &lt;ctype.h&gt;
 int main ()
 {
@@ -579,8 +195,7 @@ int main ()
   }
   return 0;
 }
-</code></pre><p>当然这样写没有什么问题，但是我们也可以这样子写如下：</p>
-<pre tabindex="0"><code>#define _CRT_SECURE_NO_WARNINGS 1
+</code></pre><p>当然这样写没有什么问题，但是我们也可以这样子写如下：</p><pre tabindex=0><code>#define _CRT_SECURE_NO_WARNINGS 1
 #include &lt;stdio.h&gt;
 #include &lt;ctype.h&gt;
 int main()
@@ -597,22 +212,15 @@ int main()
     return 0;
 }
 </code></pre><p>因为int 与 char 都是整型的因此两种写法是没有什么问题的，但是我们平常在书写的时候要尽量采用第二种写法，因为这样可能更快一些，下面是在VS上运行的结果，如下：
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/images/776bd4fa04172cee158f0a94be4b8b8f.png"></p>
-<h6 id="2大写字符转化为小写字符函数的模拟实现">2.大写字符转化为小写字符函数的模拟实现<a hidden class="anchor" aria-hidden="true" href="#2大写字符转化为小写字符函数的模拟实现">#</a></h6>
-<pre tabindex="0"><code>int my_tolower(int a)
+<img alt=在这里插入图片描述 loading=lazy src=/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/images/776bd4fa04172cee158f0a94be4b8b8f.png></p><h6 id=2大写字符转化为小写字符函数的模拟实现>2.大写字符转化为小写字符函数的模拟实现<a hidden class=anchor aria-hidden=true href=#2大写字符转化为小写字符函数的模拟实现>#</a></h6><pre tabindex=0><code>int my_tolower(int a)
 {
     if (a &gt;= &#39;A&#39; &amp;&amp; a &lt;= &#39;Z&#39;)
         a = a + 32;
     return a;
 
 }
-</code></pre><p>这个模拟实现出来的代码与库里面的代码是一模一样的。</p>
-<h5 id="2小写字符转化为大写字符的函数">2.小写字符转化为大写字符的函数<a hidden class="anchor" aria-hidden="true" href="#2小写字符转化为大写字符的函数">#</a></h5>
-<h6 id="1小写字符转化为大写字符函数的具体诠释">1.小写字符转化为大写字符函数的具体诠释<a hidden class="anchor" aria-hidden="true" href="#1小写字符转化为大写字符函数的具体诠释">#</a></h6>
-<p>形如以下形式：</p>
-<pre tabindex="0"><code>int toupper ( int c );
-</code></pre><p>给大家举出一下例子，我们一起看一下：</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+</code></pre><p>这个模拟实现出来的代码与库里面的代码是一模一样的。</p><h5 id=2小写字符转化为大写字符的函数>2.小写字符转化为大写字符的函数<a hidden class=anchor aria-hidden=true href=#2小写字符转化为大写字符的函数>#</a></h5><h6 id=1小写字符转化为大写字符函数的具体诠释>1.小写字符转化为大写字符函数的具体诠释<a hidden class=anchor aria-hidden=true href=#1小写字符转化为大写字符函数的具体诠释>#</a></h6><p>形如以下形式：</p><pre tabindex=0><code>int toupper ( int c );
+</code></pre><p>给大家举出一下例子，我们一起看一下：</p><pre tabindex=0><code>#include &lt;stdio.h&gt;
 #include &lt;ctype.h&gt;
 int main ()
 {
@@ -627,8 +235,7 @@ int main ()
   }
   return 0;
 }
-</code></pre><p>当然这样写没有什么问题，但是我们也可以这样子写如下：</p>
-<pre tabindex="0"><code>#define _CRT_SECURE_NO_WARNINGS 1
+</code></pre><p>当然这样写没有什么问题，但是我们也可以这样子写如下：</p><pre tabindex=0><code>#define _CRT_SECURE_NO_WARNINGS 1
 #include &lt;stdio.h&gt;
 #include &lt;ctype.h&gt;
 int main()
@@ -645,24 +252,15 @@ int main()
     return 0;
 }
 </code></pre><p>因为int 与 char 都是整型的因此两种写法是没有什么问题的，但是我们平常在书写的时候要尽量采用第二种写法，因为这样可能更快一些，下面是在VS上运行的结果，如下：
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/images/8a1ff853eb8e03f864a2a1ebe06c3f09.png"></p>
-<h6 id="2小写字符转化为大写字符函数的模拟实现">2.小写字符转化为大写字符函数的模拟实现<a hidden class="anchor" aria-hidden="true" href="#2小写字符转化为大写字符函数的模拟实现">#</a></h6>
-<pre tabindex="0"><code>int my_upper(int a)
+<img alt=在这里插入图片描述 loading=lazy src=/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/images/8a1ff853eb8e03f864a2a1ebe06c3f09.png></p><h6 id=2小写字符转化为大写字符函数的模拟实现>2.小写字符转化为大写字符函数的模拟实现<a hidden class=anchor aria-hidden=true href=#2小写字符转化为大写字符函数的模拟实现>#</a></h6><pre tabindex=0><code>int my_upper(int a)
 {
     if (a &gt;= &#39;a&#39; &amp;&amp; a &lt;= &#39;z&#39;)
         a = a - 32;
     return a;
 
 }
-</code></pre><p>这个模拟实现出来的代码与库里面的代码是一模一样的</p>
-<h2 id="二字符串函数">二.字符串函数<a hidden class="anchor" aria-hidden="true" href="#二字符串函数">#</a></h2>
-<p>在这里面我们会遇到比较多的字符串函数，但是你会发现这些函数其实都差不多，所以当我为各位介绍一下函数时，请各位不要过于惊慌，不要太害怕，我们会在今后的学习中会经常遇到这些函数，所以我会用我最大的努力为大家详细的介绍这些有用的函数，望大家喜欢，下面就开始我们的字符串函数之旅。</p>
-<h3 id="1字符串函数包括哪些">1.字符串函数包括哪些<a hidden class="anchor" aria-hidden="true" href="#1字符串函数包括哪些">#</a></h3>
-<p>其实字符串函数是比较多的，那么今天我就为大家介绍几种字符串函数，余下的函数，等以后再为大家介绍，我今天为大家介绍的函数是一下几种：strlen函数，strcpy函数，strcat函数，strcmp函数。</p>
-<h4 id="1strlen函数">1.strlen函数<a hidden class="anchor" aria-hidden="true" href="#1strlen函数">#</a></h4>
-<p>这个函数主要的功能是求字符串的长度的。
-我给大家举出例子如下：</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+</code></pre><p>这个模拟实现出来的代码与库里面的代码是一模一样的</p><h2 id=二字符串函数>二.字符串函数<a hidden class=anchor aria-hidden=true href=#二字符串函数>#</a></h2><p>在这里面我们会遇到比较多的字符串函数，但是你会发现这些函数其实都差不多，所以当我为各位介绍一下函数时，请各位不要过于惊慌，不要太害怕，我们会在今后的学习中会经常遇到这些函数，所以我会用我最大的努力为大家详细的介绍这些有用的函数，望大家喜欢，下面就开始我们的字符串函数之旅。</p><h3 id=1字符串函数包括哪些>1.字符串函数包括哪些<a hidden class=anchor aria-hidden=true href=#1字符串函数包括哪些>#</a></h3><p>其实字符串函数是比较多的，那么今天我就为大家介绍几种字符串函数，余下的函数，等以后再为大家介绍，我今天为大家介绍的函数是一下几种：strlen函数，strcpy函数，strcat函数，strcmp函数。</p><h4 id=1strlen函数>1.strlen函数<a hidden class=anchor aria-hidden=true href=#1strlen函数>#</a></h4><p>这个函数主要的功能是求字符串的长度的。
+我给大家举出例子如下：</p><pre tabindex=0><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
 int main ()
@@ -673,17 +271,13 @@ int main ()
   printf (&#34;The sentence entered is %u characters long.\n&#34;,(unsigned)strlen(szInput));
   return 0;
 }
-</code></pre><p>对于这个函数，我模拟实现如下：</p>
-<pre tabindex="0"><code>int  my_strlen(char* a)
+</code></pre><p>对于这个函数，我模拟实现如下：</p><pre tabindex=0><code>int  my_strlen(char* a)
 {
 	char* b = a;
 	while (*a++);
 	return a - b-1;
 }
-</code></pre><p>其余地方都是差不多的，我可以相信大家对于这个函数一定有更加深刻的认识与了解。</p>
-<h4 id="2strcpy函数">2.strcpy函数<a hidden class="anchor" aria-hidden="true" href="#2strcpy函数">#</a></h4>
-<p>这个函数的主要功能是将一个字符串复制到另一个字符串当中，如下我给大家举出下面的例子：</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+</code></pre><p>其余地方都是差不多的，我可以相信大家对于这个函数一定有更加深刻的认识与了解。</p><h4 id=2strcpy函数>2.strcpy函数<a hidden class=anchor aria-hidden=true href=#2strcpy函数>#</a></h4><p>这个函数的主要功能是将一个字符串复制到另一个字符串当中，如下我给大家举出下面的例子：</p><pre tabindex=0><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
 int main ()
@@ -696,8 +290,7 @@ int main ()
   printf (&#34;str1: %s\nstr2: %s\nstr3: %s\n&#34;,str1,str2,str3);
   return 0;
 }
-</code></pre><p>对于这个函数我模拟实现如下：</p>
-<pre tabindex="0"><code>char* my_strcpy(char* a,const char *b)
+</code></pre><p>对于这个函数我模拟实现如下：</p><pre tabindex=0><code>char* my_strcpy(char* a,const char *b)
 {
 	char* ret = a;
 	assert(a);
@@ -705,10 +298,7 @@ int main ()
 	while (*a++ = *b++);
 	return  ret;
 }
-</code></pre><p>通过我对于这个函数的模拟我有理由相信大家一定会对于这个函数会有新的认识与了解，知道其中实现的具体的逻辑，对这个函数使用会更加的熟练。</p>
-<h4 id="3strcat函数">3.strcat函数<a hidden class="anchor" aria-hidden="true" href="#3strcat函数">#</a></h4>
-<p>这个函数是将一个字符串复制到另一个字符串的末尾，具体的例子如下：</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+</code></pre><p>通过我对于这个函数的模拟我有理由相信大家一定会对于这个函数会有新的认识与了解，知道其中实现的具体的逻辑，对这个函数使用会更加的熟练。</p><h4 id=3strcat函数>3.strcat函数<a hidden class=anchor aria-hidden=true href=#3strcat函数>#</a></h4><p>这个函数是将一个字符串复制到另一个字符串的末尾，具体的例子如下：</p><pre tabindex=0><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
 int main ()
@@ -722,9 +312,8 @@ int main ()
   return 0;
 }
 </code></pre><p>大家好这个程序的运行结果如下所示：
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/images/95fc4cd0bd48cb7efe7e87e470cf834c.png">
-那么接下来，大家好我将为大家展示出我对于这个函数的模拟实现，下面就是具体的例子如下：</p>
-<pre tabindex="0"><code>char* my_strcat(char* a, const char* b)
+<img alt=在这里插入图片描述 loading=lazy src=/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/images/95fc4cd0bd48cb7efe7e87e470cf834c.png>
+那么接下来，大家好我将为大家展示出我对于这个函数的模拟实现，下面就是具体的例子如下：</p><pre tabindex=0><code>char* my_strcat(char* a, const char* b)
 {
 	char* ret = a;
 	assert(a);
@@ -733,10 +322,7 @@ int main ()
 	while (*a++ = *b++);
 	return ret;
 }
-</code></pre><p>大家好，我的这个函数实现的基本逻辑与库函数里面的逻辑可以说是一样的，那么大家对于该函数的阅读，一定会在一定程度上增进对于库函数strcat的了解与认识，今后我们会对该函数的使用会愈加的频繁，下面我就为大家介绍今天的最后一个函数。</p>
-<h4 id="4strcmp函数">4.strcmp函数<a hidden class="anchor" aria-hidden="true" href="#4strcmp函数">#</a></h4>
-<p>这个函数是比较俩个字符串是否都是一样的，下面我就为大家举出具体的例子；</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+</code></pre><p>大家好，我的这个函数实现的基本逻辑与库函数里面的逻辑可以说是一样的，那么大家对于该函数的阅读，一定会在一定程度上增进对于库函数strcat的了解与认识，今后我们会对该函数的使用会愈加的频繁，下面我就为大家介绍今天的最后一个函数。</p><h4 id=4strcmp函数>4.strcmp函数<a hidden class=anchor aria-hidden=true href=#4strcmp函数>#</a></h4><p>这个函数是比较俩个字符串是否都是一样的，下面我就为大家举出具体的例子；</p><pre tabindex=0><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
 int main ()
@@ -752,156 +338,13 @@ int main ()
   return 0;
 }
 </code></pre><p>大家好这个函数的具体运行结果如下：
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/images/bd7a09971e3487343000a0e80841b9e2.png">
+<img alt=在这里插入图片描述 loading=lazy src=/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/images/bd7a09971e3487343000a0e80841b9e2.png>
 大家只要脊柱这个库函数就可以了，具体的实现我今天就不为大家介绍了，大家若果有兴趣的话可观看一些视频，例如鹏哥的视频，鹏哥会为大家详细的介绍这个函数的具体实现及基本逻辑的，很遗憾今天我为大家讲解的知识点结束了，若果大家感兴趣的话，可以关注的账号，我会定期的为大家讲解的。
-完（结束）</p>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/">
-    <span class="title">« 上一页</span>
-    <span>字符串中删除后导星号的问题</span>
-  </a>
-  <a class="next" href="http://localhost:1313/posts/%E5%85%B6%E4%BB%96%E5%8D%9A%E5%AE%A2/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/">
-    <span class="title">下一页 »</span>
-    <span></span>
-  </a>
-</nav>
-
-  </footer>
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = '复制';
-
-        function copyingDone() {
-            copybutton.innerHTML = '已复制！';
-            setTimeout(() => {
-                copybutton.innerHTML = '复制';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+完（结束）</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/><span class=title>« 上一页</span>
+<span>字符串中删除后导星号的问题</span>
+</a><a class=next href=https://dsduyopg.github.io/posts/%E5%85%B6%E4%BB%96%E5%8D%9A%E5%AE%A2/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/><span class=title>下一页 »</span>
+<span></span></a></nav></footer><div class=comments><h2>评论</h2><script src=https://utteranc.es/client.js repo=dsduyopg/dsduyopg.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script><noscript>请启用 JavaScript 查看评论。</noscript></div></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

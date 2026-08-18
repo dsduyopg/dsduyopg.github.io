@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "rm -rf 删掉日志文件后，为什么 service restart 才能恢复？"
 date: 2026-08-18
 draft: false

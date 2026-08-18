@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "C语言指针篇第一"
 date: 2026-08-18
 draft: false

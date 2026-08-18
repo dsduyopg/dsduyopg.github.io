@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "C语言之扫雷游戏"
 date: 2026-08-18
 draft: false

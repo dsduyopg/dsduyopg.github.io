@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "博客日记与我的看法"
 date: 2026-08-18
 draft: false

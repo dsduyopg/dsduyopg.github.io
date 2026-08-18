@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "SSh的相关操作"
 date: 2026-08-18
 draft: false

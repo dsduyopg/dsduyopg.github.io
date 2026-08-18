@@ -1,0 +1,14 @@
+{{- if not (.Param "hideComments") }}
+<div class="comments">
+  <h2>评论</h2>
+  <script src="https://utteranc.es/client.js"
+          repo="dsduyopg/dsduyopg.github.io"
+          issue-term="pathname"
+          label="comment"
+          theme="preferred-color-scheme"
+          crossorigin="anonymous"
+          async>
+  </script>
+  <noscript>请启用 JavaScript 查看评论。</noscript>
+</div>
+{{- end }}

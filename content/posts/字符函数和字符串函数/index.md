@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "字符函数和字符串函数"
 date: 2026-08-18
 draft: false

@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "数学---等价无穷小问题"
 date: 2026-08-18
 draft: false

@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "数据同步服务"
 date: 2026-08-18
 draft: false

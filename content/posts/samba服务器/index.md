@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "samba服务器"
 date: 2026-08-18
 draft: false

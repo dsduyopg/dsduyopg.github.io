@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "数据结构链表当中的头结点问题"
 date: 2026-08-18
 draft: false

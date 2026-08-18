@@ -1,4 +1,5 @@
 ---
+comments: true
 title: "整数和浮点数在内存中存储"
 date: 2026-08-18
 draft: false

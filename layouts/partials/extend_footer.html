@@ -1,0 +1,8 @@
+{{- if not site.Params.disableBusuanzi }}
+<div class="busuanzi">
+  本站访客 <span id="busuanzi_value_site_uv"></span> ·
+  访问量 <span id="busuanzi_value_site_pv"></span>
+  {{- if eq .Kind "page" }} · 本文阅读 <span id="busuanzi_value_page_pv"></span>{{- end }}
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+{{- end }}
