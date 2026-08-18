@@ -147,6 +147,40 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">rm -rf 删掉日志文件后，为什么 service restart 才能恢复？
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景
+1.打开系统⽇志的配置⽂件
+2.在规则模块中， 配置需求要求的内容
+3.进行测试
+1.测试优先级大于这个的
+2.测试优先级小于这个的
+2.出现问题
+1.删除日志文件
+2.出现问题
+3.问题原因
+4.解决问题
+1.重启服务
+2.测试
+5.总结
+我自己总结
+我查阅资料总结
+1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中
+1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log*.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;)# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert &#34;12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info &#34;12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因
+1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 问题2：是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的 理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点 3.问题原因 1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说
+1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。3.命令的级别不够高：执行的命令是 logger -p crit &#34;...&#34;。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;) 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>253 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to rm -rf 删掉日志文件后，为什么 service restart 才能恢复？" href="http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">samba服务器
     </h2>
   </header>
@@ -460,40 +494,6 @@ blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后�
 
 <span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>36 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
   <a class="entry-link" aria-label="post link to 高数学习中的常系数非齐次线性微分方程的问题" href="http://localhost:1313/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">关于ftp与SELinux的冲突问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>关于ftp与SELinux的冲突问题 1.问题背景
-2.遇到的问题
-3.问题解决的方法
-1.ai的方法
-为什么本地能写、FTP 不能写？
-嫌疑一：write_enable 没开（最常见！）
-嫌疑二：SELinux 拦住了 ftpd
-兜底：看日志，让服务器自己告诉你原因
-建议的排查顺序
-2.我看出了什么
-第 2 步：临时关掉 SELinux 做隔离测试
-第 3 步：回客户端 lftp 重试
-看结果分支判断
-3.我的解决方案
-4.给我们的警示
-1.问题背景 首先这个问题诞生于如此条件下，我在跟随佳乐老师创建完lisi，zhangsan，wangwu之后呢，我就用lisi作为用户登录服务器node1，这里面设置了禁锢操作，路径是/export/public，而public里面拥有2个文件夹.一个是logs，另一个是src，同时设置了黑白名单,张三设置在黑名单，王五和李四设置在白名单
-2.遇到的问题 1.遇到的问题其实就是，在我用lisi把客户端的根目录下的a.log，发送给服务器的logs目录，无法操作 2.后来，我在logs目录下创建文件夹也是无法操作的，也是显示权限不足 但是呢，我在服务器的这个logs目录下创建文件夹是可以创建的 3.就很奇怪，再去服务器是可以搞定的，是可以创建文件夹的，但是在客户端是没有办法进行创建的，我当时以为是logs的权限设置的不对，用的是root创建，权限大的缘故，但是其实并不是如此的,后面我在服务器用了lisi照样是可以创建的 4.后来，我仔细检查了这些文件夹的权限，并再次赋权,这次显然也是不行的 3.问题解决的方法 解决的办法，后来，我把我的问题，这些比较奇怪的地方，我问了千文，后来，在他的帮助之下我成功了，在客户端我成功的在服务器的logs上面创建了文件夹，这意味着什么呢，显然这意味着，我可以把客户端家目录的a.log上传给服务器的logs里面，结果显然和我想的一样 下面是千文告诉我的解决方案，让我一步一步排查，最后成功找到了问题关键所咋
-1.ai的方法 这个对比信息非常关键！它直接帮我们排除了文件系统权限问题。
-为什么本地能写、FTP 不能写？ 本质区别在于执行写入的&#34;身份&#34;不同：
-场景 执行者 受什么约束 本地 mkdir lisi 自己的 shell 进程 只看文件系统的 rwx 权限 ✅ FTP mkdir vsftpd 守护进程代为执行 受 vsftpd.conf 开关 &#43; SELinux 对 ftpd 的策略双重约束 ❌ 所以本地能写，完全不能证明 FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>391 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to 关于ftp与SELinux的冲突问题" href="http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

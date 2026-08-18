@@ -147,6 +147,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">C语言之讲解篇5
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>例题：
+下列程序段的输出结果为（ ）unsigned long pulArray[] = {6,7,8,9,10};unsigned long *pulPtr;pulPtr = pulArray;*(pulPtr &#43; 3) &#43;= 3;printf(&#34;%d,%d\n&#34;,*pulPtr, *(pulPtr &#43; 3)); 解释：pulPtr已经是数组的首元素6，而*(pulPtr &#43; 3)是指针向后移动3位所得到的结果，同时把该结果再加上3所得的值是12，接下来再把12赋值给*(pulPtr &#43; 3)，然后由于指针是数组的首地址那么的话，*pulPtr就是6，而(pulPtr &#43; 3)自然就是12，接下来我们就可以选择6 12了，本题11就这样结束了。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>31 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to C语言之讲解篇5" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">C语言之讲解篇6
     </h2>
   </header>
@@ -429,40 +445,6 @@ systemctl restart nfs-serversystemctl statussystemctl enable 六.验证是否�
 
 <span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>90 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
   <a class="entry-link" aria-label="post link to nfs服务器的相关知识" href="http://localhost:1313/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">rm -rf 删掉日志文件后，为什么 service restart 才能恢复？
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景
-1.打开系统⽇志的配置⽂件
-2.在规则模块中， 配置需求要求的内容
-3.进行测试
-1.测试优先级大于这个的
-2.测试优先级小于这个的
-2.出现问题
-1.删除日志文件
-2.出现问题
-3.问题原因
-4.解决问题
-1.重启服务
-2.测试
-5.总结
-我自己总结
-我查阅资料总结
-1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中
-1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log*.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;)# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert &#34;12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info &#34;12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因
-1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 问题2：是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的 理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点 3.问题原因 1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说
-1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。3.命令的级别不够高：执行的命令是 logger -p crit &#34;...&#34;。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;) 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>253 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
-  <a class="entry-link" aria-label="post link to rm -rf 删掉日志文件后，为什么 service restart 才能恢复？" href="http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
