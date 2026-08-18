@@ -372,6 +372,31 @@ int tolower ( int c ); 给大家举出一下例子，我们一起看一下：
 <span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>439 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
   <a class="entry-link" aria-label="post link to 字符函数和字符串函数" href="http://localhost:1313/posts/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/"></a>
 </article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
+![图片](https://img-blog.csdnimg.cn/xxxx.png) 如果图床失效或文章被删除，图片就找不回来了。
+这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：
+![图片](images/xxxx.png) 这样博客的正文和图片就能一起保存、迁移、备份。
+使用方法 1. 准备 本机需要安装 Python 3.11 或更高版本。
+检查：
+python --version 2. 下载图片 python download_images.py &#34;D:\博客\文章.md&#34; 执行后会在文章同目录生成：
+D:\博客\ ├─ 文章.md └─ images\ └─ xxxx.png 文章.md 里的图片链接会自动改写为：
+![图片](images/xxxx.png) 3. 可选参数 指定图片目录名：
+python download_images.py &#34;D:\博客\文章.md&#34; --out 图片 只预览，不实际下载：
+python download_images.py &#34;D:\博客\文章.md&#34; --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span>1 分钟</span>&nbsp;·&nbsp;<span>77 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></footer>
+  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/posts/%E5%85%B6%E4%BB%96%E5%8D%9A%E5%AE%A2/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"></a>
+</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="http://localhost:1313/posts/page/3/" title="上一页">&laquo;</a>
