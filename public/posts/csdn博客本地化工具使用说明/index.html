@@ -1,4 +1,13 @@
-<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>CSDN 博客本地化工具使用说明 | 我的博客</title><meta name=keywords content><meta name=description content='CSDN 博客本地化工具
+<!DOCTYPE html>
+<html lang="zh-cn" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>CSDN 博客本地化工具使用说明 | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="CSDN 博客本地化工具
 用途
 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
 ![图片](https://img-blog.csdnimg.cn/xxxx.png)
@@ -12,7 +21,7 @@ CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
 检查：
 python --version
 2. 下载图片
-python download_images.py "D:\博客\文章.md"
+python download_images.py &#34;D:\博客\文章.md&#34;
 执行后会在文章同目录生成：
 D:\博客\
 ├─ 文章.md
@@ -22,9 +31,9 @@ D:\博客\
 ![图片](images/xxxx.png)
 3. 可选参数
 指定图片目录名：
-python download_images.py "D:\博客\文章.md" --out 图片
+python download_images.py &#34;D:\博客\文章.md&#34; --out 图片
 只预览，不实际下载：
-python download_images.py "D:\博客\文章.md" --dry-run
+python download_images.py &#34;D:\博客\文章.md&#34; --dry-run
 注意事项
 
 脚本只处理 Markdown 的 ![alt](url) 图片语法
@@ -34,47 +43,439 @@ python download_images.py "D:\博客\文章.md" --dry-run
 下载的图片文件会按 URL 文件名保存，重名时自动加编号
 
 建议
-下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。'><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/><link crossorigin=anonymous href=/assets/css/stylesheet.17e11805d3075f44c706341eeb6b41c4243b7f0769a966362af6f3d10f0b1051.css integrity="sha256-F+EYBdMHX0THBjQe62tBxCQ7fwdpqWY2Kvbz0Q8LEFE=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="CSDN 博客本地化工具使用说明"><meta property="og:description" content='CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
+下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。">
+<meta name="author" content="dsduyopg">
+<link rel="canonical" href="http://localhost:1313/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.17e11805d3075f44c706341eeb6b41c4243b7f0769a966362af6f3d10f0b1051.css" integrity="sha256-F&#43;EYBdMHX0THBjQe62tBxCQ7fwdpqWY2Kvbz0Q8LEFE=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="CSDN 博客本地化工具使用说明">
+  <meta property="og:description" content="CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
 ![图片](https://img-blog.csdnimg.cn/xxxx.png) 如果图床失效或文章被删除，图片就找不回来了。
 这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：
 ![图片](images/xxxx.png) 这样博客的正文和图片就能一起保存、迁移、备份。
 使用方法 1. 准备 本机需要安装 Python 3.11 或更高版本。
 检查：
-python --version 2. 下载图片 python download_images.py "D:\博客\文章.md" 执行后会在文章同目录生成：
+python --version 2. 下载图片 python download_images.py &#34;D:\博客\文章.md&#34; 执行后会在文章同目录生成：
 D:\博客\ ├─ 文章.md └─ images\ └─ xxxx.png 文章.md 里的图片链接会自动改写为：
 ![图片](images/xxxx.png) 3. 可选参数 指定图片目录名：
-python download_images.py "D:\博客\文章.md" --out 图片 只预览，不实际下载：
-python download_images.py "D:\博客\文章.md" --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="CSDN 博客本地化工具使用说明"><meta name=twitter:description content='CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
+python download_images.py &#34;D:\博客\文章.md&#34; --out 图片 只预览，不实际下载：
+python download_images.py &#34;D:\博客\文章.md&#34; --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CSDN 博客本地化工具使用说明">
+  <meta name="twitter:description" content="CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
 ![图片](https://img-blog.csdnimg.cn/xxxx.png) 如果图床失效或文章被删除，图片就找不回来了。
 这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：
 ![图片](images/xxxx.png) 这样博客的正文和图片就能一起保存、迁移、备份。
 使用方法 1. 准备 本机需要安装 Python 3.11 或更高版本。
 检查：
-python --version 2. 下载图片 python download_images.py "D:\博客\文章.md" 执行后会在文章同目录生成：
+python --version 2. 下载图片 python download_images.py &#34;D:\博客\文章.md&#34; 执行后会在文章同目录生成：
 D:\博客\ ├─ 文章.md └─ images\ └─ xxxx.png 文章.md 里的图片链接会自动改写为：
 ![图片](images/xxxx.png) 3. 可选参数 指定图片目录名：
-python download_images.py "D:\博客\文章.md" --out 图片 只预览，不实际下载：
-python download_images.py "D:\博客\文章.md" --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"CSDN 博客本地化工具使用说明","item":"https://dsduyopg.github.io/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"CSDN 博客本地化工具使用说明","name":"CSDN 博客本地化工具使用说明","description":"CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：\n![图片](https://img-blog.csdnimg.cn/xxxx.png) 如果图床失效或文章被删除，图片就找不回来了。\n这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：\n![图片](images/xxxx.png) 这样博客的正文和图片就能一起保存、迁移、备份。\n使用方法 1. 准备 本机需要安装 Python 3.11 或更高版本。\n检查：\npython --version 2. 下载图片 python download_images.py \u0026#34;D:\\博客\\文章.md\u0026#34; 执行后会在文章同目录生成：\nD:\\博客\\ ├─ 文章.md └─ images\\ └─ xxxx.png 文章.md 里的图片链接会自动改写为：\n![图片](images/xxxx.png) 3. 可选参数 指定图片目录名：\npython download_images.py \u0026#34;D:\\博客\\文章.md\u0026#34; --out 图片 只预览，不实际下载：\npython download_images.py \u0026#34;D:\\博客\\文章.md\u0026#34; --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。\n","keywords":[],"articleBody":"CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：\n![图片](https://img-blog.csdnimg.cn/xxxx.png) 如果图床失效或文章被删除，图片就找不回来了。\n这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：\n![图片](images/xxxx.png) 这样博客的正文和图片就能一起保存、迁移、备份。\n使用方法 1. 准备 本机需要安装 Python 3.11 或更高版本。\n检查：\npython --version 2. 下载图片 python download_images.py \"D:\\博客\\文章.md\" 执行后会在文章同目录生成：\nD:\\博客\\ ├─ 文章.md └─ images\\ └─ xxxx.png 文章.md 里的图片链接会自动改写为：\n![图片](images/xxxx.png) 3. 可选参数 指定图片目录名：\npython download_images.py \"D:\\博客\\文章.md\" --out 图片 只预览，不实际下载：\npython download_images.py \"D:\\博客\\文章.md\" --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。\n","wordCount":"77","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
-<a href=/posts/>Posts</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">CSDN 博客本地化工具使用说明</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>77 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><li><a href=#csdn-%e5%8d%9a%e5%ae%a2%e6%9c%ac%e5%9c%b0%e5%8c%96%e5%b7%a5%e5%85%b7 aria-label="CSDN 博客本地化工具">CSDN 博客本地化工具</a><ul><li><a href=#%e7%94%a8%e9%80%94 aria-label=用途>用途</a></li><li><a href=#%e4%bd%bf%e7%94%a8%e6%96%b9%e6%b3%95 aria-label=使用方法>使用方法</a><ul><li><a href=#1-%e5%87%86%e5%a4%87 aria-label="1. 准备">1. 准备</a></li><li><a href=#2-%e4%b8%8b%e8%bd%bd%e5%9b%be%e7%89%87 aria-label="2. 下载图片">2. 下载图片</a></li><li><a href=#3-%e5%8f%af%e9%80%89%e5%8f%82%e6%95%b0 aria-label="3. 可选参数">3. 可选参数</a></li></ul></li><li><a href=#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9 aria-label=注意事项>注意事项</a></li><li><a href=#%e5%bb%ba%e8%ae%ae aria-label=建议>建议</a></li></ul></li></ul></div></details><div class="post-content md-content"><h1 id=csdn-博客本地化工具>CSDN 博客本地化工具<a hidden class=anchor aria-hidden=true href=#csdn-博客本地化工具>#</a></h1><h2 id=用途>用途<a hidden class=anchor aria-hidden=true href=#用途>#</a></h2><p>CSDN 导出的 Markdown 文件通常只包含图床链接，例如：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-markdown data-lang=markdown><span style=display:flex><span>![<span style=color:#f92672>图片</span>](<span style=color:#a6e22e>https://img-blog.csdnimg.cn/xxxx.png</span>)
-</span></span></code></pre></div><p>如果图床失效或文章被删除，图片就找不回来了。</p><p>这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-markdown data-lang=markdown><span style=display:flex><span>![<span style=color:#f92672>图片</span>](<span style=color:#a6e22e>images/xxxx.png</span>)
-</span></span></code></pre></div><p>这样博客的正文和图片就能一起保存、迁移、备份。</p><h2 id=使用方法>使用方法<a hidden class=anchor aria-hidden=true href=#使用方法>#</a></h2><h3 id=1-准备>1. 准备<a hidden class=anchor aria-hidden=true href=#1-准备>#</a></h3><p>本机需要安装 Python 3.11 或更高版本。</p><p>检查：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span>python --version
-</span></span></code></pre></div><h3 id=2-下载图片>2. 下载图片<a hidden class=anchor aria-hidden=true href=#2-下载图片>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span>python download_images.py <span style=color:#e6db74>&#34;D:\博客\文章.md&#34;</span>
-</span></span></code></pre></div><p>执行后会在文章同目录生成：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>D:\博客\
-</span></span><span style=display:flex><span>├─ 文章.md
-</span></span><span style=display:flex><span>└─ images\
-</span></span><span style=display:flex><span>   └─ xxxx.png
-</span></span></code></pre></div><p><code>文章.md</code> 里的图片链接会自动改写为：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-markdown data-lang=markdown><span style=display:flex><span>![<span style=color:#f92672>图片</span>](<span style=color:#a6e22e>images/xxxx.png</span>)
-</span></span></code></pre></div><h3 id=3-可选参数>3. 可选参数<a hidden class=anchor aria-hidden=true href=#3-可选参数>#</a></h3><p>指定图片目录名：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span>python download_images.py <span style=color:#e6db74>&#34;D:\博客\文章.md&#34;</span> --out 图片
-</span></span></code></pre></div><p>只预览，不实际下载：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span>python download_images.py <span style=color:#e6db74>&#34;D:\博客\文章.md&#34;</span> --dry-run
-</span></span></code></pre></div><h2 id=注意事项>注意事项<a hidden class=anchor aria-hidden=true href=#注意事项>#</a></h2><ul><li>脚本只处理 Markdown 的 <code>![alt](url)</code> 图片语法</li><li>下载失败时会保留原图床链接，并在结果里显示 <code>FAILED</code></li><li>已存在且大小不为 0 的图片会自动跳过，不会重复下载</li><li>执行前会先把原 Markdown 备份为 <code>文章.md.bak</code></li><li>下载的图片文件会按 URL 文件名保存，重名时自动加编号</li></ul><h2 id=建议>建议<a hidden class=anchor aria-hidden=true href=#建议>#</a></h2><p>下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/><span class=title>« 上一页</span>
-<span>【实战】DNS建设案例_</span>
-</a><a class=next href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/><span class=title>下一页 »</span>
-<span>C语言的分支与循环上</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
-<span>Powered by
-<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
-</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
+python download_images.py &#34;D:\博客\文章.md&#34; --out 图片 只预览，不实际下载：
+python download_images.py &#34;D:\博客\文章.md&#34; --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "CSDN 博客本地化工具使用说明",
+      "item": "http://localhost:1313/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CSDN 博客本地化工具使用说明",
+  "name": "CSDN 博客本地化工具使用说明",
+  "description": "CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：\n![图片](https://img-blog.csdnimg.cn/xxxx.png) 如果图床失效或文章被删除，图片就找不回来了。\n这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：\n![图片](images/xxxx.png) 这样博客的正文和图片就能一起保存、迁移、备份。\n使用方法 1. 准备 本机需要安装 Python 3.11 或更高版本。\n检查：\npython --version 2. 下载图片 python download_images.py \u0026#34;D:\\博客\\文章.md\u0026#34; 执行后会在文章同目录生成：\nD:\\博客\\ ├─ 文章.md └─ images\\ └─ xxxx.png 文章.md 里的图片链接会自动改写为：\n![图片](images/xxxx.png) 3. 可选参数 指定图片目录名：\npython download_images.py \u0026#34;D:\\博客\\文章.md\u0026#34; --out 图片 只预览，不实际下载：\npython download_images.py \u0026#34;D:\\博客\\文章.md\u0026#34; --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：\n![图片](https://img-blog.csdnimg.cn/xxxx.png) 如果图床失效或文章被删除，图片就找不回来了。\n这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：\n![图片](images/xxxx.png) 这样博客的正文和图片就能一起保存、迁移、备份。\n使用方法 1. 准备 本机需要安装 Python 3.11 或更高版本。\n检查：\npython --version 2. 下载图片 python download_images.py \"D:\\博客\\文章.md\" 执行后会在文章同目录生成：\nD:\\博客\\ ├─ 文章.md └─ images\\ └─ xxxx.png 文章.md 里的图片链接会自动改写为：\n![图片](images/xxxx.png) 3. 可选参数 指定图片目录名：\npython download_images.py \"D:\\博客\\文章.md\" --out 图片 只预览，不实际下载：\npython download_images.py \"D:\\博客\\文章.md\" --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。\n",
+  "wordCount" : "77",
+  "inLanguage": "zh-cn",
+  "datePublished": "2026-08-18T00:00:00Z",
+  "dateModified": "2026-08-18T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "dsduyopg"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">主页</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/posts/">Posts</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      CSDN 博客本地化工具使用说明
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>77 字</span>&nbsp;·&nbsp;<span>dsduyopg</span>
+
+</div>
+  </header> <details class="toc" >
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">目录</span>
+    </summary>
+
+    <div class="inner"><ul>
+            <li>
+                <a href="#csdn-%e5%8d%9a%e5%ae%a2%e6%9c%ac%e5%9c%b0%e5%8c%96%e5%b7%a5%e5%85%b7" aria-label="CSDN 博客本地化工具">CSDN 博客本地化工具</a><ul>
+                    
+            <li>
+                <a href="#%e7%94%a8%e9%80%94" aria-label="用途">用途</a></li>
+            <li>
+                <a href="#%e4%bd%bf%e7%94%a8%e6%96%b9%e6%b3%95" aria-label="使用方法">使用方法</a><ul>
+                    
+            <li>
+                <a href="#1-%e5%87%86%e5%a4%87" aria-label="1. 准备">1. 准备</a></li>
+            <li>
+                <a href="#2-%e4%b8%8b%e8%bd%bd%e5%9b%be%e7%89%87" aria-label="2. 下载图片">2. 下载图片</a></li>
+            <li>
+                <a href="#3-%e5%8f%af%e9%80%89%e5%8f%82%e6%95%b0" aria-label="3. 可选参数">3. 可选参数</a></li></ul>
+            </li>
+            <li>
+                <a href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" aria-label="注意事项">注意事项</a></li>
+            <li>
+                <a href="#%e5%bb%ba%e8%ae%ae" aria-label="建议">建议</a>
+            </li>
+        </ul>
+        </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><h1 id="csdn-博客本地化工具">CSDN 博客本地化工具<a hidden class="anchor" aria-hidden="true" href="#csdn-博客本地化工具">#</a></h1>
+<h2 id="用途">用途<a hidden class="anchor" aria-hidden="true" href="#用途">#</a></h2>
+<p>CSDN 导出的 Markdown 文件通常只包含图床链接，例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>![<span style="color:#f92672">图片</span>](<span style="color:#a6e22e">https://img-blog.csdnimg.cn/xxxx.png</span>)
+</span></span></code></pre></div><p>如果图床失效或文章被删除，图片就找不回来了。</p>
+<p>这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>![<span style="color:#f92672">图片</span>](<span style="color:#a6e22e">images/xxxx.png</span>)
+</span></span></code></pre></div><p>这样博客的正文和图片就能一起保存、迁移、备份。</p>
+<h2 id="使用方法">使用方法<a hidden class="anchor" aria-hidden="true" href="#使用方法">#</a></h2>
+<h3 id="1-准备">1. 准备<a hidden class="anchor" aria-hidden="true" href="#1-准备">#</a></h3>
+<p>本机需要安装 Python 3.11 或更高版本。</p>
+<p>检查：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python --version
+</span></span></code></pre></div><h3 id="2-下载图片">2. 下载图片<a hidden class="anchor" aria-hidden="true" href="#2-下载图片">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python download_images.py <span style="color:#e6db74">&#34;D:\博客\文章.md&#34;</span>
+</span></span></code></pre></div><p>执行后会在文章同目录生成：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>D:\博客\
+</span></span><span style="display:flex;"><span>├─ 文章.md
+</span></span><span style="display:flex;"><span>└─ images\
+</span></span><span style="display:flex;"><span>   └─ xxxx.png
+</span></span></code></pre></div><p><code>文章.md</code> 里的图片链接会自动改写为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>![<span style="color:#f92672">图片</span>](<span style="color:#a6e22e">images/xxxx.png</span>)
+</span></span></code></pre></div><h3 id="3-可选参数">3. 可选参数<a hidden class="anchor" aria-hidden="true" href="#3-可选参数">#</a></h3>
+<p>指定图片目录名：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python download_images.py <span style="color:#e6db74">&#34;D:\博客\文章.md&#34;</span> --out 图片
+</span></span></code></pre></div><p>只预览，不实际下载：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python download_images.py <span style="color:#e6db74">&#34;D:\博客\文章.md&#34;</span> --dry-run
+</span></span></code></pre></div><h2 id="注意事项">注意事项<a hidden class="anchor" aria-hidden="true" href="#注意事项">#</a></h2>
+<ul>
+<li>脚本只处理 Markdown 的 <code>![alt](url)</code> 图片语法</li>
+<li>下载失败时会保留原图床链接，并在结果里显示 <code>FAILED</code></li>
+<li>已存在且大小不为 0 的图片会自动跳过，不会重复下载</li>
+<li>执行前会先把原 Markdown 备份为 <code>文章.md.bak</code></li>
+<li>下载的图片文件会按 URL 文件名保存，重名时自动加编号</li>
+</ul>
+<h2 id="建议">建议<a hidden class="anchor" aria-hidden="true" href="#建议">#</a></h2>
+<p>下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/">
+    <span class="title">« 上一页</span>
+    <span>【实战】DNS建设案例_</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/">
+    <span class="title">下一页 »</span>
+    <span>C语言的分支与循环上</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

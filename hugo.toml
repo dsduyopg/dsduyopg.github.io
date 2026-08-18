@@ -6,6 +6,9 @@ defaultContentLanguage = 'zh-cn'
 paginate = 9
 enableEmoji = true
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [params]
   env = 'production'
   description = '记录 Linux、运维、自动化和我自己折腾过的项目'
@@ -32,6 +35,21 @@ enableEmoji = true
 [[params.socialIcons]]
 name = 'github'
 url = 'https://github.com/dsduyopg'
+
+[[menu.main]]
+name = "搜索"
+url = "/search/"
+weight = 1
+
+[[menu.main]]
+name = "归档"
+url = "/archives/"
+weight = 2
+
+[[menu.main]]
+name = "标签"
+url = "/tags/"
+weight = 3
 
 [markup]
   [markup.goldmark]

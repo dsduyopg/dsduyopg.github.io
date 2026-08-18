@@ -1,4 +1,13 @@
-<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>C语言之讲解篇8 | 我的博客</title><meta name=keywords content><meta name=description content="例题：
+<!DOCTYPE html>
+<html lang="zh-cn" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>C语言之讲解篇8 | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="例题：
 
 
 输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。
@@ -18,14 +27,14 @@ right sz-1;
 1.left的的执行功能
 left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。
 2.实现操作与基本逻辑
-我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left<=right，当其为偶数时就跳出循环。
+我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left&lt;=right，当其为偶数时就跳出循环。
 基本语句如下：
-while(left<right)
+while(left&lt;right)
 	{
      // 从前往后，找到一个偶数，找到后停止
-		while((left<right)&&(arr[left]%2==1))
+		while((left&lt;right)&amp;&amp;(arr[left]%2==1))
 		{
-			left++;
+			left&#43;&#43;;
 		}
 	}
 2.right的具体实现
@@ -33,9 +42,9 @@ while(left<right)
 1.right的的执行功能
 right首先是定义为寻找偶数数，而遇到奇数时就停止循环，并将那个偶数带回到right身上。
 2.实现操作与基本逻辑
-我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left<=right，当其为奇数时就跳出循环。
+我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left&lt;=right，当其为奇数时就跳出循环。
 基本语句如下：
-while((left<right)&& (arr[right]%2==0))
+while((left&lt;right)&amp;&amp; (arr[right]%2==0))
 		{
 			right--;
 		}
@@ -48,23 +57,23 @@ void swap_arr(int arr[], int sz)
 	int tmp = 0;
 
 
-	while(left<right)
+	while(left&lt;right)
 	{
      // 从前往后，找到一个偶数，找到后停止
-		while((left<right)&&(arr[left]%2==1))
+		while((left&lt;right)&amp;&amp;(arr[left]%2==1))
 		{
-			left++;
+			left&#43;&#43;;
 		}
 
 		// 从后往前找，找一个奇数，找到后停止
-		while((left<right)&& (arr[right]%2==0))
+		while((left&lt;right)&amp;&amp; (arr[right]%2==0))
 		{
 			right--;
 		}
 
      // 如果偶数和奇数都找到，交换这两个数据的位置
      // 然后继续找，直到两个指针相遇
-		if(left<right)
+		if(left&lt;right)
 		{
 			tmp = arr[left];
 			arr[left] = arr[right];
@@ -73,41 +82,295 @@ void swap_arr(int arr[], int sz)
 	}
 }
 3.最后就可完成函数了。
-将函数部分搞定之后我们就可以，把整个代码搞定了，如下："><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/><link crossorigin=anonymous href=/assets/css/stylesheet.17e11805d3075f44c706341eeb6b41c4243b7f0769a966362af6f3d10f0b1051.css integrity="sha256-F+EYBdMHX0THBjQe62tBxCQ7fwdpqWY2Kvbz0Q8LEFE=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="C语言之讲解篇8"><meta property="og:description" content="例题：
+将函数部分搞定之后我们就可以，把整个代码搞定了，如下：">
+<meta name="author" content="dsduyopg">
+<link rel="canonical" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.17e11805d3075f44c706341eeb6b41c4243b7f0769a966362af6f3d10f0b1051.css" integrity="sha256-F&#43;EYBdMHX0THBjQe62tBxCQ7fwdpqWY2Kvbz0Q8LEFE=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="C语言之讲解篇8">
+  <meta property="og:description" content="例题：
 输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。
 1.首先设置一个逆序输出的函数。 由于他们是没有任何返回值的因此呢，我们可以设定一个没有一个返回值的函数，同时还需要做到，对原来的函数进行修改，因此我们考虑使用数组或者指针。所以结合以上，所设置的函数可以是：
 void swap_arr(int arr[], int sz); 2.其次呢再设定两个变量，left,right. 1.left,right的初始化 在这里，我们首先可以假定left是数组的最小者，而right是数组的最大者，由于数组的小标是从0开始的那么最大者就是数组的长度减去1，而求数组的长度就可以使用sz，那么的话，最大者就是：sz-1
 left 0;right sz-1; 2.left与right的具体实现 1.left的具体实现 是通过遇到偶数时停止循环造成的。
 1.left的的执行功能 left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。
-2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left<=right，当其为偶数时就跳出循环。
+2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left&lt;=right，当其为偶数时就跳出循环。
 基本语句如下：
-while(left<right){// 从前往后，找到一个偶数，找到后停止while((left<right)&&(arr[left]%2==1)){left++;}} 2.right的具体实现 是通过遇到奇数时停止循环造成的。
+while(left&lt;right){// 从前往后，找到一个偶数，找到后停止while((left&lt;right)&amp;&amp;(arr[left]%2==1)){left&#43;&#43;;}} 2.right的具体实现 是通过遇到奇数时停止循环造成的。
 1.right的的执行功能 right首先是定义为寻找偶数数，而遇到奇数时就停止循环，并将那个偶数带回到right身上。
-2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left<=right，当其为奇数时就跳出循环。
+2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left&lt;=right，当其为奇数时就跳出循环。
 基本语句如下：
-while((left<right)&& (arr[right]%2==0)){right--;} 3.最后是left,ritht的交换与现实 最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：
-void swap_arr(int arr[], int sz){int left = 0;int right = sz-1;int tmp = 0;while(left<right){// 从前往后，找到一个偶数，找到后停止while((left<right)&&(arr[left]%2==1)){left++;}// 从后往前找，找一个奇数，找到后停止while((left<right)&& (arr[right]%2==0)){right--;}// 如果偶数和奇数都找到，交换这两个数据的位置// 然后继续找，直到两个指针相遇if(left<right){tmp = arr[left];arr[left] = arr[right];arr[right] = tmp;}}} 3.最后就可完成函数了。 将函数部分搞定之后我们就可以，把整个代码搞定了，如下："><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="C语言之讲解篇8"><meta name=twitter:description content="例题：
+while((left&lt;right)&amp;&amp; (arr[right]%2==0)){right--;} 3.最后是left,ritht的交换与现实 最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：
+void swap_arr(int arr[], int sz){int left = 0;int right = sz-1;int tmp = 0;while(left&lt;right){// 从前往后，找到一个偶数，找到后停止while((left&lt;right)&amp;&amp;(arr[left]%2==1)){left&#43;&#43;;}// 从后往前找，找一个奇数，找到后停止while((left&lt;right)&amp;&amp; (arr[right]%2==0)){right--;}// 如果偶数和奇数都找到，交换这两个数据的位置// 然后继续找，直到两个指针相遇if(left&lt;right){tmp = arr[left];arr[left] = arr[right];arr[right] = tmp;}}} 3.最后就可完成函数了。 将函数部分搞定之后我们就可以，把整个代码搞定了，如下：">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="C语言之讲解篇8">
+  <meta name="twitter:description" content="例题：
 输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。
 1.首先设置一个逆序输出的函数。 由于他们是没有任何返回值的因此呢，我们可以设定一个没有一个返回值的函数，同时还需要做到，对原来的函数进行修改，因此我们考虑使用数组或者指针。所以结合以上，所设置的函数可以是：
 void swap_arr(int arr[], int sz); 2.其次呢再设定两个变量，left,right. 1.left,right的初始化 在这里，我们首先可以假定left是数组的最小者，而right是数组的最大者，由于数组的小标是从0开始的那么最大者就是数组的长度减去1，而求数组的长度就可以使用sz，那么的话，最大者就是：sz-1
 left 0;right sz-1; 2.left与right的具体实现 1.left的具体实现 是通过遇到偶数时停止循环造成的。
 1.left的的执行功能 left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。
-2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left<=right，当其为偶数时就跳出循环。
+2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left&lt;=right，当其为偶数时就跳出循环。
 基本语句如下：
-while(left<right){// 从前往后，找到一个偶数，找到后停止while((left<right)&&(arr[left]%2==1)){left++;}} 2.right的具体实现 是通过遇到奇数时停止循环造成的。
+while(left&lt;right){// 从前往后，找到一个偶数，找到后停止while((left&lt;right)&amp;&amp;(arr[left]%2==1)){left&#43;&#43;;}} 2.right的具体实现 是通过遇到奇数时停止循环造成的。
 1.right的的执行功能 right首先是定义为寻找偶数数，而遇到奇数时就停止循环，并将那个偶数带回到right身上。
-2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left<=right，当其为奇数时就跳出循环。
+2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left&lt;=right，当其为奇数时就跳出循环。
 基本语句如下：
-while((left<right)&& (arr[right]%2==0)){right--;} 3.最后是left,ritht的交换与现实 最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：
-void swap_arr(int arr[], int sz){int left = 0;int right = sz-1;int tmp = 0;while(left<right){// 从前往后，找到一个偶数，找到后停止while((left<right)&&(arr[left]%2==1)){left++;}// 从后往前找，找一个奇数，找到后停止while((left<right)&& (arr[right]%2==0)){right--;}// 如果偶数和奇数都找到，交换这两个数据的位置// 然后继续找，直到两个指针相遇if(left<right){tmp = arr[left];arr[left] = arr[right];arr[right] = tmp;}}} 3.最后就可完成函数了。 将函数部分搞定之后我们就可以，把整个代码搞定了，如下："><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"C语言之讲解篇8","item":"https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"C语言之讲解篇8","name":"C语言之讲解篇8","description":"例题：\n输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。\n1.首先设置一个逆序输出的函数。 由于他们是没有任何返回值的因此呢，我们可以设定一个没有一个返回值的函数，同时还需要做到，对原来的函数进行修改，因此我们考虑使用数组或者指针。所以结合以上，所设置的函数可以是：\nvoid swap_arr(int arr[], int sz); 2.其次呢再设定两个变量，left,right. 1.left,right的初始化 在这里，我们首先可以假定left是数组的最小者，而right是数组的最大者，由于数组的小标是从0开始的那么最大者就是数组的长度减去1，而求数组的长度就可以使用sz，那么的话，最大者就是：sz-1\nleft 0;\rright sz-1; 2.left与right的具体实现 1.left的具体实现 是通过遇到偶数时停止循环造成的。\n1.left的的执行功能 left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。\n2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left\u0026lt;=right，当其为偶数时就跳出循环。\n基本语句如下：\nwhile(left\u0026lt;right)\r{\r// 从前往后，找到一个偶数，找到后停止\rwhile((left\u0026lt;right)\u0026amp;\u0026amp;(arr[left]%2==1))\r{\rleft++;\r}\r} 2.right的具体实现 是通过遇到奇数时停止循环造成的。\n1.right的的执行功能 right首先是定义为寻找偶数数，而遇到奇数时就停止循环，并将那个偶数带回到right身上。\n2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left\u0026lt;=right，当其为奇数时就跳出循环。\n基本语句如下：\nwhile((left\u0026lt;right)\u0026amp;\u0026amp; (arr[right]%2==0))\r{\rright--;\r} 3.最后是left,ritht的交换与现实 最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：\nvoid swap_arr(int arr[], int sz)\r{\rint left = 0;\rint right = sz-1;\rint tmp = 0;\rwhile(left\u0026lt;right)\r{\r// 从前往后，找到一个偶数，找到后停止\rwhile((left\u0026lt;right)\u0026amp;\u0026amp;(arr[left]%2==1))\r{\rleft++;\r}\r// 从后往前找，找一个奇数，找到后停止\rwhile((left\u0026lt;right)\u0026amp;\u0026amp; (arr[right]%2==0))\r{\rright--;\r}\r// 如果偶数和奇数都找到，交换这两个数据的位置\r// 然后继续找，直到两个指针相遇\rif(left\u0026lt;right)\r{\rtmp = arr[left];\rarr[left] = arr[right];\rarr[right] = tmp;\r}\r}\r} 3.最后就可完成函数了。 将函数部分搞定之后我们就可以，把整个代码搞定了，如下：\n","keywords":[],"articleBody":"例题：\n输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。\n1.首先设置一个逆序输出的函数。 由于他们是没有任何返回值的因此呢，我们可以设定一个没有一个返回值的函数，同时还需要做到，对原来的函数进行修改，因此我们考虑使用数组或者指针。所以结合以上，所设置的函数可以是：\nvoid swap_arr(int arr[], int sz); 2.其次呢再设定两个变量，left,right. 1.left,right的初始化 在这里，我们首先可以假定left是数组的最小者，而right是数组的最大者，由于数组的小标是从0开始的那么最大者就是数组的长度减去1，而求数组的长度就可以使用sz，那么的话，最大者就是：sz-1\nleft 0;\rright sz-1; 2.left与right的具体实现 1.left的具体实现 是通过遇到偶数时停止循环造成的。\n1.left的的执行功能 left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。\n2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left\u003c=right，当其为偶数时就跳出循环。\n基本语句如下：\nwhile(left","wordCount":"193","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
-<a href=/posts/>Posts</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">C语言之讲解篇8</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>193 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><li><a href=#1%e9%a6%96%e5%85%88%e8%ae%be%e7%bd%ae%e4%b8%80%e4%b8%aa%e9%80%86%e5%ba%8f%e8%be%93%e5%87%ba%e7%9a%84%e5%87%bd%e6%95%b0 aria-label=1.首先设置一个逆序输出的函数。>1.首先设置一个逆序输出的函数。</a></li><li><a href=#2%e5%85%b6%e6%ac%a1%e5%91%a2%e5%86%8d%e8%ae%be%e5%ae%9a%e4%b8%a4%e4%b8%aa%e5%8f%98%e9%87%8fleftright aria-label=2.其次呢再设定两个变量，left,right.>2.其次呢再设定两个变量，left,right.</a><ul><li><a href=#1leftright%e7%9a%84%e5%88%9d%e5%a7%8b%e5%8c%96 aria-label=1.left,right的初始化>1.left,right的初始化</a></li><li><a href=#2left%e4%b8%8eright%e7%9a%84%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0 aria-label=2.left与right的具体实现>2.left与right的具体实现</a><ul><li><a href=#1left%e7%9a%84%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0 aria-label=1.left的具体实现>1.left的具体实现</a><ul><li><a href=#1left%e7%9a%84%e7%9a%84%e6%89%a7%e8%a1%8c%e5%8a%9f%e8%83%bd aria-label=1.left的的执行功能>1.left的的执行功能</a></li></ul></li><li><a href=#2%e5%ae%9e%e7%8e%b0%e6%93%8d%e4%bd%9c%e4%b8%8e%e5%9f%ba%e6%9c%ac%e9%80%bb%e8%be%91 aria-label=2.实现操作与基本逻辑>2.实现操作与基本逻辑</a></li><li><a href=#2right%e7%9a%84%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0 aria-label=2.right的具体实现>2.right的具体实现</a><ul><li><a href=#1right%e7%9a%84%e7%9a%84%e6%89%a7%e8%a1%8c%e5%8a%9f%e8%83%bd aria-label=1.right的的执行功能>1.right的的执行功能</a></li></ul></li><li><a href=#2%e5%ae%9e%e7%8e%b0%e6%93%8d%e4%bd%9c%e4%b8%8e%e5%9f%ba%e6%9c%ac%e9%80%bb%e8%be%91-1 aria-label=2.实现操作与基本逻辑>2.实现操作与基本逻辑</a></li></ul></li><li><a href=#3%e6%9c%80%e5%90%8e%e6%98%afleftritht%e7%9a%84%e4%ba%a4%e6%8d%a2%e4%b8%8e%e7%8e%b0%e5%ae%9e aria-label=3.最后是left,ritht的交换与现实>3.最后是left,ritht的交换与现实</a></li></ul></li><li><a href=#3%e6%9c%80%e5%90%8e%e5%b0%b1%e5%8f%af%e5%ae%8c%e6%88%90%e5%87%bd%e6%95%b0%e4%ba%86 aria-label=3.最后就可完成函数了。>3.最后就可完成函数了。</a></li></ul></div></details><div class="post-content md-content"><p>例题：</p><blockquote></blockquote><p>输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。</p><h2 id=1首先设置一个逆序输出的函数>1.首先设置一个逆序输出的函数。<a hidden class=anchor aria-hidden=true href=#1首先设置一个逆序输出的函数>#</a></h2><p>由于他们是没有任何返回值的因此呢，我们可以设定一个没有一个返回值的函数，同时还需要做到，对原来的函数进行修改，因此我们考虑使用数组或者指针。所以结合以上，所设置的函数可以是：</p><pre tabindex=0><code>void swap_arr(int arr[], int sz);
-</code></pre><h2 id=2其次呢再设定两个变量leftright>2.其次呢再设定两个变量，left,right.<a hidden class=anchor aria-hidden=true href=#2其次呢再设定两个变量leftright>#</a></h2><h3 id=1leftright的初始化>1.left,right的初始化<a hidden class=anchor aria-hidden=true href=#1leftright的初始化>#</a></h3><blockquote></blockquote><p>在这里，我们首先可以假定left是数组的最小者，而right是数组的最大者，由于数组的小标是从0开始的那么最大者就是数组的长度减去1，而求数组的长度就可以使用sz，那么的话，最大者就是：sz-1</p><pre tabindex=0><code>left 0;
+while((left&lt;right)&amp;&amp; (arr[right]%2==0)){right--;} 3.最后是left,ritht的交换与现实 最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：
+void swap_arr(int arr[], int sz){int left = 0;int right = sz-1;int tmp = 0;while(left&lt;right){// 从前往后，找到一个偶数，找到后停止while((left&lt;right)&amp;&amp;(arr[left]%2==1)){left&#43;&#43;;}// 从后往前找，找一个奇数，找到后停止while((left&lt;right)&amp;&amp; (arr[right]%2==0)){right--;}// 如果偶数和奇数都找到，交换这两个数据的位置// 然后继续找，直到两个指针相遇if(left&lt;right){tmp = arr[left];arr[left] = arr[right];arr[right] = tmp;}}} 3.最后就可完成函数了。 将函数部分搞定之后我们就可以，把整个代码搞定了，如下：">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "C语言之讲解篇8",
+      "item": "http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C语言之讲解篇8",
+  "name": "C语言之讲解篇8",
+  "description": "例题：\n输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。\n1.首先设置一个逆序输出的函数。 由于他们是没有任何返回值的因此呢，我们可以设定一个没有一个返回值的函数，同时还需要做到，对原来的函数进行修改，因此我们考虑使用数组或者指针。所以结合以上，所设置的函数可以是：\nvoid swap_arr(int arr[], int sz); 2.其次呢再设定两个变量，left,right. 1.left,right的初始化 在这里，我们首先可以假定left是数组的最小者，而right是数组的最大者，由于数组的小标是从0开始的那么最大者就是数组的长度减去1，而求数组的长度就可以使用sz，那么的话，最大者就是：sz-1\nleft 0;\rright sz-1; 2.left与right的具体实现 1.left的具体实现 是通过遇到偶数时停止循环造成的。\n1.left的的执行功能 left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。\n2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left\u0026lt;=right，当其为偶数时就跳出循环。\n基本语句如下：\nwhile(left\u0026lt;right)\r{\r// 从前往后，找到一个偶数，找到后停止\rwhile((left\u0026lt;right)\u0026amp;\u0026amp;(arr[left]%2==1))\r{\rleft++;\r}\r} 2.right的具体实现 是通过遇到奇数时停止循环造成的。\n1.right的的执行功能 right首先是定义为寻找偶数数，而遇到奇数时就停止循环，并将那个偶数带回到right身上。\n2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left\u0026lt;=right，当其为奇数时就跳出循环。\n基本语句如下：\nwhile((left\u0026lt;right)\u0026amp;\u0026amp; (arr[right]%2==0))\r{\rright--;\r} 3.最后是left,ritht的交换与现实 最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：\nvoid swap_arr(int arr[], int sz)\r{\rint left = 0;\rint right = sz-1;\rint tmp = 0;\rwhile(left\u0026lt;right)\r{\r// 从前往后，找到一个偶数，找到后停止\rwhile((left\u0026lt;right)\u0026amp;\u0026amp;(arr[left]%2==1))\r{\rleft++;\r}\r// 从后往前找，找一个奇数，找到后停止\rwhile((left\u0026lt;right)\u0026amp;\u0026amp; (arr[right]%2==0))\r{\rright--;\r}\r// 如果偶数和奇数都找到，交换这两个数据的位置\r// 然后继续找，直到两个指针相遇\rif(left\u0026lt;right)\r{\rtmp = arr[left];\rarr[left] = arr[right];\rarr[right] = tmp;\r}\r}\r} 3.最后就可完成函数了。 将函数部分搞定之后我们就可以，把整个代码搞定了，如下：\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "例题：\n输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。\n1.首先设置一个逆序输出的函数。 由于他们是没有任何返回值的因此呢，我们可以设定一个没有一个返回值的函数，同时还需要做到，对原来的函数进行修改，因此我们考虑使用数组或者指针。所以结合以上，所设置的函数可以是：\nvoid swap_arr(int arr[], int sz); 2.其次呢再设定两个变量，left,right. 1.left,right的初始化 在这里，我们首先可以假定left是数组的最小者，而right是数组的最大者，由于数组的小标是从0开始的那么最大者就是数组的长度减去1，而求数组的长度就可以使用sz，那么的话，最大者就是：sz-1\nleft 0;\rright sz-1; 2.left与right的具体实现 1.left的具体实现 是通过遇到偶数时停止循环造成的。\n1.left的的执行功能 left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。\n2.实现操作与基本逻辑 我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left\u003c=right，当其为偶数时就跳出循环。\n基本语句如下：\nwhile(left",
+  "wordCount" : "193",
+  "inLanguage": "zh-cn",
+  "datePublished": "2026-08-18T00:00:00Z",
+  "dateModified": "2026-08-18T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "dsduyopg"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">主页</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/posts/">Posts</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      C语言之讲解篇8
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>193 字</span>&nbsp;·&nbsp;<span>dsduyopg</span>
+
+</div>
+  </header> <details class="toc" >
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">目录</span>
+    </summary>
+
+    <div class="inner"><ul>
+            <li>
+                <a href="#1%e9%a6%96%e5%85%88%e8%ae%be%e7%bd%ae%e4%b8%80%e4%b8%aa%e9%80%86%e5%ba%8f%e8%be%93%e5%87%ba%e7%9a%84%e5%87%bd%e6%95%b0" aria-label="1.首先设置一个逆序输出的函数。">1.首先设置一个逆序输出的函数。</a></li>
+            <li>
+                <a href="#2%e5%85%b6%e6%ac%a1%e5%91%a2%e5%86%8d%e8%ae%be%e5%ae%9a%e4%b8%a4%e4%b8%aa%e5%8f%98%e9%87%8fleftright" aria-label="2.其次呢再设定两个变量，left,right.">2.其次呢再设定两个变量，left,right.</a><ul>
+                    
+            <li>
+                <a href="#1leftright%e7%9a%84%e5%88%9d%e5%a7%8b%e5%8c%96" aria-label="1.left,right的初始化">1.left,right的初始化</a></li>
+            <li>
+                <a href="#2left%e4%b8%8eright%e7%9a%84%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0" aria-label="2.left与right的具体实现">2.left与right的具体实现</a><ul>
+                    
+            <li>
+                <a href="#1left%e7%9a%84%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0" aria-label="1.left的具体实现">1.left的具体实现</a><ul>
+                    
+            <li>
+                <a href="#1left%e7%9a%84%e7%9a%84%e6%89%a7%e8%a1%8c%e5%8a%9f%e8%83%bd" aria-label="1.left的的执行功能">1.left的的执行功能</a></li></ul>
+            </li>
+            <li>
+                <a href="#2%e5%ae%9e%e7%8e%b0%e6%93%8d%e4%bd%9c%e4%b8%8e%e5%9f%ba%e6%9c%ac%e9%80%bb%e8%be%91" aria-label="2.实现操作与基本逻辑">2.实现操作与基本逻辑</a></li>
+            <li>
+                <a href="#2right%e7%9a%84%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0" aria-label="2.right的具体实现">2.right的具体实现</a><ul>
+                    
+            <li>
+                <a href="#1right%e7%9a%84%e7%9a%84%e6%89%a7%e8%a1%8c%e5%8a%9f%e8%83%bd" aria-label="1.right的的执行功能">1.right的的执行功能</a></li></ul>
+            </li>
+            <li>
+                <a href="#2%e5%ae%9e%e7%8e%b0%e6%93%8d%e4%bd%9c%e4%b8%8e%e5%9f%ba%e6%9c%ac%e9%80%bb%e8%be%91-1" aria-label="2.实现操作与基本逻辑">2.实现操作与基本逻辑</a></li></ul>
+            </li>
+            <li>
+                <a href="#3%e6%9c%80%e5%90%8e%e6%98%afleftritht%e7%9a%84%e4%ba%a4%e6%8d%a2%e4%b8%8e%e7%8e%b0%e5%ae%9e" aria-label="3.最后是left,ritht的交换与现实">3.最后是left,ritht的交换与现实</a></li></ul>
+            </li>
+            <li>
+                <a href="#3%e6%9c%80%e5%90%8e%e5%b0%b1%e5%8f%af%e5%ae%8c%e6%88%90%e5%87%bd%e6%95%b0%e4%ba%86" aria-label="3.最后就可完成函数了。">3.最后就可完成函数了。</a>
+            </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><p>例题：</p>
+<blockquote>
+</blockquote>
+<p>输入一个整数数组，实现一个函数，来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分,所有偶数位于数组的后半部分。</p>
+<h2 id="1首先设置一个逆序输出的函数">1.首先设置一个逆序输出的函数。<a hidden class="anchor" aria-hidden="true" href="#1首先设置一个逆序输出的函数">#</a></h2>
+<p>由于他们是没有任何返回值的因此呢，我们可以设定一个没有一个返回值的函数，同时还需要做到，对原来的函数进行修改，因此我们考虑使用数组或者指针。所以结合以上，所设置的函数可以是：</p>
+<pre tabindex="0"><code>void swap_arr(int arr[], int sz);
+</code></pre><h2 id="2其次呢再设定两个变量leftright">2.其次呢再设定两个变量，left,right.<a hidden class="anchor" aria-hidden="true" href="#2其次呢再设定两个变量leftright">#</a></h2>
+<h3 id="1leftright的初始化">1.left,right的初始化<a hidden class="anchor" aria-hidden="true" href="#1leftright的初始化">#</a></h3>
+<blockquote>
+</blockquote>
+<p>在这里，我们首先可以假定left是数组的最小者，而right是数组的最大者，由于数组的小标是从0开始的那么最大者就是数组的长度减去1，而求数组的长度就可以使用sz，那么的话，最大者就是：sz-1</p>
+<pre tabindex="0"><code>left 0;
 right sz-1;
-</code></pre><h3 id=2left与right的具体实现>2.left与right的具体实现<a hidden class=anchor aria-hidden=true href=#2left与right的具体实现>#</a></h3><h4 id=1left的具体实现>1.left的具体实现<a hidden class=anchor aria-hidden=true href=#1left的具体实现>#</a></h4><p><code>是通过遇到偶数时停止循环造成的。</code></p><h5 id=1left的的执行功能>1.left的的执行功能<a hidden class=anchor aria-hidden=true href=#1left的的执行功能>#</a></h5><p>left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。</p><h4 id=2实现操作与基本逻辑>2.实现操作与基本逻辑<a hidden class=anchor aria-hidden=true href=#2实现操作与基本逻辑>#</a></h4><p>我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left&lt;=right，当其为偶数时就跳出循环。</p><p>基本语句如下：</p><pre tabindex=0><code>while(left&lt;right)
+</code></pre><h3 id="2left与right的具体实现">2.left与right的具体实现<a hidden class="anchor" aria-hidden="true" href="#2left与right的具体实现">#</a></h3>
+<h4 id="1left的具体实现">1.left的具体实现<a hidden class="anchor" aria-hidden="true" href="#1left的具体实现">#</a></h4>
+<p><code>是通过遇到偶数时停止循环造成的。</code></p>
+<h5 id="1left的的执行功能">1.left的的执行功能<a hidden class="anchor" aria-hidden="true" href="#1left的的执行功能">#</a></h5>
+<p>left首先是定义为寻找奇数，而遇到偶数时就停止循环，并将那个偶数带回到left身上。</p>
+<h4 id="2实现操作与基本逻辑">2.实现操作与基本逻辑<a hidden class="anchor" aria-hidden="true" href="#2实现操作与基本逻辑">#</a></h4>
+<p>我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是小标为left的数组，是奇数并且保证left&lt;=right，当其为偶数时就跳出循环。</p>
+<p>基本语句如下：</p>
+<pre tabindex="0"><code>while(left&lt;right)
 	{
      // 从前往后，找到一个偶数，找到后停止
 		while((left&lt;right)&amp;&amp;(arr[left]%2==1))
@@ -115,11 +378,20 @@ right sz-1;
 			left++;
 		}
 	}
-</code></pre><h4 id=2right的具体实现>2.right的具体实现<a hidden class=anchor aria-hidden=true href=#2right的具体实现>#</a></h4><p><code>是通过遇到奇数时停止循环造成的。</code></p><h5 id=1right的的执行功能>1.right的的执行功能<a hidden class=anchor aria-hidden=true href=#1right的的执行功能>#</a></h5><p>right首先是定义为寻找偶数数，而遇到奇数时就停止循环，并将那个偶数带回到right身上。</p><h4 id=2实现操作与基本逻辑-1>2.实现操作与基本逻辑<a hidden class=anchor aria-hidden=true href=#2实现操作与基本逻辑-1>#</a></h4><p>我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left&lt;=right，当其为奇数时就跳出循环。</p><p>基本语句如下：</p><pre tabindex=0><code>while((left&lt;right)&amp;&amp; (arr[right]%2==0))
+</code></pre><h4 id="2right的具体实现">2.right的具体实现<a hidden class="anchor" aria-hidden="true" href="#2right的具体实现">#</a></h4>
+<p><code>是通过遇到奇数时停止循环造成的。</code></p>
+<h5 id="1right的的执行功能">1.right的的执行功能<a hidden class="anchor" aria-hidden="true" href="#1right的的执行功能">#</a></h5>
+<p>right首先是定义为寻找偶数数，而遇到奇数时就停止循环，并将那个偶数带回到right身上。</p>
+<h4 id="2实现操作与基本逻辑-1">2.实现操作与基本逻辑<a hidden class="anchor" aria-hidden="true" href="#2实现操作与基本逻辑-1">#</a></h4>
+<p>我们可以通过循环来实现，在众多的循环当中我们可以选择的是，while循环而循环条件就是下标为right的数组，是偶数并且保证left&lt;=right，当其为奇数时就跳出循环。</p>
+<p>基本语句如下：</p>
+<pre tabindex="0"><code>while((left&lt;right)&amp;&amp; (arr[right]%2==0))
 		{
 			right--;
 		}
-</code></pre><h3 id=3最后是leftritht的交换与现实>3.最后是left,ritht的交换与现实<a hidden class=anchor aria-hidden=true href=#3最后是leftritht的交换与现实>#</a></h3><p>最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：</p><pre tabindex=0><code>void swap_arr(int arr[], int sz)
+</code></pre><h3 id="3最后是leftritht的交换与现实">3.最后是left,ritht的交换与现实<a hidden class="anchor" aria-hidden="true" href="#3最后是leftritht的交换与现实">#</a></h3>
+<p>最后我们将这些整合在一起，得到了函数并将left,right进行交换，由于left是偶数，right是奇数俩者交换，求出则为奇数在前偶数在后，函数完整的代码如下：</p>
+<pre tabindex="0"><code>void swap_arr(int arr[], int sz)
 {
 	int left = 0;
 	int right = sz-1;
@@ -150,7 +422,9 @@ right sz-1;
 		}
 	}
 }
-</code></pre><h2 id=3最后就可完成函数了>3.最后就可完成函数了。<a hidden class=anchor aria-hidden=true href=#3最后就可完成函数了>#</a></h2><p>将函数部分搞定之后我们就可以，把整个代码搞定了，如下：</p><pre tabindex=0><code>#include&lt;stdio.h&gt;
+</code></pre><h2 id="3最后就可完成函数了">3.最后就可完成函数了。<a hidden class="anchor" aria-hidden="true" href="#3最后就可完成函数了">#</a></h2>
+<p>将函数部分搞定之后我们就可以，把整个代码搞定了，如下：</p>
+<pre tabindex="0"><code>#include&lt;stdio.h&gt;
 void swap_arr(int arr[], int sz)
 {
 	int left = 0;
@@ -197,11 +471,153 @@ int main() {
 
 }
 最后我们写这个代码，他可以实现对于无符号整形数组实现奇数在前，偶数在后，我们搞定了本函数。
-</code></pre></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/><span class=title>« 上一页</span>
-<span>C语言之讲解篇7</span>
-</a><a class=next href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/><span class=title>下一页 »</span>
-<span>C语言之扫雷游戏</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
-<span>Powered by
-<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
-</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
+</code></pre>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/">
+    <span class="title">« 上一页</span>
+    <span>C语言之讲解篇7</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/">
+    <span class="title">下一页 »</span>
+    <span>C语言之扫雷游戏</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
