@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>数据结构链表当中的头结点问题 | 我的博客</title>
-<meta name="keywords" content="">
-<meta name="description" content="数据结构链表当中的头结点问题
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>数据结构链表当中的头结点问题 | 我的博客</title><meta name=keywords content><meta name=description content='数据结构链表当中的头结点问题
 
 
 
@@ -51,7 +42,111 @@
 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。
 给出自己原来写的代码及源码
 下面我将给出大家我首先第一次写的代码如下：
-#include &lt;stdio.h&gt;
+#include <stdio.h>
+#include <stdlib.h>
+
+// 定义链表节点结构
+struct ListNode {
+    int value;
+    struct ListNode* next;
+};
+
+// 反转链表函数
+struct ListNode* reverseList(struct ListNode* head) {
+    struct ListNode* prev = NULL;
+    struct ListNode* current = head;
+    struct ListNode* nextNode = NULL;
+
+    while (current != NULL) {
+        nextNode = current->next;  // 暂存下一个节点
+        current->next = prev;      // 反转当前节点的指针
+        prev = current;            // 前移 prev
+        current = nextNode;        // 前移 current
+    }
+
+    return prev;  // 返回新的头节点
+}
+
+// 辅助函数，用于创建新节点
+struct ListNode* createNode() {
+    struct ListNode* head;  // 初始化头节点为空
+    head=(struct ListNode*)malloc(sizeof(struct ListNode));
+  head->next=NULL; // 用于记录链表的尾节点
+    int x;                         // x为链表数据域中的数据
+    while (scanf("%d", &amp;x) != EOF) {
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = x;
+        newNode->next =head->next;  // 将新节点链接到尾节点之后
+        head->next=newNode;        // 更新尾节点
+    }
+    return head;
+}
+
+// 辅助函数，用于打印链表
+void printList(struct ListNode* head) {
+    struct ListNode* current = head;
+    while (current != NULL) {
+        printf("%d -> ", current->value);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+
+// 辅助函数，用于释放链表内存
+void freeList(struct ListNode* head) {
+    struct ListNode* current = head;
+    while (current != NULL) {
+        struct ListNode* next = current->next;
+        free(current);
+        current = next;
+    }
+}
+
+// 主函数，用于测试反转链表
+int main() {
+    // 创建链表
+    printf("请输入链表节点值，以EOF结束：\n");
+    struct ListNode* head = createNode();
+
+    printf("原链表: ");
+    printList(head);
+
+    // 反转链表
+    struct ListNode* reversedHead = reverseList(head);
+
+    printf("反转后的链表: ");
+    printList(reversedHead);
+
+    // 释放内存
+    freeList(reversedHead);
+
+    return 0;
+}
+2.出现的问题
+出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路'><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/><link crossorigin=anonymous href=/assets/css/stylesheet.a061064ab34cca821922a540f2091b6e3812d4baa4533f49371257c91fa0baf1.css integrity="sha256-oGEGSrNMyoIZIqVA8gkbbjgS1LqkUz9JNxJXyR+guvE=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="数据结构链表当中的头结点问题"><meta property="og:description" content='数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）
+给出自己原来写的代码及源码
+2.出现的问题
+出现的问题分类，代码里的哪些函数出错了。
+我的解决方案 从网上chatgpt查找得到的解决方案
+自己研究得出的方案
+给出自己修改过的代码
+给予大家的警示 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。
+给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：
+#include <stdio.h>#include <stdlib.h>// 定义链表节点结构struct ListNode {int value;struct ListNode* next;};// 反转链表函数struct ListNode* reverseList(struct ListNode* head) {struct ListNode* prev = NULL;struct ListNode* current = head;struct ListNode* nextNode = NULL;while (current != NULL) {nextNode = current->next; // 暂存下一个节点current->next = prev; // 反转当前节点的指针prev = current; // 前移 prevcurrent = nextNode; // 前移 current}return prev; // 返回新的头节点}// 辅助函数，用于创建新节点struct ListNode* createNode() {struct ListNode* head; // 初始化头节点为空head=(struct ListNode*)malloc(sizeof(struct ListNode));head->next=NULL; // 用于记录链表的尾节点int x; // x为链表数据域中的数据while (scanf("%d", &amp;x) != EOF) {struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));newNode->value = x;newNode->next =head->next; // 将新节点链接到尾节点之后head->next=newNode; // 更新尾节点}return head;}// 辅助函数，用于打印链表void printList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {printf("%d -> ", current->value);current = current->next;}printf("NULL\n");}// 辅助函数，用于释放链表内存void freeList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {struct ListNode* next = current->next;free(current);current = next;}}// 主函数，用于测试反转链表int main() {// 创建链表printf("请输入链表节点值，以EOF结束：\n");struct ListNode* head = createNode();printf("原链表: ");printList(head);// 反转链表struct ListNode* reversedHead = reverseList(head);printf("反转后的链表: ");printList(reversedHead);// 释放内存freeList(reversedHead);return 0;} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="数据结构链表当中的头结点问题"><meta name=twitter:description content='数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）
+给出自己原来写的代码及源码
+2.出现的问题
+出现的问题分类，代码里的哪些函数出错了。
+我的解决方案 从网上chatgpt查找得到的解决方案
+自己研究得出的方案
+给出自己修改过的代码
+给予大家的警示 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。
+给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：
+#include <stdio.h>#include <stdlib.h>// 定义链表节点结构struct ListNode {int value;struct ListNode* next;};// 反转链表函数struct ListNode* reverseList(struct ListNode* head) {struct ListNode* prev = NULL;struct ListNode* current = head;struct ListNode* nextNode = NULL;while (current != NULL) {nextNode = current->next; // 暂存下一个节点current->next = prev; // 反转当前节点的指针prev = current; // 前移 prevcurrent = nextNode; // 前移 current}return prev; // 返回新的头节点}// 辅助函数，用于创建新节点struct ListNode* createNode() {struct ListNode* head; // 初始化头节点为空head=(struct ListNode*)malloc(sizeof(struct ListNode));head->next=NULL; // 用于记录链表的尾节点int x; // x为链表数据域中的数据while (scanf("%d", &amp;x) != EOF) {struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));newNode->value = x;newNode->next =head->next; // 将新节点链接到尾节点之后head->next=newNode; // 更新尾节点}return head;}// 辅助函数，用于打印链表void printList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {printf("%d -> ", current->value);current = current->next;}printf("NULL\n");}// 辅助函数，用于释放链表内存void freeList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {struct ListNode* next = current->next;free(current);current = next;}}// 主函数，用于测试反转链表int main() {// 创建链表printf("请输入链表节点值，以EOF结束：\n");struct ListNode* head = createNode();printf("原链表: ");printList(head);// 反转链表struct ListNode* reversedHead = reverseList(head);printf("反转后的链表: ");printList(reversedHead);// 释放内存freeList(reversedHead);return 0;} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"数据结构链表当中的头结点问题","item":"https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"数据结构链表当中的头结点问题","name":"数据结构链表当中的头结点问题","description":"数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）\n给出自己原来写的代码及源码\n2.出现的问题\n出现的问题分类，代码里的哪些函数出错了。\n我的解决方案 从网上chatgpt查找得到的解决方案\n自己研究得出的方案\n给出自己修改过的代码\n给予大家的警示 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。\n给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：\n#include \u0026lt;stdio.h\u0026gt;\r#include \u0026lt;stdlib.h\u0026gt;\r// 定义链表节点结构\rstruct ListNode {\rint value;\rstruct ListNode* next;\r};\r// 反转链表函数\rstruct ListNode* reverseList(struct ListNode* head) {\rstruct ListNode* prev = NULL;\rstruct ListNode* current = head;\rstruct ListNode* nextNode = NULL;\rwhile (current != NULL) {\rnextNode = current-\u0026gt;next; // 暂存下一个节点\rcurrent-\u0026gt;next = prev; // 反转当前节点的指针\rprev = current; // 前移 prev\rcurrent = nextNode; // 前移 current\r}\rreturn prev; // 返回新的头节点\r}\r// 辅助函数，用于创建新节点\rstruct ListNode* createNode() {\rstruct ListNode* head; // 初始化头节点为空\rhead=(struct ListNode*)malloc(sizeof(struct ListNode));\rhead-\u0026gt;next=NULL; // 用于记录链表的尾节点\rint x; // x为链表数据域中的数据\rwhile (scanf(\u0026#34;%d\u0026#34;, \u0026amp;x) != EOF) {\rstruct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));\rnewNode-\u0026gt;value = x;\rnewNode-\u0026gt;next =head-\u0026gt;next; // 将新节点链接到尾节点之后\rhead-\u0026gt;next=newNode; // 更新尾节点\r}\rreturn head;\r}\r// 辅助函数，用于打印链表\rvoid printList(struct ListNode* head) {\rstruct ListNode* current = head;\rwhile (current != NULL) {\rprintf(\u0026#34;%d -\u0026gt; \u0026#34;, current-\u0026gt;value);\rcurrent = current-\u0026gt;next;\r}\rprintf(\u0026#34;NULL\\n\u0026#34;);\r}\r// 辅助函数，用于释放链表内存\rvoid freeList(struct ListNode* head) {\rstruct ListNode* current = head;\rwhile (current != NULL) {\rstruct ListNode* next = current-\u0026gt;next;\rfree(current);\rcurrent = next;\r}\r}\r// 主函数，用于测试反转链表\rint main() {\r// 创建链表\rprintf(\u0026#34;请输入链表节点值，以EOF结束：\\n\u0026#34;);\rstruct ListNode* head = createNode();\rprintf(\u0026#34;原链表: \u0026#34;);\rprintList(head);\r// 反转链表\rstruct ListNode* reversedHead = reverseList(head);\rprintf(\u0026#34;反转后的链表: \u0026#34;);\rprintList(reversedHead);\r// 释放内存\rfreeList(reversedHead);\rreturn 0;\r} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路\n","keywords":[],"articleBody":"数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）\n给出自己原来写的代码及源码\n2.出现的问题\n出现的问题分类，代码里的哪些函数出错了。\n我的解决方案 从网上chatgpt查找得到的解决方案\n自己研究得出的方案\n给出自己修改过的代码\n给予大家的警示 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。\n给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：\n#include #include // 定义链表节点结构\rstruct ListNode {\rint value;\rstruct ListNode* next;\r};\r// 反转链表函数\rstruct ListNode* reverseList(struct ListNode* head) {\rstruct ListNode* prev = NULL;\rstruct ListNode* current = head;\rstruct ListNode* nextNode = NULL;\rwhile (current != NULL) {\rnextNode = current-\u003enext; // 暂存下一个节点\rcurrent-\u003enext = prev; // 反转当前节点的指针\rprev = current; // 前移 prev\rcurrent = nextNode; // 前移 current\r}\rreturn prev; // 返回新的头节点\r}\r// 辅助函数，用于创建新节点\rstruct ListNode* createNode() {\rstruct ListNode* head; // 初始化头节点为空\rhead=(struct ListNode*)malloc(sizeof(struct ListNode));\rhead-\u003enext=NULL; // 用于记录链表的尾节点\rint x; // x为链表数据域中的数据\rwhile (scanf(\"%d\", \u0026x) != EOF) {\rstruct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));\rnewNode-\u003evalue = x;\rnewNode-\u003enext =head-\u003enext; // 将新节点链接到尾节点之后\rhead-\u003enext=newNode; // 更新尾节点\r}\rreturn head;\r}\r// 辅助函数，用于打印链表\rvoid printList(struct ListNode* head) {\rstruct ListNode* current = head;\rwhile (current != NULL) {\rprintf(\"%d -\u003e \", current-\u003evalue);\rcurrent = current-\u003enext;\r}\rprintf(\"NULL\\n\");\r}\r// 辅助函数，用于释放链表内存\rvoid freeList(struct ListNode* head) {\rstruct ListNode* current = head;\rwhile (current != NULL) {\rstruct ListNode* next = current-\u003enext;\rfree(current);\rcurrent = next;\r}\r}\r// 主函数，用于测试反转链表\rint main() {\r// 创建链表\rprintf(\"请输入链表节点值，以EOF结束：\\n\");\rstruct ListNode* head = createNode();\rprintf(\"原链表: \");\rprintList(head);\r// 反转链表\rstruct ListNode* reversedHead = reverseList(head);\rprintf(\"反转后的链表: \");\rprintList(reversedHead);\r// 释放内存\rfreeList(reversedHead);\rreturn 0;\r} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路\n出现的问题分类，代码里的哪些函数出错了。 我在ChatGPT上面经过询问得知，我不应该为头结点开辟一块内存空间即用malloc函数，上面解释说，若果强行要用malloc开辟的话，就会操作起来比较的麻烦，但是我想起来我们用到的头插法的雨具是这样子的,\n假设新插入的空间是space那么的话，语句如下：\rhead-\u003enext=NULL;\rspace-\u003enext=head\u003enext;\rhead-\u003enext=space; 我想既然，教材里面都给出了，head有next指针那么的话，head一定是用malloc开辟的空间，但是呢ChatGPT说不需要为头结点开辟空间，我想着若果头结点不需要开辟空间的话，那么的话，教材里为何给介绍开辟空间的那种头插法，我着教材不可能骗人吧，但是呢，经过测试，发现确实书本上的知识有一点问题，正确的头插法应该是这样子的不需要头结点的插入方法：\n假设新插入的空间是space那么的话，语句如下：\rhead=NULL;\rspace-\u003enext=head;\rhead-=space; 这样子会更加的方便一些，不会有后续的错误，我把这个ChatGPT上给出的头插法带入到我的代码里结果非常显而易见，我成功了，结果也是非常喜人的。\n下面我就为大家带来一下我的错误的运行的截图，如下所示：\n并且呢，我为大家带来ChatGPT上面的截图如下：\n**大家好，这就是ChatGPT给我的建！\n下面我就为大家介绍如何解决该问题。**\n3. 我的解决方案 在前文当中，我已经为大家介绍过了，我如何知道我的错误的问题，就是经过ChatGPT，询问得知，下面我就大模型，以及自己的总结俩方面给出合理的建议。\n从网上chatgpt查找得到的解决方案 很明显他给出的解决方案就是把headbxy建议一个头结点，这样就很容易成功，他给出的源码如下：\n#include #include // 定义链表节点结构\rtypedef struct ListNode {\rint value;\rstruct ListNode* next;\r} ListNode;\r// 反转链表函数\rListNode* reverseList(ListNode* head) {\rListNode* prev = NULL;\rListNode* current = head;\rListNode* nextNode = NULL;\rwhile (current != NULL) {\rnextNode = current-\u003enext; // 暂存下一个节点\rcurrent-\u003enext = prev; // 反转当前节点的指针\rprev = current; // 前移 prev\rcurrent = nextNode; // 前移 current\r}\rreturn prev; // 返回新的头节点\r}\r// 创建新节点函数\rListNode* createNode(int value) {\rListNode* newNode = (ListNode*)malloc(sizeof(ListNode));\rnewNode-\u003evalue = value;\rnewNode-\u003enext = NULL;\rreturn newNode;\r}\r// 辅助函数，用于创建链表\rListNode* createList() {\rListNode* head = NULL; // 初始化头节点为空\rint x; // x为链表数据域中的数据\rwhile (scanf(\"%d\", \u0026x) != EOF) {\rListNode* newNode = createNode(x);\rnewNode-\u003enext = head; // 将新节点插入到链表头部\rhead = newNode; // 更新头节点\r}\rreturn head;\r}\r// 辅助函数，用于打印链表\rvoid printList(ListNode* head) {\rListNode* current = head;\rwhile (current != NULL) {\rprintf(\"%d -\u003e \", current-\u003evalue);\rcurrent = current-\u003enext;\r}\rprintf(\"NULL\\n\");\r}\r// 辅助函数，用于释放链表内存\rvoid freeList(ListNode* head) {\rListNode* current = head;\rwhile (current != NULL) {\rListNode* next = current-\u003enext;\rfree(current);\rcurrent = next;\r}\r}\r// 主函数，用于测试反转链表\rint main() {\r// 创建链表\rprintf(\"请输入链表节点值，以EOF结束：\\n\");\rListNode* head = createList();\rprintf(\"原链表: \");\rprintList(head);\r// 反转链表\rListNode* reversedHead = reverseList(head);\rprintf(\"反转后的链表: \");\rprintList(reversedHead);\r// 释放内存\rfreeList(reversedHead);\rreturn 0;\r} 但是呢，我并不满足这个解决方案，经过思考我也得出我的解决方案\n自己研究得出的方案 我是把打印的函数的\nstruct ListNode* current = head; 这个语句，修改为下面这个语句：\nstruct ListNode* current = head-\u003enext; 然后再在反转单链表函数的里面修改就可以了，\n如下：需要把这个语句\nstruct ListNode* current = head; 修改为下面这个语句就可以了：\nstruct ListNode* current = head; 然后呢，需要在末尾加上这个语句，并修改返回值为head即可\nhead-\u003enext = prev;\rreturn head; 给出自己修改过的代码 下面我就为大家带来我修改完之后的代码语句，如下：\n#include #include // 定义链表节点结构\rtypedef struct ListNode {\rint value;\rstruct ListNode* next;\r}ListNode;\r// 反转链表函数\rstruct ListNode* reverseList(struct ListNode* head) {\rstruct ListNode* prev = NULL;\rstruct ListNode* current = head-\u003enext;\rstruct ListNode* nextNode = NULL;\rwhile (current!= NULL) {\rnextNode = current-\u003enext; // 暂存下一个节点\rcurrent-\u003enext = prev; // 反转当前节点的指针\rprev = current; // 前移 prev\rcurrent = nextNode; // 前移 current\r}\rhead-\u003enext = prev;\rreturn head; // 返回新的头节点\r}\rListNode* create(int x){\rListNode*newnode=(ListNode*)malloc(sizeof(ListNode));\rnewnode-\u003evalue=x;\rnewnode-\u003enext=NULL;\rreturn newnode;\r}\r// 辅助函数，用于创建新节点\rListNode* headNode() {\rstruct ListNode* head=(ListNode*)malloc(sizeof(ListNode));\rhead-\u003enext=NULL;\rint x; // x为链表数据域中的数据\rwhile (scanf(\"%d\", \u0026x) != EOF) {\rstruct ListNode* newNode =create(x);\rnewNode-\u003enext = head-\u003enext;\rhead-\u003enext= newNode; // 更新尾节点\r}\rreturn head;\r}\r// 辅助函数，用于打印链表\rvoid printList(struct ListNode* head) {\rstruct ListNode* current = head-\u003enext;\rwhile (current != NULL) {\rprintf(\"%d -\u003e \", current-\u003evalue);\rcurrent = current-\u003enext;\r}\rprintf(\"NULL\\n\");\r}\r// 主函数，用于测试反转链表\rint main() {\r// 创建链表\rprintf(\"请输入链表节点值，以EOF结束：\\n\");\rstruct ListNode* head = headNode();\rprintf(\"原链表: \");\rprintList(head);\r// 反转链表\rstruct ListNode* reversedHead = reverseList(head);\rprintf(\"反转后的链表: \");\rprintList(reversedHead);\rreturn 0;\r} 4. 给予大家的警示 总的来说，比较俩种方法，可能第二种的方案比较麻烦，需要修改二处函数，可以想见，假设在以后工作之中，处理的函数体量庞大，那么的话，修改的函数也会有心无力的，因此呢我觉得，用第一种的不带头结点的方案是很喜人的，具体的话，自己看，但是在外面考试当中还是需要明白第二种的诀窍\n最后写到，谨祝大家在数据解构课里面要善于思考，用于使用ChatGPT，会使用ChatGPT，他是一个很好的工具，同时呢，要是大家学有余力的的话，推荐大家学习咸鱼老师的数据结构，在b战里面大家可以搜索，王道的咸鱼老师讲的非常好。\n","wordCount":"664","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg.github.io/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/posts/>Posts</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">数据结构链表当中的头结点问题</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>664 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><ul><ul><li><a href=#%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e9%93%be%e8%a1%a8%e5%bd%93%e4%b8%ad%e7%9a%84%e5%a4%b4%e7%bb%93%e7%82%b9%e9%97%ae%e9%a2%98 aria-label=数据结构链表当中的头结点问题>数据结构链表当中的头结点问题</a></li></ul></ul><li><a href=#1-%e7%a4%ba%e4%be%8b%e4%b8%be%e8%af%81 aria-label="1. 示例举证">1. 示例举证</a><ul><li><a href=#%e5%87%ba%e7%8e%b0%e7%9a%84%e4%bb%80%e4%b9%88%e4%be%8b%e5%ad%90%e5%8d%95%e9%93%be%e8%a1%a8%e7%9a%84%e8%a1%a8%e5%a4%b4%e8%8a%82%e7%82%b9 aria-label=出现的什么例子（单链表的表头节点）>出现的什么例子（单链表的表头节点）</a></li><li><a href=#%e7%bb%99%e5%87%ba%e8%87%aa%e5%b7%b1%e5%8e%9f%e6%9d%a5%e5%86%99%e7%9a%84%e4%bb%a3%e7%a0%81%e5%8f%8a%e6%ba%90%e7%a0%81 aria-label=给出自己原来写的代码及源码>给出自己原来写的代码及源码</a></li></ul></li><li><a href=#2%e5%87%ba%e7%8e%b0%e7%9a%84%e9%97%ae%e9%a2%98 aria-label=2.出现的问题>2.出现的问题</a><ul><li><a href=#%e5%87%ba%e7%8e%b0%e7%9a%84%e9%97%ae%e9%a2%98%e5%88%86%e7%b1%bb%e4%bb%a3%e7%a0%81%e9%87%8c%e7%9a%84%e5%93%aa%e4%ba%9b%e5%87%bd%e6%95%b0%e5%87%ba%e9%94%99%e4%ba%86 aria-label=出现的问题分类，代码里的哪些函数出错了。>出现的问题分类，代码里的哪些函数出错了。</a></li></ul></li><li><a href=#3-%e6%88%91%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88 aria-label="3. 我的解决方案">3. 我的解决方案</a><ul><li><a href=#%e4%bb%8e%e7%bd%91%e4%b8%8achatgpt%e6%9f%a5%e6%89%be%e5%be%97%e5%88%b0%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88 aria-label=从网上chatgpt查找得到的解决方案>从网上chatgpt查找得到的解决方案</a></li><li><a href=#%e8%87%aa%e5%b7%b1%e7%a0%94%e7%a9%b6%e5%be%97%e5%87%ba%e7%9a%84%e6%96%b9%e6%a1%88 aria-label=自己研究得出的方案>自己研究得出的方案</a></li><li><a href=#%e7%bb%99%e5%87%ba%e8%87%aa%e5%b7%b1%e4%bf%ae%e6%94%b9%e8%bf%87%e7%9a%84%e4%bb%a3%e7%a0%81 aria-label=给出自己修改过的代码>给出自己修改过的代码</a></li></ul></li><li><a href=#4-%e7%bb%99%e4%ba%88%e5%a4%a7%e5%ae%b6%e7%9a%84%e8%ad%a6%e7%a4%ba aria-label="4. 给予大家的警示">4. 给予大家的警示</a></li></ul></div></details><div class="post-content md-content"><h4 id=数据结构链表当中的头结点问题>数据结构链表当中的头结点问题<a hidden class=anchor aria-hidden=true href=#数据结构链表当中的头结点问题>#</a></h4><ul><li><ol><li>==示例举证==</li></ol></li><li><p>出现的什么例子（单链表的表头节点）</p></li><li><p>给出自己原来写的代码及源码</p></li><li><p>2.出现的问题</p></li><li><p>出现的问题分类，代码里的哪些函数出错了。</p></li><li><ol start=3><li>我的解决方案</li></ol></li><li><p>从网上chatgpt查找得到的解决方案</p></li><li><p>自己研究得出的方案</p></li><li><p>给出自己修改过的代码</p></li><li><ol start=4><li>给予大家的警示</li></ol></li></ul><h2 id=1-示例举证>1. 示例举证<a hidden class=anchor aria-hidden=true href=#1-示例举证>#</a></h2><h3 id=出现的什么例子单链表的表头节点>出现的什么例子（单链表的表头节点）<a hidden class=anchor aria-hidden=true href=#出现的什么例子单链表的表头节点>#</a></h3><p>首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。</p><h3 id=给出自己原来写的代码及源码>给出自己原来写的代码及源码<a hidden class=anchor aria-hidden=true href=#给出自己原来写的代码及源码>#</a></h3><p>下面我将给出大家我首先第一次写的代码如下：</p><pre tabindex=0><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
 // 定义链表节点结构
@@ -131,417 +226,15 @@ int main() {
 
     return 0;
 }
-2.出现的问题
-出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路">
-<meta name="author" content="dsduyopg">
-<link rel="canonical" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.e43bd292f097a172cd3328da33b8b3c29d3a16aae8222db58d5654514ee9c77a.css" integrity="sha256-5DvSkvCXoXLNMyjaM7izwp06FqroIi21jVZUUU7px3o=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="数据结构链表当中的头结点问题">
-  <meta property="og:description" content="数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）
-给出自己原来写的代码及源码
-2.出现的问题
-出现的问题分类，代码里的哪些函数出错了。
-我的解决方案 从网上chatgpt查找得到的解决方案
-自己研究得出的方案
-给出自己修改过的代码
-给予大家的警示 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。
-给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：
-#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;// 定义链表节点结构struct ListNode {int value;struct ListNode* next;};// 反转链表函数struct ListNode* reverseList(struct ListNode* head) {struct ListNode* prev = NULL;struct ListNode* current = head;struct ListNode* nextNode = NULL;while (current != NULL) {nextNode = current-&gt;next; // 暂存下一个节点current-&gt;next = prev; // 反转当前节点的指针prev = current; // 前移 prevcurrent = nextNode; // 前移 current}return prev; // 返回新的头节点}// 辅助函数，用于创建新节点struct ListNode* createNode() {struct ListNode* head; // 初始化头节点为空head=(struct ListNode*)malloc(sizeof(struct ListNode));head-&gt;next=NULL; // 用于记录链表的尾节点int x; // x为链表数据域中的数据while (scanf(&#34;%d&#34;, &amp;x) != EOF) {struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));newNode-&gt;value = x;newNode-&gt;next =head-&gt;next; // 将新节点链接到尾节点之后head-&gt;next=newNode; // 更新尾节点}return head;}// 辅助函数，用于打印链表void printList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {printf(&#34;%d -&gt; &#34;, current-&gt;value);current = current-&gt;next;}printf(&#34;NULL\n&#34;);}// 辅助函数，用于释放链表内存void freeList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {struct ListNode* next = current-&gt;next;free(current);current = next;}}// 主函数，用于测试反转链表int main() {// 创建链表printf(&#34;请输入链表节点值，以EOF结束：\n&#34;);struct ListNode* head = createNode();printf(&#34;原链表: &#34;);printList(head);// 反转链表struct ListNode* reversedHead = reverseList(head);printf(&#34;反转后的链表: &#34;);printList(reversedHead);// 释放内存freeList(reversedHead);return 0;} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="数据结构链表当中的头结点问题">
-  <meta name="twitter:description" content="数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）
-给出自己原来写的代码及源码
-2.出现的问题
-出现的问题分类，代码里的哪些函数出错了。
-我的解决方案 从网上chatgpt查找得到的解决方案
-自己研究得出的方案
-给出自己修改过的代码
-给予大家的警示 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。
-给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：
-#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;// 定义链表节点结构struct ListNode {int value;struct ListNode* next;};// 反转链表函数struct ListNode* reverseList(struct ListNode* head) {struct ListNode* prev = NULL;struct ListNode* current = head;struct ListNode* nextNode = NULL;while (current != NULL) {nextNode = current-&gt;next; // 暂存下一个节点current-&gt;next = prev; // 反转当前节点的指针prev = current; // 前移 prevcurrent = nextNode; // 前移 current}return prev; // 返回新的头节点}// 辅助函数，用于创建新节点struct ListNode* createNode() {struct ListNode* head; // 初始化头节点为空head=(struct ListNode*)malloc(sizeof(struct ListNode));head-&gt;next=NULL; // 用于记录链表的尾节点int x; // x为链表数据域中的数据while (scanf(&#34;%d&#34;, &amp;x) != EOF) {struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));newNode-&gt;value = x;newNode-&gt;next =head-&gt;next; // 将新节点链接到尾节点之后head-&gt;next=newNode; // 更新尾节点}return head;}// 辅助函数，用于打印链表void printList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {printf(&#34;%d -&gt; &#34;, current-&gt;value);current = current-&gt;next;}printf(&#34;NULL\n&#34;);}// 辅助函数，用于释放链表内存void freeList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {struct ListNode* next = current-&gt;next;free(current);current = next;}}// 主函数，用于测试反转链表int main() {// 创建链表printf(&#34;请输入链表节点值，以EOF结束：\n&#34;);struct ListNode* head = createNode();printf(&#34;原链表: &#34;);printList(head);// 反转链表struct ListNode* reversedHead = reverseList(head);printf(&#34;反转后的链表: &#34;);printList(reversedHead);// 释放内存freeList(reversedHead);return 0;} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "http://localhost:1313/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "数据结构链表当中的头结点问题",
-      "item": "http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "数据结构链表当中的头结点问题",
-  "name": "数据结构链表当中的头结点问题",
-  "description": "数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）\n给出自己原来写的代码及源码\n2.出现的问题\n出现的问题分类，代码里的哪些函数出错了。\n我的解决方案 从网上chatgpt查找得到的解决方案\n自己研究得出的方案\n给出自己修改过的代码\n给予大家的警示 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。\n给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：\n#include \u0026lt;stdio.h\u0026gt;\r#include \u0026lt;stdlib.h\u0026gt;\r// 定义链表节点结构\rstruct ListNode {\rint value;\rstruct ListNode* next;\r};\r// 反转链表函数\rstruct ListNode* reverseList(struct ListNode* head) {\rstruct ListNode* prev = NULL;\rstruct ListNode* current = head;\rstruct ListNode* nextNode = NULL;\rwhile (current != NULL) {\rnextNode = current-\u0026gt;next; // 暂存下一个节点\rcurrent-\u0026gt;next = prev; // 反转当前节点的指针\rprev = current; // 前移 prev\rcurrent = nextNode; // 前移 current\r}\rreturn prev; // 返回新的头节点\r}\r// 辅助函数，用于创建新节点\rstruct ListNode* createNode() {\rstruct ListNode* head; // 初始化头节点为空\rhead=(struct ListNode*)malloc(sizeof(struct ListNode));\rhead-\u0026gt;next=NULL; // 用于记录链表的尾节点\rint x; // x为链表数据域中的数据\rwhile (scanf(\u0026#34;%d\u0026#34;, \u0026amp;x) != EOF) {\rstruct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));\rnewNode-\u0026gt;value = x;\rnewNode-\u0026gt;next =head-\u0026gt;next; // 将新节点链接到尾节点之后\rhead-\u0026gt;next=newNode; // 更新尾节点\r}\rreturn head;\r}\r// 辅助函数，用于打印链表\rvoid printList(struct ListNode* head) {\rstruct ListNode* current = head;\rwhile (current != NULL) {\rprintf(\u0026#34;%d -\u0026gt; \u0026#34;, current-\u0026gt;value);\rcurrent = current-\u0026gt;next;\r}\rprintf(\u0026#34;NULL\\n\u0026#34;);\r}\r// 辅助函数，用于释放链表内存\rvoid freeList(struct ListNode* head) {\rstruct ListNode* current = head;\rwhile (current != NULL) {\rstruct ListNode* next = current-\u0026gt;next;\rfree(current);\rcurrent = next;\r}\r}\r// 主函数，用于测试反转链表\rint main() {\r// 创建链表\rprintf(\u0026#34;请输入链表节点值，以EOF结束：\\n\u0026#34;);\rstruct ListNode* head = createNode();\rprintf(\u0026#34;原链表: \u0026#34;);\rprintList(head);\r// 反转链表\rstruct ListNode* reversedHead = reverseList(head);\rprintf(\u0026#34;反转后的链表: \u0026#34;);\rprintList(reversedHead);\r// 释放内存\rfreeList(reversedHead);\rreturn 0;\r} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）\n给出自己原来写的代码及源码\n2.出现的问题\n出现的问题分类，代码里的哪些函数出错了。\n我的解决方案 从网上chatgpt查找得到的解决方案\n自己研究得出的方案\n给出自己修改过的代码\n给予大家的警示 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。\n给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：\n#include #include // 定义链表节点结构\rstruct ListNode {\rint value;\rstruct ListNode* next;\r};\r// 反转链表函数\rstruct ListNode* reverseList(struct ListNode* head) {\rstruct ListNode* prev = NULL;\rstruct ListNode* current = head;\rstruct ListNode* nextNode = NULL;\rwhile (current != NULL) {\rnextNode = current-\u003enext; // 暂存下一个节点\rcurrent-\u003enext = prev; // 反转当前节点的指针\rprev = current; // 前移 prev\rcurrent = nextNode; // 前移 current\r}\rreturn prev; // 返回新的头节点\r}\r// 辅助函数，用于创建新节点\rstruct ListNode* createNode() {\rstruct ListNode* head; // 初始化头节点为空\rhead=(struct ListNode*)malloc(sizeof(struct ListNode));\rhead-\u003enext=NULL; // 用于记录链表的尾节点\rint x; // x为链表数据域中的数据\rwhile (scanf(\"%d\", \u0026x) != EOF) {\rstruct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));\rnewNode-\u003evalue = x;\rnewNode-\u003enext =head-\u003enext; // 将新节点链接到尾节点之后\rhead-\u003enext=newNode; // 更新尾节点\r}\rreturn head;\r}\r// 辅助函数，用于打印链表\rvoid printList(struct ListNode* head) {\rstruct ListNode* current = head;\rwhile (current != NULL) {\rprintf(\"%d -\u003e \", current-\u003evalue);\rcurrent = current-\u003enext;\r}\rprintf(\"NULL\\n\");\r}\r// 辅助函数，用于释放链表内存\rvoid freeList(struct ListNode* head) {\rstruct ListNode* current = head;\rwhile (current != NULL) {\rstruct ListNode* next = current-\u003enext;\rfree(current);\rcurrent = next;\r}\r}\r// 主函数，用于测试反转链表\rint main() {\r// 创建链表\rprintf(\"请输入链表节点值，以EOF结束：\\n\");\rstruct ListNode* head = createNode();\rprintf(\"原链表: \");\rprintList(head);\r// 反转链表\rstruct ListNode* reversedHead = reverseList(head);\rprintf(\"反转后的链表: \");\rprintList(reversedHead);\r// 释放内存\rfreeList(reversedHead);\rreturn 0;\r} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路\n出现的问题分类，代码里的哪些函数出错了。 我在ChatGPT上面经过询问得知，我不应该为头结点开辟一块内存空间即用malloc函数，上面解释说，若果强行要用malloc开辟的话，就会操作起来比较的麻烦，但是我想起来我们用到的头插法的雨具是这样子的,\n假设新插入的空间是space那么的话，语句如下：\rhead-\u003enext=NULL;\rspace-\u003enext=head\u003enext;\rhead-\u003enext=space; 我想既然，教材里面都给出了，head有next指针那么的话，head一定是用malloc开辟的空间，但是呢ChatGPT说不需要为头结点开辟空间，我想着若果头结点不需要开辟空间的话，那么的话，教材里为何给介绍开辟空间的那种头插法，我着教材不可能骗人吧，但是呢，经过测试，发现确实书本上的知识有一点问题，正确的头插法应该是这样子的不需要头结点的插入方法：\n假设新插入的空间是space那么的话，语句如下：\rhead=NULL;\rspace-\u003enext=head;\rhead-=space; 这样子会更加的方便一些，不会有后续的错误，我把这个ChatGPT上给出的头插法带入到我的代码里结果非常显而易见，我成功了，结果也是非常喜人的。\n下面我就为大家带来一下我的错误的运行的截图，如下所示：\n并且呢，我为大家带来ChatGPT上面的截图如下：\n**大家好，这就是ChatGPT给我的建！\n下面我就为大家介绍如何解决该问题。**\n3. 我的解决方案 在前文当中，我已经为大家介绍过了，我如何知道我的错误的问题，就是经过ChatGPT，询问得知，下面我就大模型，以及自己的总结俩方面给出合理的建议。\n从网上chatgpt查找得到的解决方案 很明显他给出的解决方案就是把headbxy建议一个头结点，这样就很容易成功，他给出的源码如下：\n#include #include // 定义链表节点结构\rtypedef struct ListNode {\rint value;\rstruct ListNode* next;\r} ListNode;\r// 反转链表函数\rListNode* reverseList(ListNode* head) {\rListNode* prev = NULL;\rListNode* current = head;\rListNode* nextNode = NULL;\rwhile (current != NULL) {\rnextNode = current-\u003enext; // 暂存下一个节点\rcurrent-\u003enext = prev; // 反转当前节点的指针\rprev = current; // 前移 prev\rcurrent = nextNode; // 前移 current\r}\rreturn prev; // 返回新的头节点\r}\r// 创建新节点函数\rListNode* createNode(int value) {\rListNode* newNode = (ListNode*)malloc(sizeof(ListNode));\rnewNode-\u003evalue = value;\rnewNode-\u003enext = NULL;\rreturn newNode;\r}\r// 辅助函数，用于创建链表\rListNode* createList() {\rListNode* head = NULL; // 初始化头节点为空\rint x; // x为链表数据域中的数据\rwhile (scanf(\"%d\", \u0026x) != EOF) {\rListNode* newNode = createNode(x);\rnewNode-\u003enext = head; // 将新节点插入到链表头部\rhead = newNode; // 更新头节点\r}\rreturn head;\r}\r// 辅助函数，用于打印链表\rvoid printList(ListNode* head) {\rListNode* current = head;\rwhile (current != NULL) {\rprintf(\"%d -\u003e \", current-\u003evalue);\rcurrent = current-\u003enext;\r}\rprintf(\"NULL\\n\");\r}\r// 辅助函数，用于释放链表内存\rvoid freeList(ListNode* head) {\rListNode* current = head;\rwhile (current != NULL) {\rListNode* next = current-\u003enext;\rfree(current);\rcurrent = next;\r}\r}\r// 主函数，用于测试反转链表\rint main() {\r// 创建链表\rprintf(\"请输入链表节点值，以EOF结束：\\n\");\rListNode* head = createList();\rprintf(\"原链表: \");\rprintList(head);\r// 反转链表\rListNode* reversedHead = reverseList(head);\rprintf(\"反转后的链表: \");\rprintList(reversedHead);\r// 释放内存\rfreeList(reversedHead);\rreturn 0;\r} 但是呢，我并不满足这个解决方案，经过思考我也得出我的解决方案\n自己研究得出的方案 我是把打印的函数的\nstruct ListNode* current = head; 这个语句，修改为下面这个语句：\nstruct ListNode* current = head-\u003enext; 然后再在反转单链表函数的里面修改就可以了，\n如下：需要把这个语句\nstruct ListNode* current = head; 修改为下面这个语句就可以了：\nstruct ListNode* current = head; 然后呢，需要在末尾加上这个语句，并修改返回值为head即可\nhead-\u003enext = prev;\rreturn head; 给出自己修改过的代码 下面我就为大家带来我修改完之后的代码语句，如下：\n#include #include // 定义链表节点结构\rtypedef struct ListNode {\rint value;\rstruct ListNode* next;\r}ListNode;\r// 反转链表函数\rstruct ListNode* reverseList(struct ListNode* head) {\rstruct ListNode* prev = NULL;\rstruct ListNode* current = head-\u003enext;\rstruct ListNode* nextNode = NULL;\rwhile (current!= NULL) {\rnextNode = current-\u003enext; // 暂存下一个节点\rcurrent-\u003enext = prev; // 反转当前节点的指针\rprev = current; // 前移 prev\rcurrent = nextNode; // 前移 current\r}\rhead-\u003enext = prev;\rreturn head; // 返回新的头节点\r}\rListNode* create(int x){\rListNode*newnode=(ListNode*)malloc(sizeof(ListNode));\rnewnode-\u003evalue=x;\rnewnode-\u003enext=NULL;\rreturn newnode;\r}\r// 辅助函数，用于创建新节点\rListNode* headNode() {\rstruct ListNode* head=(ListNode*)malloc(sizeof(ListNode));\rhead-\u003enext=NULL;\rint x; // x为链表数据域中的数据\rwhile (scanf(\"%d\", \u0026x) != EOF) {\rstruct ListNode* newNode =create(x);\rnewNode-\u003enext = head-\u003enext;\rhead-\u003enext= newNode; // 更新尾节点\r}\rreturn head;\r}\r// 辅助函数，用于打印链表\rvoid printList(struct ListNode* head) {\rstruct ListNode* current = head-\u003enext;\rwhile (current != NULL) {\rprintf(\"%d -\u003e \", current-\u003evalue);\rcurrent = current-\u003enext;\r}\rprintf(\"NULL\\n\");\r}\r// 主函数，用于测试反转链表\rint main() {\r// 创建链表\rprintf(\"请输入链表节点值，以EOF结束：\\n\");\rstruct ListNode* head = headNode();\rprintf(\"原链表: \");\rprintList(head);\r// 反转链表\rstruct ListNode* reversedHead = reverseList(head);\rprintf(\"反转后的链表: \");\rprintList(reversedHead);\rreturn 0;\r} 4. 给予大家的警示 总的来说，比较俩种方法，可能第二种的方案比较麻烦，需要修改二处函数，可以想见，假设在以后工作之中，处理的函数体量庞大，那么的话，修改的函数也会有心无力的，因此呢我觉得，用第一种的不带头结点的方案是很喜人的，具体的话，自己看，但是在外面考试当中还是需要明白第二种的诀窍\n最后写到，谨祝大家在数据解构课里面要善于思考，用于使用ChatGPT，会使用ChatGPT，他是一个很好的工具，同时呢，要是大家学有余力的的话，推荐大家学习咸鱼老师的数据结构，在b战里面大家可以搜索，王道的咸鱼老师讲的非常好。\n",
-  "wordCount" : "664",
-  "inLanguage": "zh-cn",
-  "datePublished": "2026-08-18T00:00:00Z",
-  "dateModified": "2026-08-18T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": "dsduyopg"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="http://localhost:1313/search/" title="搜索">
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/about/" title="关于">
-                    <span>关于</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
-            <a href="/">主页</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/posts/">Posts</a>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-</nav>
-    <h1 class="post-title entry-hint-parent">
-      数据结构链表当中的头结点问题
-    </h1>
-    <div class="post-meta">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>664 字</span>&nbsp;·&nbsp;<span>dsduyopg</span>
-
-</div>
-  </header> <details class="toc" >
-    <summary accesskey="c" title="(Alt + C)">
-        <span class="title">目录</span>
-    </summary>
-
-    <div class="inner"><ul><ul><ul>
-            <li>
-                <a href="#%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e9%93%be%e8%a1%a8%e5%bd%93%e4%b8%ad%e7%9a%84%e5%a4%b4%e7%bb%93%e7%82%b9%e9%97%ae%e9%a2%98" aria-label="数据结构链表当中的头结点问题">数据结构链表当中的头结点问题</a></li></ul>
-                </ul>
-                
-            <li>
-                <a href="#1-%e7%a4%ba%e4%be%8b%e4%b8%be%e8%af%81" aria-label="1. 示例举证">1. 示例举证</a><ul>
-                    
-            <li>
-                <a href="#%e5%87%ba%e7%8e%b0%e7%9a%84%e4%bb%80%e4%b9%88%e4%be%8b%e5%ad%90%e5%8d%95%e9%93%be%e8%a1%a8%e7%9a%84%e8%a1%a8%e5%a4%b4%e8%8a%82%e7%82%b9" aria-label="出现的什么例子（单链表的表头节点）">出现的什么例子（单链表的表头节点）</a></li>
-            <li>
-                <a href="#%e7%bb%99%e5%87%ba%e8%87%aa%e5%b7%b1%e5%8e%9f%e6%9d%a5%e5%86%99%e7%9a%84%e4%bb%a3%e7%a0%81%e5%8f%8a%e6%ba%90%e7%a0%81" aria-label="给出自己原来写的代码及源码">给出自己原来写的代码及源码</a></li></ul>
-            </li>
-            <li>
-                <a href="#2%e5%87%ba%e7%8e%b0%e7%9a%84%e9%97%ae%e9%a2%98" aria-label="2.出现的问题">2.出现的问题</a><ul>
-                    
-            <li>
-                <a href="#%e5%87%ba%e7%8e%b0%e7%9a%84%e9%97%ae%e9%a2%98%e5%88%86%e7%b1%bb%e4%bb%a3%e7%a0%81%e9%87%8c%e7%9a%84%e5%93%aa%e4%ba%9b%e5%87%bd%e6%95%b0%e5%87%ba%e9%94%99%e4%ba%86" aria-label="出现的问题分类，代码里的哪些函数出错了。">出现的问题分类，代码里的哪些函数出错了。</a></li></ul>
-            </li>
-            <li>
-                <a href="#3-%e6%88%91%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" aria-label="3. 我的解决方案">3. 我的解决方案</a><ul>
-                    
-            <li>
-                <a href="#%e4%bb%8e%e7%bd%91%e4%b8%8achatgpt%e6%9f%a5%e6%89%be%e5%be%97%e5%88%b0%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" aria-label="从网上chatgpt查找得到的解决方案">从网上chatgpt查找得到的解决方案</a></li>
-            <li>
-                <a href="#%e8%87%aa%e5%b7%b1%e7%a0%94%e7%a9%b6%e5%be%97%e5%87%ba%e7%9a%84%e6%96%b9%e6%a1%88" aria-label="自己研究得出的方案">自己研究得出的方案</a></li>
-            <li>
-                <a href="#%e7%bb%99%e5%87%ba%e8%87%aa%e5%b7%b1%e4%bf%ae%e6%94%b9%e8%bf%87%e7%9a%84%e4%bb%a3%e7%a0%81" aria-label="给出自己修改过的代码">给出自己修改过的代码</a></li></ul>
-            </li>
-            <li>
-                <a href="#4-%e7%bb%99%e4%ba%88%e5%a4%a7%e5%ae%b6%e7%9a%84%e8%ad%a6%e7%a4%ba" aria-label="4. 给予大家的警示">4. 给予大家的警示</a>
-            </li>
-        </ul>
-    </div>
-</details>
-
-  <div class="post-content md-content"><h4 id="数据结构链表当中的头结点问题">数据结构链表当中的头结点问题<a hidden class="anchor" aria-hidden="true" href="#数据结构链表当中的头结点问题">#</a></h4>
-<ul>
-<li>
-<ol>
-<li>==示例举证==</li>
-</ol>
-</li>
-<li>
-<p>出现的什么例子（单链表的表头节点）</p>
-</li>
-<li>
-<p>给出自己原来写的代码及源码</p>
-</li>
-<li>
-<p>2.出现的问题</p>
-</li>
-<li>
-<p>出现的问题分类，代码里的哪些函数出错了。</p>
-</li>
-<li>
-<ol start="3">
-<li>我的解决方案</li>
-</ol>
-</li>
-<li>
-<p>从网上chatgpt查找得到的解决方案</p>
-</li>
-<li>
-<p>自己研究得出的方案</p>
-</li>
-<li>
-<p>给出自己修改过的代码</p>
-</li>
-<li>
-<ol start="4">
-<li>给予大家的警示</li>
-</ol>
-</li>
-</ul>
-<h2 id="1-示例举证">1. 示例举证<a hidden class="anchor" aria-hidden="true" href="#1-示例举证">#</a></h2>
-<h3 id="出现的什么例子单链表的表头节点">出现的什么例子（单链表的表头节点）<a hidden class="anchor" aria-hidden="true" href="#出现的什么例子单链表的表头节点">#</a></h3>
-<p>首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。</p>
-<h3 id="给出自己原来写的代码及源码">给出自己原来写的代码及源码<a hidden class="anchor" aria-hidden="true" href="#给出自己原来写的代码及源码">#</a></h3>
-<p>下面我将给出大家我首先第一次写的代码如下：</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-// 定义链表节点结构
-struct ListNode {
-    int value;
-    struct ListNode* next;
-};
-
-// 反转链表函数
-struct ListNode* reverseList(struct ListNode* head) {
-    struct ListNode* prev = NULL;
-    struct ListNode* current = head;
-    struct ListNode* nextNode = NULL;
-
-    while (current != NULL) {
-        nextNode = current-&gt;next;  // 暂存下一个节点
-        current-&gt;next = prev;      // 反转当前节点的指针
-        prev = current;            // 前移 prev
-        current = nextNode;        // 前移 current
-    }
-
-    return prev;  // 返回新的头节点
-}
-
-// 辅助函数，用于创建新节点
-struct ListNode* createNode() {
-    struct ListNode* head;  // 初始化头节点为空
-    head=(struct ListNode*)malloc(sizeof(struct ListNode));
-  head-&gt;next=NULL; // 用于记录链表的尾节点
-    int x;                         // x为链表数据域中的数据
-    while (scanf(&#34;%d&#34;, &amp;x) != EOF) {
-        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
-        newNode-&gt;value = x;
-        newNode-&gt;next =head-&gt;next;  // 将新节点链接到尾节点之后
-        head-&gt;next=newNode;        // 更新尾节点
-    }
-    return head;
-}
-
-// 辅助函数，用于打印链表
-void printList(struct ListNode* head) {
-    struct ListNode* current = head;
-    while (current != NULL) {
-        printf(&#34;%d -&gt; &#34;, current-&gt;value);
-        current = current-&gt;next;
-    }
-    printf(&#34;NULL\n&#34;);
-}
-
-// 辅助函数，用于释放链表内存
-void freeList(struct ListNode* head) {
-    struct ListNode* current = head;
-    while (current != NULL) {
-        struct ListNode* next = current-&gt;next;
-        free(current);
-        current = next;
-    }
-}
-
-// 主函数，用于测试反转链表
-int main() {
-    // 创建链表
-    printf(&#34;请输入链表节点值，以EOF结束：\n&#34;);
-    struct ListNode* head = createNode();
-
-    printf(&#34;原链表: &#34;);
-    printList(head);
-
-    // 反转链表
-    struct ListNode* reversedHead = reverseList(head);
-
-    printf(&#34;反转后的链表: &#34;);
-    printList(reversedHead);
-
-    // 释放内存
-    freeList(reversedHead);
-
-    return 0;
-}
-</code></pre><h2 id="2出现的问题">2.出现的问题<a hidden class="anchor" aria-hidden="true" href="#2出现的问题">#</a></h2>
-<p><strong>出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路</strong></p>
-<h3 id="出现的问题分类代码里的哪些函数出错了">出现的问题分类，代码里的哪些函数出错了。<a hidden class="anchor" aria-hidden="true" href="#出现的问题分类代码里的哪些函数出错了">#</a></h3>
-<p>我在ChatGPT上面经过询问得知，我不应该为头结点开辟一块内存空间即用malloc函数，上面解释说，若果强行要用malloc开辟的话，就会操作起来比较的麻烦，但是我想起来我们用到的头插法的雨具是这样子的,</p>
-<pre tabindex="0"><code>假设新插入的空间是space那么的话，语句如下：
+</code></pre><h2 id=2出现的问题>2.出现的问题<a hidden class=anchor aria-hidden=true href=#2出现的问题>#</a></h2><p><strong>出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路</strong></p><h3 id=出现的问题分类代码里的哪些函数出错了>出现的问题分类，代码里的哪些函数出错了。<a hidden class=anchor aria-hidden=true href=#出现的问题分类代码里的哪些函数出错了>#</a></h3><p>我在ChatGPT上面经过询问得知，我不应该为头结点开辟一块内存空间即用malloc函数，上面解释说，若果强行要用malloc开辟的话，就会操作起来比较的麻烦，但是我想起来我们用到的头插法的雨具是这样子的,</p><pre tabindex=0><code>假设新插入的空间是space那么的话，语句如下：
 head-&gt;next=NULL;
 space-&gt;next=head&gt;next;
 head-&gt;next=space;
-</code></pre><p>我想既然，教材里面都给出了，head有next指针那么的话，head一定是用malloc开辟的空间，但是呢ChatGPT说不需要为头结点开辟空间，我想着若果头结点不需要开辟空间的话，那么的话，教材里为何给介绍开辟空间的那种头插法，我着教材不可能骗人吧，但是呢，经过测试，发现确实书本上的知识有一点问题，正确的头插法应该是这样子的不需要头结点的插入方法：</p>
-<pre tabindex="0"><code>假设新插入的空间是space那么的话，语句如下：
+</code></pre><p>我想既然，教材里面都给出了，head有next指针那么的话，head一定是用malloc开辟的空间，但是呢ChatGPT说不需要为头结点开辟空间，我想着若果头结点不需要开辟空间的话，那么的话，教材里为何给介绍开辟空间的那种头插法，我着教材不可能骗人吧，但是呢，经过测试，发现确实书本上的知识有一点问题，正确的头插法应该是这样子的不需要头结点的插入方法：</p><pre tabindex=0><code>假设新插入的空间是space那么的话，语句如下：
 head=NULL;
 space-&gt;next=head;
 head-=space;
-</code></pre><p>这样子会更加的方便一些，不会有后续的错误，我把这个ChatGPT上给出的头插法带入到我的代码里结果非常显而易见，我成功了，结果也是非常喜人的。</p>
-<p>下面我就为大家带来一下我的错误的运行的截图，如下所示：</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/images/c74520f4da4c4317ac0b9344d64f9e45.png"></p>
-<p>并且呢，我为大家带来ChatGPT上面的截图如下：</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/images/fe753da4efe24e759ded646ad2604e09.png"></p>
-<p>**大家好，这就是ChatGPT给我的建！</p>
-<p>下面我就为大家介绍如何解决该问题。**</p>
-<h2 id="3-我的解决方案">3. 我的解决方案<a hidden class="anchor" aria-hidden="true" href="#3-我的解决方案">#</a></h2>
-<p>在前文当中，我已经为大家介绍过了，我如何知道我的错误的问题，就是经过ChatGPT，询问得知，下面我就大模型，以及自己的总结俩方面给出合理的建议。</p>
-<h3 id="从网上chatgpt查找得到的解决方案">从网上chatgpt查找得到的解决方案<a hidden class="anchor" aria-hidden="true" href="#从网上chatgpt查找得到的解决方案">#</a></h3>
-<p>很明显他给出的解决方案就是把headbxy建议一个头结点，这样就很容易成功，他给出的源码如下：</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+</code></pre><p>这样子会更加的方便一些，不会有后续的错误，我把这个ChatGPT上给出的头插法带入到我的代码里结果非常显而易见，我成功了，结果也是非常喜人的。</p><p>下面我就为大家带来一下我的错误的运行的截图，如下所示：</p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/images/c74520f4da4c4317ac0b9344d64f9e45.png></p><p>并且呢，我为大家带来ChatGPT上面的截图如下：</p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/images/fe753da4efe24e759ded646ad2604e09.png></p><p>**大家好，这就是ChatGPT给我的建！</p><p>下面我就为大家介绍如何解决该问题。**</p><h2 id=3-我的解决方案>3. 我的解决方案<a hidden class=anchor aria-hidden=true href=#3-我的解决方案>#</a></h2><p>在前文当中，我已经为大家介绍过了，我如何知道我的错误的问题，就是经过ChatGPT，询问得知，下面我就大模型，以及自己的总结俩方面给出合理的建议。</p><h3 id=从网上chatgpt查找得到的解决方案>从网上chatgpt查找得到的解决方案<a hidden class=anchor aria-hidden=true href=#从网上chatgpt查找得到的解决方案>#</a></h3><p>很明显他给出的解决方案就是把headbxy建议一个头结点，这样就很容易成功，他给出的源码如下：</p><pre tabindex=0><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
 // 定义链表节点结构
@@ -626,23 +319,13 @@ int main() {
 
     return 0;
 }
-</code></pre><p>但是呢，我并不满足这个解决方案，经过思考我也得出我的解决方案</p>
-<h3 id="自己研究得出的方案">自己研究得出的方案<a hidden class="anchor" aria-hidden="true" href="#自己研究得出的方案">#</a></h3>
-<p>我是把打印的函数的</p>
-<pre tabindex="0"><code> struct ListNode* current = head;
-</code></pre><p>这个语句，修改为下面这个语句：</p>
-<pre tabindex="0"><code> struct ListNode* current = head-&gt;next;
-</code></pre><p>然后再在反转单链表函数的里面修改就可以了，</p>
-<p>如下：需要把这个语句</p>
-<pre tabindex="0"><code> struct ListNode* current = head;
-</code></pre><p>修改为下面这个语句就可以了：</p>
-<pre tabindex="0"><code> struct ListNode* current = head;
-</code></pre><p>然后呢，需要在末尾加上这个语句，并修改返回值为head即可</p>
-<pre tabindex="0"><code>head-&gt;next = prev;
+</code></pre><p>但是呢，我并不满足这个解决方案，经过思考我也得出我的解决方案</p><h3 id=自己研究得出的方案>自己研究得出的方案<a hidden class=anchor aria-hidden=true href=#自己研究得出的方案>#</a></h3><p>我是把打印的函数的</p><pre tabindex=0><code> struct ListNode* current = head;
+</code></pre><p>这个语句，修改为下面这个语句：</p><pre tabindex=0><code> struct ListNode* current = head-&gt;next;
+</code></pre><p>然后再在反转单链表函数的里面修改就可以了，</p><p>如下：需要把这个语句</p><pre tabindex=0><code> struct ListNode* current = head;
+</code></pre><p>修改为下面这个语句就可以了：</p><pre tabindex=0><code> struct ListNode* current = head;
+</code></pre><p>然后呢，需要在末尾加上这个语句，并修改返回值为head即可</p><pre tabindex=0><code>head-&gt;next = prev;
     return head;
-</code></pre><h3 id="给出自己修改过的代码">给出自己修改过的代码<a hidden class="anchor" aria-hidden="true" href="#给出自己修改过的代码">#</a></h3>
-<p>下面我就为大家带来我修改完之后的代码语句，如下：</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+</code></pre><h3 id=给出自己修改过的代码>给出自己修改过的代码<a hidden class=anchor aria-hidden=true href=#给出自己修改过的代码>#</a></h3><p>下面我就为大家带来我修改完之后的代码语句，如下：</p><pre tabindex=0><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
 // 定义链表节点结构
@@ -717,175 +400,11 @@ int main() {
 
     return 0;
 }
-</code></pre><h2 id="4-给予大家的警示">4. 给予大家的警示<a hidden class="anchor" aria-hidden="true" href="#4-给予大家的警示">#</a></h2>
-<p>总的来说，比较俩种方法，可能第二种的方案比较麻烦，需要修改二处函数，可以想见，假设在以后工作之中，处理的函数体量庞大，那么的话，修改的函数也会有心无力的，因此呢我觉得，用第一种的不带头结点的方案是很喜人的，具体的话，自己看，但是在外面考试当中还是需要明白第二种的诀窍</p>
-<p>最后写到，谨祝大家在数据解构课里面要善于思考，用于使用ChatGPT，会使用ChatGPT，他是一个很好的工具，同时呢，要是大家学有余力的的话，推荐大家学习咸鱼老师的数据结构，在b战里面大家可以搜索，王道的咸鱼老师讲的非常好。</p>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/">
-    <span class="title">« 上一页</span>
-    <span>关于ftp与SELinux的冲突问题</span>
-  </a>
-  <a class="next" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/">
-    <span class="title">下一页 »</span>
-    <span>数据同步服务</span>
-  </a>
-</nav>
-
-  </footer>
-<div class="comments">
-  <h2>评论</h2>
-  <script src="https://utteranc.es/client.js"
-          repo="dsduyopg/dsduyopg.github.io"
-          issue-term="pathname"
-          label="comment"
-          theme="preferred-color-scheme"
-          crossorigin="anonymous"
-          async>
-  </script>
-  <noscript>请启用 JavaScript 查看评论。</noscript>
-</div>
-
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-<div class="busuanzi">
-  本站访客 <span id="busuanzi_value_site_uv"></span> ·
-  访问量 <span id="busuanzi_value_site_pv"></span> · 本文阅读 <span id="busuanzi_value_page_pv"></span>
-</div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = '复制';
-
-        function copyingDone() {
-            copybutton.innerHTML = '已复制！';
-            setTimeout(() => {
-                copybutton.innerHTML = '复制';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+</code></pre><h2 id=4-给予大家的警示>4. 给予大家的警示<a hidden class=anchor aria-hidden=true href=#4-给予大家的警示>#</a></h2><p>总的来说，比较俩种方法，可能第二种的方案比较麻烦，需要修改二处函数，可以想见，假设在以后工作之中，处理的函数体量庞大，那么的话，修改的函数也会有心无力的，因此呢我觉得，用第一种的不带头结点的方案是很喜人的，具体的话，自己看，但是在外面考试当中还是需要明白第二种的诀窍</p><p>最后写到，谨祝大家在数据解构课里面要善于思考，用于使用ChatGPT，会使用ChatGPT，他是一个很好的工具，同时呢，要是大家学有余力的的话，推荐大家学习咸鱼老师的数据结构，在b战里面大家可以搜索，王道的咸鱼老师讲的非常好。</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/><span class=title>« 上一页</span>
+<span>关于ftp与SELinux的冲突问题</span>
+</a><a class=next href=https://dsduyopg.github.io/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/><span class=title>下一页 »</span>
+<span>数据同步服务</span></a></nav></footer><div class=comments><h2>评论</h2><script src=https://utteranc.es/client.js repo=dsduyopg/dsduyopg.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script><noscript>请启用 JavaScript 查看评论。</noscript></div></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

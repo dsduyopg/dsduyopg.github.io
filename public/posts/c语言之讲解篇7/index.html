@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>C语言之讲解篇7 | 我的博客</title>
-<meta name="keywords" content="">
-<meta name="description" content="例题：写一个函数，可以逆序一个字符串的内容。
-#include &lt;stdio.h&gt;
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>C语言之讲解篇7 | 我的博客</title><meta name=keywords content><meta name=description content='例题：写一个函数，可以逆序一个字符串的内容。
+#include <stdio.h>
 void reverse(char * letter);
 int main()
  {
@@ -16,8 +7,8 @@ int main()
     int i;
     while(num[i]!=&#39;\0&#39;)
     {
-        scanf(&#34;%c&#34;,&amp;num[i]);
-        i&#43;&#43;;
+        scanf("%c",&amp;num[i]);
+        i++;
     }
   reverse(num);
     return 0;
@@ -27,11 +18,11 @@ void reverse(char * letter)
     char * start=letter;
     while(*letter!=&#39;\0&#39;)
     {
-        letter&#43;&#43;;
+        letter++;
     }
-    while(letter&gt;=start)
+    while(letter>=start)
     {
-        printf(&#34;%c&#34;,*letter);
+        printf("%c",*letter);
         letter--;
     }
 }
@@ -41,17 +32,17 @@ void reverse(char * letter)
 /*
 思路：该题比较简单，请参考代码
 */
-#include&lt;stdio.h&gt;
+#include<stdio.h>
 void Reverse(char* str)
 {
     char* left = str;
-    char* right = str &#43; strlen(str)-1;
-    while(left &lt; right)
+    char* right = str + strlen(str)-1;
+    while(left < right)
     {
         char temp = *left;
         *left = *right;
         *right = temp;
-        &#43;&#43;left;
+        ++left;
         --right;
     }
 }
@@ -59,7 +50,7 @@ void Reverse(char* str)
 
 int main()
 {
-    char str[] = &#34;hello bit&#34;;
+    char str[] = "hello bit";
     //在这里完成下面函数，参数自己设计，要求：使用指针
     Reverse(str);
     return 0;
@@ -73,221 +64,21 @@ int main()
     while(gets(str))
     {
         Reverse(str);
-        printf(&#34;%s\n&#34;, str);
+        printf("%s\n", str);
         memset(str, 0, sizeof(str)/sizeof(str[0]));
     }
     return 0;
 }
-接下来本题就宣告结束了。">
-<meta name="author" content="dsduyopg">
-<link rel="canonical" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.a061064ab34cca821922a540f2091b6e3812d4baa4533f49371257c91fa0baf1.css" integrity="sha256-oGEGSrNMyoIZIqVA8gkbbjgS1LqkUz9JNxJXyR&#43;guvE=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="C语言之讲解篇7">
-  <meta property="og:description" content="例题：写一个函数，可以逆序一个字符串的内容。
-#include &lt;stdio.h&gt;void reverse(char * letter);int main(){char num[50];int i;while(num[i]!=&#39;\0&#39;){scanf(&#34;%c&#34;,&amp;num[i]);i&#43;&#43;;}reverse(num);return 0;}void reverse(char * letter){char * start=letter;while(*letter!=&#39;\0&#39;){letter&#43;&#43;;}while(letter&gt;=start){printf(&#34;%c&#34;,*letter);letter--;}} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：
-/*思路：该题比较简单，请参考代码*/#include&lt;stdio.h&gt;void Reverse(char* str){char* left = str;char* right = str &#43; strlen(str)-1;while(left &lt; right){char temp = *left;*left = *right;*right = temp;&#43;&#43;left;--right;}}int main(){char str[] = &#34;hello bit&#34;;//在这里完成下面函数，参数自己设计，要求：使用指针Reverse(str);return 0;}// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，int main(){char str[101] = {0};while(gets(str)){Reverse(str);printf(&#34;%s\n&#34;, str);memset(str, 0, sizeof(str)/sizeof(str[0]));}return 0;} 接下来本题就宣告结束了。">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="C语言之讲解篇7">
-  <meta name="twitter:description" content="例题：写一个函数，可以逆序一个字符串的内容。
-#include &lt;stdio.h&gt;void reverse(char * letter);int main(){char num[50];int i;while(num[i]!=&#39;\0&#39;){scanf(&#34;%c&#34;,&amp;num[i]);i&#43;&#43;;}reverse(num);return 0;}void reverse(char * letter){char * start=letter;while(*letter!=&#39;\0&#39;){letter&#43;&#43;;}while(letter&gt;=start){printf(&#34;%c&#34;,*letter);letter--;}} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：
-/*思路：该题比较简单，请参考代码*/#include&lt;stdio.h&gt;void Reverse(char* str){char* left = str;char* right = str &#43; strlen(str)-1;while(left &lt; right){char temp = *left;*left = *right;*right = temp;&#43;&#43;left;--right;}}int main(){char str[] = &#34;hello bit&#34;;//在这里完成下面函数，参数自己设计，要求：使用指针Reverse(str);return 0;}// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，int main(){char str[101] = {0};while(gets(str)){Reverse(str);printf(&#34;%s\n&#34;, str);memset(str, 0, sizeof(str)/sizeof(str[0]));}return 0;} 接下来本题就宣告结束了。">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "http://localhost:1313/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "C语言之讲解篇7",
-      "item": "http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "C语言之讲解篇7",
-  "name": "C语言之讲解篇7",
-  "description": "例题：写一个函数，可以逆序一个字符串的内容。\n#include \u0026lt;stdio.h\u0026gt;\rvoid reverse(char * letter);\rint main()\r{\rchar num[50];\rint i;\rwhile(num[i]!=\u0026#39;\\0\u0026#39;)\r{\rscanf(\u0026#34;%c\u0026#34;,\u0026amp;num[i]);\ri++;\r}\rreverse(num);\rreturn 0;\r}\rvoid reverse(char * letter)\r{\rchar * start=letter;\rwhile(*letter!=\u0026#39;\\0\u0026#39;)\r{\rletter++;\r}\rwhile(letter\u0026gt;=start)\r{\rprintf(\u0026#34;%c\u0026#34;,*letter);\rletter--;\r}\r} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：\n/*\r思路：该题比较简单，请参考代码\r*/\r#include\u0026lt;stdio.h\u0026gt;\rvoid Reverse(char* str)\r{\rchar* left = str;\rchar* right = str + strlen(str)-1;\rwhile(left \u0026lt; right)\r{\rchar temp = *left;\r*left = *right;\r*right = temp;\r++left;\r--right;\r}\r}\rint main()\r{\rchar str[] = \u0026#34;hello bit\u0026#34;;\r//在这里完成下面函数，参数自己设计，要求：使用指针\rReverse(str);\rreturn 0;\r}\r// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，\rint main()\r{\rchar str[101] = {0};\rwhile(gets(str))\r{\rReverse(str);\rprintf(\u0026#34;%s\\n\u0026#34;, str);\rmemset(str, 0, sizeof(str)/sizeof(str[0]));\r}\rreturn 0;\r} 接下来本题就宣告结束了。\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "例题：写一个函数，可以逆序一个字符串的内容。\n#include void reverse(char * letter);\rint main()\r{\rchar num[50];\rint i;\rwhile(num[i]!='\\0')\r{\rscanf(\"%c\",\u0026num[i]);\ri++;\r}\rreverse(num);\rreturn 0;\r}\rvoid reverse(char * letter)\r{\rchar * start=letter;\rwhile(*letter!='\\0')\r{\rletter++;\r}\rwhile(letter\u003e=start)\r{\rprintf(\"%c\",*letter);\rletter--;\r}\r} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：\n/*\r思路：该题比较简单，请参考代码\r*/\r#include\rvoid Reverse(char* str)\r{\rchar* left = str;\rchar* right = str + strlen(str)-1;\rwhile(left \u003c right)\r{\rchar temp = *left;\r*left = *right;\r*right = temp;\r++left;\r--right;\r}\r}\rint main()\r{\rchar str[] = \"hello bit\";\r//在这里完成下面函数，参数自己设计，要求：使用指针\rReverse(str);\rreturn 0;\r}\r// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，\rint main()\r{\rchar str[101] = {0};\rwhile(gets(str))\r{\rReverse(str);\rprintf(\"%s\\n\", str);\rmemset(str, 0, sizeof(str)/sizeof(str[0]));\r}\rreturn 0;\r} 接下来本题就宣告结束了。\n",
-  "wordCount" : "113",
-  "inLanguage": "zh-cn",
-  "datePublished": "2026-08-18T00:00:00Z",
-  "dateModified": "2026-08-18T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": "dsduyopg"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="http://localhost:1313/search/" title="搜索">
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/about/" title="关于">
-                    <span>关于</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
-            <a href="/">主页</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/posts/">Posts</a>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-</nav>
-    <h1 class="post-title entry-hint-parent">
-      C语言之讲解篇7
-    </h1>
-    <div class="post-meta">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>113 字</span>&nbsp;·&nbsp;<span>dsduyopg</span>
-
-</div>
-  </header> 
-
-  <div class="post-content md-content"><p>例题：写一个函数，可以逆序一个字符串的内容。</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+接下来本题就宣告结束了。'><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/><link crossorigin=anonymous href=/assets/css/stylesheet.a061064ab34cca821922a540f2091b6e3812d4baa4533f49371257c91fa0baf1.css integrity="sha256-oGEGSrNMyoIZIqVA8gkbbjgS1LqkUz9JNxJXyR+guvE=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="C语言之讲解篇7"><meta property="og:description" content='例题：写一个函数，可以逆序一个字符串的内容。
+#include <stdio.h>void reverse(char * letter);int main(){char num[50];int i;while(num[i]!=&#39;\0&#39;){scanf("%c",&amp;num[i]);i++;}reverse(num);return 0;}void reverse(char * letter){char * start=letter;while(*letter!=&#39;\0&#39;){letter++;}while(letter>=start){printf("%c",*letter);letter--;}} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：
+/*思路：该题比较简单，请参考代码*/#include<stdio.h>void Reverse(char* str){char* left = str;char* right = str + strlen(str)-1;while(left < right){char temp = *left;*left = *right;*right = temp;++left;--right;}}int main(){char str[] = "hello bit";//在这里完成下面函数，参数自己设计，要求：使用指针Reverse(str);return 0;}// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，int main(){char str[101] = {0};while(gets(str)){Reverse(str);printf("%s\n", str);memset(str, 0, sizeof(str)/sizeof(str[0]));}return 0;} 接下来本题就宣告结束了。'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="C语言之讲解篇7"><meta name=twitter:description content='例题：写一个函数，可以逆序一个字符串的内容。
+#include <stdio.h>void reverse(char * letter);int main(){char num[50];int i;while(num[i]!=&#39;\0&#39;){scanf("%c",&amp;num[i]);i++;}reverse(num);return 0;}void reverse(char * letter){char * start=letter;while(*letter!=&#39;\0&#39;){letter++;}while(letter>=start){printf("%c",*letter);letter--;}} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：
+/*思路：该题比较简单，请参考代码*/#include<stdio.h>void Reverse(char* str){char* left = str;char* right = str + strlen(str)-1;while(left < right){char temp = *left;*left = *right;*right = temp;++left;--right;}}int main(){char str[] = "hello bit";//在这里完成下面函数，参数自己设计，要求：使用指针Reverse(str);return 0;}// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，int main(){char str[101] = {0};while(gets(str)){Reverse(str);printf("%s\n", str);memset(str, 0, sizeof(str)/sizeof(str[0]));}return 0;} 接下来本题就宣告结束了。'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"C语言之讲解篇7","item":"https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"C语言之讲解篇7","name":"C语言之讲解篇7","description":"例题：写一个函数，可以逆序一个字符串的内容。\n#include \u0026lt;stdio.h\u0026gt;\rvoid reverse(char * letter);\rint main()\r{\rchar num[50];\rint i;\rwhile(num[i]!=\u0026#39;\\0\u0026#39;)\r{\rscanf(\u0026#34;%c\u0026#34;,\u0026amp;num[i]);\ri++;\r}\rreverse(num);\rreturn 0;\r}\rvoid reverse(char * letter)\r{\rchar * start=letter;\rwhile(*letter!=\u0026#39;\\0\u0026#39;)\r{\rletter++;\r}\rwhile(letter\u0026gt;=start)\r{\rprintf(\u0026#34;%c\u0026#34;,*letter);\rletter--;\r}\r} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：\n/*\r思路：该题比较简单，请参考代码\r*/\r#include\u0026lt;stdio.h\u0026gt;\rvoid Reverse(char* str)\r{\rchar* left = str;\rchar* right = str + strlen(str)-1;\rwhile(left \u0026lt; right)\r{\rchar temp = *left;\r*left = *right;\r*right = temp;\r++left;\r--right;\r}\r}\rint main()\r{\rchar str[] = \u0026#34;hello bit\u0026#34;;\r//在这里完成下面函数，参数自己设计，要求：使用指针\rReverse(str);\rreturn 0;\r}\r// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，\rint main()\r{\rchar str[101] = {0};\rwhile(gets(str))\r{\rReverse(str);\rprintf(\u0026#34;%s\\n\u0026#34;, str);\rmemset(str, 0, sizeof(str)/sizeof(str[0]));\r}\rreturn 0;\r} 接下来本题就宣告结束了。\n","keywords":[],"articleBody":"例题：写一个函数，可以逆序一个字符串的内容。\n#include void reverse(char * letter);\rint main()\r{\rchar num[50];\rint i;\rwhile(num[i]!='\\0')\r{\rscanf(\"%c\",\u0026num[i]);\ri++;\r}\rreverse(num);\rreturn 0;\r}\rvoid reverse(char * letter)\r{\rchar * start=letter;\rwhile(*letter!='\\0')\r{\rletter++;\r}\rwhile(letter\u003e=start)\r{\rprintf(\"%c\",*letter);\rletter--;\r}\r} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：\n/*\r思路：该题比较简单，请参考代码\r*/\r#include\rvoid Reverse(char* str)\r{\rchar* left = str;\rchar* right = str + strlen(str)-1;\rwhile(left \u003c right)\r{\rchar temp = *left;\r*left = *right;\r*right = temp;\r++left;\r--right;\r}\r}\rint main()\r{\rchar str[] = \"hello bit\";\r//在这里完成下面函数，参数自己设计，要求：使用指针\rReverse(str);\rreturn 0;\r}\r// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，\rint main()\r{\rchar str[101] = {0};\rwhile(gets(str))\r{\rReverse(str);\rprintf(\"%s\\n\", str);\rmemset(str, 0, sizeof(str)/sizeof(str[0]));\r}\rreturn 0;\r} 接下来本题就宣告结束了。\n","wordCount":"113","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg.github.io/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/posts/>Posts</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">C语言之讲解篇7</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>113 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><div class="post-content md-content"><p>例题：写一个函数，可以逆序一个字符串的内容。</p><pre tabindex=0><code>#include &lt;stdio.h&gt;
 void reverse(char * letter);
 int main()
  {
@@ -314,10 +105,7 @@ void reverse(char * letter)
         letter--;
     }
 }
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/images/9b1592125a58301e5b1633e39c3c0ae7.png"></p>
-<p>在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/images/4aa164b2ff9d1b2072697e4c0a063a3d.png"></p>
-<pre tabindex="0"><code>/*
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/images/9b1592125a58301e5b1633e39c3c0ae7.png></p><p>在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：</p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/images/4aa164b2ff9d1b2072697e4c0a063a3d.png></p><pre tabindex=0><code>/*
 思路：该题比较简单，请参考代码
 */
 #include&lt;stdio.h&gt;
@@ -357,173 +145,11 @@ int main()
     }
     return 0;
 }
-</code></pre><p>接下来本题就宣告结束了。</p>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/">
-    <span class="title">« 上一页</span>
-    <span>C语言之讲解篇6</span>
-  </a>
-  <a class="next" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/">
-    <span class="title">下一页 »</span>
-    <span>C语言之讲解篇8</span>
-  </a>
-</nav>
-
-  </footer>
-<div class="comments">
-  <h2>评论</h2>
-  <script src="https://utteranc.es/client.js"
-          repo="dsduyopg/dsduyopg.github.io"
-          issue-term="pathname"
-          label="comment"
-          theme="preferred-color-scheme"
-          crossorigin="anonymous"
-          async>
-  </script>
-  <noscript>请启用 JavaScript 查看评论。</noscript>
-</div>
-
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-<div class="busuanzi">
-  本站访客 <span id="busuanzi_value_site_uv"></span> ·
-  访问量 <span id="busuanzi_value_site_pv"></span> · 本文阅读 <span id="busuanzi_value_page_pv"></span>
-</div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = '复制';
-
-        function copyingDone() {
-            copybutton.innerHTML = '已复制！';
-            setTimeout(() => {
-                copybutton.innerHTML = '复制';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+</code></pre><p>接下来本题就宣告结束了。</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/><span class=title>« 上一页</span>
+<span>C语言之讲解篇6</span>
+</a><a class=next href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/><span class=title>下一页 »</span>
+<span>C语言之讲解篇8</span></a></nav></footer><div class=comments><h2>评论</h2><script src=https://utteranc.es/client.js repo=dsduyopg/dsduyopg.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script><noscript>请启用 JavaScript 查看评论。</noscript></div></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

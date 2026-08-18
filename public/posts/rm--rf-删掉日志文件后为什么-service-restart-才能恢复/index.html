@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？ | 我的博客</title>
-<meta name="keywords" content="">
-<meta name="description" content="rm -rf 删掉日志文件后，为什么重启服务能恢复？
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？ | 我的博客</title><meta name=keywords content><meta name=description content='rm -rf 删掉日志文件后，为什么重启服务能恢复？
 
 
 1.问题背景
@@ -64,19 +55,19 @@
 vi /etc/rsyslog.conf
 2.在规则模块中， 配置需求要求的内容
 # ALL SERVICE CRIT TO /var/log/alert.log
-*.crit   action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;)
+*.crit   action(type="omfile" file="/var/log/alert.log")
 # 这个需要在本某块上面，规则模块下面
 
 顺便给服务打开
 
 3.进行测试
 1.测试优先级大于这个的
-logger -p alert &#34;12324 249nc90ju90nj-0
+logger -p alert "12324 249nc90ju90nj-0
 看测试结果
 
 
 2.测试优先级小于这个的
-logger -p info &#34;12324 249nc90ju90nj-0
+logger -p info "12324 249nc90ju90nj-0
 
 
 2.出现问题
@@ -100,73 +91,13 @@ rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试
 
 2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。
 
-3.命令的级别不够高：执行的命令是 logger -p crit &#34;...&#34;。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。
+3.命令的级别不够高：执行的命令是 logger -p crit "..."。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。
 
-4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;) 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。
+4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type="omfile" file="/var/log/alert.log") 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。
 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放
 
 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计
-这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了">
-<meta name="author" content="dsduyopg">
-<link rel="canonical" href="http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.e43bd292f097a172cd3328da33b8b3c29d3a16aae8222db58d5654514ee9c77a.css" integrity="sha256-5DvSkvCXoXLNMyjaM7izwp06FqroIi21jVZUUU7px3o=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="rm -rf 删掉日志文件后，为什么 service restart 才能恢复？">
-  <meta property="og:description" content="rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景
+这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了'><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/><link crossorigin=anonymous href=/assets/css/stylesheet.a061064ab34cca821922a540f2091b6e3812d4baa4533f49371257c91fa0baf1.css integrity="sha256-oGEGSrNMyoIZIqVA8gkbbjgS1LqkUz9JNxJXyR+guvE=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="rm -rf 删掉日志文件后，为什么 service restart 才能恢复？"><meta property="og:description" content='rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景
 1.打开系统⽇志的配置⽂件
 2.在规则模块中， 配置需求要求的内容
 3.进行测试
@@ -183,18 +114,9 @@ rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试
 我自己总结
 我查阅资料总结
 1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中
-1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log*.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;)# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert &#34;12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info &#34;12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因
+1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log*.crit action(type="omfile" file="/var/log/alert.log")# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert "12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info "12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因
 1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 问题2：是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的 理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点 3.问题原因 1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说
-1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。3.命令的级别不够高：执行的命令是 logger -p crit &#34;...&#34;。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;) 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="rm -rf 删掉日志文件后，为什么 service restart 才能恢复？">
-  <meta name="twitter:description" content="rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景
+1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。3.命令的级别不够高：执行的命令是 logger -p crit "..."。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type="omfile" file="/var/log/alert.log") 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="rm -rf 删掉日志文件后，为什么 service restart 才能恢复？"><meta name=twitter:description content='rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景
 1.打开系统⽇志的配置⽂件
 2.在规则模块中， 配置需求要求的内容
 3.进行测试
@@ -211,289 +133,28 @@ rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试
 我自己总结
 我查阅资料总结
 1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中
-1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log*.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;)# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert &#34;12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info &#34;12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因
+1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log*.crit action(type="omfile" file="/var/log/alert.log")# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert "12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info "12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因
 1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 问题2：是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的 理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点 3.问题原因 1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说
-1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。3.命令的级别不够高：执行的命令是 logger -p crit &#34;...&#34;。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;) 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "http://localhost:1313/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "rm -rf 删掉日志文件后，为什么 service restart 才能恢复？",
-      "item": "http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "rm -rf 删掉日志文件后，为什么 service restart 才能恢复？",
-  "name": "rm -rf 删掉日志文件后，为什么 service restart 才能恢复？",
-  "description": "rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景\n1.打开系统⽇志的配置⽂件\n2.在规则模块中， 配置需求要求的内容\n3.进行测试\n1.测试优先级大于这个的\n2.测试优先级小于这个的\n2.出现问题\n1.删除日志文件\n2.出现问题\n3.问题原因\n4.解决问题\n1.重启服务\n2.测试\n5.总结\n我自己总结\n我查阅资料总结\n1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中\n1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log\r*.crit action(type=\u0026#34;omfile\u0026#34; file=\u0026#34;/var/log/alert.log\u0026#34;)\r# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert \u0026#34;12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info \u0026#34;12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因\n1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 问题2：是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的 理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点 3.问题原因 1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说\n1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。\r2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。\r3.命令的级别不够高：执行的命令是 logger -p crit \u0026#34;...\u0026#34;。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。\r4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=\u0026#34;omfile\u0026#34; file=\u0026#34;/var/log/alert.log\u0026#34;) 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景\n1.打开系统⽇志的配置⽂件\n2.在规则模块中， 配置需求要求的内容\n3.进行测试\n1.测试优先级大于这个的\n2.测试优先级小于这个的\n2.出现问题\n1.删除日志文件\n2.出现问题\n3.问题原因\n4.解决问题\n1.重启服务\n2.测试\n5.总结\n我自己总结\n我查阅资料总结\n1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中\n1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log\r*.crit action(type=\"omfile\" file=\"/var/log/alert.log\")\r# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert \"12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info \"12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因\n1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 问题2：是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的 理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点 3.问题原因 1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说\n1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。\r2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。\r3.命令的级别不够高：执行的命令是 logger -p crit \"...\"。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。\r4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=\"omfile\" file=\"/var/log/alert.log\") 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了\n4.解决问题 1.重启服务 systemctl restart rsyslog 2.测试 我们先在日志文件里面输入一些内容 优先级高的 优先级小的 发现和预想的结果一样，证明这个是可以的，我们的问题解决了，这个小作业也完成了\n5.总结 我自己总结 之所以是删除了日志文件然后再用logger输入相关指令不能写入文件其实是由于，当 rsyslog 服务启动时，它会读取配置文件，发现需要往 /var/log/alert.log 写日志。于是它向内核申请一个文件描述符（FD），就像拿到了一个直通文件的“管道”，然后日志文件删掉之后，FD还存在，但是之前的日志文件没有了，写入数据顺着之前日志文件的FD写入磁盘，只不过因为删了日志文件，无法成功查找到他，但是如果重启这个服务，会释放掉旧的FD，然后会申请一个新的FD，这样写入数据是根据这个新的FD来的，不是按照删除的FD来的，所以这个时候是可以写入的 照我看来，其实这个就有些像指针与地址的关系，当我们写入数据要解引用这个指针，方可写入，但是如果我们把这个变量给赋值给其他变量，还是对这个新变量赋值，但是由于指针指向的地址其实就是之前的变量地址，赋值也是把值送给之气的地址，因此新的变量还是之前的旧的数据。C语言里的全局变量的作用范围其实是全局，但是局部变量因为地址就在本地生效，即使在其他地方定义了一个一样的名字，也很难生效，无法赋值.\n我查阅资料总结 为什么删除了 /var/log/alert.log 后，logger 命令看似“写不进去”？其实数据通常仍然在被写入，只是我们看不到了。\n严格来说，logger 本身一般不是直接写 /var/log/alert.log，而是把日志消息发送给 rsyslog 服务，真正负责写入文件的是 rsyslog。\n当 rsyslog 启动时，它会读取配置文件，发现需要向 /var/log/alert.log 输出日志。于是它调用 open() 打开这个文件，并从内核获得一个文件描述符，也就是 FD。这个 FD 本质上是一个整数句柄，比如 3。可以把它理解成进程文件描述符表中的一个下标：内核根据这个下标找到对应的 struct file 对象，而 struct file 又通过 dentry 关联到 inode 和磁盘数据块。\n当我们执行：\nrm /var/log/alert.log 删除的只是目录项，也就是文件名到 inode 的映射关系。好比把门牌号摘掉了，但房子本身还在。更准确地说，删除的是一个路径入口，而不是立刻销毁文件对象。因为 rsyslog 仍然持有旧的 FD，所以内核中对应的 struct file 仍然有效，它指向的 inode 也仍然有效。\n因此，之后 rsyslog 调用 write() 时，数据仍然会顺着旧的 FD 写入原来的 inode 和数据块。写入本身通常并没有失败，只是 /var/log/alert.log 这个路径已经不存在了，所以你无法再通过原路径 cat 到内容。这就是为什么用 lsof 能看到该文件处于 (deleted) 状态：文件对象还活着，只是没有名字了。\n重启服务后为什么会恢复？\n因为重启会让旧的 rsyslog 进程退出，旧的 FD 会被关闭，对应的 struct file 引用减少。当这个旧 inode 不再被任何打开句柄或硬链接引用时，磁盘空间才会真正释放。随后新的 rsyslog 进程启动，重新调用 open() 打开或创建 /var/log/alert.log，获得新的 FD，指向新的文件对象。从此以后，日志走的是新 FD，写的是新文件，所以就能看见了。\n如果用 C 语言的指针来类比，可以这样理解：\n路径名 /var/log/alert.log 类似于变量名\rinode 类似于真正的对象\rFD 类似于进程持有的指针/引用 rm 删除文件更像删除变量名、删除别名，或者解除一个目录项引用，而不是立刻释放底层对象。只要 rsyslog 还持有 FD 这个“指针”，它就可以继续通过这个指针写入原来的对象。重启服务则相当于让进程放弃旧指针，重新 open() 一个新对象，拿到新的指针。\n不过，这里不能完全类比成 free(p) 后继续使用 p。在 C 语言里，free(p) 后再解引用 p 是悬垂指针，属于未定义行为；而 Linux 文件这里是引用计数机制：删除目录项只是减少 inode 的一个引用，只要还有进程持有打开的文件描述符，文件对象仍然合法存在。\n同样，在 Shell 里重新创建一个同名的 /var/log/alert.log，也无法把旧的日志流“接回来”。因为新的文件名指向新的 inode，而 rsyslog 手里的旧 FD 仍然指向旧 inode。除非让 rsyslog 重新打开日志文件，例如重启服务，或者在支持的情况下 reload、发送 HUP 信号，它才会关闭旧 FD，并根据新的路径名打开新的文件对象。\n",
-  "wordCount" : "253",
-  "inLanguage": "zh-cn",
-  "datePublished": "2026-08-18T00:00:00Z",
-  "dateModified": "2026-08-18T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": "dsduyopg"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="http://localhost:1313/search/" title="搜索">
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/about/" title="关于">
-                    <span>关于</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
-            <a href="/">主页</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/posts/">Posts</a>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-</nav>
-    <h1 class="post-title entry-hint-parent">
-      rm -rf 删掉日志文件后，为什么 service restart 才能恢复？
-    </h1>
-    <div class="post-meta">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>253 字</span>&nbsp;·&nbsp;<span>dsduyopg</span>
-
-</div>
-  </header> <details class="toc" >
-    <summary accesskey="c" title="(Alt + C)">
-        <span class="title">目录</span>
-    </summary>
-
-    <div class="inner"><ul><ul><ul>
-            <li>
-                <a href="#rm--rf-%e5%88%a0%e6%8e%89%e6%97%a5%e5%bf%97%e6%96%87%e4%bb%b6%e5%90%8e%e4%b8%ba%e4%bb%80%e4%b9%88%e9%87%8d%e5%90%af%e6%9c%8d%e5%8a%a1%e8%83%bd%e6%81%a2%e5%a4%8d" aria-label="rm -rf 删掉日志文件后，为什么重启服务能恢复？">rm -rf 删掉日志文件后，为什么重启服务能恢复？</a></li></ul>
-                </ul>
-                
-            <li>
-                <a href="#1%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" aria-label="1.问题背景">1.问题背景</a><ul>
-                    
-            <li>
-                <a href="#1%e6%89%93%e5%bc%80%e7%b3%bb%e7%bb%9f%e5%bf%97%e7%9a%84%e9%85%8d%e7%bd%ae%e4%bb%b6" aria-label="1.打开系统⽇志的配置⽂件">1.打开系统⽇志的配置⽂件</a></li>
-            <li>
-                <a href="#2%e5%9c%a8%e8%a7%84%e5%88%99%e6%a8%a1%e5%9d%97%e4%b8%ad-%e9%85%8d%e7%bd%ae%e9%9c%80%e6%b1%82%e8%a6%81%e6%b1%82%e7%9a%84%e5%86%85%e5%ae%b9" aria-label="2.在规则模块中， 配置需求要求的内容">2.在规则模块中， 配置需求要求的内容</a></li>
-            <li>
-                <a href="#3%e8%bf%9b%e8%a1%8c%e6%b5%8b%e8%af%95" aria-label="3.进行测试">3.进行测试</a><ul>
-                    
-            <li>
-                <a href="#1%e6%b5%8b%e8%af%95%e4%bc%98%e5%85%88%e7%ba%a7%e5%a4%a7%e4%ba%8e%e8%bf%99%e4%b8%aa%e7%9a%84" aria-label="1.测试优先级大于这个的">1.测试优先级大于这个的</a></li>
-            <li>
-                <a href="#2%e6%b5%8b%e8%af%95%e4%bc%98%e5%85%88%e7%ba%a7%e5%b0%8f%e4%ba%8e%e8%bf%99%e4%b8%aa%e7%9a%84" aria-label="2.测试优先级小于这个的">2.测试优先级小于这个的</a></li></ul>
-            </li></ul>
-            </li>
-            <li>
-                <a href="#2%e5%87%ba%e7%8e%b0%e9%97%ae%e9%a2%98" aria-label="2.出现问题">2.出现问题</a><ul>
-                    
-            <li>
-                <a href="#1%e5%88%a0%e9%99%a4%e6%97%a5%e5%bf%97%e6%96%87%e4%bb%b6" aria-label="1.删除日志文件">1.删除日志文件</a></li>
-            <li>
-                <a href="#2%e5%87%ba%e7%8e%b0%e9%97%ae%e9%a2%98-1" aria-label="2.出现问题">2.出现问题</a></li></ul>
-            </li>
-            <li>
-                <a href="#3%e9%97%ae%e9%a2%98%e5%8e%9f%e5%9b%a0" aria-label="3.问题原因">3.问题原因</a></li>
-            <li>
-                <a href="#4%e8%a7%a3%e5%86%b3%e9%97%ae%e9%a2%98" aria-label="4.解决问题">4.解决问题</a><ul>
-                    
-            <li>
-                <a href="#1%e9%87%8d%e5%90%af%e6%9c%8d%e5%8a%a1" aria-label="1.重启服务">1.重启服务</a></li>
-            <li>
-                <a href="#2%e6%b5%8b%e8%af%95" aria-label="2.测试">2.测试</a></li></ul>
-            </li>
-            <li>
-                <a href="#5%e6%80%bb%e7%bb%93" aria-label="5.总结">5.总结</a><ul>
-                    
-            <li>
-                <a href="#%e6%88%91%e8%87%aa%e5%b7%b1%e6%80%bb%e7%bb%93" aria-label="我自己总结">我自己总结</a></li>
-            <li>
-                <a href="#%e6%88%91%e6%9f%a5%e9%98%85%e8%b5%84%e6%96%99%e6%80%bb%e7%bb%93" aria-label="我查阅资料总结">我查阅资料总结</a>
-            </li>
-        </ul>
-        </li>
-        </ul>
-    </div>
-</details>
-
-  <div class="post-content md-content"><h4 id="rm--rf-删掉日志文件后为什么重启服务能恢复">rm -rf 删掉日志文件后，为什么重启服务能恢复？<a hidden class="anchor" aria-hidden="true" href="#rm--rf-删掉日志文件后为什么重启服务能恢复">#</a></h4>
-<ul>
-<li>
-<p><a href="#1_1">1.问题背景</a></p>
-</li>
-<li>
-<p><a href="#1_5">1.打开系统⽇志的配置⽂件</a></p>
-</li>
-<li>
-<p><a href="#2__9">2.在规则模块中， 配置需求要求的内容</a></p>
-</li>
-<li>
-<p><a href="#3_22">3.进行测试</a></p>
-</li>
-<li>
-<p><a href="#1_23">1.测试优先级大于这个的</a></p>
-</li>
-<li>
-<p><a href="#2_32">2.测试优先级小于这个的</a></p>
-</li>
-<li>
-<p><a href="#2_43">2.出现问题</a></p>
-</li>
-<li>
-<p><a href="#1_46">1.删除日志文件</a></p>
-</li>
-<li>
-<p><a href="#2_50">2.出现问题</a></p>
-</li>
-<li>
-<p><a href="#3_63">3.问题原因</a></p>
-</li>
-<li>
-<p><a href="#4_80">4.解决问题</a></p>
-</li>
-<li>
-<p><a href="#1_82">1.重启服务</a></p>
-</li>
-<li>
-<p><a href="#2_88">2.测试</a></p>
-</li>
-<li>
-<p><a href="#5_102">5.总结</a></p>
-</li>
-<li>
-<p><a href="#_104">我自己总结</a></p>
-</li>
-<li>
-<p><a href="#_109">我查阅资料总结</a></p>
-</li>
-</ul>
-<h2 id="1问题背景">1.问题背景<a hidden class="anchor" aria-hidden="true" href="#1问题背景">#</a></h2>
-<p><code>把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中</code></p>
-<h3 id="1打开系统志的配置件">1.打开系统⽇志的配置⽂件<a hidden class="anchor" aria-hidden="true" href="#1打开系统志的配置件">#</a></h3>
-<pre tabindex="0"><code>vi /etc/rsyslog.conf
-</code></pre><h3 id="2在规则模块中-配置需求要求的内容">2.在规则模块中， 配置需求要求的内容<a hidden class="anchor" aria-hidden="true" href="#2在规则模块中-配置需求要求的内容">#</a></h3>
-<pre tabindex="0"><code># ALL SERVICE CRIT TO /var/log/alert.log
+1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。3.命令的级别不够高：执行的命令是 logger -p crit "..."。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type="omfile" file="/var/log/alert.log") 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"rm -rf 删掉日志文件后，为什么 service restart 才能恢复？","item":"https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"rm -rf 删掉日志文件后，为什么 service restart 才能恢复？","name":"rm -rf 删掉日志文件后，为什么 service restart 才能恢复？","description":"rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景\n1.打开系统⽇志的配置⽂件\n2.在规则模块中， 配置需求要求的内容\n3.进行测试\n1.测试优先级大于这个的\n2.测试优先级小于这个的\n2.出现问题\n1.删除日志文件\n2.出现问题\n3.问题原因\n4.解决问题\n1.重启服务\n2.测试\n5.总结\n我自己总结\n我查阅资料总结\n1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中\n1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log\r*.crit action(type=\u0026#34;omfile\u0026#34; file=\u0026#34;/var/log/alert.log\u0026#34;)\r# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert \u0026#34;12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info \u0026#34;12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因\n1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 问题2：是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的 理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点 3.问题原因 1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说\n1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。\r2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。\r3.命令的级别不够高：执行的命令是 logger -p crit \u0026#34;...\u0026#34;。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。\r4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=\u0026#34;omfile\u0026#34; file=\u0026#34;/var/log/alert.log\u0026#34;) 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了\n","keywords":[],"articleBody":"rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景\n1.打开系统⽇志的配置⽂件\n2.在规则模块中， 配置需求要求的内容\n3.进行测试\n1.测试优先级大于这个的\n2.测试优先级小于这个的\n2.出现问题\n1.删除日志文件\n2.出现问题\n3.问题原因\n4.解决问题\n1.重启服务\n2.测试\n5.总结\n我自己总结\n我查阅资料总结\n1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中\n1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log\r*.crit action(type=\"omfile\" file=\"/var/log/alert.log\")\r# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert \"12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info \"12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因\n1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 问题2：是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的 理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点 3.问题原因 1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说\n1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。\r2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。\r3.命令的级别不够高：执行的命令是 logger -p crit \"...\"。虽然这里指定了级别为 crit（严重），但由于它默认使用的是 user 设施（即 user.crit），它没有被上述那条规则排除，因此被正确地路由到了 info 以上的通用日志规则中。\r4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=\"omfile\" file=\"/var/log/alert.log\") 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。 2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放 3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计 这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了\n4.解决问题 1.重启服务 systemctl restart rsyslog 2.测试 我们先在日志文件里面输入一些内容 优先级高的 优先级小的 发现和预想的结果一样，证明这个是可以的，我们的问题解决了，这个小作业也完成了\n5.总结 我自己总结 之所以是删除了日志文件然后再用logger输入相关指令不能写入文件其实是由于，当 rsyslog 服务启动时，它会读取配置文件，发现需要往 /var/log/alert.log 写日志。于是它向内核申请一个文件描述符（FD），就像拿到了一个直通文件的“管道”，然后日志文件删掉之后，FD还存在，但是之前的日志文件没有了，写入数据顺着之前日志文件的FD写入磁盘，只不过因为删了日志文件，无法成功查找到他，但是如果重启这个服务，会释放掉旧的FD，然后会申请一个新的FD，这样写入数据是根据这个新的FD来的，不是按照删除的FD来的，所以这个时候是可以写入的 照我看来，其实这个就有些像指针与地址的关系，当我们写入数据要解引用这个指针，方可写入，但是如果我们把这个变量给赋值给其他变量，还是对这个新变量赋值，但是由于指针指向的地址其实就是之前的变量地址，赋值也是把值送给之气的地址，因此新的变量还是之前的旧的数据。C语言里的全局变量的作用范围其实是全局，但是局部变量因为地址就在本地生效，即使在其他地方定义了一个一样的名字，也很难生效，无法赋值.\n我查阅资料总结 为什么删除了 /var/log/alert.log 后，logger 命令看似“写不进去”？其实数据通常仍然在被写入，只是我们看不到了。\n严格来说，logger 本身一般不是直接写 /var/log/alert.log，而是把日志消息发送给 rsyslog 服务，真正负责写入文件的是 rsyslog。\n当 rsyslog 启动时，它会读取配置文件，发现需要向 /var/log/alert.log 输出日志。于是它调用 open() 打开这个文件，并从内核获得一个文件描述符，也就是 FD。这个 FD 本质上是一个整数句柄，比如 3。可以把它理解成进程文件描述符表中的一个下标：内核根据这个下标找到对应的 struct file 对象，而 struct file 又通过 dentry 关联到 inode 和磁盘数据块。\n当我们执行：\nrm /var/log/alert.log 删除的只是目录项，也就是文件名到 inode 的映射关系。好比把门牌号摘掉了，但房子本身还在。更准确地说，删除的是一个路径入口，而不是立刻销毁文件对象。因为 rsyslog 仍然持有旧的 FD，所以内核中对应的 struct file 仍然有效，它指向的 inode 也仍然有效。\n因此，之后 rsyslog 调用 write() 时，数据仍然会顺着旧的 FD 写入原来的 inode 和数据块。写入本身通常并没有失败，只是 /var/log/alert.log 这个路径已经不存在了，所以你无法再通过原路径 cat 到内容。这就是为什么用 lsof 能看到该文件处于 (deleted) 状态：文件对象还活着，只是没有名字了。\n重启服务后为什么会恢复？\n因为重启会让旧的 rsyslog 进程退出，旧的 FD 会被关闭，对应的 struct file 引用减少。当这个旧 inode 不再被任何打开句柄或硬链接引用时，磁盘空间才会真正释放。随后新的 rsyslog 进程启动，重新调用 open() 打开或创建 /var/log/alert.log，获得新的 FD，指向新的文件对象。从此以后，日志走的是新 FD，写的是新文件，所以就能看见了。\n如果用 C 语言的指针来类比，可以这样理解：\n路径名 /var/log/alert.log 类似于变量名\rinode 类似于真正的对象\rFD 类似于进程持有的指针/引用 rm 删除文件更像删除变量名、删除别名，或者解除一个目录项引用，而不是立刻释放底层对象。只要 rsyslog 还持有 FD 这个“指针”，它就可以继续通过这个指针写入原来的对象。重启服务则相当于让进程放弃旧指针，重新 open() 一个新对象，拿到新的指针。\n不过，这里不能完全类比成 free(p) 后继续使用 p。在 C 语言里，free(p) 后再解引用 p 是悬垂指针，属于未定义行为；而 Linux 文件这里是引用计数机制：删除目录项只是减少 inode 的一个引用，只要还有进程持有打开的文件描述符，文件对象仍然合法存在。\n同样，在 Shell 里重新创建一个同名的 /var/log/alert.log，也无法把旧的日志流“接回来”。因为新的文件名指向新的 inode，而 rsyslog 手里的旧 FD 仍然指向旧 inode。除非让 rsyslog 重新打开日志文件，例如重启服务，或者在支持的情况下 reload、发送 HUP 信号，它才会关闭旧 FD，并根据新的路径名打开新的文件对象。\n","wordCount":"253","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg.github.io/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/posts/>Posts</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">rm -rf 删掉日志文件后，为什么 service restart 才能恢复？</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>253 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><ul><ul><li><a href=#rm--rf-%e5%88%a0%e6%8e%89%e6%97%a5%e5%bf%97%e6%96%87%e4%bb%b6%e5%90%8e%e4%b8%ba%e4%bb%80%e4%b9%88%e9%87%8d%e5%90%af%e6%9c%8d%e5%8a%a1%e8%83%bd%e6%81%a2%e5%a4%8d aria-label="rm -rf 删掉日志文件后，为什么重启服务能恢复？">rm -rf 删掉日志文件后，为什么重启服务能恢复？</a></li></ul></ul><li><a href=#1%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af aria-label=1.问题背景>1.问题背景</a><ul><li><a href=#1%e6%89%93%e5%bc%80%e7%b3%bb%e7%bb%9f%e5%bf%97%e7%9a%84%e9%85%8d%e7%bd%ae%e4%bb%b6 aria-label=1.打开系统⽇志的配置⽂件>1.打开系统⽇志的配置⽂件</a></li><li><a href=#2%e5%9c%a8%e8%a7%84%e5%88%99%e6%a8%a1%e5%9d%97%e4%b8%ad-%e9%85%8d%e7%bd%ae%e9%9c%80%e6%b1%82%e8%a6%81%e6%b1%82%e7%9a%84%e5%86%85%e5%ae%b9 aria-label="2.在规则模块中， 配置需求要求的内容">2.在规则模块中， 配置需求要求的内容</a></li><li><a href=#3%e8%bf%9b%e8%a1%8c%e6%b5%8b%e8%af%95 aria-label=3.进行测试>3.进行测试</a><ul><li><a href=#1%e6%b5%8b%e8%af%95%e4%bc%98%e5%85%88%e7%ba%a7%e5%a4%a7%e4%ba%8e%e8%bf%99%e4%b8%aa%e7%9a%84 aria-label=1.测试优先级大于这个的>1.测试优先级大于这个的</a></li><li><a href=#2%e6%b5%8b%e8%af%95%e4%bc%98%e5%85%88%e7%ba%a7%e5%b0%8f%e4%ba%8e%e8%bf%99%e4%b8%aa%e7%9a%84 aria-label=2.测试优先级小于这个的>2.测试优先级小于这个的</a></li></ul></li></ul></li><li><a href=#2%e5%87%ba%e7%8e%b0%e9%97%ae%e9%a2%98 aria-label=2.出现问题>2.出现问题</a><ul><li><a href=#1%e5%88%a0%e9%99%a4%e6%97%a5%e5%bf%97%e6%96%87%e4%bb%b6 aria-label=1.删除日志文件>1.删除日志文件</a></li><li><a href=#2%e5%87%ba%e7%8e%b0%e9%97%ae%e9%a2%98-1 aria-label=2.出现问题>2.出现问题</a></li></ul></li><li><a href=#3%e9%97%ae%e9%a2%98%e5%8e%9f%e5%9b%a0 aria-label=3.问题原因>3.问题原因</a></li><li><a href=#4%e8%a7%a3%e5%86%b3%e9%97%ae%e9%a2%98 aria-label=4.解决问题>4.解决问题</a><ul><li><a href=#1%e9%87%8d%e5%90%af%e6%9c%8d%e5%8a%a1 aria-label=1.重启服务>1.重启服务</a></li><li><a href=#2%e6%b5%8b%e8%af%95 aria-label=2.测试>2.测试</a></li></ul></li><li><a href=#5%e6%80%bb%e7%bb%93 aria-label=5.总结>5.总结</a><ul><li><a href=#%e6%88%91%e8%87%aa%e5%b7%b1%e6%80%bb%e7%bb%93 aria-label=我自己总结>我自己总结</a></li><li><a href=#%e6%88%91%e6%9f%a5%e9%98%85%e8%b5%84%e6%96%99%e6%80%bb%e7%bb%93 aria-label=我查阅资料总结>我查阅资料总结</a></li></ul></li></ul></div></details><div class="post-content md-content"><h4 id=rm--rf-删掉日志文件后为什么重启服务能恢复>rm -rf 删掉日志文件后，为什么重启服务能恢复？<a hidden class=anchor aria-hidden=true href=#rm--rf-删掉日志文件后为什么重启服务能恢复>#</a></h4><ul><li><p><a href=#1_1>1.问题背景</a></p></li><li><p><a href=#1_5>1.打开系统⽇志的配置⽂件</a></p></li><li><p><a href=#2__9>2.在规则模块中， 配置需求要求的内容</a></p></li><li><p><a href=#3_22>3.进行测试</a></p></li><li><p><a href=#1_23>1.测试优先级大于这个的</a></p></li><li><p><a href=#2_32>2.测试优先级小于这个的</a></p></li><li><p><a href=#2_43>2.出现问题</a></p></li><li><p><a href=#1_46>1.删除日志文件</a></p></li><li><p><a href=#2_50>2.出现问题</a></p></li><li><p><a href=#3_63>3.问题原因</a></p></li><li><p><a href=#4_80>4.解决问题</a></p></li><li><p><a href=#1_82>1.重启服务</a></p></li><li><p><a href=#2_88>2.测试</a></p></li><li><p><a href=#5_102>5.总结</a></p></li><li><p><a href=#_104>我自己总结</a></p></li><li><p><a href=#_109>我查阅资料总结</a></p></li></ul><h2 id=1问题背景>1.问题背景<a hidden class=anchor aria-hidden=true href=#1问题背景>#</a></h2><p><code>把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中</code></p><h3 id=1打开系统志的配置件>1.打开系统⽇志的配置⽂件<a hidden class=anchor aria-hidden=true href=#1打开系统志的配置件>#</a></h3><pre tabindex=0><code>vi /etc/rsyslog.conf
+</code></pre><h3 id=2在规则模块中-配置需求要求的内容>2.在规则模块中， 配置需求要求的内容<a hidden class=anchor aria-hidden=true href=#2在规则模块中-配置需求要求的内容>#</a></h3><pre tabindex=0><code># ALL SERVICE CRIT TO /var/log/alert.log
 *.crit   action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;)
 # 这个需要在本某块上面，规则模块下面
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/8124e4a0880a4a1eb2b8e77088e04fc0.png">
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/8124e4a0880a4a1eb2b8e77088e04fc0.png>
 <code>顺便给服务打开</code>
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/931446c550144ec692235d5db9a7145a.png"></p>
-<h3 id="3进行测试">3.进行测试<a hidden class="anchor" aria-hidden="true" href="#3进行测试">#</a></h3>
-<h4 id="1测试优先级大于这个的">1.测试优先级大于这个的<a hidden class="anchor" aria-hidden="true" href="#1测试优先级大于这个的">#</a></h4>
-<pre tabindex="0"><code>logger -p alert &#34;12324 249nc90ju90nj-0
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/931446c550144ec692235d5db9a7145a.png></p><h3 id=3进行测试>3.进行测试<a hidden class=anchor aria-hidden=true href=#3进行测试>#</a></h3><h4 id=1测试优先级大于这个的>1.测试优先级大于这个的<a hidden class=anchor aria-hidden=true href=#1测试优先级大于这个的>#</a></h4><pre tabindex=0><code>logger -p alert &#34;12324 249nc90ju90nj-0
 </code></pre><p>看测试结果
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/ad4b49e551c343d7828f2a69afb8ffa5.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/a4e5830517654c02bc964f5ebaa704a8.png"></p>
-<h4 id="2测试优先级小于这个的">2.测试优先级小于这个的<a hidden class="anchor" aria-hidden="true" href="#2测试优先级小于这个的">#</a></h4>
-<pre tabindex="0"><code>logger -p info &#34;12324 249nc90ju90nj-0
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/e629038b05424584aa457685404be575.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/268522bf9fa34ad485cd24ac8c1a94aa.png"></p>
-<h2 id="2出现问题">2.出现问题<a hidden class="anchor" aria-hidden="true" href="#2出现问题">#</a></h2>
-<p><code>当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因</code></p>
-<h3 id="1删除日志文件">1.删除日志文件<a hidden class="anchor" aria-hidden="true" href="#1删除日志文件">#</a></h3>
-<pre tabindex="0"><code>rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试
-</code></pre><h3 id="2出现问题-1">2.出现问题<a hidden class="anchor" aria-hidden="true" href="#2出现问题-1">#</a></h3>
-<ul>
-<li>问题1：<strong>是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同</strong></li>
-</ul>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/c62a8936613647339a8bd3d6e93b7120.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/6777fb84f29d4548a854d0a07e7d8d50.png"></p>
-<ul>
-<li>问题2：<strong>是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的</strong>
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/c4236b3b35724e69b5135775f047e203.png">
-<strong>理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点</strong></li>
-</ul>
-<h2 id="3问题原因">3.问题原因<a hidden class="anchor" aria-hidden="true" href="#3问题原因">#</a></h2>
-<p><code>1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说</code></p>
-<pre tabindex="0"><code>1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/ad4b49e551c343d7828f2a69afb8ffa5.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/a4e5830517654c02bc964f5ebaa704a8.png></p><h4 id=2测试优先级小于这个的>2.测试优先级小于这个的<a hidden class=anchor aria-hidden=true href=#2测试优先级小于这个的>#</a></h4><pre tabindex=0><code>logger -p info &#34;12324 249nc90ju90nj-0
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/e629038b05424584aa457685404be575.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/268522bf9fa34ad485cd24ac8c1a94aa.png></p><h2 id=2出现问题>2.出现问题<a hidden class=anchor aria-hidden=true href=#2出现问题>#</a></h2><p><code>当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因</code></p><h3 id=1删除日志文件>1.删除日志文件<a hidden class=anchor aria-hidden=true href=#1删除日志文件>#</a></h3><pre tabindex=0><code>rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试
+</code></pre><h3 id=2出现问题-1>2.出现问题<a hidden class=anchor aria-hidden=true href=#2出现问题-1>#</a></h3><ul><li>问题1：<strong>是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同</strong></li></ul><p><img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/c62a8936613647339a8bd3d6e93b7120.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/6777fb84f29d4548a854d0a07e7d8d50.png></p><ul><li>问题2：<strong>是我手动创建了这个日志文件，但是启动这个logger服务是依然无法写入日志内容的</strong>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/c4236b3b35724e69b5135775f047e203.png>
+<strong>理论上说，优先级大于或者等于crit的才会在alarm.log日志里面写入日志的，但是目前所展示的情况好像和我想得不一样，即使与它的优先级一样，但是依然是无法写入文件的，这又是一点</strong></li></ul><h2 id=3问题原因>3.问题原因<a hidden class=anchor aria-hidden=true href=#3问题原因>#</a></h2><p><code>1.后来，我检查了我的配置文件，以及输入的命令，是没有任何错误的，然后我问了一下元宝，他给了我解决的方法，我开始问他为何无法自动创建日志文件呢，他说</code></p><pre tabindex=0><code>1.配置规则的触发机制：在 Linux 的 rsyslog 配置中，文件输出通常是“按需创建”的。这意味着，只有当符合条件的日志真正产生并被写入时，对应的文件才会被创建。
 
 2.日志级别不匹配导致“静默丢弃”：在配置文件中，有一条规则是 *.info;mail.none;authpriv.none;cron.none action(...)。这条规则的意思是：将所有设施的 info 级别及以上的日志写入某个文件（被截断了，通常是 /var/log/messages），但同时显式排除了 authpriv（认证授权）和 cron（定时任务）的日志。
 
@@ -501,209 +162,25 @@ rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试
 
 4.结果：日志被写入了那个通用的大文件里，根本没有走到下面 *.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;) 这条规则。因此，/var/log/alert.log 这个文件从未被触发创建，自然就找不到了。
 </code></pre><p><code>2.我看了一眼他说的，我认为是无法正常创建文件导致的，我手动创建了一个，结果依然是不行的，后面我又问了一下他为何我创建的文件还是没有内容呢，他说是 SELinux 可能开启，让我检查一番，我看了，我的这个并没有开放</code>
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/6583a39f858f4117b744cf100241b68c.jpeg">
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/6583a39f858f4117b744cf100241b68c.jpeg>
 <code>3.我问了一下，他，我的这个selinux并没有开放,他说可能是因为配置文件有语法冲突，rsyslog 内部报错，/var/log 目录的权限问题，服务没有重启，查看 rsyslog 丢弃日志的统计</code>
-<strong>这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了</strong></p>
-<h2 id="4解决问题">4.解决问题<a hidden class="anchor" aria-hidden="true" href="#4解决问题">#</a></h2>
-<h3 id="1重启服务">1.重启服务<a hidden class="anchor" aria-hidden="true" href="#1重启服务">#</a></h3>
-<pre tabindex="0"><code>systemctl restart rsyslog
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/ecec29860e3a46c4a759947b2d877ce8.png"></p>
-<h3 id="2测试">2.测试<a hidden class="anchor" aria-hidden="true" href="#2测试">#</a></h3>
-<p><code>我们先在日志文件里面输入一些内容</code>
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/2ae3b8f954764826825e8838315a1cdb.png">
+<strong>这几点中我可以看明白的就只有前4个，但是前3个我之前都检查过了，没有任何问题，我明白可能我的服务没有重启，我就重启了这个服务，然后直接和预料的结果一样，显然成功了</strong></p><h2 id=4解决问题>4.解决问题<a hidden class=anchor aria-hidden=true href=#4解决问题>#</a></h2><h3 id=1重启服务>1.重启服务<a hidden class=anchor aria-hidden=true href=#1重启服务>#</a></h3><pre tabindex=0><code>systemctl restart rsyslog
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/ecec29860e3a46c4a759947b2d877ce8.png></p><h3 id=2测试>2.测试<a hidden class=anchor aria-hidden=true href=#2测试>#</a></h3><p><code>我们先在日志文件里面输入一些内容</code>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/2ae3b8f954764826825e8838315a1cdb.png>
 优先级高的
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/e34703174607469fb8c345b70fe730b5.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/bb1d73b7d9b148f6a76a28608ae7d123.png">
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/e34703174607469fb8c345b70fe730b5.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/bb1d73b7d9b148f6a76a28608ae7d123.png>
 优先级小的
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/fbca90bcb11345cdb3cde156d6549c00.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/d428fb4b336e46b688986d9169565543.png"></p>
-<p><code>发现和预想的结果一样，证明这个是可以的，我们的问题解决了，这个小作业也完成了</code></p>
-<h2 id="5总结">5.总结<a hidden class="anchor" aria-hidden="true" href="#5总结">#</a></h2>
-<h3 id="我自己总结">我自己总结<a hidden class="anchor" aria-hidden="true" href="#我自己总结">#</a></h3>
-<p><code>之所以是删除了日志文件然后再用logger输入相关指令不能写入文件其实是由于，当 rsyslog 服务启动时，它会读取配置文件，发现需要往 /var/log/alert.log 写日志。于是它向内核申请一个文件描述符（FD），就像拿到了一个直通文件的“管道”，然后日志文件删掉之后，FD还存在，但是之前的日志文件没有了，写入数据顺着之前日志文件的FD写入磁盘，只不过因为删了日志文件，无法成功查找到他，但是如果重启这个服务，会释放掉旧的FD，然后会申请一个新的FD，这样写入数据是根据这个新的FD来的，不是按照删除的FD来的，所以这个时候是可以写入的 照我看来，其实这个就有些像指针与地址的关系，当我们写入数据要解引用这个指针，方可写入，但是如果我们把这个变量给赋值给其他变量，还是对这个新变量赋值，但是由于指针指向的地址其实就是之前的变量地址，赋值也是把值送给之气的地址，因此新的变量还是之前的旧的数据。C语言里的全局变量的作用范围其实是全局，但是局部变量因为地址就在本地生效，即使在其他地方定义了一个一样的名字，也很难生效，无法赋值.</code></p>
-<h3 id="我查阅资料总结">我查阅资料总结<a hidden class="anchor" aria-hidden="true" href="#我查阅资料总结">#</a></h3>
-<p>为什么删除了 <code>/var/log/alert.log</code> 后，<code>logger</code> 命令看似“写不进去”？其实数据通常仍然在被写入，只是我们看不到了。</p>
-<p>严格来说，<code>logger</code> 本身一般不是直接写 <code>/var/log/alert.log</code>，而是把日志消息发送给 rsyslog 服务，真正负责写入文件的是 rsyslog。</p>
-<p>当 rsyslog 启动时，它会读取配置文件，发现需要向 <code>/var/log/alert.log</code> 输出日志。于是它调用 <code>open()</code> 打开这个文件，并从内核获得一个文件描述符，也就是 FD。这个 FD 本质上是一个整数句柄，比如 3。可以把它理解成进程文件描述符表中的一个下标：内核根据这个下标找到对应的 <code>struct file</code> 对象，而 <code>struct file</code> 又通过 dentry 关联到 inode 和磁盘数据块。</p>
-<p>当我们执行：</p>
-<pre tabindex="0"><code>rm /var/log/alert.log
-</code></pre><p>删除的只是目录项，也就是文件名到 inode 的映射关系。好比把门牌号摘掉了，但房子本身还在。更准确地说，删除的是一个路径入口，而不是立刻销毁文件对象。因为 rsyslog 仍然持有旧的 FD，所以内核中对应的 <code>struct file</code> 仍然有效，它指向的 inode 也仍然有效。</p>
-<p>因此，之后 rsyslog 调用 <code>write()</code> 时，数据仍然会顺着旧的 FD 写入原来的 inode 和数据块。写入本身通常并没有失败，只是 <code>/var/log/alert.log</code> 这个路径已经不存在了，所以你无法再通过原路径 <code>cat</code> 到内容。这就是为什么用 <code>lsof</code> 能看到该文件处于 <code>(deleted)</code> 状态：文件对象还活着，只是没有名字了。</p>
-<p>重启服务后为什么会恢复？</p>
-<p>因为重启会让旧的 rsyslog 进程退出，旧的 FD 会被关闭，对应的 <code>struct file</code> 引用减少。当这个旧 inode 不再被任何打开句柄或硬链接引用时，磁盘空间才会真正释放。随后新的 rsyslog 进程启动，重新调用 <code>open()</code> 打开或创建 <code>/var/log/alert.log</code>，获得新的 FD，指向新的文件对象。从此以后，日志走的是新 FD，写的是新文件，所以就能看见了。</p>
-<p>如果用 C 语言的指针来类比，可以这样理解：</p>
-<pre tabindex="0"><code>路径名 /var/log/alert.log  类似于变量名
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/fbca90bcb11345cdb3cde156d6549c00.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/d428fb4b336e46b688986d9169565543.png></p><p><code>发现和预想的结果一样，证明这个是可以的，我们的问题解决了，这个小作业也完成了</code></p><h2 id=5总结>5.总结<a hidden class=anchor aria-hidden=true href=#5总结>#</a></h2><h3 id=我自己总结>我自己总结<a hidden class=anchor aria-hidden=true href=#我自己总结>#</a></h3><p><code>之所以是删除了日志文件然后再用logger输入相关指令不能写入文件其实是由于，当 rsyslog 服务启动时，它会读取配置文件，发现需要往 /var/log/alert.log 写日志。于是它向内核申请一个文件描述符（FD），就像拿到了一个直通文件的“管道”，然后日志文件删掉之后，FD还存在，但是之前的日志文件没有了，写入数据顺着之前日志文件的FD写入磁盘，只不过因为删了日志文件，无法成功查找到他，但是如果重启这个服务，会释放掉旧的FD，然后会申请一个新的FD，这样写入数据是根据这个新的FD来的，不是按照删除的FD来的，所以这个时候是可以写入的 照我看来，其实这个就有些像指针与地址的关系，当我们写入数据要解引用这个指针，方可写入，但是如果我们把这个变量给赋值给其他变量，还是对这个新变量赋值，但是由于指针指向的地址其实就是之前的变量地址，赋值也是把值送给之气的地址，因此新的变量还是之前的旧的数据。C语言里的全局变量的作用范围其实是全局，但是局部变量因为地址就在本地生效，即使在其他地方定义了一个一样的名字，也很难生效，无法赋值.</code></p><h3 id=我查阅资料总结>我查阅资料总结<a hidden class=anchor aria-hidden=true href=#我查阅资料总结>#</a></h3><p>为什么删除了 <code>/var/log/alert.log</code> 后，<code>logger</code> 命令看似“写不进去”？其实数据通常仍然在被写入，只是我们看不到了。</p><p>严格来说，<code>logger</code> 本身一般不是直接写 <code>/var/log/alert.log</code>，而是把日志消息发送给 rsyslog 服务，真正负责写入文件的是 rsyslog。</p><p>当 rsyslog 启动时，它会读取配置文件，发现需要向 <code>/var/log/alert.log</code> 输出日志。于是它调用 <code>open()</code> 打开这个文件，并从内核获得一个文件描述符，也就是 FD。这个 FD 本质上是一个整数句柄，比如 3。可以把它理解成进程文件描述符表中的一个下标：内核根据这个下标找到对应的 <code>struct file</code> 对象，而 <code>struct file</code> 又通过 dentry 关联到 inode 和磁盘数据块。</p><p>当我们执行：</p><pre tabindex=0><code>rm /var/log/alert.log
+</code></pre><p>删除的只是目录项，也就是文件名到 inode 的映射关系。好比把门牌号摘掉了，但房子本身还在。更准确地说，删除的是一个路径入口，而不是立刻销毁文件对象。因为 rsyslog 仍然持有旧的 FD，所以内核中对应的 <code>struct file</code> 仍然有效，它指向的 inode 也仍然有效。</p><p>因此，之后 rsyslog 调用 <code>write()</code> 时，数据仍然会顺着旧的 FD 写入原来的 inode 和数据块。写入本身通常并没有失败，只是 <code>/var/log/alert.log</code> 这个路径已经不存在了，所以你无法再通过原路径 <code>cat</code> 到内容。这就是为什么用 <code>lsof</code> 能看到该文件处于 <code>(deleted)</code> 状态：文件对象还活着，只是没有名字了。</p><p>重启服务后为什么会恢复？</p><p>因为重启会让旧的 rsyslog 进程退出，旧的 FD 会被关闭，对应的 <code>struct file</code> 引用减少。当这个旧 inode 不再被任何打开句柄或硬链接引用时，磁盘空间才会真正释放。随后新的 rsyslog 进程启动，重新调用 <code>open()</code> 打开或创建 <code>/var/log/alert.log</code>，获得新的 FD，指向新的文件对象。从此以后，日志走的是新 FD，写的是新文件，所以就能看见了。</p><p>如果用 C 语言的指针来类比，可以这样理解：</p><pre tabindex=0><code>路径名 /var/log/alert.log  类似于变量名
 inode                     类似于真正的对象
 FD                        类似于进程持有的指针/引用
-</code></pre><p><code>rm</code> 删除文件更像删除变量名、删除别名，或者解除一个目录项引用，而不是立刻释放底层对象。只要 rsyslog 还持有 FD 这个“指针”，它就可以继续通过这个指针写入原来的对象。重启服务则相当于让进程放弃旧指针，重新 <code>open()</code> 一个新对象，拿到新的指针。</p>
-<p>不过，这里不能完全类比成 <code>free(p)</code> 后继续使用 <code>p</code>。在 C 语言里，<code>free(p)</code> 后再解引用 <code>p</code> 是悬垂指针，属于未定义行为；而 Linux 文件这里是引用计数机制：删除目录项只是减少 inode 的一个引用，只要还有进程持有打开的文件描述符，文件对象仍然合法存在。</p>
-<p>同样，在 Shell 里重新创建一个同名的 <code>/var/log/alert.log</code>，也无法把旧的日志流“接回来”。因为新的文件名指向新的 inode，而 rsyslog 手里的旧 FD 仍然指向旧 inode。除非让 rsyslog 重新打开日志文件，例如重启服务，或者在支持的情况下 reload、发送 HUP 信号，它才会关闭旧 FD，并根据新的路径名打开新的文件对象。</p>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">
-    <span class="title">« 上一页</span>
-    <span>nfs服务器的相关知识</span>
-  </a>
-  <a class="next" href="http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-    <span class="title">下一页 »</span>
-    <span>samba服务器</span>
-  </a>
-</nav>
-
-  </footer>
-<div class="comments">
-  <h2>评论</h2>
-  <script src="https://utteranc.es/client.js"
-          repo="dsduyopg/dsduyopg.github.io"
-          issue-term="pathname"
-          label="comment"
-          theme="preferred-color-scheme"
-          crossorigin="anonymous"
-          async>
-  </script>
-  <noscript>请启用 JavaScript 查看评论。</noscript>
-</div>
-
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-<div class="busuanzi">
-  本站访客 <span id="busuanzi_value_site_uv"></span> ·
-  访问量 <span id="busuanzi_value_site_pv"></span> · 本文阅读 <span id="busuanzi_value_page_pv"></span>
-</div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = '复制';
-
-        function copyingDone() {
-            copybutton.innerHTML = '已复制！';
-            setTimeout(() => {
-                copybutton.innerHTML = '复制';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+</code></pre><p><code>rm</code> 删除文件更像删除变量名、删除别名，或者解除一个目录项引用，而不是立刻释放底层对象。只要 rsyslog 还持有 FD 这个“指针”，它就可以继续通过这个指针写入原来的对象。重启服务则相当于让进程放弃旧指针，重新 <code>open()</code> 一个新对象，拿到新的指针。</p><p>不过，这里不能完全类比成 <code>free(p)</code> 后继续使用 <code>p</code>。在 C 语言里，<code>free(p)</code> 后再解引用 <code>p</code> 是悬垂指针，属于未定义行为；而 Linux 文件这里是引用计数机制：删除目录项只是减少 inode 的一个引用，只要还有进程持有打开的文件描述符，文件对象仍然合法存在。</p><p>同样，在 Shell 里重新创建一个同名的 <code>/var/log/alert.log</code>，也无法把旧的日志流“接回来”。因为新的文件名指向新的 inode，而 rsyslog 手里的旧 FD 仍然指向旧 inode。除非让 rsyslog 重新打开日志文件，例如重启服务，或者在支持的情况下 reload、发送 HUP 信号，它才会关闭旧 FD，并根据新的路径名打开新的文件对象。</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/><span class=title>« 上一页</span>
+<span>nfs服务器的相关知识</span>
+</a><a class=next href=https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/><span class=title>下一页 »</span>
+<span>samba服务器</span></a></nav></footer><div class=comments><h2>评论</h2><script src=https://utteranc.es/client.js repo=dsduyopg/dsduyopg.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script><noscript>请启用 JavaScript 查看评论。</noscript></div></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
