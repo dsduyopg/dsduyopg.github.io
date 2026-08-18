@@ -1,0 +1,39 @@
+baseURL = 'https://dsduyopg.github.io/'
+locale = 'zh-cn'
+title = '我的博客'
+theme = 'PaperMod'
+defaultContentLanguage = 'zh-cn'
+paginate = 9
+enableEmoji = true
+
+[params]
+  env = 'production'
+  description = '记录 Linux、运维、自动化和我自己折腾过的项目'
+  keywords = ['Linux', '运维', '自动化', 'Python', 'Teldrive', '博客']
+  author = 'dsduyopg'
+  mainSections = ['posts']
+  ShowReadingTime = true
+  ShowWordCount = true
+  ShowCodeCopyButtons = true
+  ShowBreadCrumbs = true
+  ShowToc = true
+  TocOpen = false
+  ShowPostNavLinks = true
+  ShowShareButtons = false
+  ShowRssButtonInSectionTermList = true
+  disableSpecial1stPost = true
+  math = true
+
+  [params.homeInfoParams]
+    Title = '欢迎来到我的博客'
+    Content = '记录 Linux、运维、自动化，还有我自己折腾过的项目。这里会持续更新。'
+    AlignSocialIconsTo = 'left'
+
+[[params.socialIcons]]
+name = 'github'
+url = 'https://github.com/dsduyopg'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

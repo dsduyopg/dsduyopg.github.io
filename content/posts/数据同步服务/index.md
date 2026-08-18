@@ -1,0 +1,786 @@
+---
+title: "数据同步服务"
+date: 2026-08-18
+draft: false
+---
+#### 文章目录
+
+
+- [一.数据同步服务的基本介绍](#_3)
+
+
+- [1.什么是数据同步？](#1_5)
+
+- [2.如何进行实时同步](#2_9)
+
+- [3.特点](#3_28)
+
+- [4.怎么实现仅同步变化的数据呢？](#4_34)
+
+- [5.同步方式](#5_42)
+
+
+- [二.如何安装数据同步服务： dnf -y install rsync](#_dnf_y_install_rsync_50)
+
+- [三.综合案例](#_60)
+
+
+- [1. 本地同步操作:](#1__62)
+
+- [2.远程同步操作:](#2_85)
+
+- [3.综合案例,实现定时与增量备份](#3_98)
+
+
+- [四.结合INOTIFY实现数据实时同步](#INOTIFY_118)
+
+
+- [1.对node2进行配置](#1node2_153)
+
+
+- [1.创建用户](#1_155)
+
+- [2.修改配置文件](#2_168)
+
+- [3.创建密码⽂件](#3_193)
+
+- [4. 启动rsync服务](#4_rsync_201)
+
+
+- [五.设置开机自启动](#_220)
+
+
+- [1.杀死进程](#1_222)
+
+- [2.设置开机⾃启动](#2_234)
+
+
+- [六.基于RSYNC服务完成⼿动同步](#RSYNC_300)
+
+
+- [1.格式](#1_302)
+
+- [2.基于⼿动同步⽅式完成数据同步](#2_314)
+
+
+- [3.创建日志文件](#3_320)
+
+
+- [4.开始传输文件了](#4_329)
+
+
+- [解决方案](#_346)
+
+
+- [找到根本原因了！](#_350)
+
+- [解决方案](#_358)
+
+
+- [方案1：临时关闭 SELinux（快速验证）](#1_SELinux_360)
+
+- [方案2：永久关闭 SELinux](#2_SELinux_381)
+
+- [方案3：设置正确的 SELinux 上下文（推荐，更安全）](#3_SELinux__398)
+
+- [建议](#_417)
+
+
+- [七,使⽤密码⽂件， 实现不需要输⼊密码](#__457)
+
+- [八.使用主机名](#_486)
+
+- [九.使用脚本自动配置](#_508)
+
+
+- [1.安装使用的软件](#1_510)
+
+- [2.编写脚本](#2_526)
+
+- [3给文件加权以及启动脚本文件](#3_552)
+
+- [4.最后测试一下](#4_557)
+
+
+## 一.数据同步服务的基本介绍
+
+
+### 1.什么是数据同步？
+
+
+`指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程`
+
+
+### 2.如何进行实时同步
+
+
+```
+常⽤选项：
+• -v ：详细模式输出，显⽰传输过程中的⽂件信息。
+• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。
+• -z ：对备份的⽂件在传输时进⾏压缩处理。
+• -P ：显⽰进度条。
+• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）
+• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh
+端⼝
+本地同步：
+rsync -av /src/directory/ /dest/directory/
+远程同步：
+rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/
+拉取远程数据到本地：
+rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
+
+```
+
+
+### 3.特点
+
+
+• ⽀持增量同步：只传输发⽣变化的数据部分。
+ • ⽀持 SSH 加密传输。
+ • 可保持⽂件权限、时间戳、连接和等元数据。
+
+
+### 4.怎么实现仅同步变化的数据呢？
+
+
+```
+1.会对需要同步的数据文件进行分块(底层)
+2.每一个数据块会基于数据生成校验码，只要数据发生变化 这个校验码也会发生改变
+3.在同步文件的时候， 只需要监测哪些数据块的校验码发生变化， 就可以指定那个块数据改变了， 此时仅需要同步这些变化数据块即可
+
+```
+
+
+### 5.同步方式
+
+
+手动同步–> 定时同步
+
+
+实时同步
+
+
+## 二.如何安装数据同步服务： dnf -y install rsync
+
+
+```
+dnf install rsync -y
+
+```
+
+
+![在这里插入图片描述](images/3797614224cc49d5a3fca322dfdf0d27.png)
+
+
+## 三.综合案例
+
+
+### 1. 本地同步操作:
+
+
+```
+准备⼯作
+1- 在node1节点的 /usr/local⽬录下,创建⼀个nginx-1.8.0⽬录,并在此⽬录下构建⼀个
+html⽬录
+2- 在html⽬录下,创建index.html、favicon.ico、logo.png⽂件，以及assets⽬录
+3- 在assets⽬录下，创建index.js、index.css⽂件
+4- 给各个⽂件随机写⼊⼀些内容
+需求：对html⽬录进⾏同步操作。 将其同步到/usr/local/nginx-1.8.0/backup/下，并且如果
+源⽬录下已经删除的，在⽬标⽬录下也应该被删除
+
+```
+
+
+**我们应当用rsync命令进行相应的操作，下面就是我操作出来的**
+
+
+![在这里插入图片描述](images/f24199616bd64be2976432f00501fdf4.png)
+
+
+![在这里插入图片描述](images/ee2ff999ecb64ec7ba949b4a0a56e145.png)
+ ![在这里插入图片描述](images/8cc454aa2c71417ebc9f1743d69fef13.png)
+
+
+### 2.远程同步操作:
+
+
+```
+需求：对/usr/local/nginx-1.8.0/html⽬录进⾏操作，将其同步到node2的家⽬录的backup的⽬
+录中
+注意： 需要双⽅均安装rsync，同时配置了SSH密钥（否则需要输⼊密码）
+
+```
+
+
+`这个案例也是没有什么太大的问题的，下面是我在这个案例中做出的`
+
+
+![在这里插入图片描述](images/d911be837ebe4112a5553e21e165097d.png)
+
+
+### 3.综合案例,实现定时与增量备份
+
+
+```
+需求说明：
+在centos stream 9的 /var/log⽬录下， 存储了⼤量的关于系统的⽇志：如messages⽂件存储⼤量
+的系统⽇志信息，secure⽇志⽂件存储了⼤量的与系统安全的⽇志。请对此⽬录中的messages、
+secure⽇志⽂件进⾏定时的备份到node2节点的/export/data/node1_backup_system_log⽬录中，
+要求每⽇凌晨2点进⾏备份⼀次。
+
+```
+
+
+在这案例之中我们可以使用定时任务进行操作的
+
+
+![在这里插入图片描述](images/e43fc2f70dfe4cd6907dc89ceece0657.png)
+
+
+![在这里插入图片描述](images/f75359b85d11467499f187989fb51ff5.png)
+
+
+## 四.结合INOTIFY实现数据实时同步
+
+
+```
+⾸先将⼆个路径分别创建出来， 便于后续演⽰
+node1执⾏： mkdir -p /export/data/logs
+node2执⾏： mkdir -p /export/data/node1_exe_backup_log
+
+```
+
+
+![在这里插入图片描述](images/48b53dc5870544e39fc4c082d68c6b12.png)
+
+
+![在这里插入图片描述](images/84ef413258f549afb18c49aaee593a27.png)
+
+
+- 优势：
+
+
+```
+⾼效性: rsyncd 的守护进程模式可以避免每次连接都启动 SSH 进程，因此在某些情况下可能会⽐
+SSH ⽅式略微提⾼性能。
+简化配置: ⼀旦配置好 rsyncd，⽆需每次都输⼊ SSH 密码，适合⽤于定时备份等⾃动化任务。
+
+```
+
+
+- 缺点：
+
+
+```
+安全性问题: rsyncd 是基于开放端⼝的⽅式进⾏⽂件同步，默认情况下并不加密传输的数据。这使
+得数据传输过程可能暴露给中间⼈攻击（MITM）。虽然可以配置 rsyncd 使⽤ --password-file
+来限制访问，但仍然不如 SSH 安全。
+需要开放端⼝: 您需要在防⽕墙上开放 rsync 服务使⽤的端⼝（通常是 873），这可能增加潜在的
+安全⻛险。
+配置复杂: 需要在服务器上配置 rsyncd.conf，并管理模块、权限、⽤⼾等细节。
+
+```
+
+
+### 1.对node2进行配置
+
+
+#### 1.创建用户
+
+
+`在这里面呢，我们需要在node2中创建2个用户，一个是backup_user,一个是rsync用户`
+
+
+```
+useradd backup_user
+useradd rsync
+passwd backup_user
+passwd rsync
+
+```
+
+
+注意密码，都设置为123456
+
+
+#### 2.修改配置文件
+
+
+**注意，这个配置文件要是在node2中修改的，以下是修改命令**
+
+
+```
+# 全局设置
+uid = rsync
+gid = rsync
+use chroot = no
+port = 873
+max connections = 200
+pid file = /var/run/rsyncd.pid
+log file = /var/log/rsyncd.log
+transfer logging = yes
+ignore nonreadable = yes
+[node1_logs]
+path = /export/data/node1_exe_backup_log
+comment = Backup Directory
+read only = no
+secrets file = /etc/rsyncd.passwd
+hosts allow = 192.168.149.0/24
+hosts deny = *
+auth users = backup_user
+
+```
+
+
+#### 3.创建密码⽂件
+
+
+```
+echo "backup_user:123456" > /etc/rsyncd.passwd
+# 设置密码⽂件的权限为600，确保该⽂件只有 RSYNC 服务可以读取
+chmod 600 /etc/rsyncd.passwd
+
+```
+
+
+#### 4. 启动rsync服务
+
+
+```
+1 rsync --daemon
+
+```
+
+
+![在这里插入图片描述](images/58dee05eaabd4dc49891471c76545a6b.png)
+
+
+```
+测试是否可以正常访问： 在node1执⾏
+rsync rsync://backup_user@192.168.88.102/node1_logs
+注意在node2需要开放端⼝：
+firewall-cmd --permanent --add-port=873/tcp
+
+```
+
+
+![在这里插入图片描述](images/d1989d021bb6426380e6f51e57bf0034.png)
+
+
+## 五.设置开机自启动
+
+
+### 1.杀死进程
+
+
+```
+-- 查看进程
+ps -ef | grep rsync -- 查看进程ID
+-- 杀死进程
+kill -9 rsync的进程ID
+
+```
+
+
+![在这里插入图片描述](images/fcd3fe2f9e22479d8e444903657b882b.png)
+
+
+### 2.设置开机⾃启动
+
+
+由于rsync并不是⼀个系统服务（简单判断：通过systemctl启动和关闭的服务），故需要先
+ 设置为系统服务后才可以设置
+
+
+- 修改配置文件
+
+
+```
+[Unit]
+Description=Rsync Daemon
+After=network.target
+[Service]
+ExecStart=/usr/bin/rsync --daemon --config=/etc/rsyncd.conf --no-detach
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+[Install]
+WantedBy=multi-user.target
+特殊说明：
+ExecReload=/bin/kill -HUP $MAINPID：通过发送 SIGHUP 信号，告诉 rsync 守护进程重新
+加载其配置⽂件，⽽⽆需停⽌并重新启动进程。
+
+```
+
+
+- 这个时候，我们需要把旧的日志文件给删掉
+
+
+`因为我们可能在操作的时候会产出一些错误的日志，就是由于这些错误的文件会导致，我们后续无法成功启动rsync服务`
+
+
+![在这里插入图片描述](images/0f536eb514064a138a47535825883933.png)
+
+
+**就像我这样的错误一样，这个时候，我们就要学会查看日志文件了，因为一些错误会记录在日志里面**
+
+
+![在这里插入图片描述](images/5022578e0a2041e0bf82f35ec95129eb.png)
+
+
+**其实，当我把旧的日志文件给删掉之后哦，成功了，应该是之前启动失败过一次，日志文件，没有删除，然后再次启动，通过对比这个日志文件，发现有问题，就无法启动，删除文件意思是把里面的的错误清理掉，之后相当于重新启动，所以可以成功启动后**
+
+
+![在这里插入图片描述](images/f9265c47416648689835d494fc49a1b0.png)
+
+
+```
+总结这次成功的逻辑
+
+这次能成功，其实是两个动作配合的结果：
+
+清理现场：rm -f /var/run/rsyncd.pid 清除了旧的工作证，扫清了路障。
+
+修正配置：你之前（或者在我们的排查中）修正了 /etc/rsyncd.conf 里的错误（比如把密码文件的路径写对了，或者模块路径建好了）。
+
+所以，并不是“这样修改就可以”这么简单，而是“清理了旧障碍 + 配置本身正确”共同作用的结果。
+
+💡 小贴士：以后遇到类似问题怎么办？
+
+下次如果再遇到服务启动失败，且提示 already running、permission denied 或 status=11，可以尝试这个“万能重启三部曲”：
+
+查日志：journalctl -xeu 服务名 看具体报错。
+
+删 pid 文件：rm -f /var/run/服务名.pid 清理旧状态。
+
+重启服务：systemctl restart 服务名。
+
+记住，日志是你最好的朋友，它能告诉你服务到底是哪里不舒服。现在你的 rsync 服务已经稳稳运行了，可以去客户端测试同步啦！
+
+```
+
+
+## 六.基于RSYNC服务完成⼿动同步
+
+
+### 1.格式
+
+
+```
+⽤⼾名@主机地址::模块名称 或 rsync://⽤⼾名@主机地址/模块名称
+说明：
+模块名： 指的是配置到rsync.conf 中 【】的内容
+⽤⼾名： 指的是模块中指定的⽤⼾名， 如果没有指定， 可以是主机存在的⽤⼾名即可（前提
+是该⽤⼾需要有权限）
+例如：
+backup_user@192.168.88.102::node1_logs
+
+```
+
+
+### 2.基于⼿动同步⽅式完成数据同步
+
+
+```
+rsync -avz /export/data/logs/ backup_user@node2::node1_logs
+
+```
+
+
+## 3.创建日志文件
+
+
+`在创建的日志文件里面录入数据`
+
+
+```
+cd /export/data/logs
+touch log.txt && echo "2491 797 1243124 9127">>log.txt
+
+```
+
+
+### 4.开始传输文件了
+
+
+**在这一步里面呢，我们需要注意上下文，把这个权限给关掉，否则，后面传输就像我一样不会成功的**
+
+
+![在这里插入图片描述](images/26b6693e93574eaeb136bf6615bb7331.png)
+
+
+**大家可以看到，我通过传送指令，无法发送成功，但是文件的权限都是开的，是最大的权限**
+
+
+![在这里插入图片描述](images/7bd43237e0a94a5e85851f1e8df8701f.png)
+
+
+**当时，我就比较迷了，不知道该如何办，然后我问了千问，它给予了我很大的帮助了，我明白了其实是我Linux的上下文的权限比较严格，需要将其关闭**
+
+
+![在这里插入图片描述](images/3145c85ef4da49e682952ce1a8cd7c91.png)
+
+
+#### 解决方案
+
+
+以下是千问告诉我的
+
+
+### 找到根本原因了！
+
+
+**SELinux 处于 `Enforcing`（强制）模式**，这就是 rsync 报 Permission denied 的真正原因。**
+
+
+**即使目录权限是 `drwxrwxrwx`（777），SELinux 的安全策略仍然会阻止 rsync 进程写入文件。**
+
+
+### 解决方案
+
+
+#### 方案1：临时关闭 SELinux（快速验证）
+
+
+在远程服务器 **192.168.149.131** 上执行：
+
+
+```
+# 临时设置为 Permissive 模式（不需要重启）
+sudo setenforce 0
+
+# 验证
+getenforce
+# 应该输出: Permissive
+
+```
+
+
+然后重新执行 rsync 命令，应该就能成功了。
+
+
+>
+
+
+⚠️ 这只是临时生效，重启后会恢复为 Enforcing。
+
+
+#### 方案2：永久关闭 SELinux
+
+
+```
+# 编辑 SELinux 配置文件
+sudo vi /etc/selinux/config
+
+# 将 SELINUX=enforcing 改为：
+SELINUX=disabled
+
+# 重启服务器生效
+sudo reboot
+
+```
+
+
+#### 方案3：设置正确的 SELinux 上下文（推荐，更安全）
+
+
+如果不想关闭 SELinux，可以给目录设置正确的标签：
+
+
+```
+# 查看当前目录的 SELinux 上下文
+ls -Zd /export/data/node1_exe_backup_log/
+
+# 设置 rsync 可以写入的上下文
+sudo chcon -Rt public_content_rw_t /export/data/node1_exe_backup_log/
+
+# 如果 rsync 以守护进程方式运行，还需要：
+sudo setsebool -P rsync_full_access on
+
+```
+
+
+#### 建议
+
+
+**先用方案1快速验证**，确认是 SELinux 的问题后，再决定用方案2还是方案3长期解决。
+
+
+```
+# 在远程服务器上执行
+sudo setenforce 0
+
+```
+
+
+然后回到本地重新执行 rsync 命令即可。
+
+
+![在这里插入图片描述](images/8ac5ac380cb84c8b830486665919aec8.png)
+
+
+这个是我按照，他的提示放权的步骤
+
+
+接下来，很明显，我再次发送文件，直接成功了
+
+
+![在这里插入图片描述](images/c0fe09d45589427297a0a688bc37e0c6.png)
+
+
+![在这里插入图片描述](images/ed077686afe346e781c59d27d34c3cde.png)
+
+
+注意，ai说的是下一次重启还会权限不足，因此我们需要修改配置文件
+
+
+![在这里插入图片描述](images/7d67a5255e75406eb847e4906821e88e.png)
+
+
+![在这里插入图片描述](images/f92ca092e180417783c914bd90e3baee.png)
+
+
+将SELINUX修改为disabled就可以了
+
+
+**然后，我们重启一起机器，是配置生效，就可以了。**
+
+
+## 七,使⽤密码⽂件， 实现不需要输⼊密码
+
+
+- 步骤⼀： 配置密码⽂件
+
+
+```
+echo '123456' > /etc/rsync.password
+chmod 600 /etc/rsync.password
+注意： 权限必须是600，否则会报错
+
+```
+
+
+![在这里插入图片描述](images/857d0a1c14e14c63a92ea65f3571f9c3.png)
+ ![在这里插入图片描述](images/ca3460eb710546a2931a082130f17f37.png)
+
+
+- 步骤⼆： 使⽤密码⽂件， 实现不需要输⼊密码
+
+
+```
+rsync -avz --password-file=/etc/rsync.password /export/data/logs/
+backup_user@node2::node1_logs
+
+```
+
+
+![在这里插入图片描述](images/a048b4827a54434d90f3e299169ea317.png)
+
+
+**查看node2机器**
+
+
+![在这里插入图片描述](images/8d3571647e68489d9f3a1b3b008bc18e.png)
+
+
+## 八.使用主机名
+
+
+`这个应该修改配置文件hosts`
+
+
+```
+echo "192.168.149.128 node1 node1.itcast.cn">>/etc/hosts
+echo "192.168.149.131 node2 node2.itcast.cn">>/etc/hosts
+
+```
+
+
+![在这里插入图片描述](images/3303e84e3cbe403e9965e5879badb87e.png)
+
+
+![在这里插入图片描述](images/f1130277e6c8406db368a0cdefc6898c.png)
+
+
+![在这里插入图片描述](images/d1a4486386194c5abf53c8b1c2081410.png)
+
+
+## 九.使用脚本自动配置
+
+
+### 1.安装使用的软件
+
+
+- 安装第三方源
+
+
+```
+⾸先启⽤EPEL仓库：
+dnf install epel-release
+
+```
+
+
+- 安装监视软件
+
+
+```
+安装inotify-tools
+dnf install -y inotify-tools
+
+```
+
+
+### 2.编写脚本
+
+
+- 1.vi /root/real_time_sync.sh
+
+
+创建sh脚本文件
+
+
+```
+#!/bin/bash
+# 定义源⽬录和⽬标⽬录（⽬标⽬录是远程服务器的⽬录）
+SOURCE_DIR="/export/data/logs"
+TARGET_DIR="root@192.168.88.102:/export/data/node1_exe_backup_log" # 替换为⽬
+标服务器的⽤⼾名和⽬录
+# ⽇志⽂件
+LOG_FILE="/var/log/rsync_realtime_sync.log"
+# 使⽤inotifywait监听${WATCH_DIR}⽬录中的⽂件变化
+inotifywait -m -r -e modify,create,delete,move "${SOURCE_DIR}" | while read
+path action file; do
+echo "Detected ${action} on ${file} in ${path}. Starting rsync..." >>
+"$LOG_FILE"
+# 执⾏rsync同步操作
+rsync -avz --port=873 --delete -e ssh "${SOURCE_DIR}/" "${TARGET_DIR}"
+>> "$LOG_FILE" 2>&1
+echo "Sync completed for ${file} in ${path}." >> "$LOG_FILE"
+done
+
+```
+
+
+### 3给文件加权以及启动脚本文件
+
+
+![在这里插入图片描述](images/de9435f016924ec7a193db2c87b0f598.png)
+
+
+### 4.最后测试一下
+
+
+`在node1的/export/data/logs 里面上传几个文件，然后再打开一个node1服务器开启tail -100f监听文件，查看是否有修改，以及node2是否也跟着变化呢`
+
+
+![在这里插入图片描述](images/bc1f71e8ed5b48b184532f40235ca967.png)
+
+
+![在这里插入图片描述](images/00130a2aac85493ba709bdcd56ab6698.png)
+
+
+![在这里插入图片描述](images/983dcb33b3f14c33990ab42f6cabe000.png)
+
+
+**最后，发现成功在node2里面显示，这个实验就完成了**
