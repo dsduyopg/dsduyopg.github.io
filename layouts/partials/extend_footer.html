@@ -11,7 +11,7 @@
   (function () {
     var keyViews = 'blog_views';
     var keyTitles = 'blog_titles';
-    var isArticle = document.querySelector('.post-entry') && !document.querySelector('.hero-banner');
+    var isArticle = !!document.querySelector('.post-single');
     var hotEl = document.getElementById('hot-posts');
 
     if (isArticle) {
@@ -31,7 +31,12 @@
     var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
     var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
     var rows = Object.keys(views)
-      .filter(function (p) { return titles[p]; })
+      .filter(function (p) {
+        return p.indexOf('/posts/') === 0
+          && p.indexOf('/page/') === -1
+          && titles[p]
+          && titles[p] !== '我的博客';
+      })
       .sort(function (a, b) { return views[b] - views[a]; })
       .slice(0, 5);
     if (!rows.length) return;

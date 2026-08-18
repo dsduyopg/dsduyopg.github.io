@@ -1,4 +1,13 @@
-<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>DNS服务器 | 我的博客</title><meta name=keywords content><meta name=description content="文章目录
+<!DOCTYPE html>
+<html lang="zh-cn" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>DNS服务器 | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="文章目录
 
 
 一.DNS服务器软件介绍
@@ -105,7 +114,67 @@ DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它�
 .ai ⼈⼯智能
 .io 云计算
 .mil 军事机构
-除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等"><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/><link crossorigin=anonymous href=/assets/css/stylesheet.acb0281697426877b365afae9c3f98c3d059da7386a3e319a7edbfa64c40383c.css integrity="sha256-rLAoFpdCaHezZa+unD+Yw9BZ2nOGo+MZp+2/pkxAODw=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="DNS服务器"><meta property="og:description" content="文章目录 一.DNS服务器软件介绍
+除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等">
+<meta name="author" content="dsduyopg">
+<link rel="canonical" href="http://localhost:1313/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.acb0281697426877b365afae9c3f98c3d059da7386a3e319a7edbfa64c40383c.css" integrity="sha256-rLAoFpdCaHezZa&#43;unD&#43;Yw9BZ2nOGo&#43;MZp&#43;2/pkxAODw=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="DNS服务器">
+  <meta property="og:description" content="文章目录 一.DNS服务器软件介绍
 1.. DNS的基本概念
 2.DNS结构
 1.根域 .（root）
@@ -128,7 +197,16 @@ DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它�
 八.测试服务器是否正常
 九.如何清空
 十.总结
-一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。作⽤：• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到⽬标服务器。• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故障排查等⾮常重要。• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠性。• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务器的信息。例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```• 常⻅的顶级域及国家.com 商业机构.net ⽹络.org ⾮商业机构 www.centos.org www.kernel.org.edu 教育机构.gov 政府机关.cn 中国域名.us 美国域名.ai ⼈⼯智能.io 云计算.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="DNS服务器"><meta name=twitter:description content="文章目录 一.DNS服务器软件介绍
+一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。作⽤：• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到⽬标服务器。• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故障排查等⾮常重要。• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠性。• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务器的信息。例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```• 常⻅的顶级域及国家.com 商业机构.net ⽹络.org ⾮商业机构 www.centos.org www.kernel.org.edu 教育机构.gov 政府机关.cn 中国域名.us 美国域名.ai ⼈⼯智能.io 云计算.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DNS服务器">
+  <meta name="twitter:description" content="文章目录 一.DNS服务器软件介绍
 1.. DNS的基本概念
 2.DNS结构
 1.根域 .（root）
@@ -151,12 +229,285 @@ DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它�
 八.测试服务器是否正常
 九.如何清空
 十.总结
-一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。作⽤：• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到⽬标服务器。• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故障排查等⾮常重要。• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠性。• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务器的信息。例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```• 常⻅的顶级域及国家.com 商业机构.net ⽹络.org ⾮商业机构 www.centos.org www.kernel.org.edu 教育机构.gov 政府机关.cn 中国域名.us 美国域名.ai ⼈⼯智能.io 云计算.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"DNS服务器","item":"https://dsduyopg.github.io/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"DNS服务器","name":"DNS服务器","description":"文章目录 一.DNS服务器软件介绍\n1.. DNS的基本概念\n2.DNS结构\n1.根域 .（root）\n2.顶级域DNS服务器(TLD DNS Servers)\n3.权威DNS服务器（Authoritative DNS Servers）\n3.DNS服务器软件介绍\n二.在DNS服务器上安装BIND\n三.配置BIND主配置⽂件\n四.配置内部区域注册⽂件\n1.正向解析\n1.添加正向解析声明\n2.添加正向解析内容\n2.反向解析\n1.添加反向解析的声明\n2.添加反向解析的内容\n3.语法检测\n五.启动BIND服务\n六.配置防⽕墙\n七.客⼾端配置操作【node1】\n八.测试服务器是否正常\n九.如何清空\n十.总结\n一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域\r名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址\r不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。\r作⽤：\r• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到\r⽬标服务器。\r• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故\r障排查等⾮常重要。\r• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠\r性。\r• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不\r直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。\r根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9\r台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务\r器的信息。\r例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```\r• 常⻅的顶级域及国家\r.com 商业机构\r.net ⽹络\r.org ⾮商业机构 www.centos.org www.kernel.org\r.edu 教育机构\r.gov 政府机关\r.cn 中国域名\r.us 美国域名\r.ai ⼈⼯智能\r.io 云计算\r.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等\n","keywords":[],"articleBody":"文章目录 一.DNS服务器软件介绍\n1.. DNS的基本概念\n2.DNS结构\n1.根域 .（root）\n2.顶级域DNS服务器(TLD DNS Servers)\n3.权威DNS服务器（Authoritative DNS Servers）\n3.DNS服务器软件介绍\n二.在DNS服务器上安装BIND\n三.配置BIND主配置⽂件\n四.配置内部区域注册⽂件\n1.正向解析\n1.添加正向解析声明\n2.添加正向解析内容\n2.反向解析\n1.添加反向解析的声明\n2.添加反向解析的内容\n3.语法检测\n五.启动BIND服务\n六.配置防⽕墙\n七.客⼾端配置操作【node1】\n八.测试服务器是否正常\n九.如何清空\n十.总结\n一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域\r名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址\r不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。\r作⽤：\r• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到\r⽬标服务器。\r• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故\r障排查等⾮常重要。\r• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠\r性。\r• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不\r直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。\r根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9\r台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务\r器的信息。\r例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```\r• 常⻅的顶级域及国家\r.com 商业机构\r.net ⽹络\r.org ⾮商业机构 www.centos.org www.kernel.org\r.edu 教育机构\r.gov 政府机关\r.cn 中国域名\r.us 美国域名\r.ai ⼈⼯智能\r.io 云计算\r.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等\n3.权威DNS服务器（Authoritative DNS Servers） 权威DNS服务器存储了某个域名的确切信息（如 IP 地址）。当DNS查询请求到达这些服务器时，服务器会直接返回查询结果。它们对⾃⼰所管理的域名负责。除了这些类型的DNS服务器外，其实还有递归DNS服务器、缓存DNS服务器、前向DNS服务器等\n3.DNS服务器软件介绍 ⽬前市场上⽀持搭建DNS服务器的软件有很多，以下是⼏个常⽤的DNS服务器介绍：\r• 1- BIND（Berkeley Internet Name Domain）\rBIND 是最常⻅的 DNS 服务器软件之⼀，⼴泛应⽤于 Linux 和 Unix 系统。它功能强⼤，⽀\r持正向和反向解析，并且具有灵活的配置选项。\r优点：\r功能强⼤，⽀持主从 DNS 配置。\r配置灵活，⽀持多种⾼级功能，如 DNSSEC、访问控制等。\r社区活跃，⽀持⼴泛。\r缺点：\r配置较为复杂，初学者需要时间学习。\r• 2- Unbound\rUnbound 是⼀个轻量级的、开源的 DNS 解析器，主要⽤于递归查询，它的设计⽬标是提供快\r速、安全、灵活的 DNS 服务。相⽐ BIND，Unbound 更加简洁易⽤，适合⽤于简单的 DNS 解析服\r务。\r优点：\r配置简便，容易上⼿。\r安全性⾼，⽀持 DNSSEC 和 DoH（DNS over HTTPS）。\r性能优越，适合⾼负载环境。\r缺点：\r功能不如 BIND 强⼤，主要⽤于递归解析，⽽⾮权威 DNS 服务。\r3- dnsmasq\rdnsmasq 是⼀个轻量级的 DNS 和 DHCP 服务器，适⽤于⼩型⽹络或家庭环境。它可以提供\rDNS 缓存功能，并且⽀持 DHCP 服务。\r优点：\r配置简单，适合⼩型⽹络和家庭⽹络。\r⽀持 DHCP 服务，可以同时作为 DNS 和 DHCP 服务器。\r⽀持 DNS 缓存，加速访问速度。\r缺点：\r功能相对有限，适合⼩规模⽹络，不能处理⾼负载。\r4- PowerDNS\rPowerDNS 是⼀个⾼性能的 DNS 服务器，⽀持多种后端数据库，如 MySQL 和 PostgreSQL。\r它适⽤于需要⾼性能、⾼可⽤性的企业级应⽤。\r优点：\r⽀持多种后端数据库，便于管理⼤量 DNS 记录。\r⾼性能，适合⼤规模部署。\r缺点：\r配置较为复杂，适合有经验的⽤⼾。\r5- CoreDNS\rCoreDNS 是⼀个灵活、可扩展的 DNS 服务器，⼴泛⽤于 Kubernetes 环境中，也可以作为传\r统 DNS 服务器使⽤。它由 Go 语⾔编写，⽀持插件扩展。\r优点：\r可扩展，⽀持插件机制。\r轻量级，易于配置。\r⽀持现代云环境，特别适⽤于 Kubernetes 集群。\r缺点：\r主要⽤于云环境，配置⽅式与传统 DNS 服务有所不同。 本次我们主要采⽤BIND来完成建设DNS服务器的任务 服务器规划： • node1为访问的客⼾端 • node2为DNS服务器\n二.在DNS服务器上安装BIND node1和node2上面是均可以安装这个软件bind的说明： bind：提供 DNS 服务器功能，⽤于 解析域名（包括内部和外部域名），管理 DNS 区域和记录。 bind-utils：提供⼀些 DNS 查询⼯具，如 dig、nslookup、host，⽤于测试和调试 DNS 配置\n三.配置BIND主配置⽂件 我们使用vi /etc/named.conf这个命令来配置文件\n四.配置内部区域注册⽂件 假设⽬前有以下内部⽹站需要配置内部转发：\r1 internal.local 192.168.88.101 1.正向解析 1.添加正向解析声明 .我们修改配置文件，vi /etc/named.rfc1912.zones,在文件里面添加正向解析的声明 vi /etc/named.rfc1912.zones\r添加以下内容：\rzone \"internal.local\" IN {\rtype master;\rfile \"/var/named/internal.local.db\";\rallow-update { none; };\r};\r说明:\rzone \"internal.local\" IN {\r表示一个 DNS 区域的声明\rinternal.local 是此 DNS 区域的名称\rIN 指 Internet 类别，常用默认值\rtype master;\r指定此区域的类型为 主（master）区域\r主区域是该域名的权威数据源，DNS 数据直接从此服务器的配置文件加载\rfile \"/var/named/internal.local.db\";\r定义该区域的区域数据文件位置\r文件 internal.local.db 包含该区域的记录（如 A、MX、NS 等）\rallow-update { none; };\r指定此区域是否允许动态更新\rnone 意味着不允许任何动态更新，域名记录只能通过手动修改文件更新 2.添加正向解析内容 .我们需要打开之前在rfc1912.zones这里面声明的文件，然后在这个文件里面进行添加内容 vi /var/named/internal.local.db\r# 添加以下内容：\r$TTL 86400\r@ IN SOA ns1.internal.local. admin.internal.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.internal.local.\rns1 IN A 192.168.149.130\rweb1 IN A 192.168.149.128\rweb2 IN A 192.168.149.128\r@ IN A 192.168.149.128\r说明:\r$TTL 默认 TTL (Time To Live)。\r所有资源记录的默认缓存时间，单位为秒。\r这里设置为 86400（一天）。客户端在缓存数据时会遵循此值。\rSOA 记录（Start of Authority）\r@: 当前区域的根域（即 internal.local）。\rIN: 表示 Internet 类别。\rSOA: 开始授权记录，定义该区域的关键元信息。\rns1.internal.local. 主域名服务器的 FQDN（全限定域名）。\radmin.internal.local. 管理员的邮箱地址，@ 替换为 .（即 admin@internal.local）。\r2024011701 序列号，每次修改区域文件时需递增，用于从服务器检测更新。\r3600 刷新时间，从服务器多久检查主服务器是否有更新（秒）。\r1800 重试时间，从服务器在刷新失败后再次尝试的等待时间（秒）。\r1209600 过期时间，从服务器在无法联系主服务器时数据失效的时间（秒）。\r86400 最小 TTL，未覆盖的记录的默认缓存时间（秒）。\rNS 记录（Name Server）\r指定该区域的域名服务器地址。\rns1.internal.local.: 表示 internal.local 的主域名服务器。\rA 记录（Address）: 定义域名到 IPv4 地址的映射。\rns1.internal.local. 解析为 192.168.88.102\rweb1.internal.local. 和 web2.internal.local. 都解析为 192.168.88.101\r扩展常见的DNS记录类型:\rA 记录（Address Record）: 将域名映射到 IPv4 地址。\rAAAA 记录: 将域名映射到 IPv6 地址。\rCNAME 记录（Canonical Name Record）: 为域名提供别名。\rMX 记录（Mail Exchange Record）: 指定邮件服务器的地址。\rNS 记录（Name Server Record）: 指定域名的权威 DNS 服务器。\rSOA 记录（Start of Authority Record）: 定义 DNS 区域的起始权威信息。\rPTR 记录（Pointer Record）: 用于反向 DNS 查找，将 IP 地址映射回域名。\rTXT 记录（Text Record）: 存储任意文本数据，常用于 SPF、DKIM 等验证机制。 要是我们需要其他域名比如说是it_test.cn，那么的话，我们需要先把internal.local都改成it_test.cn，其次我们这个时候需要的子域名是heima以及boxuegu，那么我们需要将web1修改为heima，web2修改为boxuegu，其实就可以了，这个域名其实就添加成功了。\n2.反向解析 1.添加反向解析的声明 1.我们需要打开rfc1912.zones这个文件，并且在文件添加反向解析的声明 vi /etc/named.rfc1912.zones\r# 添加以下配置\rzone \"149.168.192.in-addr.arpa\" IN {\rtype master;\rfile \"/var/named/192.168.149.rev\";\rallow-update { none; };\r};\r说明:\rzone \"149.168.192.in-addr.arpa\" IN {\r这是一个 反向区域（reverse zone）的声明。\r反向区域用于将 IP 地址（IPv4）转换为域名，这和正向 DNS 查询（将域名转换为 IP 地址）是相反的。\r149.168.192.in-addr.arpa：这是 192.168.149.x IP 地址段的反向区域名称。反向查找区域的命名规则是：将 IP 地址的每个八位字节倒序并加上 .in-addr.arpa 后缀。例如，192.168.149.x 的反向区域名称就是 149.168.192.in-addr.arpa。\rtype master;\r指定该区域是 主（master）区域，也就是说，这是该区域的权威 DNS 服务器，并且数据会从本地文件加载\rfile \"192.168.149.rev\";\r这是该区域的区域数据文件路径。\r192.168.149.rev 文件包含了反向解析记录，用于将 IP 地址（如 192.168.149.101）映射到对应的域名\rallow-update { none; };\rallow-update 指定是否允许动态更新。在这里设置为 none，意味着不允许任何动态更新\r这是一种安全配置，防止未经授权的客户端修改 DNS 记录 2.添加反向解析的内容 vi /var/named/192.168.149.rev\r# 添加以下配置\r$TTL 86400\r@ IN SOA ns1.internal.local. admin.internal.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.internal.local.\r130 IN PTR ns1\r128 IN PTR web1\r128 IN PTR web2\r128 IN PTR @ 这个文件其实与正向的文件很相似，只不过的是这个文件刚好在后几行反过来了,it_test.cn，其实添加逻辑也是一样的,和正向文件差不多，把Internal.local修改,以及把web1,web2修改一下就可以了\n然后我们保存文件就可以了\n3.语法检测 我们需要采用named-checkconf /etc/named.conf这个命令来进行检测文件是否有错误\n# 配置文件语法检查\rnamed-checkconf /etc/named.conf\r如果报了错误， 一般都是由于配置文件丢失内容导致语法结构不对， 请检查配置文件\r/etc/named.conf 【大概率是该文件的问题】\r/etc/named.rfc1912.zones 我们再次进行区域文件的检查,查看正向与反向文件哪一个出错了呢\n# 区域文件语法检查\rnamed-checkzone internal.local /var/named/internal.local.db\rnamed-checkzone 149.168.192.in-addr.arpa /var/named/192.168.149.rev 五.启动BIND服务 systemctl start named -- 立即启动\rsystemctl enable named -- 开启自动启动\rsystemctl status named -- 查看状态 接下来，我们需要把这个dns的bind服务打开就可以了\n可以看到，这个服务我是成功的启动了的，没有报任何的错误，接下来，我们需要在服务器上面把这个服务的端口放行，那么其实node2上面的配置就解决了\n六.配置防⽕墙 firewall-cmd --zone=public --add-port=53/udp --permanent\rfirewall-cmd --zone=public --add-port=53/tcp --permanent\rfirewall-cmd --reload\r或者：\rfirewall-cmd --zone=public --add-service=dns --permanent\rfirewall-cmd --reload\r# 查看规则信息：\rfirewall-cmd --list-all 这上面的是配置防火墙的命令，我们通过截图查看一下是否成功了的 我们把防火墙放行，可以看到其实也是完美的运行，没有报出错误，接下来我们需要对node1进行配置，把node1的dns修改为node2的IP地址\n然后我们，再次查看已经放行的服务列表\n七.客⼾端配置操作【node1】 我们需要把node1的dns追加一条，内容是node2的IP地址\nvim /etc/NetworkManager/system-connections/ens33.nmconnection #打开配置文件，来进行相应的网络配置操作 [connection]\rid=ens33\ruuid=f63e95b4-2d94-316d-9f6e-bddab78c0f43\rtype=ethernet\rautoconnect-priority=-999\rinterface-name=ens33\rtimestamp=1785329942\r[ethernet]\r[ipv4]\raddress1=192.168.149.128/24\rdns=192.168.149.130;1.1.1.1;8.8.8.8;\rgateway=192.168.149.2\rmethod=manual\r[ipv6]\raddr-gen-mode=eui64\rmethod=auto\r[proxy] 我们显示一下网卡的信息，查看是否dns配置成功了\nnmcli device show ens160 八.测试服务器是否正常 使用 dig或nslookup 命令测试 DNS 查询，确保内部域名解析正常工作。例如： dig web1.internal.local 我们再使用命令ping一下看一下是否与设定的域名可以连通 **使用 dig 或 nslookup 命令测试 DNS 查询，确保外部域名解析正常工作。 ** 可以看到，域名解析服务是可以正常解析外部链接的\n九.如何清空 node2:\rdnf -y remove bind bind-utils\rdnf clean all\rrm -rf /etc/named*\rnode1:\r修改网卡的DNS服务器， 将其调整为 8.8.8.8;114.114.114; 我们通过这个命令把今天做的再删掉，多做几遍，同时删掉的话，可以更好的完成dns的作业\n十.总结 **本次学习任务，佳乐老师讲解了dns服务器的相关设定，从软件包的安装，文件的修改，端口放行。以及node1的相关设定。修改的文件本次在node2里面主要是有1个主配置文件，1个区域文件，区域文件要追加正向解析和反向解析，正向解析和反向解析都还要在你声明的时候指定的文件，来进行修改就可以了，我们在检测一下刚刚的配置文件是否出错，最后进行服务的启动以及端口的放行.\n然后我们在node1中我们需要修改他的网络，将他的dns新增一条记录，内容是node2的IP地址，我们再用dig检测是否node2的dns服务器可以正常运行,这个其实也是可以的，windows也是同理将dns修改为node2的IP地址。需要注意我这里修改的是vmnet1网卡，最后Windows也是成功ping通了。\n","wordCount":"754","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg.github.io/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
-<a href=/posts/>Posts</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">DNS服务器</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>754 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><ul><ul><li><a href=#%e6%96%87%e7%ab%a0%e7%9b%ae%e5%bd%95 aria-label=文章目录>文章目录</a></li></ul></ul><li><a href=#%e4%b8%80dns%e6%9c%8d%e5%8a%a1%e5%99%a8%e8%bd%af%e4%bb%b6%e4%bb%8b%e7%bb%8d aria-label=一.DNS服务器软件介绍>一.DNS服务器软件介绍</a><ul><li><a href=#1-dns%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5 aria-label="1… DNS的基本概念">1… DNS的基本概念</a></li><li><a href=#2dns%e7%bb%93%e6%9e%84 aria-label=2.DNS结构>2.DNS结构</a><ul><li><a href=#1%e6%a0%b9%e5%9f%9f-root aria-label="1.根域 .（root）">1.根域 .（root）</a></li><li><a href=#2%e9%a1%b6%e7%ba%a7%e5%9f%9fdns%e6%9c%8d%e5%8a%a1%e5%99%a8tld-dns-servers aria-label="2.顶级域DNS服务器(TLD DNS Servers)">2.顶级域DNS服务器(TLD DNS Servers)</a></li><li><a href=#3%e6%9d%83%e5%a8%81dns%e6%9c%8d%e5%8a%a1%e5%99%a8authoritative-dns-servers aria-label="3.权威DNS服务器（Authoritative DNS Servers）">3.权威DNS服务器（Authoritative DNS Servers）</a></li></ul></li><li><a href=#3dns%e6%9c%8d%e5%8a%a1%e5%99%a8%e8%bd%af%e4%bb%b6%e4%bb%8b%e7%bb%8d aria-label=3.DNS服务器软件介绍>3.DNS服务器软件介绍</a></li></ul></li><li><a href=#%e4%ba%8c%e5%9c%a8dns%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%b8%8a%e5%ae%89%e8%a3%85bind aria-label=二.在DNS服务器上安装BIND>二.在DNS服务器上安装BIND</a></li><li><a href=#%e4%b8%89%e9%85%8d%e7%bd%aebind%e4%b8%bb%e9%85%8d%e7%bd%ae%e4%bb%b6 aria-label=三.配置BIND主配置⽂件>三.配置BIND主配置⽂件</a></li><li><a href=#%e5%9b%9b%e9%85%8d%e7%bd%ae%e5%86%85%e9%83%a8%e5%8c%ba%e5%9f%9f%e6%b3%a8%e5%86%8c%e4%bb%b6 aria-label=四.配置内部区域注册⽂件>四.配置内部区域注册⽂件</a><ul><li><a href=#1%e6%ad%a3%e5%90%91%e8%a7%a3%e6%9e%90 aria-label=1.正向解析>1.正向解析</a><ul><li><a href=#1%e6%b7%bb%e5%8a%a0%e6%ad%a3%e5%90%91%e8%a7%a3%e6%9e%90%e5%a3%b0%e6%98%8e aria-label=1.添加正向解析声明>1.添加正向解析声明</a></li><li><a href=#2%e6%b7%bb%e5%8a%a0%e6%ad%a3%e5%90%91%e8%a7%a3%e6%9e%90%e5%86%85%e5%ae%b9 aria-label=2.添加正向解析内容>2.添加正向解析内容</a></li></ul></li><li><a href=#2%e5%8f%8d%e5%90%91%e8%a7%a3%e6%9e%90 aria-label=2.反向解析>2.反向解析</a><ul><li><a href=#1%e6%b7%bb%e5%8a%a0%e5%8f%8d%e5%90%91%e8%a7%a3%e6%9e%90%e7%9a%84%e5%a3%b0%e6%98%8e aria-label=1.添加反向解析的声明>1.添加反向解析的声明</a></li><li><a href=#2%e6%b7%bb%e5%8a%a0%e5%8f%8d%e5%90%91%e8%a7%a3%e6%9e%90%e7%9a%84%e5%86%85%e5%ae%b9 aria-label=2.添加反向解析的内容>2.添加反向解析的内容</a></li></ul></li><li><a href=#3%e8%af%ad%e6%b3%95%e6%a3%80%e6%b5%8b aria-label=3.语法检测>3.语法检测</a></li></ul></li><li><a href=#%e4%ba%94%e5%90%af%e5%8a%a8bind%e6%9c%8d%e5%8a%a1 aria-label=五.启动BIND服务>五.启动BIND服务</a></li><li><a href=#%e5%85%ad%e9%85%8d%e7%bd%ae%e9%98%b2%e5%a2%99 aria-label=六.配置防⽕墙>六.配置防⽕墙</a></li><li><a href=#%e4%b8%83%e5%ae%a2%e7%ab%af%e9%85%8d%e7%bd%ae%e6%93%8d%e4%bd%9cnode1 aria-label=七.客⼾端配置操作【node1】>七.客⼾端配置操作【node1】</a></li><li><a href=#%e5%85%ab%e6%b5%8b%e8%af%95%e6%9c%8d%e5%8a%a1%e5%99%a8%e6%98%af%e5%90%a6%e6%ad%a3%e5%b8%b8 aria-label=八.测试服务器是否正常>八.测试服务器是否正常</a></li><li><a href=#%e4%b9%9d%e5%a6%82%e4%bd%95%e6%b8%85%e7%a9%ba aria-label=九.如何清空>九.如何清空</a></li><li><a href=#%e5%8d%81%e6%80%bb%e7%bb%93 aria-label=十.总结>十.总结</a></li></ul></div></details><div class="post-content md-content"><h4 id=文章目录>文章目录<a hidden class=anchor aria-hidden=true href=#文章目录>#</a></h4><ul><li><p><a href=#DNS_3>一.DNS服务器软件介绍</a></p></li><li><p><a href=#1_DNS_7>1.. DNS的基本概念</a></p></li><li><p><a href=#2DNS_23>2.DNS结构</a></p></li><li><p><a href=#1_root_28>1.根域 .（root）</a></p></li><li><p><a href=#2DNSTLD_DNS_Servers_37>2.顶级域DNS服务器(TLD DNS Servers)</a></p></li><li><p><a href=#3DNSAuthoritative_DNS_Servers_59>3.权威DNS服务器（Authoritative DNS Servers）</a></p></li><li><p><a href=#3DNS_63>3.DNS服务器软件介绍</a></p></li><li><p><a href=#DNSBIND_121>二.在DNS服务器上安装BIND</a></p></li><li><p><a href=#BIND_137>三.配置BIND主配置⽂件</a></p></li><li><p><a href=#_147>四.配置内部区域注册⽂件</a></p></li><li><p><a href=#1_154>1.正向解析</a></p></li><li><p><a href=#1_156>1.添加正向解析声明</a></p></li><li><p><a href=#2_194>2.添加正向解析内容</a></p></li><li><p><a href=#2_267>2.反向解析</a></p></li><li><p><a href=#1_269>1.添加反向解析的声明</a></p></li><li><p><a href=#2_304>2.添加反向解析的内容</a></p></li><li><p><a href=#3_334>3.语法检测</a></p></li><li><p><a href=#BIND_362>五.启动BIND服务</a></p></li><li><p><a href=#_377>六.配置防⽕墙</a></p></li><li><p><a href=#node1_404>七.客⼾端配置操作【node1】</a></p></li><li><p><a href=#_452>八.测试服务器是否正常</a></p></li><li><p><a href=#_481>九.如何清空</a></p></li><li><p><a href=#_500>十.总结</a></p></li></ul><h2 id=一dns服务器软件介绍>一.DNS服务器软件介绍<a hidden class=anchor aria-hidden=true href=#一dns服务器软件介绍>#</a></h2><h3 id=1-dns的基本概念>1… DNS的基本概念<a hidden class=anchor aria-hidden=true href=#1-dns的基本概念>#</a></h3><pre tabindex=0><code>DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域
+一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。作⽤：• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到⽬标服务器。• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故障排查等⾮常重要。• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠性。• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务器的信息。例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```• 常⻅的顶级域及国家.com 商业机构.net ⽹络.org ⾮商业机构 www.centos.org www.kernel.org.edu 教育机构.gov 政府机关.cn 中国域名.us 美国域名.ai ⼈⼯智能.io 云计算.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "DNS服务器",
+      "item": "http://localhost:1313/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "DNS服务器",
+  "name": "DNS服务器",
+  "description": "文章目录 一.DNS服务器软件介绍\n1.. DNS的基本概念\n2.DNS结构\n1.根域 .（root）\n2.顶级域DNS服务器(TLD DNS Servers)\n3.权威DNS服务器（Authoritative DNS Servers）\n3.DNS服务器软件介绍\n二.在DNS服务器上安装BIND\n三.配置BIND主配置⽂件\n四.配置内部区域注册⽂件\n1.正向解析\n1.添加正向解析声明\n2.添加正向解析内容\n2.反向解析\n1.添加反向解析的声明\n2.添加反向解析的内容\n3.语法检测\n五.启动BIND服务\n六.配置防⽕墙\n七.客⼾端配置操作【node1】\n八.测试服务器是否正常\n九.如何清空\n十.总结\n一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域\r名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址\r不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。\r作⽤：\r• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到\r⽬标服务器。\r• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故\r障排查等⾮常重要。\r• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠\r性。\r• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不\r直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。\r根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9\r台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务\r器的信息。\r例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```\r• 常⻅的顶级域及国家\r.com 商业机构\r.net ⽹络\r.org ⾮商业机构 www.centos.org www.kernel.org\r.edu 教育机构\r.gov 政府机关\r.cn 中国域名\r.us 美国域名\r.ai ⼈⼯智能\r.io 云计算\r.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "文章目录 一.DNS服务器软件介绍\n1.. DNS的基本概念\n2.DNS结构\n1.根域 .（root）\n2.顶级域DNS服务器(TLD DNS Servers)\n3.权威DNS服务器（Authoritative DNS Servers）\n3.DNS服务器软件介绍\n二.在DNS服务器上安装BIND\n三.配置BIND主配置⽂件\n四.配置内部区域注册⽂件\n1.正向解析\n1.添加正向解析声明\n2.添加正向解析内容\n2.反向解析\n1.添加反向解析的声明\n2.添加反向解析的内容\n3.语法检测\n五.启动BIND服务\n六.配置防⽕墙\n七.客⼾端配置操作【node1】\n八.测试服务器是否正常\n九.如何清空\n十.总结\n一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域\r名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址\r不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。\r作⽤：\r• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到\r⽬标服务器。\r• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故\r障排查等⾮常重要。\r• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠\r性。\r• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不\r直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。\r根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9\r台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务\r器的信息。\r例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```\r• 常⻅的顶级域及国家\r.com 商业机构\r.net ⽹络\r.org ⾮商业机构 www.centos.org www.kernel.org\r.edu 教育机构\r.gov 政府机关\r.cn 中国域名\r.us 美国域名\r.ai ⼈⼯智能\r.io 云计算\r.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等\n3.权威DNS服务器（Authoritative DNS Servers） 权威DNS服务器存储了某个域名的确切信息（如 IP 地址）。当DNS查询请求到达这些服务器时，服务器会直接返回查询结果。它们对⾃⼰所管理的域名负责。除了这些类型的DNS服务器外，其实还有递归DNS服务器、缓存DNS服务器、前向DNS服务器等\n3.DNS服务器软件介绍 ⽬前市场上⽀持搭建DNS服务器的软件有很多，以下是⼏个常⽤的DNS服务器介绍：\r• 1- BIND（Berkeley Internet Name Domain）\rBIND 是最常⻅的 DNS 服务器软件之⼀，⼴泛应⽤于 Linux 和 Unix 系统。它功能强⼤，⽀\r持正向和反向解析，并且具有灵活的配置选项。\r优点：\r功能强⼤，⽀持主从 DNS 配置。\r配置灵活，⽀持多种⾼级功能，如 DNSSEC、访问控制等。\r社区活跃，⽀持⼴泛。\r缺点：\r配置较为复杂，初学者需要时间学习。\r• 2- Unbound\rUnbound 是⼀个轻量级的、开源的 DNS 解析器，主要⽤于递归查询，它的设计⽬标是提供快\r速、安全、灵活的 DNS 服务。相⽐ BIND，Unbound 更加简洁易⽤，适合⽤于简单的 DNS 解析服\r务。\r优点：\r配置简便，容易上⼿。\r安全性⾼，⽀持 DNSSEC 和 DoH（DNS over HTTPS）。\r性能优越，适合⾼负载环境。\r缺点：\r功能不如 BIND 强⼤，主要⽤于递归解析，⽽⾮权威 DNS 服务。\r3- dnsmasq\rdnsmasq 是⼀个轻量级的 DNS 和 DHCP 服务器，适⽤于⼩型⽹络或家庭环境。它可以提供\rDNS 缓存功能，并且⽀持 DHCP 服务。\r优点：\r配置简单，适合⼩型⽹络和家庭⽹络。\r⽀持 DHCP 服务，可以同时作为 DNS 和 DHCP 服务器。\r⽀持 DNS 缓存，加速访问速度。\r缺点：\r功能相对有限，适合⼩规模⽹络，不能处理⾼负载。\r4- PowerDNS\rPowerDNS 是⼀个⾼性能的 DNS 服务器，⽀持多种后端数据库，如 MySQL 和 PostgreSQL。\r它适⽤于需要⾼性能、⾼可⽤性的企业级应⽤。\r优点：\r⽀持多种后端数据库，便于管理⼤量 DNS 记录。\r⾼性能，适合⼤规模部署。\r缺点：\r配置较为复杂，适合有经验的⽤⼾。\r5- CoreDNS\rCoreDNS 是⼀个灵活、可扩展的 DNS 服务器，⼴泛⽤于 Kubernetes 环境中，也可以作为传\r统 DNS 服务器使⽤。它由 Go 语⾔编写，⽀持插件扩展。\r优点：\r可扩展，⽀持插件机制。\r轻量级，易于配置。\r⽀持现代云环境，特别适⽤于 Kubernetes 集群。\r缺点：\r主要⽤于云环境，配置⽅式与传统 DNS 服务有所不同。 本次我们主要采⽤BIND来完成建设DNS服务器的任务 服务器规划： • node1为访问的客⼾端 • node2为DNS服务器\n二.在DNS服务器上安装BIND node1和node2上面是均可以安装这个软件bind的说明： bind：提供 DNS 服务器功能，⽤于 解析域名（包括内部和外部域名），管理 DNS 区域和记录。 bind-utils：提供⼀些 DNS 查询⼯具，如 dig、nslookup、host，⽤于测试和调试 DNS 配置\n三.配置BIND主配置⽂件 我们使用vi /etc/named.conf这个命令来配置文件\n四.配置内部区域注册⽂件 假设⽬前有以下内部⽹站需要配置内部转发：\r1 internal.local 192.168.88.101 1.正向解析 1.添加正向解析声明 .我们修改配置文件，vi /etc/named.rfc1912.zones,在文件里面添加正向解析的声明 vi /etc/named.rfc1912.zones\r添加以下内容：\rzone \"internal.local\" IN {\rtype master;\rfile \"/var/named/internal.local.db\";\rallow-update { none; };\r};\r说明:\rzone \"internal.local\" IN {\r表示一个 DNS 区域的声明\rinternal.local 是此 DNS 区域的名称\rIN 指 Internet 类别，常用默认值\rtype master;\r指定此区域的类型为 主（master）区域\r主区域是该域名的权威数据源，DNS 数据直接从此服务器的配置文件加载\rfile \"/var/named/internal.local.db\";\r定义该区域的区域数据文件位置\r文件 internal.local.db 包含该区域的记录（如 A、MX、NS 等）\rallow-update { none; };\r指定此区域是否允许动态更新\rnone 意味着不允许任何动态更新，域名记录只能通过手动修改文件更新 2.添加正向解析内容 .我们需要打开之前在rfc1912.zones这里面声明的文件，然后在这个文件里面进行添加内容 vi /var/named/internal.local.db\r# 添加以下内容：\r$TTL 86400\r@ IN SOA ns1.internal.local. admin.internal.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.internal.local.\rns1 IN A 192.168.149.130\rweb1 IN A 192.168.149.128\rweb2 IN A 192.168.149.128\r@ IN A 192.168.149.128\r说明:\r$TTL 默认 TTL (Time To Live)。\r所有资源记录的默认缓存时间，单位为秒。\r这里设置为 86400（一天）。客户端在缓存数据时会遵循此值。\rSOA 记录（Start of Authority）\r@: 当前区域的根域（即 internal.local）。\rIN: 表示 Internet 类别。\rSOA: 开始授权记录，定义该区域的关键元信息。\rns1.internal.local. 主域名服务器的 FQDN（全限定域名）。\radmin.internal.local. 管理员的邮箱地址，@ 替换为 .（即 admin@internal.local）。\r2024011701 序列号，每次修改区域文件时需递增，用于从服务器检测更新。\r3600 刷新时间，从服务器多久检查主服务器是否有更新（秒）。\r1800 重试时间，从服务器在刷新失败后再次尝试的等待时间（秒）。\r1209600 过期时间，从服务器在无法联系主服务器时数据失效的时间（秒）。\r86400 最小 TTL，未覆盖的记录的默认缓存时间（秒）。\rNS 记录（Name Server）\r指定该区域的域名服务器地址。\rns1.internal.local.: 表示 internal.local 的主域名服务器。\rA 记录（Address）: 定义域名到 IPv4 地址的映射。\rns1.internal.local. 解析为 192.168.88.102\rweb1.internal.local. 和 web2.internal.local. 都解析为 192.168.88.101\r扩展常见的DNS记录类型:\rA 记录（Address Record）: 将域名映射到 IPv4 地址。\rAAAA 记录: 将域名映射到 IPv6 地址。\rCNAME 记录（Canonical Name Record）: 为域名提供别名。\rMX 记录（Mail Exchange Record）: 指定邮件服务器的地址。\rNS 记录（Name Server Record）: 指定域名的权威 DNS 服务器。\rSOA 记录（Start of Authority Record）: 定义 DNS 区域的起始权威信息。\rPTR 记录（Pointer Record）: 用于反向 DNS 查找，将 IP 地址映射回域名。\rTXT 记录（Text Record）: 存储任意文本数据，常用于 SPF、DKIM 等验证机制。 要是我们需要其他域名比如说是it_test.cn，那么的话，我们需要先把internal.local都改成it_test.cn，其次我们这个时候需要的子域名是heima以及boxuegu，那么我们需要将web1修改为heima，web2修改为boxuegu，其实就可以了，这个域名其实就添加成功了。\n2.反向解析 1.添加反向解析的声明 1.我们需要打开rfc1912.zones这个文件，并且在文件添加反向解析的声明 vi /etc/named.rfc1912.zones\r# 添加以下配置\rzone \"149.168.192.in-addr.arpa\" IN {\rtype master;\rfile \"/var/named/192.168.149.rev\";\rallow-update { none; };\r};\r说明:\rzone \"149.168.192.in-addr.arpa\" IN {\r这是一个 反向区域（reverse zone）的声明。\r反向区域用于将 IP 地址（IPv4）转换为域名，这和正向 DNS 查询（将域名转换为 IP 地址）是相反的。\r149.168.192.in-addr.arpa：这是 192.168.149.x IP 地址段的反向区域名称。反向查找区域的命名规则是：将 IP 地址的每个八位字节倒序并加上 .in-addr.arpa 后缀。例如，192.168.149.x 的反向区域名称就是 149.168.192.in-addr.arpa。\rtype master;\r指定该区域是 主（master）区域，也就是说，这是该区域的权威 DNS 服务器，并且数据会从本地文件加载\rfile \"192.168.149.rev\";\r这是该区域的区域数据文件路径。\r192.168.149.rev 文件包含了反向解析记录，用于将 IP 地址（如 192.168.149.101）映射到对应的域名\rallow-update { none; };\rallow-update 指定是否允许动态更新。在这里设置为 none，意味着不允许任何动态更新\r这是一种安全配置，防止未经授权的客户端修改 DNS 记录 2.添加反向解析的内容 vi /var/named/192.168.149.rev\r# 添加以下配置\r$TTL 86400\r@ IN SOA ns1.internal.local. admin.internal.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.internal.local.\r130 IN PTR ns1\r128 IN PTR web1\r128 IN PTR web2\r128 IN PTR @ 这个文件其实与正向的文件很相似，只不过的是这个文件刚好在后几行反过来了,it_test.cn，其实添加逻辑也是一样的,和正向文件差不多，把Internal.local修改,以及把web1,web2修改一下就可以了\n然后我们保存文件就可以了\n3.语法检测 我们需要采用named-checkconf /etc/named.conf这个命令来进行检测文件是否有错误\n# 配置文件语法检查\rnamed-checkconf /etc/named.conf\r如果报了错误， 一般都是由于配置文件丢失内容导致语法结构不对， 请检查配置文件\r/etc/named.conf 【大概率是该文件的问题】\r/etc/named.rfc1912.zones 我们再次进行区域文件的检查,查看正向与反向文件哪一个出错了呢\n# 区域文件语法检查\rnamed-checkzone internal.local /var/named/internal.local.db\rnamed-checkzone 149.168.192.in-addr.arpa /var/named/192.168.149.rev 五.启动BIND服务 systemctl start named -- 立即启动\rsystemctl enable named -- 开启自动启动\rsystemctl status named -- 查看状态 接下来，我们需要把这个dns的bind服务打开就可以了\n可以看到，这个服务我是成功的启动了的，没有报任何的错误，接下来，我们需要在服务器上面把这个服务的端口放行，那么其实node2上面的配置就解决了\n六.配置防⽕墙 firewall-cmd --zone=public --add-port=53/udp --permanent\rfirewall-cmd --zone=public --add-port=53/tcp --permanent\rfirewall-cmd --reload\r或者：\rfirewall-cmd --zone=public --add-service=dns --permanent\rfirewall-cmd --reload\r# 查看规则信息：\rfirewall-cmd --list-all 这上面的是配置防火墙的命令，我们通过截图查看一下是否成功了的 我们把防火墙放行，可以看到其实也是完美的运行，没有报出错误，接下来我们需要对node1进行配置，把node1的dns修改为node2的IP地址\n然后我们，再次查看已经放行的服务列表\n七.客⼾端配置操作【node1】 我们需要把node1的dns追加一条，内容是node2的IP地址\nvim /etc/NetworkManager/system-connections/ens33.nmconnection #打开配置文件，来进行相应的网络配置操作 [connection]\rid=ens33\ruuid=f63e95b4-2d94-316d-9f6e-bddab78c0f43\rtype=ethernet\rautoconnect-priority=-999\rinterface-name=ens33\rtimestamp=1785329942\r[ethernet]\r[ipv4]\raddress1=192.168.149.128/24\rdns=192.168.149.130;1.1.1.1;8.8.8.8;\rgateway=192.168.149.2\rmethod=manual\r[ipv6]\raddr-gen-mode=eui64\rmethod=auto\r[proxy] 我们显示一下网卡的信息，查看是否dns配置成功了\nnmcli device show ens160 八.测试服务器是否正常 使用 dig或nslookup 命令测试 DNS 查询，确保内部域名解析正常工作。例如： dig web1.internal.local 我们再使用命令ping一下看一下是否与设定的域名可以连通 **使用 dig 或 nslookup 命令测试 DNS 查询，确保外部域名解析正常工作。 ** 可以看到，域名解析服务是可以正常解析外部链接的\n九.如何清空 node2:\rdnf -y remove bind bind-utils\rdnf clean all\rrm -rf /etc/named*\rnode1:\r修改网卡的DNS服务器， 将其调整为 8.8.8.8;114.114.114; 我们通过这个命令把今天做的再删掉，多做几遍，同时删掉的话，可以更好的完成dns的作业\n十.总结 **本次学习任务，佳乐老师讲解了dns服务器的相关设定，从软件包的安装，文件的修改，端口放行。以及node1的相关设定。修改的文件本次在node2里面主要是有1个主配置文件，1个区域文件，区域文件要追加正向解析和反向解析，正向解析和反向解析都还要在你声明的时候指定的文件，来进行修改就可以了，我们在检测一下刚刚的配置文件是否出错，最后进行服务的启动以及端口的放行.\n然后我们在node1中我们需要修改他的网络，将他的dns新增一条记录，内容是node2的IP地址，我们再用dig检测是否node2的dns服务器可以正常运行,这个其实也是可以的，windows也是同理将dns修改为node2的IP地址。需要注意我这里修改的是vmnet1网卡，最后Windows也是成功ping通了。\n",
+  "wordCount" : "754",
+  "inLanguage": "zh-cn",
+  "datePublished": "2026-08-18T00:00:00Z",
+  "dateModified": "2026-08-18T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "dsduyopg"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于">
+                    <span>关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">主页</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/posts/">Posts</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      DNS服务器
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>754 字</span>&nbsp;·&nbsp;<span>dsduyopg</span>
+
+</div>
+  </header> <details class="toc" >
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">目录</span>
+    </summary>
+
+    <div class="inner"><ul><ul><ul>
+            <li>
+                <a href="#%e6%96%87%e7%ab%a0%e7%9b%ae%e5%bd%95" aria-label="文章目录">文章目录</a></li></ul>
+                </ul>
+                
+            <li>
+                <a href="#%e4%b8%80dns%e6%9c%8d%e5%8a%a1%e5%99%a8%e8%bd%af%e4%bb%b6%e4%bb%8b%e7%bb%8d" aria-label="一.DNS服务器软件介绍">一.DNS服务器软件介绍</a><ul>
+                    
+            <li>
+                <a href="#1-dns%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5" aria-label="1… DNS的基本概念">1… DNS的基本概念</a></li>
+            <li>
+                <a href="#2dns%e7%bb%93%e6%9e%84" aria-label="2.DNS结构">2.DNS结构</a><ul>
+                    
+            <li>
+                <a href="#1%e6%a0%b9%e5%9f%9f-root" aria-label="1.根域 .（root）">1.根域 .（root）</a></li>
+            <li>
+                <a href="#2%e9%a1%b6%e7%ba%a7%e5%9f%9fdns%e6%9c%8d%e5%8a%a1%e5%99%a8tld-dns-servers" aria-label="2.顶级域DNS服务器(TLD DNS Servers)">2.顶级域DNS服务器(TLD DNS Servers)</a></li>
+            <li>
+                <a href="#3%e6%9d%83%e5%a8%81dns%e6%9c%8d%e5%8a%a1%e5%99%a8authoritative-dns-servers" aria-label="3.权威DNS服务器（Authoritative DNS Servers）">3.权威DNS服务器（Authoritative DNS Servers）</a></li></ul>
+            </li>
+            <li>
+                <a href="#3dns%e6%9c%8d%e5%8a%a1%e5%99%a8%e8%bd%af%e4%bb%b6%e4%bb%8b%e7%bb%8d" aria-label="3.DNS服务器软件介绍">3.DNS服务器软件介绍</a></li></ul>
+            </li>
+            <li>
+                <a href="#%e4%ba%8c%e5%9c%a8dns%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%b8%8a%e5%ae%89%e8%a3%85bind" aria-label="二.在DNS服务器上安装BIND">二.在DNS服务器上安装BIND</a></li>
+            <li>
+                <a href="#%e4%b8%89%e9%85%8d%e7%bd%aebind%e4%b8%bb%e9%85%8d%e7%bd%ae%e4%bb%b6" aria-label="三.配置BIND主配置⽂件">三.配置BIND主配置⽂件</a></li>
+            <li>
+                <a href="#%e5%9b%9b%e9%85%8d%e7%bd%ae%e5%86%85%e9%83%a8%e5%8c%ba%e5%9f%9f%e6%b3%a8%e5%86%8c%e4%bb%b6" aria-label="四.配置内部区域注册⽂件">四.配置内部区域注册⽂件</a><ul>
+                    
+            <li>
+                <a href="#1%e6%ad%a3%e5%90%91%e8%a7%a3%e6%9e%90" aria-label="1.正向解析">1.正向解析</a><ul>
+                    
+            <li>
+                <a href="#1%e6%b7%bb%e5%8a%a0%e6%ad%a3%e5%90%91%e8%a7%a3%e6%9e%90%e5%a3%b0%e6%98%8e" aria-label="1.添加正向解析声明">1.添加正向解析声明</a></li>
+            <li>
+                <a href="#2%e6%b7%bb%e5%8a%a0%e6%ad%a3%e5%90%91%e8%a7%a3%e6%9e%90%e5%86%85%e5%ae%b9" aria-label="2.添加正向解析内容">2.添加正向解析内容</a></li></ul>
+            </li>
+            <li>
+                <a href="#2%e5%8f%8d%e5%90%91%e8%a7%a3%e6%9e%90" aria-label="2.反向解析">2.反向解析</a><ul>
+                    
+            <li>
+                <a href="#1%e6%b7%bb%e5%8a%a0%e5%8f%8d%e5%90%91%e8%a7%a3%e6%9e%90%e7%9a%84%e5%a3%b0%e6%98%8e" aria-label="1.添加反向解析的声明">1.添加反向解析的声明</a></li>
+            <li>
+                <a href="#2%e6%b7%bb%e5%8a%a0%e5%8f%8d%e5%90%91%e8%a7%a3%e6%9e%90%e7%9a%84%e5%86%85%e5%ae%b9" aria-label="2.添加反向解析的内容">2.添加反向解析的内容</a></li></ul>
+            </li>
+            <li>
+                <a href="#3%e8%af%ad%e6%b3%95%e6%a3%80%e6%b5%8b" aria-label="3.语法检测">3.语法检测</a></li></ul>
+            </li>
+            <li>
+                <a href="#%e4%ba%94%e5%90%af%e5%8a%a8bind%e6%9c%8d%e5%8a%a1" aria-label="五.启动BIND服务">五.启动BIND服务</a></li>
+            <li>
+                <a href="#%e5%85%ad%e9%85%8d%e7%bd%ae%e9%98%b2%e5%a2%99" aria-label="六.配置防⽕墙">六.配置防⽕墙</a></li>
+            <li>
+                <a href="#%e4%b8%83%e5%ae%a2%e7%ab%af%e9%85%8d%e7%bd%ae%e6%93%8d%e4%bd%9cnode1" aria-label="七.客⼾端配置操作【node1】">七.客⼾端配置操作【node1】</a></li>
+            <li>
+                <a href="#%e5%85%ab%e6%b5%8b%e8%af%95%e6%9c%8d%e5%8a%a1%e5%99%a8%e6%98%af%e5%90%a6%e6%ad%a3%e5%b8%b8" aria-label="八.测试服务器是否正常">八.测试服务器是否正常</a></li>
+            <li>
+                <a href="#%e4%b9%9d%e5%a6%82%e4%bd%95%e6%b8%85%e7%a9%ba" aria-label="九.如何清空">九.如何清空</a></li>
+            <li>
+                <a href="#%e5%8d%81%e6%80%bb%e7%bb%93" aria-label="十.总结">十.总结</a>
+            </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><h4 id="文章目录">文章目录<a hidden class="anchor" aria-hidden="true" href="#文章目录">#</a></h4>
+<ul>
+<li>
+<p><a href="#DNS_3">一.DNS服务器软件介绍</a></p>
+</li>
+<li>
+<p><a href="#1_DNS_7">1.. DNS的基本概念</a></p>
+</li>
+<li>
+<p><a href="#2DNS_23">2.DNS结构</a></p>
+</li>
+<li>
+<p><a href="#1_root_28">1.根域 .（root）</a></p>
+</li>
+<li>
+<p><a href="#2DNSTLD_DNS_Servers_37">2.顶级域DNS服务器(TLD DNS Servers)</a></p>
+</li>
+<li>
+<p><a href="#3DNSAuthoritative_DNS_Servers_59">3.权威DNS服务器（Authoritative DNS Servers）</a></p>
+</li>
+<li>
+<p><a href="#3DNS_63">3.DNS服务器软件介绍</a></p>
+</li>
+<li>
+<p><a href="#DNSBIND_121">二.在DNS服务器上安装BIND</a></p>
+</li>
+<li>
+<p><a href="#BIND_137">三.配置BIND主配置⽂件</a></p>
+</li>
+<li>
+<p><a href="#_147">四.配置内部区域注册⽂件</a></p>
+</li>
+<li>
+<p><a href="#1_154">1.正向解析</a></p>
+</li>
+<li>
+<p><a href="#1_156">1.添加正向解析声明</a></p>
+</li>
+<li>
+<p><a href="#2_194">2.添加正向解析内容</a></p>
+</li>
+<li>
+<p><a href="#2_267">2.反向解析</a></p>
+</li>
+<li>
+<p><a href="#1_269">1.添加反向解析的声明</a></p>
+</li>
+<li>
+<p><a href="#2_304">2.添加反向解析的内容</a></p>
+</li>
+<li>
+<p><a href="#3_334">3.语法检测</a></p>
+</li>
+<li>
+<p><a href="#BIND_362">五.启动BIND服务</a></p>
+</li>
+<li>
+<p><a href="#_377">六.配置防⽕墙</a></p>
+</li>
+<li>
+<p><a href="#node1_404">七.客⼾端配置操作【node1】</a></p>
+</li>
+<li>
+<p><a href="#_452">八.测试服务器是否正常</a></p>
+</li>
+<li>
+<p><a href="#_481">九.如何清空</a></p>
+</li>
+<li>
+<p><a href="#_500">十.总结</a></p>
+</li>
+</ul>
+<h2 id="一dns服务器软件介绍">一.DNS服务器软件介绍<a hidden class="anchor" aria-hidden="true" href="#一dns服务器软件介绍">#</a></h2>
+<h3 id="1-dns的基本概念">1… DNS的基本概念<a hidden class="anchor" aria-hidden="true" href="#1-dns的基本概念">#</a></h3>
+<pre tabindex="0"><code>DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域
 名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址
 不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。
 作⽤：
@@ -167,11 +518,15 @@ DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它�
 • 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠
 性。
 • 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。
-</code></pre><h3 id=2dns结构>2.DNS结构<a hidden class=anchor aria-hidden=true href=#2dns结构>#</a></h3><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/172e794e0a404cd78fab9914d1449c84.png></p><h4 id=1根域-root>1.根域 .（root）<a hidden class=anchor aria-hidden=true href=#1根域-root>#</a></h4><pre tabindex=0><code>在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不
+</code></pre><h3 id="2dns结构">2.DNS结构<a hidden class="anchor" aria-hidden="true" href="#2dns结构">#</a></h3>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/172e794e0a404cd78fab9914d1449c84.png"></p>
+<h4 id="1根域-root">1.根域 .（root）<a hidden class="anchor" aria-hidden="true" href="#1根域-root">#</a></h4>
+<pre tabindex="0"><code>在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不
 直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。
 根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9
 台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。）
-</code></pre><h4 id=2顶级域dns服务器tld-dns-servers>2.顶级域DNS服务器(TLD DNS Servers)<a hidden class=anchor aria-hidden=true href=#2顶级域dns服务器tld-dns-servers>#</a></h4><pre tabindex=0><code>顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务
+</code></pre><h4 id="2顶级域dns服务器tld-dns-servers">2.顶级域DNS服务器(TLD DNS Servers)<a hidden class="anchor" aria-hidden="true" href="#2顶级域dns服务器tld-dns-servers">#</a></h4>
+<pre tabindex="0"><code>顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务
 器的信息。
 例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```
 • 常⻅的顶级域及国家
@@ -185,7 +540,11 @@ DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它�
 .ai ⼈⼯智能
 .io 云计算
 .mil 军事机构
-</code></pre><p><code>除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等</code></p><h4 id=3权威dns服务器authoritative-dns-servers>3.权威DNS服务器（Authoritative DNS Servers）<a hidden class=anchor aria-hidden=true href=#3权威dns服务器authoritative-dns-servers>#</a></h4><p><code>权威DNS服务器存储了某个域名的确切信息（如 IP 地址）。当DNS查询请求到达这些服务器时，服务器会直接返回查询结果。它们对⾃⼰所管理的域名负责。除了这些类型的DNS服务器外，其实还有递归DNS服务器、缓存DNS服务器、前向DNS服务器等</code></p><h3 id=3dns服务器软件介绍>3.DNS服务器软件介绍<a hidden class=anchor aria-hidden=true href=#3dns服务器软件介绍>#</a></h3><pre tabindex=0><code>⽬前市场上⽀持搭建DNS服务器的软件有很多，以下是⼏个常⽤的DNS服务器介绍：
+</code></pre><p><code>除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等</code></p>
+<h4 id="3权威dns服务器authoritative-dns-servers">3.权威DNS服务器（Authoritative DNS Servers）<a hidden class="anchor" aria-hidden="true" href="#3权威dns服务器authoritative-dns-servers">#</a></h4>
+<p><code>权威DNS服务器存储了某个域名的确切信息（如 IP 地址）。当DNS查询请求到达这些服务器时，服务器会直接返回查询结果。它们对⾃⼰所管理的域名负责。除了这些类型的DNS服务器外，其实还有递归DNS服务器、缓存DNS服务器、前向DNS服务器等</code></p>
+<h3 id="3dns服务器软件介绍">3.DNS服务器软件介绍<a hidden class="anchor" aria-hidden="true" href="#3dns服务器软件介绍">#</a></h3>
+<pre tabindex="0"><code>⽬前市场上⽀持搭建DNS服务器的软件有很多，以下是⼏个常⽤的DNS服务器介绍：
 • 1- BIND（Berkeley Internet Name Domain）
 BIND 是最常⻅的 DNS 服务器软件之⼀，⼴泛应⽤于 Linux 和 Unix 系统。它功能强⼤，⽀
 持正向和反向解析，并且具有灵活的配置选项。
@@ -234,9 +593,24 @@ CoreDNS 是⼀个灵活、可扩展的 DNS 服务器，⼴泛⽤于 Kubernetes �
 </code></pre><p>本次我们主要采⽤BIND来完成建设DNS服务器的任务
 服务器规划：
 • node1为访问的客⼾端
-• node2为DNS服务器</p><h2 id=二在dns服务器上安装bind>二.在DNS服务器上安装BIND<a hidden class=anchor aria-hidden=true href=#二在dns服务器上安装bind>#</a></h2><p><code>node1和node2上面是均可以安装这个软件bind的说明： bind：提供 DNS 服务器功能，⽤于 解析域名（包括内部和外部域名），管理 DNS 区域和记录。 bind-utils：提供⼀些 DNS 查询⼯具，如 dig、nslookup、host，⽤于测试和调试 DNS 配置</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/595f902e3ffd4c5eaed6d06fd167fe42.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/3e11f160c29c4395a2ea54eef70dd939.png></p><h2 id=三配置bind主配置件>三.配置BIND主配置⽂件<a hidden class=anchor aria-hidden=true href=#三配置bind主配置件>#</a></h2><p><code>我们使用vi /etc/named.conf这个命令来配置文件</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/3e93315e891d40e88f60907cd9719901.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/1e643d9652574e9f8d2f40be5034955c.png></p><h2 id=四配置内部区域注册件>四.配置内部区域注册⽂件<a hidden class=anchor aria-hidden=true href=#四配置内部区域注册件>#</a></h2><pre tabindex=0><code>假设⽬前有以下内部⽹站需要配置内部转发：
+• node2为DNS服务器</p>
+<h2 id="二在dns服务器上安装bind">二.在DNS服务器上安装BIND<a hidden class="anchor" aria-hidden="true" href="#二在dns服务器上安装bind">#</a></h2>
+<p><code>node1和node2上面是均可以安装这个软件bind的说明： bind：提供 DNS 服务器功能，⽤于 解析域名（包括内部和外部域名），管理 DNS 区域和记录。 bind-utils：提供⼀些 DNS 查询⼯具，如 dig、nslookup、host，⽤于测试和调试 DNS 配置</code></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/595f902e3ffd4c5eaed6d06fd167fe42.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/3e11f160c29c4395a2ea54eef70dd939.png"></p>
+<h2 id="三配置bind主配置件">三.配置BIND主配置⽂件<a hidden class="anchor" aria-hidden="true" href="#三配置bind主配置件">#</a></h2>
+<p><code>我们使用vi /etc/named.conf这个命令来配置文件</code></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/3e93315e891d40e88f60907cd9719901.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/1e643d9652574e9f8d2f40be5034955c.png"></p>
+<h2 id="四配置内部区域注册件">四.配置内部区域注册⽂件<a hidden class="anchor" aria-hidden="true" href="#四配置内部区域注册件">#</a></h2>
+<pre tabindex="0"><code>假设⽬前有以下内部⽹站需要配置内部转发：
 1 internal.local 192.168.88.101
-</code></pre><h3 id=1正向解析>1.正向解析<a hidden class=anchor aria-hidden=true href=#1正向解析>#</a></h3><h4 id=1添加正向解析声明>1.添加正向解析声明<a hidden class=anchor aria-hidden=true href=#1添加正向解析声明>#</a></h4><ul><li>.<code>我们修改配置文件，vi /etc/named.rfc1912.zones,在文件里面添加正向解析的声明</code></li></ul><pre tabindex=0><code>vi /etc/named.rfc1912.zones
+</code></pre><h3 id="1正向解析">1.正向解析<a hidden class="anchor" aria-hidden="true" href="#1正向解析">#</a></h3>
+<h4 id="1添加正向解析声明">1.添加正向解析声明<a hidden class="anchor" aria-hidden="true" href="#1添加正向解析声明">#</a></h4>
+<ul>
+<li>.<code>我们修改配置文件，vi /etc/named.rfc1912.zones,在文件里面添加正向解析的声明</code></li>
+</ul>
+<pre tabindex="0"><code>vi /etc/named.rfc1912.zones
 
 添加以下内容：
 
@@ -264,7 +638,12 @@ file &#34;/var/named/internal.local.db&#34;;
 allow-update { none; };
     指定此区域是否允许动态更新
     none 意味着不允许任何动态更新，域名记录只能通过手动修改文件更新
-</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/21b800d457fb45fdae1201d29af5fe51.png></p><h4 id=2添加正向解析内容>2.添加正向解析内容<a hidden class=anchor aria-hidden=true href=#2添加正向解析内容>#</a></h4><ul><li>.<code>我们需要打开之前在rfc1912.zones这里面声明的文件，然后在这个文件里面进行添加内容</code></li></ul><pre tabindex=0><code>vi /var/named/internal.local.db
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/21b800d457fb45fdae1201d29af5fe51.png"></p>
+<h4 id="2添加正向解析内容">2.添加正向解析内容<a hidden class="anchor" aria-hidden="true" href="#2添加正向解析内容">#</a></h4>
+<ul>
+<li>.<code>我们需要打开之前在rfc1912.zones这里面声明的文件，然后在这个文件里面进行添加内容</code></li>
+</ul>
+<pre tabindex="0"><code>vi /var/named/internal.local.db
 
 # 添加以下内容：
 
@@ -318,7 +697,15 @@ NS 记录（Name Server Record）: 指定域名的权威 DNS 服务器。
 SOA 记录（Start of Authority Record）: 定义 DNS 区域的起始权威信息。
 PTR 记录（Pointer Record）: 用于反向 DNS 查找，将 IP 地址映射回域名。
 TXT 记录（Text Record）: 存储任意文本数据，常用于 SPF、DKIM 等验证机制。
-</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/bf0b4babb53e47768321f52e93f996c7.png></p><p><code>要是我们需要其他域名比如说是it_test.cn，那么的话，我们需要先把internal.local都改成it_test.cn，其次我们这个时候需要的子域名是heima以及boxuegu，那么我们需要将web1修改为heima，web2修改为boxuegu，其实就可以了，这个域名其实就添加成功了。</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/989505ec6ede49f49d574daaf7cd0328.png></p><h3 id=2反向解析>2.反向解析<a hidden class=anchor aria-hidden=true href=#2反向解析>#</a></h3><h4 id=1添加反向解析的声明>1.添加反向解析的声明<a hidden class=anchor aria-hidden=true href=#1添加反向解析的声明>#</a></h4><ul><li>1.<code>我们需要打开rfc1912.zones这个文件，并且在文件添加反向解析的声明</code></li></ul><pre tabindex=0><code>vi /etc/named.rfc1912.zones
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/bf0b4babb53e47768321f52e93f996c7.png"></p>
+<p><code>要是我们需要其他域名比如说是it_test.cn，那么的话，我们需要先把internal.local都改成it_test.cn，其次我们这个时候需要的子域名是heima以及boxuegu，那么我们需要将web1修改为heima，web2修改为boxuegu，其实就可以了，这个域名其实就添加成功了。</code></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/989505ec6ede49f49d574daaf7cd0328.png"></p>
+<h3 id="2反向解析">2.反向解析<a hidden class="anchor" aria-hidden="true" href="#2反向解析">#</a></h3>
+<h4 id="1添加反向解析的声明">1.添加反向解析的声明<a hidden class="anchor" aria-hidden="true" href="#1添加反向解析的声明">#</a></h4>
+<ul>
+<li>1.<code>我们需要打开rfc1912.zones这个文件，并且在文件添加反向解析的声明</code></li>
+</ul>
+<pre tabindex="0"><code>vi /etc/named.rfc1912.zones
 
 # 添加以下配置
 zone &#34;149.168.192.in-addr.arpa&#34; IN {
@@ -343,7 +730,9 @@ file &#34;192.168.149.rev&#34;;
 allow-update { none; };
 allow-update 指定是否允许动态更新。在这里设置为 none，意味着不允许任何动态更新
 这是一种安全配置，防止未经授权的客户端修改 DNS 记录
-</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/354e10bdcbdf4f31be28920892e7bc28.png></p><h4 id=2添加反向解析的内容>2.添加反向解析的内容<a hidden class=anchor aria-hidden=true href=#2添加反向解析的内容>#</a></h4><pre tabindex=0><code>vi /var/named/192.168.149.rev
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/354e10bdcbdf4f31be28920892e7bc28.png"></p>
+<h4 id="2添加反向解析的内容">2.添加反向解析的内容<a hidden class="anchor" aria-hidden="true" href="#2添加反向解析的内容">#</a></h4>
+<pre tabindex="0"><code>vi /var/named/192.168.149.rev
 
 # 添加以下配置
 $TTL 86400
@@ -359,20 +748,33 @@ $TTL 86400
 128    IN    PTR   web1
 128    IN    PTR   web2
 128    IN    PTR   @
-</code></pre><p><code>这个文件其实与正向的文件很相似，只不过的是这个文件刚好在后几行反过来了,it_test.cn，其实添加逻辑也是一样的,和正向文件差不多，把Internal.local修改,以及把web1,web2修改一下就可以了</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4f6f75bc176342e3800d4af09b959d4b.png></p><p><code>然后我们保存文件就可以了</code></p><h3 id=3语法检测>3.语法检测<a hidden class=anchor aria-hidden=true href=#3语法检测>#</a></h3><p><code>我们需要采用named-checkconf /etc/named.conf这个命令来进行检测文件是否有错误</code></p><pre tabindex=0><code># 配置文件语法检查
+</code></pre><p><code>这个文件其实与正向的文件很相似，只不过的是这个文件刚好在后几行反过来了,it_test.cn，其实添加逻辑也是一样的,和正向文件差不多，把Internal.local修改,以及把web1,web2修改一下就可以了</code></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4f6f75bc176342e3800d4af09b959d4b.png"></p>
+<p><code>然后我们保存文件就可以了</code></p>
+<h3 id="3语法检测">3.语法检测<a hidden class="anchor" aria-hidden="true" href="#3语法检测">#</a></h3>
+<p><code>我们需要采用named-checkconf /etc/named.conf这个命令来进行检测文件是否有错误</code></p>
+<pre tabindex="0"><code># 配置文件语法检查
 named-checkconf /etc/named.conf
 
 
 如果报了错误， 一般都是由于配置文件丢失内容导致语法结构不对， 请检查配置文件
 /etc/named.conf  【大概率是该文件的问题】
 /etc/named.rfc1912.zones
-</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/0adf22ccf94f4158a6cb7048152e13dc.png></p><p><code>我们再次进行区域文件的检查,查看正向与反向文件哪一个出错了呢</code></p><pre tabindex=0><code># 区域文件语法检查
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/0adf22ccf94f4158a6cb7048152e13dc.png"></p>
+<p><code>我们再次进行区域文件的检查,查看正向与反向文件哪一个出错了呢</code></p>
+<pre tabindex="0"><code># 区域文件语法检查
 named-checkzone internal.local /var/named/internal.local.db
 named-checkzone 149.168.192.in-addr.arpa /var/named/192.168.149.rev
-</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/951210cb7f484b8db75949f75ef40048.png></p><h2 id=五启动bind服务>五.启动BIND服务<a hidden class=anchor aria-hidden=true href=#五启动bind服务>#</a></h2><pre tabindex=0><code>systemctl start named  -- 立即启动
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/951210cb7f484b8db75949f75ef40048.png"></p>
+<h2 id="五启动bind服务">五.启动BIND服务<a hidden class="anchor" aria-hidden="true" href="#五启动bind服务">#</a></h2>
+<pre tabindex="0"><code>systemctl start named  -- 立即启动
 systemctl enable named  -- 开启自动启动
 systemctl status named  -- 查看状态
-</code></pre><p><code>接下来，我们需要把这个dns的bind服务打开就可以了</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/5b22d03dc48a4199861aedc5854a7287.png></p><p><code>可以看到，这个服务我是成功的启动了的，没有报任何的错误，接下来，我们需要在服务器上面把这个服务的端口放行，那么其实node2上面的配置就解决了</code></p><h2 id=六配置防墙>六.配置防⽕墙<a hidden class=anchor aria-hidden=true href=#六配置防墙>#</a></h2><pre tabindex=0><code>firewall-cmd --zone=public --add-port=53/udp --permanent
+</code></pre><p><code>接下来，我们需要把这个dns的bind服务打开就可以了</code></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/5b22d03dc48a4199861aedc5854a7287.png"></p>
+<p><code>可以看到，这个服务我是成功的启动了的，没有报任何的错误，接下来，我们需要在服务器上面把这个服务的端口放行，那么其实node2上面的配置就解决了</code></p>
+<h2 id="六配置防墙">六.配置防⽕墙<a hidden class="anchor" aria-hidden="true" href="#六配置防墙">#</a></h2>
+<pre tabindex="0"><code>firewall-cmd --zone=public --add-port=53/udp --permanent
 firewall-cmd --zone=public --add-port=53/tcp --permanent
 firewall-cmd --reload
 
@@ -384,8 +786,14 @@ firewall-cmd --reload
 # 查看规则信息：
 firewall-cmd --list-all
 </code></pre><p><code>这上面的是配置防火墙的命令，我们通过截图查看一下是否成功了的</code>
-<img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/36a00f6aa43a49cf8ac2350811aff46e.png></p><p><code>我们把防火墙放行，可以看到其实也是完美的运行，没有报出错误，接下来我们需要对node1进行配置，把node1的dns修改为node2的IP地址</code></p><p><code>然后我们，再次查看已经放行的服务列表</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4ee55ba4a9ef4b67aecf05f10d30e68d.png></p><h2 id=七客端配置操作node1>七.客⼾端配置操作【node1】<a hidden class=anchor aria-hidden=true href=#七客端配置操作node1>#</a></h2><p><code>我们需要把node1的dns追加一条，内容是node2的IP地址</code></p><pre tabindex=0><code>vim /etc/NetworkManager/system-connections/ens33.nmconnection #打开配置文件，来进行相应的网络配置操作
-</code></pre><pre tabindex=0><code>[connection]
+<img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/36a00f6aa43a49cf8ac2350811aff46e.png"></p>
+<p><code>我们把防火墙放行，可以看到其实也是完美的运行，没有报出错误，接下来我们需要对node1进行配置，把node1的dns修改为node2的IP地址</code></p>
+<p><code>然后我们，再次查看已经放行的服务列表</code></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4ee55ba4a9ef4b67aecf05f10d30e68d.png"></p>
+<h2 id="七客端配置操作node1">七.客⼾端配置操作【node1】<a hidden class="anchor" aria-hidden="true" href="#七客端配置操作node1">#</a></h2>
+<p><code>我们需要把node1的dns追加一条，内容是node2的IP地址</code></p>
+<pre tabindex="0"><code>vim /etc/NetworkManager/system-connections/ens33.nmconnection #打开配置文件，来进行相应的网络配置操作
+</code></pre><pre tabindex="0"><code>[connection]
 id=ens33
 uuid=f63e95b4-2d94-316d-9f6e-bddab78c0f43
 type=ethernet
@@ -406,9 +814,27 @@ addr-gen-mode=eui64
 method=auto
 
 [proxy]
-</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/b0b6ae46e6eb418ba1324f2eb3eeb07f.png></p><p><code>我们显示一下网卡的信息，查看是否dns配置成功了</code></p><pre tabindex=0><code> nmcli device show ens160
-</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c27bc485c72e4dbdacd39ebc4697a918.png></p><h2 id=八测试服务器是否正常>八.测试服务器是否正常<a hidden class=anchor aria-hidden=true href=#八测试服务器是否正常>#</a></h2><ul><li><code>使用 </code>dig<code>或</code>nslookup<code> 命令测试 DNS 查询，确保内部域名解析正常工作。例如：</code></li></ul><pre tabindex=0><code>dig web1.internal.local
-</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/0467565a136d4633ba34f8430c5bcd82.png></p><ul><li><strong>我们再使用命令ping一下看一下是否与设定的域名可以连通</strong></li></ul><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/7222cc3729c14474ba92098e9090a740.png></p><ul><li>**使用 <code>dig</code> 或 <code>nslookup</code> 命令测试 DNS 查询，确保外部域名解析正常工作。 **</li></ul><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/717d08cf22e642cea2bea4b31e42abc1.png></p><p><code>可以看到，域名解析服务是可以正常解析外部链接的</code></p><h2 id=九如何清空>九.如何清空<a hidden class=anchor aria-hidden=true href=#九如何清空>#</a></h2><pre tabindex=0><code>node2:
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/b0b6ae46e6eb418ba1324f2eb3eeb07f.png"></p>
+<p><code>我们显示一下网卡的信息，查看是否dns配置成功了</code></p>
+<pre tabindex="0"><code> nmcli device show ens160
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c27bc485c72e4dbdacd39ebc4697a918.png"></p>
+<h2 id="八测试服务器是否正常">八.测试服务器是否正常<a hidden class="anchor" aria-hidden="true" href="#八测试服务器是否正常">#</a></h2>
+<ul>
+<li><code>使用 </code>dig<code>或</code>nslookup<code> 命令测试 DNS 查询，确保内部域名解析正常工作。例如：</code></li>
+</ul>
+<pre tabindex="0"><code>dig web1.internal.local
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/0467565a136d4633ba34f8430c5bcd82.png"></p>
+<ul>
+<li><strong>我们再使用命令ping一下看一下是否与设定的域名可以连通</strong></li>
+</ul>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/7222cc3729c14474ba92098e9090a740.png"></p>
+<ul>
+<li>**使用 <code>dig</code> 或 <code>nslookup</code> 命令测试 DNS 查询，确保外部域名解析正常工作。 **</li>
+</ul>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/717d08cf22e642cea2bea4b31e42abc1.png"></p>
+<p><code>可以看到，域名解析服务是可以正常解析外部链接的</code></p>
+<h2 id="九如何清空">九.如何清空<a hidden class="anchor" aria-hidden="true" href="#九如何清空">#</a></h2>
+<pre tabindex="0"><code>node2:
     dnf -y remove bind bind-utils
     dnf clean all
 
@@ -416,13 +842,158 @@ method=auto
 
 node1:
     修改网卡的DNS服务器， 将其调整为 8.8.8.8;114.114.114;
-</code></pre><p><code>我们通过这个命令把今天做的再删掉，多做几遍，同时删掉的话，可以更好的完成dns的作业</code></p><h2 id=十总结>十.总结<a hidden class=anchor aria-hidden=true href=#十总结>#</a></h2><p>**本次学习任务，佳乐老师讲解了dns服务器的相关设定，从软件包的安装，文件的修改，端口放行。以及node1的相关设定。修改的文件本次在node2里面主要是有1个主配置文件，1个区域文件，区域文件要追加正向解析和反向解析，正向解析和反向解析都还要在你声明的时候指定的文件，来进行修改就可以了，我们在检测一下刚刚的配置文件是否出错，最后进行服务的启动以及端口的放行.</p><p>然后我们在node1中我们需要修改他的网络，将他的dns新增一条记录，内容是node2的IP地址，我们再用dig检测是否node2的dns服务器可以正常运行,这个其实也是可以的，windows也是同理将dns修改为node2的IP地址。需要注意我这里修改的是vmnet1网卡，最后Windows也是成功ping通了。</p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/d6d26698b8774f3d95756d5b2e7860f2.png></p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/><span class=title>« 上一页</span>
-<span>C语言指针篇第一</span>
-</a><a class=next href=https://dsduyopg.github.io/posts/ftp%E6%9C%8D%E5%8A%A1/><span class=title>下一页 »</span>
-<span>FTP服务</span></a></nav></footer><div class=comments><h2>评论</h2><div class=like-box><button class=like-btn type=button data-like-path=/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/>
-<span class=like-heart>♡</span>
-<span class=like-count>0</span></button></div><script src=https://utteranc.es/client.js repo=dsduyopg/dsduyopg.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script><noscript>请启用 JavaScript 查看评论。</noscript></div><script>(function(){var t,n,s,o,i,e=document.querySelector(".like-btn");if(!e)return;s="like:"+e.getAttribute("data-like-path"),n=parseInt(localStorage.getItem(s)||"0",10),t=n>0,o=e.querySelector(".like-heart"),i=e.querySelector(".like-count");function a(){i.textContent=n,o.textContent=t?"♥":"♡",e.classList.toggle("liked",t)}e.addEventListener("click",function(){t=!t,n=t?1:0,localStorage.setItem(s,String(n)),a()}),a()})()</script></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
-<span>Powered by
-<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
-访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>(function(){var e,t,n,s,a,r,o="blog_views",i="blog_titles",l=document.querySelector(".post-entry")&&!document.querySelector(".hero-banner"),c=document.getElementById("hot-posts");if(l){if(n=location.pathname,a=(document.title||"").replace(/\s*\|.*$/,"").trim(),!n||!a)return;e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),e[n]=(e[n]||0)+1,t[n]=a,localStorage.setItem(o,JSON.stringify(e)),localStorage.setItem(i,JSON.stringify(t));return}if(!c)return;if(e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),r=Object.keys(e).filter(function(e){return t[e]}).sort(function(t,n){return e[n]-e[t]}).slice(0,5),!r.length)return;s='<h3>热门文章</h3><ol class="hot-list">',r.forEach(function(e){s+='<li><a href="'+e+'">'+t[e]+"</a></li>"}),s+="</ol>",c.innerHTML=s})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
+</code></pre><p><code>我们通过这个命令把今天做的再删掉，多做几遍，同时删掉的话，可以更好的完成dns的作业</code></p>
+<h2 id="十总结">十.总结<a hidden class="anchor" aria-hidden="true" href="#十总结">#</a></h2>
+<p>**本次学习任务，佳乐老师讲解了dns服务器的相关设定，从软件包的安装，文件的修改，端口放行。以及node1的相关设定。修改的文件本次在node2里面主要是有1个主配置文件，1个区域文件，区域文件要追加正向解析和反向解析，正向解析和反向解析都还要在你声明的时候指定的文件，来进行修改就可以了，我们在检测一下刚刚的配置文件是否出错，最后进行服务的启动以及端口的放行.</p>
+<p>然后我们在node1中我们需要修改他的网络，将他的dns新增一条记录，内容是node2的IP地址，我们再用dig检测是否node2的dns服务器可以正常运行,这个其实也是可以的，windows也是同理将dns修改为node2的IP地址。需要注意我这里修改的是vmnet1网卡，最后Windows也是成功ping通了。</p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/d6d26698b8774f3d95756d5b2e7860f2.png"></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/">
+    <span class="title">« 上一页</span>
+    <span>C语言指针篇第一</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/ftp%E6%9C%8D%E5%8A%A1/">
+    <span class="title">下一页 »</span>
+    <span>FTP服务</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
