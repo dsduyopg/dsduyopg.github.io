@@ -506,3 +506,333 @@ details.toc {
     font-size: 20px;
   }
 }
+
+/* ============================================================
+   ✨ 精致升级第二部分（保留上述全部功能样式，仅追加）
+   ============================================================ */
+
+:root {
+  --brand-1: #6366f1;
+  --brand-2: #a855f7;
+  --brand-3: #22d3ee;
+  --card-radius: 18px;
+}
+
+/* ---------- HERO 大屏（首页） ---------- */
+.hero-section {
+  position: relative;
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 0 0 30px 30px;
+  margin: -30px -20px 0;
+  padding: 5rem 1.5rem 4rem;
+}
+
+.hero-aurora {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 18% 18%, rgba(99, 102, 241, .55), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 82% 12%, rgba(168, 85, 247, .5), transparent 60%),
+    radial-gradient(ellipse 55% 55% at 50% 88%, rgba(34, 211, 238, .4), transparent 60%),
+    linear-gradient(160deg, #0f172a 0%, #1e1b4b 55%, #172554 100%);
+  animation: auroraShift 14s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes auroraShift {
+  0%   { filter: hue-rotate(0deg) brightness(1); }
+  50%  { filter: hue-rotate(18deg) brightness(1.12); }
+  100% { filter: hue-rotate(-12deg) brightness(.95); }
+}
+
+.hero-aurora::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(255,255,255,.35) 1px, transparent 1.5px),
+    radial-gradient(rgba(255,255,255,.2) 1px, transparent 1.5px);
+  background-size: 56px 56px, 32px 32px;
+  background-position: 0 0, 14px 14px;
+  opacity: .28;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.hero-kicker {
+  font-size: .82rem;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: #a5b4fc;
+  margin-bottom: 1.1rem;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 8vw, 5.2rem);
+  font-weight: 800;
+  line-height: 1.08;
+  margin: 0 0 1.2rem;
+  background: linear-gradient(120deg, #e0e7ff 0%, #c4b5fd 40%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 6px 28px rgba(129, 140, 248, .35));
+  animation: titleGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from { filter: drop-shadow(0 6px 22px rgba(129,140,248,.25)); }
+  to   { filter: drop-shadow(0 6px 34px rgba(168,85,247,.5)); }
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: rgba(226, 232, 240, .82);
+  margin: 0 auto 2rem;
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.2rem;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: .72rem 1.6rem;
+  border-radius: 999px;
+  font-size: .95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  border: 1.5px solid transparent;
+}
+
+.hero-btn.primary {
+  background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+  color: #fff;
+  box-shadow: 0 8px 26px rgba(124, 58, 237, .45);
+}
+
+.hero-btn.ghost {
+  background: rgba(255, 255, 255, .08);
+  color: #e2e8f0;
+  border-color: rgba(255, 255, 255, .25);
+  backdrop-filter: blur(8px);
+}
+
+.hero-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 14px 34px rgba(124, 58, 237, .55);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 1.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: .85rem;
+  color: rgba(203, 213, 225, .75);
+}
+
+.hero-stats span {
+  padding: .3rem .9rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(6px);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #a5b4fc;
+  font-size: 1.8rem;
+  text-decoration: none;
+  animation: bounce 2s infinite;
+  z-index: 1;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(9px); }
+}
+
+:root[data-theme="light"] .hero-section {
+  min-height: 74vh;
+}
+
+:root[data-theme="light"] .hero-aurora {
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(99,102,241,.4), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 80% 15%, rgba(168,85,247,.35), transparent 60%),
+    radial-gradient(ellipse 55% 55% at 50% 85%, rgba(34,211,238,.35), transparent 60%),
+    linear-gradient(160deg, #eef2ff 0%, #ede9fe 55%, #e0f2fe 100%);
+}
+
+:root[data-theme="light"] .hero-kicker { color: var(--brand-1); }
+:root[data-theme="light"] .hero-sub { color: #475569; }
+:root[data-theme="light"] .hero-stats { color: #64748b; }
+:root[data-theme="light"] .hero-btn.ghost {
+  background: rgba(99,102,241,.08);
+  color: #4f46e5;
+  border-color: rgba(99,102,241,.3);
+}
+
+/* ---------- 最新文章卡片区（首页） ---------- */
+.home-posts {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.8rem;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-more {
+  color: var(--brand-3);
+  text-decoration: none;
+  font-size: .9rem;
+  transition: letter-spacing .25s ease;
+}
+
+.section-more:hover { letter-spacing: .08em; }
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.post-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.6rem 1.6rem 1.3rem;
+  border-radius: var(--card-radius);
+  background: var(--entry);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .06);
+  transition: transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s ease, border-color .3s ease;
+  overflow: hidden;
+}
+
+.post-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, var(--brand-1), var(--brand-2), var(--brand-3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 22px 44px rgba(99, 102, 241, .22);
+}
+
+.post-card:hover::before { opacity: 1; }
+
+.post-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.post-card-tags {
+  display: flex;
+  gap: .45rem;
+  margin-bottom: .85rem;
+  flex-wrap: wrap;
+}
+
+.tag-pill {
+  font-size: .7rem;
+  padding: .22rem .7rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(99,102,241,.16), rgba(168,85,247,.16));
+  color: var(--brand-1);
+  font-weight: 600;
+}
+
+.post-card-title {
+  font-size: 1.18rem;
+  line-height: 1.45;
+  margin: 0 0 .6rem;
+  font-weight: 700;
+}
+
+.post-card-summary {
+  font-size: .88rem;
+  color: var(--secondary);
+  line-height: 1.65;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.1rem;
+  padding-top: .9rem;
+  border-top: 1px dashed var(--border);
+  font-size: .78rem;
+  color: var(--secondary);
+}
+
+/* 全站细节打磨 */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--theme); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--brand-1), var(--brand-2));
+  border-radius: 8px;
+}
+
+@media (max-width: 640px) {
+  .hero-section { min-height: 70vh; padding-top: 3rem; }
+  .post-grid { grid-template-columns: 1fr; }
+  .hero-actions { gap: .6rem; }
+  .hero-btn { padding: .6rem 1.1rem; font-size: .88rem; }
+}
