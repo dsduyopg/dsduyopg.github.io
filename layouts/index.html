@@ -1,0 +1,78 @@
+{{- define "main" }}
+
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+{{- $paginator := .Paginate $pages }}
+
+{{- if .IsHome }}
+<!-- ============ HERO 大屏 ============ -->
+<section class="hero-section">
+  <div class="hero-aurora"></div>
+  <div class="hero-content">
+    <p class="hero-kicker">HELLO &amp; WELCOME</p>
+    <h1 class="hero-title">{{ site.Title }}</h1>
+    <p class="hero-sub">记录 Linux、运维、自动化和我自己折腾过的项目</p>
+    <div class="hero-actions">
+      <a class="hero-btn primary" href="{{ "posts/" | relURL }}">📚 全部文章</a>
+      <a class="hero-btn ghost" href="{{ "tags/" | relURL }}">🏷️ 标签</a>
+      <a class="hero-btn ghost" href="{{ "search/" | relURL }}">🔍 搜索</a>
+    </div>
+    <div class="hero-stats">
+      <span>{{ len site.RegularPages }} 篇文章</span>
+      <span>{{ len site.Taxonomies.tags }} 个标签</span>
+      <span>持续更新中</span>
+    </div>
+  </div>
+  <a class="hero-scroll" href="#recent-posts" aria-label="向下滚动">⌄</a>
+</section>
+{{- end }}
+
+<!-- ============ 最新文章卡片区 ============ -->
+<section class="home-posts" id="recent-posts">
+  {{- if .IsHome }}
+  <div class="section-head">
+    <h2 class="section-title">✨ 最新文章</h2>
+    <a class="section-more" href="{{ "posts/" | relURL }}">查看全部 →</a>
+  </div>
+  {{- end }}
+
+  <div class="post-grid">
+    {{- range $paginator.Pages }}
+    <article class="post-card">
+      <a class="post-card-link" href="{{ .Permalink }}"></a>
+      <div class="post-card-body">
+        {{- with .Params.tags }}
+        <div class="post-card-tags">
+          {{- range first 2 . }}
+          <span class="tag-pill">{{ . }}</span>
+          {{- end }}
+        </div>
+        {{- end }}
+        <h3 class="post-card-title">{{ .Title }}</h3>
+        {{- if (ne (.Param "hideSummary") true) }}
+        <p class="post-card-summary">{{ .Summary | plainify | htmlUnescape | truncate 110 }}</p>
+        {{- end }}
+      </div>
+      <div class="post-card-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        <span class="read-time">☕ {{ .ReadingTime }} 分钟</span>
+      </div>
+    </article>
+    {{- end }}
+  </div>
+
+  {{- if gt $paginator.TotalPages 1 }}
+  <footer class="page-footer">
+    <nav class="pagination">
+      {{- if $paginator.HasPrev }}
+      <a class="prev" href="{{ $paginator.Prev.URL | relURL }}">« 上一页</a>
+      {{- end }}
+      {{- if $paginator.HasNext }}
+      <a class="next" href="{{ $paginator.Next.URL | relURL }}">下一页 »</a>
+      {{- end }}
+    </nav>
+  </footer>
+  {{- end }}
+</section>
+
+{{- end }}
