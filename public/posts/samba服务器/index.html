@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>samba服务器 | 我的博客</title>
-<meta name="keywords" content="">
-<meta name="description" content="samba服务器
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>samba服务器 | 我的博客</title><meta name=keywords content><meta name=description content="samba服务器
 
 
 一.SAMBA基本介绍
@@ -73,67 +64,7 @@ Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (
 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析
 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例
 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显
-⽰的能⼒，使其在⽹络浏览器中可⻅。">
-<meta name="author" content="dsduyopg">
-<link rel="canonical" href="http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.e43bd292f097a172cd3328da33b8b3c29d3a16aae8222db58d5654514ee9c77a.css" integrity="sha256-5DvSkvCXoXLNMyjaM7izwp06FqroIi21jVZUUU7px3o=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="samba服务器">
-  <meta property="og:description" content="samba服务器 一.SAMBA基本介绍
+⽰的能⼒，使其在⽹络浏览器中可⻅。"><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/><link crossorigin=anonymous href=/assets/css/stylesheet.e43bd292f097a172cd3328da33b8b3c29d3a16aae8222db58d5654514ee9c77a.css integrity="sha256-5DvSkvCXoXLNMyjaM7izwp06FqroIi21jVZUUU7px3o=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="samba服务器"><meta property="og:description" content="samba服务器 一.SAMBA基本介绍
 二.安装SAMBA服务
 一.服务端
 二.客户端
@@ -147,16 +78,7 @@ Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，�
 2.开放端口
 七.在Linux主机访问
 八. 在windows主机访问
-一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是Windows 操作系统⽤于⽂件共享和打印服务的主要协议。Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="samba服务器">
-  <meta name="twitter:description" content="samba服务器 一.SAMBA基本介绍
+一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是Windows 操作系统⽤于⽂件共享和打印服务的主要协议。Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="samba服务器"><meta name=twitter:description content="samba服务器 一.SAMBA基本介绍
 二.安装SAMBA服务
 一.服务端
 二.客户端
@@ -170,463 +92,58 @@ Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，�
 2.开放端口
 七.在Linux主机访问
 八. 在windows主机访问
-一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是Windows 操作系统⽤于⽂件共享和打印服务的主要协议。Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "http://localhost:1313/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "samba服务器",
-      "item": "http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "samba服务器",
-  "name": "samba服务器",
-  "description": "samba服务器 一.SAMBA基本介绍\n二.安装SAMBA服务\n一.服务端\n二.客户端\n三.创建共享⽬录\n四.修改配置⽂件\n五.配置⽤⼾信息\n1.添加用户user01\n2.把用户追加到samba\n六.启动samba服务\n1.启动samba服务\n2.开放端口\n七.在Linux主机访问\n八. 在windows主机访问\n一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访\r问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。\r它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是\rWindows 操作系统⽤于⽂件共享和打印服务的主要协议。\rSamba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家\r庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "samba服务器 一.SAMBA基本介绍\n二.安装SAMBA服务\n一.服务端\n二.客户端\n三.创建共享⽬录\n四.修改配置⽂件\n五.配置⽤⼾信息\n1.添加用户user01\n2.把用户追加到samba\n六.启动samba服务\n1.启动samba服务\n2.开放端口\n七.在Linux主机访问\n八. 在windows主机访问\n一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访\r问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。\r它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是\rWindows 操作系统⽤于⽂件共享和打印服务的主要协议。\rSamba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家\r庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。\n三.创建共享⽬录 mkdir -p /sambda/share 四.修改配置⽂件 配置⽂件所在位置：/etc/samba/smb.conf 修改配置文件 /etc/samba/smb.conf，在文件末尾追加共享配置。这里我们添加一个用户 user01，并将其加入到 Samba 服务器中。最后重启服务并检查状态，确认配置生效。\n五.配置⽤⼾信息 1.添加用户user01 useradd user01\rpasswd user01\r123456 2.把用户追加到samba smbpasswd -a user01\rpdbedit -L 六.启动samba服务 1.启动samba服务 systemctl enable nmb\rsystemctl enable smb\rsystemctl start nmb\rsystemctl start smb\r验证是否启动：\rsystemctl status nmb\rsystemctl status smb 2.开放端口 firewall-cmd --permanent --add-service=smb\rfirewall-cmd --reload 七.在Linux主机访问 smbclient //192.168.149.131 -U user01 smbclient //192.168.149.131/smbshare -U user01 在客户端使用 Samba 时，需要先安装 Samba 客户端软件，并在服务器防火墙中开放 Samba 相关端口。接着，从客户端访问 Samba 服务器。此时需要确保共享目录的使用者和所属组均为 user01。在客户端创建文件夹后，回到服务器端查看，确认该文件夹是由 user01 创建的。尝试上传文件时，如果失败，可能是因为当前登录的目录权限不足。例如，在 /home/admin 目录下登录 Samba 服务器时，无法将 /root 目录下的文件传输过去；若切换到 /root 目录下登录，即可成功上传。\n八. 在windows主机访问 ",
-  "wordCount" : "170",
-  "inLanguage": "zh-cn",
-  "datePublished": "2026-08-18T00:00:00Z",
-  "dateModified": "2026-08-18T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": "dsduyopg"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="http://localhost:1313/search/" title="搜索">
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
-            <a href="/">主页</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/posts/">Posts</a>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-</nav>
-    <h1 class="post-title entry-hint-parent">
-      samba服务器
-    </h1>
-    <div class="post-meta">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>170 字</span>&nbsp;·&nbsp;<span>dsduyopg</span>
-
-</div>
-  </header> <details class="toc" >
-    <summary accesskey="c" title="(Alt + C)">
-        <span class="title">目录</span>
-    </summary>
-
-    <div class="inner"><ul><ul><ul>
-            <li>
-                <a href="#samba%e6%9c%8d%e5%8a%a1%e5%99%a8" aria-label="samba服务器">samba服务器</a></li></ul>
-                </ul>
-                
-            <li>
-                <a href="#%e4%b8%80samba%e5%9f%ba%e6%9c%ac%e4%bb%8b%e7%bb%8d" aria-label="一.SAMBA基本介绍">一.SAMBA基本介绍</a></li>
-            <li>
-                <a href="#%e4%ba%8c%e5%ae%89%e8%a3%85samba%e6%9c%8d%e5%8a%a1" aria-label="二.安装SAMBA服务">二.安装SAMBA服务</a><ul>
-                    
-            <li>
-                <a href="#%e4%b8%80%e6%9c%8d%e5%8a%a1%e7%ab%af" aria-label="一.服务端">一.服务端</a></li>
-            <li>
-                <a href="#%e4%ba%8c%e5%ae%a2%e6%88%b7%e7%ab%af" aria-label="二.客户端">二.客户端</a></li></ul>
-            </li>
-            <li>
-                <a href="#%e4%b8%89%e5%88%9b%e5%bb%ba%e5%85%b1%e4%ba%ab%e5%bd%95" aria-label="三.创建共享⽬录">三.创建共享⽬录</a></li>
-            <li>
-                <a href="#%e5%9b%9b%e4%bf%ae%e6%94%b9%e9%85%8d%e7%bd%ae%e4%bb%b6" aria-label="四.修改配置⽂件">四.修改配置⽂件</a></li>
-            <li>
-                <a href="#%e4%ba%94%e9%85%8d%e7%bd%ae%e4%bf%a1%e6%81%af" aria-label="五.配置⽤⼾信息">五.配置⽤⼾信息</a><ul>
-                    
-            <li>
-                <a href="#1%e6%b7%bb%e5%8a%a0%e7%94%a8%e6%88%b7user01" aria-label="1.添加用户user01">1.添加用户user01</a></li>
-            <li>
-                <a href="#2%e6%8a%8a%e7%94%a8%e6%88%b7%e8%bf%bd%e5%8a%a0%e5%88%b0samba" aria-label="2.把用户追加到samba">2.把用户追加到samba</a></li></ul>
-            </li>
-            <li>
-                <a href="#%e5%85%ad%e5%90%af%e5%8a%a8samba%e6%9c%8d%e5%8a%a1" aria-label="六.启动samba服务">六.启动samba服务</a><ul>
-                    
-            <li>
-                <a href="#1%e5%90%af%e5%8a%a8samba%e6%9c%8d%e5%8a%a1" aria-label="1.启动samba服务">1.启动samba服务</a></li>
-            <li>
-                <a href="#2%e5%bc%80%e6%94%be%e7%ab%af%e5%8f%a3" aria-label="2.开放端口">2.开放端口</a></li></ul>
-            </li>
-            <li>
-                <a href="#%e4%b8%83%e5%9c%a8linux%e4%b8%bb%e6%9c%ba%e8%ae%bf%e9%97%ae" aria-label="七.在Linux主机访问">七.在Linux主机访问</a></li>
-            <li>
-                <a href="#%e5%85%ab-%e5%9c%a8windows%e4%b8%bb%e6%9c%ba%e8%ae%bf%e9%97%ae" aria-label="八. 在windows主机访问">八. 在windows主机访问</a>
-            </li>
-        </ul>
-    </div>
-</details>
-
-  <div class="post-content md-content"><h4 id="samba服务器">samba服务器<a hidden class="anchor" aria-hidden="true" href="#samba服务器">#</a></h4>
-<ul>
-<li>
-<p><a href="#SAMBA_1">一.SAMBA基本介绍</a></p>
-</li>
-<li>
-<p><a href="#SAMBA_13">二.安装SAMBA服务</a></p>
-</li>
-<li>
-<p><a href="#_16">一.服务端</a></p>
-</li>
-<li>
-<p><a href="#_21">二.客户端</a></p>
-</li>
-<li>
-<p><a href="#_33">三.创建共享⽬录</a></p>
-</li>
-<li>
-<p><a href="#_38">四.修改配置⽂件</a></p>
-</li>
-<li>
-<p><a href="#_44">五.配置⽤⼾信息</a></p>
-</li>
-<li>
-<p><a href="#1user01_46">1.添加用户user01</a></p>
-</li>
-<li>
-<p><a href="#2samba_54">2.把用户追加到samba</a></p>
-</li>
-<li>
-<p><a href="#samba_62">六.启动samba服务</a></p>
-</li>
-<li>
-<p><a href="#1samba_63">1.启动samba服务</a></p>
-</li>
-<li>
-<p><a href="#2_75">2.开放端口</a></p>
-</li>
-<li>
-<p><a href="#Linux_82">七.在Linux主机访问</a></p>
-</li>
-<li>
-<p><a href="#_windows_97">八. 在windows主机访问</a></p>
-</li>
-</ul>
-<h2 id="一samba基本介绍">一.SAMBA基本介绍<a hidden class="anchor" aria-hidden="true" href="#一samba基本介绍">#</a></h2>
-<pre tabindex="0"><code>需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访
+一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是Windows 操作系统⽤于⽂件共享和打印服务的主要协议。Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"samba服务器","item":"https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"samba服务器","name":"samba服务器","description":"samba服务器 一.SAMBA基本介绍\n二.安装SAMBA服务\n一.服务端\n二.客户端\n三.创建共享⽬录\n四.修改配置⽂件\n五.配置⽤⼾信息\n1.添加用户user01\n2.把用户追加到samba\n六.启动samba服务\n1.启动samba服务\n2.开放端口\n七.在Linux主机访问\n八. 在windows主机访问\n一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访\r问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。\r它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是\rWindows 操作系统⽤于⽂件共享和打印服务的主要协议。\rSamba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家\r庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。\n","keywords":[],"articleBody":"samba服务器 一.SAMBA基本介绍\n二.安装SAMBA服务\n一.服务端\n二.客户端\n三.创建共享⽬录\n四.修改配置⽂件\n五.配置⽤⼾信息\n1.添加用户user01\n2.把用户追加到samba\n六.启动samba服务\n1.启动samba服务\n2.开放端口\n七.在Linux主机访问\n八. 在windows主机访问\n一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访\r问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。\r它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是\rWindows 操作系统⽤于⽂件共享和打印服务的主要协议。\rSamba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家\r庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。\n三.创建共享⽬录 mkdir -p /sambda/share 四.修改配置⽂件 配置⽂件所在位置：/etc/samba/smb.conf 修改配置文件 /etc/samba/smb.conf，在文件末尾追加共享配置。这里我们添加一个用户 user01，并将其加入到 Samba 服务器中。最后重启服务并检查状态，确认配置生效。\n五.配置⽤⼾信息 1.添加用户user01 useradd user01\rpasswd user01\r123456 2.把用户追加到samba smbpasswd -a user01\rpdbedit -L 六.启动samba服务 1.启动samba服务 systemctl enable nmb\rsystemctl enable smb\rsystemctl start nmb\rsystemctl start smb\r验证是否启动：\rsystemctl status nmb\rsystemctl status smb 2.开放端口 firewall-cmd --permanent --add-service=smb\rfirewall-cmd --reload 七.在Linux主机访问 smbclient //192.168.149.131 -U user01 smbclient //192.168.149.131/smbshare -U user01 在客户端使用 Samba 时，需要先安装 Samba 客户端软件，并在服务器防火墙中开放 Samba 相关端口。接着，从客户端访问 Samba 服务器。此时需要确保共享目录的使用者和所属组均为 user01。在客户端创建文件夹后，回到服务器端查看，确认该文件夹是由 user01 创建的。尝试上传文件时，如果失败，可能是因为当前登录的目录权限不足。例如，在 /home/admin 目录下登录 Samba 服务器时，无法将 /root 目录下的文件传输过去；若切换到 /root 目录下登录，即可成功上传。\n八. 在windows主机访问 ","wordCount":"170","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/posts/>Posts</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">samba服务器</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>170 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><ul><ul><li><a href=#samba%e6%9c%8d%e5%8a%a1%e5%99%a8 aria-label=samba服务器>samba服务器</a></li></ul></ul><li><a href=#%e4%b8%80samba%e5%9f%ba%e6%9c%ac%e4%bb%8b%e7%bb%8d aria-label=一.SAMBA基本介绍>一.SAMBA基本介绍</a></li><li><a href=#%e4%ba%8c%e5%ae%89%e8%a3%85samba%e6%9c%8d%e5%8a%a1 aria-label=二.安装SAMBA服务>二.安装SAMBA服务</a><ul><li><a href=#%e4%b8%80%e6%9c%8d%e5%8a%a1%e7%ab%af aria-label=一.服务端>一.服务端</a></li><li><a href=#%e4%ba%8c%e5%ae%a2%e6%88%b7%e7%ab%af aria-label=二.客户端>二.客户端</a></li></ul></li><li><a href=#%e4%b8%89%e5%88%9b%e5%bb%ba%e5%85%b1%e4%ba%ab%e5%bd%95 aria-label=三.创建共享⽬录>三.创建共享⽬录</a></li><li><a href=#%e5%9b%9b%e4%bf%ae%e6%94%b9%e9%85%8d%e7%bd%ae%e4%bb%b6 aria-label=四.修改配置⽂件>四.修改配置⽂件</a></li><li><a href=#%e4%ba%94%e9%85%8d%e7%bd%ae%e4%bf%a1%e6%81%af aria-label=五.配置⽤⼾信息>五.配置⽤⼾信息</a><ul><li><a href=#1%e6%b7%bb%e5%8a%a0%e7%94%a8%e6%88%b7user01 aria-label=1.添加用户user01>1.添加用户user01</a></li><li><a href=#2%e6%8a%8a%e7%94%a8%e6%88%b7%e8%bf%bd%e5%8a%a0%e5%88%b0samba aria-label=2.把用户追加到samba>2.把用户追加到samba</a></li></ul></li><li><a href=#%e5%85%ad%e5%90%af%e5%8a%a8samba%e6%9c%8d%e5%8a%a1 aria-label=六.启动samba服务>六.启动samba服务</a><ul><li><a href=#1%e5%90%af%e5%8a%a8samba%e6%9c%8d%e5%8a%a1 aria-label=1.启动samba服务>1.启动samba服务</a></li><li><a href=#2%e5%bc%80%e6%94%be%e7%ab%af%e5%8f%a3 aria-label=2.开放端口>2.开放端口</a></li></ul></li><li><a href=#%e4%b8%83%e5%9c%a8linux%e4%b8%bb%e6%9c%ba%e8%ae%bf%e9%97%ae aria-label=七.在Linux主机访问>七.在Linux主机访问</a></li><li><a href=#%e5%85%ab-%e5%9c%a8windows%e4%b8%bb%e6%9c%ba%e8%ae%bf%e9%97%ae aria-label="八. 在windows主机访问">八. 在windows主机访问</a></li></ul></div></details><div class="post-content md-content"><h4 id=samba服务器>samba服务器<a hidden class=anchor aria-hidden=true href=#samba服务器>#</a></h4><ul><li><p><a href=#SAMBA_1>一.SAMBA基本介绍</a></p></li><li><p><a href=#SAMBA_13>二.安装SAMBA服务</a></p></li><li><p><a href=#_16>一.服务端</a></p></li><li><p><a href=#_21>二.客户端</a></p></li><li><p><a href=#_33>三.创建共享⽬录</a></p></li><li><p><a href=#_38>四.修改配置⽂件</a></p></li><li><p><a href=#_44>五.配置⽤⼾信息</a></p></li><li><p><a href=#1user01_46>1.添加用户user01</a></p></li><li><p><a href=#2samba_54>2.把用户追加到samba</a></p></li><li><p><a href=#samba_62>六.启动samba服务</a></p></li><li><p><a href=#1samba_63>1.启动samba服务</a></p></li><li><p><a href=#2_75>2.开放端口</a></p></li><li><p><a href=#Linux_82>七.在Linux主机访问</a></p></li><li><p><a href=#_windows_97>八. 在windows主机访问</a></p></li></ul><h2 id=一samba基本介绍>一.SAMBA基本介绍<a hidden class=anchor aria-hidden=true href=#一samba基本介绍>#</a></h2><pre tabindex=0><code>需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访
 问该共享⽬录
-</code></pre><pre tabindex="0"><code>介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。
+</code></pre><pre tabindex=0><code>介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。
 它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是
 Windows 操作系统⽤于⽂件共享和打印服务的主要协议。
 Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家
 庭、企业和跨平台环境中。
-</code></pre><h2 id="二安装samba服务">二.安装SAMBA服务<a hidden class="anchor" aria-hidden="true" href="#二安装samba服务">#</a></h2>
-<h3 id="一服务端">一.服务端<a hidden class="anchor" aria-hidden="true" href="#一服务端">#</a></h3>
-<pre tabindex="0"><code>node2执⾏: dnf -y install samba
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4e9cbe84fda6474ea45a60cfe7998596.png"></p>
-<h3 id="二客户端">二.客户端<a hidden class="anchor" aria-hidden="true" href="#二客户端">#</a></h3>
-<pre tabindex="0"><code>dnf install -y samba-client
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c31cf89e084446b8a7b2703cdb5265b3.png">
+</code></pre><h2 id=二安装samba服务>二.安装SAMBA服务<a hidden class=anchor aria-hidden=true href=#二安装samba服务>#</a></h2><h3 id=一服务端>一.服务端<a hidden class=anchor aria-hidden=true href=#一服务端>#</a></h3><pre tabindex=0><code>node2执⾏: dnf -y install samba
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4e9cbe84fda6474ea45a60cfe7998596.png></p><h3 id=二客户端>二.客户端<a hidden class=anchor aria-hidden=true href=#二客户端>#</a></h3><pre tabindex=0><code>dnf install -y samba-client
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c31cf89e084446b8a7b2703cdb5265b3.png>
 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的
 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block)
 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务
 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析
 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例
 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显
-⽰的能⼒，使其在⽹络浏览器中可⻅。</p>
-<h2 id="三创建共享录">三.创建共享⽬录<a hidden class="anchor" aria-hidden="true" href="#三创建共享录">#</a></h2>
-<pre tabindex="0"><code>mkdir -p /sambda/share
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/1e9bcbd7b602494894a3197c8d92e6d8.png"></p>
-<h2 id="四修改配置件">四.修改配置⽂件<a hidden class="anchor" aria-hidden="true" href="#四修改配置件">#</a></h2>
-<pre tabindex="0"><code>配置⽂件所在位置：/etc/samba/smb.conf
-</code></pre><p>修改配置文件 <code>/etc/samba/smb.conf</code>，在文件末尾追加共享配置。这里我们添加一个用户 <code>user01</code>，并将其加入到 Samba 服务器中。最后重启服务并检查状态，确认配置生效。</p>
-<h2 id="五配置信息">五.配置⽤⼾信息<a hidden class="anchor" aria-hidden="true" href="#五配置信息">#</a></h2>
-<h3 id="1添加用户user01">1.添加用户user01<a hidden class="anchor" aria-hidden="true" href="#1添加用户user01">#</a></h3>
-<pre tabindex="0"><code>useradd user01
+⽰的能⼒，使其在⽹络浏览器中可⻅。</p><h2 id=三创建共享录>三.创建共享⽬录<a hidden class=anchor aria-hidden=true href=#三创建共享录>#</a></h2><pre tabindex=0><code>mkdir -p /sambda/share
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/1e9bcbd7b602494894a3197c8d92e6d8.png></p><h2 id=四修改配置件>四.修改配置⽂件<a hidden class=anchor aria-hidden=true href=#四修改配置件>#</a></h2><pre tabindex=0><code>配置⽂件所在位置：/etc/samba/smb.conf
+</code></pre><p>修改配置文件 <code>/etc/samba/smb.conf</code>，在文件末尾追加共享配置。这里我们添加一个用户 <code>user01</code>，并将其加入到 Samba 服务器中。最后重启服务并检查状态，确认配置生效。</p><h2 id=五配置信息>五.配置⽤⼾信息<a hidden class=anchor aria-hidden=true href=#五配置信息>#</a></h2><h3 id=1添加用户user01>1.添加用户user01<a hidden class=anchor aria-hidden=true href=#1添加用户user01>#</a></h3><pre tabindex=0><code>useradd user01
 passwd user01
 123456
-</code></pre><h3 id="2把用户追加到samba">2.把用户追加到samba<a hidden class="anchor" aria-hidden="true" href="#2把用户追加到samba">#</a></h3>
-<pre tabindex="0"><code>smbpasswd -a user01
+</code></pre><h3 id=2把用户追加到samba>2.把用户追加到samba<a hidden class=anchor aria-hidden=true href=#2把用户追加到samba>#</a></h3><pre tabindex=0><code>smbpasswd -a user01
 pdbedit -L
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/e25f08ec644f4a43aa9223eb32f9ea5e.png"></p>
-<h2 id="六启动samba服务">六.启动samba服务<a hidden class="anchor" aria-hidden="true" href="#六启动samba服务">#</a></h2>
-<h3 id="1启动samba服务">1.启动samba服务<a hidden class="anchor" aria-hidden="true" href="#1启动samba服务">#</a></h3>
-<pre tabindex="0"><code>systemctl enable nmb
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/e25f08ec644f4a43aa9223eb32f9ea5e.png></p><h2 id=六启动samba服务>六.启动samba服务<a hidden class=anchor aria-hidden=true href=#六启动samba服务>#</a></h2><h3 id=1启动samba服务>1.启动samba服务<a hidden class=anchor aria-hidden=true href=#1启动samba服务>#</a></h3><pre tabindex=0><code>systemctl enable nmb
 systemctl enable smb
 systemctl start nmb
 systemctl start smb
 验证是否启动：
 systemctl status nmb
 systemctl status smb
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/f8d44d69acb04171a5c7bc21a9881be4.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/8a3282661539414b89f5e4f151f8be57.png"></p>
-<h3 id="2开放端口">2.开放端口<a hidden class="anchor" aria-hidden="true" href="#2开放端口">#</a></h3>
-<pre tabindex="0"><code>firewall-cmd --permanent --add-service=smb
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/f8d44d69acb04171a5c7bc21a9881be4.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/8a3282661539414b89f5e4f151f8be57.png></p><h3 id=2开放端口>2.开放端口<a hidden class=anchor aria-hidden=true href=#2开放端口>#</a></h3><pre tabindex=0><code>firewall-cmd --permanent --add-service=smb
 firewall-cmd --reload
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/f68aafee9192414cbfce8e3db902c166.png"></p>
-<h2 id="七在linux主机访问">七.在Linux主机访问<a hidden class="anchor" aria-hidden="true" href="#七在linux主机访问">#</a></h2>
-<pre tabindex="0"><code>smbclient //192.168.149.131 -U user01
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/7c7d4225e1874ce59dea7ec8bc3c2bf4.png"></p>
-<pre tabindex="0"><code>smbclient //192.168.149.131/smbshare -U user01
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/248ee3f293cf472b8059512203eadb43.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/42ea74688b004c5286c749b2097d15f0.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/77223c2ab425434eab83578c479c1778.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/8f44a7d5cb394d9cbdaf3fe9ceaf7f55.png"></p>
-<p>在客户端使用 Samba 时，需要先安装 Samba 客户端软件，并在服务器防火墙中开放 Samba 相关端口。接着，从客户端访问 Samba 服务器。此时需要确保共享目录的使用者和所属组均为 <code>user01</code>。在客户端创建文件夹后，回到服务器端查看，确认该文件夹是由 <code>user01</code> 创建的。尝试上传文件时，如果失败，可能是因为当前登录的目录权限不足。例如，在 <code>/home/admin</code> 目录下登录 Samba 服务器时，无法将 <code>/root</code> 目录下的文件传输过去；若切换到 <code>/root</code> 目录下登录，即可成功上传。</p>
-<h2 id="八-在windows主机访问">八. 在windows主机访问<a hidden class="anchor" aria-hidden="true" href="#八-在windows主机访问">#</a></h2>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/98e353053fae48878e5afcfc4d8cc83b.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/2eb762415c804c0c9c8c1248655b7ef7.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/8089bb90114c447cbbd6c2ac0b2995d9.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c4ccbed71ed84938a6a716c6f1e529dc.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/01741de60dda4cc2b64bcb0aa4ee67be.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/1c6a84bf4c654bcc9df07069d77ca7b9.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/991621306af24cae8646d80335191264.png"></p>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/">
-    <span class="title">« 上一页</span>
-    <span>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？</span>
-  </a>
-  <a class="next" href="http://localhost:1313/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/">
-    <span class="title">下一页 »</span>
-    <span>SSh的相关操作</span>
-  </a>
-</nav>
-
-  </footer>
-<div class="comments">
-  <h2>评论</h2>
-  <script src="https://utteranc.es/client.js"
-          repo="dsduyopg/dsduyopg.github.io"
-          issue-term="pathname"
-          label="comment"
-          theme="preferred-color-scheme"
-          crossorigin="anonymous"
-          async>
-  </script>
-  <noscript>请启用 JavaScript 查看评论。</noscript>
-</div>
-
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-<div class="busuanzi">
-  本站访客 <span id="busuanzi_value_site_uv"></span> ·
-  访问量 <span id="busuanzi_value_site_pv"></span> · 本文阅读 <span id="busuanzi_value_page_pv"></span>
-</div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = '复制';
-
-        function copyingDone() {
-            copybutton.innerHTML = '已复制！';
-            setTimeout(() => {
-                copybutton.innerHTML = '复制';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/f68aafee9192414cbfce8e3db902c166.png></p><h2 id=七在linux主机访问>七.在Linux主机访问<a hidden class=anchor aria-hidden=true href=#七在linux主机访问>#</a></h2><pre tabindex=0><code>smbclient //192.168.149.131 -U user01
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/7c7d4225e1874ce59dea7ec8bc3c2bf4.png></p><pre tabindex=0><code>smbclient //192.168.149.131/smbshare -U user01
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/248ee3f293cf472b8059512203eadb43.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/42ea74688b004c5286c749b2097d15f0.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/77223c2ab425434eab83578c479c1778.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/8f44a7d5cb394d9cbdaf3fe9ceaf7f55.png></p><p>在客户端使用 Samba 时，需要先安装 Samba 客户端软件，并在服务器防火墙中开放 Samba 相关端口。接着，从客户端访问 Samba 服务器。此时需要确保共享目录的使用者和所属组均为 <code>user01</code>。在客户端创建文件夹后，回到服务器端查看，确认该文件夹是由 <code>user01</code> 创建的。尝试上传文件时，如果失败，可能是因为当前登录的目录权限不足。例如，在 <code>/home/admin</code> 目录下登录 Samba 服务器时，无法将 <code>/root</code> 目录下的文件传输过去；若切换到 <code>/root</code> 目录下登录，即可成功上传。</p><h2 id=八-在windows主机访问>八. 在windows主机访问<a hidden class=anchor aria-hidden=true href=#八-在windows主机访问>#</a></h2><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/98e353053fae48878e5afcfc4d8cc83b.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/2eb762415c804c0c9c8c1248655b7ef7.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/8089bb90114c447cbbd6c2ac0b2995d9.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c4ccbed71ed84938a6a716c6f1e529dc.png>
+<img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/01741de60dda4cc2b64bcb0aa4ee67be.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/1c6a84bf4c654bcc9df07069d77ca7b9.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/991621306af24cae8646d80335191264.png></p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/><span class=title>« 上一页</span>
+<span>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？</span>
+</a><a class=next href=https://dsduyopg.github.io/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/><span class=title>下一页 »</span>
+<span>SSh的相关操作</span></a></nav></footer><div class=comments><h2>评论</h2><script src=https://utteranc.es/client.js repo=dsduyopg/dsduyopg.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script><noscript>请启用 JavaScript 查看评论。</noscript></div></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

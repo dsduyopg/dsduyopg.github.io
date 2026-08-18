@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>整数和浮点数在内存中存储 | 我的博客</title>
-<meta name="keywords" content="">
-<meta name="description" content="大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>整数和浮点数在内存中存储 | 我的博客</title><meta name=keywords content><meta name=description content='大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！
 整数和浮点数在内存中存储
 
 
@@ -50,8 +41,8 @@ int main()
     //
     float* pFloat = (float*)&amp;n;
 
-    printf(&#34;n的值为：%d\n&#34;, n);//9
-    printf(&#34;*pFloat的值为：%f\n&#34;, *pFloat);
+    printf("n的值为：%d\n", n);//9
+    printf("*pFloat的值为：%f\n", *pFloat);
     //0 00000000 00000000000000000001001
     //E 为全0
     //(-1)^0 * 0.00000000000000000001001 *  2^-126
@@ -66,75 +57,15 @@ int main()
     //E = 3
     //01000001000100000000000000000000
     //
-    printf(&#34;num的值为：%d\n&#34;, n);
-    printf(&#34;*pFloat的值为：%f\n&#34;, *pFloat);//9.0
+    printf("num的值为：%d\n", n);
+    printf("*pFloat的值为：%f\n", *pFloat);//9.0
     return 0;
 }
 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0
 
 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。
 2.整数在内存中的存储
-这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码&#43;1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。">
-<meta name="author" content="dsduyopg">
-<link rel="canonical" href="http://localhost:1313/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.e43bd292f097a172cd3328da33b8b3c29d3a16aae8222db58d5654514ee9c77a.css" integrity="sha256-5DvSkvCXoXLNMyjaM7izwp06FqroIi21jVZUUU7px3o=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="http://localhost:1313/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="整数和浮点数在内存中存储">
-  <meta property="og:description" content="大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！
+这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。'><meta name=author content="dsduyopg"><link rel=canonical href=https://dsduyopg.github.io/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/><link crossorigin=anonymous href=/assets/css/stylesheet.e43bd292f097a172cd3328da33b8b3c29d3a16aae8222db58d5654514ee9c77a.css integrity="sha256-5DvSkvCXoXLNMyjaM7izwp06FqroIi21jVZUUU7px3o=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg.github.io/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg.github.io/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg.github.io/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/"><meta property="og:site_name" content="我的博客"><meta property="og:title" content="整数和浮点数在内存中存储"><meta property="og:description" content='大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！
 整数和浮点数在内存中存储 1.整数与浮点数在内存中存储是否一样
 整数与浮点数在内存中存储的例子
 2.整数在内存中的存储
@@ -146,17 +77,8 @@ IEEE754的详细相关规定
 3.讲解上例当中的题目
 1.整数与浮点数在内存中存储是否一样 首先我们大家都有一个疑问，在内存中数据的存储不都是以二进制形式存储的吗？还有什么不同呢？其实我在学习本节课之前我和大家的认知是一样的，都是认为他们的存储都是一样的，但是今天我可以告诉给大家，在内存中存储其实并不一样，下面我为大家详细的介绍一下。
 整数与浮点数在内存中存储的例子 下面我为大家举出一个关于他们在内存存储的例子，如下：
-int main(){int n = 9;//整型的存储方式，补码//00000000000000000000000000001001 9的补码//float* pFloat = (float*)&amp;n;printf(&#34;n的值为：%d\n&#34;, n);//9printf(&#34;*pFloat的值为：%f\n&#34;, *pFloat);//0 00000000 00000000000000000001001//E 为全0//(-1)^0 * 0.00000000000000000001001 * 2^-126//1*//0.000000*pFloat = 9.0;//1001.0//(-1)^0 * 1.001*2^3//S=0//M=1.001//E = 3//01000001000100000000000000000000//printf(&#34;num的值为：%d\n&#34;, n);printf(&#34;*pFloat的值为：%f\n&#34;, *pFloat);//9.0return 0;} 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。
-2.整数在内存中的存储 这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码&#43;1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="整数和浮点数在内存中存储">
-  <meta name="twitter:description" content="大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！
+int main(){int n = 9;//整型的存储方式，补码//00000000000000000000000000001001 9的补码//float* pFloat = (float*)&amp;n;printf("n的值为：%d\n", n);//9printf("*pFloat的值为：%f\n", *pFloat);//0 00000000 00000000000000000001001//E 为全0//(-1)^0 * 0.00000000000000000001001 * 2^-126//1*//0.000000*pFloat = 9.0;//1001.0//(-1)^0 * 1.001*2^3//S=0//M=1.001//E = 3//01000001000100000000000000000000//printf("num的值为：%d\n", n);printf("*pFloat的值为：%f\n", *pFloat);//9.0return 0;} 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。
+2.整数在内存中的存储 这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="整数和浮点数在内存中存储"><meta name=twitter:description content='大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！
 整数和浮点数在内存中存储 1.整数与浮点数在内存中存储是否一样
 整数与浮点数在内存中存储的例子
 2.整数在内存中的存储
@@ -168,213 +90,13 @@ IEEE754的详细相关规定
 3.讲解上例当中的题目
 1.整数与浮点数在内存中存储是否一样 首先我们大家都有一个疑问，在内存中数据的存储不都是以二进制形式存储的吗？还有什么不同呢？其实我在学习本节课之前我和大家的认知是一样的，都是认为他们的存储都是一样的，但是今天我可以告诉给大家，在内存中存储其实并不一样，下面我为大家详细的介绍一下。
 整数与浮点数在内存中存储的例子 下面我为大家举出一个关于他们在内存存储的例子，如下：
-int main(){int n = 9;//整型的存储方式，补码//00000000000000000000000000001001 9的补码//float* pFloat = (float*)&amp;n;printf(&#34;n的值为：%d\n&#34;, n);//9printf(&#34;*pFloat的值为：%f\n&#34;, *pFloat);//0 00000000 00000000000000000001001//E 为全0//(-1)^0 * 0.00000000000000000001001 * 2^-126//1*//0.000000*pFloat = 9.0;//1001.0//(-1)^0 * 1.001*2^3//S=0//M=1.001//E = 3//01000001000100000000000000000000//printf(&#34;num的值为：%d\n&#34;, n);printf(&#34;*pFloat的值为：%f\n&#34;, *pFloat);//9.0return 0;} 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。
-2.整数在内存中的存储 这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码&#43;1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "http://localhost:1313/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "整数和浮点数在内存中存储",
-      "item": "http://localhost:1313/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "整数和浮点数在内存中存储",
-  "name": "整数和浮点数在内存中存储",
-  "description": "大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！\n整数和浮点数在内存中存储 1.整数与浮点数在内存中存储是否一样\n整数与浮点数在内存中存储的例子\n2.整数在内存中的存储\n整数在内存中存储的具体例子\n3.浮点数在内存中的存储\n1.规定相关东西\nIEEE754的详细相关规定\n2.浮点数在内存中的具体示例\n3.讲解上例当中的题目\n1.整数与浮点数在内存中存储是否一样 首先我们大家都有一个疑问，在内存中数据的存储不都是以二进制形式存储的吗？还有什么不同呢？其实我在学习本节课之前我和大家的认知是一样的，都是认为他们的存储都是一样的，但是今天我可以告诉给大家，在内存中存储其实并不一样，下面我为大家详细的介绍一下。\n整数与浮点数在内存中存储的例子 下面我为大家举出一个关于他们在内存存储的例子，如下：\nint main()\r{\rint n = 9;//整型的存储方式，补码\r//00000000000000000000000000001001 9的补码\r//\rfloat* pFloat = (float*)\u0026amp;n;\rprintf(\u0026#34;n的值为：%d\\n\u0026#34;, n);//9\rprintf(\u0026#34;*pFloat的值为：%f\\n\u0026#34;, *pFloat);\r//0 00000000 00000000000000000001001\r//E 为全0\r//(-1)^0 * 0.00000000000000000001001 * 2^-126\r//1*\r//0.000000\r*pFloat = 9.0;\r//1001.0\r//(-1)^0 * 1.001*2^3\r//S=0\r//M=1.001\r//E = 3\r//01000001000100000000000000000000\r//\rprintf(\u0026#34;num的值为：%d\\n\u0026#34;, n);\rprintf(\u0026#34;*pFloat的值为：%f\\n\u0026#34;, *pFloat);//9.0\rreturn 0;\r} 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。\n2.整数在内存中的存储 这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！\n整数和浮点数在内存中存储 1.整数与浮点数在内存中存储是否一样\n整数与浮点数在内存中存储的例子\n2.整数在内存中的存储\n整数在内存中存储的具体例子\n3.浮点数在内存中的存储\n1.规定相关东西\nIEEE754的详细相关规定\n2.浮点数在内存中的具体示例\n3.讲解上例当中的题目\n1.整数与浮点数在内存中存储是否一样 首先我们大家都有一个疑问，在内存中数据的存储不都是以二进制形式存储的吗？还有什么不同呢？其实我在学习本节课之前我和大家的认知是一样的，都是认为他们的存储都是一样的，但是今天我可以告诉给大家，在内存中存储其实并不一样，下面我为大家详细的介绍一下。\n整数与浮点数在内存中存储的例子 下面我为大家举出一个关于他们在内存存储的例子，如下：\nint main()\r{\rint n = 9;//整型的存储方式，补码\r//00000000000000000000000000001001 9的补码\r//\rfloat* pFloat = (float*)\u0026n;\rprintf(\"n的值为：%d\\n\", n);//9\rprintf(\"*pFloat的值为：%f\\n\", *pFloat);\r//0 00000000 00000000000000000001001\r//E 为全0\r//(-1)^0 * 0.00000000000000000001001 * 2^-126\r//1*\r//0.000000\r*pFloat = 9.0;\r//1001.0\r//(-1)^0 * 1.001*2^3\r//S=0\r//M=1.001\r//E = 3\r//01000001000100000000000000000000\r//\rprintf(\"num的值为：%d\\n\", n);\rprintf(\"*pFloat的值为：%f\\n\", *pFloat);//9.0\rreturn 0;\r} 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。\n2.整数在内存中的存储 这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。\n整数在内存中存储的具体例子 下面我为大家介绍关于整数在内存中存储的一些例子，\nint a=9;\rint w=-9; 我们通过这个例子可以看出在内存中，a的存储是原来的二进制编码，但是呢w则是反码加1,通过以上我对于整数的诠释相信大家一定会明白整数在内存中存储原理，下面我就为大家介绍关于浮点数在内存中的存储原理。\n3.浮点数在内存中的存储 1.规定相关东西 首先呢，\nIEEE754规定了，任意⼀个⼆进制浮点数V可以表⽰成下⾯的形式： V = (−1) S *M * 2E •(-1)S表⽰符号位，当S=0，V为正数；当S=1，V为负数 • M 表⽰有效数字，M是⼤于等于1，⼩于2的 • 2E 表⽰指数位\nIEEE754的详细相关规定 1.这个组织对于浮点数的详细相关规定是一下几个方面：\n1.对于32位的浮点数，最⾼的1位存储符号位S，接着的8位存储指数E，剩下的23位存储有效数字M 2.对于64位的浮点数，最⾼的1位存储符号位S，接着的11位存储指数E，剩下的52位存储有效数字M\n大家看有图所示： 以及这个图案： 2.详细的相关定如下： 1.IEEE754规定M必须是大于等于1但是小于等于2，在书写中系统默认前面有一那么就相当于，在写M中前面的数字1可以不用自己书写只用书写1后面的部分就可以了，我给大家举出例子如下所示： 比如M=1.00001那么在内存中存储M的时候相当于将1后面的部分存储下来，也就是说存储的是00001 2，IEEE754规定对于指数部分就有些麻烦了，对于有8位的E来说，就是相当于给指数加上127，但是对于有11为的E来说，那么相等于是给指数加上1023. 3.我相信大家对于S一定是比较明白的那么的话，我就不为大家详细介绍了。\n2.浮点数在内存中的具体示例 首先在给大家举出例子的时候，希望大家明白一下几点。 1.若果E全为0那么的话就是不用再给M加上1了而是用0.xxxx表示，而指数则是需要用1-127表示，因此这个数字是正负都很接近0的数字 2.若果E全为1的话那么就表示的数字是正负无穷大。\n3.讲解上例当中的题目 大家通过我的相信分析，那么的话相信大家对于浮点数在内存中的存储一定有一番理解了，下面我就为大家介绍刚刚的题目。 1.首先呢题目中说n=9而9又是一个正数，根据前面讲到的，可以知道9的原码，反码，补码都是一样的，9的补码是00000000 00000000 00000000 001001 但是呢由于后面的语句意思是说将9.0的浮点数数地址强制转换为整数的地址，根据上面讲到的IEEE754标准可以知道的是在内存中其9.0的补码存储为浮点数地址，V=（-1）0 *1.001 *23 那么E等于3+127=130；M等于0001，S=0，也就是这样子的：0 100 0001 0001 0000 0000 0000 0000 0000 由于最高位是0那么原反补一样，是01000001000100000000000000000000，转换为十进制整数，就是1,091,567,616 2.由于整数9转化为浮点数，是0 00000000 0000000000000000000001001 由于E全为0那么这个数就非常接近0，也就是0 因此呢，通过以上的分析，大家想必对于上例也有了一番新的认识与理解，非常遗憾，这次的讲解再一次的结束了，我会在下一篇文章中给大家带来详细讲解的 完（结束）.\n",
-  "wordCount" : "135",
-  "inLanguage": "zh-cn",
-  "datePublished": "2026-08-18T00:00:00Z",
-  "dateModified": "2026-08-18T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": "dsduyopg"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="http://localhost:1313/search/" title="搜索">
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
-            <a href="/">主页</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/posts/">Posts</a>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-</nav>
-    <h1 class="post-title entry-hint-parent">
-      整数和浮点数在内存中存储
-    </h1>
-    <div class="post-meta">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>135 字</span>&nbsp;·&nbsp;<span>dsduyopg</span>
-
-</div>
-  </header> <details class="toc" >
-    <summary accesskey="c" title="(Alt + C)">
-        <span class="title">目录</span>
-    </summary>
-
-    <div class="inner"><ul><ul><ul>
-            <li>
-                <a href="#%e6%95%b4%e6%95%b0%e5%92%8c%e6%b5%ae%e7%82%b9%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e5%ad%98%e5%82%a8" aria-label="整数和浮点数在内存中存储">整数和浮点数在内存中存储</a></li></ul>
-                </ul>
-                
-            <li>
-                <a href="#1%e6%95%b4%e6%95%b0%e4%b8%8e%e6%b5%ae%e7%82%b9%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e5%ad%98%e5%82%a8%e6%98%af%e5%90%a6%e4%b8%80%e6%a0%b7" aria-label="1.整数与浮点数在内存中存储是否一样">1.整数与浮点数在内存中存储是否一样</a><ul>
-                    
-            <li>
-                <a href="#%e6%95%b4%e6%95%b0%e4%b8%8e%e6%b5%ae%e7%82%b9%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e5%ad%98%e5%82%a8%e7%9a%84%e4%be%8b%e5%ad%90" aria-label="整数与浮点数在内存中存储的例子">整数与浮点数在内存中存储的例子</a></li></ul>
-            </li>
-            <li>
-                <a href="#2%e6%95%b4%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e7%9a%84%e5%ad%98%e5%82%a8" aria-label="2.整数在内存中的存储">2.整数在内存中的存储</a><ul>
-                    
-            <li>
-                <a href="#%e6%95%b4%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e5%ad%98%e5%82%a8%e7%9a%84%e5%85%b7%e4%bd%93%e4%be%8b%e5%ad%90" aria-label="整数在内存中存储的具体例子">整数在内存中存储的具体例子</a></li></ul>
-            </li>
-            <li>
-                <a href="#3%e6%b5%ae%e7%82%b9%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e7%9a%84%e5%ad%98%e5%82%a8" aria-label="3.浮点数在内存中的存储">3.浮点数在内存中的存储</a><ul>
-                    
-            <li>
-                <a href="#1%e8%a7%84%e5%ae%9a%e7%9b%b8%e5%85%b3%e4%b8%9c%e8%a5%bf" aria-label="1.规定相关东西">1.规定相关东西</a><ul>
-                    
-            <li>
-                <a href="#ieee754%e7%9a%84%e8%af%a6%e7%bb%86%e7%9b%b8%e5%85%b3%e8%a7%84%e5%ae%9a" aria-label="IEEE754的详细相关规定">IEEE754的详细相关规定</a></li></ul>
-            </li>
-            <li>
-                <a href="#2%e6%b5%ae%e7%82%b9%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e7%9a%84%e5%85%b7%e4%bd%93%e7%a4%ba%e4%be%8b" aria-label="2.浮点数在内存中的具体示例">2.浮点数在内存中的具体示例</a></li>
-            <li>
-                <a href="#3%e8%ae%b2%e8%a7%a3%e4%b8%8a%e4%be%8b%e5%bd%93%e4%b8%ad%e7%9a%84%e9%a2%98%e7%9b%ae" aria-label="3.讲解上例当中的题目">3.讲解上例当中的题目</a>
-            </li>
-        </ul>
-        </li>
-        </ul>
-    </div>
-</details>
-
-  <div class="post-content md-content"><p><code>大家好，今天我为大家介绍关于整数与浮点数在内存中的存储</code>，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！</p>
-<h4 id="整数和浮点数在内存中存储">整数和浮点数在内存中存储<a hidden class="anchor" aria-hidden="true" href="#整数和浮点数在内存中存储">#</a></h4>
-<ul>
-<li>
-<p><a href="#1_2">1.整数与浮点数在内存中存储是否一样</a></p>
-</li>
-<li>
-<p><a href="#_5">整数与浮点数在内存中存储的例子</a></p>
-</li>
-<li>
-<p><a href="#2_40">2.整数在内存中的存储</a></p>
-</li>
-<li>
-<p><a href="#_42">整数在内存中存储的具体例子</a></p>
-</li>
-<li>
-<p><a href="#3_49">3.浮点数在内存中的存储</a></p>
-</li>
-<li>
-<p><a href="#1_50">1.规定相关东西</a></p>
-</li>
-<li>
-<p><a href="#IEEE754_56">IEEE754的详细相关规定</a></p>
-</li>
-<li>
-<p><a href="#2_70">2.浮点数在内存中的具体示例</a></p>
-</li>
-<li>
-<p><a href="#3_74">3.讲解上例当中的题目</a></p>
-</li>
-</ul>
-<h2 id="1整数与浮点数在内存中存储是否一样">1.整数与浮点数在内存中存储是否一样<a hidden class="anchor" aria-hidden="true" href="#1整数与浮点数在内存中存储是否一样">#</a></h2>
-<p>首先我们大家都有一个疑问，在内存中数据的存储不都是以二进制形式存储的吗？还有什么不同呢？其实我在学习本节课之前我和大家的认知是一样的，都是认为他们的存储都是一样的，但是今天我可以告诉给大家，在内存中存储其实并不一样，下面我为大家详细的介绍一下。</p>
-<h3 id="整数与浮点数在内存中存储的例子">整数与浮点数在内存中存储的例子<a hidden class="anchor" aria-hidden="true" href="#整数与浮点数在内存中存储的例子">#</a></h3>
-<p>下面我为大家举出一个关于他们在内存存储的例子，如下：</p>
-<pre tabindex="0"><code>
+int main(){int n = 9;//整型的存储方式，补码//00000000000000000000000000001001 9的补码//float* pFloat = (float*)&amp;n;printf("n的值为：%d\n", n);//9printf("*pFloat的值为：%f\n", *pFloat);//0 00000000 00000000000000000001001//E 为全0//(-1)^0 * 0.00000000000000000001001 * 2^-126//1*//0.000000*pFloat = 9.0;//1001.0//(-1)^0 * 1.001*2^3//S=0//M=1.001//E = 3//01000001000100000000000000000000//printf("num的值为：%d\n", n);printf("*pFloat的值为：%f\n", *pFloat);//9.0return 0;} 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。
+2.整数在内存中的存储 这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://dsduyopg.github.io/posts/"},{"@type":"ListItem","position":2,"name":"整数和浮点数在内存中存储","item":"https://dsduyopg.github.io/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"整数和浮点数在内存中存储","name":"整数和浮点数在内存中存储","description":"大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！\n整数和浮点数在内存中存储 1.整数与浮点数在内存中存储是否一样\n整数与浮点数在内存中存储的例子\n2.整数在内存中的存储\n整数在内存中存储的具体例子\n3.浮点数在内存中的存储\n1.规定相关东西\nIEEE754的详细相关规定\n2.浮点数在内存中的具体示例\n3.讲解上例当中的题目\n1.整数与浮点数在内存中存储是否一样 首先我们大家都有一个疑问，在内存中数据的存储不都是以二进制形式存储的吗？还有什么不同呢？其实我在学习本节课之前我和大家的认知是一样的，都是认为他们的存储都是一样的，但是今天我可以告诉给大家，在内存中存储其实并不一样，下面我为大家详细的介绍一下。\n整数与浮点数在内存中存储的例子 下面我为大家举出一个关于他们在内存存储的例子，如下：\nint main()\r{\rint n = 9;//整型的存储方式，补码\r//00000000000000000000000000001001 9的补码\r//\rfloat* pFloat = (float*)\u0026amp;n;\rprintf(\u0026#34;n的值为：%d\\n\u0026#34;, n);//9\rprintf(\u0026#34;*pFloat的值为：%f\\n\u0026#34;, *pFloat);\r//0 00000000 00000000000000000001001\r//E 为全0\r//(-1)^0 * 0.00000000000000000001001 * 2^-126\r//1*\r//0.000000\r*pFloat = 9.0;\r//1001.0\r//(-1)^0 * 1.001*2^3\r//S=0\r//M=1.001\r//E = 3\r//01000001000100000000000000000000\r//\rprintf(\u0026#34;num的值为：%d\\n\u0026#34;, n);\rprintf(\u0026#34;*pFloat的值为：%f\\n\u0026#34;, *pFloat);//9.0\rreturn 0;\r} 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。\n2.整数在内存中的存储 这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。\n","keywords":[],"articleBody":"大家好，今天我为大家介绍关于整数与浮点数在内存中的存储，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！\n整数和浮点数在内存中存储 1.整数与浮点数在内存中存储是否一样\n整数与浮点数在内存中存储的例子\n2.整数在内存中的存储\n整数在内存中存储的具体例子\n3.浮点数在内存中的存储\n1.规定相关东西\nIEEE754的详细相关规定\n2.浮点数在内存中的具体示例\n3.讲解上例当中的题目\n1.整数与浮点数在内存中存储是否一样 首先我们大家都有一个疑问，在内存中数据的存储不都是以二进制形式存储的吗？还有什么不同呢？其实我在学习本节课之前我和大家的认知是一样的，都是认为他们的存储都是一样的，但是今天我可以告诉给大家，在内存中存储其实并不一样，下面我为大家详细的介绍一下。\n整数与浮点数在内存中存储的例子 下面我为大家举出一个关于他们在内存存储的例子，如下：\nint main()\r{\rint n = 9;//整型的存储方式，补码\r//00000000000000000000000000001001 9的补码\r//\rfloat* pFloat = (float*)\u0026n;\rprintf(\"n的值为：%d\\n\", n);//9\rprintf(\"*pFloat的值为：%f\\n\", *pFloat);\r//0 00000000 00000000000000000001001\r//E 为全0\r//(-1)^0 * 0.00000000000000000001001 * 2^-126\r//1*\r//0.000000\r*pFloat = 9.0;\r//1001.0\r//(-1)^0 * 1.001*2^3\r//S=0\r//M=1.001\r//E = 3\r//01000001000100000000000000000000\r//\rprintf(\"num的值为：%d\\n\", n);\rprintf(\"*pFloat的值为：%f\\n\", *pFloat);//9.0\rreturn 0;\r} 大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。\n2.整数在内存中的存储 这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。\n整数在内存中存储的具体例子 下面我为大家介绍关于整数在内存中存储的一些例子，\nint a=9;\rint w=-9; 我们通过这个例子可以看出在内存中，a的存储是原来的二进制编码，但是呢w则是反码加1,通过以上我对于整数的诠释相信大家一定会明白整数在内存中存储原理，下面我就为大家介绍关于浮点数在内存中的存储原理。\n3.浮点数在内存中的存储 1.规定相关东西 首先呢，\nIEEE754规定了，任意⼀个⼆进制浮点数V可以表⽰成下⾯的形式： V = (−1) S *M * 2E •(-1)S表⽰符号位，当S=0，V为正数；当S=1，V为负数 • M 表⽰有效数字，M是⼤于等于1，⼩于2的 • 2E 表⽰指数位\nIEEE754的详细相关规定 1.这个组织对于浮点数的详细相关规定是一下几个方面：\n1.对于32位的浮点数，最⾼的1位存储符号位S，接着的8位存储指数E，剩下的23位存储有效数字M 2.对于64位的浮点数，最⾼的1位存储符号位S，接着的11位存储指数E，剩下的52位存储有效数字M\n大家看有图所示： 以及这个图案： 2.详细的相关定如下： 1.IEEE754规定M必须是大于等于1但是小于等于2，在书写中系统默认前面有一那么就相当于，在写M中前面的数字1可以不用自己书写只用书写1后面的部分就可以了，我给大家举出例子如下所示： 比如M=1.00001那么在内存中存储M的时候相当于将1后面的部分存储下来，也就是说存储的是00001 2，IEEE754规定对于指数部分就有些麻烦了，对于有8位的E来说，就是相当于给指数加上127，但是对于有11为的E来说，那么相等于是给指数加上1023. 3.我相信大家对于S一定是比较明白的那么的话，我就不为大家详细介绍了。\n2.浮点数在内存中的具体示例 首先在给大家举出例子的时候，希望大家明白一下几点。 1.若果E全为0那么的话就是不用再给M加上1了而是用0.xxxx表示，而指数则是需要用1-127表示，因此这个数字是正负都很接近0的数字 2.若果E全为1的话那么就表示的数字是正负无穷大。\n3.讲解上例当中的题目 大家通过我的相信分析，那么的话相信大家对于浮点数在内存中的存储一定有一番理解了，下面我就为大家介绍刚刚的题目。 1.首先呢题目中说n=9而9又是一个正数，根据前面讲到的，可以知道9的原码，反码，补码都是一样的，9的补码是00000000 00000000 00000000 001001 但是呢由于后面的语句意思是说将9.0的浮点数数地址强制转换为整数的地址，根据上面讲到的IEEE754标准可以知道的是在内存中其9.0的补码存储为浮点数地址，V=（-1）0 *1.001 *23 那么E等于3+127=130；M等于0001，S=0，也就是这样子的：0 100 0001 0001 0000 0000 0000 0000 0000 由于最高位是0那么原反补一样，是01000001000100000000000000000000，转换为十进制整数，就是1,091,567,616 2.由于整数9转化为浮点数，是0 00000000 0000000000000000000001001 由于E全为0那么这个数就非常接近0，也就是0 因此呢，通过以上的分析，大家想必对于上例也有了一番新的认识与理解，非常遗憾，这次的讲解再一次的结束了，我会在下一篇文章中给大家带来详细讲解的 完（结束）.\n","wordCount":"135","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","author":{"@type":"Person","name":"dsduyopg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg.github.io/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/"},"publisher":{"@type":"Organization","name":"我的博客","logo":{"@type":"ImageObject","url":"https://dsduyopg.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg.github.io/ accesskey=h title="我的博客 (Alt + H)">我的博客</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg.github.io/search/ title=搜索><span>搜索</span></a></li><li><a href=https://dsduyopg.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg.github.io/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/posts/>Posts</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">整数和浮点数在内存中存储</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>135 字</span>&nbsp;·&nbsp;<span>dsduyopg</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><ul><ul><li><a href=#%e6%95%b4%e6%95%b0%e5%92%8c%e6%b5%ae%e7%82%b9%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e5%ad%98%e5%82%a8 aria-label=整数和浮点数在内存中存储>整数和浮点数在内存中存储</a></li></ul></ul><li><a href=#1%e6%95%b4%e6%95%b0%e4%b8%8e%e6%b5%ae%e7%82%b9%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e5%ad%98%e5%82%a8%e6%98%af%e5%90%a6%e4%b8%80%e6%a0%b7 aria-label=1.整数与浮点数在内存中存储是否一样>1.整数与浮点数在内存中存储是否一样</a><ul><li><a href=#%e6%95%b4%e6%95%b0%e4%b8%8e%e6%b5%ae%e7%82%b9%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e5%ad%98%e5%82%a8%e7%9a%84%e4%be%8b%e5%ad%90 aria-label=整数与浮点数在内存中存储的例子>整数与浮点数在内存中存储的例子</a></li></ul></li><li><a href=#2%e6%95%b4%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e7%9a%84%e5%ad%98%e5%82%a8 aria-label=2.整数在内存中的存储>2.整数在内存中的存储</a><ul><li><a href=#%e6%95%b4%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e5%ad%98%e5%82%a8%e7%9a%84%e5%85%b7%e4%bd%93%e4%be%8b%e5%ad%90 aria-label=整数在内存中存储的具体例子>整数在内存中存储的具体例子</a></li></ul></li><li><a href=#3%e6%b5%ae%e7%82%b9%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e7%9a%84%e5%ad%98%e5%82%a8 aria-label=3.浮点数在内存中的存储>3.浮点数在内存中的存储</a><ul><li><a href=#1%e8%a7%84%e5%ae%9a%e7%9b%b8%e5%85%b3%e4%b8%9c%e8%a5%bf aria-label=1.规定相关东西>1.规定相关东西</a><ul><li><a href=#ieee754%e7%9a%84%e8%af%a6%e7%bb%86%e7%9b%b8%e5%85%b3%e8%a7%84%e5%ae%9a aria-label=IEEE754的详细相关规定>IEEE754的详细相关规定</a></li></ul></li><li><a href=#2%e6%b5%ae%e7%82%b9%e6%95%b0%e5%9c%a8%e5%86%85%e5%ad%98%e4%b8%ad%e7%9a%84%e5%85%b7%e4%bd%93%e7%a4%ba%e4%be%8b aria-label=2.浮点数在内存中的具体示例>2.浮点数在内存中的具体示例</a></li><li><a href=#3%e8%ae%b2%e8%a7%a3%e4%b8%8a%e4%be%8b%e5%bd%93%e4%b8%ad%e7%9a%84%e9%a2%98%e7%9b%ae aria-label=3.讲解上例当中的题目>3.讲解上例当中的题目</a></li></ul></li></ul></div></details><div class="post-content md-content"><p><code>大家好，今天我为大家介绍关于整数与浮点数在内存中的存储</code>，我们通过今天的讲解一定会更加理解浮点数的储存模式，更好修炼大家的内功，来开启我们的学习之旅吧！</p><h4 id=整数和浮点数在内存中存储>整数和浮点数在内存中存储<a hidden class=anchor aria-hidden=true href=#整数和浮点数在内存中存储>#</a></h4><ul><li><p><a href=#1_2>1.整数与浮点数在内存中存储是否一样</a></p></li><li><p><a href=#_5>整数与浮点数在内存中存储的例子</a></p></li><li><p><a href=#2_40>2.整数在内存中的存储</a></p></li><li><p><a href=#_42>整数在内存中存储的具体例子</a></p></li><li><p><a href=#3_49>3.浮点数在内存中的存储</a></p></li><li><p><a href=#1_50>1.规定相关东西</a></p></li><li><p><a href=#IEEE754_56>IEEE754的详细相关规定</a></p></li><li><p><a href=#2_70>2.浮点数在内存中的具体示例</a></p></li><li><p><a href=#3_74>3.讲解上例当中的题目</a></p></li></ul><h2 id=1整数与浮点数在内存中存储是否一样>1.整数与浮点数在内存中存储是否一样<a hidden class=anchor aria-hidden=true href=#1整数与浮点数在内存中存储是否一样>#</a></h2><p>首先我们大家都有一个疑问，在内存中数据的存储不都是以二进制形式存储的吗？还有什么不同呢？其实我在学习本节课之前我和大家的认知是一样的，都是认为他们的存储都是一样的，但是今天我可以告诉给大家，在内存中存储其实并不一样，下面我为大家详细的介绍一下。</p><h3 id=整数与浮点数在内存中存储的例子>整数与浮点数在内存中存储的例子<a hidden class=anchor aria-hidden=true href=#整数与浮点数在内存中存储的例子>#</a></h3><p>下面我为大家举出一个关于他们在内存存储的例子，如下：</p><pre tabindex=0><code>
 int main()
 {
     int n = 9;//整型的存储方式，补码
@@ -403,45 +125,24 @@ int main()
     return 0;
 }
 </code></pre><p>大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/images/4b360db0fd17a82162a9734848396396.png">
-因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。</p>
-<h2 id="2整数在内存中的存储">2.整数在内存中的存储<a hidden class="anchor" aria-hidden="true" href="#2整数在内存中的存储">#</a></h2>
-<p>这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。</p>
-<h3 id="整数在内存中存储的具体例子">整数在内存中存储的具体例子<a hidden class="anchor" aria-hidden="true" href="#整数在内存中存储的具体例子">#</a></h3>
-<p>下面我为大家介绍关于整数在内存中存储的一些例子，</p>
-<pre tabindex="0"><code>int a=9;
+<img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/images/4b360db0fd17a82162a9734848396396.png>
+因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。</p><h2 id=2整数在内存中的存储>2.整数在内存中的存储<a hidden class=anchor aria-hidden=true href=#2整数在内存中的存储>#</a></h2><p>这个我们都知道，整数在内存中是按照二进制的补码进行存储的，而正数的补码就是正数其本身，但是负数的补码则是其原二进制的反码+1，具体的讲在二进制当中我已经为大家详细介绍过了，下面我们看一下他们的具体的例子就可以了。</p><h3 id=整数在内存中存储的具体例子>整数在内存中存储的具体例子<a hidden class=anchor aria-hidden=true href=#整数在内存中存储的具体例子>#</a></h3><p>下面我为大家介绍关于整数在内存中存储的一些例子，</p><pre tabindex=0><code>int a=9;
 int w=-9;
-</code></pre><p>我们通过这个例子可以看出在内存中，a的存储是原来的二进制编码，但是呢w则是反码加1,通过以上我对于整数的诠释相信大家一定会明白整数在内存中存储原理，下面我就为大家介绍关于浮点数在内存中的存储原理。</p>
-<h2 id="3浮点数在内存中的存储">3.浮点数在内存中的存储<a hidden class="anchor" aria-hidden="true" href="#3浮点数在内存中的存储">#</a></h2>
-<h3 id="1规定相关东西">1.规定相关东西<a hidden class="anchor" aria-hidden="true" href="#1规定相关东西">#</a></h3>
-<p>首先呢，</p>
-<blockquote>
-</blockquote>
-<p>IEEE754规定了，任意⼀个⼆进制浮点数V可以表⽰成下⾯的形式：
+</code></pre><p>我们通过这个例子可以看出在内存中，a的存储是原来的二进制编码，但是呢w则是反码加1,通过以上我对于整数的诠释相信大家一定会明白整数在内存中存储原理，下面我就为大家介绍关于浮点数在内存中的存储原理。</p><h2 id=3浮点数在内存中的存储>3.浮点数在内存中的存储<a hidden class=anchor aria-hidden=true href=#3浮点数在内存中的存储>#</a></h2><h3 id=1规定相关东西>1.规定相关东西<a hidden class=anchor aria-hidden=true href=#1规定相关东西>#</a></h3><p>首先呢，</p><blockquote></blockquote><p>IEEE754规定了，任意⼀个⼆进制浮点数V可以表⽰成下⾯的形式：
 V = (−1) S *M * 2E
 •(-1)S表⽰符号位，当S=0，V为正数；当S=1，V为负数 • M 表⽰有效数字，M是⼤于等于1，⼩于2的
-• 2E 表⽰指数位</p>
-<h4 id="ieee754的详细相关规定">IEEE754的详细相关规定<a hidden class="anchor" aria-hidden="true" href="#ieee754的详细相关规定">#</a></h4>
-<p>1.这个组织对于浮点数的详细相关规定是一下几个方面：</p>
-<blockquote>
-</blockquote>
-<p>1.对于32位的浮点数，最⾼的1位存储符号位S，接着的8位存储指数E，剩下的23位存储有效数字M
-2.对于64位的浮点数，最⾼的1位存储符号位S，接着的11位存储指数E，剩下的52位存储有效数字M</p>
-<p>大家看有图所示：
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/images/ea50fd496de6bcf44a10384c4fb2b6b8.png">
+• 2E 表⽰指数位</p><h4 id=ieee754的详细相关规定>IEEE754的详细相关规定<a hidden class=anchor aria-hidden=true href=#ieee754的详细相关规定>#</a></h4><p>1.这个组织对于浮点数的详细相关规定是一下几个方面：</p><blockquote></blockquote><p>1.对于32位的浮点数，最⾼的1位存储符号位S，接着的8位存储指数E，剩下的23位存储有效数字M
+2.对于64位的浮点数，最⾼的1位存储符号位S，接着的11位存储指数E，剩下的52位存储有效数字M</p><p>大家看有图所示：
+<img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/images/ea50fd496de6bcf44a10384c4fb2b6b8.png>
 以及这个图案：
-<img alt="在这里插入图片描述" loading="lazy" src="/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/images/6c00a7eba773c3b0949ddb19860d8695.png">
+<img alt=在这里插入图片描述 loading=lazy src=/posts/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/images/6c00a7eba773c3b0949ddb19860d8695.png>
 2.详细的相关定如下：
 1.IEEE754规定M必须是大于等于1但是小于等于2，在书写中系统默认前面有一那么就相当于，在写M中前面的数字1可以不用自己书写只用书写1后面的部分就可以了，我给大家举出例子如下所示：
 比如M=1.00001那么在内存中存储M的时候相当于将1后面的部分存储下来，也就是说存储的是00001
 2，IEEE754规定对于指数部分就有些麻烦了，对于有8位的E来说，就是相当于给指数加上127，但是对于有11为的E来说，那么相等于是给指数加上1023.
-3.我相信大家对于S一定是比较明白的那么的话，我就不为大家详细介绍了。</p>
-<h3 id="2浮点数在内存中的具体示例">2.浮点数在内存中的具体示例<a hidden class="anchor" aria-hidden="true" href="#2浮点数在内存中的具体示例">#</a></h3>
-<p>首先在给大家举出例子的时候，希望大家明白一下几点。
+3.我相信大家对于S一定是比较明白的那么的话，我就不为大家详细介绍了。</p><h3 id=2浮点数在内存中的具体示例>2.浮点数在内存中的具体示例<a hidden class=anchor aria-hidden=true href=#2浮点数在内存中的具体示例>#</a></h3><p>首先在给大家举出例子的时候，希望大家明白一下几点。
 1.若果E全为0那么的话就是不用再给M加上1了而是用0.xxxx表示，而指数则是需要用1-127表示，因此这个数字是正负都很接近0的数字
-2.若果E全为1的话那么就表示的数字是正负无穷大。</p>
-<h3 id="3讲解上例当中的题目">3.讲解上例当中的题目<a hidden class="anchor" aria-hidden="true" href="#3讲解上例当中的题目">#</a></h3>
-<p>大家通过我的相信分析，那么的话相信大家对于浮点数在内存中的存储一定有一番理解了，下面我就为大家介绍刚刚的题目。
+2.若果E全为1的话那么就表示的数字是正负无穷大。</p><h3 id=3讲解上例当中的题目>3.讲解上例当中的题目<a hidden class=anchor aria-hidden=true href=#3讲解上例当中的题目>#</a></h3><p>大家通过我的相信分析，那么的话相信大家对于浮点数在内存中的存储一定有一番理解了，下面我就为大家介绍刚刚的题目。
 1.首先呢题目中说n=9而9又是一个正数，根据前面讲到的，可以知道9的原码，反码，补码都是一样的，9的补码是00000000 00000000 00000000 001001
 但是呢由于后面的语句意思是说将9.0的浮点数数地址强制转换为整数的地址，根据上面讲到的IEEE754标准可以知道的是在内存中其9.0的补码存储为浮点数地址，V=（-1）0 *1.001 *23
 那么E等于3+127=130；M等于0001，S=0，也就是这样子的：0 100 0001 0001 0000 0000 0000 0000 0000
@@ -449,173 +150,11 @@ V = (−1) S *M * 2E
 2.由于整数9转化为浮点数，是0 00000000 0000000000000000000001001
 由于E全为0那么这个数就非常接近0，也就是0
 因此呢，通过以上的分析，大家想必对于上例也有了一番新的认识与理解，非常遗憾，这次的讲解再一次的结束了，我会在下一篇文章中给大家带来详细讲解的
-完（结束）.</p>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">
-    <span class="title">« 上一页</span>
-    <span>这个是关于ssh的相关问题这个是关于ssh的相关问题</span>
-  </a>
-  <a class="next" href="http://localhost:1313/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/">
-    <span class="title">下一页 »</span>
-    <span>字符串中删除后导星号的问题</span>
-  </a>
-</nav>
-
-  </footer>
-<div class="comments">
-  <h2>评论</h2>
-  <script src="https://utteranc.es/client.js"
-          repo="dsduyopg/dsduyopg.github.io"
-          issue-term="pathname"
-          label="comment"
-          theme="preferred-color-scheme"
-          crossorigin="anonymous"
-          async>
-  </script>
-  <noscript>请启用 JavaScript 查看评论。</noscript>
-</div>
-
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-<div class="busuanzi">
-  本站访客 <span id="busuanzi_value_site_uv"></span> ·
-  访问量 <span id="busuanzi_value_site_pv"></span> · 本文阅读 <span id="busuanzi_value_page_pv"></span>
-</div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = '复制';
-
-        function copyingDone() {
-            copybutton.innerHTML = '已复制！';
-            setTimeout(() => {
-                copybutton.innerHTML = '复制';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+完（结束）.</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg.github.io/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/><span class=title>« 上一页</span>
+<span>这个是关于ssh的相关问题这个是关于ssh的相关问题</span>
+</a><a class=next href=https://dsduyopg.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/><span class=title>下一页 »</span>
+<span>字符串中删除后导星号的问题</span></a></nav></footer><div class=comments><h2>评论</h2><script src=https://utteranc.es/client.js repo=dsduyopg/dsduyopg.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script><noscript>请启用 JavaScript 查看评论。</noscript></div></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg.github.io/>我的博客</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
