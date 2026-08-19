@@ -13,27 +13,7 @@
       <link>https://dsduyopg-github-io.pages.dev/posts/telegram-%E5%8F%8C%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E5%8A%A0%E5%AF%86-&#43;-%E6%98%8E%E6%96%87%E5%8F%8C%E9%80%9A%E9%81%93-&#43;-%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8F%96%E6%96%87%E4%BB%B6/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
       <guid>https://dsduyopg-github-io.pages.dev/posts/telegram-%E5%8F%8C%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E5%8A%A0%E5%AF%86-&#43;-%E6%98%8E%E6%96%87%E5%8F%8C%E9%80%9A%E9%81%93-&#43;-%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8F%96%E6%96%87%E4%BB%B6/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;我怕电脑坏了，博客、课件、代码和考研资料全丢，于是用 Telegram 的私有频道给自己搭了一套免费的自动备份系统：加密 + 明文双通道，文件有变化 5 秒内自动上传，机器人随时查目录、按序号取文件，开机自启，最后还封装成了一键安装包。&lt;/p&gt;
-&lt;p&gt;全程 AI 写代码，我只做需求设计、测试验证和问题排障。这篇文章把完整实施过程和踩过的坑都记录下来，想搭类似系统的人可以直接照着做。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;声明：本文是 AI 辅助开发实践记录。代码由 AI 辅助生成，作者负责需求设计、方案选型、测试、部署和排障。文中出现的手机号、Token、频道 ID 均为占位符，请勿直接复制使用。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我最怕的事，是电脑突然坏了。博客、课件、代码、考研资料，全都存在本地硬盘里，坏了就真的什么都没了。U 盘会丢、会坏；网盘要么容量小，要么限速，要么收费；而且都是手动上传，经常想不起来备份。&lt;/p&gt;
-&lt;p&gt;其实这个问题，我上一个项目就尝试解决过。当时我做了 Git 自动同步方案，先问了 AI 一个问题：远端仓库大小、单个仓库能存的文件数，到底有什么限制？它告诉我：Gitee 的空间限制比 GitHub 严格得多，空间小；GitHub 也不是无限的，同样有空间和单仓库大小的上限。&lt;/p&gt;
-&lt;p&gt;那时我就意识到，只靠 Git 一个小工具，解决不了所有备份问题。同步博客这种文件少、体积小的场景没什么压力，但一旦要同步课件、学习资料这类又多又大的文件，就很吃力了。Git 项目虽然也能备份，但只适合小文件。我需要探索一种新的范式，来摆脱这个困境。&lt;/p&gt;
-&lt;p&gt;我把上面的痛点整理成了明确的需求：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;容量要大&lt;/strong&gt;——网盘装不下我的课件和学习资料&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;速度不能太慢&lt;/strong&gt;——别像某些网盘一样上传下载都限速&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;要自动&lt;/strong&gt;——手动上传总会忘，最好&amp;quot;文件一改，自动同步&amp;quot;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;要异地保存&lt;/strong&gt;——电脑坏了、U 盘丢了，文件还在别处，能恢复&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;成本要低&lt;/strong&gt;——个人使用，不想年年交钱&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;国内网盘首先排除——要么容量小，要么要付费，要么限速。后来我想到了自己天天在用的那个 AI 机器人（bot）：它就部署在 Telegram 上，而 Telegram 的私有频道可以存放大量文件，这不正好和我的需求相符吗？容量近乎用不完，速度也够用，还能自动上传、异地保存。这就是这个项目的直接推动力。&lt;/p&gt;
-&lt;p&gt;下面我将详细介绍这个项目：从方案选型、系统架构，到一步步搭建、踩过的坑，再到整套系统的最终效果。&lt;/p&gt;
-&lt;h2 id=&#34;一最终做成了什么&#34;&gt;一.最终做成了什么&lt;/h2&gt;</description>
+      <description>用 Telegram 私有频道搭建免费自动备份系统：加密 &#43; 明文双通道、实时同步、机器人取文件、一键安装包，全程 AI 写代码，含完整实施步骤和踩坑记录。</description>
     </item>
     <item>
       <title>Windows 上让 Git 自动同步：NSSM 服务 &#43; 实时监听实战</title>
