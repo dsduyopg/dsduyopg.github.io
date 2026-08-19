@@ -212,21 +212,14 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p> 目录 数据结构链表当中的头结点问题 1. 示例举证 出现的什么例子（单链表的表头节点） 给出自己原来写的代码及源码 2.出现的问题 出现的问题分类，代码里的哪些函数出错了。 3. 我的解决方案 从网上chatgpt查找得到的解决方案 自己研究得出的方案 给出自己修改过的代码 4. 给予大家的警示 数据结构链表当中的头结点问题 ==示例举证== 出现的什么例子（单链表的表头节点）
-给出自己原来写的代码及源码
-2.出现的问题
-出现的问题分类，代码里的哪些函数出错了。
-我的解决方案 从网上chatgpt查找得到的解决方案
-自己研究得出的方案
-给出自己修改过的代码
-给予大家的警示 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。
+    <p> 目录 数据结构链表当中的头结点问题 1. 示例举证 出现的什么例子（单链表的表头节点） 给出自己原来写的代码及源码 2.出现的问题 出现的问题分类，代码里的哪些函数出错了。 3. 我的解决方案 从网上chatgpt查找得到的解决方案 自己研究得出的方案 给出自己修改过的代码 4. 给予大家的警示 数据结构链表当中的头结点问题 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。
 给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：
 #include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;// 定义链表节点结构struct ListNode {int value;struct ListNode* next;};// 反转链表函数struct ListNode* reverseList(struct ListNode* head) {struct ListNode* prev = NULL;struct ListNode* current = head;struct ListNode* nextNode = NULL;while (current != NULL) {nextNode = current-&gt;next; // 暂存下一个节点current-&gt;next = prev; // 反转当前节点的指针prev = current; // 前移 prevcurrent = nextNode; // 前移 current}return prev; // 返回新的头节点}// 辅助函数，用于创建新节点struct ListNode* createNode() {struct ListNode* head; // 初始化头节点为空head=(struct ListNode*)malloc(sizeof(struct ListNode));head-&gt;next=NULL; // 用于记录链表的尾节点int x; // x为链表数据域中的数据while (scanf(&#34;%d&#34;, &amp;x) != EOF) {struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));newNode-&gt;value = x;newNode-&gt;next =head-&gt;next; // 将新节点链接到尾节点之后head-&gt;next=newNode; // 更新尾节点}return head;}// 辅助函数，用于打印链表void printList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {printf(&#34;%d -&gt; &#34;, current-&gt;value);current = current-&gt;next;}printf(&#34;NULL\n&#34;);}// 辅助函数，用于释放链表内存void freeList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {struct ListNode* next = current-&gt;next;free(current);current = next;}}// 主函数，用于测试反转链表int main() {// 创建链表printf(&#34;请输入链表节点值，以EOF结束：\n&#34;);struct ListNode* head = createNode();printf(&#34;原链表: &#34;);printList(head);// 反转链表struct ListNode* reversedHead = reverseList(head);printf(&#34;反转后的链表: &#34;);printList(reversedHead);// 释放内存freeList(reversedHead);return 0;} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>679 字</span></footer>
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>669 字</span></footer>
   <a class="entry-link" aria-label="post link to 数据结构链表当中的头结点问题" href="https://dsduyopg-github-io.pages.dev/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/"></a>
 </article>
 
