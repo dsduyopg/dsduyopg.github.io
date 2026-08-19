@@ -3,9 +3,10 @@ comments: true
 title: "Windows 上让 Git 自动同步：NSSM 服务 + 实时监听实战"
 date: 2026-08-18
 draft: false
+ShowToc: false
 tags: ["Git", "Windows", "NSSM", "自动化"]
 ---
-
+{{< toc >}}
 
 - [1. 引言](#1__8)
 

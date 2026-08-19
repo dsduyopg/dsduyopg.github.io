@@ -3,7 +3,10 @@ comments: true
 title: "C语言的分支与循环上"
 date: 2026-08-18
 draft: false
+ShowToc: false
 ---
+{{< toc >}}
+
 ## if语句
 
 

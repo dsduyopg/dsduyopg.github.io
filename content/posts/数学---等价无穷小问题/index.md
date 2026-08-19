@@ -3,7 +3,10 @@ comments: true
 title: "数学---等价无穷小问题"
 date: 2026-08-18
 draft: false
+ShowToc: false
 ---
+{{< toc >}}
+
 ## 题目如下：limit as x approaches 0 of (cosx)/(x^2)-(sinx)/(x ^3) 中，可以用等价无穷小写吗？
 
 

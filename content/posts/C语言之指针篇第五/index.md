@@ -3,7 +3,10 @@ comments: true
 title: "C语言之指针篇第五"
 date: 2026-08-18
 draft: false
+ShowToc: false
 ---
+{{< toc >}}
+
 在本讲中，我们将会详细的学习sizeof以及strlen的区别，同时呢我也会为大家讲一些经典面试题，相信大家在看过我的本讲之后，一定会对指针有更加深刻的认识与了解，下面就开启我们的指针之旅吧。
 
 

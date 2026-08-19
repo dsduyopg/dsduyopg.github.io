@@ -3,7 +3,10 @@ comments: true
 title: "C语言之讲解篇4"
 date: 2026-08-18
 draft: false
+ShowToc: false
 ---
+{{< toc >}}
+
 例题：
 
 
