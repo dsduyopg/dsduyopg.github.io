@@ -1,20 +1,10 @@
-
-
-
-
-* * *
-
+---
 comments: true
-
-title: "Telegram 双备份系统实战：加密 + 明文双通道 + 机器人取文件"
-
-date: 2026-08-19、
-
-Telegram, 备份, Teldrive, 自动化, AI辅助开
-
+title: "Windows 上让 Git 自动同步：NSSM 服务 + 实时监听实战"
+date: 2026-08-18
 draft: false
-
-* * *
+tags: [Telegram, 备份, Teldrive, 自动化, AI辅助开发]
+---
 
 # Telegram 双备份系统实战：加密 + 明文双通道 + 机器人取文件
 
@@ -48,7 +38,7 @@ draft: false
 
 下面我将详细介绍这个项目：从方案选型、系统架构，到一步步搭建、踩过的坑，再到整套系统的最终效果。
 
-# 一.最终做成了什么
+## 一.最终做成了什么
 
 
 
