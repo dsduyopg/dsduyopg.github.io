@@ -13,8 +13,7 @@
       <link>https://dsduyopg-github-io.pages.dev/posts/telegram-%E5%8F%8C%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E5%8A%A0%E5%AF%86-&#43;-%E6%98%8E%E6%96%87%E5%8F%8C%E9%80%9A%E9%81%93-&#43;-%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8F%96%E6%96%87%E4%BB%B6/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
       <guid>https://dsduyopg-github-io.pages.dev/posts/telegram-%E5%8F%8C%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E5%8A%A0%E5%AF%86-&#43;-%E6%98%8E%E6%96%87%E5%8F%8C%E9%80%9A%E9%81%93-&#43;-%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8F%96%E6%96%87%E4%BB%B6/</guid>
-      <description>&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;blockquote&gt;
+      <description>&lt;blockquote&gt;
 &lt;p&gt;我怕电脑坏了，博客、课件、代码和考研资料全丢，于是用 Telegram 的私有频道给自己搭了一套免费的自动备份系统：加密 + 明文双通道，文件有变化 5 秒内自动上传，机器人随时查目录、按序号取文件，开机自启，最后还封装成了一键安装包。&lt;/p&gt;
 &lt;p&gt;全程 AI 写代码，我只做需求设计、测试验证和问题排障。这篇文章把完整实施过程和踩过的坑都记录下来，想搭类似系统的人可以直接照着做。&lt;/p&gt;
 &lt;/blockquote&gt;
