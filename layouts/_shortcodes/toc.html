@@ -1,0 +1,12 @@
+{{- /* 正文内目录：用法 {{< toc >}}，自动从 ##/### 标题生成，遵循 hugo.toml 的 [markup.tableOfContents] 设置 */ -}}
+{{- $toc := .Page.TableOfContents -}}
+{{- with $toc }}
+<details class="toc" open>
+  <summary accesskey="c" title="(Alt + C)">
+    <span class="title">{{- i18n "toc" | default "Table of Contents" -}}</span>
+  </summary>
+  <div class="inner">
+    {{- . | safeHTML -}}
+  </div>
+</details>
+{{- end }}

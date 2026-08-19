@@ -3,6 +3,7 @@ comments: true
 title: "Telegram 双备份系统实战：加密 + 明文双通道 + 机器人取文件"
 date: 2026-08-18
 draft: false
+ShowToc: false
 description: "用 Telegram 私有频道搭建免费自动备份系统：加密 + 明文双通道、实时同步、机器人取文件、一键安装包，全程 AI 写代码，含完整实施步骤和踩坑记录。"
 tags: [Telegram, 备份, Teldrive, 自动化, AI辅助开发]
 
