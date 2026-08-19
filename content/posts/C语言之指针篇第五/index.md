@@ -13,28 +13,6 @@ ShowToc: false
 #### C语言之指针篇第五
 
 
-- [一.sizeof和strlen的对⽐](#sizeofstrlen_3)
-
-
-- [1.sizeof](#1sizeof_5)
-
-
-- [1.sizeof含义](#1sizeof_6)
-
-- [2.例子：](#2_8)
-
-
-- [2.strlen](#2strlen_20)
-
-
-- [1.strlen的含义](#1strlen_21)
-
-- [2.例子](#2_23)
-
-
-- [二.数组指针笔试题解析](#_31)
-
-
 ## 一.sizeof和strlen的对⽐
 
 
