@@ -1,14 +1,10 @@
 ---
 comments: true
-title: "Windows 上让 Git 自动同步：NSSM 服务 + 实时监听实战"
+title: "Telegram 双备份系统实战：加密 + 明文双通道 + 机器人取文件"
 date: 2026-08-18
 draft: false
 tags: [Telegram, 备份, Teldrive, 自动化, AI辅助开发]
 ---
-
-# Telegram 双备份系统实战：加密 + 明文双通道 + 机器人取文件
-
-
 
 [TOC]
 
