@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="auto" data-theme="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -86,74 +86,24 @@
 
 
 磁盘的综合案例
-
-
 1.修改网络配置
-
-
+我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172
 1.改成88网段
-
-
+注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下
+这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。
 情况一：全局迁移至 88 网段（推荐彻底解决）
-
-
-第一步：修改 VMware 底层配置
-
-
-第二步：修改虚拟机内部配置
-
-
-第三步：验证连通性
-
-
-情况二：临时恢复连接（最省事）
-
-
-2.ssh免密登录
-
-
-0.对于hosts文件进行修改
-
-
-1.生成私钥和公钥
-
-
-2.发送公钥
-
-
-3.测试一下
-
-
-2.DNS配置
-
-
-1.要求
-
-
-2.配置
-
-
-1.正解析文件的配置
-
-
-3.反解析文件配置
-
-
-3.测试
-
-
-4.开放端口">
+如果你想把所有机器都规范到 88 网段，请按以下步骤操作：">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">
+<link rel="canonical" href="https://dsduyopg-github-io.pages.dev/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.4ebc9b965c5d98ea3529c621193c44d266a9d19d18362e536509add964466cf5.css" integrity="sha256-TrybllxdmOo1KcYhGTxE0map0Z0YNi5TZQmt2WRGbPU=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://dsduyopg-github-io.pages.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://dsduyopg-github-io.pages.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://dsduyopg-github-io.pages.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://dsduyopg-github-io.pages.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">
+<link rel="alternate" hreflang="zh-cn" href="https://dsduyopg-github-io.pages.dev/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">
 <noscript>
     <style>
         #theme-toggle,
@@ -199,28 +149,12 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">
+</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">
   <meta property="og:site_name" content="My_blog">
   <meta property="og:title" content="磁盘的综合案例">
-  <meta property="og:description" content="目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置
-1.改成88网段
-情况一：全局迁移至 88 网段（推荐彻底解决）
-第一步：修改 VMware 底层配置
-第二步：修改虚拟机内部配置
-第三步：验证连通性
-情况二：临时恢复连接（最省事）
-2.ssh免密登录
-0.对于hosts文件进行修改
-1.生成私钥和公钥
-2.发送公钥
-3.测试一下
-2.DNS配置
-1.要求
-2.配置
-1.正解析文件的配置
-3.反解析文件配置
-3.测试
-4.开放端口">
+  <meta property="og:description" content="目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172
+1.改成88网段 注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下 这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。
+情况一：全局迁移至 88 网段（推荐彻底解决） 如果你想把所有机器都规范到 88 网段，请按以下步骤操作：">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -229,25 +163,9 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="磁盘的综合案例">
-  <meta name="twitter:description" content="目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置
-1.改成88网段
-情况一：全局迁移至 88 网段（推荐彻底解决）
-第一步：修改 VMware 底层配置
-第二步：修改虚拟机内部配置
-第三步：验证连通性
-情况二：临时恢复连接（最省事）
-2.ssh免密登录
-0.对于hosts文件进行修改
-1.生成私钥和公钥
-2.发送公钥
-3.测试一下
-2.DNS配置
-1.要求
-2.配置
-1.正解析文件的配置
-3.反解析文件配置
-3.测试
-4.开放端口">
+  <meta name="twitter:description" content="目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172
+1.改成88网段 注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下 这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。
+情况一：全局迁移至 88 网段（推荐彻底解决） 如果你想把所有机器都规范到 88 网段，请按以下步骤操作：">
 
 
 <script type="application/ld+json">
@@ -259,13 +177,13 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:1313/posts/"
+      "item": "https://dsduyopg-github-io.pages.dev/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "磁盘的综合案例",
-      "item": "http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"
+      "item": "https://dsduyopg-github-io.pages.dev/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"
     }
   ]
 }
@@ -276,25 +194,25 @@
   "@type": "BlogPosting",
   "headline": "磁盘的综合案例",
   "name": "磁盘的综合案例",
-  "description": " 目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置\n1.改成88网段\n情况一：全局迁移至 88 网段（推荐彻底解决）\n第一步：修改 VMware 底层配置\n第二步：修改虚拟机内部配置\n第三步：验证连通性\n情况二：临时恢复连接（最省事）\n2.ssh免密登录\n0.对于hosts文件进行修改\n1.生成私钥和公钥\n2.发送公钥\n3.测试一下\n2.DNS配置\n1.要求\n2.配置\n1.正解析文件的配置\n3.反解析文件配置\n3.测试\n4.开放端口\n",
+  "description": " 目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172\n1.改成88网段 注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下 这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。\n情况一：全局迁移至 88 网段（推荐彻底解决） 如果你想把所有机器都规范到 88 网段，请按以下步骤操作：\n",
   "keywords": [
     
   ],
-  "articleBody": " 目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置\n1.改成88网段\n情况一：全局迁移至 88 网段（推荐彻底解决）\n第一步：修改 VMware 底层配置\n第二步：修改虚拟机内部配置\n第三步：验证连通性\n情况二：临时恢复连接（最省事）\n2.ssh免密登录\n0.对于hosts文件进行修改\n1.生成私钥和公钥\n2.发送公钥\n3.测试一下\n2.DNS配置\n1.要求\n2.配置\n1.正解析文件的配置\n3.反解析文件配置\n3.测试\n4.开放端口\n5.开启服务\n6.修改客户端dns\n7.测试\n3. 日志的配置\n1. 要求\n2. 修改rsyslog.conf\n3. 重启服务与放行端口\n4.测试\n4.磁盘配置\n0.需求\n1.添加一个100G大容量磁盘\n2.添加到物理卷\n2.添加到卷组\n3.添加到逻辑卷\n4.格式化分区的格式\n5.挂载到指定路径\n6.添加剩下的15G\n1.设置让扩容生效\n2.查看是否配置生效\n1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172\n1.改成88网段 注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下 这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。\n情况一：全局迁移至 88 网段（推荐彻底解决） 如果你想把所有机器都规范到 88 网段，请按以下步骤操作：\n第一步：修改 VMware 底层配置 在 Windows 宿主机上打开 VMware，点击顶部菜单栏的 编辑 → 虚拟网络编辑器。\n选中左侧的 VMnet8 (NAT 模式)。\n点击右下角的 更改设置（需管理员权限）。\n将 子网 IP 从 192.168.149.0 修改为 192.168.88.0，子网掩码保持 255.255.255.0。\n点击旁边的 NAT 设置，确认网关 IP 已自动变为 192.168.88.2（如果不是请手动修正）。\n点击 DHCP 设置，将地址池起始范围调整到 88 网段（例如 192.168.88.128 ~ 192.168.88.254）。\n点击 应用，等待服务重启。\n第二步：修改虚拟机内部配置 启动虚拟机，进入系统。\n编辑网卡配置文件（以 CentOS/RedHat 为例）：\nvi /etc/sysconfig/network-scripts/ifcfg-ens33 修改以下关键字段： BOOTPROTO=static\rIPADDR=192.168.88.170\rNETMASK=255.255.255.0\rGATEWAY=192.168.88.2\rDNS1=8.8.8.8\rONBOOT=yes 将上述 IPADDR 替换为每台机器对应的规划 IP（170 / 171 / 172）。\n重启网络服务： systemctl restart network 或重启虚拟机：\nreboot 第三步：验证连通性 在 Windows 宿主机上执行：\nping 192.168.88.170\rping 192.168.88.171\rping 192.168.88.172 全部能通即说明配置成功。\n情况二：临时恢复连接（最省事） 如果你只是想快速让环境通起来，不想折腾 VMware 的设置，最简单的方法是**“妥协”**：\n直接将那台连不上的虚拟机 IP 改回 149 网段（例如 192.168.149.170），只要它回到 VMware 当前设定的网段，宿主机立刻就能连通。\nip addr add 192.168.149.170/24 dev ens33 因此，我采用的也是最省事的方案，修改主机号就可以了\n2.ssh免密登录 0.对于hosts文件进行修改 我们在这一步操作的时候，需要注意的是，应当对于/etc/hosts文件进行修改，把三个主机的ip记录添加进去，用映射关系表述 127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4\r::1 localhost localhost.localdomain localhost6 localhost6.localdomain6\r192.168.149.170 node1 node1.itcast.cn\r192.168.149.171 node2 node2.itcast.cn\r192.168.149.172 node3 node3.itcast.cn 随后我们测试一下连通性如何 这里我们发现是可以的，配制太大的问题,但是需要注意的是我们需要服务和网卡都重启一下，这样配置才会生效\n1.生成私钥和公钥 我们先再宿主机上面生成对应的公钥与私钥，然后将公钥发送给远端\nssh-keygen -f ~/.ssh/id_rsa -P '' -q 其他两台主机同理，也是如此操作的\n2.发送公钥 ssh-copy-id node1 #发送公钥给node1\rssh-copy-id node2 #发送公钥给node2\rssh-copy-id node3 #发送公钥给node3 3.测试一下 我发现ssh免密登录也是配置好了，这台虚拟机网络部分解决了\n2.DNS配置 1.要求 是用node2作为dns服务器，node1和node3作为客户端，域名要求是web.internal.local 是node1的ip，而log.internal.local则是node3的ip ns1.internal.local和inter.local则是node2的\n2.配置 注意，之前我们安装过这个dns软件包bind-utils,下面我就把需要注意的部分写出来，其他或是和之前配置的重复或是没有写的必要,主配置文件和区域声明文件因为之前用的就是这个网段,所以我就不需要重新配置这几个文件了\n1.正解析文件的配置 $TTL 86400\r@ IN SOA ns1.internal.local. admin.internal.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.internal.local.\rns1 IN A 192.168.149.171\rweb IN A 192.168.149.170\rlog IN A 192.168.149.172\r@ IN A 192.168.149.171 3.反解析文件配置 $TTL 86400\r@ IN SOA ns1.internal.local. admin.internal.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.internal.local.\r171 IN PTR ns1\r170 IN PTR web\r172 IN PTR log\r171 IN PTR @ 3.测试 4.开放端口 firewall-cmd --permanent --add-service=dns\rfirewall-cmd --reload 5.开启服务 systemctl start named\rsystemctl status named 6.修改客户端dns vim /etc/NetworkManager/system-connections/ens33.nmconnection\r#打开配置文件\r[ipv4]\raddress1=192.168.149.171/24\rdns=192.168.149.171;\rgateway=192.168.149.2\rmethod=manual\r#这里只需要修改这个部分的dns最好将dns只保留一个，否则容易解析失败，\r#我可能dns后面呢跟的太多了，之前解析失败了 其余两台也需要这样改，注意，node2也需要进行修改自己指向自己 修改完之后，将服务和网卡都重新启动一下，然后随后进行测试\n7.测试 #在三台主机分别输入\rping web.internal.local;\rping log.internal.local;i\rping nternal.local. 3. 日志的配置 1. 要求 要求：node1和node2作为客户端，将info级别的日志发送到node3\n2. 修改rsyslog.conf #注意这里是单个转发不是所有日志转发不用转发模块\rvim /etc/rsyslog.conf\r*.info;mail.none;authpriv.none;cron.none action(type=\"omfwd\" protocol=\"tcp\" target=\"log.internal.local\" port=\"514\")\r#注意，node2也是如此修改的\r#node3也是修改这个文件不过需要将tcp放开\rmodule(load=\"imtcp\")\r# needs to be done just once\rinput(type=\"imtcp\" port=\"514\") 这个是node3的图片 3. 重启服务与放行端口 systemctl restart rsyslog\rsystemctl status rsyslog\r#重启服务\rfirewall-cmd --add-port 514/tcp --permanent\rfirewall-cmd --reload\rfirewall-cmd --list-all\r#放行端口 4.测试 #在node1和node2分别输入logger -p info '111' 4.磁盘配置 0.需求 我们需要搞一个lvm，大小为30G\n1.添加一个100G大容量磁盘 我需要在虚拟机针对node1新增一块磁盘，大小就为100G\n2.添加到物理卷 我们使用lsblk查看新增的磁盘，然后使用pvcreate进而增加到物理卷\npvcreate /dev/sdb 2.添加到卷组 之后我们把这个物理卷添加到卷组，就可以了\nvgcreate vg_logs /dev/sdb # 可选 -s\rvgdisplay #查看卷组信息 3.添加到逻辑卷 #我们先加15G的逻辑卷之后再扩容15G\rlvcreate -L +15GB -n lv_logdata vg_logs\rlvdisplay 4.格式化分区的格式 mkfs.xfs /dev/vg_logs/lv_logdata 5.挂载到指定路径 1.创建挂载路径 mkdir -p /var/log 2.开始挂载 mount /dev/vg_logs/lv_logdata /var/log/ 3设置永久挂载 先打开fstab文件把挂载信息添加到文件\nvim /etc/fstab\r/dev/mapper/cs_192-root / xfs defaults 0 0\rUUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot xfs defaults 0 0/dev/mapper/cs_192-swap none swap defaults 0 0/dev/mapper/vg_logs-lv_logdata /var/log xfs defaults 0 0 3.开机测试一下是否文件设置成功 df -h 6.添加剩下的15G lvextend -L +15GB /dev/vg_logs/lv_logdata 1.设置让扩容生效 xfs_growfs /dev/vg_logs/lv_logdata 2.查看是否配置生效 df -h ",
-  "wordCount" : "520",
+  "articleBody": " 目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172\n1.改成88网段 注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下 这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。\n情况一：全局迁移至 88 网段（推荐彻底解决） 如果你想把所有机器都规范到 88 网段，请按以下步骤操作：\n第一步：修改 VMware 底层配置 在 Windows 宿主机上打开 VMware，点击顶部菜单栏的 编辑 → 虚拟网络编辑器。\n选中左侧的 VMnet8 (NAT 模式)。\n点击右下角的 更改设置（需管理员权限）。\n将 子网 IP 从 192.168.149.0 修改为 192.168.88.0，子网掩码保持 255.255.255.0。\n点击旁边的 NAT 设置，确认网关 IP 已自动变为 192.168.88.2（如果不是请手动修正）。\n点击 DHCP 设置，将地址池起始范围调整到 88 网段（例如 192.168.88.128 ~ 192.168.88.254）。\n点击 应用，等待服务重启。\n第二步：修改虚拟机内部配置 启动虚拟机，进入系统。\n编辑网卡配置文件（以 CentOS/RedHat 为例）：\nvi /etc/sysconfig/network-scripts/ifcfg-ens33 修改以下关键字段： BOOTPROTO=static\rIPADDR=192.168.88.170\rNETMASK=255.255.255.0\rGATEWAY=192.168.88.2\rDNS1=8.8.8.8\rONBOOT=yes 将上述 IPADDR 替换为每台机器对应的规划 IP（170 / 171 / 172）。\n重启网络服务： systemctl restart network 或重启虚拟机：\nreboot 第三步：验证连通性 在 Windows 宿主机上执行：\nping 192.168.88.170\rping 192.168.88.171\rping 192.168.88.172 全部能通即说明配置成功。\n情况二：临时恢复连接（最省事） 如果你只是想快速让环境通起来，不想折腾 VMware 的设置，最简单的方法是**“妥协”**：\n直接将那台连不上的虚拟机 IP 改回 149 网段（例如 192.168.149.170），只要它回到 VMware 当前设定的网段，宿主机立刻就能连通。\nip addr add 192.168.149.170/24 dev ens33 因此，我采用的也是最省事的方案，修改主机号就可以了\n2.ssh免密登录 0.对于hosts文件进行修改 我们在这一步操作的时候，需要注意的是，应当对于/etc/hosts文件进行修改，把三个主机的ip记录添加进去，用映射关系表述 127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4\r::1 localhost localhost.localdomain localhost6 localhost6.localdomain6\r192.168.149.170 node1 node1.itcast.cn\r192.168.149.171 node2 node2.itcast.cn\r192.168.149.172 node3 node3.itcast.cn 随后我们测试一下连通性如何 这里我们发现是可以的，配制太大的问题,但是需要注意的是我们需要服务和网卡都重启一下，这样配置才会生效\n1.生成私钥和公钥 我们先再宿主机上面生成对应的公钥与私钥，然后将公钥发送给远端\nssh-keygen -f ~/.ssh/id_rsa -P '' -q 其他两台主机同理，也是如此操作的\n2.发送公钥 ssh-copy-id node1 #发送公钥给node1\rssh-copy-id node2 #发送公钥给node2\rssh-copy-id node3 #发送公钥给node3 3.测试一下 我发现ssh免密登录也是配置好了，这台虚拟机网络部分解决了\n2.DNS配置 1.要求 是用node2作为dns服务器，node1和node3作为客户端，域名要求是web.internal.local 是node1的ip，而log.internal.local则是node3的ip ns1.internal.local和inter.local则是node2的\n2.配置 注意，之前我们安装过这个dns软件包bind-utils,下面我就把需要注意的部分写出来，其他或是和之前配置的重复或是没有写的必要,主配置文件和区域声明文件因为之前用的就是这个网段,所以我就不需要重新配置这几个文件了\n1.正解析文件的配置 $TTL 86400\r@ IN SOA ns1.internal.local. admin.internal.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.internal.local.\rns1 IN A 192.168.149.171\rweb IN A 192.168.149.170\rlog IN A 192.168.149.172\r@ IN A 192.168.149.171 3.反解析文件配置 $TTL 86400\r@ IN SOA ns1.internal.local. admin.internal.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.internal.local.\r171 IN PTR ns1\r170 IN PTR web\r172 IN PTR log\r171 IN PTR @ 3.测试 4.开放端口 firewall-cmd --permanent --add-service=dns\rfirewall-cmd --reload 5.开启服务 systemctl start named\rsystemctl status named 6.修改客户端dns vim /etc/NetworkManager/system-connections/ens33.nmconnection\r#打开配置文件\r[ipv4]\raddress1=192.168.149.171/24\rdns=192.168.149.171;\rgateway=192.168.149.2\rmethod=manual\r#这里只需要修改这个部分的dns最好将dns只保留一个，否则容易解析失败，\r#我可能dns后面呢跟的太多了，之前解析失败了 其余两台也需要这样改，注意，node2也需要进行修改自己指向自己 修改完之后，将服务和网卡都重新启动一下，然后随后进行测试\n7.测试 #在三台主机分别输入\rping web.internal.local;\rping log.internal.local;i\rping nternal.local. 3. 日志的配置 1. 要求 要求：node1和node2作为客户端，将info级别的日志发送到node3\n2. 修改rsyslog.conf #注意这里是单个转发不是所有日志转发不用转发模块\rvim /etc/rsyslog.conf\r*.info;mail.none;authpriv.none;cron.none action(type=\"omfwd\" protocol=\"tcp\" target=\"log.internal.local\" port=\"514\")\r#注意，node2也是如此修改的\r#node3也是修改这个文件不过需要将tcp放开\rmodule(load=\"imtcp\")\r# needs to be done just once\rinput(type=\"imtcp\" port=\"514\") 这个是node3的图片 3. 重启服务与放行端口 systemctl restart rsyslog\rsystemctl status rsyslog\r#重启服务\rfirewall-cmd --add-port 514/tcp --permanent\rfirewall-cmd --reload\rfirewall-cmd --list-all\r#放行端口 4.测试 #在node1和node2分别输入logger -p info '111' 4.磁盘配置 0.需求 我们需要搞一个lvm，大小为30G\n1.添加一个100G大容量磁盘 我需要在虚拟机针对node1新增一块磁盘，大小就为100G\n2.添加到物理卷 我们使用lsblk查看新增的磁盘，然后使用pvcreate进而增加到物理卷\npvcreate /dev/sdb 2.添加到卷组 之后我们把这个物理卷添加到卷组，就可以了\nvgcreate vg_logs /dev/sdb # 可选 -s\rvgdisplay #查看卷组信息 3.添加到逻辑卷 #我们先加15G的逻辑卷之后再扩容15G\rlvcreate -L +15GB -n lv_logdata vg_logs\rlvdisplay 4.格式化分区的格式 mkfs.xfs /dev/vg_logs/lv_logdata 5.挂载到指定路径 1.创建挂载路径 mkdir -p /var/log 2.开始挂载 mount /dev/vg_logs/lv_logdata /var/log/ 3设置永久挂载 先打开fstab文件把挂载信息添加到文件\nvim /etc/fstab\r/dev/mapper/cs_192-root / xfs defaults 0 0\rUUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot xfs defaults 0 0/dev/mapper/cs_192-swap none swap defaults 0 0/dev/mapper/vg_logs-lv_logdata /var/log xfs defaults 0 0 3.开机测试一下是否文件设置成功 df -h 6.添加剩下的15G lvextend -L +15GB /dev/vg_logs/lv_logdata 1.设置让扩容生效 xfs_growfs /dev/vg_logs/lv_logdata 2.查看是否配置生效 df -h ",
+  "wordCount" : "474",
   "inLanguage": "zh-cn",
   "datePublished": "2026-08-18T00:00:00Z",
   "dateModified": "2026-08-18T00:00:00Z",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"
+    "@id": "https://dsduyopg-github-io.pages.dev/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "My_blog",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
+      "url": "https://dsduyopg-github-io.pages.dev/favicon.ico"
     }
   }
 }
@@ -304,7 +222,7 @@
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="My_blog (Alt + H)">My_blog</a>
+            <a href="https://dsduyopg-github-io.pages.dev/" accesskey="h" title="My_blog (Alt + H)">My_blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -330,27 +248,27 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="http://localhost:1313/" title="首页">
+                <a href="https://dsduyopg-github-io.pages.dev/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/posts/" title="文章">
+                <a href="https://dsduyopg-github-io.pages.dev/posts/" title="文章">
                     <span>文章</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/archives/" title="归档">
+                <a href="https://dsduyopg-github-io.pages.dev/archives/" title="归档">
                     <span>归档</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="标签">
+                <a href="https://dsduyopg-github-io.pages.dev/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="搜索 (Alt &#43; /)" accesskey=/>
+                <a href="https://dsduyopg-github-io.pages.dev/search/" title="搜索 (Alt &#43; /)" accesskey=/>
                     <span>搜索</span>
                 </a>
             </li>
@@ -378,7 +296,7 @@
     </h1>
     <div class="post-meta">
 
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>520 字</span>
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>474 字</span>
 
 </div>
   </header> 
@@ -462,122 +380,6 @@
 </details>
 
 <h4 id="磁盘的综合案例">磁盘的综合案例<a hidden class="anchor" aria-hidden="true" href="#磁盘的综合案例">#</a></h4>
-<ul>
-<li>
-<p><a href="#1_1">1.修改网络配置</a></p>
-</li>
-<li>
-<p><a href="#188_3">1.改成88网段</a></p>
-</li>
-<li>
-<p><a href="#_88__7">情况一：全局迁移至 88 网段（推荐彻底解决）</a></p>
-</li>
-<li>
-<p><a href="#_VMware__11">第一步：修改 VMware 底层配置</a></p>
-</li>
-<li>
-<p><a href="#_21">第二步：修改虚拟机内部配置</a></p>
-</li>
-<li>
-<p><a href="#_55">第三步：验证连通性</a></p>
-</li>
-<li>
-<p><a href="#_69">情况二：临时恢复连接（最省事）</a></p>
-</li>
-<li>
-<p><a href="#2ssh_80">2.ssh免密登录</a></p>
-</li>
-<li>
-<p><a href="#0hosts_81">0.对于hosts文件进行修改</a></p>
-</li>
-<li>
-<p><a href="#1_97">1.生成私钥和公钥</a></p>
-</li>
-<li>
-<p><a href="#2_105">2.发送公钥</a></p>
-</li>
-<li>
-<p><a href="#3_111">3.测试一下</a></p>
-</li>
-<li>
-<p><a href="#2DNS_116">2.DNS配置</a></p>
-</li>
-<li>
-<p><a href="#1_117">1.要求</a></p>
-</li>
-<li>
-<p><a href="#2_119">2.配置</a></p>
-</li>
-<li>
-<p><a href="#1_121">1.正解析文件的配置</a></p>
-</li>
-<li>
-<p><a href="#3_138">3.反解析文件配置</a></p>
-</li>
-<li>
-<p><a href="#3_157">3.测试</a></p>
-</li>
-<li>
-<p><a href="#4_159">4.开放端口</a></p>
-</li>
-<li>
-<p><a href="#5_165">5.开启服务</a></p>
-</li>
-<li>
-<p><a href="#6dns_171">6.修改客户端dns</a></p>
-</li>
-<li>
-<p><a href="#7_187">7.测试</a></p>
-</li>
-<li>
-<p><a href="#3__197">3. 日志的配置</a></p>
-</li>
-<li>
-<p><a href="#1__198">1. 要求</a></p>
-</li>
-<li>
-<p><a href="#2_rsyslogconf_200">2. 修改rsyslog.conf</a></p>
-</li>
-<li>
-<p><a href="#3__215">3. 重启服务与放行端口</a></p>
-</li>
-<li>
-<p><a href="#4_226">4.测试</a></p>
-</li>
-<li>
-<p><a href="#4_233">4.磁盘配置</a></p>
-</li>
-<li>
-<p><a href="#0_234">0.需求</a></p>
-</li>
-<li>
-<p><a href="#1100G_237">1.添加一个100G大容量磁盘</a></p>
-</li>
-<li>
-<p><a href="#2_239">2.添加到物理卷</a></p>
-</li>
-<li>
-<p><a href="#2_245">2.添加到卷组</a></p>
-</li>
-<li>
-<p><a href="#3_253">3.添加到逻辑卷</a></p>
-</li>
-<li>
-<p><a href="#4_261">4.格式化分区的格式</a></p>
-</li>
-<li>
-<p><a href="#5_266">5.挂载到指定路径</a></p>
-</li>
-<li>
-<p><a href="#615G_293">6.添加剩下的15G</a></p>
-</li>
-<li>
-<p><a href="#1_299">1.设置让扩容生效</a></p>
-</li>
-<li>
-<p><a href="#2_306">2.查看是否配置生效</a></p>
-</li>
-</ul>
 <h2 id="1修改网络配置">1.修改网络配置<a hidden class="anchor" aria-hidden="true" href="#1修改网络配置">#</a></h2>
 <p><code>我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172</code></p>
 <h3 id="1改成88网段">1.改成88网段<a hidden class="anchor" aria-hidden="true" href="#1改成88网段">#</a></h3>
@@ -840,11 +642,11 @@ UUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot                   xfs     defaul
     <ul class="post-tags">
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/">
+  <a class="prev" href="https://dsduyopg-github-io.pages.dev/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/">
     <span class="title">« 上一页</span>
     <span>磁盘的使用以及挂载</span>
   </a>
-  <a class="next" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">
+  <a class="next" href="https://dsduyopg-github-io.pages.dev/posts/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">
     <span class="title">下一页 »</span>
     <span>磁盘管理的相关知识</span>
   </a>
@@ -854,7 +656,7 @@ UUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot                   xfs     defaul
 <ul class="share-buttons">
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share 磁盘的综合案例 on x"
-            href="https://x.com/intent/tweet/?text=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f&amp;hashtags=">
+            href="https://x.com/intent/tweet/?text=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f&amp;hashtags=">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
@@ -863,7 +665,7 @@ UUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot                   xfs     defaul
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share 磁盘的综合案例 on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f&amp;title=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b&amp;summary=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f">
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f&amp;title=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b&amp;summary=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b&amp;source=https%3a%2f%2fdsduyopg-github-io.pages.dev%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
@@ -872,7 +674,7 @@ UUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot                   xfs     defaul
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share 磁盘的综合案例 on reddit"
-            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f&title=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b">
+            href="https://reddit.com/submit?url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f&title=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
@@ -881,7 +683,7 @@ UUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot                   xfs     defaul
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share 磁盘的综合案例 on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f">
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
@@ -890,7 +692,7 @@ UUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot                   xfs     defaul
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share 磁盘的综合案例 on whatsapp"
-            href="https://api.whatsapp.com/send?text=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f">
+            href="https://api.whatsapp.com/send?text=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b%20-%20https%3a%2f%2fdsduyopg-github-io.pages.dev%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
@@ -899,7 +701,7 @@ UUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot                   xfs     defaul
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share 磁盘的综合案例 on telegram"
-            href="https://telegram.me/share/url?text=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f">
+            href="https://telegram.me/share/url?text=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f">
             <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
@@ -908,7 +710,7 @@ UUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot                   xfs     defaul
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share 磁盘的综合案例 on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b&u=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f">
+            href="https://news.ycombinator.com/submitlink?t=%e7%a3%81%e7%9b%98%e7%9a%84%e7%bb%bc%e5%90%88%e6%a1%88%e4%be%8b&u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2fposts%2f%25E7%25A3%2581%25E7%259B%2598%25E7%259A%2584%25E7%25BB%25BC%25E5%2590%2588%25E6%25A1%2588%25E4%25BE%258B%2f">
             <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
                 <path
@@ -966,7 +768,7 @@ UUID=2fac3fef-f7ab-4148-ab3a-56b65bd8dc8c /boot                   xfs     defaul
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">My_blog</a></span> · 
+        <span>&copy; 2026 <a href="https://dsduyopg-github-io.pages.dev/">My_blog</a></span> · 
 
     
     
