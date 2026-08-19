@@ -1,0 +1,15 @@
+{{- /* 热门文章：优先展示 front matter 标记了 hot: true 的文章，不足 5 篇用最新文章补齐，最多 5 篇 */ -}}
+{{- $hot := where site.RegularPages "Params.hot" true -}}
+{{- $need := sub 5 (len $hot) -}}
+{{- if gt $need 0 -}}
+  {{- $latest := where site.RegularPages "Type" "in" site.Params.mainSections | first $need -}}
+  {{- $hot = union $hot $latest -}}
+{{- end -}}
+<div id="hot-posts" class="hot-posts">
+  <h3>热门文章</h3>
+  <ol class="hot-list">
+    {{- range first 5 $hot }}
+    <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+    {{- end }}
+  </ol>
+</div>

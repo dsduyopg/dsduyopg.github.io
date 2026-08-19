@@ -28,6 +28,7 @@
     }
 
     if (!hotEl) return;
+    if (hotEl.children.length) return; // 已有服务端渲染的默认列表，不再用本地记录覆盖
     var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
     var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
     var rows = Object.keys(views)
