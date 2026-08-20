@@ -39,7 +39,7 @@ tags: [Telegram, 备份, Teldrive, 自动化, AI辅助开发]
 
 
 
-## 一.最终做成了什么
+## 1.最终做成了什么
 
 ### 1.1如何想到的
 
@@ -71,7 +71,7 @@ tags: [Telegram, 备份, Teldrive, 自动化, AI辅助开发]
 
 电脑自动备份，手机也能直接传文件进频道，两边数据互通。
 
-## 二.用到的技术
+## 2.用到的技术
 
 | 组件                   | 作用                        | 为什么选它                  |
 | -------------------- | ------------------------- | ---------------------- |
@@ -118,7 +118,7 @@ tags: [Telegram, 备份, Teldrive, 自动化, AI辅助开发]
 
 * 一个机器人 token（在 `@BotFather` 创建）
 
-> 本文重点讨论这套系统的架构思路，不是以安装这些组件为主；把它们准备好再往下看，体验会更顺。
+> 本文重点讨论这套系统的架构思路，不是以安装这些组件为主，但是还是会把这个操作流程说一下的；把它们准备好再往下看，体验会更顺。
 
 **组件安装顺序**
 
@@ -131,5 +131,362 @@ Python 3.11+ → PostgreSQL 17 → Teldrive → rclone 专用版 → NSSM → Py
 **操作顺序**
 
 Python → PostgreSQL → Teldrive → rclone → NSSM → 依赖库 → 频道 → Teldrive 登录 → Telethon 登录 → 机器人 → 注册服务 → 加目录测试
+
+
+
+
+
+## 四.架构
+
+### 4.1项目架构
+
+先看这套系统装完之后长什么样。所有程序都放在用户目录下，加密备份和明文直传两条链路各自独立：
+
+```text
+%USERPROFILE%\.teldrive-backup\            ← 备份系统的"家"
+├─ teldrive-backup.ps1      加密备份服务（rclone + Teldrive，分片加密上传）
+├─ rclone.conf              rclone 配置（teldrive: 后端）
+├─ backup-config.json       备份源、同步间隔、排除规则
+├─ logs\                    同步日志
+└─ direct\                  明文直传 + 机器人
+   ├─ direct-watch.ps1      明文直传服务
+   ├─ direct_upload.py      上传与机器人核心
+   ├─ direct_config.json    频道、备份源配置
+   ├─ bot_config.json       机器人配置（敏感，不展示）
+   └─ meta\                 配置和数据库的每小时备份
+```
+
+全部验证通过后，我把这套系统封装成了一键安装包，可以在其他电脑上直接部署：
+
+```text
+一键安装包\
+├─ setup.ps1         主入口（环境检查 / 安装 / 初始化 / 注册服务）
+├─ backup.ps1        双备份统一菜单
+├─ install-*.ps1     各组件安装模块
+├─ modules\          公共安装逻辑
+├─ files\            备份脚本本体
+└─ 一键安装.bat      一键入口
+```
+
+### 4.2系统架构
+
+
+
+整套系统分两条备份链路，外加一个检索机器人，跑在三个 Windows 服务上。
+
+```text
+本地目录
+  ├─ 加密备份: FileSystemWatcher -> rclone -> Teldrive API -> Telegram 私有频道（加密）
+  └─ 明文直传: FileSystemWatcher -> Telethon -> Telegram 频道（可直接查看）
+
+机器人
+  ├─ /start 开始
+  ├─ /status 查看状态
+  ├─ /today 今日更新
+  ├─ /all 全部目录
+  ├─ 翻页 / 跳页 / 回复序号取文件
+  └─ 每日更新 + 停止按钮
+```
+
+三个 Windows 服务：
+
+| 服务             | 对应程序                        | 作用                    |
+| -------------- | --------------------------- | --------------------- |
+| TeldriveServer | `teldrive.exe run`          | Teldrive Web 服务 + API |
+| TeldriveBackup | `teldrive-backup.ps1 watch` | 加密备份监听（rclone）        |
+| TeldriveDirect | `direct-watch.ps1 watch`    | 明文直传监听（Telethon）      |
+
+加密和明文两条链路互相独立，各自有频道、各自的锁和 manifest 日志，互不影响。
+
+## 5.实施步骤
+
+### 5.1.第 1 步：安装 Python
+
+
+
+Python 官网下载 Windows 安装包，安装时**一定要勾选 "Add Python to PATH"**。
+
+验证：
+
+```powershell
+python --version
+```
+
+能输出版本号就成功
+
+![0c151313-21d6-4116-9322-db53f3ba6c87](./images/0c151313-21d6-4116-9322-db53f3ba6c87.png)
+
+
+
+### 5.2.第 2 步：安装 PostgreSQL 17（原生服务，不用 Docker）
+
+安装完成后把服务设为自动启动：
+
+```powershell
+Set-Service -Name postgresql-x64-17 -StartupType Automatic
+Start-Service postgresql-x64-17
+```
+
+> 注意：如果启动失败，先看 Windows 事件日志。我遇到过安全策略干扰，重启系统后恢复正常。
+
+创建 Teldrive 的数据库账号和库（密码用占位符）：
+
+```powershell
+psql -U postgres -h 127.0.0.1 -p 5432 -c "CREATE ROLE teldrive LOGIN PASSWORD 'DB_PASSWORD';"
+psql -U postgres -h 127.0.0.1 -p 5432 -c "CREATE DATABASE teldrive OWNER teldrive;"
+```
+
+> 注意：这里我们**不需要**把 PostgreSQL 注册成 NSSM 服务。
+> 
+> 原因：PostgreSQL 安装时就已经注册成了 Windows 原生服务（服务名 `postgresql-x64-17`），能直接被服务管理器（SCM）管理，停止服务时会走优雅关库流程（停连接、刷脏页、安全落盘）。而 NSSM 是用来把"不能自己当服务"的普通程序（脚本、exe）包装成服务的，给 PostgreSQL 套一层反而多一道中转，服务停止时可能变成直接杀进程，导致数据库非正常退出，下次启动就要走 recovery（恢复）流程。所以上面用 `Set-Service` / `Start-Service` 直接管理就够了。
+
+![db3e9447-769d-4bf0-85dd-30995a2ed6ab](./images/db3e9447-769d-4bf0-85dd-30995a2ed6ab.png)
+
+```bash
+$env:Path += ";C:\Program Files\PostgreSQL\17\bin"
+pg_isready -h 127.0.0.1 -p 5433
+psql --version
+#当前窗口直接刷新 PATH
+
+
+
+pg_isready -h 127.0.0.1 -p 5433
+Get-Service postgresql-x64-17
+netstat -ano | findstr :5433
+psql -U postgres -h 127.0.0.1 -p 5433 -c "SELECT version();"
+#这个是校验这个数据库安成功的命令
+
+
+
+```
+
+
+
+### 5.3.第 3 步：安装 Teldrive
+
+Teldrive 是核心服务，负责把文件分片、加密、上传到 Telegram。把 `teldrive.exe` 放到 `%USERPROFILE%\.installer\bin\`，配置文件 `config.toml` 放到 `%USERPROFILE%\.teldrive\`（里面是占位符）：
+
+```toml
+```toml
+# ========== Teldrive 核心配置说明 ==========
+
+[db]
+# PostgreSQL 数据库连接串
+# 格式：postgres://用户名:密码@地址:端口/库名
+# ⚠️ DB_PASSWORD 是占位符，要换成真实密码
+# ⚠️ 端口按自己实际的写（本文是 5433）
+data-source = "postgres://teldrive:DB_PASSWORD@127.0.0.1:5433/postgres"
+
+# 启用 SQL 预编译语句：性能更好，也能防 SQL 注入
+prepare-stmt = true
+
+[db.pool]
+# 连接池开关
+enable = true
+# 空闲时最多保留的连接数（复用连接，省去反复建连的开销）
+max-idle-connections = 25
+# 单个连接最长存活时间，到期自动回收换新
+max-lifetime = "10m"
+# 同一时刻最大并发连接数，防止拖垮数据库
+max-open-connections = 25
+
+[jwt]
+# 允许访问的用户名白名单；空数组 = 不限制，任何 Telegram 账号都能用
+# 建议填上自己的用户名，如 ["my_username"]，防止别人蹭你的存储
+allowed-users = []
+
+# JWT 签名密钥（登录令牌用它签发和验证）
+# ⚠️ 必须换成随机长字符串，不要用字面量 JWT_SECRET，否则别人能伪造登录
+secret = "JWT_SECRET"
+
+[tg.uploads]
+# 上传文件的加密密钥（对应"加密通道"）
+# 设置了 = 文件先本地加密再传 Telegram，存的是密文
+# 留空   = 明文直接传（明文通道）
+# ⚠️ 密钥丢失后已加密的文件永远无法解密，务必备份！
+encryption-key = "ENCRYPTION_KEY"
+```
+
+必须改的 3 处
+--------
+
+| 行                             | 现在                  | 改成         | 为什么                 |
+| ----------------------------- | ------------------- | ---------- | ------------------- |
+| `data-source`                 | `DB_PASSWORD``5432` | 真实密码`5433` | 占位符密码 + 你实际端口是 5433 |
+| `[jwt] secret`                | `"JWT_SECRET"`      | 随机长字符串     | 占位符，不换别人能伪造登录       |
+| `[tg.uploads] encryption-key` | `"ENCRYPTION_KEY"`  | 随机密钥       | 占位符，加密通道靠它          |
+
+建议改的 1 处
+--------
+
+| 行                     | 现在        | 建议改成        | 为什么                   |
+| --------------------- | --------- | ----------- | --------------------- |
+| `[jwt] allowed-users` | `[]`（不限制） | `["你的用户名"]` | 防止别人登录你的 Teldrive 蹭存储 |
+
+不用动的行
+-----
+
+* `prepare-stmt = true` —— 保持开启即可
+
+* `[db.pool]` 整个块 —— 25/10m/25 对单机够用，不用调
+
+* `max-idle-connections` / `max-lifetime` / `max-open-connections` —— 同上
+
+> 注意[jwt] secret和[tg.uploads] encryption-key这两行，密钥可以自己写，但是要注意密钥不能太短，太简单，长度要求32B,我们可以使用powershell自动生成密钥，以下是生成密钥的命令
+
+```bash
+$b = New-Object byte[] 32; [System.Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($b); [System.BitConverter]::ToString($b).Replace("-","")
+```
+
+![d8bcb257-407a-4e10-9813-332f1dac646a](./images/d8bcb257-407a-4e10-9813-332f1dac646a.png)
+
+修改完配置文件，我们使用以下命令查看是否成功运行
+
+```
+# 第 1 层：进程正常、端口在听
+Get-Process teldrive                     # 能看到进程
+netstat -ano | findstr :8080             # 8080 在监听
+
+# 第 2 层：Web 可访问（返回 200）
+curl.exe -s -o NUL -w "%{http_code}" http://127.0.0.1:8080
+
+# 第 3 层：确认新配置真的连上了数据库（能查到一行即成功）
+psql -U postgres -h 127.0.0.1 -p 5433 -d postgres -c "SELECT usename, state FROM pg_stat_activity WHERE usename='teldrive';"
+```
+
+三条快速判断：进程存在 + 8080 返回 200 = 配置文件格式正确；pg_stat_activity 能查到 teldrive 连接 = 密码/端口改对了；浏览器能登录并能上传下载文件 = 全部配置生效。
+常见坑：`psql` 报"不是内部命令"是因为 PostgreSQL 的 bin 目录没加进 PATH，用完整路径 `"C:\Program Files\PostgreSQL\17\bin\psql.exe"` 代替即可
+
+```
+
+![1893ba45-8516-4df2-96a6-e532633d72df](./images/1893ba45-8516-4df2-96a6-e532633d72df.png)
+
+我通过使用以上命令发现成功的，可以正常使用teldrive服务
+
+
+
+![4a57b6a7-d830-4a26-b4fc-24aca048b3ca](./images/4a57b6a7-d830-4a26-b4fc-24aca048b3ca.png)
+
+
+
+这个是我已经在teldrive登录好的。
+
+### 5.4.第 4 步：安装 Teldrive 专用 rclone（最关键的一步）
+
+普通官方 rclone 不支持 `teldrive:` 后端，必须用 `github.com/tgdrive/rclone` 的 Teldrive 专用版。装完**必须验证后端**：
+
+```powershell
+& "$env:USERPROFILE\.installer\bin\rclone.exe" help backends
+```
+
+输出里必须能看到：
+
+```text
+> teldrive     Tel Drive
+```
+
+![f1c3f573-b486-43e8-ba97-54fda7477d2a](./images/f1c3f573-b486-43e8-ba97-54fda7477d2a.png)
+
+到这一步，也没有问题，发现是可以显示teldrive     Tel Drive这两个服务的，其中，我刚开始安装这个服务的时候，用的并非是专用版本的是普通的，发现本地文件无法同步到远端了，后面的部分我会为大家详细介绍我遇到的这个问题。
+
+### 5.5.第 5 步：安装 NSSM
+
+NSSM 用来把脚本注册成 Windows 服务：
+
+```powershell
+nssm version
+```
+
+![d963c79d-57cf-40e4-b5fb-d5f1c1eefa2c](./images/d963c79d-57cf-40e4-b5fb-d5f1c1eefa2c.png)
+
+### 5.6.第 6 步：安装 Python 依赖
+
+```powershell
+python -m pip install --upgrade telethon requests pillow
+```
+
+![5eeab885-0f95-4614-b1dc-ce63bbd72f7e](./images/5eeab885-0f95-4614-b1dc-ce63bbd72f7e.png)
+
+
+
+### 5.7.第 7 步：创建 Telegram 私有频道
+
+手机 Telegram 里创建两个频道（**必须是私有**）：一个加密频道，一个明文频道。把机器人添加进明文频道并设为管理员。
+
+**本次，我就创建了private_database  linux_data私有频道，和一个机器人**
+
+
+
+### 5.8.第 8 步：登录 Teldrive 并填 Token
+
+`access_token` **不是填在 Teldrive 网页里**，而是填回你本机 rclone 的配置文件 `rclone.conf` 中 `[teldrive]` 段落的那一行——把 `PASTE_ACCESS_TOKEN` 这个占位符替换成真正的 token 字符串即可。
+**具体操作**
+
+**第 1 步：从浏览器拿到 token**
+
+1. 浏览器打开 `http://localhost:8080`，用 Telegram 登录 Teldrive
+2. 登录成功后，按 **F12**​ 打开开发者工具 → 切到 **Application（应用**​ 或 Storage（存储）**​ 选项卡 → 找**Cookies​ → `http://localhost:8080`
+3. 在 cookie 列表里找到名为 **`access_token`**​ 的那条，复制它的 **Value**​ 值
+
+> 💡 如果你的 cookie 里没有 `access_token`，只有 **`user_session`**，那就复制 `user_session` 的值——它就是旧版本里的 access token。
+
+**第 2 步：填回 rclone.conf**
+
+找到 rclone 的配置文件（一般在 `~/.config/rclone/rclone.conf` 或 Windows 下 `C:\Users\<用户名>\.config\rclone\rclone.conf`），把 `[teldrive]` 段改成：
+    [teldrive]
+    type = teldrive
+    api_host = http://localhost:8080
+    access_token = 这里粘贴你刚复制的那串长字符串
+    chunk_size = 500M
+    upload_concurrency = 4
+    encrypt_files = true
+    random_chunk_name = true
+    channel_id = 0
+    root_folder_id =
+
+注意几点：
+
+* `access_token =` 后面**直接粘字符串**，不要带引号（官方示例虽然写了引号，但实际 INI 配置里值通常不包引号）
+* **删掉**​ `PASTE_ACCESS_TOKEN` 这个占位符，它就是提示你"粘贴到这里"的意思
+* `root_folder_id` 不填就是根目录，可留空
+
+改完保存，然后跑 `rclone ls teldrive:` 测试一下能不能列出文件，能列出来就说明 token 填对了。
+
+> ⚠️ 这个 token 就是你 Telegram 账号的会话凭证，**等同于登录态**，别泄露给别人。
+
+如果你是用 `rclone config` 命令交互式添加的，它会在 `access_token>` 这一行让你粘贴，效果和在文件里改是一样的。
+
+![15cc275e-e5f9-42d1-adc1-a3934d2197d4](./images/15cc275e-e5f9-42d1-adc1-a3934d2197d4.png)
+
+验证连通：
+
+```powershell
+& "$env:USERPROFILE\.installer\bin\rclone.exe" lsd teldrive: --config "$env:USERPROFILE\.teldrive-backup\rclone.conf"
+```
+
+能看到目录就说明通了。
+
+![874da9db-aa78-4a7f-a417-fe816a40b35e](./images/874da9db-aa78-4a7f-a417-fe816a40b35e.png)
+
+
+
+**第三步**
+
+由于前几步我们安装了Telethon，这一步，我们需要给telethon登录
+
+
+
+| 方式         | 需要什么                              | 没有的        |
+| ---------- | --------------------------------- | ---------- |
+| 手机号登录      | api_id + api_hash + 手机号 + 验证码     | 不需要 token  |
+| **Bot 登录** | api_id + api_hash + **bot_token** | 不需要手机号/验证码 |
+
+注意：**即使是 bot 登录，api_id 和 api_hash 也还是要的**（Telethon 用它标识客户端），只是不用手机号那一步。
+
+
+
+
+
+
 
 
