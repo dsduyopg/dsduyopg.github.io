@@ -1,0 +1,2 @@
+# 不自动转换换行符，避免 Hugo 全站构建时大量 CRLF 警告拖慢 git add
+* -text
