@@ -483,6 +483,64 @@ python -m pip install --upgrade telethon requests pillow
 
 注意：**即使是 bot 登录，api_id 和 api_hash 也还是要的**（Telethon 用它标识客户端），只是不用手机号那一步。
 
+**这里我以手机登录为主**
+
+手机号登录（明文直传用）
+------------
+
+步骤
+
+1. 写一个登录脚本（或你的 `direct_upload.py`），填入 api_id/api_hash：
+
+
+
+```python
+Python from telethon import TelegramClient api_id = 123456 # 换成你的 
+api_hash = "你的hash" # 换成你的 
+client = TelegramClient("user_session", api_id, api_hash) client.start() # 触发登录流
+print("登录成功")
+```
+
+
+
+1. 运行脚本，按提示依次输入：
+   
+   * **手机号**（带国家码，如 `+8613800000000`）
+   
+   * **验证码**（Telegram 发到 APP/短信，5 位数字）
+   
+   * **两步验证密码**（如果你的账号开启了 2FA，才会问）
+
+2. 提示 `登录成功`，当前目录会生成 **`user_session.session`** 文件
+
+3. 之后每次运行自动复用 session，**不再需要重新登录**（除非删了 session 文件）
+
+> 对应你博客里的命令就是：`python direct_upload.py login --phone +8613800000000`，脚本内部封装了上面这套流程。
+
+
+
+### 5.9.第 9 步：注册三个 Windows 服务
+
+用 NSSM 注册（以加密备份为例）：
+
+```powershell
+nssm install TeldriveBackup "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File "$env:USERPROFILE\.teldrive-backup\teldrive-backup.ps1" watch
+nssm set TeldriveBackup Start SERVICE_AUTO_START
+nssm start TeldriveBackup
+```
+
+**注意**：NSSM 服务环境不会继承普通用户 PATH，必须显式设置 `PYTHON_EXE`、`RCLONE_EXE` 等变量，否则服务找不到 Python。
+
+![366edd51-071e-4790-9dbf-efaba4397a1a](./images/366edd51-071e-4790-9dbf-efaba4397a1a.png)
+
+
+
+![812f7201-257c-4edb-bef9-aaf85e75f46d](./images/812f7201-257c-4edb-bef9-aaf85e75f46d.png)
+
+
+
+![3b134cf8-308f-4be3-ab47-3e183100ccd3](./images/3b134cf8-308f-4be3-ab47-3e183100ccd3.png)
+
 
 
 
