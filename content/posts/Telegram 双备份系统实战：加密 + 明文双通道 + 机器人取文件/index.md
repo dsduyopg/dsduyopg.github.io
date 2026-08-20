@@ -307,8 +307,7 @@ secret = "JWT_SECRET"
 encryption-key = "ENCRYPTION_KEY"
 ```
 
-必须改的 3 处
---------
+**必须改的 3 处**
 
 | 行                             | 现在                  | 改成         | 为什么                 |
 | ----------------------------- | ------------------- | ---------- | ------------------- |
@@ -316,15 +315,13 @@ encryption-key = "ENCRYPTION_KEY"
 | `[jwt] secret`                | `"JWT_SECRET"`      | 随机长字符串     | 占位符，不换别人能伪造登录       |
 | `[tg.uploads] encryption-key` | `"ENCRYPTION_KEY"`  | 随机密钥       | 占位符，加密通道靠它          |
 
-建议改的 1 处
---------
+**建议改的 1 处**
 
 | 行                     | 现在        | 建议改成        | 为什么                   |
 | --------------------- | --------- | ----------- | --------------------- |
 | `[jwt] allowed-users` | `[]`（不限制） | `["你的用户名"]` | 防止别人登录你的 Teldrive 蹭存储 |
 
-不用动的行
------
+**不用动的行**
 
 * `prepare-stmt = true` —— 保持开启即可
 
@@ -339,6 +336,8 @@ $b = New-Object byte[] 32; [System.Security.Cryptography.RandomNumberGenerator]:
 ```
 
 ![d8bcb257-407a-4e10-9813-332f1dac646a](./images/d8bcb257-407a-4e10-9813-332f1dac646a.png)
+
+![4a57b6a7-d830-4a26-b4fc-24aca048b3ca](./images/4a57b6a7-d830-4a26-b4fc-24aca048b3ca.png)
 
 修改完配置文件，我们使用以下命令查看是否成功运行
 
@@ -357,27 +356,19 @@ psql -U postgres -h 127.0.0.1 -p 5433 -d postgres -c "SELECT usename, state FROM
 三条快速判断：进程存在 + 8080 返回 200 = 配置文件格式正确；pg_stat_activity 能查到 teldrive 连接 = 密码/端口改对了；浏览器能登录并能上传下载文件 = 全部配置生效。
 常见坑：`psql` 报"不是内部命令"是因为 PostgreSQL 的 bin 目录没加进 PATH，用完整路径 `"C:\Program Files\PostgreSQL\17\bin\psql.exe"` 代替即可
 
-```
-
 ![1893ba45-8516-4df2-96a6-e532633d72df](./images/1893ba45-8516-4df2-96a6-e532633d72df.png)
 
+```bash
 我通过使用以上命令发现成功的，可以正常使用teldrive服务
 
-
-
-![4a57b6a7-d830-4a26-b4fc-24aca048b3ca](./images/4a57b6a7-d830-4a26-b4fc-24aca048b3ca.png)
-
-
-
 这个是我已经在teldrive登录好的。
+```
 
 ### 5.4.第 4 步：安装 Teldrive 专用 rclone（最关键的一步）
 
 普通官方 rclone 不支持 `teldrive:` 后端，必须用 `github.com/tgdrive/rclone` 的 Teldrive 专用版。装完**必须验证后端**：
 
-```powershell
 & "$env:USERPROFILE\.installer\bin\rclone.exe" help backends
-```
 
 输出里必须能看到：
 
@@ -484,15 +475,15 @@ python -m pip install --upgrade telethon requests pillow
 注意：**即使是 bot 登录，api_id 和 api_hash 也还是要的**（Telethon 用它标识客户端），只是不用手机号那一步。
 
 **这里我以手机登录为主**
-
 手机号登录（明文直传用）
+
 ------------
 
 步骤
 
 1. 写一个登录脚本（或你的 `direct_upload.py`），填入 api_id/api_hash：
-
-
+   
+   
 
 ```python
 Python from telethon import TelegramClient api_id = 123456 # 换成你的 
@@ -541,10 +532,14 @@ nssm start TeldriveBackup
 
 ![3b134cf8-308f-4be3-ab47-3e183100ccd3](./images/3b134cf8-308f-4be3-ab47-3e183100ccd3.png)
 
+### 5.10.第 10 步：添加备份目录
 
+加密备份：
 
+```powershell
+& "$env:USERPROFILE\.teldrive-backup\teldrive-backup.ps1" menu
+```
 
+选 `1) Add backup folder`。明文直传先选 `4) List chats`、`5) Set target chat`，再选 `1) Add backup folder`。
 
-
-
-
+添加完成后，目录一有变化就会自动上传。
