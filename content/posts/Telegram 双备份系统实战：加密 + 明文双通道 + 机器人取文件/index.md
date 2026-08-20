@@ -337,8 +337,6 @@ $b = New-Object byte[] 32; [System.Security.Cryptography.RandomNumberGenerator]:
 
 ![d8bcb257-407a-4e10-9813-332f1dac646a](./images/d8bcb257-407a-4e10-9813-332f1dac646a.png)
 
-![4a57b6a7-d830-4a26-b4fc-24aca048b3ca](./images/4a57b6a7-d830-4a26-b4fc-24aca048b3ca.png)
-
 修改完配置文件，我们使用以下命令查看是否成功运行
 
 ```
@@ -363,6 +361,8 @@ psql -U postgres -h 127.0.0.1 -p 5433 -d postgres -c "SELECT usename, state FROM
 
 这个是我已经在teldrive登录好的。
 ```
+
+![4a57b6a7-d830-4a26-b4fc-24aca048b3ca](./images/4a57b6a7-d830-4a26-b4fc-24aca048b3ca.png)
 
 ### 5.4.第 4 步：安装 Teldrive 专用 rclone（最关键的一步）
 
@@ -537,9 +537,40 @@ nssm start TeldriveBackup
 加密备份：
 
 ```powershell
-& "$env:USERPROFILE\.teldrive-backup\teldrive-backup.ps1" menu
+set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
+
+![68804f73-485a-4896-add3-6e31cc0b407d](./images/68804f73-485a-4896-add3-6e31cc0b407d.png)
+
+
 
 选 `1) Add backup folder`。明文直传先选 `4) List chats`、`5) Set target chat`，再选 `1) Add backup folder`。
 
 添加完成后，目录一有变化就会自动上传。
+
+
+
+![afb83185-5688-49ad-b1fb-2969488bfe89](./images/afb83185-5688-49ad-b1fb-2969488bfe89.png)
+
+
+
+![d3f37fe2-3945-4216-80ab-8c772cbaea44](./images/d3f37fe2-3945-4216-80ab-8c772cbaea44.png)
+
+
+
+这里面在direct 备份里我选择
+
+D:\linux\linux_heima chat: -1004425264068 prefix: linux_heima mode: overwrite
+D:\picture chat: -1004387615517 prefix: picture mode: overwrite  了这两个目录，我将为大家验证是否，可以自动备份
+
+
+
+
+
+## 6.验证
+
+
+
+经过验证，脚本是可以进行自动备份的，随后我将这两脚本封装成为一个脚本，一个界面
+
+
