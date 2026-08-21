@@ -4,15 +4,27 @@
 import argparse
 import re
 import sys
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp", ".svg", ".avif"}
 IMG_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
+R2_URL_RE = re.compile(r"^(https?://[^/]+)/([^/]+)/([^/]+)/images/")
 
 
 def is_remote(url):
     return url.startswith(("http://", "https://", "//", "data:"))
+
+
+def parse_r2_url(url):
+    match = R2_URL_RE.match(url.strip())
+    if not match:
+        return None
+    base = match.group(1)
+    prefix = urllib.parse.unquote(match.group(2))
+    slug = urllib.parse.unquote(match.group(3))
+    return base, prefix, slug
 
 
 def local_image_path(url):
@@ -31,7 +43,10 @@ def replace_line(line, base, prefix, slug):
         path = local_image_path(target)
         if path is None:
             return match.group(0)
-        url = "{0}/{1}/{2}/images/{3}".format(base, prefix, slug, path.name)
+        encoded_prefix = urllib.parse.quote(prefix, safe="")
+        encoded_slug = urllib.parse.quote(slug, safe="")
+        encoded_name = urllib.parse.quote(path.name, safe="")
+        url = "{0}/{1}/{2}/images/{3}".format(base, encoded_prefix, encoded_slug, encoded_name)
         return "![{0}]({1})".format(alt, url)
 
     return IMG_RE.sub(repl, line)
@@ -76,9 +91,10 @@ def check_r2_urls(text, base, prefix):
 def main():
     parser = argparse.ArgumentParser(description="Replace local image links with R2 URLs.")
     parser.add_argument("--file", required=True, help="Markdown file to process")
-    parser.add_argument("--slug", required=True, help="R2 project slug, e.g. telegram_rsyc_twoway")
+    parser.add_argument("--slug", help="R2 project slug, e.g. telegram_rsyc_twoway")
     parser.add_argument("--base", default="https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev")
     parser.add_argument("--prefix", default="blog_images")
+    parser.add_argument("--url", help="Paste an existing R2 image URL to auto-detect base, prefix and slug")
     parser.add_argument("--output", help="Output markdown path")
     parser.add_argument("--in-place", action="store_true", help="Overwrite the source file")
     parser.add_argument("--check", action="store_true", help="Verify R2 image URLs after replacement")
@@ -88,8 +104,20 @@ def main():
     if not source.exists():
         sys.exit("File not found: {0}".format(source))
 
+    base = args.base
+    prefix = args.prefix
+    slug = args.slug
+    if args.url:
+        parsed = parse_r2_url(args.url)
+        if not parsed:
+            sys.exit("Cannot parse R2 URL: {0}".format(args.url))
+        base, prefix, slug = parsed
+        print("Auto-detected: base={0}, prefix={1}, slug={2}".format(base, prefix, slug))
+    elif not slug:
+        sys.exit("--slug is required unless --url is provided")
+
     text = source.read_text(encoding="utf-8-sig")
-    output_text, changed = process_markdown(text, args.base, args.prefix, args.slug)
+    output_text, changed = process_markdown(text, base, prefix, slug)
 
     if args.output and args.in_place:
         sys.exit("Use either --output or --in-place, not both")
@@ -105,7 +133,7 @@ def main():
     print("Output: {0}".format(target))
 
     if args.check:
-        urls, bad = check_r2_urls(output_text, args.base, args.prefix)
+        urls, bad = check_r2_urls(output_text, base, prefix)
         print("R2 URLs checked: {0}, bad: {1}".format(len(urls), len(bad)))
         for url, reason in bad[:10]:
             print("BAD {0}: {1}".format(url, reason))
