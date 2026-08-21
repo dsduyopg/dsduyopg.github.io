@@ -43,18 +43,22 @@ def local_image_path(url):
 
 
 def replace_line(line, base, prefix, slug):
+    count = 0
+
     def repl(match):
+        nonlocal count
         alt, target = match.group(1), match.group(2)
         path = local_image_path(target)
         if path is None:
             return match.group(0)
+        count += 1
         encoded_prefix = urllib.parse.quote(prefix, safe="")
         encoded_slug = urllib.parse.quote(slug, safe="")
         encoded_name = urllib.parse.quote(path.name, safe="")
         url = "{0}/{1}/{2}/images/{3}".format(base, encoded_prefix, encoded_slug, encoded_name)
         return "![{0}]({1})".format(alt, url)
 
-    return IMG_RE.sub(repl, line)
+    return IMG_RE.sub(repl, line), count
 
 
 def process_markdown(text, base, prefix, slug):
@@ -71,9 +75,8 @@ def process_markdown(text, base, prefix, slug):
         if in_fence:
             out_lines.append(line)
             continue
-        new_body = replace_line(body, base, prefix, slug)
-        if new_body != body:
-            changed += 1
+        new_body, replaced = replace_line(body, base, prefix, slug)
+        changed += replaced
         out_lines.append(new_body + ending)
     return "".join(out_lines), changed
 
