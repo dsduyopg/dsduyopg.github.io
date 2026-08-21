@@ -39,9 +39,9 @@ tags: [Telegram, 备份, Teldrive, 自动化, AI辅助开发]
 
 
 
-## 1.最终做成了什么
+## 1. 最终做成了什么
 
-### 1.1如何想到的
+### 1.1 如何想到的
 
 最初我的需求是模糊的，只知道自己想要"大容量、低成本、自动化"，但具体怎么架构，脑子里还是一片空白。
 
@@ -53,7 +53,7 @@ tags: [Telegram, 备份, Teldrive, 自动化, AI辅助开发]
 
 * 这两个方向，后来正好成了我两条备份链路的雏形：**Teldrive 走加密备份，Telethon 走明文直传**——图形界面拦不住脚本，只要走对接口就行。
   
-  ### 1.2最终的结果
+### 1.2 最终的结果
 
 一套 Windows 上的双备份系统：
 
@@ -71,7 +71,7 @@ tags: [Telegram, 备份, Teldrive, 自动化, AI辅助开发]
 
 电脑自动备份，手机也能直接传文件进频道，两边数据互通。
 
-## 2.用到的技术
+## 2. 用到的技术
 
 | 组件                   | 作用                        | 为什么选它                  |
 | -------------------- | ------------------------- | ---------------------- |
@@ -94,7 +94,7 @@ tags: [Telegram, 备份, Teldrive, 自动化, AI辅助开发]
 
 5. **为什么分片设 500 MB、默认覆盖模式？** 分片越大，Telegram 消息条数越少，方便管理；但又不能设得过大——传输 1G 左右的大文件时，中途失败不会从头重传，而是从断点继续。日常备份不需要每次修改都留历史版本，默认覆盖只保留最新版，需要版本历史的目录可以单独开启 version 模式；这样还能避免频道消息过多，触发官方限制，带来账号风险。
 
-## 3.准备工作
+## 3. 准备工作
 
 动手之前，除了上一节表格里的六个组件（Teldrive、PostgreSQL、rclone 专用版、Telethon、NSSM、PowerShell），还需要准备：
 
@@ -136,9 +136,9 @@ Python → PostgreSQL → Teldrive → rclone → NSSM → 依赖库 → 频道 
 
 
 
-## 4.架构
+## 4. 架构
 
-### 4.1项目架构
+### 4.1 项目架构
 
 先看这套系统装完之后长什么样。所有程序都放在用户目录下，加密备份和明文直传两条链路各自独立：
 
@@ -168,7 +168,7 @@ Python → PostgreSQL → Teldrive → rclone → NSSM → 依赖库 → 频道 
 └─ 一键安装.bat      一键入口
 ```
 
-### 4.2系统架构
+### 4.2 系统架构
 
 
 
@@ -198,9 +198,9 @@ Python → PostgreSQL → Teldrive → rclone → NSSM → 依赖库 → 频道 
 
 加密和明文两条链路互相独立，各自有频道、各自的锁和 manifest 日志，互不影响。
 
-## 5.实施步骤
+## 5. 实施步骤
 
-### 5.1.第 1 步：安装 Python
+### 5.1 第 1 步：安装 Python
 
 
 
@@ -218,7 +218,7 @@ python --version
 
 
 
-### 5.2.第 2 步：安装 PostgreSQL 17（原生服务，不用 Docker）
+### 5.2 第 2 步：安装 PostgreSQL 17（原生服务，不用 Docker）
 
 安装完成后把服务设为自动启动：
 
@@ -262,7 +262,7 @@ psql -U postgres -h 127.0.0.1 -p 5433 -c "SELECT version();"
 
 
 
-### 5.3.第 3 步：安装 Teldrive
+### 5.3 第 3 步：安装 Teldrive
 
 Teldrive 是核心服务，负责把文件分片、加密、上传到 Telegram。把 `teldrive.exe` 放到 `%USERPROFILE%\.installer\bin\`，配置文件 `config.toml` 放到 `%USERPROFILE%\.teldrive\`（里面是占位符）：
 
@@ -364,7 +364,7 @@ psql -U postgres -h 127.0.0.1 -p 5433 -d postgres -c "SELECT usename, state FROM
 
 ![4a57b6a7-d830-4a26-b4fc-24aca048b3ca](./images/4a57b6a7-d830-4a26-b4fc-24aca048b3ca.png)
 
-### 5.4.第 4 步：安装 Teldrive 专用 rclone（最关键的一步）
+### 5.4 第 4 步：安装 Teldrive 专用 rclone（最关键的一步）
 
 普通官方 rclone 不支持 `teldrive:` 后端，必须用 `github.com/tgdrive/rclone` 的 Teldrive 专用版。装完**必须验证后端**：
 
@@ -380,7 +380,7 @@ psql -U postgres -h 127.0.0.1 -p 5433 -d postgres -c "SELECT usename, state FROM
 
 到这一步，也没有问题，发现是可以显示teldrive     Tel Drive这两个服务的，其中，我刚开始安装这个服务的时候，用的并非是专用版本的是普通的，发现本地文件无法同步到远端了，后面的部分我会为大家详细介绍我遇到的这个问题。
 
-### 5.5.第 5 步：安装 NSSM
+### 5.5 第 5 步：安装 NSSM
 
 NSSM 用来把脚本注册成 Windows 服务：
 
@@ -390,7 +390,7 @@ nssm version
 
 ![d963c79d-57cf-40e4-b5fb-d5f1c1eefa2c](./images/d963c79d-57cf-40e4-b5fb-d5f1c1eefa2c.png)
 
-### 5.6.第 6 步：安装 Python 依赖
+### 5.6 第 6 步：安装 Python 依赖
 
 ```powershell
 python -m pip install --upgrade telethon requests pillow
@@ -400,7 +400,7 @@ python -m pip install --upgrade telethon requests pillow
 
 
 
-### 5.7.第 7 步：创建 Telegram 私有频道
+### 5.7 第 7 步：创建 Telegram 私有频道
 
 手机 Telegram 里创建两个频道（**必须是私有**）：一个加密频道，一个明文频道。把机器人添加进明文频道并设为管理员。
 
@@ -408,7 +408,7 @@ python -m pip install --upgrade telethon requests pillow
 
 
 
-### 5.8.第 8 步：登录 Teldrive 并填 Token
+### 5.8 第 8 步：登录 Teldrive 并填 Token
 
 `access_token` **不是填在 Teldrive 网页里**，而是填回你本机 rclone 的配置文件 `rclone.conf` 中 `[teldrive]` 段落的那一行——把 `PASTE_ACCESS_TOKEN` 这个占位符替换成真正的 token 字符串即可。
 **具体操作**
@@ -510,7 +510,7 @@ print("登录成功")
 
 
 
-### 5.9.第 9 步：注册三个 Windows 服务
+### 5.9 第 9 步：注册三个 Windows 服务
 
 用 NSSM 注册（以加密备份为例）：
 
@@ -532,7 +532,7 @@ nssm start TeldriveBackup
 
 ![3b134cf8-308f-4be3-ab47-3e183100ccd3](./images/3b134cf8-308f-4be3-ab47-3e183100ccd3.png)
 
-### 5.10.第 10 步：添加备份目录
+### 5.10 第 10 步：添加备份目录
 
 加密备份：
 
@@ -568,7 +568,7 @@ D:\my-blog chat: -1004476355877 prefix: my-blog mode: overwritete  这两个目�
 
 
 
-## 6.验证
+## 6. 验证
 
 
 
@@ -649,9 +649,9 @@ app显示出来的
 
 经过校验发现此次的自动备份时成功的，加密备份，明文备份，我都做了校验，发现是成功的，这个功能是极其便利的，从文件的备份，到文件读取，再到灾变，恢复，异常处理，非常实用，对于需要加密的人，可以把重要的资料加密备份，同时自己也要及时备份密钥，因此，这个项目从最初的想法，到一步一步的打磨，把模糊的概念建一个自动备份而低成本的项目，逐步完善了，成长为利用teldrive以及telethon的双轨备份，明文+加密，两套备份手段，变成可以实施的方案，下面，我将从原理细节为大家披露以下核心的技术实现
 
-## 7.技术原理
+## 7. 技术原理
 
-### 1.原理细节
+### 7.1 原理细节
 
 #### 1.1技术原理总览
 
@@ -914,7 +914,7 @@ orphan 清理：
   
   
 
-### 2.脚本细节
+### 7.2 脚本细节
 
 #### 2.1 teldrive-backup.ps1
 
@@ -1068,7 +1068,7 @@ bat 的作用：
 * 内容尽量用 ASCII
 * 中文编码容易在 GBK 下被拆坏
 
-## 8.实施过程中遇到的问题与解决
+## 8. 实施过程中遇到的问题与解决
 
 
 
@@ -1495,7 +1495,7 @@ didn't find backend called "teldrive"
 
 
 
-## 9总结
+## 9. 总结
 
 ### 9.1 成果回顾
 
@@ -1520,7 +1520,6 @@ didn't find backend called "teldrive"
 ### 9.5 写在最后
 
 做这个项目的过程中我最大的感受是：服务本质就是在解决冲突——进程冲突、文件锁冲突、上传去重冲突、事件丢失与补扫的冲突。这些思想和 Linux 下解决资源竞争的思路是一脉相承的。如果你也在学 Linux 或操作系统，不妨试着从"冲突管理"的视角去理解服务设计，会有不一样的收获。希望这篇记录对你有用，祝大家备份无忧。
-
 
 
 
