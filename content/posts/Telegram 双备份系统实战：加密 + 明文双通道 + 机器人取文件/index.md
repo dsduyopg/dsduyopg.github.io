@@ -561,7 +561,8 @@ set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 这里面在direct 备份里我选择
 
 D:\linux\linux_heima chat: -1004425264068 prefix: linux_heima mode: overwrite
-D:\picture chat: -1004387615517 prefix: picture mode: overwrite  了这两个目录，我将为大家验证是否，可以自动备份
+D:\picture chat: -1004387615517 prefix: picture mode: overwrite
+D:\my-blog chat: -1004476355877 prefix: my-blog mode: overwritete  这两个目录，我将为大家验证是否，可以自动备份
 
 
 
@@ -571,6 +572,931 @@ D:\picture chat: -1004387615517 prefix: picture mode: overwrite  了这两个目
 
 
 
-经过验证，脚本是可以进行自动备份的，随后我将这两脚本封装成为一个脚本，一个界面
+经过验证，脚本是可以进行自动备份的，随后我将这两脚本封装成为一个脚本，一个界面.
+
+
+
+**我在备份的时候选择的是，忽视隐藏文件**
+
+* 隐藏目录/隐藏文件是脚本故意跳过的。`should_skip_path` 会跳过任何以 `.` 开头的路径、`.log` 文件和 0 字节文件。目前 `D:\linux\linux_heima` 有 269 个、`D:\my-blog` 有 310 个隐藏文件被跳过，`direct_state.json` 里也确实没有任何隐藏路径。
+* 普通文件仍在正常备份：`linux_heima` 806/806、`picture` 10/10 已完成；`my-blog` 还在补传，刚才还剩 51 个待传，最新一次上传是 07:39:38，`direct_state.json` 也一直在更新
+  
+  
+
+这个是我在脚本加入了统计隐藏文件，实际备份文件的功能，这样，我们校对起来是比较容易的
+
+
+
+![d650cdb2-ffa0-4585-b647-9e06d73a7745](./images/d650cdb2-ffa0-4585-b647-9e06d73a7745.png)
+
+同时，我在频道加了manifest.txt统计文件，而mainfest不是由本地备份的，所以不计入统计，经过验证发现在linux_heima是可以自动备份的，其他目录同理，下
+
+
+
+
+
+然后我会在机器人上面也进行验证
+
+
+
+![0250845a-b84a-4bf5-93ce-c54b4df43229](./images/0250845a-b84a-4bf5-93ce-c54b4df43229.png)
+
+
+
+![8c070a03-a42e-48b2-8eb0-3a9bf77ac0e1](./images/8c070a03-a42e-48b2-8eb0-3a9bf77ac0e1.png)
+
+
+
+![d0b4bc6c-175d-46ac-8ab4-6614562ca1e0](./images/d0b4bc6c-175d-46ac-8ab4-6614562ca1e0.png)
+
+
+
+
+
+
+
+![d82552b4-cd2e-4765-9853-93c4a87f2919](./images/d82552b4-cd2e-4765-9853-93c4a87f2919.png)
+
+
+
+文件改动测试
+
+
+
+![66263a0c-6362-4014-8c1d-60263e149a1a](./images/66263a0c-6362-4014-8c1d-60263e149a1a.png)
+
+追加内容之后
+
+
+
+![d586642f-e3a8-4efa-bfd5-21fbf23aba28](./images/d586642f-e3a8-4efa-bfd5-21fbf23aba28.png)
+
+
+
+
+
+app显示出来的
+
+
+
+![b68f8118-d437-4cf8-85b5-b4716fc3353b](./images/b68f8118-d437-4cf8-85b5-b4716fc3353b.png)
+
+
+
+![cadf1da0-a5e7-466f-8fdd-9e578b819537](./images/cadf1da0-a5e7-466f-8fdd-9e578b819537.png)
+
+
+
+经过校验发现此次的自动备份时成功的，加密备份，明文备份，我都做了校验，发现是成功的，这个功能是极其便利的，从文件的备份，到文件读取，再到灾变，恢复，异常处理，非常实用，对于需要加密的人，可以把重要的资料加密备份，同时自己也要及时备份密钥，因此，这个项目从最初的想法，到一步一步的打磨，把模糊的概念建一个自动备份而低成本的项目，逐步完善了，成长为利用teldrive以及telethon的双轨备份，明文+加密，两套备份手段，变成可以实施的方案，下面，我将从原理细节为大家披露以下核心的技术实现
+
+## 7.技术原理
+
+### 1.原理细节
+
+#### 1.1技术原理总览
+
+| 技术                | 解决什么问题            | 核心原理                            |
+| ----------------- | ----------------- | ------------------------------- |
+| FileSystemWatcher | 监听目录变化            | Windows 文件系统事件                  |
+| Debounce 防抖       | 避免频繁触发上传          | 事件后等待 N 秒再执行                    |
+| 文件锁               | 防止多个同步同时执行        | 独占打开锁文件                         |
+| rclone sync       | 加密备份同步            | 对比本地和远端差异                       |
+| Teldrive          | 分片、加密、上传 Telegram | 调用 Telegram API 上传分片            |
+| PostgreSQL        | 保存文件索引            | 记录文件、分片、频道状态                    |
+| Telethon          | 明文直传              | Telegram MTProto 客户端库           |
+| 状态文件              | 记住已上传文件           | 保存 size、mtime、message_id        |
+| manifest          | 记录目录和日期           | 本地生成日志上传频道                      |
+| 长轮询               | 机器人接收消息           | getUpdates 定时拉取                 |
+| 回调按钮              | 机器人交互             | Inline Keyboard + callback_data |
+| NSSM              | 开机自启              | 把命令注册成 Windows 服务               |
+
+
+
+#### 1.2核心概念详解
+
+##### 1.2.1 FileSystemWatcher：文件监听
+
+```powershell
+PowerShell 用 `System.IO.FileSystemWatcher` 监听目录： $w = New-Object System.IO.FileSystemWatcher $w.Path = $src.path $w.IncludeSubdirectories = $true $w.NotifyFilter = [System.IO.NotifyFilters]::FileName -bor ` [System.IO.NotifyFilters]::LastWrite -bor ` [System.IO.NotifyFilters]::Size -bor ` [System.IO.NotifyFilters]::CreationTime $w.EnableRaisingEvents = $true Register-ObjectEvent -InputObject $w -EventName Changed -MessageData $message -Action $action Register-ObjectEvent -InputObject $w -EventName Created -MessageData $message -Action $action Register-ObjectEvent -InputObject $w -EventName Deleted -MessageData $message -Action $action Register-ObjectEvent -InputObject $w -EventName Renamed -MessageData $message -Action $action
+
+要点：
+
+* `IncludeSubdirectories = $true` 监听子目录
+* `NotifyFilter` 只关心文件名、修改时间、大小、创建时间
+* 事件触发后不立即同步，而是把目录标记为 dirty
+```
+
+
+
+##### 1.2.2Debounce：防抖
+
+写文件时系统会触发多次事件，直接同步会浪费资源。
+
+所以事件回调只做两件事：
+
+```powershell
+$st.dirty[$key] = $true $st.lastChange[$key] = [DateTime]::UtcNow
+```
+
+
+
+主循环每次检查：
+
+```powershell
+$last = $state.lastChange[$key] if ($last -and (($now - $last).TotalSeconds -ge $DebounceSeconds)) { $due += $key }
+```
+
+
+
+只有距离最后一次变化超过 `debounceSeconds` 才真正同步。
+
+##### 1.2.3 文件锁：防止重复同步
+
+两个进程不能同时执行 rclone 或 Telethon 上传，否则会产生重复记录。
+
+锁的原理是独占打开文件：
+
+```powershell
+$stream = [System.IO.File]::Open( $lock, [System.IO.FileMode]::OpenOrCreate, [System.IO.FileAccess]::ReadWrite, [System.IO.FileShare]::None )
+```
+
+
+
+第二个进程尝试打开时会被拒绝，返回 `$null`，表示“另一个同步正在运行”。
+
+##### 1.2.4 手动同步优先级
+
+手动执行 `Sync now` 时，如果后台正在同步，不能直接杀掉 rclone，否则可能留下半成品数据库记录。
+
+方案：
+
+* 手动同步创建 `sync.priority` 文件
+* 后台循环发现该文件后，停止下一个任务
+* 手动同步等待当前文件传完，然后获取锁执行
+* 手动执行完成后删除 priority 文件
+* 后台下一轮从头继续
+
+##### 1.2.5 rclone sync：加密备份同步
+
+核心命令：
+    & $RcloneExe sync `
+        $source.path `
+        "teldrive:backup/$($source.remotePath)" `
+        --config $RcloneConfig `
+        --create-empty-src-dirs `
+        --transfers 4 `
+        --checkers 8 `
+        --log-file $log `
+        --log-level INFO
+
+含义：
+
+* `sync` 让远端和本地一致
+* `teldrive:` 是 Teldrive 专用 rclone 后端
+* `--create-empty-src-dirs` 保留空目录
+* `--transfers 4` 同时上传 4 个文件
+* `--checkers 8` 同时检查 8 个文件
+
+##### 1.2.6 Teldrive 后端
+
+Teldrive 是 Telegram 网盘服务：
+
+* 文件切成多个分片
+* 分片加密后上传 Telegram
+* PostgreSQL 保存文件索引和分片 ID
+* rclone 通过 `teldrive:` 后端调用 Teldrive API
+
+```powershell
+`rclone.conf`： [teldrive] type = teldrive api_host = http://localhost:8080 access_token = PASTE_ACCESS_TOKEN chunk_size = 500M upload_concurrency = 4 encrypt_files = true random_chunk_name = true channel_id = 0 root_folder_id =
+```
+
+
+
+关键参数：
+
+| 参数                   | 含义          |
+| -------------------- | ----------- |
+| `chunk_size`         | 分片大小，500 MB |
+| `upload_concurrency` | 并发上传数       |
+| `encrypt_files`      | 是否加密文件      |
+| `random_chunk_name`  | 分片文件名是否随机化  |
+| `channel_id`         | 上传到哪个频道     |
+
+##### 1.2.7 PostgreSQL 的作用
+
+数据库表 `teldrive.files` 保存：
+
+* 文件名
+* 文件类型
+* 大小
+* 状态：`active`、`pending_deletion`
+* 频道 ID
+* 分片信息 `parts`
+* 父目录 ID
+* 哈希
+
+索引是恢复的关键，只删 Telegram 消息不删索引，会导致 rclone 认为文件还在。
+
+##### 1.2.8 Telethon：明文直传
+
+Telethon 是 Python 的 Telegram MTProto 客户端库。
+
+```powershell
+登录： python direct_upload.py login --phone +8613800000000
+
+上传： async def upload_one(client, chat, file_path, name, message_id=None, mode="overwrite"): if mode == "overwrite" and message_id: try: await client.edit_message( chat, message_id, file=str(file_path), text=name, force_document=True, ) return True, message_id except Exception as exc: print("edit failed, sending new:", name, exc) msg = await client.send_file( chat, str(file_path), file_name=name, caption=name, force_document=True, ) return True, msg.id
+```
+
+
+
+##### 1.2.9 overwrite 和 version 两种模式
+
+overwrite：
+
+* 查找同名旧消息
+* 用 `edit_message` 覆盖原文件
+* 频道里只保留最新版
+
+version：
+
+* 不查找旧消息
+* 每次直接 `send_file`
+* 每次修改都保留为新消息
+
+##### 1.2.10 状态文件：记住已上传文件
+
+直接上传脚本用 `direct_state.json` 保存状态：
+
+```powershell
+sig = { "size": stat.st_size, "mtime": int(stat.st_mtime), } entry = state.get(key) if entry and entry.get("size") == sig["size"] and entry.get("mtime") == sig["mtime"]: continue
+
+key 的组成： 本地根目录 + 频道 ID + 远端文件名
+
+只有 size 或 mtime 变化，才重新上传。
+```
+
+
+
+##### 1.2.11 manifest 日志和轮替
+
+manifest 是频道文件目录，记录：
+    文件名 | 修改时间 | 覆盖时间 | 添加时间
+
+超过 `manifest_max_size`（默认 50 MB）后自动轮替：
+
+```powershell
+rotated = manifest_path.with_name( manifest_path.stem + "-" + stamp + manifest_path.suffix ) manifest_path.replace(rotated)
+
+只保留最近 `manifest_max_files`（默认 10）份。
+```
+
+
+
+##### 1.2.12 机器人长轮询
+
+机器人使用 Telegram Bot API 的 `getUpdates`：
+
+```powershell
+url = "https://api.telegram.org/bot" + token + "/getUpdates?timeout=2&offset=" + str(offset) updates = json.loads(urllib.request.urlopen(url, timeout=5).read().decode("utf-8"))
+
+`offset` 表示已经处理到哪个 update，处理完后写回 `bot_offset.txt`，避免重复处理。
+```
+
+
+
+##### 1.2.13 回调按钮
+
+目录消息带 Inline Keyboard：
+
+```powershell
+{ "text": "上一页", "callback_data": "page_prev", }, { "text": "下一页", "callback_data": "page_next", }, { "text": "跳转到页码", "callback_data": "jump_page", }
+```
+
+
+
+用户点击后，Telegram 返回 `callback_query`，机器人根据 `callback_data` 处理。
+
+##### 1.2.14 NSSM 服务
+
+NSSM 把任意命令注册成 Windows 服务：
+
+```powershell
+nssm install TeldriveBackup powershell -NoProfile -ExecutionPolicy Bypass -File "...\teldrive-backup.ps1" watch nssm set TeldriveBackup Start SERVICE_AUTO_START nssm set TeldriveBackup AppEnvironmentExtra "PYTHON_EXE=..." "RCLONE_EXE=..." nssm start TeldriveBackup
+```
+
+
+
+服务环境必须显式设置，因为服务不继承用户 PATH。
+
+##### 1.2.15 pending 和 orphan 清理
+
+pending 清理：
+
+1. 查询数据库 `status='pending_deletion'` 的分片消息 ID
+2. 用 Telethon 删除 Telegram 旧消息
+3. 删除数据库 pending 记录
+
+orphan 清理：
+
+1. 查询数据库 active 分片消息 ID
+2. 扫描频道所有消息
+3. 删除数据库中不存在、但频道里残留的旧消息
+
+##### 1.2.16 元数据备份
+
+加密脚本可以把 `config.toml`、`rclone.conf`、数据库 dump 上传到频道，防止配置丢失。
+
+注意：
+
+* 配置和密钥属于敏感信息
+* 如果配置本身加密，需要额外保存解密方式
+* 建议单独放到一个只有自己能访问的频道
+  
+  
+
+### 2.脚本细节
+
+#### 2.1 teldrive-backup.ps1
+
+总行数约 1100 行，核心函数：
+
+| 函数                                   | 作用                      |
+| ------------------------------------ | ----------------------- |
+| `Get-Config` / `Save-Config`         | 读写 `backup-config.json` |
+| `Get-NormalizedPath`                 | 路径标准化                   |
+| `Test-PathOverlap`                   | 防止父子目录重复备份              |
+| `Add-BackupDir` / `Remove-BackupDir` | 管理备份源                   |
+| `Sync-Source`                        | 执行一次 rclone sync        |
+| `Sync-All`                           | 同步所有目录                  |
+| `Get-SyncLock` / `Release-SyncLock`  | 互斥锁                     |
+| `Test-RcloneReady`                   | 检查 Teldrive 是否可用        |
+| `New-Watchers` / `Remove-Watchers`   | 文件监听                    |
+| `Watch-Service`                      | 后台服务主循环                 |
+| `Invoke-PendingCleanup`              | 删除 pending 旧消息          |
+| `Invoke-OrphanCleanup`               | 删除孤儿消息                  |
+| `Repair-Channel`                     | 重建频道索引                  |
+| `Purge-Channel`                      | 清空整个频道                  |
+| `Backup-Metadata`                    | 备份配置和数据库                |
+
+同步前检查后端：
+    function Test-TeldriveBackend {
+        $help = & $RcloneExe help backends 2>&1 | Out-String
+        return $help -match 'teldrive'
+    }
+    if (-not (Test-TeldriveBackend)) {
+        throw "rclone does not include the teldrive backend: $RcloneExe"
+    }
+
+后台服务主循环：
+    while ($true) {
+        try {
+            # 1. 配置变化时重载
+            # 2. 检查 dirty 目录是否过了防抖时间
+            # 3. 检查 Teldrive 是否可用
+            # 4. 获取锁，逐个同步
+            # 5. 同步后清理 pending 和 orphan
+            # 6. 每 60 分钟做一次全量同步
+            # 7. 每 60 分钟清理旧日志
+        } catch {
+            Write-Host "[watch] error: $_"
+        }
+        Start-Sleep -Seconds 2
+    }
+
+#### 2.2 direct-watch.ps1
+
+总行数约 860 行，核心函数：
+
+| 函数                                      | 作用                    |
+| --------------------------------------- | --------------------- |
+| `Invoke-DirectPython`                   | 调用 `direct_upload.py` |
+| `Get-DirectLock` / `Release-DirectLock` | 扫描互斥锁                 |
+| `Invoke-DirectScan`                     | 执行一次上传扫描              |
+| `Add-Source` / `Remove-Source`          | 管理明文备份源               |
+| `Restore-Direct`                        | 恢复远端文件                |
+| `New-Watchers` / `Remove-Watchers`      | 文件监听                  |
+| `Watch-Service`                         | 明文服务主循环               |
+| `Push-MetaDirect`                       | 上传配置和状态               |
+| `Purge-ChatDirect`                      | 清空频道                  |
+| `Set-BotSchedule`                       | 设置机器人每日发送时间           |
+| `Set-ManifestSize`                      | 设置 manifest 大小        |
+
+服务启动时会：
+
+1. 先做一次初始扫描
+2. 上传 manifest
+3. 上传 meta 状态
+4. 清理 meta 重复记录
+5. 进入监听循环
+
+#### 2.3 direct_upload.py
+
+总行数约 1470 行，是明文直传和机器人的核心。
+
+命令：
+
+| 命令              | 作用                |
+| --------------- | ----------------- |
+| `login`         | Telegram 登录       |
+| `chats`         | 列出会话              |
+| `set-chat`      | 设置默认频道            |
+| `scan`          | 扫描并上传             |
+| `changed`       | 检查是否有变化           |
+| `restore`       | 恢复远端文件            |
+| `paths`         | 列出远端路径            |
+| `manifest`      | 生成 manifest       |
+| `delete-remote` | 删除远端路径            |
+| `purge-chat`    | 清空频道              |
+| `clean-pending` | 清理 pending        |
+| `clean-orphans` | 清理孤儿              |
+| `clean-saved`   | 清理 Saved Messages |
+| `clean-meta`    | 清理 meta 重复        |
+| `bot-check`     | 机器人长轮询            |
+| `bot-digest`    | 发送每日更新            |
+
+扫描上传核心逻辑：
+
+```powershell
+async def cmd_scan(args): cfg = load_config() state = load_state() async with TelegramClient(cfg["session"], API_ID, API_HASH) as client: await client.connect() pending = [] for s in cfg.get("sources", []): root = s["path"] chat = s.get("chat") or cfg["chat"] prefix = s.get("prefix") or "" mode = (s.get("mode") or "overwrite").lower() for path in sorted(Path(root).rglob("*")): if not path.is_file(): continue if should_skip_path(path): continue rel = remote_name(Path(root), path) name = (prefix + "/" + rel) if prefix else rel key = root + "|" + str(chat) + "|" + name stat = path.stat() sig = {"size": stat.st_size, "mtime": int(stat.st_mtime)} entry = state.get(key) if entry and entry.get("size") == sig["size"] and entry.get("mtime") == sig["mtime"]: continue existing = entry.get("message_id") if entry else None pending.append((chat, path, name, key, sig, mode, existing)) # 并发上传 sem = asyncio.Semaphore(4) async def worker(item): async with sem: ok, mid = await upload_one(client, chat, path, name, existing, mode) if ok: state[key] = { "size": sig["size"], "mtime": sig["mtime"], "message_id": mid, "uploaded_at": int(time.time()), } save_state(state) await asyncio.gather(*(worker(item) for item in pending))
+
+恢复： async def cmd_restore(args): async with TelegramClient(cfg["session"], API_ID, API_HASH) as client: await client.connect() async for message in client.iter_messages(cfg["chat"]): if not message.document: continue name = (message.message or "").strip() if remote and name != remote and not name.startswith(remote + "/"): continue target = dest / Path(name) target.parent.mkdir(parents=True, exist_ok=True) await message.download_media(file=str(target))
+
+恢复时的安全检查： if rel.is_absolute() or ".." in rel.parts: print("skip unsafe name:", name) continue
+```
+
+
+
+#### 2.4 安装模块
+
+一键安装包由多个模块组成：
+
+| 文件                            | 作用                    |
+| ----------------------------- | --------------------- |
+| `setup.ps1`                   | 主入口                   |
+| `backup.ps1`                  | 双备份统一菜单               |
+| `install-rclone.ps1`          | 安装 Teldrive 专用 rclone |
+| `install-teldrive.ps1`        | 安装 Teldrive           |
+| `install-nssm.ps1`            | 安装 NSSM               |
+| `install-postgres.ps1`        | 安装/检测 PostgreSQL      |
+| `install-services.ps1`        | 注册服务                  |
+| `modules/common.ps1`          | 公共函数                  |
+| `modules/init-teldrive.ps1`   | 初始化数据库和配置             |
+| `modules/init-direct.ps1`     | 初始化明文直传               |
+| `modules/install-runtime.ps1` | 安装运行环境                |
+
+安装 rclone 的修复后逻辑：
+    $rcloneZip = Join-Path $dirs.InstallDir 'rclone-tgdrive-windows-amd64.zip'
+    $rcloneUrl = Get-GithubAssetUrl 'tgdrive/rclone' 'windows.*amd64.*\.zip$'
+    Download-File $rcloneUrl $rcloneZip
+    # 安装后校验后端
+    $backendOk = & (Join-Path $dirs.BinDir 'rclone.exe') help backends 2>&1 | Out-String
+    if ($backendOk -notmatch 'teldrive') {
+        throw 'Installed rclone does not include the teldrive backend'
+    }
+
+#### 2.5 bat 入口
+
+bat 的作用：
+
+* 调用 PowerShell
+* 保持菜单循环
+* 选择退出才关闭窗口
+
+注意事项：
+
+* 必须使用 CRLF 换行
+* 内容尽量用 ASCII
+* 中文编码容易在 GBK 下被拆坏
+
+## 8.实施过程中遇到的问题与解决
+
+
+
+1. Chrome 无法登录 Teldrive，Edge 可以
+
+现象：
+
+- Chrome 打开 Teldrive 网页反复失败
+- 换 Edge 后可以正常登录
+
+原因：
+
+- 多为浏览器缓存、Cookie 或扩展拦截
+
+解决：
+
+- 清理 Chrome 缓存和站点 Cookie
+- 临时关闭广告拦截/隐私扩展
+- 或直接使用 Edge 完成登录
+
+状态：已解决。
+
+### 2. 使用原生 PostgreSQL 而不是 Docker
+
+现象：
+
+- 不想依赖 Docker，希望数据库作为 Windows 原生服务运行
+
+原因：
+
+- Docker 增加一层虚拟化，维护和开机自启不如原生服务直观
+
+解决：
+
+- 安装 PostgreSQL 17 原生版
+- 注册为 Windows 服务 `postgresql-x64-17`
+- 配置 `teldrive` 数据库和账号
+
+状态：已解决。
+
+### 3. PostgreSQL 服务无法启动
+
+现象：
+
+- `Start-Service postgresql-x64-17` 报错
+
+原因：
+
+- 系统 Device Guard / 相关安全策略干扰，重启后恢复正常
+
+解决：
+
+- 检查服务账户和日志
+- 重启 Windows
+- 确认服务设置为 Automatic
+
+状态：已解决。
+
+### 4. Telegram 频道显示 600 多个文件，本地只有 500 多个
+
+现象：
+
+- `private_database` 客户端显示 600+ 文件
+- 本地实际文件少于该数字
+
+原因：
+
+- 频道里残留历史消息、重复上传、旧分片
+- Telegram 客户端缓存旧数量
+
+解决：
+
+- 用 Telethon 脚本统计真实消息数
+- 清空频道消息和数据库记录后重新上传
+- 客户端退出重进刷新
+
+状态：已解决。
+
+### 5. 清空频道后再次同步只上传 2 个文件
+
+现象：
+
+- 手动删除频道文件后，再次同步只上传了少量文件
+
+原因：
+
+- 只删了 Telegram 消息，数据库索引还在
+- rclone 认为远端仍存在文件，不再上传
+
+解决：
+
+- 正确步骤：先删除 Telegram 消息，再清空数据库文件记录
+- 再执行同步
+
+状态：已解决。
+
+### 6. 加密备份产生重复记录
+
+现象：
+
+- 同一文件出现多条记录
+- 几 MB 的文件被分成多个片段
+
+原因：
+
+- 旧记录被标记为 `pending_deletion`，未及时清理
+- 早期分片大小过小
+- 本地源路径重复或父子目录重叠
+
+解决：
+
+- 同步后自动删除旧消息和孤儿消息
+- 分片大小调整为 500 MB
+- 禁止同一频道下父子目录重叠
+- 排除隐藏文件、`.log`、0 字节文件
+
+状态：已解决。
+
+### 7. rclone 报 HTTP 500
+
+现象：
+
+- `Internal Server Error`
+
+原因：
+
+- Teldrive 服务临时故障或并发请求过高
+
+解决：
+
+- rclone 自动重试
+- 等待后重试
+- 清理孤儿分片
+
+状态：已解决。
+
+### 8. 机器人按钮没有反应
+
+现象：
+
+- 点击“总目录”“今日更新”没有回复
+
+原因：
+
+- 目录消息太长，超过 Telegram 单条消息限制，发送时报 HTTP 400
+
+解决：
+
+- 改为分页发送，每页 20 条
+- 增加上一页 / 下一页 / 跳转页码按钮
+
+状态：已解决。
+
+### 9. 机器人把文件发到了 Saved Messages
+
+现象：
+
+- 回复序号取文件，文件跑到“已保存消息”
+
+原因：
+
+- 远端文件用 Telethon 以当前账号发送给自己，Telegram 自动放进 Saved Messages
+
+解决：
+
+- 改为机器人 `copyMessage` / `forwardMessage` 直接转发到私聊
+- 增加清理 Saved Messages 残留的命令
+
+状态：已解决。
+
+### 10. 手机上传的文件在机器人目录里看不到
+
+现象：
+
+- 手机直接传文件/图片到频道，`/all` 里没有
+
+原因：
+
+- 目录扫描只识别 document 消息
+- 手机图片默认是 photo 消息，不是 document
+
+解决：
+
+- 目录同时扫描 document / photo / video
+- 无标题图片显示为 `photo_xxx.jpg`
+- 选择序号后直接转发
+
+状态：已解决。
+
+### 11. 0 字节文件无法上传
+
+现象：
+
+- Telegram 报 `The number of file parts is invalid`
+
+原因：
+
+- Telegram 无法上传 0 字节文件
+
+解决：
+
+- 上传前过滤 0 字节文件
+
+状态：已解决。
+
+### 12. bat 双击一闪而过
+
+现象：
+
+- 双击 bat 窗口立即关闭
+
+原因：
+
+- bat 使用 LF 换行，Windows 批处理解析异常
+- 中文编码在 GBK 下被拆坏
+
+解决：
+
+- 改为 CRLF 换行
+- bat 内容改为纯英文 ASCII
+
+状态：已解决。
+
+### 13. bat 执行后直接退出，无法回到菜单
+
+现象：
+
+- 选择操作后，按任意键就退出
+
+解决：
+
+- 改为 `goto` 标签循环菜单
+- 只有选择“退出”才关闭
+
+状态：已解决。
+
+### 14. 添加备份路径失败，提示 mode must be overwrite or version
+
+现象：
+
+- 选择“浏览文件夹”后添加失败
+
+原因：
+
+- PowerShell 变量 `$mode` 和参数 `$Mode` 同名冲突
+- 选择“2 浏览”后 `Mode` 被写成 `2`
+
+解决：
+
+- 把局部变量改名为 `$choose`
+
+状态：已解决。
+
+### 15. 输入 q 报错
+
+现象：
+
+- 设置 manifest 大小或机器人时间时输入 `q` 报类型转换错误
+
+解决：
+
+- 支持 `q` 取消
+- 非法输入提示后返回，不再崩溃
+
+状态：已解决。
+
+### 16. NSSM 后台服务找不到 Python
+
+现象：
+
+- `TeldriveBackup` 服务日志显示 python not found
+
+原因：
+
+- 服务环境没有继承用户 PATH
+
+解决：
+
+- 在 NSSM 服务环境变量中显式设置 `PYTHON_EXE`
+- 同时设置 `TELDRIVE_DIRECT_ROOT`
+
+状态：已解决。
+
+### 17. Telethon 会话数据库被锁
+
+现象：
+
+- `database is locked`
+- `telegram session is busy`
+
+原因：
+
+- 多个进程同时使用同一个 Telegram 会话
+
+解决：
+
+- 增加 tg.lock 互斥锁
+- 清理过期锁文件
+- 避免手动命令和后台服务同时运行
+
+状态：已解决。
+
+### 18. manifest 每小时都更新
+
+现象：
+
+- 备份源包含脚本、配置、数据库 dump
+- 这些文件变化后不断上传
+
+原因：
+
+- 工具自身文件也在备份源内
+
+解决：
+
+- 明确 manifest 的更新来源
+- 可选：把工具目录从备份源中排除
+
+状态：已理解并记录。
+
+### 19. manifest 需要日志轮替
+
+需求：
+
+- 日志超过设定大小后自动新建文件
+- 保留最近 N 份历史
+
+实现：
+
+- 默认 50 MB 轮替
+- 保留最近 10 份
+- 每个频道使用独立 manifest 文件
+
+状态：已实现。
+
+### 20. 本地日志无限增长
+
+解决：
+
+- 默认保留 30 天
+- 每小时自动清理
+- 增加手动清理命令
+
+状态：已实现。
+
+### 21. rclone 不认识 teldrive 后端，加密备份突然失效
+
+现象：
+
+- `private_database` 不再同步新文件
+- 服务日志反复出现：
+
+```text
+CRITICAL: Failed to create file system for "teldrive:":
+didn't find backend called "teldrive"
+```
+
+- 之前一直正常，某次操作后突然全部失败
+
+原因：
+
+- 加密备份依赖 Teldrive 专用版 rclone，它才带 `teldrive` 后端
+- 一键安装包旧版从 `downloads.rclone.org` 下载官方普通版 rclone
+- 某次运行安装/修复流程时，官方版 v1.75.0 覆盖了原来的 Teldrive 专用版
+- 之后每次调用 rclone 都不认识 `teldrive:`，所以同步全部失败
+
+解决：
+
+- 用 `rclone help backends` 检查是否包含 `teldrive`
+- 下载 `github.com/tgdrive/rclone` 的 Teldrive 专用版替换
+- 旧官方版另存为 `rclone-v1.75.0-official.exe` 备份
+- 重新触发同步，确认频道恢复更新
+- 修改一键安装包：rclone 改为从 `tgdrive/rclone` 下载，安装后校验后端
+- 环境检查增加后端校验
+- 备份脚本同步前先检查后端，缺失时直接给出明确错误
+
+状态：已解决，并已加入脚本和一键安装包。
+
+### 22. 加密备份不实时同步（private_database 频道长时间不更新）
+
+现象：
+
+- 本地新增/修改文件后，加密备份不马上上传
+- `private_database` 频道长时间没有新记录
+- 明文直传脚本正常，只有加密备份不正常
+
+原因：
+
+- `TeldriveBackup` 服务原本只依赖 `FileSystemWatcher`
+- `FileSystemWatcher` 会漏事件（大批量复制、程序直接写入、事件积压时）
+- 漏掉事件后，原实现要等很久的整点扫描，最长 60 分钟才上传
+- 本次一次性新增 400+ 文件（`博客\CSDN博客本地留档`）时全部漏掉，导致频道一直不更新
+
+解决：
+
+- 新增 `Get-DirSignature`：统计目录内有效文件数和最后修改时间总和
+- `Watch-Service` 增加 5 秒轮询，每次比对目录签名，发现变化立即标记为待同步
+- 保留 `FileSystemWatcher` 做事件触发，两者互为兜底
+- 同步完成后记录签名，避免重复同步
+- 已同步更新：本机脚本、一键安装包脚本、项目复盘代码原文、一键安装包 zip
+- 新增 `重启加密备份服务.bat`，重启后新监听逻辑生效
+
+状态：已修复。后台正在自动追赶本次漏掉的 400+ 文件，追赶期间手动同步和自动同步共用锁，不会产生重复记录。
+
+### 23. 手动同步中断后 sync.priority 残留，实时同步再次停止
+
+现象：
+
+- `private_database` 长时间不更新
+- `service.stdout.log` 反复出现 `[watch] manual sync requested, stopping background sync`
+- `logs\sync.priority` 文件一直存在且时间很久
+
+原因：
+
+- 手动 `sync` 启动时写入 `sync.priority`，如果窗口在等待锁或同步过程中被关闭，文件不会删除
+- 旧逻辑只判断文件是否存在，残留文件会让后台同步一直放弃
+
+解决：
+
+- 新增 `Test-PriorityBlocking`：`sync.priority` 超过 10 分钟视为残留并自动删除
+- 后台监听和周期同步统一使用该判断
+- 已同步更新：本机脚本、一键安装包脚本、项目复盘代码原文
+- 手动删除残留文件并重启 `TeldriveBackup` 后，后台立即恢复同步
+
+
+
+## 9总结
+
+
 
 
