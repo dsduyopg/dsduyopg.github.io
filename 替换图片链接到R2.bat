@@ -29,7 +29,9 @@ if "%SLUG%"=="" (
   echo Project slug is required.
   goto end
 )
-python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --check
+set "R2_BASE=https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev"
+set /p R2_BASE=R2 base URL (Enter for default): 
+python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --check
 goto end
 
 :drag_prompt
@@ -39,13 +41,16 @@ echo.
 echo 1. Drag the markdown file into this window
 echo 2. Press Enter
 echo 3. Type a short English slug, e.g. blog1
+echo 4. Paste the R2 base URL, or press Enter for default
 echo.
 set /p MD_FILE=Markdown file: 
 set /p SLUG=Project slug: 
 set "MD_FILE=%MD_FILE:"=%"
 if "%MD_FILE%"=="" goto drag_prompt
 if "%SLUG%"=="" goto drag_prompt
-python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --check
+set "R2_BASE=https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev"
+set /p R2_BASE=R2 base URL (Enter for default): 
+python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --check
 goto end
 
 :advanced
