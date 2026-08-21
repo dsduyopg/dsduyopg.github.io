@@ -18,7 +18,12 @@ def is_remote(url):
 
 
 def parse_r2_url(url):
-    match = R2_URL_RE.match(url.strip())
+    url = url.strip()
+    link = re.match(r"\[[^\]]+\]\(([^)]+)\)", url)
+    if link:
+        url = link.group(1).strip()
+    url = url.strip("<>")
+    match = R2_URL_RE.match(url)
     if not match:
         return None
     base = match.group(1)

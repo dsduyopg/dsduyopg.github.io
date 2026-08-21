@@ -20,6 +20,11 @@ if "%FIRST%"=="" goto drag_prompt
 if "%FIRST:~0,2%"=="--" goto advanced
 
 set "MD_FILE=%FIRST%"
+if not exist "%MD_FILE%" (
+  echo File not found: %MD_FILE%
+  echo Please drag the actual file or type the full path.
+  goto end
+)
 set /p R2_URL=Paste R2 image URL, Enter for manual: 
 if defined R2_URL (
   python "%SCRIPT%" --file "%MD_FILE%" --url "%R2_URL%" --check
@@ -59,6 +64,11 @@ echo.
 set /p MD_FILE=Markdown file: 
 set "MD_FILE=%MD_FILE:"=%"
 if "%MD_FILE%"=="" goto drag_prompt
+if not exist "%MD_FILE%" (
+  echo File not found: %MD_FILE%
+  echo Please drag the actual file or type the full path.
+  goto drag_prompt
+)
 set /p R2_URL=Paste R2 image URL, Enter for manual: 
 if defined R2_URL (
   python "%SCRIPT%" --file "%MD_FILE%" --url "%R2_URL%" --check
