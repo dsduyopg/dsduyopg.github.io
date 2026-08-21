@@ -32,8 +32,8 @@ if "%SLUG%"=="" (
 set "R2_BASE=https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev"
 set /p R2_BASE=R2 base URL (Enter for default): 
 set /p OUT_PATH=Output path, Enter for auto: 
-set "OUT_PATH=%OUT_PATH:"=%"
-if "%OUT_PATH%"=="" (
+if defined OUT_PATH set "OUT_PATH=%OUT_PATH:"=%"
+if not defined OUT_PATH (
   python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --check
 ) else (
   python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --output "%OUT_PATH%" --check
@@ -58,8 +58,8 @@ if "%SLUG%"=="" goto drag_prompt
 set "R2_BASE=https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev"
 set /p R2_BASE=R2 base URL (Enter for default): 
 set /p OUT_PATH=Output path, Enter for auto: 
-set "OUT_PATH=%OUT_PATH:"=%"
-if "%OUT_PATH%"=="" (
+if defined OUT_PATH set "OUT_PATH=%OUT_PATH:"=%"
+if not defined OUT_PATH (
   python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --check
 ) else (
   python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --output "%OUT_PATH%" --check
