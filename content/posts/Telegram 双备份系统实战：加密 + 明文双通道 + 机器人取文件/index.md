@@ -739,15 +739,18 @@ $stream = [System.IO.File]::Open( $lock, [System.IO.FileMode]::OpenOrCreate, [Sy
 ##### 1.2.5 rclone sync：加密备份同步
 
 核心命令：
-    & $RcloneExe sync `
-        $source.path `
-        "teldrive:backup/$($source.remotePath)" `
-        --config $RcloneConfig `
-        --create-empty-src-dirs `
-        --transfers 4 `
-        --checkers 8 `
-        --log-file $log `
-        --log-level INFO
+
+```powershell
+& $RcloneExe sync `
+    $source.path `
+    "teldrive:backup/$($source.remotePath)" `
+    --config $RcloneConfig `
+    --create-empty-src-dirs `
+    --transfers 4 `
+    --checkers 8 `
+    --log-file $log `
+    --log-level INFO
+```
 
 含义：
 
@@ -766,8 +769,18 @@ Teldrive 是 Telegram 网盘服务：
 * PostgreSQL 保存文件索引和分片 ID
 * rclone 通过 `teldrive:` 后端调用 Teldrive API
 
-```powershell
-`rclone.conf`： [teldrive] type = teldrive api_host = http://localhost:8080 access_token = PASTE_ACCESS_TOKEN chunk_size = 500M upload_concurrency = 4 encrypt_files = true random_chunk_name = true channel_id = 0 root_folder_id =
+```text
+# rclone.conf
+[teldrive]
+type = teldrive
+api_host = http://localhost:8080
+access_token = PASTE_ACCESS_TOKEN
+chunk_size = 500M
+upload_concurrency = 4
+encrypt_files = true
+random_chunk_name = true
+channel_id = 0
+root_folder_id =
 ```
 
 
@@ -1072,7 +1085,7 @@ bat 的作用：
 
 
 
-1. Chrome 无法登录 Teldrive，Edge 可以
+### 1. Chrome 无法登录 Teldrive，Edge 可以
 
 现象：
 
@@ -1520,5 +1533,3 @@ didn't find backend called "teldrive"
 ### 9.5 写在最后
 
 做这个项目的过程中我最大的感受是：服务本质就是在解决冲突——进程冲突、文件锁冲突、上传去重冲突、事件丢失与补扫的冲突。这些思想和 Linux 下解决资源竞争的思路是一脉相承的。如果你也在学 Linux 或操作系统，不妨试着从"冲突管理"的视角去理解服务设计，会有不一样的收获。希望这篇记录对你有用，祝大家备份无忧。
-
-
