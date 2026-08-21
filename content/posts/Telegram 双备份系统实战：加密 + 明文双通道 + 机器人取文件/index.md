@@ -267,7 +267,6 @@ psql -U postgres -h 127.0.0.1 -p 5433 -c "SELECT version();"
 Teldrive 是核心服务，负责把文件分片、加密、上传到 Telegram。把 `teldrive.exe` 放到 `%USERPROFILE%\.installer\bin\`，配置文件 `config.toml` 放到 `%USERPROFILE%\.teldrive\`（里面是占位符）：
 
 ```toml
-```toml
 # ========== Teldrive 核心配置说明 ==========
 
 [db]
@@ -339,7 +338,7 @@ $b = New-Object byte[] 32; [System.Security.Cryptography.RandomNumberGenerator]:
 
 修改完配置文件，我们使用以下命令查看是否成功运行
 
-```
+```text
 # 第 1 层：进程正常、端口在听
 Get-Process teldrive                     # 能看到进程
 netstat -ano | findstr :8080             # 8080 在监听
@@ -356,11 +355,9 @@ psql -U postgres -h 127.0.0.1 -p 5433 -d postgres -c "SELECT usename, state FROM
 
 ![1893ba45-8516-4df2-96a6-e532633d72df](./images/1893ba45-8516-4df2-96a6-e532633d72df.png)
 
-```bash
-我通过使用以上命令发现成功的，可以正常使用teldrive服务
+我通过使用以上命令确认 Teldrive 服务可以正常使用。
 
-这个是我已经在teldrive登录好的。
-```
+下图是我已经登录好的 Teldrive 网页。
 
 ![4a57b6a7-d830-4a26-b4fc-24aca048b3ca](./images/4a57b6a7-d830-4a26-b4fc-24aca048b3ca.png)
 
