@@ -19,7 +19,7 @@ enableRobotsTXT = true
   ShowToc = true
   ShowPostNavLinks = true
   ShowRssButtonInSectionTermList = true
-  ShowAllPagesInArchive = true
+  ShowAllPagesInArchive = false
   hideSummary = false
 
   [params.search]
