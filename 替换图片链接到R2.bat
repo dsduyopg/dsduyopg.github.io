@@ -1,5 +1,4 @@
 @echo off
-chcp 65001 >nul
 setlocal enabledelayedexpansion
 
 set "PY=python"
@@ -24,15 +23,15 @@ goto end
 
 :interactive
 echo.
-echo 图片链接替换到 R2
+echo Replace local images with R2 URLs
 echo.
-set /p MD_PATH=请拖入 md 文件: 
-set /p SLUG=请输入项目 slug: 
+set /p MD_PATH=Drag markdown file here: 
+set /p SLUG=Project slug: 
 set "MD_PATH=%MD_PATH:"=%"
 if "%MD_PATH%"=="" goto interactive
 if "%SLUG%"=="" goto interactive
 echo.
-set /p INPLACE=直接覆盖原文件? (y/n): 
+set /p INPLACE=Overwrite original file? (y/n): 
 if /i "%INPLACE%"=="y" (
   python "%SCRIPT%" --file "%MD_PATH%" --slug "%SLUG%" --in-place --check
 ) else (
