@@ -31,7 +31,13 @@ if "%SLUG%"=="" (
 )
 set "R2_BASE=https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev"
 set /p R2_BASE=R2 base URL (Enter for default): 
-python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --check
+set /p OUT_PATH=Output path (Enter=auto next to original): 
+set "OUT_PATH=%OUT_PATH:"=%"
+if "%OUT_PATH%"=="" (
+  python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --check
+) else (
+  python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --output "%OUT_PATH%" --check
+)
 goto end
 
 :drag_prompt
@@ -42,6 +48,7 @@ echo 1. Drag the markdown file into this window
 echo 2. Press Enter
 echo 3. Type a short English slug, e.g. blog1
 echo 4. Paste the R2 base URL, or press Enter for default
+echo 5. Optional output path, or press Enter for auto
 echo.
 set /p MD_FILE=Markdown file: 
 set /p SLUG=Project slug: 
@@ -50,7 +57,13 @@ if "%MD_FILE%"=="" goto drag_prompt
 if "%SLUG%"=="" goto drag_prompt
 set "R2_BASE=https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev"
 set /p R2_BASE=R2 base URL (Enter for default): 
-python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --check
+set /p OUT_PATH=Output path (Enter=auto next to original): 
+set "OUT_PATH=%OUT_PATH:"=%"
+if "%OUT_PATH%"=="" (
+  python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --check
+) else (
+  python "%SCRIPT%" --file "%MD_FILE%" --slug "%SLUG%" --base "%R2_BASE%" --output "%OUT_PATH%" --check
+)
 goto end
 
 :advanced
