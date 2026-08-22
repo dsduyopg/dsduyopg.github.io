@@ -433,7 +433,7 @@ rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
 <p>实时同步</p>
 <h2 id="二如何安装数据同步服务-dnf--y-install-rsync">二.如何安装数据同步服务： dnf -y install rsync<a hidden class="anchor" aria-hidden="true" href="#二如何安装数据同步服务-dnf--y-install-rsync">#</a></h2>
 <pre tabindex="0"><code>dnf install rsync -y
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="images/3797614224cc49d5a3fca322dfdf0d27.png"></p>
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3797614224cc49d5a3fca322dfdf0d27.png"></p>
 <h2 id="三综合案例">三.综合案例<a hidden class="anchor" aria-hidden="true" href="#三综合案例">#</a></h2>
 <h3 id="1-本地同步操作">1. 本地同步操作:<a hidden class="anchor" aria-hidden="true" href="#1-本地同步操作">#</a></h3>
 <pre tabindex="0"><code>准备⼯作
@@ -445,15 +445,15 @@ html⽬录
 需求：对html⽬录进⾏同步操作。 将其同步到/usr/local/nginx-1.8.0/backup/下，并且如果
 源⽬录下已经删除的，在⽬标⽬录下也应该被删除
 </code></pre><p><strong>我们应当用rsync命令进行相应的操作，下面就是我操作出来的</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/f24199616bd64be2976432f00501fdf4.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/ee2ff999ecb64ec7ba949b4a0a56e145.png">
-<img alt="在这里插入图片描述" loading="lazy" src="images/8cc454aa2c71417ebc9f1743d69fef13.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f24199616bd64be2976432f00501fdf4.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ee2ff999ecb64ec7ba949b4a0a56e145.png">
+<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8cc454aa2c71417ebc9f1743d69fef13.png"></p>
 <h3 id="2远程同步操作">2.远程同步操作:<a hidden class="anchor" aria-hidden="true" href="#2远程同步操作">#</a></h3>
 <pre tabindex="0"><code>需求：对/usr/local/nginx-1.8.0/html⽬录进⾏操作，将其同步到node2的家⽬录的backup的⽬
 录中
 注意： 需要双⽅均安装rsync，同时配置了SSH密钥（否则需要输⼊密码）
 </code></pre><p><code>这个案例也是没有什么太大的问题的，下面是我在这个案例中做出的</code></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/d911be837ebe4112a5553e21e165097d.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d911be837ebe4112a5553e21e165097d.png"></p>
 <h3 id="3综合案例实现定时与增量备份">3.综合案例,实现定时与增量备份<a hidden class="anchor" aria-hidden="true" href="#3综合案例实现定时与增量备份">#</a></h3>
 <pre tabindex="0"><code>需求说明：
 在centos stream 9的 /var/log⽬录下， 存储了⼤量的关于系统的⽇志：如messages⽂件存储⼤量
@@ -461,14 +461,14 @@ html⽬录
 secure⽇志⽂件进⾏定时的备份到node2节点的/export/data/node1_backup_system_log⽬录中，
 要求每⽇凌晨2点进⾏备份⼀次。
 </code></pre><p>在这案例之中我们可以使用定时任务进行操作的</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/e43fc2f70dfe4cd6907dc89ceece0657.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/f75359b85d11467499f187989fb51ff5.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/e43fc2f70dfe4cd6907dc89ceece0657.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f75359b85d11467499f187989fb51ff5.png"></p>
 <h2 id="四结合inotify实现数据实时同步">四.结合INOTIFY实现数据实时同步<a hidden class="anchor" aria-hidden="true" href="#四结合inotify实现数据实时同步">#</a></h2>
 <pre tabindex="0"><code>⾸先将⼆个路径分别创建出来， 便于后续演⽰
 node1执⾏： mkdir -p /export/data/logs
 node2执⾏： mkdir -p /export/data/node1_exe_backup_log
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="images/48b53dc5870544e39fc4c082d68c6b12.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/84ef413258f549afb18c49aaee593a27.png"></p>
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/48b53dc5870544e39fc4c082d68c6b12.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/84ef413258f549afb18c49aaee593a27.png"></p>
 <ul>
 <li>优势：</li>
 </ul>
@@ -518,19 +518,19 @@ auth users = backup_user
 chmod 600 /etc/rsyncd.passwd
 </code></pre><h4 id="4-启动rsync服务">4. 启动rsync服务<a hidden class="anchor" aria-hidden="true" href="#4-启动rsync服务">#</a></h4>
 <pre tabindex="0"><code>1 rsync --daemon
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="images/58dee05eaabd4dc49891471c76545a6b.png"></p>
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/58dee05eaabd4dc49891471c76545a6b.png"></p>
 <pre tabindex="0"><code>测试是否可以正常访问： 在node1执⾏
 rsync rsync://backup_user@192.168.88.102/node1_logs
 注意在node2需要开放端⼝：
 firewall-cmd --permanent --add-port=873/tcp
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="images/d1989d021bb6426380e6f51e57bf0034.png"></p>
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d1989d021bb6426380e6f51e57bf0034.png"></p>
 <h2 id="五设置开机自启动">五.设置开机自启动<a hidden class="anchor" aria-hidden="true" href="#五设置开机自启动">#</a></h2>
 <h3 id="1杀死进程">1.杀死进程<a hidden class="anchor" aria-hidden="true" href="#1杀死进程">#</a></h3>
 <pre tabindex="0"><code>-- 查看进程
 ps -ef | grep rsync -- 查看进程ID
 -- 杀死进程
 kill -9 rsync的进程ID
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="images/fcd3fe2f9e22479d8e444903657b882b.png"></p>
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/fcd3fe2f9e22479d8e444903657b882b.png"></p>
 <h3 id="2设置开机启动">2.设置开机⾃启动<a hidden class="anchor" aria-hidden="true" href="#2设置开机启动">#</a></h3>
 <p>由于rsync并不是⼀个系统服务（简单判断：通过systemctl启动和关闭的服务），故需要先
 设置为系统服务后才可以设置</p>
@@ -553,11 +553,11 @@ ExecReload=/bin/kill -HUP $MAINPID：通过发送 SIGHUP 信号，告诉 rsync �
 <li>这个时候，我们需要把旧的日志文件给删掉</li>
 </ul>
 <p><code>因为我们可能在操作的时候会产出一些错误的日志，就是由于这些错误的文件会导致，我们后续无法成功启动rsync服务</code></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/0f536eb514064a138a47535825883933.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/0f536eb514064a138a47535825883933.png"></p>
 <p><strong>就像我这样的错误一样，这个时候，我们就要学会查看日志文件了，因为一些错误会记录在日志里面</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/5022578e0a2041e0bf82f35ec95129eb.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/5022578e0a2041e0bf82f35ec95129eb.png"></p>
 <p><strong>其实，当我把旧的日志文件给删掉之后哦，成功了，应该是之前启动失败过一次，日志文件，没有删除，然后再次启动，通过对比这个日志文件，发现有问题，就无法启动，删除文件意思是把里面的的错误清理掉，之后相当于重新启动，所以可以成功启动后</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/f9265c47416648689835d494fc49a1b0.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f9265c47416648689835d494fc49a1b0.png"></p>
 <pre tabindex="0"><code>总结这次成功的逻辑
 
 这次能成功，其实是两个动作配合的结果：
@@ -596,11 +596,11 @@ backup_user@192.168.88.102::node1_logs
 touch log.txt &amp;&amp; echo &#34;2491 797 1243124 9127&#34;&gt;&gt;log.txt
 </code></pre><h3 id="4开始传输文件了">4.开始传输文件了<a hidden class="anchor" aria-hidden="true" href="#4开始传输文件了">#</a></h3>
 <p><strong>在这一步里面呢，我们需要注意上下文，把这个权限给关掉，否则，后面传输就像我一样不会成功的</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/26b6693e93574eaeb136bf6615bb7331.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/26b6693e93574eaeb136bf6615bb7331.png"></p>
 <p><strong>大家可以看到，我通过传送指令，无法发送成功，但是文件的权限都是开的，是最大的权限</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/7bd43237e0a94a5e85851f1e8df8701f.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/7bd43237e0a94a5e85851f1e8df8701f.png"></p>
 <p><strong>当时，我就比较迷了，不知道该如何办，然后我问了千问，它给予了我很大的帮助了，我明白了其实是我Linux的上下文的权限比较严格，需要将其关闭</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/3145c85ef4da49e682952ce1a8cd7c91.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3145c85ef4da49e682952ce1a8cd7c91.png"></p>
 <h4 id="解决方案">解决方案<a hidden class="anchor" aria-hidden="true" href="#解决方案">#</a></h4>
 <p>以下是千问告诉我的</p>
 <h3 id="找到根本原因了">找到根本原因了！<a hidden class="anchor" aria-hidden="true" href="#找到根本原因了">#</a></h3>
@@ -643,14 +643,14 @@ sudo setsebool -P rsync_full_access on
 <pre tabindex="0"><code># 在远程服务器上执行
 sudo setenforce 0
 </code></pre><p>然后回到本地重新执行 rsync 命令即可。</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/8ac5ac380cb84c8b830486665919aec8.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8ac5ac380cb84c8b830486665919aec8.png"></p>
 <p>这个是我按照，他的提示放权的步骤</p>
 <p>接下来，很明显，我再次发送文件，直接成功了</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/c0fe09d45589427297a0a688bc37e0c6.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/ed077686afe346e781c59d27d34c3cde.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/c0fe09d45589427297a0a688bc37e0c6.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ed077686afe346e781c59d27d34c3cde.png"></p>
 <p>注意，ai说的是下一次重启还会权限不足，因此我们需要修改配置文件</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/7d67a5255e75406eb847e4906821e88e.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/f92ca092e180417783c914bd90e3baee.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/7d67a5255e75406eb847e4906821e88e.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f92ca092e180417783c914bd90e3baee.png"></p>
 <p>将SELINUX修改为disabled就可以了</p>
 <p><strong>然后，我们重启一起机器，是配置生效，就可以了。</strong></p>
 <h2 id="七使密码件-实现不需要输密码">七,使⽤密码⽂件， 实现不需要输⼊密码<a hidden class="anchor" aria-hidden="true" href="#七使密码件-实现不需要输密码">#</a></h2>
@@ -660,23 +660,23 @@ sudo setenforce 0
 <pre tabindex="0"><code>echo &#39;123456&#39; &gt; /etc/rsync.password
 chmod 600 /etc/rsync.password
 注意： 权限必须是600，否则会报错
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="images/857d0a1c14e14c63a92ea65f3571f9c3.png">
-<img alt="在这里插入图片描述" loading="lazy" src="images/ca3460eb710546a2931a082130f17f37.png"></p>
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/857d0a1c14e14c63a92ea65f3571f9c3.png">
+<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ca3460eb710546a2931a082130f17f37.png"></p>
 <ul>
 <li>步骤⼆： 使⽤密码⽂件， 实现不需要输⼊密码</li>
 </ul>
 <pre tabindex="0"><code>rsync -avz --password-file=/etc/rsync.password /export/data/logs/
 backup_user@node2::node1_logs
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="images/a048b4827a54434d90f3e299169ea317.png"></p>
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/a048b4827a54434d90f3e299169ea317.png"></p>
 <p><strong>查看node2机器</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/8d3571647e68489d9f3a1b3b008bc18e.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8d3571647e68489d9f3a1b3b008bc18e.png"></p>
 <h2 id="八使用主机名">八.使用主机名<a hidden class="anchor" aria-hidden="true" href="#八使用主机名">#</a></h2>
 <p><code>这个应该修改配置文件hosts</code></p>
 <pre tabindex="0"><code>echo &#34;192.168.149.128 node1 node1.itcast.cn&#34;&gt;&gt;/etc/hosts
 echo &#34;192.168.149.131 node2 node2.itcast.cn&#34;&gt;&gt;/etc/hosts
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="images/3303e84e3cbe403e9965e5879badb87e.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/f1130277e6c8406db368a0cdefc6898c.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/d1a4486386194c5abf53c8b1c2081410.png"></p>
+</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3303e84e3cbe403e9965e5879badb87e.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f1130277e6c8406db368a0cdefc6898c.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d1a4486386194c5abf53c8b1c2081410.png"></p>
 <h2 id="九使用脚本自动配置">九.使用脚本自动配置<a hidden class="anchor" aria-hidden="true" href="#九使用脚本自动配置">#</a></h2>
 <h3 id="1安装使用的软件">1.安装使用的软件<a hidden class="anchor" aria-hidden="true" href="#1安装使用的软件">#</a></h3>
 <ul>
@@ -712,12 +712,12 @@ rsync -avz --port=873 --delete -e ssh &#34;${SOURCE_DIR}/&#34; &#34;${TARGET_DIR
 echo &#34;Sync completed for ${file} in ${path}.&#34; &gt;&gt; &#34;$LOG_FILE&#34;
 done
 </code></pre><h3 id="3给文件加权以及启动脚本文件">3给文件加权以及启动脚本文件<a hidden class="anchor" aria-hidden="true" href="#3给文件加权以及启动脚本文件">#</a></h3>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/de9435f016924ec7a193db2c87b0f598.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/de9435f016924ec7a193db2c87b0f598.png"></p>
 <h3 id="4最后测试一下">4.最后测试一下<a hidden class="anchor" aria-hidden="true" href="#4最后测试一下">#</a></h3>
 <p><code>在node1的/export/data/logs 里面上传几个文件，然后再打开一个node1服务器开启tail -100f监听文件，查看是否有修改，以及node2是否也跟着变化呢</code></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/bc1f71e8ed5b48b184532f40235ca967.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/00130a2aac85493ba709bdcd56ab6698.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="images/983dcb33b3f14c33990ab42f6cabe000.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/bc1f71e8ed5b48b184532f40235ca967.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/00130a2aac85493ba709bdcd56ab6698.png"></p>
+<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/983dcb33b3f14c33990ab42f6cabe000.png"></p>
 <p><strong>最后，发现成功在node2里面显示，这个实验就完成了</strong></p>
 
 

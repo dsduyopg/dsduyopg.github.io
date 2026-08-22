@@ -197,6 +197,31 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">CSDN 博客本地化工具使用说明
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 用途 使用方法 1. 准备 2. 下载图片 3. 可选参数 注意事项 建议 CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
+![图片](https://img-blog.csdnimg.cn/xxxx.png) 如果图床失效或文章被删除，图片就找不回来了。
+这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：
+![图片](images/xxxx.png) 这样博客的正文和图片就能一起保存、迁移、备份。
+使用方法 1. 准备 本机需要安装 Python 3.11 或更高版本。
+检查：
+python --version 2. 下载图片 python download_images.py &#34;D:\博客\文章.md&#34; 执行后会在文章同目录生成：
+D:\博客\ ├─ 文章.md └─ images\ └─ xxxx.png 文章.md 里的图片链接会自动改写为：
+![图片](images/xxxx.png) 3. 可选参数 指定图片目录名：
+python download_images.py &#34;D:\博客\文章.md&#34; --out 图片 只预览，不实际下载：
+python download_images.py &#34;D:\博客\文章.md&#34; --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>88 字</span></footer>
+  <a class="entry-link" aria-label="post link to CSDN 博客本地化工具使用说明" href="http://localhost:1313/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Telegram 双备份系统实战：加密 &#43; 明文双通道 &#43; 机器人取文件
     </h2>
   </header>
@@ -238,49 +263,6 @@
 
 <span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>2 字</span></footer>
   <a class="entry-link" aria-label="post link to 博客日记与我的看法" href="http://localhost:1313/posts/%E5%8D%9A%E5%AE%A2%E6%97%A5%E8%AE%B0%E4%B8%8E%E6%88%91%E7%9A%84%E7%9C%8B%E6%B3%95/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">磁盘的使用以及挂载
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 一.准备工作 二.查看新添加磁盘 三.分区 四.格式化 五.挂载 1.临时挂载 2.长期挂载 六.重启并查看 磁盘的使用以及挂载
-一.准备工作 在这一步当中，我们应当先关闭虚拟机，从设置里面添加一块磁盘，并设置合理的磁盘大小,随后呢，我们重新开启虚拟机就可以了，并登录mx,进行下一步操作
-二.查看新添加磁盘 我们在这一步当中使用lsblk 查看新添加的磁盘
-lsblk #查看新添加的磁盘 三.分区 fdisk /dev/sdb 然后，我们使用n来追加磁盘
-注意，再最后一个扇区的时候我们也可以指定其特定大小&#43;20G也是可以的
-我们要使用w保存信息
-我们再次使用命令df -h 查看分区
-四.格式化 格式化，我们使用的是mkfs.格式
-#格式化所支持的格式有mkfs.ext4 是⼀个⽤来格式化分区为 EXT4 ⽂件系统 的命令。EXT4（第四代扩展⽂件系统）是#Linux 系统中使⽤最⼴泛的⽂件系统类型，兼具性能、可靠性和兼容性，适⽤于⼤多数场景。#XFS 是⼀种⾼性能的⽇志⽂件系统，⼴泛⽤于企业级场景，特别是对⼤⽂件和⾼并发 I/O 的处理有#明显优势。它是 CentOS Stream 9 等现代 Linux 发⾏版的默认⽂件系统类型mkfs.xfs /dev/sdb 五.挂载 这一步，比较麻烦了，需要修改配置文件,修改的方式有两种
-1.临时挂载 我们使用mount进行临时挂载
-mount /dev/sdb1 /mnt/sdb1mount /dev/sdb2 /mnt/sdb2 2.长期挂载 uuid修改 如果我们需要一直挂载，就需要修改配置文件，/etc/fstab
-blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后打开配置文件，进行修改就可以了
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>75 字</span></footer>
-  <a class="entry-link" aria-label="post link to 磁盘的使用以及挂载" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">磁盘的综合案例
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172
-1.改成88网段 注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下 这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。
-情况一：全局迁移至 88 网段（推荐彻底解决） 如果你想把所有机器都规范到 88 网段，请按以下步骤操作：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>474 字</span></footer>
-  <a class="entry-link" aria-label="post link to 磁盘的综合案例" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"></a>
 </article>
 
 <article class="post-entry"> 

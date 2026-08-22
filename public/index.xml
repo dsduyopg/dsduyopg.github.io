@@ -314,6 +314,69 @@ hosts文件: 增加对node3的解析
 &lt;code&gt;发现这修改是生效的&lt;/code&gt;&lt;/p&gt;</description>
     </item>
     <item>
+      <title>CSDN 博客本地化工具使用说明</title>
+      <link>http://localhost:1313/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#用途&#34;&gt;用途&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#使用方法&#34;&gt;使用方法&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1-准备&#34;&gt;1. 准备&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2-下载图片&#34;&gt;2. 下载图片&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3-可选参数&#34;&gt;3. 可选参数&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#注意事项&#34;&gt;注意事项&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#建议&#34;&gt;建议&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;h1 id=&#34;csdn-博客本地化工具&#34;&gt;CSDN 博客本地化工具&lt;/h1&gt;
+&lt;h2 id=&#34;用途&#34;&gt;用途&lt;/h2&gt;
+&lt;p&gt;CSDN 导出的 Markdown 文件通常只包含图床链接，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;![&lt;span style=&#34;color:#f92672&#34;&gt;图片&lt;/span&gt;](&lt;span style=&#34;color:#a6e22e&#34;&gt;https://img-blog.csdnimg.cn/xxxx.png&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果图床失效或文章被删除，图片就找不回来了。&lt;/p&gt;
+&lt;p&gt;这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;![&lt;span style=&#34;color:#f92672&#34;&gt;图片&lt;/span&gt;](&lt;span style=&#34;color:#a6e22e&#34;&gt;images/xxxx.png&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样博客的正文和图片就能一起保存、迁移、备份。&lt;/p&gt;
+&lt;h2 id=&#34;使用方法&#34;&gt;使用方法&lt;/h2&gt;
+&lt;h3 id=&#34;1-准备&#34;&gt;1. 准备&lt;/h3&gt;
+&lt;p&gt;本机需要安装 Python 3.11 或更高版本。&lt;/p&gt;
+&lt;p&gt;检查：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-下载图片&#34;&gt;2. 下载图片&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python download_images.py &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D:\博客\文章.md&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后会在文章同目录生成：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;D:\博客\
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─ 文章.md
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─ images\
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   └─ xxxx.png
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;文章.md&lt;/code&gt; 里的图片链接会自动改写为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;![&lt;span style=&#34;color:#f92672&#34;&gt;图片&lt;/span&gt;](&lt;span style=&#34;color:#a6e22e&#34;&gt;images/xxxx.png&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-可选参数&#34;&gt;3. 可选参数&lt;/h3&gt;
+&lt;p&gt;指定图片目录名：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python download_images.py &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D:\博客\文章.md&amp;#34;&lt;/span&gt; --out 图片
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只预览，不实际下载：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python download_images.py &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D:\博客\文章.md&amp;#34;&lt;/span&gt; --dry-run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;注意事项&#34;&gt;注意事项&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;脚本只处理 Markdown 的 &lt;code&gt;![alt](url)&lt;/code&gt; 图片语法&lt;/li&gt;
+&lt;li&gt;下载失败时会保留原图床链接，并在结果里显示 &lt;code&gt;FAILED&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;已存在且大小不为 0 的图片会自动跳过，不会重复下载&lt;/li&gt;
+&lt;li&gt;执行前会先把原 Markdown 备份为 &lt;code&gt;文章.md.bak&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;下载的图片文件会按 URL 文件名保存，重名时自动加编号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;建议&#34;&gt;建议&lt;/h2&gt;
+&lt;p&gt;下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>C语言的分支与循环上</title>
       <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
@@ -2055,9 +2118,9 @@ ststemctl status  rsyslog
     </item>
     <item>
       <title>磁盘的使用以及挂载</title>
-      <link>http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -2085,16 +2148,16 @@ ststemctl status  rsyslog
 &lt;h2 id=&#34;二查看新添加磁盘&#34;&gt;二.查看新添加磁盘&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;我们在这一步当中使用lsblk 查看新添加的磁盘&lt;/code&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;lsblk  #查看新添加的磁盘
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/0a99a6fc298341e9a3b5cc8b878f6d21.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/0a99a6fc298341e9a3b5cc8b878f6d21.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;三分区&#34;&gt;三.分区&lt;/h2&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;fdisk /dev/sdb
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/4f9b3037f8e041279e65509f0090bd81.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/4f9b3037f8e041279e65509f0090bd81.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;然后，我们使用n来追加磁盘&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/69de7f653f474ada8fbe882760c9884e.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/69de7f653f474ada8fbe882760c9884e.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;注意，再最后一个扇区的时候我们也可以指定其特定大小+20G也是可以的&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/ed070ba2ef934f5a80de0302d402764c.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/ed070ba2ef934f5a80de0302d402764c.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;我们要使用w保存信息&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/6a2aa4daa1ab49708199f3963dfae6f9.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/6a2aa4daa1ab49708199f3963dfae6f9.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;我们再次使用命令df -h 查看分区&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;四格式化&#34;&gt;四.格式化&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;格式化，我们使用的是mkfs.格式&lt;/code&gt;&lt;/p&gt;
@@ -2116,14 +2179,14 @@ mount /dev/sdb2 /mnt/sdb2
 &lt;p&gt;&lt;code&gt;如果我们需要一直挂载，就需要修改配置文件，/etc/fstab&lt;/code&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;blkid /dev/sdb1
 blkid /dev/sdb2
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/f18c10da20b64c668081bb8480ce2afa.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/f18c10da20b64c668081bb8480ce2afa.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;先在，我们得到了他们的uuid，然后打开配置文件，进行修改就可以了&lt;/code&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>磁盘的综合案例</title>
-      <link>http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;

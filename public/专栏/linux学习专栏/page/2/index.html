@@ -185,6 +185,38 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">磁盘的综合案例
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172
+1.改成88网段 注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下 这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。
+情况一：全局迁移至 88 网段（推荐彻底解决） 如果你想把所有机器都规范到 88 网段，请按以下步骤操作：
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>474 字</span></footer>
+  <a class="entry-link" aria-label="post link to 磁盘的综合案例" href="http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">磁盘管理的相关知识
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 磁盘管理 1.文件系统 常见文件系统对比 一、主流文件系统横向对比 2.常用的磁盘管理命令 2.1 查看磁盘与分区信息 1. lsblk —— 查看块设备（推荐首选） 2. fdisk —— 查看分区表 3. parted —— 高级分区查看 4. blkid —— 查看 UUID 和文件系统类型 5. 其他硬件信息 2.2 分区管理命令 1. fdisk —— MBR 分区（交互式） 2. gdisk —— GPT 分区（交互式） 3. parted —— 高级分区工具 4. 刷新内核分区表 2.3 文件系统格式化 1. 创建文件系统 2. 格式化时指定参数 3. 查看文件系统信息 2.4 挂载与卸载 1. 临时挂载 2. 卸载 3. 查看挂载信息 2.5 磁盘空间监控 1. 查看磁盘使用情况 2. 查看目录大小 3. 找出占用空间最大的目录（实战排障） 2.6 LVM 逻辑卷管理 1. 物理卷（PV） 2. 卷组（VG） 3. 逻辑卷（LV） 4. 扩容后刷新文件系统 2.7 磁盘 I/O 性能排查 1. iostat —— 磁盘 I/O 统计 2. iotop —— 按进程查看 I/O 3. 其他 I/O 排查工具 2.8 磁盘故障排查 1. SMART 健康检测 2. 文件系统修复 3. 坏道检测 2.9 SWAP 交换分区管理 1. 查看 SWAP 2. 创建 SWAP 分区 3. 永久生效（写入 fstab） 4. 调整 SWAP 使用策略 2.10 fstab 配置文件详解 1. 文件格式 2. 示例 3. 常用挂载选项 4. 安全验证 fstab 📌 速查口诀 3.磁盘分区操作 1.准备工作 2.GPT分区 1.查看磁盘情况 2.使用parted命令开始分区操作 3.设置交换内存 1.分配4G的分区大小 2.使用mkswap格式化分区 3.设置swapon启动交换分区 4.查看交换分区大小 磁盘管理 1.文件系统 文件系统的主要作用是将存储设备（如硬盘、SSD）上的物理空间组织为逻辑单元，提供数据存储、检索和管理的标准方法。一般文件系统主要由超级块（Superblock）、inode、数据块、目录结构构成的
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>7 分钟</span>&nbsp;·&nbsp;<span>1415 字</span></footer>
+  <a class="entry-link" aria-label="post link to 磁盘管理的相关知识" href="http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">关于ftp与SELinux的冲突问题
     </h2>
   </header>
