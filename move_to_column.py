@@ -79,7 +79,8 @@ def ensure_column(root, name):
 
 
 def check_lock(path):
-    """返回被占用的文件列表"""
+    """返回被占用的文件列表:通过"重命名探测"判断(重命名需要删除权限,
+    文件被其他程序以非删除共享方式打开时会失败)"""
     locked = []
     targets = []
     if os.path.isdir(path):
@@ -89,10 +90,11 @@ def check_lock(path):
     else:
         targets.append(path)
     for p in targets:
+        probe = p + ".__lockprobe__"
         try:
-            with open(p, "r+b"):
-                pass
-        except (PermissionError, OSError):
+            os.rename(p, probe)
+            os.rename(probe, p)  # 改名成功说明没被锁,立刻改回
+        except OSError:
             locked.append(p)
     return locked
 
@@ -179,7 +181,18 @@ def main():
             return 0
 
     # ---------- 执行 ----------
-    shutil.move(src, dest)
+    try:
+        shutil.move(src, dest)
+    except (PermissionError, OSError) as e:
+        print("\n[错误] 移动失败,可能有文件正被其他程序占用:")
+        locked = check_lock(src)
+        if locked:
+            for p in locked[:10]:
+                print(f"   - {os.path.relpath(p, root)}")
+            print("       请关闭打开它们的程序(如 WPS、图片查看器、资源管理器、Typora 等)后重试。")
+        else:
+            print(f"       详情: {e}")
+        return 1
     ok_src = not os.path.exists(src)
     ok_dst = os.path.isdir(dest) if os.path.isdir(dest) else os.path.exists(dest)
     if ok_src and ok_dst:
