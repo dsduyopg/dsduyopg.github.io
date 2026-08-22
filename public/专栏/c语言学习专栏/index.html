@@ -194,22 +194,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">示例文章（可删除）
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>这是一篇示例文章，用来演示专栏的用法：
-本篇文章放在 content/专栏/C语言学习专栏/ 下，因此它不会出现在首页、文章列表和归档里。 只有点开「专栏 → C语言学习专栏」才能看到它。 把文章里的 searchHidden: true 删掉后，它就可以被站内搜索搜到。 确认专栏功能正常后，把这篇文章删除即可，然后把你的真实文章放到这个文件夹里。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-22 00:00:00 +0000 UTC'>August 22, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>12 字</span></footer>
-  <a class="entry-link" aria-label="post link to 示例文章（可删除）" href="http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A4%BA%E4%BE%8B%E6%96%87%E7%AB%A0-%E5%8F%AF%E5%88%A0%E9%99%A4/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">C语言的分支与循环上
     </h2>
   </header>
@@ -386,6 +370,23 @@ C标准是要求全局变量要被初始化为零值，因此即使你没有初�
 
 <span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>50 字</span></footer>
   <a class="entry-link" aria-label="post link to C语言之讲解篇6" href="http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">C语言之讲解篇7
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 例题：写一个函数，可以逆序一个字符串的内容。
+#include &lt;stdio.h&gt;void reverse(char * letter);int main(){char num[50];int i;while(num[i]!=&#39;\0&#39;){scanf(&#34;%c&#34;,&amp;num[i]);i&#43;&#43;;}reverse(num);return 0;}void reverse(char * letter){char * start=letter;while(*letter!=&#39;\0&#39;){letter&#43;&#43;;}while(letter&gt;=start){printf(&#34;%c&#34;,*letter);letter--;}} 在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：
+/*思路：该题比较简单，请参考代码*/#include&lt;stdio.h&gt;void Reverse(char* str){char* left = str;char* right = str &#43; strlen(str)-1;while(left &lt; right){char temp = *left;*left = *right;*right = temp;&#43;&#43;left;--right;}}int main(){char str[] = &#34;hello bit&#34;;//在这里完成下面函数，参数自己设计，要求：使用指针Reverse(str);return 0;}// 注意：如果是在线OJ时，必须要考虑循环输入，因为每个算法可能有多组测试用例进行验证，参考以下main函数写法，int main(){char str[101] = {0};while(gets(str)){Reverse(str);printf(&#34;%s\n&#34;, str);memset(str, 0, sizeof(str)/sizeof(str[0]));}return 0;} 接下来本题就宣告结束了。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>114 字</span></footer>
+  <a class="entry-link" aria-label="post link to C语言之讲解篇7" href="http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination" aria-label="分页">
