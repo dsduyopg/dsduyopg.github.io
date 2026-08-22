@@ -30,4 +30,6 @@ if "%~1"=="" (
   python "%~dp0move_to_column.py" --blog "%BLOG_DIR%"
 ) else (
   echo Moving article: %~nx1
-  python "%~dp0move_to_column.py" --blog "%BL
+  python "%~dp0move_to_column.py" --blog "%BLOG_DIR%" --post "%~nx1"
+)
+pause
