@@ -45,6 +45,8 @@ def list_posts(root):
     result = {}
     posts_dir = os.path.join(root, "content", "posts")
     for name in os.listdir(posts_dir):
+        if name == "_index.md":
+            continue
         full = os.path.join(posts_dir, name)
         if os.path.isdir(full) and any(f.lower().endswith(".md") for f in os.listdir(full)):
             result[name] = full

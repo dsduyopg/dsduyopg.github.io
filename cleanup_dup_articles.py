@@ -40,10 +40,12 @@ def find_blog_dir(args_dir):
 
 
 def list_posts_articles(root):
-    """返回 {文章名: 目录/文件绝对路径},扫描 posts 顶层下的文章"""
+    """返回 {文章名: 目录/文件绝对路径},扫描 posts 顶层下的文章(排除 _index.md)"""
     result = {}
     posts_dir = os.path.join(root, "content", "posts")
     for name in os.listdir(posts_dir):
+        if name == "_index.md":
+            continue
         full = os.path.join(posts_dir, name)
         if os.path.isdir(full):
             if any(f.lower().endswith(".md") for f in os.listdir(full)):
@@ -54,7 +56,7 @@ def list_posts_articles(root):
 
 
 def list_column_articles(root):
-    """返回 {文章名: 绝对路径},扫描 content/专栏/<专栏名>/ 下的所有文章"""
+    """返回 {文章名: 绝对路径},扫描 content/专栏/<专栏名>/ 下的所有文章(排除 _index.md)"""
     result = {}
     cols_dir = os.path.join(root, "content", "专栏")
     if not os.path.isdir(cols_dir):
@@ -64,6 +66,8 @@ def list_column_articles(root):
         if not os.path.isdir(col_path):
             continue
         for item in os.listdir(col_path):
+            if item == "_index.md":
+                continue
             full = os.path.join(col_path, item)
             if os.path.isdir(full):
                 if any(f.lower().endswith(".md") for f in os.listdir(full)):
