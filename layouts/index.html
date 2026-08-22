@@ -1,7 +1,9 @@
 {{- define "main" }}
 
-{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+{{- $homePages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $homePages = where $homePages "Params.hiddenInHomeList" "!=" "true" }}
+{{- $columnPages := where site.RegularPages "Section" "eq" "专栏" }}
+{{- $pages = sort (union $homePages $columnPages) "Date" "desc" }}
 {{- $paginator := .Paginate $pages }}
 
 {{- if .IsHome }}
