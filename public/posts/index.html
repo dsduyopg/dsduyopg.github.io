@@ -392,11 +392,21 @@ C标准是要求全局变量要被初始化为零值，因此即使你没有初�
   <a class="entry-link" aria-label="post link to C语言之讲解篇3" href="http://localhost:1313/posts/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/"></a>
 </article>
 <footer class="page-footer">
-  <nav class="pagination">
-    <a class="next" href="http://localhost:1313/posts/page/2/">下一页&nbsp;&nbsp;»
+  <nav class="pagination" aria-label="分页">
+    <span class="page-btn prev disabled" title="上一页" aria-disabled="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </span>
+      <a class="page-btn num active" href="/posts/" aria-label="第 1 页" aria-current="page">1</a>
+      <a class="page-btn num" href="/posts/page/2/" aria-label="第 2 页">2</a>
+      <a class="page-btn num" href="/posts/page/3/" aria-label="第 3 页">3</a>
+      <a class="page-btn num" href="/posts/page/4/" aria-label="第 4 页">4</a>
+      <a class="page-btn num" href="/posts/page/5/" aria-label="第 5 页">5</a>
+    <a class="page-btn next" href="/posts/page/2/" title="下一页" aria-label="下一页">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
   </nav>
 </footer>
+
     </main>
     
 <footer class="footer">

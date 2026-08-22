@@ -347,14 +347,21 @@ blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后�
   <a class="entry-link" aria-label="post link to 磁盘的综合案例" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"></a>
 </article>
 <footer class="page-footer">
-  <nav class="pagination">
-    <a class="prev" href="http://localhost:1313/posts/page/2/">
-      «&nbsp;上一页&nbsp;
+  <nav class="pagination" aria-label="分页">
+    <a class="page-btn prev" href="/posts/page/2/" title="上一页" aria-label="上一页">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </a>
-    <a class="next" href="http://localhost:1313/posts/page/4/">下一页&nbsp;&nbsp;»
+      <a class="page-btn num" href="/posts/" aria-label="第 1 页">1</a>
+      <a class="page-btn num" href="/posts/page/2/" aria-label="第 2 页">2</a>
+      <a class="page-btn num active" href="/posts/page/3/" aria-label="第 3 页" aria-current="page">3</a>
+      <a class="page-btn num" href="/posts/page/4/" aria-label="第 4 页">4</a>
+      <a class="page-btn num" href="/posts/page/5/" aria-label="第 5 页">5</a>
+    <a class="page-btn next" href="/posts/page/4/" title="下一页" aria-label="下一页">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
   </nav>
 </footer>
+
     </main>
     
 <footer class="footer">
