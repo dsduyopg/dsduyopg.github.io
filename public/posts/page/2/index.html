@@ -180,22 +180,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">warp导致的日志发送node2失败
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 warp导致的日志发送node2失败 1.问题背景 1.案例内容 2.案例思路 2.出现的问题 1.node2配置文件 2.重启日志文件 3.node3文件 4.node3端口和服务放行 5.出现问题 3.问题原因 核心原因剖析：用了 TCP，日志为什么还会&#34;凭空消失&#34;？ 4.解决问题 解决对策 5.总结 写在最后 warp导致的日志发送node2失败 1.问题背景 这个是一个操作，以下是案例
-1.案例内容 需求：基于node1中的/var/log/下的messages和secure日志， 完成将日志发送到日志服务器（node3）， 进行统一保存，要求保存到node3服务器的/var/log/messages和/var/log/secure思路： 2.案例思路 第一步： 修改 node1的日志配置文件， 将对应写入到messages和secure日志对应规则配置， 将其目的地变更为发送到远端服务器方案 【建议选择：TCP方案】第二步： 重启node1的系统日志服务第三步： 修改 node3的日志配置文件， 将用于接收远程日志的模块打开【tcp模块】第四步： 重启node3的系统日志服务第五步： 在node3中开放端口号第六步：测试message日志： 在node1中通过logger生成日志数据， 分别观察node1的系统日志和node3的系统日志， 哪个日志文件中会产生新的日志【正常:node3打印】测试安全日志： 通过MX连接下node1，然后在关闭， 观察在这个过程中， node1和node3的安全日志谁会打印新的日志【正常:node3打印】 2.出现的问题 我当时用的是node2和node3，把node1替换成node2了
-1.node2配置文件 打开vi /etc/rsyslog.conf这个文件，然后修改一些地方，图中红圈有一个地方圈错了，应该圈的是有@@的那几行，也是要追加的 2.重启日志文件 systemctl restart rsyslogststemctl status rsyslog 3.node3文件 和node1的文件是同一个，在模块中把tcp协议放行 4.node3端口和服务放行 firewall-cmd --add-port 514/tcp --permanentfirewall-cmd --reloadfirewall-cmd --list-allsystemctl restart rsyslogststemctl status rsyslog ...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>287 字</span></footer>
-  <a class="entry-link" aria-label="post link to warp导致的日志发送node2失败" href="http://localhost:1313/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">Windows 上让 Git 自动同步：NSSM 服务 &#43; 实时监听实战
     </h2>
   </header>
@@ -351,6 +335,24 @@ blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后�
 
 <span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span></footer>
   <a class="entry-link" aria-label="post link to 数据同步服务" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">数学---等价无穷小问题
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 题目如下：limit as x approaches 0 of (cosx)/(x^2)-(sinx)/(x ^3) 中，可以用等价无穷小写吗？ 题目如下：limit as x approaches 0 of (cosx)/(x^2)-(sinx)/(x ^3) 中，可以用等价无穷小写吗？ 我们考虑 𝑥趋近于 0 的情况，用 x 的泰勒展开式来近似 cos(𝑥)cos(x) 和sin(𝑥)sin(x)：
+在处理极限时，使用等价无穷小是一种常用的方法，但在特定情况下需要特别小心。虽然 (sin(x) 在 (x) 趋近于 0 时的等价无穷小确实是 (x)，但在这个题目中，仅仅使用 (sin(x)作为近似并不足以获得正确的结果。这是因为表达式中的每一项都涉及较高次的项，这些项对最终的极限值有重要影响。具体来说，如果只将 (sin(x)) 近似为 (x)，我们会得到：
+这允许我们保留表达式中所有对极限有显著贡献的项，从而准确地计算出极限值。总结来说，简单地将 ( sin(x) 近似为 ( x ) 忽略了 ( x^3/6) 这类高阶项，而这些项在本题目中对最终结果是至关重要的，因此不能仅用 sin(x) ~x 来处理该问题。
+大家好，资料来源于GPT-4，我整理了GPT的回答，若果有错误，还请各位大佬指正出来，感谢感谢！！！
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>54 字</span></footer>
+  <a class="entry-link" aria-label="post link to 数学---等价无穷小问题" href="http://localhost:1313/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination" aria-label="分页">
