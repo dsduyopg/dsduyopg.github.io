@@ -1,6 +1,6 @@
 @echo off
 rem ============================================================
-rem  Move an article from content/posts into a column (专栏)
+rem  Move an article from content/posts into a column
 rem  Usage:
 rem    - Double-click: interactive mode (choose article + column)
 rem    - Drag an article folder onto this bat: move that article
