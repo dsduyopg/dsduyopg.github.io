@@ -1,0 +1,226 @@
+#### samba服务器
+
+
+- [一.SAMBA基本介绍](#SAMBA_1)
+
+- [二.安装SAMBA服务](#SAMBA_13)
+
+-
+
+
+- [一.服务端](#_16)
+
+- [二.客户端](#_21)
+
+
+- [三.创建共享⽬录](#_33)
+
+- [四.修改配置⽂件](#_38)
+
+- [五.配置⽤⼾信息](#_44)
+
+-
+
+
+- [1.添加用户user01](#1user01_46)
+
+- [2.把用户追加到samba](#2samba_54)
+
+
+- [六.启动samba服务](#samba_62)
+
+-
+
+
+- [1.启动samba服务](#1samba_63)
+
+- [2.开放端口](#2_75)
+
+
+- [七.在Linux主机访问](#Linux_82)
+
+- [八. 在windows主机访问](#_windows_97)
+
+
+## []()一.SAMBA基本介绍
+
+
+```
+需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访
+问该共享⽬录
+
+```
+
+
+```
+介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。
+它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是
+Windows 操作系统⽤于⽂件共享和打印服务的主要协议。
+Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家
+庭、企业和跨平台环境中。
+
+```
+
+
+## []()二.安装SAMBA服务
+
+
+### []()一.服务端
+
+
+```
+node2执⾏: dnf -y install samba
+
+```
+
+
+![在这里插入图片描述](images/4e9cbe84fda6474ea45a60cfe7998596.png)
+
+
+### []()二.客户端
+
+
+```
+dnf install -y samba-client
+
+```
+
+
+![在这里插入图片描述](images/c31cf89e084446b8a7b2703cdb5265b3.png)
+ 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的
+ Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block)
+ 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务
+ Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析
+ 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例
+ 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显
+ ⽰的能⼒，使其在⽹络浏览器中可⻅。
+
+
+## []()三.创建共享⽬录
+
+
+```
+mkdir -p /sambda/share
+
+```
+
+
+![在这里插入图片描述](images/1e9bcbd7b602494894a3197c8d92e6d8.png)
+
+
+## []()四.修改配置⽂件
+
+
+```
+配置⽂件所在位置：/etc/samba/smb.conf
+
+```
+
+
+修改配置文件 `/etc/samba/smb.conf`，在文件末尾追加共享配置。这里我们添加一个用户 `user01`，并将其加入到 Samba 服务器中。最后重启服务并检查状态，确认配置生效。
+
+
+## []()五.配置⽤⼾信息
+
+
+### []()1.添加用户user01
+
+
+```
+useradd user01
+passwd user01
+123456
+
+
+```
+
+
+### []()2.把用户追加到samba
+
+
+```
+smbpasswd -a user01
+pdbedit -L
+
+```
+
+
+![在这里插入图片描述](images/e25f08ec644f4a43aa9223eb32f9ea5e.png)
+
+
+## []()六.启动samba服务
+
+
+### []()1.启动samba服务
+
+
+```
+systemctl enable nmb
+systemctl enable smb
+systemctl start nmb
+systemctl start smb
+验证是否启动：
+systemctl status nmb
+systemctl status smb
+
+```
+
+
+![在这里插入图片描述](images/f8d44d69acb04171a5c7bc21a9881be4.png)
+ ![在这里插入图片描述](images/8a3282661539414b89f5e4f151f8be57.png)
+
+
+### []()2.开放端口
+
+
+```
+firewall-cmd --permanent --add-service=smb
+firewall-cmd --reload
+
+```
+
+
+![在这里插入图片描述](images/f68aafee9192414cbfce8e3db902c166.png)
+
+
+## []()七.在Linux主机访问
+
+
+```
+smbclient //192.168.149.131 -U user01
+
+```
+
+
+![在这里插入图片描述](images/7c7d4225e1874ce59dea7ec8bc3c2bf4.png)
+
+
+```
+smbclient //192.168.149.131/smbshare -U user01
+
+```
+
+
+![在这里插入图片描述](images/248ee3f293cf472b8059512203eadb43.png)
+ ![在这里插入图片描述](images/42ea74688b004c5286c749b2097d15f0.png)
+ ![在这里插入图片描述](images/77223c2ab425434eab83578c479c1778.png)
+ ![在这里插入图片描述](images/8f44a7d5cb394d9cbdaf3fe9ceaf7f55.png)
+
+
+在客户端使用 Samba 时，需要先安装 Samba 客户端软件，并在服务器防火墙中开放 Samba 相关端口。接着，从客户端访问 Samba 服务器。此时需要确保共享目录的使用者和所属组均为 `user01`。在客户端创建文件夹后，回到服务器端查看，确认该文件夹是由 `user01` 创建的。尝试上传文件时，如果失败，可能是因为当前登录的目录权限不足。例如，在 `/home/admin` 目录下登录 Samba 服务器时，无法将 `/root` 目录下的文件传输过去；若切换到 `/root` 目录下登录，即可成功上传。
+
+
+## []()八. 在windows主机访问
+
+
+![在这里插入图片描述](images/98e353053fae48878e5afcfc4d8cc83b.png)
+ ![在这里插入图片描述](images/2eb762415c804c0c9c8c1248655b7ef7.png)
+ ![在这里插入图片描述](images/8089bb90114c447cbbd6c2ac0b2995d9.png)
+ ![在这里插入图片描述](images/c4ccbed71ed84938a6a716c6f1e529dc.png)
+ ![在这里插入图片描述](images/01741de60dda4cc2b64bcb0aa4ee67be.png)
+
+
+![在这里插入图片描述](images/1c6a84bf4c654bcc9df07069d77ca7b9.png)
+
+
+![在这里插入图片描述](images/991621306af24cae8646d80335191264.png)

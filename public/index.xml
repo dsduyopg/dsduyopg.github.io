@@ -127,9 +127,9 @@
     </item>
     <item>
       <title>【分支和循环（下）】</title>
-      <link>http://localhost:1313/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -191,8 +191,8 @@ printf(&amp;#34;%d\n&amp;#34;, rand());
 printf(&amp;#34;%d\n&amp;#34;, rand());
 printf(&amp;#34;%d\n&amp;#34;, rand());
 return 0;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/images/0d91b1a346e3767ef41cbdc09424ff4c.png&#34;&gt;)&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/images/a09ac5388163d77441b0a368dbdc7331.png&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/images/0d91b1a346e3767ef41cbdc09424ff4c.png&#34;&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/images/a09ac5388163d77441b0a368dbdc7331.png&#34;&gt;
 由此可以知道的，是rand两次所生成的结果是一样的，那么可以说，&lt;code&gt;rand&lt;/code&gt;不是一个正常的生成随机数的函数，因为他默认的随机种子数是1，如果要生成不同的随机数，就要让种子是变化的。&lt;/p&gt;
 &lt;h4 id=&#34;2srand-1&#34;&gt;(2).srand&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;下面我就介绍关于&lt;code&gt;srand&lt;/code&gt;函数&lt;/strong&gt;，只要在使用&lt;code&gt;rand&lt;/code&gt;之前，使用&lt;code&gt;srand&lt;/code&gt;函数，通过 &lt;code&gt;srand&lt;/code&gt;函数的参数&lt;code&gt;seed&lt;/code&gt;来设置&lt;code&gt;rand&lt;/code&gt;函数生成随机数的时候的种子，只要种子在变化，每次生成的随机数序列也就变化起来了,
@@ -207,9 +207,9 @@ return 0;
     </item>
     <item>
       <title>【实战】DNS建设案例_</title>
-      <link>http://localhost:1313/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -304,13 +304,13 @@ NFS服务器：
 hosts文件: 增加对node3的解析
 免密配置：增加对node3的免密
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;1修改ip&#34;&gt;1.修改ip&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效&lt;/code&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/434f5661479d41879041c66bda93b724.png&#34;&gt;
+&lt;p&gt;&lt;code&gt;我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效&lt;/code&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/434f5661479d41879041c66bda93b724.png&#34;&gt;
 &lt;strong&gt;这个是重启这个服务项&lt;/strong&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/c3d3ad3f3f5e4e5a84c4f518ebe362b4.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/c3d3ad3f3f5e4e5a84c4f518ebe362b4.png&#34;&gt;
 &lt;strong&gt;这个就是重启网卡这个服务了&lt;/strong&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/95a1211387f64fd5945877c10f1fdde7.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/95a1211387f64fd5945877c10f1fdde7.png&#34;&gt;
 最后我们查询一下，是否成功了呢
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e919556bbd7e4a81914e6292ce8504ae.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e919556bbd7e4a81914e6292ce8504ae.png&#34;&gt;
 &lt;code&gt;发现这修改是生效的&lt;/code&gt;&lt;/p&gt;</description>
     </item>
     <item>
@@ -1436,10 +1436,100 @@ int * pr=&amp;amp;a;
 &lt;p&gt;在下面我即将会学习到，解引用操作符以及指针变量，这个我希望大家可以认真，听我的讲解，来开启这个知识点的学习吧！&lt;/p&gt;</description>
     </item>
     <item>
-      <title>FTP服务</title>
-      <link>http://localhost:1313/posts/ftp%E6%9C%8D%E5%8A%A1/</link>
+      <title>DNS服务器</title>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/ftp%E6%9C%8D%E5%8A%A1/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#一dns服务器软件介绍&#34;&gt;一.DNS服务器软件介绍&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1-dns的基本概念&#34;&gt;1… DNS的基本概念&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2dns结构&#34;&gt;2.DNS结构&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1根域-root&#34;&gt;1.根域 .（root）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2顶级域dns服务器tld-dns-servers&#34;&gt;2.顶级域DNS服务器(TLD DNS Servers)&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3权威dns服务器authoritative-dns-servers&#34;&gt;3.权威DNS服务器（Authoritative DNS Servers）&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3dns服务器软件介绍&#34;&gt;3.DNS服务器软件介绍&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二在dns服务器上安装bind&#34;&gt;二.在DNS服务器上安装BIND&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#三配置bind主配置件&#34;&gt;三.配置BIND主配置⽂件&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#四配置内部区域注册件&#34;&gt;四.配置内部区域注册⽂件&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1正向解析&#34;&gt;1.正向解析&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1添加正向解析声明&#34;&gt;1.添加正向解析声明&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2添加正向解析内容&#34;&gt;2.添加正向解析内容&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2反向解析&#34;&gt;2.反向解析&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1添加反向解析的声明&#34;&gt;1.添加反向解析的声明&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2添加反向解析的内容&#34;&gt;2.添加反向解析的内容&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3语法检测&#34;&gt;3.语法检测&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#五启动bind服务&#34;&gt;五.启动BIND服务&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#六配置防墙&#34;&gt;六.配置防⽕墙&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#七客端配置操作node1&#34;&gt;七.客⼾端配置操作【node1】&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#八测试服务器是否正常&#34;&gt;八.测试服务器是否正常&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#九如何清空&#34;&gt;九.如何清空&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#十总结&#34;&gt;十.总结&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;h2 id=&#34;一dns服务器软件介绍&#34;&gt;一.DNS服务器软件介绍&lt;/h2&gt;
+&lt;h3 id=&#34;1-dns的基本概念&#34;&gt;1… DNS的基本概念&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域
+名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址
+不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。
+作⽤：
+• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到
+⽬标服务器。
+• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故
+障排查等⾮常重要。
+• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠
+性。
+• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;2dns结构&#34;&gt;2.DNS结构&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/172e794e0a404cd78fab9914d1449c84.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;1根域-root&#34;&gt;1.根域 .（root）&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不
+直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。
+根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9
+台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。）
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;2顶级域dns服务器tld-dns-servers&#34;&gt;2.顶级域DNS服务器(TLD DNS Servers)&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务
+器的信息。
+例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```
+• 常⻅的顶级域及国家
+.com 商业机构
+.net ⽹络
+.org ⾮商业机构 www.centos.org www.kernel.org
+.edu 教育机构
+.gov 政府机关
+.cn 中国域名
+.us 美国域名
+.ai ⼈⼯智能
+.io 云计算
+.mil 军事机构
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FTP服务</title>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -1496,7 +1586,7 @@ int * pr=&amp;amp;a;
 &lt;h2 id=&#34;一件传输协议ftp&#34;&gt;一.⽂件传输协议FTP&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;FTP（File Transfer Protocol） 是⼀种⽤于在⽹络上进⾏⽂件传输的协议，允许⽤⼾通过客⼾端和
 服务器之间上传、下载⽂件.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/ftp%E6%9C%8D%E5%8A%A1/images/83e9af719357492fa331d2d8183b5234.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/images/83e9af719357492fa331d2d8183b5234.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;二ftp的两种作模式&#34;&gt;二.FTP的两种⼯作模式&lt;/h2&gt;
 &lt;h3 id=&#34;主动模式&#34;&gt;主动模式&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;主动模式，其实就是请求是由客户端发起的，但是数据传输过程则是由服务器发过来的&lt;/code&gt;&lt;/p&gt;
@@ -1514,13 +1604,82 @@ int * pr=&amp;amp;a;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;因为客⼾端通常位于防⽕墙或 NAT 后⾯，防⽕墙可能阻⽌来⾃服务器的外部连接，所以这种模式
 可能会受到⽹络环境的限制，尤其在客⼾端位于 NAT 后时，可能⽆法建⽴连接。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/ftp%E6%9C%8D%E5%8A%A1/images/9f4b1f259e854013a1bbd34c0f159f19.png&#34;&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/images/9f4b1f259e854013a1bbd34c0f159f19.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>nfs服务器的相关知识</title>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#nfs服务器的相关知识&#34;&gt;nfs服务器的相关知识&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#一nfs基本介绍&#34;&gt;一.NFS基本介绍&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二安装软件包&#34;&gt;二.安装软件包&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#三在node2创建共享录&#34;&gt;三.在node2创建共享⽬录&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#四修改配置文件&#34;&gt;四.修改配置文件&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#六验证是否成功共享&#34;&gt;六.验证是否成功共享&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#七挂载使&#34;&gt;七.挂载使⽤&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1客户端下载软件包&#34;&gt;1.客户端下载软件包&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2建立挂载点&#34;&gt;2.建立挂载点&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3进行挂载&#34;&gt;3.进行挂载&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4查看挂载是否成功&#34;&gt;4.查看挂载是否成功&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#5检查是否可以共享文件&#34;&gt;5.检查是否可以共享文件&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;h4 id=&#34;nfs服务器的相关知识&#34;&gt;nfs服务器的相关知识&lt;/h4&gt;
+&lt;h2 id=&#34;一nfs基本介绍&#34;&gt;一.NFS基本介绍&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;CentOS Stream 9中的NFS（⽹络⽂件系统）是⼀种允许不同计算机通过⽹络共享⽂件和⽬录的协 议，使得远程主机能够像本地磁盘⼀样访问和操作⽂件。 它基于客⼾端-服务器架构，NFS服务器将本地⽂件系统共享给客⼾端，客⼾端可以通过⽹络挂载 这些共享⽬录，像访问本地⽂件⼀样进⾏操作。 NFS主要应⽤于Linux/Unix系统之间的⽂件共享，虽然也⽀持跨操作系统，但其兼容性⼀般较差&lt;/code&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/0b621a9d80f145c1beb3a56cd2072de8.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;二安装软件包&#34;&gt;二.安装软件包&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;node2 作为 NFS服务端 node1 作为客⼾端，获取共享⽬录信息&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; 客⼾端安装：
+dnf install nfs-utils
+服务端安装：
+dnf install nfs-utils
+
+在node2放行端口
+执⾏开放端⼝:
+firewall-cmd --add-service=nfs --permanent # 核⼼, 有了这个, NFS即可使⽤共享操作
+firewall-cmd --reload
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;三在node2创建共享录&#34;&gt;三.在node2创建共享⽬录&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir -p /export/software
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;四修改配置文件&#34;&gt;四.修改配置文件&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vi /etc/exports
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/5b6e57b0368a4dc6bb1e6c431f571d1f.png&#34;&gt;
+&lt;code&gt;然后保存文件，并重启服务就可以了&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl restart nfs-server
+systemctl status
+systemctl enable
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/da2bd4cb8a90441b9c975405064020b6.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;六验证是否成功共享&#34;&gt;六.验证是否成功共享&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;服务端执⾏: 查看服务端NFS共享信息
+showmount -e （早期版本兼容）
+exportfs
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/698860533bf1417aaf5675d902e6e0a9.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？</title>
-      <link>http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -1580,19 +1739,19 @@ int * pr=&amp;amp;a;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# ALL SERVICE CRIT TO /var/log/alert.log
 *.crit   action(type=&amp;#34;omfile&amp;#34; file=&amp;#34;/var/log/alert.log&amp;#34;)
 # 这个需要在本某块上面，规则模块下面
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/8124e4a0880a4a1eb2b8e77088e04fc0.png&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/8124e4a0880a4a1eb2b8e77088e04fc0.png&#34;&gt;
 &lt;code&gt;顺便给服务打开&lt;/code&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/931446c550144ec692235d5db9a7145a.png&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/931446c550144ec692235d5db9a7145a.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;3进行测试&#34;&gt;3.进行测试&lt;/h3&gt;
 &lt;h4 id=&#34;1测试优先级大于这个的&#34;&gt;1.测试优先级大于这个的&lt;/h4&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;logger -p alert &amp;#34;12324 249nc90ju90nj-0
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;看测试结果
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/ad4b49e551c343d7828f2a69afb8ffa5.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/a4e5830517654c02bc964f5ebaa704a8.png&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/ad4b49e551c343d7828f2a69afb8ffa5.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/a4e5830517654c02bc964f5ebaa704a8.png&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;2测试优先级小于这个的&#34;&gt;2.测试优先级小于这个的&lt;/h4&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;logger -p info &amp;#34;12324 249nc90ju90nj-0
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/e629038b05424584aa457685404be575.png&#34;&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/268522bf9fa34ad485cd24ac8c1a94aa.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/e629038b05424584aa457685404be575.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/268522bf9fa34ad485cd24ac8c1a94aa.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;2出现问题&#34;&gt;2.出现问题&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;1删除日志文件&#34;&gt;1.删除日志文件&lt;/h3&gt;
@@ -1601,14 +1760,14 @@ int * pr=&amp;amp;a;
 &lt;ul&gt;
 &lt;li&gt;问题1：&lt;strong&gt;是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/c62a8936613647339a8bd3d6e93b7120.png&#34;&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/6777fb84f29d4548a854d0a07e7d8d50.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/c62a8936613647339a8bd3d6e93b7120.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/6777fb84f29d4548a854d0a07e7d8d50.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>samba服务器</title>
-      <link>http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -1663,10 +1822,10 @@ Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服�
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;二安装samba服务&#34;&gt;二.安装SAMBA服务&lt;/h2&gt;
 &lt;h3 id=&#34;一服务端&#34;&gt;一.服务端&lt;/h3&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;node2执⾏: dnf -y install samba
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4e9cbe84fda6474ea45a60cfe7998596.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4e9cbe84fda6474ea45a60cfe7998596.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;二客户端&#34;&gt;二.客户端&lt;/h3&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;dnf install -y samba-client
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c31cf89e084446b8a7b2703cdb5265b3.png&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c31cf89e084446b8a7b2703cdb5265b3.png&#34;&gt;
 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的
 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block)
 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务
@@ -1677,9 +1836,9 @@ Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，�
     </item>
     <item>
       <title>SSh的相关操作</title>
-      <link>http://localhost:1313/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -1746,9 +1905,9 @@ ssh root@192.168.88.102 &amp;#34;cd ~ &amp;amp;&amp;amp; touch a.txt&amp;#34;
     </item>
     <item>
       <title>warp导致的日志发送node2失败</title>
-      <link>http://localhost:1313/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -1828,15 +1987,15 @@ ssh root@192.168.88.102 &amp;#34;cd ~ &amp;amp;&amp;amp; touch a.txt&amp;#34;
 &lt;ul&gt;
 &lt;li&gt;打开vi /etc/rsyslog.conf这个文件，然后修改一些地方，图中红圈有一个地方圈错了，应该圈的是有@@的那几行，也是要追加的&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/f2c4680116e04c009aceb90192dcf5d1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/f2c4680116e04c009aceb90192dcf5d1.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;2重启日志文件&#34;&gt;2.重启日志文件&lt;/h3&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl restart rsyslog
 
 ststemctl status  rsyslog
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/cd2a18ecf0fa4b0fb43fdd7ca4db01a2.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/cd2a18ecf0fa4b0fb43fdd7ca4db01a2.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;3node3文件&#34;&gt;3.node3文件&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;和node1的文件是同一个，在模块中把tcp协议放行&lt;/code&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/328eb6fe34f2489b880e5754d93e6dd6.png&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/328eb6fe34f2489b880e5754d93e6dd6.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;4node3端口和服务放行&#34;&gt;4.node3端口和服务放行&lt;/h3&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;firewall-cmd --add-port 514/tcp --permanent
 firewall-cmd --reload
@@ -1845,8 +2004,8 @@ firewall-cmd --list-all
 systemctl restart rsyslog
 
 ststemctl status  rsyslog
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/305a880673d84819930f0a5c64f62a6a.png&#34;&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/1eeacc31b74c42bdb5bf7b26e2bf8e35.png&#34;&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/305a880673d84819930f0a5c64f62a6a.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/1eeacc31b74c42bdb5bf7b26e2bf8e35.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Windows 上让 Git 自动同步：NSSM 服务 &#43; 实时监听实战</title>
@@ -2117,9 +2276,9 @@ blkid /dev/sdb2
     </item>
     <item>
       <title>磁盘管理的相关知识</title>
-      <link>http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -2336,9 +2495,9 @@ blkid /dev/sdb2
     </item>
     <item>
       <title>关于ftp与SELinux的冲突问题</title>
-      <link>http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -2381,15 +2540,15 @@ blkid /dev/sdb2
 &lt;p&gt;&lt;strong&gt;首先这个问题诞生于如此条件下，我在跟随佳乐老师创建完lisi，zhangsan，wangwu之后呢，我就用lisi作为用户登录服务器node1，这里面设置了禁锢操作，路径是/export/public，而public里面拥有2个文件夹.一个是logs，另一个是src，同时设置了黑白名单,张三设置在黑名单，王五和李四设置在白名单&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;2遇到的问题&#34;&gt;2.遇到的问题&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;1.遇到的问题其实就是，在我用lisi把客户端的根目录下的a.log，发送给服务器的logs目录，无法操作&lt;/strong&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/31d543a0e0d74a2facd0b57caacd8359.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/31d543a0e0d74a2facd0b57caacd8359.png&#34;&gt;
 &lt;strong&gt;2.后来，我在logs目录下创建文件夹也是无法操作的，也是显示权限不足&lt;/strong&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/55c072190ed842009aa2962c3868c3fc.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/55c072190ed842009aa2962c3868c3fc.png&#34;&gt;
 但是呢，我在服务器的这个logs目录下创建文件夹是可以创建的
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/96f60e65512b4a38be2d95aa4d888fd8.png&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/96f60e65512b4a38be2d95aa4d888fd8.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;3.就很奇怪，再去服务器是可以搞定的，是可以创建文件夹的，但是在客户端是没有办法进行创建的，我当时以为是logs的权限设置的不对，用的是root创建，权限大的缘故，但是其实并不是如此的,后面我在服务器用了lisi照样是可以创建的&lt;/code&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/5596133494e8476a96424bbf30353246.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/5596133494e8476a96424bbf30353246.png&#34;&gt;
 4.&lt;code&gt;后来，我仔细检查了这些文件夹的权限，并再次赋权,这次显然也是不行的&lt;/code&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/ed81cf0aff1743229e25473bf7b232d7.png&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/ed81cf0aff1743229e25473bf7b232d7.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;3问题解决的方法&#34;&gt;3.问题解决的方法&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;解决的办法，后来，我把我的问题，这些比较奇怪的地方，我问了千文，后来，在他的帮助之下我成功了，在客户端我成功的在服务器的logs上面创建了文件夹，这意味着什么呢，显然这意味着，我可以把客户端家目录的a.log上传给服务器的logs里面，结果显然和我想的一样&lt;/code&gt;
 &lt;strong&gt;下面是千文告诉我的解决方案，让我一步一步排查，最后成功找到了问题关键所咋&lt;/strong&gt;&lt;/p&gt;
@@ -2708,9 +2867,9 @@ rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
     </item>
     <item>
       <title>这个是关于ssh的相关问题这个是关于ssh的相关问题</title>
-      <link>http://localhost:1313/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -2768,12 +2927,12 @@ rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
 &lt;p&gt;&lt;code&gt;其实，在这里面，大家务必要小心，不要觉得这个简单，就不好好看了，这个也是开始的时候困扰了我很久，后来才知道，了是这个问题没有解决，以下我就为大家详细的说一下吧：&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;首先呢，大家务必确定两台Linux是NAT模式，这个模式对于后续操作是有帮助的，否则的话，后面大家就会遇到各种各样的麻烦的，这里我就给大家说一下给如何进行NAT设置吧&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;首先呢，大家要点击虚拟机里面的主机当中的设置按钮&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/3d39734c50c845b1a3dca94f9d54d26d.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/3d39734c50c845b1a3dca94f9d54d26d.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;接下来，在里面出现的界面我们选择网络适配器，选择NAT就可以了&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/dc4cf5b90f0745e4adcce11cd8f03886.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/dc4cf5b90f0745e4adcce11cd8f03886.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;然后，接下来的一台Linux的系统也是同理的，在这里我就不赘述了，操作到这里，其实两台主机就具有连通行了，我们可以ping一下的
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/3ddf11ca5ee34c9faa74d73d95b0bf6c.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/8357eaf939444b7bae739442e507c10a.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/3ddf11ca5ee34c9faa74d73d95b0bf6c.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/8357eaf939444b7bae739442e507c10a.png&#34;&gt;
 这一步，到这里就结束了，然后我们进行下一步操作的的.&lt;/p&gt;
 &lt;h3 id=&#34;二-检查了是否安装了ssh服务&#34;&gt;二. 检查了是否安装了ssh服务&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt; 在这里呢，我们开始进入Linux里面，开始真正意义上的操作的&lt;/code&gt;&lt;/p&gt;
@@ -2781,9 +2940,9 @@ rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
 &lt;li&gt;&lt;strong&gt;首先就是我们查询是否安装了ssh相关服务，相比大家都知道的是，我们要安装ssh的客户端和服务端两个服务的，以下是查询的命令&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh -V   # 这个是检查SSH客⼾端版本，如果安装会显⽰版本信息
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/ba6760b2476d4378a5896bca27def448.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/ba6760b2476d4378a5896bca27def448.png&#34;&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl status sshd # 这个是检查SSH服务状态，如果服务正在运⾏则说明已安装SSH服务器
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/50c753ae2698405ab406a8ae7dd025c4.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/50c753ae2698405ab406a8ae7dd025c4.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;如果提⽰： command not found或类似的， 说明SSH服务未安装， 需要安装服务&lt;/p&gt;
 &lt;p&gt;&lt;img alt=&#34;![[Pasted image 20260712225903.png]]&#34; loading=&#34;lazy&#34; src=&#34;https://i-blog.csdnimg.cn/direct/8df8e7b8cc384d2883e169ae05d52064.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt; 此时呢，就需要安装这几个服务了&lt;/code&gt;&lt;/p&gt;

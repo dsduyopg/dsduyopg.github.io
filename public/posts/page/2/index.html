@@ -180,165 +180,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">Windows 上让 Git 自动同步：NSSM 服务 &#43; 实时监听实战
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 1. 引言 1.1 自动化 Git 的介绍 1.2 传统手动推送痛点 1.3 我为何需要自动同步 2. 如何想到这个方案 2.1 背景：Linux 学习带来的启发 2.2 一段经历：用 OpenClaw 部署 NSSM 服务 2.2.1 原因 2.2.2 解决问题 2.2.3 开始执行步骤 3. 思路与方案定型 4. 需求分析 5. 验证方案可行性 6. 列出可行的方案 7. 项目实施的大纲 8. 详细步骤 8.1 一次性准备 8.1.1 在本地建一个仓库 8.1.2 安装 Git 8.1.3 SSH 准备 8.2 底层一步一步是怎么实现的 8.2.1 监听文件变化 8.2.2 事件泵 &#43; 防抖 8.2.3 自动提交推送 8.2.4 服务化（NSSM） 8.2.5 定时拉取 9. 核心脚本设计（PowerShell） 9.1 脚本文件构成 9.2 推送守护脚本设计（git_sync_realtime_xxx.ps1） 9.3 定时拉取脚本设计（change_fetcher_generic.ps1） 9.4 设计上的几个关键决定 10. 遇到的问题与解决方法（最重要的关键部分） 10.1 bat 中文乱码 10.2 SSH 私钥带口令，自动化服务无法使用 10.3 git 的 “dubious ownership” 安全保护 10.4 GitHub 端口 22 被拦截 10.5 服务“已标记为删除”（错误 1072） 10.6 定时拉取间隔写死 10.7 FileSystemWatcher 实时监听不触发 10.8 服务 PAUSED（启动失败循环） 11. 安全设计：主仓库只推送 &#43; 镜像区 11.1 为什么这样设计 11.2 两条线分别怎么做 11.3 安全边界（一定要分清） 11.4 配套安全措施 11.5 结论 12. 验证结果 13. 下载与体验 14. 总结与展望 摘要：本文记录我从“AI 机器人老挂机”的痛点出发，到用 NSSM 把 OpenClaw 网关变成 Windows 服务，再到把“Git 自动同步”做成一个完整工具包并打包发布的完整过程。全文包含：方案对比、详细步骤、核心脚本设计、8 个真实踩坑记录、安全设计、验证结果。全程由我提出需求、检查验证、确定改进方向，代码与排错由 AI 辅助完成。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>10 分钟</span>&nbsp;·&nbsp;<span>2058 字</span></footer>
-  <a class="entry-link" aria-label="post link to Windows 上让 Git 自动同步：NSSM 服务 &#43; 实时监听实战" href="http://localhost:1313/posts/ai-%E8%BE%85%E5%8A%A9%E4%B8%8Bwindows-%E4%B8%8A%E8%AE%A9-git-%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5nssm-%E6%9C%8D%E5%8A%A1-&#43;-%E5%AE%9E%E6%97%B6%E7%9B%91%E5%90%AC%E5%AE%9E%E6%88%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">博客日记与我的看法
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 大家好，我是一个对于技术绝对热爱的人，其实呢我我对于技术学习有着强烈而浓厚的热爱，尤其是对于C语言的学习，在学习C当中，我决定必须用每日的坚持来践实我对于他的热爱，具体是每天抽出大约3个小时左右时间来阅读C方面的书籍，以及呢我同时注意维护我的gitee，使其成为我简历上亮眼的一部分，说到最后了我决定必须为进入像百度这样的大公司而奋发努力
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>2 字</span></footer>
-  <a class="entry-link" aria-label="post link to 博客日记与我的看法" href="http://localhost:1313/posts/%E5%8D%9A%E5%AE%A2%E6%97%A5%E8%AE%B0%E4%B8%8E%E6%88%91%E7%9A%84%E7%9C%8B%E6%B3%95/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">磁盘的使用以及挂载
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 一.准备工作 二.查看新添加磁盘 三.分区 四.格式化 五.挂载 1.临时挂载 2.长期挂载 六.重启并查看 磁盘的使用以及挂载
-一.准备工作 在这一步当中，我们应当先关闭虚拟机，从设置里面添加一块磁盘，并设置合理的磁盘大小,随后呢，我们重新开启虚拟机就可以了，并登录mx,进行下一步操作
-二.查看新添加磁盘 我们在这一步当中使用lsblk 查看新添加的磁盘
-lsblk #查看新添加的磁盘 三.分区 fdisk /dev/sdb 然后，我们使用n来追加磁盘
-注意，再最后一个扇区的时候我们也可以指定其特定大小&#43;20G也是可以的
-我们要使用w保存信息
-我们再次使用命令df -h 查看分区
-四.格式化 格式化，我们使用的是mkfs.格式
-#格式化所支持的格式有mkfs.ext4 是⼀个⽤来格式化分区为 EXT4 ⽂件系统 的命令。EXT4（第四代扩展⽂件系统）是#Linux 系统中使⽤最⼴泛的⽂件系统类型，兼具性能、可靠性和兼容性，适⽤于⼤多数场景。#XFS 是⼀种⾼性能的⽇志⽂件系统，⼴泛⽤于企业级场景，特别是对⼤⽂件和⾼并发 I/O 的处理有#明显优势。它是 CentOS Stream 9 等现代 Linux 发⾏版的默认⽂件系统类型mkfs.xfs /dev/sdb 五.挂载 这一步，比较麻烦了，需要修改配置文件,修改的方式有两种
-1.临时挂载 我们使用mount进行临时挂载
-mount /dev/sdb1 /mnt/sdb1mount /dev/sdb2 /mnt/sdb2 2.长期挂载 uuid修改 如果我们需要一直挂载，就需要修改配置文件，/etc/fstab
-blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后打开配置文件，进行修改就可以了
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>75 字</span></footer>
-  <a class="entry-link" aria-label="post link to 磁盘的使用以及挂载" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">磁盘的综合案例
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172
-1.改成88网段 注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下 这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。
-情况一：全局迁移至 88 网段（推荐彻底解决） 如果你想把所有机器都规范到 88 网段，请按以下步骤操作：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>474 字</span></footer>
-  <a class="entry-link" aria-label="post link to 磁盘的综合案例" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">磁盘管理的相关知识
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 磁盘管理 1.文件系统 常见文件系统对比 一、主流文件系统横向对比 2.常用的磁盘管理命令 2.1 查看磁盘与分区信息 1. lsblk —— 查看块设备（推荐首选） 2. fdisk —— 查看分区表 3. parted —— 高级分区查看 4. blkid —— 查看 UUID 和文件系统类型 5. 其他硬件信息 2.2 分区管理命令 1. fdisk —— MBR 分区（交互式） 2. gdisk —— GPT 分区（交互式） 3. parted —— 高级分区工具 4. 刷新内核分区表 2.3 文件系统格式化 1. 创建文件系统 2. 格式化时指定参数 3. 查看文件系统信息 2.4 挂载与卸载 1. 临时挂载 2. 卸载 3. 查看挂载信息 2.5 磁盘空间监控 1. 查看磁盘使用情况 2. 查看目录大小 3. 找出占用空间最大的目录（实战排障） 2.6 LVM 逻辑卷管理 1. 物理卷（PV） 2. 卷组（VG） 3. 逻辑卷（LV） 4. 扩容后刷新文件系统 2.7 磁盘 I/O 性能排查 1. iostat —— 磁盘 I/O 统计 2. iotop —— 按进程查看 I/O 3. 其他 I/O 排查工具 2.8 磁盘故障排查 1. SMART 健康检测 2. 文件系统修复 3. 坏道检测 2.9 SWAP 交换分区管理 1. 查看 SWAP 2. 创建 SWAP 分区 3. 永久生效（写入 fstab） 4. 调整 SWAP 使用策略 2.10 fstab 配置文件详解 1. 文件格式 2. 示例 3. 常用挂载选项 4. 安全验证 fstab 📌 速查口诀 3.磁盘分区操作 1.准备工作 2.GPT分区 1.查看磁盘情况 2.使用parted命令开始分区操作 3.设置交换内存 1.分配4G的分区大小 2.使用mkswap格式化分区 3.设置swapon启动交换分区 4.查看交换分区大小 磁盘管理 1.文件系统 文件系统的主要作用是将存储设备（如硬盘、SSD）上的物理空间组织为逻辑单元，提供数据存储、检索和管理的标准方法。一般文件系统主要由超级块（Superblock）、inode、数据块、目录结构构成的
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>7 分钟</span>&nbsp;·&nbsp;<span>1415 字</span></footer>
-  <a class="entry-link" aria-label="post link to 磁盘管理的相关知识" href="http://localhost:1313/posts/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">高数学习中的常系数非齐次线性微分方程的问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 非齐次方程当中的代入数值问题 一.遇到的问题 0.0那个数学公式在梨米特讲义的位置 0.1那个公式在梨米特讲义上的例题 0.2那道数学公式在同济课本的地方 1.那道题目 2.我算的结果和答案给的区别 1.我算的结果 2.答案给的是这样子的 二.解决的方案 1.我的错误分析 2.测试的结果分析 1.首先是在网站symbol这个网站测试的结果，如下，大家有兴趣可以试一下。 2.然后答案给的看一下 3.分析结果 三.我的建议 非齐次方程当中的代入数值问题 一.遇到的问题 首先我在写数学题的时候，遇到了一个问题，就是我用非齐次方程的代入数值的公式进行操作的时候，遇到了，一个问题，就是，我用公式算的竟然和答案给的不一样，当时我就有一点困惑，然后，我一点一点研究，探明这个公式的使用范围。
-0.0那个数学公式在梨米特讲义的位置 0.1那个公式在梨米特讲义上的例题 0.2那道数学公式在同济课本的地方 1.那道题目 2.我算的结果和答案给的区别 1.我算的结果 2.答案给的是这样子的 二.解决的方案 当时我在淘宝问了一下，然后，我就知道我的问题在哪里了，
-1.我的错误分析 通过和淘宝上的那位老师探究，我明白了，我的问题正是没有将二阶导的系数化为1，所导致的问题，老师，说，你可以方程俩边都除以2，将2阶导的系数化为1，就可以就解决问题了，我一想这个形式不正是和书上给的形式一样吗？那结果一个是对的，然后我就用symbol这个网站测试了一下，下面是测试结果。
-2.测试的结果分析 1.首先是在网站symbol这个网站测试的结果，如下，大家有兴趣可以试一下。 2.然后答案给的看一下 3.分析结果 通过这些结果我们很清楚的看到，通过把二阶导的系数化为1，算出来是对的
-三.我的建议 通过以上的分析相信大家都认识到了，这个公式的适用范围，那就是二阶导的系数必须为1，其他的倒是没有要求。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>38 字</span></footer>
-  <a class="entry-link" aria-label="post link to 高数学习中的常系数非齐次线性微分方程的问题" href="http://localhost:1313/posts/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">关于ftp与SELinux的冲突问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 关于ftp与SELinux的冲突问题 1.问题背景 2.遇到的问题 3.问题解决的方法 1.ai的方法 为什么本地能写、FTP 不能写？ 嫌疑一：write_enable 没开（最常见！） 嫌疑二：SELinux 拦住了 ftpd 兜底：看日志，让服务器自己告诉你原因 建议的排查顺序 2.我看出了什么 第 2 步：临时关掉 SELinux 做隔离测试 第 3 步：回客户端 lftp 重试 看结果分支判断 3.我的解决方案 4.给我们的警示 关于ftp与SELinux的冲突问题 1.问题背景 首先这个问题诞生于如此条件下，我在跟随佳乐老师创建完lisi，zhangsan，wangwu之后呢，我就用lisi作为用户登录服务器node1，这里面设置了禁锢操作，路径是/export/public，而public里面拥有2个文件夹.一个是logs，另一个是src，同时设置了黑白名单,张三设置在黑名单，王五和李四设置在白名单
-2.遇到的问题 1.遇到的问题其实就是，在我用lisi把客户端的根目录下的a.log，发送给服务器的logs目录，无法操作 2.后来，我在logs目录下创建文件夹也是无法操作的，也是显示权限不足 但是呢，我在服务器的这个logs目录下创建文件夹是可以创建的 3.就很奇怪，再去服务器是可以搞定的，是可以创建文件夹的，但是在客户端是没有办法进行创建的，我当时以为是logs的权限设置的不对，用的是root创建，权限大的缘故，但是其实并不是如此的,后面我在服务器用了lisi照样是可以创建的 4.后来，我仔细检查了这些文件夹的权限，并再次赋权,这次显然也是不行的 3.问题解决的方法 解决的办法，后来，我把我的问题，这些比较奇怪的地方，我问了千文，后来，在他的帮助之下我成功了，在客户端我成功的在服务器的logs上面创建了文件夹，这意味着什么呢，显然这意味着，我可以把客户端家目录的a.log上传给服务器的logs里面，结果显然和我想的一样 下面是千文告诉我的解决方案，让我一步一步排查，最后成功找到了问题关键所咋
-1.ai的方法 这个对比信息非常关键！它直接帮我们排除了文件系统权限问题。
-为什么本地能写、FTP 不能写？ 本质区别在于执行写入的&#34;身份&#34;不同：
-场景 执行者 受什么约束 本地 mkdir lisi 自己的 shell 进程 只看文件系统的 rwx 权限 ✅ FTP mkdir vsftpd 守护进程代为执行 受 vsftpd.conf 开关 &#43; SELinux 对 ftpd 的策略双重约束 ❌ 所以本地能写，完全不能证明 FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>393 字</span></footer>
-  <a class="entry-link" aria-label="post link to 关于ftp与SELinux的冲突问题" href="http://localhost:1313/posts/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">数据结构链表当中的头结点问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 数据结构链表当中的头结点问题 1. 示例举证 出现的什么例子（单链表的表头节点） 给出自己原来写的代码及源码 2.出现的问题 出现的问题分类，代码里的哪些函数出错了。 3. 我的解决方案 从网上chatgpt查找得到的解决方案 自己研究得出的方案 给出自己修改过的代码 4. 给予大家的警示 数据结构链表当中的头结点问题 1. 示例举证 出现的什么例子（单链表的表头节点） 首先呢，我是在牛客网上做关于反转链表的操作，然后呢，做完之后，自己又把里面的具体的代码都写了一下，有打印，输入都有，这就是背景摘要。
-给出自己原来写的代码及源码 下面我将给出大家我首先第一次写的代码如下：
-#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;// 定义链表节点结构struct ListNode {int value;struct ListNode* next;};// 反转链表函数struct ListNode* reverseList(struct ListNode* head) {struct ListNode* prev = NULL;struct ListNode* current = head;struct ListNode* nextNode = NULL;while (current != NULL) {nextNode = current-&gt;next; // 暂存下一个节点current-&gt;next = prev; // 反转当前节点的指针prev = current; // 前移 prevcurrent = nextNode; // 前移 current}return prev; // 返回新的头节点}// 辅助函数，用于创建新节点struct ListNode* createNode() {struct ListNode* head; // 初始化头节点为空head=(struct ListNode*)malloc(sizeof(struct ListNode));head-&gt;next=NULL; // 用于记录链表的尾节点int x; // x为链表数据域中的数据while (scanf(&#34;%d&#34;, &amp;x) != EOF) {struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));newNode-&gt;value = x;newNode-&gt;next =head-&gt;next; // 将新节点链接到尾节点之后head-&gt;next=newNode; // 更新尾节点}return head;}// 辅助函数，用于打印链表void printList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {printf(&#34;%d -&gt; &#34;, current-&gt;value);current = current-&gt;next;}printf(&#34;NULL\n&#34;);}// 辅助函数，用于释放链表内存void freeList(struct ListNode* head) {struct ListNode* current = head;while (current != NULL) {struct ListNode* next = current-&gt;next;free(current);current = next;}}// 主函数，用于测试反转链表int main() {// 创建链表printf(&#34;请输入链表节点值，以EOF结束：\n&#34;);struct ListNode* head = createNode();printf(&#34;原链表: &#34;);printList(head);// 反转链表struct ListNode* reversedHead = reverseList(head);printf(&#34;反转后的链表: &#34;);printList(reversedHead);// 释放内存freeList(reversedHead);return 0;} 2.出现的问题 出现的问题呢就是在运行的时候，会在尾结点多出一个异常节点，当时我很懵逼，不知道，究竟错在什么地方了，然后，我以为我自己抄错了代码，然后有检验了一番，发现依旧是如此的，当时我真的很崩溃，不知道如何是好，我想到我是否可以在淘宝上面，问一下上面的大佬，花个10元，但是又觉得不值得，下面就是我的解决的经过之路
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>669 字</span></footer>
-  <a class="entry-link" aria-label="post link to 数据结构链表当中的头结点问题" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">数据同步服务
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
-2.如何进行实时同步 常⽤选项：• -v ：详细模式输出，显⽰传输过程中的⽂件信息。• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。• -z ：对备份的⽂件在传输时进⾏压缩处理。• -P ：显⽰进度条。• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh端⼝本地同步：rsync -av /src/directory/ /dest/directory/远程同步：rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/拉取远程数据到本地：rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span></footer>
-  <a class="entry-link" aria-label="post link to 数据同步服务" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">数学---等价无穷小问题
     </h2>
   </header>
@@ -354,6 +195,28 @@ blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后�
 <span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>54 字</span></footer>
   <a class="entry-link" aria-label="post link to 数学---等价无穷小问题" href="http://localhost:1313/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/"></a>
 </article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>@TOC
+1.问题背景 首先这个问题诞生于如此条件下，我在跟随佳乐老师创建完lisi，zhangsan，wangwu之后呢，我就用lisi作为用户登录服务器node1，这里面设置了禁锢操作，路径是/export/public，而public里面拥有2个文件夹.一个是logs，另一个是src，同时设置了黑白名单,张三设置在黑名单，王五和李四设置在白名单
+2.遇到的问题 1.遇到的问题其实就是，在我用lisi把客户端的根目录下的a.log，发送给服务器的logs目录，无法操作 2.后来，我在logs目录下创建文件夹也是无法操作的，也是显示权限不足 ==但是呢，我在服务器的这个logs目录下创建文件夹是可以创建的== 3.就很奇怪，再去服务器是可以搞定的，是可以创建文件夹的，但是在客户端是没有办法进行创建的，我当时以为是logs的权限设置的不对，用的是root创建，权限大的缘故，但是其实并不是如此的,后面我在服务器用了lisi照样是可以创建的 4.后来，我仔细检查了这些文件夹的权限，并再次赋权,这次显然也是不行的 3.问题解决的方法 解决的办法，后来，我把我的问题，这些比较奇怪的地方，我问了千文，后来，在他的帮助之下我成功了，在客户端我成功的在服务器的logs上面创建了文件夹，这意味着什么呢，显然这意味着，我可以把客户端家目录的a.log上传给服务器的logs里面，结果显然和我想的一样 下面是千文告诉我的解决方案，让我一步一步排查，最后成功找到了问题关键所咋
+1.ai的方法 这个对比信息非常关键！它直接帮我们排除了文件系统权限问题。
+为什么本地能写、FTP 不能写？ 本质区别在于执行写入的&#34;身份&#34;不同：
+场景 执行者 受什么约束 本地 mkdir lisi 自己的 shell 进程 只看文件系统的 rwx 权限 ✅ FTP mkdir vsftpd 守护进程代为执行 受 vsftpd.conf 开关 &#43; SELinux 对 ftpd 的策略双重约束 ❌ 所以本地能写，完全不能证明 FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。
+嫌疑一：write_enable 没开（最常见！） vsftpd 的 write_enable 默认是 NO。如果配置文件里没显式写 write_enable=YES，那么所有写操作（上传、mkdir、删除、改名）一律拒绝，正好对应你看到的 533 和 550。而它不影响读和 ls，所以你能登录、能列目录。
+grep -i write_enable /etc/vsftpd/vsftpd.conf 如果没有这一行，或显示 write_enable=NO → 就是它！ 修复：
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span>2 分钟</span>&nbsp;·&nbsp;<span>364 字</span></footer>
+  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/posts/%E5%85%B6%E4%BB%96%E5%8D%9A%E5%AE%A2/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/"></a>
+</article>
 <footer class="page-footer">
   <nav class="pagination" aria-label="分页">
     <a class="page-btn prev" href="/posts/" title="上一页" aria-label="上一页">
@@ -361,10 +224,9 @@ blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后�
     </a>
       <a class="page-btn num" href="/posts/" aria-label="第 1 页">1</a>
       <a class="page-btn num active" href="/posts/page/2/" aria-label="第 2 页" aria-current="page">2</a>
-      <a class="page-btn num" href="/posts/page/3/" aria-label="第 3 页">3</a>
-    <a class="page-btn next" href="/posts/page/3/" title="下一页" aria-label="下一页">
+    <span class="page-btn next disabled" title="下一页" aria-disabled="true">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </a>
+    </span>
   </nav>
 </footer>
 
