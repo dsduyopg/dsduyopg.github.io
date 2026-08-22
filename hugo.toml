@@ -61,10 +61,15 @@ enableRobotsTXT = true
     url = "/search/"
     weight = 5
   [[menu.main]]
+    identifier = "columns"
+    name = "专栏"
+    url = "/专栏/"
+    weight = 6
+  [[menu.main]]
     identifier = "draftbox"
     name = "草稿箱"
     url = "/草稿箱/"
-    weight = 6
+    weight = 7
 
 [markup]
   [markup.goldmark]
