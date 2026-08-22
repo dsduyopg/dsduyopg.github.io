@@ -197,31 +197,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">CSDN 博客本地化工具使用说明
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 用途 使用方法 1. 准备 2. 下载图片 3. 可选参数 注意事项 建议 CSDN 博客本地化工具 用途 CSDN 导出的 Markdown 文件通常只包含图床链接，例如：
-![图片](https://img-blog.csdnimg.cn/xxxx.png) 如果图床失效或文章被删除，图片就找不回来了。
-这个工具会把 Markdown 里的远程图片全部下载到本地，并把链接改成相对路径：
-![图片](images/xxxx.png) 这样博客的正文和图片就能一起保存、迁移、备份。
-使用方法 1. 准备 本机需要安装 Python 3.11 或更高版本。
-检查：
-python --version 2. 下载图片 python download_images.py &#34;D:\博客\文章.md&#34; 执行后会在文章同目录生成：
-D:\博客\ ├─ 文章.md └─ images\ └─ xxxx.png 文章.md 里的图片链接会自动改写为：
-![图片](images/xxxx.png) 3. 可选参数 指定图片目录名：
-python download_images.py &#34;D:\博客\文章.md&#34; --out 图片 只预览，不实际下载：
-python download_images.py &#34;D:\博客\文章.md&#34; --dry-run 注意事项 脚本只处理 Markdown 的 ![alt](url) 图片语法 下载失败时会保留原图床链接，并在结果里显示 FAILED 已存在且大小不为 0 的图片会自动跳过，不会重复下载 执行前会先把原 Markdown 备份为 文章.md.bak 下载的图片文件会按 URL 文件名保存，重名时自动加编号 建议 下载完成后，把整个博客文件夹放进 Teldrive 备份目录，这样正文和图片都会一起自动备份，不再依赖 CSDN 图床。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>88 字</span></footer>
-  <a class="entry-link" aria-label="post link to CSDN 博客本地化工具使用说明" href="http://localhost:1313/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">Telegram 双备份系统实战：加密 &#43; 明文双通道 &#43; 机器人取文件
     </h2>
   </header>
@@ -358,6 +333,24 @@ blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后�
 
 <span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span></footer>
   <a class="entry-link" aria-label="post link to 数据同步服务" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">数学---等价无穷小问题
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 题目如下：limit as x approaches 0 of (cosx)/(x^2)-(sinx)/(x ^3) 中，可以用等价无穷小写吗？ 题目如下：limit as x approaches 0 of (cosx)/(x^2)-(sinx)/(x ^3) 中，可以用等价无穷小写吗？ 我们考虑 𝑥趋近于 0 的情况，用 x 的泰勒展开式来近似 cos(𝑥)cos(x) 和sin(𝑥)sin(x)：
+在处理极限时，使用等价无穷小是一种常用的方法，但在特定情况下需要特别小心。虽然 (sin(x) 在 (x) 趋近于 0 时的等价无穷小确实是 (x)，但在这个题目中，仅仅使用 (sin(x)作为近似并不足以获得正确的结果。这是因为表达式中的每一项都涉及较高次的项，这些项对最终的极限值有重要影响。具体来说，如果只将 (sin(x)) 近似为 (x)，我们会得到：
+这允许我们保留表达式中所有对极限有显著贡献的项，从而准确地计算出极限值。总结来说，简单地将 ( sin(x) 近似为 ( x ) 忽略了 ( x^3/6) 这类高阶项，而这些项在本题目中对最终结果是至关重要的，因此不能仅用 sin(x) ~x 来处理该问题。
+大家好，资料来源于GPT-4，我整理了GPT的回答，若果有错误，还请各位大佬指正出来，感谢感谢！！！
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>54 字</span></footer>
+  <a class="entry-link" aria-label="post link to 数学---等价无穷小问题" href="http://localhost:1313/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination" aria-label="分页">
