@@ -934,3 +934,141 @@ details.toc {
   .page-btn { min-width: 36px; height: 36px; padding: 0 .7rem; font-size: .85rem; }
   .pagination { gap: .4rem; }
 }
+
+/* ============================================================
+   玻璃拟态导航菜单（首页 / 文章 / 归档 / 标签 / 搜索 / 专栏 / 草稿箱）
+   ============================================================ */
+.header-nav {
+  align-items: center;
+  column-gap: 1.25rem;
+}
+
+.menu {
+  column-gap: 0.85rem;
+  padding: 8px 0;
+}
+
+.menu li {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.menu a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.3rem;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.10));
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -10px 18px rgba(255, 255, 255, 0.05),
+    0 8px 20px rgba(30, 40, 70, 0.14);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.menu a:hover {
+  transform: translateY(-2px);
+  color: #fff;
+  border-color: color-mix(in srgb, var(--accent) 50%, rgba(255, 255, 255, 0.55));
+  background: linear-gradient(135deg,
+      color-mix(in srgb, var(--accent) 34%, rgba(255, 255, 255, 0.30)),
+      color-mix(in srgb, var(--accent-2) 30%, rgba(255, 255, 255, 0.16)));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.60),
+    0 12px 28px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+/* 轮换按钮色调，让每个菜单项都有一点自己的颜色 */
+.menu li:nth-child(3n+2) a:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 50%, rgba(255, 255, 255, 0.55));
+  background: linear-gradient(135deg,
+      color-mix(in srgb, var(--accent-2) 34%, rgba(255, 255, 255, 0.30)),
+      color-mix(in srgb, var(--accent-3) 30%, rgba(255, 255, 255, 0.16)));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.60),
+    0 12px 28px color-mix(in srgb, var(--accent-2) 38%, transparent);
+}
+
+.menu li:nth-child(3n+3) a:hover {
+  border-color: color-mix(in srgb, var(--accent-3) 50%, rgba(255, 255, 255, 0.55));
+  background: linear-gradient(135deg,
+      color-mix(in srgb, var(--accent-3) 36%, rgba(255, 255, 255, 0.30)),
+      color-mix(in srgb, var(--accent) 30%, rgba(255, 255, 255, 0.16)));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.60),
+    0 12px 28px color-mix(in srgb, var(--accent-3) 38%, transparent);
+}
+
+/* 当前所在页面：实心渐变高亮按钮 */
+.menu a:has(span.active) {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.40),
+    0 10px 26px color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+.menu a:has(span.active):hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 14px 30px color-mix(in srgb, var(--accent) 52%, transparent);
+}
+
+.menu a:has(span.active) span.active {
+  text-decoration: none;
+}
+
+/* 深色模式玻璃质感 */
+[data-theme="dark"] .menu a {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .menu a:hover {
+  border-color: color-mix(in srgb, var(--accent) 60%, rgba(255, 255, 255, 0.25));
+  background: linear-gradient(135deg,
+      color-mix(in srgb, var(--accent) 42%, rgba(255, 255, 255, 0.10)),
+      color-mix(in srgb, var(--accent-2) 36%, rgba(255, 255, 255, 0.06)));
+}
+
+[data-theme="dark"] .menu li:nth-child(3n+2) a:hover {
+  background: linear-gradient(135deg,
+      color-mix(in srgb, var(--accent-2) 42%, rgba(255, 255, 255, 0.10)),
+      color-mix(in srgb, var(--accent-3) 36%, rgba(255, 255, 255, 0.06)));
+}
+
+[data-theme="dark"] .menu li:nth-child(3n+3) a:hover {
+  background: linear-gradient(135deg,
+      color-mix(in srgb, var(--accent-3) 44%, rgba(255, 255, 255, 0.10)),
+      color-mix(in srgb, var(--accent) 36%, rgba(255, 255, 255, 0.06)));
+}
+
+[data-theme="dark"] .menu a:has(span.active) {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.30),
+    0 10px 26px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+/* 移动端：按钮略收小，保持可横向滚动 */
+@media (max-width: 768px) {
+  .menu a {
+    padding: 0.45rem 1.05rem;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+}
