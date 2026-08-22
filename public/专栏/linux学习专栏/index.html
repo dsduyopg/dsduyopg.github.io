@@ -182,22 +182,6 @@
     </a>
   </h1>
 </header>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">nfs服务器的相关知识
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 nfs服务器的相关知识 一.NFS基本介绍 二.安装软件包 三.在node2创建共享⽬录 四.修改配置文件 六.验证是否成功共享 七.挂载使⽤ 1.客户端下载软件包 2.建立挂载点 3.进行挂载 4.查看挂载是否成功 5.检查是否可以共享文件 nfs服务器的相关知识 一.NFS基本介绍 CentOS Stream 9中的NFS（⽹络⽂件系统）是⼀种允许不同计算机通过⽹络共享⽂件和⽬录的协 议，使得远程主机能够像本地磁盘⼀样访问和操作⽂件。 它基于客⼾端-服务器架构，NFS服务器将本地⽂件系统共享给客⼾端，客⼾端可以通过⽹络挂载 这些共享⽬录，像访问本地⽂件⼀样进⾏操作。 NFS主要应⽤于Linux/Unix系统之间的⽂件共享，虽然也⽀持跨操作系统，但其兼容性⼀般较差 二.安装软件包 node2 作为 NFS服务端 node1 作为客⼾端，获取共享⽬录信息
-客⼾端安装：dnf install nfs-utils服务端安装：dnf install nfs-utils在node2放行端口执⾏开放端⼝:firewall-cmd --add-service=nfs --permanent # 核⼼, 有了这个, NFS即可使⽤共享操作firewall-cmd --reload 三.在node2创建共享⽬录 mkdir -p /export/software 四.修改配置文件 vi /etc/exports 然后保存文件，并重启服务就可以了
-systemctl restart nfs-serversystemctl statussystemctl enable 六.验证是否成功共享 服务端执⾏: 查看服务端NFS共享信息showmount -e （早期版本兼容）exportfs ...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>92 字</span></footer>
-  <a class="entry-link" aria-label="post link to nfs服务器的相关知识" href="http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"></a>
-</article>
     </main>
     
 <footer class="footer">
