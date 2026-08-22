@@ -975,6 +975,113 @@ ststemctl status  rsyslog
 &lt;p&gt;所以本地能写，&lt;strong&gt;完全不能证明&lt;/strong&gt; FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>数据同步服务</title>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#一数据同步服务的基本介绍&#34;&gt;一.数据同步服务的基本介绍&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1什么是数据同步&#34;&gt;1.什么是数据同步？&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2如何进行实时同步&#34;&gt;2.如何进行实时同步&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3特点&#34;&gt;3.特点&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4怎么实现仅同步变化的数据呢&#34;&gt;4.怎么实现仅同步变化的数据呢？&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#5同步方式&#34;&gt;5.同步方式&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二如何安装数据同步服务-dnf--y-install-rsync&#34;&gt;二.如何安装数据同步服务： dnf -y install rsync&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#三综合案例&#34;&gt;三.综合案例&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1-本地同步操作&#34;&gt;1. 本地同步操作:&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2远程同步操作&#34;&gt;2.远程同步操作:&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3综合案例实现定时与增量备份&#34;&gt;3.综合案例,实现定时与增量备份&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#四结合inotify实现数据实时同步&#34;&gt;四.结合INOTIFY实现数据实时同步&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1对node2进行配置&#34;&gt;1.对node2进行配置&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1创建用户&#34;&gt;1.创建用户&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2修改配置文件&#34;&gt;2.修改配置文件&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3创建密码件&#34;&gt;3.创建密码⽂件&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4-启动rsync服务&#34;&gt;4. 启动rsync服务&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#五设置开机自启动&#34;&gt;五.设置开机自启动&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1杀死进程&#34;&gt;1.杀死进程&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2设置开机启动&#34;&gt;2.设置开机⾃启动&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#六基于rsync服务完成动同步&#34;&gt;六.基于RSYNC服务完成⼿动同步&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1格式&#34;&gt;1.格式&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2基于动同步式完成数据同步&#34;&gt;2.基于⼿动同步⽅式完成数据同步&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3创建日志文件&#34;&gt;3.创建日志文件&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#4开始传输文件了&#34;&gt;4.开始传输文件了&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#解决方案&#34;&gt;解决方案&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#找到根本原因了&#34;&gt;找到根本原因了！&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#解决方案-1&#34;&gt;解决方案&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#方案1临时关闭-selinux快速验证&#34;&gt;方案1：临时关闭 SELinux（快速验证）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#方案2永久关闭-selinux&#34;&gt;方案2：永久关闭 SELinux&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#方案3设置正确的-selinux-上下文推荐更安全&#34;&gt;方案3：设置正确的 SELinux 上下文（推荐，更安全）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#建议&#34;&gt;建议&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#七使密码件-实现不需要输密码&#34;&gt;七,使⽤密码⽂件， 实现不需要输⼊密码&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#八使用主机名&#34;&gt;八.使用主机名&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#九使用脚本自动配置&#34;&gt;九.使用脚本自动配置&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1安装使用的软件&#34;&gt;1.安装使用的软件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2编写脚本&#34;&gt;2.编写脚本&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3给文件加权以及启动脚本文件&#34;&gt;3给文件加权以及启动脚本文件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4最后测试一下&#34;&gt;4.最后测试一下&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;h2 id=&#34;一数据同步服务的基本介绍&#34;&gt;一.数据同步服务的基本介绍&lt;/h2&gt;
+&lt;h3 id=&#34;1什么是数据同步&#34;&gt;1.什么是数据同步？&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2如何进行实时同步&#34;&gt;2.如何进行实时同步&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;常⽤选项：
+• -v ：详细模式输出，显⽰传输过程中的⽂件信息。
+• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。
+• -z ：对备份的⽂件在传输时进⾏压缩处理。
+• -P ：显⽰进度条。
+• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）
+• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh
+端⼝
+本地同步：
+rsync -av /src/directory/ /dest/directory/
+远程同步：
+rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/
+拉取远程数据到本地：
+rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;3特点&#34;&gt;3.特点&lt;/h3&gt;
+&lt;p&gt;• ⽀持增量同步：只传输发⽣变化的数据部分。
+• ⽀持 SSH 加密传输。
+• 可保持⽂件权限、时间戳、连接和等元数据。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>这个是关于ssh的相关问题这个是关于ssh的相关问题</title>
       <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>

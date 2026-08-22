@@ -204,6 +204,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">数据同步服务
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
+2.如何进行实时同步 常⽤选项：• -v ：详细模式输出，显⽰传输过程中的⽂件信息。• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。• -z ：对备份的⽂件在传输时进⾏压缩处理。• -P ：显⽰进度条。• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh端⼝本地同步：rsync -av /src/directory/ /dest/directory/远程同步：rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/拉取远程数据到本地：rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span></footer>
+  <a class="entry-link" aria-label="post link to 数据同步服务" href="http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">这个是关于ssh的相关问题这个是关于ssh的相关问题
     </h2>
   </header>
