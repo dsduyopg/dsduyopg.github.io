@@ -1608,9 +1608,9 @@ int * pr=&amp;amp;a;
     </item>
     <item>
       <title>nfs服务器的相关知识</title>
-      <link>http://localhost:1313/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link>
+      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid>
+      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -1647,7 +1647,7 @@ int * pr=&amp;amp;a;
 &lt;h4 id=&#34;nfs服务器的相关知识&#34;&gt;nfs服务器的相关知识&lt;/h4&gt;
 &lt;h2 id=&#34;一nfs基本介绍&#34;&gt;一.NFS基本介绍&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;CentOS Stream 9中的NFS（⽹络⽂件系统）是⼀种允许不同计算机通过⽹络共享⽂件和⽬录的协 议，使得远程主机能够像本地磁盘⼀样访问和操作⽂件。 它基于客⼾端-服务器架构，NFS服务器将本地⽂件系统共享给客⼾端，客⼾端可以通过⽹络挂载 这些共享⽬录，像访问本地⽂件⼀样进⾏操作。 NFS主要应⽤于Linux/Unix系统之间的⽂件共享，虽然也⽀持跨操作系统，但其兼容性⼀般较差&lt;/code&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/0b621a9d80f145c1beb3a56cd2072de8.png&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/0b621a9d80f145c1beb3a56cd2072de8.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;二安装软件包&#34;&gt;二.安装软件包&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;node2 作为 NFS服务端 node1 作为客⼾端，获取共享⽬录信息&lt;/code&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; 客⼾端安装：
@@ -1663,17 +1663,17 @@ firewall-cmd --reload
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir -p /export/software
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;四修改配置文件&#34;&gt;四.修改配置文件&lt;/h2&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vi /etc/exports
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/5b6e57b0368a4dc6bb1e6c431f571d1f.png&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/5b6e57b0368a4dc6bb1e6c431f571d1f.png&#34;&gt;
 &lt;code&gt;然后保存文件，并重启服务就可以了&lt;/code&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl restart nfs-server
 systemctl status
 systemctl enable
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/da2bd4cb8a90441b9c975405064020b6.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/da2bd4cb8a90441b9c975405064020b6.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;六验证是否成功共享&#34;&gt;六.验证是否成功共享&lt;/h2&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;服务端执⾏: 查看服务端NFS共享信息
 showmount -e （早期版本兼容）
 exportfs
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/698860533bf1417aaf5675d902e6e0a9.png&#34;&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/698860533bf1417aaf5675d902e6e0a9.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？</title>
