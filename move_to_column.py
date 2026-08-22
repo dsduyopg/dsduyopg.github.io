@@ -99,6 +99,15 @@ def check_lock(path):
     return locked
 
 
+def ask(prompt):
+    """带 EOF 保护的输入"""
+    try:
+        return input(prompt)
+    except EOFError:
+        print("\n已取消。")
+        sys.exit(0)
+
+
 def main():
     parser = argparse.ArgumentParser(description="把 posts 里的文章移动到专栏")
     parser.add_argument("--blog", default="", help="博客根目录(含 content/posts),默认取脚本所在目录")
@@ -125,7 +134,7 @@ def main():
         for i, n in enumerate(names, 1):
             print(f"  [{i}] {n}")
         try:
-            sel = input("请输入编号: ").strip()
+            sel = ask("请输入编号: ").strip()
             post_name = names[int(sel) - 1]
         except (ValueError, IndexError):
             print("[错误] 无效编号")
@@ -142,7 +151,7 @@ def main():
         for i, c in enumerate(columns, 1):
             print(f"  [{i}] {c}")
         try:
-            sel = input("请输入编号,或直接输入新专栏名: ").strip()
+            sel = ask("请输入编号,或直接输入新专栏名: ").strip()
             if sel.isdigit():
                 column_name = columns[int(sel) - 1]
             elif sel:
@@ -175,7 +184,7 @@ def main():
     print(f"将移动: {os.path.relpath(src, root)}")
     print(f"    到: {os.path.relpath(dest, root)}")
     if not args.yes:
-        confirm = input("确认移动? (y/N): ").strip().lower()
+        confirm = ask("确认移动? (y/N): ").strip().lower()
         if confirm not in ("y", "yes"):
             print("已取消。")
             return 0
