@@ -2,17 +2,97 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>C语言学习专栏 on My_blog</title>
-    <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/</link>
+    <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/</link>
     <description>Recent content in C语言学习专栏 on My_blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 18 Aug 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【分支和循环（下）】</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#1分支和循环下&#34;&gt;1.分支和循环（下)&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#一随机数生成&#34;&gt;一.随机数生成&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1rand&#34;&gt;(1).rand&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2srand&#34;&gt;(2).srand&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3time&#34;&gt;(3)time&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4设置随机数的范围&#34;&gt;(4)设置随机数的范围&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#二猜数字游戏实现&#34;&gt;二.猜数字游戏实现&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#分支和循环下&#34;&gt;&lt;strong&gt;分支和循环（下)&lt;/strong&gt;&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#一随机数生成-1&#34;&gt;&lt;code&gt; 一.随机数生成&lt;/code&gt;&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1rand-1&#34;&gt;(1).rand&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2srand-1&#34;&gt;(2).srand&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3time-1&#34;&gt;(3)time&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4设置随机数的范围-1&#34;&gt;(4)设置随机数的范围&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#二猜数字游戏实现-1&#34;&gt;&lt;code&gt;二.猜数字游戏实现&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;h2 id=&#34;1分支和循环下&#34;&gt;1.分支和循环（下)&lt;/h2&gt;
+&lt;h3 id=&#34;一随机数生成&#34;&gt;一.随机数生成&lt;/h3&gt;
+&lt;h4 id=&#34;1rand&#34;&gt;(1).rand&lt;/h4&gt;
+&lt;h4 id=&#34;2srand&#34;&gt;(2).srand&lt;/h4&gt;
+&lt;h4 id=&#34;3time&#34;&gt;(3)time&lt;/h4&gt;
+&lt;h4 id=&#34;4设置随机数的范围&#34;&gt;(4)设置随机数的范围&lt;/h4&gt;
+&lt;h3 id=&#34;二猜数字游戏实现&#34;&gt;二.猜数字游戏实现&lt;/h3&gt;
+&lt;h2 id=&#34;分支和循环下&#34;&gt;&lt;strong&gt;分支和循环（下)&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;strong&gt;在本节内容当中，主要讨论了关于随机函数相关的知识点并做一些应用，也就是说讨论关于猜数字的游戏&lt;/strong&gt;&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;一随机数生成-1&#34;&gt;&lt;code&gt; 一.随机数生成&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;随机函数主要有rand,srand,函数，我们将会讨论什么是随机数种子，为何说rand函数不是我们的随机函数，以及用time函数实现srand的随机种子，进而实现了对于随机数的求解&lt;/em&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;1rand-1&#34;&gt;(1).rand&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;C语言提供了求解随机数的方法：&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int rand(void);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;但是呢，由于rand函数是为随机函数是通过某种算法生成的随机数，不是真正的随机数，下面就为大家试一下:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+int main()
+{
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+printf(&amp;#34;%d\n&amp;#34;, rand());
+return 0;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/images/0d91b1a346e3767ef41cbdc09424ff4c.png&#34;&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/images/a09ac5388163d77441b0a368dbdc7331.png&#34;&gt;
+由此可以知道的，是rand两次所生成的结果是一样的，那么可以说，&lt;code&gt;rand&lt;/code&gt;不是一个正常的生成随机数的函数，因为他默认的随机种子数是1，如果要生成不同的随机数，就要让种子是变化的。&lt;/p&gt;
+&lt;h4 id=&#34;2srand-1&#34;&gt;(2).srand&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;下面我就介绍关于&lt;code&gt;srand&lt;/code&gt;函数&lt;/strong&gt;，只要在使用&lt;code&gt;rand&lt;/code&gt;之前，使用&lt;code&gt;srand&lt;/code&gt;函数，通过 &lt;code&gt;srand&lt;/code&gt;函数的参数&lt;code&gt;seed&lt;/code&gt;来设置&lt;code&gt;rand&lt;/code&gt;函数生成随机数的时候的种子，只要种子在变化，每次生成的随机数序列也就变化起来了,
+那也就是说给&lt;code&gt;srand&lt;/code&gt;的种子是如果是随机的，&lt;code&gt;rand&lt;/code&gt;就能生成随机数；在生成随机数的时候又需要一个随
+机数，这就矛盾了.&lt;/p&gt;
+&lt;h4 id=&#34;3time-1&#34;&gt;(3)time&lt;/h4&gt;
+&lt;p&gt;因为时间是经常变化的，在&lt;code&gt;c&lt;/code&gt;当中有一个函数是&lt;code&gt;time&lt;/code&gt;,因此我们可以使用它时间作为随机数种子。在&lt;code&gt;C&lt;/code&gt;当中的定义如下：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;time_t time (time_t* timer);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;如果 timer 是NULL，就只返回这个时间的差值。time函数返回的这个时间差也被叫做：时间戳。
+使用time函数的时候，需要包含头文件：time.h&lt;/strong&gt;
+书写生成随机函数的代码如下：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>C语言的分支与循环上</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -45,9 +125,9 @@
     </item>
     <item>
       <title>C语言之操作符（上）</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -187,9 +267,9 @@
     </item>
     <item>
       <title>C语言之操作符【下】</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -288,9 +368,9 @@ return 0;
 &lt;/blockquote&gt;
 &lt;p&gt;1.每种同类型的运算符都有内部的运算符优先级，不同类型的运算符之间也有相应的优先级顺序。一个表达式中既可以包括相同类型的运算符，也可以包括不同类型的运算符或者函数。当多种运算符出现在同一个表达式中时，应该先按照不同类型运算符间的优先级进行运算。各种运算符间的优先级如下：数值运算符、字符串运算符、关系运算符、逻辑运算符。可以用括号改变优先级顺序，使得括号内的运算优先于括号外的运算。对于多重括号，总是由内到外强制表达式的某些部分优先运行。括号内的运算总是最优先计算。
 2.操作符的优先级如下：
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/images/45b5283c219699081fe2ad0d959574f3.png&#34;&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/images/a1778a520d624963904ef18d82039467.png&#34;&gt;
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/images/8826b16df4a51812dbdd2c290e8259df.png&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/images/45b5283c219699081fe2ad0d959574f3.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/images/a1778a520d624963904ef18d82039467.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/images/8826b16df4a51812dbdd2c290e8259df.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;2结合性&#34;&gt;2.结合性&lt;/h3&gt;
 &lt;p&gt;结合性是，对于多个优先级是一样的操作符的一个表达式，此时他们的就需要用到，结合性，如下：&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2*3/5
@@ -309,9 +389,9 @@ return 0;
     </item>
     <item>
       <title>C语言之讲解篇</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%87/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%87/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%87/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%87/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -348,9 +428,9 @@ int main()
     </item>
     <item>
       <title>C语言之讲解篇2</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -395,14 +475,14 @@ int main() {
 
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个是运行结果：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/images/2a48580f851b401c7918f0011416a13e.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/images/2a48580f851b401c7918f0011416a13e.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;因此这就是本题的代码。&lt;/p&gt;</description>
     </item>
     <item>
       <title>C语言之讲解篇3</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -451,13 +531,13 @@ int main()
 
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;下面是我的代码的运行结果：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/images/eed7ecde0d51f68f49631ef528cd1cbf.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/images/eed7ecde0d51f68f49631ef528cd1cbf.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>C语言之讲解篇4</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%874/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%874/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%874/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%874/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -489,9 +569,9 @@ int main()
     </item>
     <item>
       <title>C语言之讲解篇5</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -511,9 +591,9 @@ printf(&amp;#34;%d,%d\n&amp;#34;,*pulPtr, *(pulPtr + 3));
     </item>
     <item>
       <title>C语言之讲解篇6</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -582,14 +662,14 @@ void programming(char * a,int n,int num)
 
   }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;该代码的运行结果，是如下：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/images/d435635e1a3789bb4f9cbaef253b8d82.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/images/da4d462074a6440025d3452d7ca7a044.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/images/d435635e1a3789bb4f9cbaef253b8d82.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/images/da4d462074a6440025d3452d7ca7a044.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>C语言之讲解篇7</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -625,9 +705,9 @@ void reverse(char * letter)
         letter--;
     }
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/images/9b1592125a58301e5b1633e39c3c0ae7.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/images/9b1592125a58301e5b1633e39c3c0ae7.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在这里我们看到用循环设定指针的最大者似乎效率不是很高，那么我们可以使用这个语句：strlen()用他求出字符串的最大值，最后再赋值给指针似乎就完美了：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/images/4aa164b2ff9d1b2072697e4c0a063a3d.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%877/images/4aa164b2ff9d1b2072697e4c0a063a3d.png&#34;&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/*
 思路：该题比较简单，请参考代码
 */
@@ -672,9 +752,9 @@ int main()
     </item>
     <item>
       <title>C语言之讲解篇8</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%878/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -780,9 +860,9 @@ right sz-1;
     </item>
     <item>
       <title>C语言之扫雷游戏</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -832,7 +912,7 @@ right sz-1;
 &lt;h3 id=&#34;一扫雷的基本框架&#34;&gt;一.扫雷的基本框架&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;在扫雷游戏中时，首先需要我们在VS编译器当中准备三个文件，二个C文件一个头文件：&lt;/strong&gt;
 在这里大家可以参考一下我准备的文件
-&lt;img alt=&#34;C语言扫雷游戏的准备工作&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/images/7f7f24f22c1d4aa16a9abae396f7d3d3.png&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;C语言扫雷游戏的准备工作&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/images/7f7f24f22c1d4aa16a9abae396f7d3d3.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;二-扫雷游戏的基本逻辑&#34;&gt;二. 扫雷游戏的基本逻辑&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;/blockquote&gt;
@@ -842,7 +922,7 @@ right sz-1;
 &lt;code&gt;2.扫雷的基本思路是首先需要准备2个字符数组，一个数组存放排查出的雷的数量信息记录存储，并打印出来，而另一个数组则存放布置好雷的信息，这样就互不干扰了&lt;/code&gt;
 3.同时为了保持神秘，show数组开始时初始化为字符 ‘*’，为了保持两个数组的类型一致，可以使用同一
 套函数处理，mine数组最开始也初始化为字符’0’，布置雷改成’1’。如下如：
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/images/e246c041422930b6e18256de91167949.png&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F/images/e246c041422930b6e18256de91167949.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;三扫雷需要的所有函数&#34;&gt;三.扫雷需要的所有函数&lt;/h3&gt;
 &lt;p&gt;对于扫雷的实现需要用到，大量的函数，在这里我将为大家呈现出应当使用的具体函数：&lt;/p&gt;
 &lt;h4 id=&#34;1定义初始化函数&#34;&gt;1.定义初始化函数&lt;/h4&gt;
@@ -868,9 +948,9 @@ right sz-1;
     </item>
     <item>
       <title>C语言之指针篇第五</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%BA%94/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -965,9 +1045,9 @@ printf(&amp;#34;%d\n&amp;#34;,strlen(&amp;amp;arr[0]+1));//这里第二个元素
     </item>
     <item>
       <title>C语言指针篇第一</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%AF%87%E7%AC%AC%E4%B8%80/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -1069,9 +1149,9 @@ int * pr=&amp;amp;a;
     </item>
     <item>
       <title>数据结构链表当中的头结点问题</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -1201,9 +1281,9 @@ int main() {
     </item>
     <item>
       <title>整数和浮点数在内存中存储</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -1279,14 +1359,14 @@ int main()
     return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;大家觉得这个会是多少呢？我想大家所想的可能会和标准运行结果会有差距，那么的话，下面我就为大家介绍一下，这个程序的运行结果：是9,0，1091567616，9.0
-&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/images/4b360db0fd17a82162a9734848396396.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B4%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%82%A8/images/4b360db0fd17a82162a9734848396396.png&#34;&gt;
 因此我们可以知道，浮点数在内存中的存储与整数是不一样的，存储原理是不同的，那么为何会造成这种不同呢？下面我就为大家介绍一下，他们存储的具体实现。&lt;/p&gt;</description>
     </item>
     <item>
       <title>字符串中删除后导星号的问题</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
@@ -1338,7 +1418,7 @@ int main()
 
 &lt;h4 id=&#34;字符串中删除后导星号的问题&#34;&gt;字符串中删除后导星号的问题&lt;/h4&gt;
 &lt;h2 id=&#34;一题目分析&#34;&gt;一.题目分析&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/images/8774c783cdc14135aa464ad771ff5fc6.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/images/8774c783cdc14135aa464ad771ff5fc6.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;二我所犯的错误&#34;&gt;二.我所犯的错误&lt;/h2&gt;
 &lt;h3 id=&#34;21我的代码&#34;&gt;2.1我的代码&lt;/h3&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
@@ -1385,13 +1465,13 @@ void NONO ()
   fclose(out) ;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;21我的错误的代码运行的结果&#34;&gt;2.1我的错误的代码运行的结果&lt;/h3&gt;
-&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/images/b9e2d83c241e4609b894240ba88389f4.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%88%A0%E9%99%A4%E5%90%8E%E5%AF%BC%E6%98%9F%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/images/b9e2d83c241e4609b894240ba88389f4.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>字符函数和字符串函数</title>
-      <link>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/</link>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/</link>
       <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;

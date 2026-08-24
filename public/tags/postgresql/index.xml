@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>PostgreSQL on My_blog</title>
-    <link>http://localhost:1313/tags/postgresql/</link>
+    <link>https://dsduyopg-github-io.pages.dev/tags/postgresql/</link>
     <description>Recent content in PostgreSQL on My_blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 20 Aug 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://dsduyopg-github-io.pages.dev/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PostgreSQL 原生 Windows 服务：为什么不用 NSSM 包一层？</title>
-      <link>http://localhost:1313/posts/postgresql-%E5%8E%9F%E7%94%9F-windows-%E6%9C%8D%E5%8A%A1%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8-nssm-%E5%8C%85%E4%B8%80%E5%B1%82/</link>
+      <link>https://dsduyopg-github-io.pages.dev/posts/postgresql-%E5%8E%9F%E7%94%9F-windows-%E6%9C%8D%E5%8A%A1%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8-nssm-%E5%8C%85%E4%B8%80%E5%B1%82/</link>
       <pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/postgresql-%E5%8E%9F%E7%94%9F-windows-%E6%9C%8D%E5%8A%A1%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8-nssm-%E5%8C%85%E4%B8%80%E5%B1%82/</guid>
+      <guid>https://dsduyopg-github-io.pages.dev/posts/postgresql-%E5%8E%9F%E7%94%9F-windows-%E6%9C%8D%E5%8A%A1%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8-nssm-%E5%8C%85%E4%B8%80%E5%B1%82/</guid>
       <description>&lt;details class=&#34;toc&#34; open&gt;
   &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
     &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
