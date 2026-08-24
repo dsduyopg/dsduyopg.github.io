@@ -8,7 +8,7 @@ enableRobotsTXT = true
 
 [params]
   env = 'production'
-  mainSections = ['posts']
+  mainSections = ['posts', '专栏', '草稿箱']
   math = true
   disableSpecial1stPost = true
   ShowReadingTime = true
