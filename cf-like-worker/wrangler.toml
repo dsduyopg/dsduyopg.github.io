@@ -1,0 +1,11 @@
+# Cloudflare Workers + KV 匿名点赞 —— 部署配置
+# 使用方法见 README.md
+
+name = "blog-like"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# KV namespace(先在 CF 控制台创建,再替换 id)
+[[kv_namespaces]]
+binding = "LIKE_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
