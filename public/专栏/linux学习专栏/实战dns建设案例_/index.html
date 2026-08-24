@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>【实战】DNS建设案例_ | My_blog</title>
-<meta name="keywords" content="">
-<meta name="description" content="
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>【实战】DNS建设案例_ | My_blog</title><meta name=keywords content><meta name=description content="
   
     目录
   
@@ -108,296 +99,20 @@ hosts文件: 增加对node3的解析
 
 最后我们查询一下，是否成功了呢
 
-发现这修改是生效的">
-<meta name="author" content="">
-<link rel="canonical" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css" integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://dsduyopg-github-io.pages.dev/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://dsduyopg-github-io.pages.dev/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://dsduyopg-github-io.pages.dev/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://dsduyopg-github-io.pages.dev/apple-touch-icon.png">
-<link rel="mask-icon" href="https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh-cn" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/">
-  <meta property="og:site_name" content="My_blog">
-  <meta property="og:title" content="【实战】DNS建设案例_">
-  <meta property="og:description" content="目录 【实战】DNS建设案例: 0.需求 1.准备工作 2.进行标准化的服务器配置 1.修改ip 2.修改主机名 3.修改hosts文件 4.免密配置 3.实操流程 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 1.环境变量配置 2.任意目录测试一下 2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 2.解压这个包 3.运行这个软件，并在浏览器查看 2.在node2安装相关软件 1.安装NFS 3安装ftp软件 5.在node3中配置dns服务器 1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 3.修改/var/named/itcast.local.db 4.修改/var/named/192.168.149.rev文件 5.检测 6.启动服务以及开放端口 6.测试操作 6.总结 【实战】DNS建设案例: 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问
+发现这修改是生效的"><meta name=author content><link rel=canonical href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/><link crossorigin=anonymous href=/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg-github-io.pages.dev/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg-github-io.pages.dev/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg-github-io.pages.dev/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg-github-io.pages.dev/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/"><meta property="og:site_name" content="My_blog"><meta property="og:title" content="【实战】DNS建设案例_"><meta property="og:description" content="目录 【实战】DNS建设案例: 0.需求 1.准备工作 2.进行标准化的服务器配置 1.修改ip 2.修改主机名 3.修改hosts文件 4.免密配置 3.实操流程 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 1.环境变量配置 2.任意目录测试一下 2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 2.解压这个包 3.运行这个软件，并在浏览器查看 2.在node2安装相关软件 1.安装NFS 3安装ftp软件 5.在node3中配置dns服务器 1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 3.修改/var/named/itcast.local.db 4.修改/var/named/192.168.149.rev文件 5.检测 6.启动服务以及开放端口 6.测试操作 6.总结 【实战】DNS建设案例: 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问
 NFS服务器域名： nfs.itcast.localFTP服务器域名： ftp.itcast.localtomcat服务器域名： www.itcast.localFTP服务器要求:1- 禁锢FTP目录： /export/ftp2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器windows中，建议使用filezilla.exe 软件来连接NFS服务器：共享目录： /export/nfs要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可） 1.准备工作 我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了
 2.进行标准化的服务器配置 因为node1和node2的之前配置过了免密ssh登录，以及用主机名可以ping通，因此我们只需要对node3进行修改就可以了
-ip： 192.168.149.129主机名： node3.itcast.cnhosts文件: 增加对node3的解析免密配置：增加对node3的免密 1.修改ip 我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效 这个是重启这个服务项 这个就是重启网卡这个服务了 最后我们查询一下，是否成功了呢 发现这修改是生效的">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="专栏">
-    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="【实战】DNS建设案例_">
-  <meta name="twitter:description" content="目录 【实战】DNS建设案例: 0.需求 1.准备工作 2.进行标准化的服务器配置 1.修改ip 2.修改主机名 3.修改hosts文件 4.免密配置 3.实操流程 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 1.环境变量配置 2.任意目录测试一下 2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 2.解压这个包 3.运行这个软件，并在浏览器查看 2.在node2安装相关软件 1.安装NFS 3安装ftp软件 5.在node3中配置dns服务器 1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 3.修改/var/named/itcast.local.db 4.修改/var/named/192.168.149.rev文件 5.检测 6.启动服务以及开放端口 6.测试操作 6.总结 【实战】DNS建设案例: 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问
+ip： 192.168.149.129主机名： node3.itcast.cnhosts文件: 增加对node3的解析免密配置：增加对node3的免密 1.修改ip 我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效 这个是重启这个服务项 这个就是重启网卡这个服务了 最后我们查询一下，是否成功了呢 发现这修改是生效的"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="专栏"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="【实战】DNS建设案例_"><meta name=twitter:description content="目录 【实战】DNS建设案例: 0.需求 1.准备工作 2.进行标准化的服务器配置 1.修改ip 2.修改主机名 3.修改hosts文件 4.免密配置 3.实操流程 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 1.环境变量配置 2.任意目录测试一下 2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 2.解压这个包 3.运行这个软件，并在浏览器查看 2.在node2安装相关软件 1.安装NFS 3安装ftp软件 5.在node3中配置dns服务器 1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 3.修改/var/named/itcast.local.db 4.修改/var/named/192.168.149.rev文件 5.检测 6.启动服务以及开放端口 6.测试操作 6.总结 【实战】DNS建设案例: 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问
 NFS服务器域名： nfs.itcast.localFTP服务器域名： ftp.itcast.localtomcat服务器域名： www.itcast.localFTP服务器要求:1- 禁锢FTP目录： /export/ftp2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器windows中，建议使用filezilla.exe 软件来连接NFS服务器：共享目录： /export/nfs要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可） 1.准备工作 我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了
 2.进行标准化的服务器配置 因为node1和node2的之前配置过了免密ssh登录，以及用主机名可以ping通，因此我们只需要对node3进行修改就可以了
-ip： 192.168.149.129主机名： node3.itcast.cnhosts文件: 增加对node3的解析免密配置：增加对node3的免密 1.修改ip 我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效 这个是重启这个服务项 这个就是重启网卡这个服务了 最后我们查询一下，是否成功了呢 发现这修改是生效的">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [, 
-    {
-      "@type": "ListItem",
-      "position":  3 ,
-      "name": "【实战】DNS建设案例_",
-      "item": "https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "【实战】DNS建设案例_",
-  "name": "【实战】DNS建设案例_",
-  "description": " 目录 【实战】DNS建设案例: 0.需求 1.准备工作 2.进行标准化的服务器配置 1.修改ip 2.修改主机名 3.修改hosts文件 4.免密配置 3.实操流程 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 1.环境变量配置 2.任意目录测试一下 2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 2.解压这个包 3.运行这个软件，并在浏览器查看 2.在node2安装相关软件 1.安装NFS 3安装ftp软件 5.在node3中配置dns服务器 1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 3.修改/var/named/itcast.local.db 4.修改/var/named/192.168.149.rev文件 5.检测 6.启动服务以及开放端口 6.测试操作 6.总结 【实战】DNS建设案例: 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问\nNFS服务器域名： nfs.itcast.local\rFTP服务器域名： ftp.itcast.local\rtomcat服务器域名： www.itcast.local\rFTP服务器要求:\r1- 禁锢FTP目录： /export/ftp\r2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可\r3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器\rwindows中，建议使用filezilla.exe 软件来连接\rNFS服务器：\r共享目录： /export/nfs\r要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可） 1.准备工作 我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了\n2.进行标准化的服务器配置 因为node1和node2的之前配置过了免密ssh登录，以及用主机名可以ping通，因此我们只需要对node3进行修改就可以了\nip： 192.168.149.129\r主机名： node3.itcast.cn\rhosts文件: 增加对node3的解析\r免密配置：增加对node3的免密 1.修改ip 我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效 这个是重启这个服务项 这个就是重启网卡这个服务了 最后我们查询一下，是否成功了呢 发现这修改是生效的\n",
-  "keywords": [
-    
-  ],
-  "articleBody": " 目录 【实战】DNS建设案例: 0.需求 1.准备工作 2.进行标准化的服务器配置 1.修改ip 2.修改主机名 3.修改hosts文件 4.免密配置 3.实操流程 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 1.环境变量配置 2.任意目录测试一下 2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 2.解压这个包 3.运行这个软件，并在浏览器查看 2.在node2安装相关软件 1.安装NFS 3安装ftp软件 5.在node3中配置dns服务器 1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 3.修改/var/named/itcast.local.db 4.修改/var/named/192.168.149.rev文件 5.检测 6.启动服务以及开放端口 6.测试操作 6.总结 【实战】DNS建设案例: 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问\nNFS服务器域名： nfs.itcast.local\rFTP服务器域名： ftp.itcast.local\rtomcat服务器域名： www.itcast.local\rFTP服务器要求:\r1- 禁锢FTP目录： /export/ftp\r2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可\r3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器\rwindows中，建议使用filezilla.exe 软件来连接\rNFS服务器：\r共享目录： /export/nfs\r要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可） 1.准备工作 我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了\n2.进行标准化的服务器配置 因为node1和node2的之前配置过了免密ssh登录，以及用主机名可以ping通，因此我们只需要对node3进行修改就可以了\nip： 192.168.149.129\r主机名： node3.itcast.cn\rhosts文件: 增加对node3的解析\r免密配置：增加对node3的免密 1.修改ip 我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效 这个是重启这个服务项 这个就是重启网卡这个服务了 最后我们查询一下，是否成功了呢 发现这修改是生效的\n2.修改主机名 hostnamectl set-hostname node3 3.修改hosts文件 需要打开/etc/hosts文件然后输入以下内容\nvim /etc/hosts\r127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4\r::1 localhost localhost.localdomain localhost6 localhost6.localdomain6\r192.168.149.128 node1 node1.itcast.cn\r192.168.149.129 node3 node3.itcast.cn\r192.168.149.130 node2 node2.itcast.cn 我们发现，这个也是显然成功的，hosts也是修改成功的·\n4.免密配置 1.生成公钥和私钥 ssh-keygen -f ~/.ssh/id_rsa -P '' -q 2.分发公钥 ssh-copy-id node1\rssh-copy-id node2\rssh-copy-id node3 node3测试一下 写到这一步，其实node3的相关配置就已经搞定了\n3.实操流程 node1: 部署tomcat\rnode2：NFS 和 FTP\rnode3：DNS\r新克隆的node3节点：\rip： 192.168.88.103\r主机名： node3.itcast.cn\rhosts文件: 增加对node3的解析\r免密配置：增加对node3的免密\r可选：\r安装vim\r安装EPEL库 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 tar -xzf jdk-26_linux-x64_bin.tar.gz -C /opt/ 1.环境变量配置 打开/etc/profile文件,然后在里面追加以下内容\nexport JAVA_HOME=/opt/jdk-26.0.2\rexport PATH=$JAVA_HOME/bin:$PATH\rexport CLASSPATH=$JAVA_HOME/lib:$CLASSPATH 然后我们保存文件，就可以\n2.任意目录测试一下 输入以下内容进行测试\njava -version\rjavac 我发现这个也是配置ok的，任意目录下都是可以正常访问的\n2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 从下载的地方并把他上传到指定路径并解压 2.解压这个包 tar -xzf apache-tomcat-9.0.97.tar.gz -C /export/software 3.运行这个软件，并在浏览器查看 cd /export/software/bin\r./startup.sh 然后浏览器输入node1对应的ip地址看一下是否ok 出现这个页面，显然是阿帕奇正常运行了\n2.在node2安装相关软件 1.安装NFS 服务端： dnf install nfs-utils 客户端： dnf install nfs-utils 1.开启服务 systemctl enable nfs-server\rsystemctl start nfs-server 2.开放端口 执行开放端口:\rfirewall-cmd --add-service=nfs --permanent # 核心, 有了这个, NFS即可使用共享操作\rfirewall-cmd --reload 3.创建共享目录 mkdir /export/nfs #这个需要在node1和node2中同时创建 4.修改配置文件 vi /etc/exports\r#文件内需要填写的内容\r/export/nfs *(rw,sync,no_root_squash)\r#填完之后，我们保存文件，并重启这个nfs服务即可 5.验证是否成功共享 #输入以下内容即可查看是否成功共享\r服务端执行: 查看服务端NFS共享信息\rshowmount -e （早期版本兼容）\rexportfs 6.挂载使用 mount -t nfs 192.168.149.130:/export/software /export/software 7.验证 #经过验证是可以共享文件的 3安装ftp软件 1.创建文件夹 mkdir /etc/ftp #客户端与服务端都要创建这个文件夹 2.安装软件 服务端的软件安装 dnf install vsftpd -y 客户端软件安装 dns install lftp -y 3.修改配置 vi /etc/vsftpd/vsftpd.conf chroot_local_user=YES\rlocal_root=/export/ftp\r#修改完配置文件，之后我们重启服务即可了 4.启动并配置 vsftpd 服务 systemctl start vsftpd\rsystemctl enable vsftpd 5.配置防⽕墙 firewall-cmd --permanent --add-service=ftp\rfirewall-cmd --reload 6.连接FTP服务器 #在node2上面新增一个账户\ruseradd ftp_user\rpasswd ftp_user lftp ftp://ftp_user:123456@192.168.149.130 我们做到这里，其实node1和node2都已经搞定了，只剩下给node3配dns了，并且我们给node1和node2配的都是没有任何问题的，可以正常的使用\n5.在node3中配置dns服务器 注意这里其实和上一个博客内容重复了，我只把不一样的写出来 首先呢，下载方式一样，操作流程一样，只不过是文件内容修改的不一样 前提是我们需要的根域名是itcast.local,其下的域名是www.itcast.local;nfs.itcast.local;ftp.itcast.local; 因此我们在正向文件，反向文件声明都要修改，以及正方向文件内容也要改\n1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 向文件尾部追加俩条记录\nzone \"itcast.local\" IN {\rtype master;\rfile \"/var/named/itcast.local.db\";\rallow-update { none; };\r};\rzone \"149.168.192.in-addr.arpa\" IN {\rtype master;\rfile \"/var/named/192.168.149.rev\";\rallow-update { none; };\r}; 3.修改/var/named/itcast.local.db $TTL 86400\r@ IN SOA ns1.itcast.local. admin.itcast.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.itcast.local.\rns1 IN A 192.168.149.129\rnfs IN A 192.168.149.130\rftp IN A 192.168.149.130\rwww IN A 192.168.149.128\r@ IN A 192.168.149.128 4.修改/var/named/192.168.149.rev文件 $TTL 86400\r@ IN SOA ns1.itcast.local. admin.itcast.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.itcast.local.\r129 IN PTR dns\r130 IN PTR nfs\r130 IN PTR ftp\r128 IN PTR www\r128 IN PTR @ 5.检测 # 配置文件语法检查\rnamed-checkconf /etc/named.conf\r如果报了错误， 一般都是由于配置文件丢失内容导致语法结构不对， 请检查配置文件\r/etc/named.conf 【大概率是该文件的问题】\r/etc/named.rfc1912.zones # 区域文件语法检查\rnamed-checkzone internal.local /var/named/internal.local.db\rnamed-checkzone 88.168.192.in-addr.arpa /var/named/192.168.88.rev 6.启动服务以及开放端口 systemctl start named -- 立即启动\rsystemctl enable named -- 开启自动启动\rsystemctl status named -- 查看状态 firewall-cmd --zone=public --add-port=53/udp --permanent\rfirewall-cmd --zone=public --add-port=53/tcp --permanent\rfirewall-cmd --reload\r或者：\rfirewall-cmd --zone=public --add-service=dns --permanent\rfirewall-cmd --reload\r# 查看规则信息：\rfirewall-cmd --list-all 6.测试操作 把node1和node2的dns记录第一条改成node3的IP地址就可以了 6.总结 这个案例综合性的把之前学到的各种服务器都运用到了，综合度确实高，把之前学到的nfs,ftp,dns都用上了，同时也加深了对于这些内容的认识，其实我觉得，这些东西要多练习，即使会，但是还是要练习，有时候确实会多练习几遍明白一些东西，比如这次，其实我没有想到只有域名解析功能的dns可以如此组合，把node1和node2的ip放在node3里面，这样就可以通过访问其设定的域名来访问对应的服务了. 在 node3 部署 BIND 做内网 DNS，统一解析 Tomcat (www)、NFS 和 FTP (nfs/ftp)，实现了全集群基于 itcast.local 域名的服务访问，打通了 Web、存储与文件传输三大基础服务。 核心注意点： 1. NFS 挂载要用域名 (nfs.itcast.local)，别只用 IP。 2. FTP 禁锢目录需配 allow_writeable_chroot=YES。 3. DNS 指向要写进网卡配置，防止重启失效。 4. JDK/FTP 仅限内网实验，生产环境建议换 LTS JDK 和 SFTP。 ",
-  "wordCount" : "511",
-  "inLanguage": "zh-cn",
-  "datePublished": "2026-08-18T00:00:00Z",
-  "dateModified": "2026-08-18T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "My_blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://dsduyopg-github-io.pages.dev/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="https://dsduyopg-github-io.pages.dev/" accesskey="h" title="My_blog (Alt + H)">My_blog</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/" title="首页">
-                    <span>首页</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/posts/" title="文章">
-                    <span>文章</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/search/" title="搜索 (Alt &#43; /)" accesskey=/>
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/" title="专栏">
-                    <span>专栏</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/" title="草稿箱">
-                    <span>草稿箱</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
-            <a href="/">主页</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/%E4%B8%93%E6%A0%8F/">专栏</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">linux学习专栏</a>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-</nav>
-    <h1 class="post-title entry-hint-parent">
-      【实战】DNS建设案例_
-    </h1>
-    <div class="post-meta">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>511 字</span>
-
-</div>
-  </header> 
-  <div class="post-content md-content">
-<details class="toc" open>
-  <summary accesskey="c" title="(Alt + C)">
-    <span class="title">目录</span>
-  </summary>
-  <div class="inner"><nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li>
-          <ul>
-            <li><a href="#实战dns建设案例">【实战】DNS建设案例:</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#0需求">0.需求</a></li>
-    <li><a href="#1准备工作">1.准备工作</a></li>
-    <li><a href="#2进行标准化的服务器配置">2.进行标准化的服务器配置</a>
-      <ul>
-        <li><a href="#1修改ip">1.修改ip</a></li>
-        <li><a href="#2修改主机名">2.修改主机名</a></li>
-        <li><a href="#3修改hosts文件">3.修改hosts文件</a></li>
-        <li><a href="#4免密配置">4.免密配置</a></li>
-      </ul>
-    </li>
-    <li><a href="#3实操流程">3.实操流程</a></li>
-    <li><a href="#4在node1和node2中安装相关服务">4.在node1和node2中安装相关服务</a></li>
-    <li><a href="#1node1上面安装相关软件">1.node1上面安装相关软件</a>
-      <ul>
-        <li><a href="#1先在node1上面安装jdk软件包">1.先在node1上面安装jdk软件包</a>
-          <ul>
-            <li><a href="#1环境变量配置">1.环境变量配置</a></li>
-            <li><a href="#2任意目录测试一下">2.任意目录测试一下</a></li>
-          </ul>
-        </li>
-        <li><a href="#2最后安装tomcat服务器">2.最后安装tomcat服务器</a>
-          <ul>
-            <li><a href="#1从官网下载阿帕奇的tar的包">1,从官网下载阿帕奇的tar的包</a></li>
-            <li><a href="#2解压这个包">2.解压这个包</a></li>
-            <li><a href="#3运行这个软件并在浏览器查看">3.运行这个软件，并在浏览器查看</a></li>
-          </ul>
-        </li>
-        <li><a href="#2在node2安装相关软件">2.在node2安装相关软件</a>
-          <ul>
-            <li><a href="#1安装nfs">1.安装NFS</a></li>
-            <li><a href="#3安装ftp软件">3安装ftp软件</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#5在node3中配置dns服务器">5.在node3中配置dns服务器</a>
-      <ul>
-        <li><a href="#1修改namedconf这个文件">1.修改named.conf这个文件</a></li>
-        <li><a href="#2修改vi-etcnamedrfc1912zones">2.修改vi /etc/named.rfc1912.zones</a></li>
-        <li><a href="#3修改varnameditcastlocaldb">3.修改/var/named/itcast.local.db</a></li>
-        <li><a href="#4修改varnamed192168149rev文件">4.修改/var/named/192.168.149.rev文件</a></li>
-        <li><a href="#5检测">5.检测</a></li>
-        <li><a href="#6启动服务以及开放端口">6.启动服务以及开放端口</a></li>
-      </ul>
-    </li>
-    <li><a href="#6测试操作">6.测试操作</a></li>
-    <li><a href="#6总结">6.总结</a></li>
-  </ul>
-</nav></div>
-</details>
-
-<h4 id="实战dns建设案例">【实战】DNS建设案例:<a hidden class="anchor" aria-hidden="true" href="#实战dns建设案例">#</a></h4>
-<h2 id="0需求">0.需求<a hidden class="anchor" aria-hidden="true" href="#0需求">#</a></h2>
-<p><code>目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问</code></p>
-<pre tabindex="0"><code>NFS服务器域名： nfs.itcast.local
+ip： 192.168.149.129主机名： node3.itcast.cnhosts文件: 增加对node3的解析免密配置：增加对node3的免密 1.修改ip 我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效 这个是重启这个服务项 这个就是重启网卡这个服务了 最后我们查询一下，是否成功了呢 发现这修改是生效的"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":3,"name":"【实战】DNS建设案例_","item":"https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"【实战】DNS建设案例_","name":"【实战】DNS建设案例_","description":" 目录 【实战】DNS建设案例: 0.需求 1.准备工作 2.进行标准化的服务器配置 1.修改ip 2.修改主机名 3.修改hosts文件 4.免密配置 3.实操流程 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 1.环境变量配置 2.任意目录测试一下 2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 2.解压这个包 3.运行这个软件，并在浏览器查看 2.在node2安装相关软件 1.安装NFS 3安装ftp软件 5.在node3中配置dns服务器 1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 3.修改/var/named/itcast.local.db 4.修改/var/named/192.168.149.rev文件 5.检测 6.启动服务以及开放端口 6.测试操作 6.总结 【实战】DNS建设案例: 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问\nNFS服务器域名： nfs.itcast.local\rFTP服务器域名： ftp.itcast.local\rtomcat服务器域名： www.itcast.local\rFTP服务器要求:\r1- 禁锢FTP目录： /export/ftp\r2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可\r3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器\rwindows中，建议使用filezilla.exe 软件来连接\rNFS服务器：\r共享目录： /export/nfs\r要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可） 1.准备工作 我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了\n2.进行标准化的服务器配置 因为node1和node2的之前配置过了免密ssh登录，以及用主机名可以ping通，因此我们只需要对node3进行修改就可以了\nip： 192.168.149.129\r主机名： node3.itcast.cn\rhosts文件: 增加对node3的解析\r免密配置：增加对node3的免密 1.修改ip 我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效 这个是重启这个服务项 这个就是重启网卡这个服务了 最后我们查询一下，是否成功了呢 发现这修改是生效的\n","keywords":[],"articleBody":" 目录 【实战】DNS建设案例: 0.需求 1.准备工作 2.进行标准化的服务器配置 1.修改ip 2.修改主机名 3.修改hosts文件 4.免密配置 3.实操流程 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 1.环境变量配置 2.任意目录测试一下 2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 2.解压这个包 3.运行这个软件，并在浏览器查看 2.在node2安装相关软件 1.安装NFS 3安装ftp软件 5.在node3中配置dns服务器 1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 3.修改/var/named/itcast.local.db 4.修改/var/named/192.168.149.rev文件 5.检测 6.启动服务以及开放端口 6.测试操作 6.总结 【实战】DNS建设案例: 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问\nNFS服务器域名： nfs.itcast.local\rFTP服务器域名： ftp.itcast.local\rtomcat服务器域名： www.itcast.local\rFTP服务器要求:\r1- 禁锢FTP目录： /export/ftp\r2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可\r3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器\rwindows中，建议使用filezilla.exe 软件来连接\rNFS服务器：\r共享目录： /export/nfs\r要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可） 1.准备工作 我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了\n2.进行标准化的服务器配置 因为node1和node2的之前配置过了免密ssh登录，以及用主机名可以ping通，因此我们只需要对node3进行修改就可以了\nip： 192.168.149.129\r主机名： node3.itcast.cn\rhosts文件: 增加对node3的解析\r免密配置：增加对node3的免密 1.修改ip 我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效 这个是重启这个服务项 这个就是重启网卡这个服务了 最后我们查询一下，是否成功了呢 发现这修改是生效的\n2.修改主机名 hostnamectl set-hostname node3 3.修改hosts文件 需要打开/etc/hosts文件然后输入以下内容\nvim /etc/hosts\r127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4\r::1 localhost localhost.localdomain localhost6 localhost6.localdomain6\r192.168.149.128 node1 node1.itcast.cn\r192.168.149.129 node3 node3.itcast.cn\r192.168.149.130 node2 node2.itcast.cn 我们发现，这个也是显然成功的，hosts也是修改成功的·\n4.免密配置 1.生成公钥和私钥 ssh-keygen -f ~/.ssh/id_rsa -P '' -q 2.分发公钥 ssh-copy-id node1\rssh-copy-id node2\rssh-copy-id node3 node3测试一下 写到这一步，其实node3的相关配置就已经搞定了\n3.实操流程 node1: 部署tomcat\rnode2：NFS 和 FTP\rnode3：DNS\r新克隆的node3节点：\rip： 192.168.88.103\r主机名： node3.itcast.cn\rhosts文件: 增加对node3的解析\r免密配置：增加对node3的免密\r可选：\r安装vim\r安装EPEL库 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 tar -xzf jdk-26_linux-x64_bin.tar.gz -C /opt/ 1.环境变量配置 打开/etc/profile文件,然后在里面追加以下内容\nexport JAVA_HOME=/opt/jdk-26.0.2\rexport PATH=$JAVA_HOME/bin:$PATH\rexport CLASSPATH=$JAVA_HOME/lib:$CLASSPATH 然后我们保存文件，就可以\n2.任意目录测试一下 输入以下内容进行测试\njava -version\rjavac 我发现这个也是配置ok的，任意目录下都是可以正常访问的\n2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 从下载的地方并把他上传到指定路径并解压 2.解压这个包 tar -xzf apache-tomcat-9.0.97.tar.gz -C /export/software 3.运行这个软件，并在浏览器查看 cd /export/software/bin\r./startup.sh 然后浏览器输入node1对应的ip地址看一下是否ok 出现这个页面，显然是阿帕奇正常运行了\n2.在node2安装相关软件 1.安装NFS 服务端： dnf install nfs-utils 客户端： dnf install nfs-utils 1.开启服务 systemctl enable nfs-server\rsystemctl start nfs-server 2.开放端口 执行开放端口:\rfirewall-cmd --add-service=nfs --permanent # 核心, 有了这个, NFS即可使用共享操作\rfirewall-cmd --reload 3.创建共享目录 mkdir /export/nfs #这个需要在node1和node2中同时创建 4.修改配置文件 vi /etc/exports\r#文件内需要填写的内容\r/export/nfs *(rw,sync,no_root_squash)\r#填完之后，我们保存文件，并重启这个nfs服务即可 5.验证是否成功共享 #输入以下内容即可查看是否成功共享\r服务端执行: 查看服务端NFS共享信息\rshowmount -e （早期版本兼容）\rexportfs 6.挂载使用 mount -t nfs 192.168.149.130:/export/software /export/software 7.验证 #经过验证是可以共享文件的 3安装ftp软件 1.创建文件夹 mkdir /etc/ftp #客户端与服务端都要创建这个文件夹 2.安装软件 服务端的软件安装 dnf install vsftpd -y 客户端软件安装 dns install lftp -y 3.修改配置 vi /etc/vsftpd/vsftpd.conf chroot_local_user=YES\rlocal_root=/export/ftp\r#修改完配置文件，之后我们重启服务即可了 4.启动并配置 vsftpd 服务 systemctl start vsftpd\rsystemctl enable vsftpd 5.配置防⽕墙 firewall-cmd --permanent --add-service=ftp\rfirewall-cmd --reload 6.连接FTP服务器 #在node2上面新增一个账户\ruseradd ftp_user\rpasswd ftp_user lftp ftp://ftp_user:123456@192.168.149.130 我们做到这里，其实node1和node2都已经搞定了，只剩下给node3配dns了，并且我们给node1和node2配的都是没有任何问题的，可以正常的使用\n5.在node3中配置dns服务器 注意这里其实和上一个博客内容重复了，我只把不一样的写出来 首先呢，下载方式一样，操作流程一样，只不过是文件内容修改的不一样 前提是我们需要的根域名是itcast.local,其下的域名是www.itcast.local;nfs.itcast.local;ftp.itcast.local; 因此我们在正向文件，反向文件声明都要修改，以及正方向文件内容也要改\n1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 向文件尾部追加俩条记录\nzone \"itcast.local\" IN {\rtype master;\rfile \"/var/named/itcast.local.db\";\rallow-update { none; };\r};\rzone \"149.168.192.in-addr.arpa\" IN {\rtype master;\rfile \"/var/named/192.168.149.rev\";\rallow-update { none; };\r}; 3.修改/var/named/itcast.local.db $TTL 86400\r@ IN SOA ns1.itcast.local. admin.itcast.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.itcast.local.\rns1 IN A 192.168.149.129\rnfs IN A 192.168.149.130\rftp IN A 192.168.149.130\rwww IN A 192.168.149.128\r@ IN A 192.168.149.128 4.修改/var/named/192.168.149.rev文件 $TTL 86400\r@ IN SOA ns1.itcast.local. admin.itcast.local. (\r2024011701 ; Serial\r3600 ; Refresh\r1800 ; Retry\r1209600 ; Expire\r86400 ) ; Minimum TTL\rIN NS ns1.itcast.local.\r129 IN PTR dns\r130 IN PTR nfs\r130 IN PTR ftp\r128 IN PTR www\r128 IN PTR @ 5.检测 # 配置文件语法检查\rnamed-checkconf /etc/named.conf\r如果报了错误， 一般都是由于配置文件丢失内容导致语法结构不对， 请检查配置文件\r/etc/named.conf 【大概率是该文件的问题】\r/etc/named.rfc1912.zones # 区域文件语法检查\rnamed-checkzone internal.local /var/named/internal.local.db\rnamed-checkzone 88.168.192.in-addr.arpa /var/named/192.168.88.rev 6.启动服务以及开放端口 systemctl start named -- 立即启动\rsystemctl enable named -- 开启自动启动\rsystemctl status named -- 查看状态 firewall-cmd --zone=public --add-port=53/udp --permanent\rfirewall-cmd --zone=public --add-port=53/tcp --permanent\rfirewall-cmd --reload\r或者：\rfirewall-cmd --zone=public --add-service=dns --permanent\rfirewall-cmd --reload\r# 查看规则信息：\rfirewall-cmd --list-all 6.测试操作 把node1和node2的dns记录第一条改成node3的IP地址就可以了 6.总结 这个案例综合性的把之前学到的各种服务器都运用到了，综合度确实高，把之前学到的nfs,ftp,dns都用上了，同时也加深了对于这些内容的认识，其实我觉得，这些东西要多练习，即使会，但是还是要练习，有时候确实会多练习几遍明白一些东西，比如这次，其实我没有想到只有域名解析功能的dns可以如此组合，把node1和node2的ip放在node3里面，这样就可以通过访问其设定的域名来访问对应的服务了. 在 node3 部署 BIND 做内网 DNS，统一解析 Tomcat (www)、NFS 和 FTP (nfs/ftp)，实现了全集群基于 itcast.local 域名的服务访问，打通了 Web、存储与文件传输三大基础服务。 核心注意点： 1. NFS 挂载要用域名 (nfs.itcast.local)，别只用 IP。 2. FTP 禁锢目录需配 allow_writeable_chroot=YES。 3. DNS 指向要写进网卡配置，防止重启失效。 4. JDK/FTP 仅限内网实验，生产环境建议换 LTS JDK 和 SFTP。 ","wordCount":"511","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/"},"publisher":{"@type":"Organization","name":"My_blog","logo":{"@type":"ImageObject","url":"https://dsduyopg-github-io.pages.dev/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg-github-io.pages.dev/ accesskey=h title="My_blog (Alt + H)">My_blog</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg-github-io.pages.dev/ title=首页><span>首页</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/posts/ title=文章><span>文章</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/search/ title="搜索 (Alt + /)" accesskey=/><span>搜索</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/ title=专栏><span>专栏</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/ title=草稿箱><span>草稿箱</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/%E4%B8%93%E6%A0%8F/>专栏</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/>linux学习专栏</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">【实战】DNS建设案例_</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>511 字</span></div></header><div class="post-content md-content"><details class=toc open><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><nav id=TableOfContents><ul><li><ul><li><ul><li><a href=#实战dns建设案例>【实战】DNS建设案例:</a></li></ul></li></ul></li><li><a href=#0需求>0.需求</a></li><li><a href=#1准备工作>1.准备工作</a></li><li><a href=#2进行标准化的服务器配置>2.进行标准化的服务器配置</a><ul><li><a href=#1修改ip>1.修改ip</a></li><li><a href=#2修改主机名>2.修改主机名</a></li><li><a href=#3修改hosts文件>3.修改hosts文件</a></li><li><a href=#4免密配置>4.免密配置</a></li></ul></li><li><a href=#3实操流程>3.实操流程</a></li><li><a href=#4在node1和node2中安装相关服务>4.在node1和node2中安装相关服务</a></li><li><a href=#1node1上面安装相关软件>1.node1上面安装相关软件</a><ul><li><a href=#1先在node1上面安装jdk软件包>1.先在node1上面安装jdk软件包</a><ul><li><a href=#1环境变量配置>1.环境变量配置</a></li><li><a href=#2任意目录测试一下>2.任意目录测试一下</a></li></ul></li><li><a href=#2最后安装tomcat服务器>2.最后安装tomcat服务器</a><ul><li><a href=#1从官网下载阿帕奇的tar的包>1,从官网下载阿帕奇的tar的包</a></li><li><a href=#2解压这个包>2.解压这个包</a></li><li><a href=#3运行这个软件并在浏览器查看>3.运行这个软件，并在浏览器查看</a></li></ul></li><li><a href=#2在node2安装相关软件>2.在node2安装相关软件</a><ul><li><a href=#1安装nfs>1.安装NFS</a></li><li><a href=#3安装ftp软件>3安装ftp软件</a></li></ul></li></ul></li><li><a href=#5在node3中配置dns服务器>5.在node3中配置dns服务器</a><ul><li><a href=#1修改namedconf这个文件>1.修改named.conf这个文件</a></li><li><a href=#2修改vi-etcnamedrfc1912zones>2.修改vi /etc/named.rfc1912.zones</a></li><li><a href=#3修改varnameditcastlocaldb>3.修改/var/named/itcast.local.db</a></li><li><a href=#4修改varnamed192168149rev文件>4.修改/var/named/192.168.149.rev文件</a></li><li><a href=#5检测>5.检测</a></li><li><a href=#6启动服务以及开放端口>6.启动服务以及开放端口</a></li></ul></li><li><a href=#6测试操作>6.测试操作</a></li><li><a href=#6总结>6.总结</a></li></ul></nav></div></details><h4 id=实战dns建设案例>【实战】DNS建设案例:<a hidden class=anchor aria-hidden=true href=#实战dns建设案例>#</a></h4><h2 id=0需求>0.需求<a hidden class=anchor aria-hidden=true href=#0需求>#</a></h2><p><code>目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问</code></p><pre tabindex=0><code>NFS服务器域名： nfs.itcast.local
 FTP服务器域名： ftp.itcast.local
 tomcat服务器域名： www.itcast.local
 
@@ -412,58 +127,32 @@ NFS服务器：
     共享目录： /export/nfs
 
     要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可）
-</code></pre><h2 id="1准备工作">1.准备工作<a hidden class="anchor" aria-hidden="true" href="#1准备工作">#</a></h2>
-<p><code>我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3</code>
-而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了</p>
-<h2 id="2进行标准化的服务器配置">2.进行标准化的服务器配置<a hidden class="anchor" aria-hidden="true" href="#2进行标准化的服务器配置">#</a></h2>
-<p><code>因为node1和node2的之前配置过了免密ssh登录，以及用主机名可以ping通，因此我们只需要对node3进行修改就可以了</code></p>
-<pre tabindex="0"><code>ip： 192.168.149.129
+</code></pre><h2 id=1准备工作>1.准备工作<a hidden class=anchor aria-hidden=true href=#1准备工作>#</a></h2><p><code>我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3</code>
+而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了</p><h2 id=2进行标准化的服务器配置>2.进行标准化的服务器配置<a hidden class=anchor aria-hidden=true href=#2进行标准化的服务器配置>#</a></h2><p><code>因为node1和node2的之前配置过了免密ssh登录，以及用主机名可以ping通，因此我们只需要对node3进行修改就可以了</code></p><pre tabindex=0><code>ip： 192.168.149.129
 主机名： node3.itcast.cn
 hosts文件: 增加对node3的解析
 免密配置：增加对node3的免密
-</code></pre><h3 id="1修改ip">1.修改ip<a hidden class="anchor" aria-hidden="true" href="#1修改ip">#</a></h3>
-<p><code>我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效</code><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/434f5661479d41879041c66bda93b724.png">
+</code></pre><h3 id=1修改ip>1.修改ip<a hidden class=anchor aria-hidden=true href=#1修改ip>#</a></h3><p><code>我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效</code><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/434f5661479d41879041c66bda93b724.png>
 <strong>这个是重启这个服务项</strong>
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/c3d3ad3f3f5e4e5a84c4f518ebe362b4.png">
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/c3d3ad3f3f5e4e5a84c4f518ebe362b4.png>
 <strong>这个就是重启网卡这个服务了</strong>
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/95a1211387f64fd5945877c10f1fdde7.png">
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/95a1211387f64fd5945877c10f1fdde7.png>
 最后我们查询一下，是否成功了呢
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e919556bbd7e4a81914e6292ce8504ae.png">
-<code>发现这修改是生效的</code></p>
-<h3 id="2修改主机名">2.修改主机名<a hidden class="anchor" aria-hidden="true" href="#2修改主机名">#</a></h3>
-<pre tabindex="0"><code>hostnamectl set-hostname node3
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/75d57f800c014d56bd40bccc9e85ed5d.png"></p>
-<h3 id="3修改hosts文件">3.修改hosts文件<a hidden class="anchor" aria-hidden="true" href="#3修改hosts文件">#</a></h3>
-<p><code>需要打开/etc/hosts文件然后输入以下内容</code></p>
-<pre tabindex="0"><code>vim /etc/hosts
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e919556bbd7e4a81914e6292ce8504ae.png>
+<code>发现这修改是生效的</code></p><h3 id=2修改主机名>2.修改主机名<a hidden class=anchor aria-hidden=true href=#2修改主机名>#</a></h3><pre tabindex=0><code>hostnamectl set-hostname node3
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/75d57f800c014d56bd40bccc9e85ed5d.png></p><h3 id=3修改hosts文件>3.修改hosts文件<a hidden class=anchor aria-hidden=true href=#3修改hosts文件>#</a></h3><p><code>需要打开/etc/hosts文件然后输入以下内容</code></p><pre tabindex=0><code>vim /etc/hosts
 
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 192.168.149.128 node1 node1.itcast.cn
 192.168.149.129 node3 node3.itcast.cn
 192.168.149.130 node2 node2.itcast.cn
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/0761fdb4dd0c4665b77f6d66ec294aa5.png"></p>
-<p><code>我们发现，这个也是显然成功的，hosts也是修改成功的·</code></p>
-<h3 id="4免密配置">4.免密配置<a hidden class="anchor" aria-hidden="true" href="#4免密配置">#</a></h3>
-<ul>
-<li>1.生成公钥和私钥</li>
-</ul>
-<pre tabindex="0"><code>ssh-keygen -f ~/.ssh/id_rsa -P &#39;&#39; -q
-</code></pre><ul>
-<li>2.分发公钥</li>
-</ul>
-<pre tabindex="0"><code>ssh-copy-id node1
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/0761fdb4dd0c4665b77f6d66ec294aa5.png></p><p><code>我们发现，这个也是显然成功的，hosts也是修改成功的·</code></p><h3 id=4免密配置>4.免密配置<a hidden class=anchor aria-hidden=true href=#4免密配置>#</a></h3><ul><li>1.生成公钥和私钥</li></ul><pre tabindex=0><code>ssh-keygen -f ~/.ssh/id_rsa -P &#39;&#39; -q
+</code></pre><ul><li>2.分发公钥</li></ul><pre tabindex=0><code>ssh-copy-id node1
 ssh-copy-id node2
 ssh-copy-id node3
-</code></pre><ul>
-<li>node3测试一下</li>
-</ul>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/896402e6aaf744a09e424e549f8575c8.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/f1d8e9c9273040c7a27a3ca8a1542cfe.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/a17e600a4d2f406292b4918e777c4850.png"></p>
-<p><code>写到这一步，其实node3的相关配置就已经搞定了</code></p>
-<h2 id="3实操流程">3.实操流程<a hidden class="anchor" aria-hidden="true" href="#3实操流程">#</a></h2>
-<pre tabindex="0"><code>node1: 部署tomcat
+</code></pre><ul><li>node3测试一下</li></ul><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/896402e6aaf744a09e424e549f8575c8.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/f1d8e9c9273040c7a27a3ca8a1542cfe.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/a17e600a4d2f406292b4918e777c4850.png></p><p><code>写到这一步，其实node3的相关配置就已经搞定了</code></p><h2 id=3实操流程>3.实操流程<a hidden class=anchor aria-hidden=true href=#3实操流程>#</a></h2><pre tabindex=0><code>node1: 部署tomcat
 
 node2：NFS 和 FTP
 
@@ -479,136 +168,68 @@ hosts文件: 增加对node3的解析
 可选：
     安装vim
     安装EPEL库
-</code></pre><h2 id="4在node1和node2中安装相关服务">4.在node1和node2中安装相关服务<a hidden class="anchor" aria-hidden="true" href="#4在node1和node2中安装相关服务">#</a></h2>
-<h2 id="1node1上面安装相关软件">1.node1上面安装相关软件<a hidden class="anchor" aria-hidden="true" href="#1node1上面安装相关软件">#</a></h2>
-<h3 id="1先在node1上面安装jdk软件包">1.先在node1上面安装jdk软件包<a hidden class="anchor" aria-hidden="true" href="#1先在node1上面安装jdk软件包">#</a></h3>
-<pre tabindex="0"><code>tar -xzf jdk-26_linux-x64_bin.tar.gz -C /opt/
-</code></pre><p><img loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e786df021af54f11b0eafd6e3e50f293.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/6b99bcf7c51b4b0693f4853ed1ade88f.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/71752257b85f42c197afa02400c36fea.png"></p>
-<h4 id="1环境变量配置">1.环境变量配置<a hidden class="anchor" aria-hidden="true" href="#1环境变量配置">#</a></h4>
-<p><code>打开/etc/profile文件,然后在里面追加以下内容</code></p>
-<pre tabindex="0"><code>
+</code></pre><h2 id=4在node1和node2中安装相关服务>4.在node1和node2中安装相关服务<a hidden class=anchor aria-hidden=true href=#4在node1和node2中安装相关服务>#</a></h2><h2 id=1node1上面安装相关软件>1.node1上面安装相关软件<a hidden class=anchor aria-hidden=true href=#1node1上面安装相关软件>#</a></h2><h3 id=1先在node1上面安装jdk软件包>1.先在node1上面安装jdk软件包<a hidden class=anchor aria-hidden=true href=#1先在node1上面安装jdk软件包>#</a></h3><pre tabindex=0><code>tar -xzf jdk-26_linux-x64_bin.tar.gz -C /opt/
+</code></pre><p><img loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e786df021af54f11b0eafd6e3e50f293.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/6b99bcf7c51b4b0693f4853ed1ade88f.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/71752257b85f42c197afa02400c36fea.png></p><h4 id=1环境变量配置>1.环境变量配置<a hidden class=anchor aria-hidden=true href=#1环境变量配置>#</a></h4><p><code>打开/etc/profile文件,然后在里面追加以下内容</code></p><pre tabindex=0><code>
 export JAVA_HOME=/opt/jdk-26.0.2
 export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=$JAVA_HOME/lib:$CLASSPATH
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e0180798fa354988871daffd9bdb06e3.png">
-<strong>然后我们保存文件，就可以</strong></p>
-<h4 id="2任意目录测试一下">2.任意目录测试一下<a hidden class="anchor" aria-hidden="true" href="#2任意目录测试一下">#</a></h4>
-<p><code>输入以下内容进行测试</code></p>
-<pre tabindex="0"><code>java -version
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e0180798fa354988871daffd9bdb06e3.png>
+<strong>然后我们保存文件，就可以</strong></p><h4 id=2任意目录测试一下>2.任意目录测试一下<a hidden class=anchor aria-hidden=true href=#2任意目录测试一下>#</a></h4><p><code>输入以下内容进行测试</code></p><pre tabindex=0><code>java -version
 javac
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/c5bd07175cdc4695bcff9f0a9f06d4ce.png">
-<code>我发现这个也是配置ok的，任意目录下都是可以正常访问的</code></p>
-<h3 id="2最后安装tomcat服务器">2.最后安装tomcat服务器<a hidden class="anchor" aria-hidden="true" href="#2最后安装tomcat服务器">#</a></h3>
-<h4 id="1从官网下载阿帕奇的tar的包">1,从官网下载阿帕奇的tar的包<a hidden class="anchor" aria-hidden="true" href="#1从官网下载阿帕奇的tar的包">#</a></h4>
-<p><code>从下载的地方并把他上传到指定路径并解压</code>
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/f2c2603c75aa4545a3c9c422257a721a.png"></p>
-<h4 id="2解压这个包">2.解压这个包<a hidden class="anchor" aria-hidden="true" href="#2解压这个包">#</a></h4>
-<pre tabindex="0"><code>tar -xzf apache-tomcat-9.0.97.tar.gz -C /export/software
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/1d4159dea6134deb9931d6bdc1d3859a.png"></p>
-<h4 id="3运行这个软件并在浏览器查看">3.运行这个软件，并在浏览器查看<a hidden class="anchor" aria-hidden="true" href="#3运行这个软件并在浏览器查看">#</a></h4>
-<pre tabindex="0"><code>cd /export/software/bin
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/c5bd07175cdc4695bcff9f0a9f06d4ce.png>
+<code>我发现这个也是配置ok的，任意目录下都是可以正常访问的</code></p><h3 id=2最后安装tomcat服务器>2.最后安装tomcat服务器<a hidden class=anchor aria-hidden=true href=#2最后安装tomcat服务器>#</a></h3><h4 id=1从官网下载阿帕奇的tar的包>1,从官网下载阿帕奇的tar的包<a hidden class=anchor aria-hidden=true href=#1从官网下载阿帕奇的tar的包>#</a></h4><p><code>从下载的地方并把他上传到指定路径并解压</code>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/f2c2603c75aa4545a3c9c422257a721a.png></p><h4 id=2解压这个包>2.解压这个包<a hidden class=anchor aria-hidden=true href=#2解压这个包>#</a></h4><pre tabindex=0><code>tar -xzf apache-tomcat-9.0.97.tar.gz -C /export/software
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/1d4159dea6134deb9931d6bdc1d3859a.png></p><h4 id=3运行这个软件并在浏览器查看>3.运行这个软件，并在浏览器查看<a hidden class=anchor aria-hidden=true href=#3运行这个软件并在浏览器查看>#</a></h4><pre tabindex=0><code>cd /export/software/bin
 ./startup.sh
 </code></pre><p><code>然后浏览器输入node1对应的ip地址看一下是否ok</code>
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/5ac54a6ce1414c099d8de495baa37a86.png">
-<code>出现这个页面，显然是阿帕奇正常运行了</code></p>
-<h3 id="2在node2安装相关软件">2.在node2安装相关软件<a hidden class="anchor" aria-hidden="true" href="#2在node2安装相关软件">#</a></h3>
-<h4 id="1安装nfs">1.安装NFS<a hidden class="anchor" aria-hidden="true" href="#1安装nfs">#</a></h4>
-<ul>
-<li>服务端：</li>
-</ul>
-<pre tabindex="0"><code>dnf install nfs-utils
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e0187e945f6a4c2db00a205113ecdd20.png"></p>
-<ul>
-<li>客户端：</li>
-</ul>
-<pre tabindex="0"><code>dnf install nfs-utils
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/8e27f85f8d9f4dd0a25458bb3780283f.png"></p>
-<h5 id="1开启服务">1.开启服务<a hidden class="anchor" aria-hidden="true" href="#1开启服务">#</a></h5>
-<pre tabindex="0"><code>systemctl enable nfs-server
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/5ac54a6ce1414c099d8de495baa37a86.png>
+<code>出现这个页面，显然是阿帕奇正常运行了</code></p><h3 id=2在node2安装相关软件>2.在node2安装相关软件<a hidden class=anchor aria-hidden=true href=#2在node2安装相关软件>#</a></h3><h4 id=1安装nfs>1.安装NFS<a hidden class=anchor aria-hidden=true href=#1安装nfs>#</a></h4><ul><li>服务端：</li></ul><pre tabindex=0><code>dnf install nfs-utils
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e0187e945f6a4c2db00a205113ecdd20.png></p><ul><li>客户端：</li></ul><pre tabindex=0><code>dnf install nfs-utils
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/8e27f85f8d9f4dd0a25458bb3780283f.png></p><h5 id=1开启服务>1.开启服务<a hidden class=anchor aria-hidden=true href=#1开启服务>#</a></h5><pre tabindex=0><code>systemctl enable nfs-server
 systemctl start nfs-server
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/ce40be5b4a4d4ed285b544ba00be2bdd.png"></p>
-<h5 id="2开放端口">2.开放端口<a hidden class="anchor" aria-hidden="true" href="#2开放端口">#</a></h5>
-<pre tabindex="0"><code>执行开放端口:
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/ce40be5b4a4d4ed285b544ba00be2bdd.png></p><h5 id=2开放端口>2.开放端口<a hidden class=anchor aria-hidden=true href=#2开放端口>#</a></h5><pre tabindex=0><code>执行开放端口:
 firewall-cmd --add-service=nfs --permanent  # 核心, 有了这个, NFS即可使用共享操作
 firewall-cmd --reload
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/393b44e1e2e74de0a328d543fcfce5ba.png"></p>
-<h5 id="3创建共享目录">3.创建共享目录<a hidden class="anchor" aria-hidden="true" href="#3创建共享目录">#</a></h5>
-<pre tabindex="0"><code>mkdir /export/nfs #这个需要在node1和node2中同时创建
-</code></pre><h5 id="4修改配置文件">4.修改配置文件<a hidden class="anchor" aria-hidden="true" href="#4修改配置文件">#</a></h5>
-<pre tabindex="0"><code>vi  /etc/exports
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/393b44e1e2e74de0a328d543fcfce5ba.png></p><h5 id=3创建共享目录>3.创建共享目录<a hidden class=anchor aria-hidden=true href=#3创建共享目录>#</a></h5><pre tabindex=0><code>mkdir /export/nfs #这个需要在node1和node2中同时创建
+</code></pre><h5 id=4修改配置文件>4.修改配置文件<a hidden class=anchor aria-hidden=true href=#4修改配置文件>#</a></h5><pre tabindex=0><code>vi  /etc/exports
 
 #文件内需要填写的内容
 /export/nfs *(rw,sync,no_root_squash)
 
 #填完之后，我们保存文件，并重启这个nfs服务即可
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/3cb849cf1485490d9dbc9d3b2e86f1bc.png"></p>
-<h5 id="5验证是否成功共享">5.验证是否成功共享<a hidden class="anchor" aria-hidden="true" href="#5验证是否成功共享">#</a></h5>
-<pre tabindex="0"><code>#输入以下内容即可查看是否成功共享
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/3cb849cf1485490d9dbc9d3b2e86f1bc.png></p><h5 id=5验证是否成功共享>5.验证是否成功共享<a hidden class=anchor aria-hidden=true href=#5验证是否成功共享>#</a></h5><pre tabindex=0><code>#输入以下内容即可查看是否成功共享
 
 服务端执行: 查看服务端NFS共享信息
 showmount -e   （早期版本兼容）
 
 exportfs
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/dd61c0165db14bbdb7dc010c21313405.png"></p>
-<h5 id="6挂载使用">6.挂载使用<a hidden class="anchor" aria-hidden="true" href="#6挂载使用">#</a></h5>
-<pre tabindex="0"><code>mount -t nfs 192.168.149.130:/export/software /export/software
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/a9d14f3fdbac4987b2f834111c624c2d.png"></p>
-<h5 id="7验证">7.验证<a hidden class="anchor" aria-hidden="true" href="#7验证">#</a></h5>
-<pre tabindex="0"><code>#经过验证是可以共享文件的
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/86506014770147c08d240023f612bf83.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/56dfbbeef367464c80f30007b9b2a467.png"></p>
-<h4 id="3安装ftp软件">3安装ftp软件<a hidden class="anchor" aria-hidden="true" href="#3安装ftp软件">#</a></h4>
-<h5 id="1创建文件夹">1.创建文件夹<a hidden class="anchor" aria-hidden="true" href="#1创建文件夹">#</a></h5>
-<pre tabindex="0"><code>mkdir /etc/ftp #客户端与服务端都要创建这个文件夹
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/0bbf796973034804beecd29ece186ef1.png"></p>
-<h5 id="2安装软件">2.安装软件<a hidden class="anchor" aria-hidden="true" href="#2安装软件">#</a></h5>
-<ul>
-<li>服务端的软件安装</li>
-</ul>
-<pre tabindex="0"><code>
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/dd61c0165db14bbdb7dc010c21313405.png></p><h5 id=6挂载使用>6.挂载使用<a hidden class=anchor aria-hidden=true href=#6挂载使用>#</a></h5><pre tabindex=0><code>mount -t nfs 192.168.149.130:/export/software /export/software
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/a9d14f3fdbac4987b2f834111c624c2d.png></p><h5 id=7验证>7.验证<a hidden class=anchor aria-hidden=true href=#7验证>#</a></h5><pre tabindex=0><code>#经过验证是可以共享文件的
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/86506014770147c08d240023f612bf83.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/56dfbbeef367464c80f30007b9b2a467.png></p><h4 id=3安装ftp软件>3安装ftp软件<a hidden class=anchor aria-hidden=true href=#3安装ftp软件>#</a></h4><h5 id=1创建文件夹>1.创建文件夹<a hidden class=anchor aria-hidden=true href=#1创建文件夹>#</a></h5><pre tabindex=0><code>mkdir /etc/ftp #客户端与服务端都要创建这个文件夹
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/0bbf796973034804beecd29ece186ef1.png></p><h5 id=2安装软件>2.安装软件<a hidden class=anchor aria-hidden=true href=#2安装软件>#</a></h5><ul><li>服务端的软件安装</li></ul><pre tabindex=0><code>
 dnf install vsftpd -y
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/30d64dbda9ef4d3f9e2d09a305358392.png"></p>
-<ul>
-<li>客户端软件安装</li>
-</ul>
-<pre tabindex="0"><code>dns install lftp -y
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/da315d66dd8441248214d58d9b462c4d.png"></p>
-<h5 id="3修改配置">3.修改配置<a hidden class="anchor" aria-hidden="true" href="#3修改配置">#</a></h5>
-<pre tabindex="0"><code>vi /etc/vsftpd/vsftpd.conf
-</code></pre><pre tabindex="0"><code>chroot_local_user=YES
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/30d64dbda9ef4d3f9e2d09a305358392.png></p><ul><li>客户端软件安装</li></ul><pre tabindex=0><code>dns install lftp -y
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/da315d66dd8441248214d58d9b462c4d.png></p><h5 id=3修改配置>3.修改配置<a hidden class=anchor aria-hidden=true href=#3修改配置>#</a></h5><pre tabindex=0><code>vi /etc/vsftpd/vsftpd.conf
+</code></pre><pre tabindex=0><code>chroot_local_user=YES
 local_root=/export/ftp
 
 #修改完配置文件，之后我们重启服务即可了
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/c6c727bd6433423e8dd6ed7dee2ef7e0.png"></p>
-<h5 id="4启动并配置-vsftpd-服务">4.启动并配置 vsftpd 服务<a hidden class="anchor" aria-hidden="true" href="#4启动并配置-vsftpd-服务">#</a></h5>
-<pre tabindex="0"><code>systemctl start vsftpd
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/c6c727bd6433423e8dd6ed7dee2ef7e0.png></p><h5 id=4启动并配置-vsftpd-服务>4.启动并配置 vsftpd 服务<a hidden class=anchor aria-hidden=true href=#4启动并配置-vsftpd-服务>#</a></h5><pre tabindex=0><code>systemctl start vsftpd
 systemctl enable vsftpd
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/f0b0b8513b7041c4a9aacb996c20deff.png"></p>
-<h5 id="5配置防墙">5.配置防⽕墙<a hidden class="anchor" aria-hidden="true" href="#5配置防墙">#</a></h5>
-<pre tabindex="0"><code>firewall-cmd --permanent --add-service=ftp
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/f0b0b8513b7041c4a9aacb996c20deff.png></p><h5 id=5配置防墙>5.配置防⽕墙<a hidden class=anchor aria-hidden=true href=#5配置防墙>#</a></h5><pre tabindex=0><code>firewall-cmd --permanent --add-service=ftp
 firewall-cmd --reload
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/ebe15b3e2cbf49a292b96f280304182b.png"></p>
-<h5 id="6连接ftp服务器">6.连接FTP服务器<a hidden class="anchor" aria-hidden="true" href="#6连接ftp服务器">#</a></h5>
-<pre tabindex="0"><code>#在node2上面新增一个账户
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/ebe15b3e2cbf49a292b96f280304182b.png></p><h5 id=6连接ftp服务器>6.连接FTP服务器<a hidden class=anchor aria-hidden=true href=#6连接ftp服务器>#</a></h5><pre tabindex=0><code>#在node2上面新增一个账户
  useradd ftp_user
  passwd ftp_user
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/5c9a915a903e4a88ac99dad0fce585a3.png"></p>
-<pre tabindex="0"><code>lftp ftp://ftp_user:123456@192.168.149.130
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/bc615db8484c4a27b24c7670e4ba7f99.png">
-<code>我们做到这里，其实node1和node2都已经搞定了，只剩下给node3配dns了，并且我们给node1和node2配的都是没有任何问题的，可以正常的使用</code></p>
-<h2 id="5在node3中配置dns服务器">5.在node3中配置dns服务器<a hidden class="anchor" aria-hidden="true" href="#5在node3中配置dns服务器">#</a></h2>
-<p>注意这里其实和上一个博客内容重复了，我只把不一样的写出来
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/5c9a915a903e4a88ac99dad0fce585a3.png></p><pre tabindex=0><code>lftp ftp://ftp_user:123456@192.168.149.130
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/bc615db8484c4a27b24c7670e4ba7f99.png>
+<code>我们做到这里，其实node1和node2都已经搞定了，只剩下给node3配dns了，并且我们给node1和node2配的都是没有任何问题的，可以正常的使用</code></p><h2 id=5在node3中配置dns服务器>5.在node3中配置dns服务器<a hidden class=anchor aria-hidden=true href=#5在node3中配置dns服务器>#</a></h2><p>注意这里其实和上一个博客内容重复了，我只把不一样的写出来
 首先呢，下载方式一样，操作流程一样，只不过是文件内容修改的不一样
 <strong>前提是我们需要的根域名是itcast.local,其下的域名是www.itcast.local;nfs.itcast.local;ftp.itcast.local;</strong>
-<code>因此我们在正向文件，反向文件声明都要修改，以及正方向文件内容也要改</code></p>
-<h3 id="1修改namedconf这个文件">1.修改named.conf这个文件<a hidden class="anchor" aria-hidden="true" href="#1修改namedconf这个文件">#</a></h3>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/8b436f0a1b4740cb816d96b8066cc57e.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/1d7d9fac60e9444eb6bcbff5e62ab434.png"></p>
-<h3 id="2修改vi-etcnamedrfc1912zones">2.修改vi /etc/named.rfc1912.zones<a hidden class="anchor" aria-hidden="true" href="#2修改vi-etcnamedrfc1912zones">#</a></h3>
-<p><code>向文件尾部追加俩条记录</code></p>
-<pre tabindex="0"><code>zone &#34;itcast.local&#34; IN {
+<code>因此我们在正向文件，反向文件声明都要修改，以及正方向文件内容也要改</code></p><h3 id=1修改namedconf这个文件>1.修改named.conf这个文件<a hidden class=anchor aria-hidden=true href=#1修改namedconf这个文件>#</a></h3><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/8b436f0a1b4740cb816d96b8066cc57e.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/1d7d9fac60e9444eb6bcbff5e62ab434.png></p><h3 id=2修改vi-etcnamedrfc1912zones>2.修改vi /etc/named.rfc1912.zones<a hidden class=anchor aria-hidden=true href=#2修改vi-etcnamedrfc1912zones>#</a></h3><p><code>向文件尾部追加俩条记录</code></p><pre tabindex=0><code>zone &#34;itcast.local&#34; IN {
     type master;
     file &#34;/var/named/itcast.local.db&#34;;
     allow-update { none; };
@@ -618,9 +239,7 @@ zone &#34;149.168.192.in-addr.arpa&#34; IN {
     file &#34;/var/named/192.168.149.rev&#34;;
     allow-update { none; };
 };
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/af6e800f78be4f1da36a265b8026f9c4.png"></p>
-<h3 id="3修改varnameditcastlocaldb">3.修改/var/named/itcast.local.db<a hidden class="anchor" aria-hidden="true" href="#3修改varnameditcastlocaldb">#</a></h3>
-<pre tabindex="0"><code>
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/af6e800f78be4f1da36a265b8026f9c4.png></p><h3 id=3修改varnameditcastlocaldb>3.修改/var/named/itcast.local.db<a hidden class=anchor aria-hidden=true href=#3修改varnameditcastlocaldb>#</a></h3><pre tabindex=0><code>
 $TTL 86400
 @    IN    SOA   ns1.itcast.local. admin.itcast.local. (
                   2024011701 ; Serial
@@ -635,9 +254,7 @@ nfs    IN    A     192.168.149.130
 ftp    IN    A     192.168.149.130
 www    IN    A     192.168.149.128
 @      IN    A     192.168.149.128
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/ec87fa9345f3475abda13a48166868ad.png"></p>
-<h3 id="4修改varnamed192168149rev文件">4.修改/var/named/192.168.149.rev文件<a hidden class="anchor" aria-hidden="true" href="#4修改varnamed192168149rev文件">#</a></h3>
-<pre tabindex="0"><code>$TTL 86400
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/ec87fa9345f3475abda13a48166868ad.png></p><h3 id=4修改varnamed192168149rev文件>4.修改/var/named/192.168.149.rev文件<a hidden class=anchor aria-hidden=true href=#4修改varnamed192168149rev文件>#</a></h3><pre tabindex=0><code>$TTL 86400
 @    IN    SOA   ns1.itcast.local. admin.itcast.local. (
                   2024011701 ; Serial
                   3600       ; Refresh
@@ -651,27 +268,21 @@ www    IN    A     192.168.149.128
 130    IN    PTR   ftp
 128    IN    PTR   www
 128    IN    PTR   @
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/9d53915a29f84fada18ab8457a99e0de.png"></p>
-<h3 id="5检测">5.检测<a hidden class="anchor" aria-hidden="true" href="#5检测">#</a></h3>
-<pre tabindex="0"><code># 配置文件语法检查
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/9d53915a29f84fada18ab8457a99e0de.png></p><h3 id=5检测>5.检测<a hidden class=anchor aria-hidden=true href=#5检测>#</a></h3><pre tabindex=0><code># 配置文件语法检查
 named-checkconf /etc/named.conf
 
 
 如果报了错误， 一般都是由于配置文件丢失内容导致语法结构不对， 请检查配置文件
 /etc/named.conf  【大概率是该文件的问题】
 /etc/named.rfc1912.zones
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/5d5d52e149084e55a364da4a6192cfe6.png"></p>
-<pre tabindex="0"><code># 区域文件语法检查
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/5d5d52e149084e55a364da4a6192cfe6.png></p><pre tabindex=0><code># 区域文件语法检查
 named-checkzone internal.local /var/named/internal.local.db
 named-checkzone 88.168.192.in-addr.arpa /var/named/192.168.88.rev
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/5d99b64e68d84aa4bddc6144380f9f0c.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/17afc6705bb0411d9575e8903984b786.png"></p>
-<h3 id="6启动服务以及开放端口">6.启动服务以及开放端口<a hidden class="anchor" aria-hidden="true" href="#6启动服务以及开放端口">#</a></h3>
-<pre tabindex="0"><code>systemctl start named  -- 立即启动
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/5d99b64e68d84aa4bddc6144380f9f0c.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/17afc6705bb0411d9575e8903984b786.png></p><h3 id=6启动服务以及开放端口>6.启动服务以及开放端口<a hidden class=anchor aria-hidden=true href=#6启动服务以及开放端口>#</a></h3><pre tabindex=0><code>systemctl start named  -- 立即启动
 systemctl enable named  -- 开启自动启动
 systemctl status named  -- 查看状态
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/05c3bf7ccc5346f085609a3a69f07a5b.png"></p>
-<pre tabindex="0"><code>firewall-cmd --zone=public --add-port=53/udp --permanent
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/05c3bf7ccc5346f085609a3a69f07a5b.png></p><pre tabindex=0><code>firewall-cmd --zone=public --add-port=53/udp --permanent
 firewall-cmd --zone=public --add-port=53/tcp --permanent
 firewall-cmd --reload
 
@@ -682,330 +293,24 @@ firewall-cmd --reload
 
 # 查看规则信息：
 firewall-cmd --list-all
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/d70a2e67c67a47fb8a0017a50405f909.png"></p>
-<h2 id="6测试操作">6.测试操作<a hidden class="anchor" aria-hidden="true" href="#6测试操作">#</a></h2>
-<p><code>把node1和node2的dns记录第一条改成node3的IP地址就可以了</code>
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/ac4ec96b8eed41229667e3022699a3dd.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/eb682c2c66da4e86a9ec6afcafed866c.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/864815dee102482ba5506dfae481c441.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/6c26bcf12b6c4d3080eb05ecb58e51b6.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/76f765a75fec4eadbe0619f10aec1106.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/a70a4d7628f14e91973f249d71d9fd61.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/cf940262663543ccbd80c72440fdd1ce.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/d0c4b3cb345d48118abd9f0f5b037cef.png"></p>
-<h2 id="6总结">6.总结<a hidden class="anchor" aria-hidden="true" href="#6总结">#</a></h2>
-<p><code> 这个案例综合性的把之前学到的各种服务器都运用到了，综合度确实高，把之前学到的nfs,ftp,dns都用上了，同时也加深了对于这些内容的认识，其实我觉得，这些东西要多练习，即使会，但是还是要练习，有时候确实会多练习几遍明白一些东西，比如这次，其实我没有想到只有域名解析功能的dns可以如此组合，把node1和node2的ip放在node3里面，这样就可以通过访问其设定的域名来访问对应的服务了.</code>
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/d70a2e67c67a47fb8a0017a50405f909.png></p><h2 id=6测试操作>6.测试操作<a hidden class=anchor aria-hidden=true href=#6测试操作>#</a></h2><p><code>把node1和node2的dns记录第一条改成node3的IP地址就可以了</code>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/ac4ec96b8eed41229667e3022699a3dd.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/eb682c2c66da4e86a9ec6afcafed866c.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/864815dee102482ba5506dfae481c441.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/6c26bcf12b6c4d3080eb05ecb58e51b6.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/76f765a75fec4eadbe0619f10aec1106.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/a70a4d7628f14e91973f249d71d9fd61.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/cf940262663543ccbd80c72440fdd1ce.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/d0c4b3cb345d48118abd9f0f5b037cef.png></p><h2 id=6总结>6.总结<a hidden class=anchor aria-hidden=true href=#6总结>#</a></h2><p><code>这个案例综合性的把之前学到的各种服务器都运用到了，综合度确实高，把之前学到的nfs,ftp,dns都用上了，同时也加深了对于这些内容的认识，其实我觉得，这些东西要多练习，即使会，但是还是要练习，有时候确实会多练习几遍明白一些东西，比如这次，其实我没有想到只有域名解析功能的dns可以如此组合，把node1和node2的ip放在node3里面，这样就可以通过访问其设定的域名来访问对应的服务了.</code>
 <code>在 node3 部署 BIND 做内网 DNS，统一解析 Tomcat (www)、NFS 和 FTP (nfs/ftp)，实现了全集群基于 itcast.local 域名的服务访问，打通了 Web、存储与文件传输三大基础服务。</code>
 <code>核心注意点：</code>
-<code>1. NFS 挂载要用域名 (nfs.itcast.local)，别只用 IP。 2. FTP 禁锢目录需配 allow_writeable_chroot=YES。 3. DNS 指向要写进网卡配置，防止重启失效。 4. JDK/FTP 仅限内网实验，生产环境建议换 LTS JDK 和 SFTP。 </code></p>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/">
-    <span class="title">« 上一页</span>
-    <span>【分支和循环（下）】</span>
-  </a>
-  <a class="next" href="https://dsduyopg-github-io.pages.dev/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
-    <span class="title">下一页 »</span>
-    <span>CSDN 博客本地化工具使用说明</span>
-  </a>
-</nav>
-
-
-<ul class="share-buttons">
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on x"
-            href="https://x.com/intent/tweet/?text=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f&amp;hashtags=">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f&amp;title=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_&amp;summary=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_&amp;source=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on reddit"
-            href="https://reddit.com/submit?url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f&title=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on whatsapp"
-            href="https://api.whatsapp.com/send?text=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_%20-%20https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on telegram"
-            href="https://telegram.me/share/url?text=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f">
-            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_&u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f">
-            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
-                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
-                <path
-                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
-            </svg>
-        </a>
-    </li>
-</ul>
-
-  </footer>
-<div class="comments">
-  <h2>评论</h2>
-  <div class="like-box">
-    <button class="like-btn" type="button" data-like-path="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/">
-      <span class="like-heart">♡</span>
-      <span class="like-count">0</span>
-    </button>
-  </div>
-  <script src="https://utteranc.es/client.js"
-          repo="dsduyopg/dsduyopg.github.io"
-          issue-term="pathname"
-          label="comment"
-          theme="preferred-color-scheme"
-          crossorigin="anonymous"
-          async>
-  </script>
-  <noscript>请启用 JavaScript 查看评论。</noscript>
-</div>
-
-<script>
-  (function () {
-    var btn = document.querySelector('.like-btn');
-    if (!btn) return;
-    var key = 'like:' + btn.getAttribute('data-like-path');
-    var count = parseInt(localStorage.getItem(key) || '0', 10);
-    var liked = count > 0;
-    var heart = btn.querySelector('.like-heart');
-    var num = btn.querySelector('.like-count');
-    function render() {
-      num.textContent = count;
-      heart.textContent = liked ? '♥' : '♡';
-      btn.classList.toggle('liked', liked);
-    }
-    btn.addEventListener('click', function () {
-      liked = !liked;
-      count = liked ? 1 : 0;
-      localStorage.setItem(key, String(count));
-      render();
-    });
-    render();
-  })();
-</script>
-
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="https://dsduyopg-github-io.pages.dev/">My_blog</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-<div class="busuanzi">
-  本站访客 <span id="busuanzi_value_site_uv"></span> ·
-  访问量 <span id="busuanzi_value_site_pv"></span> · 本文阅读 <span id="busuanzi_value_page_pv"></span>
-</div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<script>
-  (function () {
-    var keyViews = 'blog_views';
-    var keyTitles = 'blog_titles';
-    var isArticle = !!document.querySelector('.post-single');
-    var hotEl = document.getElementById('hot-posts');
-
-    if (isArticle) {
-      var path = location.pathname;
-      var title = (document.title || '').replace(/\s*\|.*$/, '').trim();
-      if (!path || !title) return;
-      var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
-      var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
-      views[path] = (views[path] || 0) + 1;
-      titles[path] = title;
-      localStorage.setItem(keyViews, JSON.stringify(views));
-      localStorage.setItem(keyTitles, JSON.stringify(titles));
-      return;
-    }
-
-    if (!hotEl) return;
-    if (hotEl.children.length) return; 
-    var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
-    var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
-    var rows = Object.keys(views)
-      .filter(function (p) {
-        return p.indexOf('/posts/') === 0
-          && p.indexOf('/page/') === -1
-          && titles[p]
-          && titles[p] !== '我的博客';
-      })
-      .sort(function (a, b) { return views[b] - views[a]; })
-      .slice(0, 5);
-    if (!rows.length) return;
-
-    var html = '<h3>热门文章</h3><ol class="hot-list">';
-    rows.forEach(function (p) {
-      html += '<li><a href="' + p + '">' + titles[p] + '</a></li>';
-    });
-    html += '</ol>';
-    hotEl.innerHTML = html;
-  })();
-</script>
-
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = '复制';
-
-        function copyingDone() {
-            copybutton.innerHTML = '已复制！';
-            setTimeout(() => {
-                copybutton.innerHTML = '复制';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+<code>1. NFS 挂载要用域名 (nfs.itcast.local)，别只用 IP。 2. FTP 禁锢目录需配 allow_writeable_chroot=YES。 3. DNS 指向要写进网卡配置，防止重启失效。 4. JDK/FTP 仅限内网实验，生产环境建议换 LTS JDK 和 SFTP。</code></p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/><span class=title>« 上一页</span>
+<span>【分支和循环（下）】</span>
+</a><a class=next href=https://dsduyopg-github-io.pages.dev/posts/csdn%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/><span class=title>下一页 »</span>
+<span>CSDN 博客本地化工具使用说明</span></a></nav><ul class=share-buttons><li><a target=_blank rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on x" href="https://x.com/intent/tweet/?text=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f&amp;hashtags="><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446C483.971.0 512 28.03 512 62.554zM269.951 190.75 182.567 75.216H56L207.216 272.95 63.9 436.783h61.366L235.9 310.383l96.667 126.4H456L298.367 228.367l134-153.151H371.033zM127.633 110h36.468l219.38 290.065H349.5z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f&amp;title=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_&amp;summary=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_&amp;source=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f&title=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on whatsapp" href="https://api.whatsapp.com/send?text=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_%20-%20https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on telegram" href="https://telegram.me/share/url?text=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f"><svg viewBox="2 2 28 28" height="30" width="30" fill="currentColor"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 【实战】DNS建设案例_ on ycombinator" href="https://news.ycombinator.com/submitlink?t=%e3%80%90%e5%ae%9e%e6%88%98%e3%80%91DNS%e5%bb%ba%e8%ae%be%e6%a1%88%e4%be%8b_&u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E5%25AE%259E%25E6%2588%2598dns%25E5%25BB%25BA%25E8%25AE%25BE%25E6%25A1%2588%25E4%25BE%258B_%2f"><svg width="30" height="30" viewBox="0 0 512 512" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446zM183.8767 87.9921h-62.034L230.6673 292.4508V424.0079h50.6655V292.4508L390.1575 87.9921H328.1233L256 238.2489z"/></svg></a></li></ul></footer><div class=comments><h2>评论</h2><div class=like-box><button class=like-btn type=button data-like-path=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/>
+<span class=like-heart>♡</span>
+<span class=like-count>0</span></button></div><script src=https://utteranc.es/client.js repo=dsduyopg/dsduyopg.github.io issue-term=pathname label=comment theme=preferred-color-scheme crossorigin=anonymous async></script><noscript>请启用 JavaScript 查看评论。</noscript></div><script>(function(){var t,n,s,o,i,e=document.querySelector(".like-btn");if(!e)return;s="like:"+e.getAttribute("data-like-path"),n=parseInt(localStorage.getItem(s)||"0",10),t=n>0,o=e.querySelector(".like-heart"),i=e.querySelector(".like-count");function a(){i.textContent=n,o.textContent=t?"♥":"♡",e.classList.toggle("liked",t)}e.addEventListener("click",function(){t=!t,n=t?1:0,localStorage.setItem(s,String(n)),a()}),a()})()</script></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg-github-io.pages.dev/>My_blog</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script><script>(function(){var e,t,n,s,r,c,o="blog_views",i="blog_titles",l=!!document.querySelector(".post-single"),a=document.getElementById("hot-posts");if(l){if(n=location.pathname,r=(document.title||"").replace(/\s*\|.*$/,"").trim(),!n||!r)return;e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),e[n]=(e[n]||0)+1,t[n]=r,localStorage.setItem(o,JSON.stringify(e)),localStorage.setItem(i,JSON.stringify(t));return}if(!a)return;if(a.children.length)return;if(e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),c=Object.keys(e).filter(function(e){return e.indexOf("/posts/")===0&&e.indexOf("/page/")===-1&&t[e]&&t[e]!=="我的博客"}).sort(function(t,n){return e[n]-e[t]}).slice(0,5),!c.length)return;s='<h3>热门文章</h3><ol class="hot-list">',c.forEach(function(e){s+='<li><a href="'+e+'">'+t[e]+"</a></li>"}),s+="</ol>",a.innerHTML=s})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
