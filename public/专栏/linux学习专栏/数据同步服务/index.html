@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>数据同步服务 | My_blog</title>
-<meta name="keywords" content="">
-<meta name="description" content="
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>数据同步服务 | My_blog</title><meta name=keywords content><meta name=description content="
   
     目录
   
@@ -107,306 +98,16 @@ rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
 3.特点
 • ⽀持增量同步：只传输发⽣变化的数据部分。
 • ⽀持 SSH 加密传输。
-• 可保持⽂件权限、时间戳、连接和等元数据。">
-<meta name="author" content="">
-<link rel="canonical" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css" integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://dsduyopg-github-io.pages.dev/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://dsduyopg-github-io.pages.dev/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://dsduyopg-github-io.pages.dev/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://dsduyopg-github-io.pages.dev/apple-touch-icon.png">
-<link rel="mask-icon" href="https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh-cn" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/">
-  <meta property="og:site_name" content="My_blog">
-  <meta property="og:title" content="数据同步服务">
-  <meta property="og:description" content="目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
-2.如何进行实时同步 常⽤选项：• -v ：详细模式输出，显⽰传输过程中的⽂件信息。• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。• -z ：对备份的⽂件在传输时进⾏压缩处理。• -P ：显⽰进度条。• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh端⼝本地同步：rsync -av /src/directory/ /dest/directory/远程同步：rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/拉取远程数据到本地：rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="专栏">
-    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="数据同步服务">
-  <meta name="twitter:description" content="目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
-2.如何进行实时同步 常⽤选项：• -v ：详细模式输出，显⽰传输过程中的⽂件信息。• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。• -z ：对备份的⽂件在传输时进⾏压缩处理。• -P ：显⽰进度条。• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh端⼝本地同步：rsync -av /src/directory/ /dest/directory/远程同步：rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/拉取远程数据到本地：rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [, 
-    {
-      "@type": "ListItem",
-      "position":  3 ,
-      "name": "数据同步服务",
-      "item": "https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "数据同步服务",
-  "name": "数据同步服务",
-  "description": " 目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程\n2.如何进行实时同步 常⽤选项：\r• -v ：详细模式输出，显⽰传输过程中的⽂件信息。\r• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。\r• -z ：对备份的⽂件在传输时进⾏压缩处理。\r• -P ：显⽰进度条。\r• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）\r• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh\r端⼝\r本地同步：\rrsync -av /src/directory/ /dest/directory/\r远程同步：\rrsync -avz /src/directory/ root@192.168.88.102:/dest/directory/\r拉取远程数据到本地：\rrsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。\n",
-  "keywords": [
-    
-  ],
-  "articleBody": " 目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程\n2.如何进行实时同步 常⽤选项：\r• -v ：详细模式输出，显⽰传输过程中的⽂件信息。\r• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。\r• -z ：对备份的⽂件在传输时进⾏压缩处理。\r• -P ：显⽰进度条。\r• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）\r• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh\r端⼝\r本地同步：\rrsync -av /src/directory/ /dest/directory/\r远程同步：\rrsync -avz /src/directory/ root@192.168.88.102:/dest/directory/\r拉取远程数据到本地：\rrsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。\n4.怎么实现仅同步变化的数据呢？ 1.会对需要同步的数据文件进行分块(底层)\r2.每一个数据块会基于数据生成校验码，只要数据发生变化 这个校验码也会发生改变\r3.在同步文件的时候， 只需要监测哪些数据块的校验码发生变化， 就可以指定那个块数据改变了， 此时仅需要同步这些变化数据块即可 5.同步方式 手动同步–\u003e 定时同步\n实时同步\n二.如何安装数据同步服务： dnf -y install rsync dnf install rsync -y 三.综合案例 1. 本地同步操作: 准备⼯作\r1- 在node1节点的 /usr/local⽬录下,创建⼀个nginx-1.8.0⽬录,并在此⽬录下构建⼀个\rhtml⽬录\r2- 在html⽬录下,创建index.html、favicon.ico、logo.png⽂件，以及assets⽬录\r3- 在assets⽬录下，创建index.js、index.css⽂件\r4- 给各个⽂件随机写⼊⼀些内容\r需求：对html⽬录进⾏同步操作。 将其同步到/usr/local/nginx-1.8.0/backup/下，并且如果\r源⽬录下已经删除的，在⽬标⽬录下也应该被删除 我们应当用rsync命令进行相应的操作，下面就是我操作出来的\n2.远程同步操作: 需求：对/usr/local/nginx-1.8.0/html⽬录进⾏操作，将其同步到node2的家⽬录的backup的⽬\r录中\r注意： 需要双⽅均安装rsync，同时配置了SSH密钥（否则需要输⼊密码） 这个案例也是没有什么太大的问题的，下面是我在这个案例中做出的\n3.综合案例,实现定时与增量备份 需求说明：\r在centos stream 9的 /var/log⽬录下， 存储了⼤量的关于系统的⽇志：如messages⽂件存储⼤量\r的系统⽇志信息，secure⽇志⽂件存储了⼤量的与系统安全的⽇志。请对此⽬录中的messages、\rsecure⽇志⽂件进⾏定时的备份到node2节点的/export/data/node1_backup_system_log⽬录中，\r要求每⽇凌晨2点进⾏备份⼀次。 在这案例之中我们可以使用定时任务进行操作的\n四.结合INOTIFY实现数据实时同步 ⾸先将⼆个路径分别创建出来， 便于后续演⽰\rnode1执⾏： mkdir -p /export/data/logs\rnode2执⾏： mkdir -p /export/data/node1_exe_backup_log 优势： ⾼效性: rsyncd 的守护进程模式可以避免每次连接都启动 SSH 进程，因此在某些情况下可能会⽐\rSSH ⽅式略微提⾼性能。\r简化配置: ⼀旦配置好 rsyncd，⽆需每次都输⼊ SSH 密码，适合⽤于定时备份等⾃动化任务。 缺点： 安全性问题: rsyncd 是基于开放端⼝的⽅式进⾏⽂件同步，默认情况下并不加密传输的数据。这使\r得数据传输过程可能暴露给中间⼈攻击（MITM）。虽然可以配置 rsyncd 使⽤ --password-file\r来限制访问，但仍然不如 SSH 安全。\r需要开放端⼝: 您需要在防⽕墙上开放 rsync 服务使⽤的端⼝（通常是 873），这可能增加潜在的\r安全⻛险。\r配置复杂: 需要在服务器上配置 rsyncd.conf，并管理模块、权限、⽤⼾等细节。 1.对node2进行配置 1.创建用户 在这里面呢，我们需要在node2中创建2个用户，一个是backup_user,一个是rsync用户\nuseradd backup_user\ruseradd rsync\rpasswd backup_user\rpasswd rsync 注意密码，都设置为123456\n2.修改配置文件 注意，这个配置文件要是在node2中修改的，以下是修改命令\n# 全局设置\ruid = rsync\rgid = rsync\ruse chroot = no\rport = 873\rmax connections = 200\rpid file = /var/run/rsyncd.pid\rlog file = /var/log/rsyncd.log\rtransfer logging = yes\rignore nonreadable = yes\r[node1_logs]\rpath = /export/data/node1_exe_backup_log\rcomment = Backup Directory\rread only = no\rsecrets file = /etc/rsyncd.passwd\rhosts allow = 192.168.149.0/24\rhosts deny = *\rauth users = backup_user 3.创建密码⽂件 echo \"backup_user:123456\" \u003e /etc/rsyncd.passwd\r# 设置密码⽂件的权限为600，确保该⽂件只有 RSYNC 服务可以读取\rchmod 600 /etc/rsyncd.passwd 4. 启动rsync服务 1 rsync --daemon 测试是否可以正常访问： 在node1执⾏\rrsync rsync://backup_user@192.168.88.102/node1_logs\r注意在node2需要开放端⼝：\rfirewall-cmd --permanent --add-port=873/tcp 五.设置开机自启动 1.杀死进程 -- 查看进程\rps -ef | grep rsync -- 查看进程ID\r-- 杀死进程\rkill -9 rsync的进程ID 2.设置开机⾃启动 由于rsync并不是⼀个系统服务（简单判断：通过systemctl启动和关闭的服务），故需要先 设置为系统服务后才可以设置\n修改配置文件 [Unit]\rDescription=Rsync Daemon\rAfter=network.target\r[Service]\rExecStart=/usr/bin/rsync --daemon --config=/etc/rsyncd.conf --no-detach\rExecReload=/bin/kill -HUP $MAINPID\rRestart=always\r[Install]\rWantedBy=multi-user.target\r特殊说明：\rExecReload=/bin/kill -HUP $MAINPID：通过发送 SIGHUP 信号，告诉 rsync 守护进程重新\r加载其配置⽂件，⽽⽆需停⽌并重新启动进程。 这个时候，我们需要把旧的日志文件给删掉 因为我们可能在操作的时候会产出一些错误的日志，就是由于这些错误的文件会导致，我们后续无法成功启动rsync服务\n就像我这样的错误一样，这个时候，我们就要学会查看日志文件了，因为一些错误会记录在日志里面\n其实，当我把旧的日志文件给删掉之后哦，成功了，应该是之前启动失败过一次，日志文件，没有删除，然后再次启动，通过对比这个日志文件，发现有问题，就无法启动，删除文件意思是把里面的的错误清理掉，之后相当于重新启动，所以可以成功启动后\n总结这次成功的逻辑\r这次能成功，其实是两个动作配合的结果：\r清理现场：rm -f /var/run/rsyncd.pid 清除了旧的工作证，扫清了路障。\r修正配置：你之前（或者在我们的排查中）修正了 /etc/rsyncd.conf 里的错误（比如把密码文件的路径写对了，或者模块路径建好了）。\r所以，并不是“这样修改就可以”这么简单，而是“清理了旧障碍 + 配置本身正确”共同作用的结果。\r💡 小贴士：以后遇到类似问题怎么办？\r下次如果再遇到服务启动失败，且提示 already running、permission denied 或 status=11，可以尝试这个“万能重启三部曲”：\r查日志：journalctl -xeu 服务名 看具体报错。\r删 pid 文件：rm -f /var/run/服务名.pid 清理旧状态。\r重启服务：systemctl restart 服务名。\r记住，日志是你最好的朋友，它能告诉你服务到底是哪里不舒服。现在你的 rsync 服务已经稳稳运行了，可以去客户端测试同步啦！ 六.基于RSYNC服务完成⼿动同步 1.格式 ⽤⼾名@主机地址::模块名称 或 rsync://⽤⼾名@主机地址/模块名称\r说明：\r模块名： 指的是配置到rsync.conf 中 【】的内容\r⽤⼾名： 指的是模块中指定的⽤⼾名， 如果没有指定， 可以是主机存在的⽤⼾名即可（前提\r是该⽤⼾需要有权限）\r例如：\rbackup_user@192.168.88.102::node1_logs 2.基于⼿动同步⽅式完成数据同步 rsync -avz /export/data/logs/ backup_user@node2::node1_logs 3.创建日志文件 在创建的日志文件里面录入数据\ncd /export/data/logs\rtouch log.txt \u0026\u0026 echo \"2491 797 1243124 9127\"\u003e\u003elog.txt 4.开始传输文件了 在这一步里面呢，我们需要注意上下文，把这个权限给关掉，否则，后面传输就像我一样不会成功的\n大家可以看到，我通过传送指令，无法发送成功，但是文件的权限都是开的，是最大的权限\n当时，我就比较迷了，不知道该如何办，然后我问了千问，它给予了我很大的帮助了，我明白了其实是我Linux的上下文的权限比较严格，需要将其关闭\n解决方案 以下是千问告诉我的\n找到根本原因了！ SELinux 处于 Enforcing（强制）模式，这就是 rsync 报 Permission denied 的真正原因。**\n即使目录权限是 drwxrwxrwx（777），SELinux 的安全策略仍然会阻止 rsync 进程写入文件。\n解决方案 方案1：临时关闭 SELinux（快速验证） 在远程服务器 192.168.149.131 上执行：\n# 临时设置为 Permissive 模式（不需要重启）\rsudo setenforce 0\r# 验证\rgetenforce\r# 应该输出: Permissive 然后重新执行 rsync 命令，应该就能成功了。\n⚠️ 这只是临时生效，重启后会恢复为 Enforcing。\n方案2：永久关闭 SELinux # 编辑 SELinux 配置文件\rsudo vi /etc/selinux/config\r# 将 SELINUX=enforcing 改为：\rSELINUX=disabled\r# 重启服务器生效\rsudo reboot 方案3：设置正确的 SELinux 上下文（推荐，更安全） 如果不想关闭 SELinux，可以给目录设置正确的标签：\n# 查看当前目录的 SELinux 上下文\rls -Zd /export/data/node1_exe_backup_log/\r# 设置 rsync 可以写入的上下文\rsudo chcon -Rt public_content_rw_t /export/data/node1_exe_backup_log/\r# 如果 rsync 以守护进程方式运行，还需要：\rsudo setsebool -P rsync_full_access on 建议 先用方案1快速验证，确认是 SELinux 的问题后，再决定用方案2还是方案3长期解决。\n# 在远程服务器上执行\rsudo setenforce 0 然后回到本地重新执行 rsync 命令即可。\n这个是我按照，他的提示放权的步骤\n接下来，很明显，我再次发送文件，直接成功了\n注意，ai说的是下一次重启还会权限不足，因此我们需要修改配置文件\n将SELINUX修改为disabled就可以了\n然后，我们重启一起机器，是配置生效，就可以了。\n七,使⽤密码⽂件， 实现不需要输⼊密码 步骤⼀： 配置密码⽂件 echo '123456' \u003e /etc/rsync.password\rchmod 600 /etc/rsync.password\r注意： 权限必须是600，否则会报错 步骤⼆： 使⽤密码⽂件， 实现不需要输⼊密码 rsync -avz --password-file=/etc/rsync.password /export/data/logs/\rbackup_user@node2::node1_logs 查看node2机器\n八.使用主机名 这个应该修改配置文件hosts\necho \"192.168.149.128 node1 node1.itcast.cn\"\u003e\u003e/etc/hosts\recho \"192.168.149.131 node2 node2.itcast.cn\"\u003e\u003e/etc/hosts 九.使用脚本自动配置 1.安装使用的软件 安装第三方源 ⾸先启⽤EPEL仓库：\rdnf install epel-release 安装监视软件 安装inotify-tools\rdnf install -y inotify-tools 2.编写脚本 1.vi /root/real_time_sync.sh 创建sh脚本文件\n#!/bin/bash\r# 定义源⽬录和⽬标⽬录（⽬标⽬录是远程服务器的⽬录）\rSOURCE_DIR=\"/export/data/logs\"\rTARGET_DIR=\"root@192.168.88.102:/export/data/node1_exe_backup_log\" # 替换为⽬\r标服务器的⽤⼾名和⽬录\r# ⽇志⽂件\rLOG_FILE=\"/var/log/rsync_realtime_sync.log\"\r# 使⽤inotifywait监听${WATCH_DIR}⽬录中的⽂件变化\rinotifywait -m -r -e modify,create,delete,move \"${SOURCE_DIR}\" | while read\rpath action file; do\recho \"Detected ${action} on ${file} in ${path}. Starting rsync...\" \u003e\u003e\r\"$LOG_FILE\"\r# 执⾏rsync同步操作\rrsync -avz --port=873 --delete -e ssh \"${SOURCE_DIR}/\" \"${TARGET_DIR}\"\r\u003e\u003e \"$LOG_FILE\" 2\u003e\u00261\recho \"Sync completed for ${file} in ${path}.\" \u003e\u003e \"$LOG_FILE\"\rdone 3给文件加权以及启动脚本文件 4.最后测试一下 在node1的/export/data/logs 里面上传几个文件，然后再打开一个node1服务器开启tail -100f监听文件，查看是否有修改，以及node2是否也跟着变化呢\n最后，发现成功在node2里面显示，这个实验就完成了\n",
-  "wordCount" : "649",
-  "inLanguage": "zh-cn",
-  "datePublished": "2026-08-18T00:00:00Z",
-  "dateModified": "2026-08-18T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "My_blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://dsduyopg-github-io.pages.dev/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="https://dsduyopg-github-io.pages.dev/" accesskey="h" title="My_blog (Alt + H)">My_blog</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/" title="首页">
-                    <span>首页</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/posts/" title="文章">
-                    <span>文章</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/search/" title="搜索 (Alt &#43; /)" accesskey=/>
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/" title="专栏">
-                    <span>专栏</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/" title="草稿箱">
-                    <span>草稿箱</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
-            <a href="/">主页</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/%E4%B8%93%E6%A0%8F/">专栏</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">linux学习专栏</a>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-</nav>
-    <h1 class="post-title entry-hint-parent">
-      数据同步服务
-    </h1>
-    <div class="post-meta">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span>
-
-</div>
-  </header> 
-  <div class="post-content md-content">
-<details class="toc" open>
-  <summary accesskey="c" title="(Alt + C)">
-    <span class="title">目录</span>
-  </summary>
-  <div class="inner"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#一数据同步服务的基本介绍">一.数据同步服务的基本介绍</a>
-      <ul>
-        <li><a href="#1什么是数据同步">1.什么是数据同步？</a></li>
-        <li><a href="#2如何进行实时同步">2.如何进行实时同步</a></li>
-        <li><a href="#3特点">3.特点</a></li>
-        <li><a href="#4怎么实现仅同步变化的数据呢">4.怎么实现仅同步变化的数据呢？</a></li>
-        <li><a href="#5同步方式">5.同步方式</a></li>
-      </ul>
-    </li>
-    <li><a href="#二如何安装数据同步服务-dnf--y-install-rsync">二.如何安装数据同步服务： dnf -y install rsync</a></li>
-    <li><a href="#三综合案例">三.综合案例</a>
-      <ul>
-        <li><a href="#1-本地同步操作">1. 本地同步操作:</a></li>
-        <li><a href="#2远程同步操作">2.远程同步操作:</a></li>
-        <li><a href="#3综合案例实现定时与增量备份">3.综合案例,实现定时与增量备份</a></li>
-      </ul>
-    </li>
-    <li><a href="#四结合inotify实现数据实时同步">四.结合INOTIFY实现数据实时同步</a>
-      <ul>
-        <li><a href="#1对node2进行配置">1.对node2进行配置</a>
-          <ul>
-            <li><a href="#1创建用户">1.创建用户</a></li>
-            <li><a href="#2修改配置文件">2.修改配置文件</a></li>
-            <li><a href="#3创建密码件">3.创建密码⽂件</a></li>
-            <li><a href="#4-启动rsync服务">4. 启动rsync服务</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#五设置开机自启动">五.设置开机自启动</a>
-      <ul>
-        <li><a href="#1杀死进程">1.杀死进程</a></li>
-        <li><a href="#2设置开机启动">2.设置开机⾃启动</a></li>
-      </ul>
-    </li>
-    <li><a href="#六基于rsync服务完成动同步">六.基于RSYNC服务完成⼿动同步</a>
-      <ul>
-        <li><a href="#1格式">1.格式</a></li>
-        <li><a href="#2基于动同步式完成数据同步">2.基于⼿动同步⽅式完成数据同步</a></li>
-      </ul>
-    </li>
-    <li><a href="#3创建日志文件">3.创建日志文件</a>
-      <ul>
-        <li><a href="#4开始传输文件了">4.开始传输文件了</a>
-          <ul>
-            <li><a href="#解决方案">解决方案</a></li>
-          </ul>
-        </li>
-        <li><a href="#找到根本原因了">找到根本原因了！</a></li>
-        <li><a href="#解决方案-1">解决方案</a>
-          <ul>
-            <li><a href="#方案1临时关闭-selinux快速验证">方案1：临时关闭 SELinux（快速验证）</a></li>
-            <li><a href="#方案2永久关闭-selinux">方案2：永久关闭 SELinux</a></li>
-            <li><a href="#方案3设置正确的-selinux-上下文推荐更安全">方案3：设置正确的 SELinux 上下文（推荐，更安全）</a></li>
-            <li><a href="#建议">建议</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#七使密码件-实现不需要输密码">七,使⽤密码⽂件， 实现不需要输⼊密码</a></li>
-    <li><a href="#八使用主机名">八.使用主机名</a></li>
-    <li><a href="#九使用脚本自动配置">九.使用脚本自动配置</a>
-      <ul>
-        <li><a href="#1安装使用的软件">1.安装使用的软件</a></li>
-        <li><a href="#2编写脚本">2.编写脚本</a></li>
-        <li><a href="#3给文件加权以及启动脚本文件">3给文件加权以及启动脚本文件</a></li>
-        <li><a href="#4最后测试一下">4.最后测试一下</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
-</details>
-
-<h2 id="一数据同步服务的基本介绍">一.数据同步服务的基本介绍<a hidden class="anchor" aria-hidden="true" href="#一数据同步服务的基本介绍">#</a></h2>
-<h3 id="1什么是数据同步">1.什么是数据同步？<a hidden class="anchor" aria-hidden="true" href="#1什么是数据同步">#</a></h3>
-<p><code>指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程</code></p>
-<h3 id="2如何进行实时同步">2.如何进行实时同步<a hidden class="anchor" aria-hidden="true" href="#2如何进行实时同步">#</a></h3>
-<pre tabindex="0"><code>常⽤选项：
+• 可保持⽂件权限、时间戳、连接和等元数据。"><meta name=author content><link rel=canonical href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/><link crossorigin=anonymous href=/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg-github-io.pages.dev/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg-github-io.pages.dev/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg-github-io.pages.dev/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg-github-io.pages.dev/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"><meta property="og:site_name" content="My_blog"><meta property="og:title" content="数据同步服务"><meta property="og:description" content="目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
+2.如何进行实时同步 常⽤选项：• -v ：详细模式输出，显⽰传输过程中的⽂件信息。• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。• -z ：对备份的⽂件在传输时进⾏压缩处理。• -P ：显⽰进度条。• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh端⼝本地同步：rsync -av /src/directory/ /dest/directory/远程同步：rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/拉取远程数据到本地：rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="专栏"><meta property="article:published_time" content="2026-08-18T00:00:00+00:00"><meta property="article:modified_time" content="2026-08-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="数据同步服务"><meta name=twitter:description content="目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
+2.如何进行实时同步 常⽤选项：• -v ：详细模式输出，显⽰传输过程中的⽂件信息。• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。• -z ：对备份的⽂件在传输时进⾏压缩处理。• -P ：显⽰进度条。• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh端⼝本地同步：rsync -av /src/directory/ /dest/directory/远程同步：rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/拉取远程数据到本地：rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":3,"name":"数据同步服务","item":"https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"数据同步服务","name":"数据同步服务","description":" 目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程\n2.如何进行实时同步 常⽤选项：\r• -v ：详细模式输出，显⽰传输过程中的⽂件信息。\r• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。\r• -z ：对备份的⽂件在传输时进⾏压缩处理。\r• -P ：显⽰进度条。\r• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）\r• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh\r端⼝\r本地同步：\rrsync -av /src/directory/ /dest/directory/\r远程同步：\rrsync -avz /src/directory/ root@192.168.88.102:/dest/directory/\r拉取远程数据到本地：\rrsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。\n","keywords":[],"articleBody":" 目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程\n2.如何进行实时同步 常⽤选项：\r• -v ：详细模式输出，显⽰传输过程中的⽂件信息。\r• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。\r• -z ：对备份的⽂件在传输时进⾏压缩处理。\r• -P ：显⽰进度条。\r• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）\r• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh\r端⼝\r本地同步：\rrsync -av /src/directory/ /dest/directory/\r远程同步：\rrsync -avz /src/directory/ root@192.168.88.102:/dest/directory/\r拉取远程数据到本地：\rrsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。\n4.怎么实现仅同步变化的数据呢？ 1.会对需要同步的数据文件进行分块(底层)\r2.每一个数据块会基于数据生成校验码，只要数据发生变化 这个校验码也会发生改变\r3.在同步文件的时候， 只需要监测哪些数据块的校验码发生变化， 就可以指定那个块数据改变了， 此时仅需要同步这些变化数据块即可 5.同步方式 手动同步–\u003e 定时同步\n实时同步\n二.如何安装数据同步服务： dnf -y install rsync dnf install rsync -y 三.综合案例 1. 本地同步操作: 准备⼯作\r1- 在node1节点的 /usr/local⽬录下,创建⼀个nginx-1.8.0⽬录,并在此⽬录下构建⼀个\rhtml⽬录\r2- 在html⽬录下,创建index.html、favicon.ico、logo.png⽂件，以及assets⽬录\r3- 在assets⽬录下，创建index.js、index.css⽂件\r4- 给各个⽂件随机写⼊⼀些内容\r需求：对html⽬录进⾏同步操作。 将其同步到/usr/local/nginx-1.8.0/backup/下，并且如果\r源⽬录下已经删除的，在⽬标⽬录下也应该被删除 我们应当用rsync命令进行相应的操作，下面就是我操作出来的\n2.远程同步操作: 需求：对/usr/local/nginx-1.8.0/html⽬录进⾏操作，将其同步到node2的家⽬录的backup的⽬\r录中\r注意： 需要双⽅均安装rsync，同时配置了SSH密钥（否则需要输⼊密码） 这个案例也是没有什么太大的问题的，下面是我在这个案例中做出的\n3.综合案例,实现定时与增量备份 需求说明：\r在centos stream 9的 /var/log⽬录下， 存储了⼤量的关于系统的⽇志：如messages⽂件存储⼤量\r的系统⽇志信息，secure⽇志⽂件存储了⼤量的与系统安全的⽇志。请对此⽬录中的messages、\rsecure⽇志⽂件进⾏定时的备份到node2节点的/export/data/node1_backup_system_log⽬录中，\r要求每⽇凌晨2点进⾏备份⼀次。 在这案例之中我们可以使用定时任务进行操作的\n四.结合INOTIFY实现数据实时同步 ⾸先将⼆个路径分别创建出来， 便于后续演⽰\rnode1执⾏： mkdir -p /export/data/logs\rnode2执⾏： mkdir -p /export/data/node1_exe_backup_log 优势： ⾼效性: rsyncd 的守护进程模式可以避免每次连接都启动 SSH 进程，因此在某些情况下可能会⽐\rSSH ⽅式略微提⾼性能。\r简化配置: ⼀旦配置好 rsyncd，⽆需每次都输⼊ SSH 密码，适合⽤于定时备份等⾃动化任务。 缺点： 安全性问题: rsyncd 是基于开放端⼝的⽅式进⾏⽂件同步，默认情况下并不加密传输的数据。这使\r得数据传输过程可能暴露给中间⼈攻击（MITM）。虽然可以配置 rsyncd 使⽤ --password-file\r来限制访问，但仍然不如 SSH 安全。\r需要开放端⼝: 您需要在防⽕墙上开放 rsync 服务使⽤的端⼝（通常是 873），这可能增加潜在的\r安全⻛险。\r配置复杂: 需要在服务器上配置 rsyncd.conf，并管理模块、权限、⽤⼾等细节。 1.对node2进行配置 1.创建用户 在这里面呢，我们需要在node2中创建2个用户，一个是backup_user,一个是rsync用户\nuseradd backup_user\ruseradd rsync\rpasswd backup_user\rpasswd rsync 注意密码，都设置为123456\n2.修改配置文件 注意，这个配置文件要是在node2中修改的，以下是修改命令\n# 全局设置\ruid = rsync\rgid = rsync\ruse chroot = no\rport = 873\rmax connections = 200\rpid file = /var/run/rsyncd.pid\rlog file = /var/log/rsyncd.log\rtransfer logging = yes\rignore nonreadable = yes\r[node1_logs]\rpath = /export/data/node1_exe_backup_log\rcomment = Backup Directory\rread only = no\rsecrets file = /etc/rsyncd.passwd\rhosts allow = 192.168.149.0/24\rhosts deny = *\rauth users = backup_user 3.创建密码⽂件 echo \"backup_user:123456\" \u003e /etc/rsyncd.passwd\r# 设置密码⽂件的权限为600，确保该⽂件只有 RSYNC 服务可以读取\rchmod 600 /etc/rsyncd.passwd 4. 启动rsync服务 1 rsync --daemon 测试是否可以正常访问： 在node1执⾏\rrsync rsync://backup_user@192.168.88.102/node1_logs\r注意在node2需要开放端⼝：\rfirewall-cmd --permanent --add-port=873/tcp 五.设置开机自启动 1.杀死进程 -- 查看进程\rps -ef | grep rsync -- 查看进程ID\r-- 杀死进程\rkill -9 rsync的进程ID 2.设置开机⾃启动 由于rsync并不是⼀个系统服务（简单判断：通过systemctl启动和关闭的服务），故需要先 设置为系统服务后才可以设置\n修改配置文件 [Unit]\rDescription=Rsync Daemon\rAfter=network.target\r[Service]\rExecStart=/usr/bin/rsync --daemon --config=/etc/rsyncd.conf --no-detach\rExecReload=/bin/kill -HUP $MAINPID\rRestart=always\r[Install]\rWantedBy=multi-user.target\r特殊说明：\rExecReload=/bin/kill -HUP $MAINPID：通过发送 SIGHUP 信号，告诉 rsync 守护进程重新\r加载其配置⽂件，⽽⽆需停⽌并重新启动进程。 这个时候，我们需要把旧的日志文件给删掉 因为我们可能在操作的时候会产出一些错误的日志，就是由于这些错误的文件会导致，我们后续无法成功启动rsync服务\n就像我这样的错误一样，这个时候，我们就要学会查看日志文件了，因为一些错误会记录在日志里面\n其实，当我把旧的日志文件给删掉之后哦，成功了，应该是之前启动失败过一次，日志文件，没有删除，然后再次启动，通过对比这个日志文件，发现有问题，就无法启动，删除文件意思是把里面的的错误清理掉，之后相当于重新启动，所以可以成功启动后\n总结这次成功的逻辑\r这次能成功，其实是两个动作配合的结果：\r清理现场：rm -f /var/run/rsyncd.pid 清除了旧的工作证，扫清了路障。\r修正配置：你之前（或者在我们的排查中）修正了 /etc/rsyncd.conf 里的错误（比如把密码文件的路径写对了，或者模块路径建好了）。\r所以，并不是“这样修改就可以”这么简单，而是“清理了旧障碍 + 配置本身正确”共同作用的结果。\r💡 小贴士：以后遇到类似问题怎么办？\r下次如果再遇到服务启动失败，且提示 already running、permission denied 或 status=11，可以尝试这个“万能重启三部曲”：\r查日志：journalctl -xeu 服务名 看具体报错。\r删 pid 文件：rm -f /var/run/服务名.pid 清理旧状态。\r重启服务：systemctl restart 服务名。\r记住，日志是你最好的朋友，它能告诉你服务到底是哪里不舒服。现在你的 rsync 服务已经稳稳运行了，可以去客户端测试同步啦！ 六.基于RSYNC服务完成⼿动同步 1.格式 ⽤⼾名@主机地址::模块名称 或 rsync://⽤⼾名@主机地址/模块名称\r说明：\r模块名： 指的是配置到rsync.conf 中 【】的内容\r⽤⼾名： 指的是模块中指定的⽤⼾名， 如果没有指定， 可以是主机存在的⽤⼾名即可（前提\r是该⽤⼾需要有权限）\r例如：\rbackup_user@192.168.88.102::node1_logs 2.基于⼿动同步⽅式完成数据同步 rsync -avz /export/data/logs/ backup_user@node2::node1_logs 3.创建日志文件 在创建的日志文件里面录入数据\ncd /export/data/logs\rtouch log.txt \u0026\u0026 echo \"2491 797 1243124 9127\"\u003e\u003elog.txt 4.开始传输文件了 在这一步里面呢，我们需要注意上下文，把这个权限给关掉，否则，后面传输就像我一样不会成功的\n大家可以看到，我通过传送指令，无法发送成功，但是文件的权限都是开的，是最大的权限\n当时，我就比较迷了，不知道该如何办，然后我问了千问，它给予了我很大的帮助了，我明白了其实是我Linux的上下文的权限比较严格，需要将其关闭\n解决方案 以下是千问告诉我的\n找到根本原因了！ SELinux 处于 Enforcing（强制）模式，这就是 rsync 报 Permission denied 的真正原因。**\n即使目录权限是 drwxrwxrwx（777），SELinux 的安全策略仍然会阻止 rsync 进程写入文件。\n解决方案 方案1：临时关闭 SELinux（快速验证） 在远程服务器 192.168.149.131 上执行：\n# 临时设置为 Permissive 模式（不需要重启）\rsudo setenforce 0\r# 验证\rgetenforce\r# 应该输出: Permissive 然后重新执行 rsync 命令，应该就能成功了。\n⚠️ 这只是临时生效，重启后会恢复为 Enforcing。\n方案2：永久关闭 SELinux # 编辑 SELinux 配置文件\rsudo vi /etc/selinux/config\r# 将 SELINUX=enforcing 改为：\rSELINUX=disabled\r# 重启服务器生效\rsudo reboot 方案3：设置正确的 SELinux 上下文（推荐，更安全） 如果不想关闭 SELinux，可以给目录设置正确的标签：\n# 查看当前目录的 SELinux 上下文\rls -Zd /export/data/node1_exe_backup_log/\r# 设置 rsync 可以写入的上下文\rsudo chcon -Rt public_content_rw_t /export/data/node1_exe_backup_log/\r# 如果 rsync 以守护进程方式运行，还需要：\rsudo setsebool -P rsync_full_access on 建议 先用方案1快速验证，确认是 SELinux 的问题后，再决定用方案2还是方案3长期解决。\n# 在远程服务器上执行\rsudo setenforce 0 然后回到本地重新执行 rsync 命令即可。\n这个是我按照，他的提示放权的步骤\n接下来，很明显，我再次发送文件，直接成功了\n注意，ai说的是下一次重启还会权限不足，因此我们需要修改配置文件\n将SELINUX修改为disabled就可以了\n然后，我们重启一起机器，是配置生效，就可以了。\n七,使⽤密码⽂件， 实现不需要输⼊密码 步骤⼀： 配置密码⽂件 echo '123456' \u003e /etc/rsync.password\rchmod 600 /etc/rsync.password\r注意： 权限必须是600，否则会报错 步骤⼆： 使⽤密码⽂件， 实现不需要输⼊密码 rsync -avz --password-file=/etc/rsync.password /export/data/logs/\rbackup_user@node2::node1_logs 查看node2机器\n八.使用主机名 这个应该修改配置文件hosts\necho \"192.168.149.128 node1 node1.itcast.cn\"\u003e\u003e/etc/hosts\recho \"192.168.149.131 node2 node2.itcast.cn\"\u003e\u003e/etc/hosts 九.使用脚本自动配置 1.安装使用的软件 安装第三方源 ⾸先启⽤EPEL仓库：\rdnf install epel-release 安装监视软件 安装inotify-tools\rdnf install -y inotify-tools 2.编写脚本 1.vi /root/real_time_sync.sh 创建sh脚本文件\n#!/bin/bash\r# 定义源⽬录和⽬标⽬录（⽬标⽬录是远程服务器的⽬录）\rSOURCE_DIR=\"/export/data/logs\"\rTARGET_DIR=\"root@192.168.88.102:/export/data/node1_exe_backup_log\" # 替换为⽬\r标服务器的⽤⼾名和⽬录\r# ⽇志⽂件\rLOG_FILE=\"/var/log/rsync_realtime_sync.log\"\r# 使⽤inotifywait监听${WATCH_DIR}⽬录中的⽂件变化\rinotifywait -m -r -e modify,create,delete,move \"${SOURCE_DIR}\" | while read\rpath action file; do\recho \"Detected ${action} on ${file} in ${path}. Starting rsync...\" \u003e\u003e\r\"$LOG_FILE\"\r# 执⾏rsync同步操作\rrsync -avz --port=873 --delete -e ssh \"${SOURCE_DIR}/\" \"${TARGET_DIR}\"\r\u003e\u003e \"$LOG_FILE\" 2\u003e\u00261\recho \"Sync completed for ${file} in ${path}.\" \u003e\u003e \"$LOG_FILE\"\rdone 3给文件加权以及启动脚本文件 4.最后测试一下 在node1的/export/data/logs 里面上传几个文件，然后再打开一个node1服务器开启tail -100f监听文件，查看是否有修改，以及node2是否也跟着变化呢\n最后，发现成功在node2里面显示，这个实验就完成了\n","wordCount":"649","inLanguage":"zh-cn","datePublished":"2026-08-18T00:00:00Z","dateModified":"2026-08-18T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"},"publisher":{"@type":"Organization","name":"My_blog","logo":{"@type":"ImageObject","url":"https://dsduyopg-github-io.pages.dev/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg-github-io.pages.dev/ accesskey=h title="My_blog (Alt + H)">My_blog</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg-github-io.pages.dev/ title=首页><span>首页</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/posts/ title=文章><span>文章</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/search/ title="搜索 (Alt + /)" accesskey=/><span>搜索</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/ title=专栏><span>专栏</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/ title=草稿箱><span>草稿箱</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/%E4%B8%93%E6%A0%8F/>专栏</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/>linux学习专栏</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">数据同步服务</h1><div class=post-meta><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span></div></header><div class="post-content md-content"><details class=toc open><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><nav id=TableOfContents><ul><li><a href=#一数据同步服务的基本介绍>一.数据同步服务的基本介绍</a><ul><li><a href=#1什么是数据同步>1.什么是数据同步？</a></li><li><a href=#2如何进行实时同步>2.如何进行实时同步</a></li><li><a href=#3特点>3.特点</a></li><li><a href=#4怎么实现仅同步变化的数据呢>4.怎么实现仅同步变化的数据呢？</a></li><li><a href=#5同步方式>5.同步方式</a></li></ul></li><li><a href=#二如何安装数据同步服务-dnf--y-install-rsync>二.如何安装数据同步服务： dnf -y install rsync</a></li><li><a href=#三综合案例>三.综合案例</a><ul><li><a href=#1-本地同步操作>1. 本地同步操作:</a></li><li><a href=#2远程同步操作>2.远程同步操作:</a></li><li><a href=#3综合案例实现定时与增量备份>3.综合案例,实现定时与增量备份</a></li></ul></li><li><a href=#四结合inotify实现数据实时同步>四.结合INOTIFY实现数据实时同步</a><ul><li><a href=#1对node2进行配置>1.对node2进行配置</a><ul><li><a href=#1创建用户>1.创建用户</a></li><li><a href=#2修改配置文件>2.修改配置文件</a></li><li><a href=#3创建密码件>3.创建密码⽂件</a></li><li><a href=#4-启动rsync服务>4. 启动rsync服务</a></li></ul></li></ul></li><li><a href=#五设置开机自启动>五.设置开机自启动</a><ul><li><a href=#1杀死进程>1.杀死进程</a></li><li><a href=#2设置开机启动>2.设置开机⾃启动</a></li></ul></li><li><a href=#六基于rsync服务完成动同步>六.基于RSYNC服务完成⼿动同步</a><ul><li><a href=#1格式>1.格式</a></li><li><a href=#2基于动同步式完成数据同步>2.基于⼿动同步⽅式完成数据同步</a></li></ul></li><li><a href=#3创建日志文件>3.创建日志文件</a><ul><li><a href=#4开始传输文件了>4.开始传输文件了</a><ul><li><a href=#解决方案>解决方案</a></li></ul></li><li><a href=#找到根本原因了>找到根本原因了！</a></li><li><a href=#解决方案-1>解决方案</a><ul><li><a href=#方案1临时关闭-selinux快速验证>方案1：临时关闭 SELinux（快速验证）</a></li><li><a href=#方案2永久关闭-selinux>方案2：永久关闭 SELinux</a></li><li><a href=#方案3设置正确的-selinux-上下文推荐更安全>方案3：设置正确的 SELinux 上下文（推荐，更安全）</a></li><li><a href=#建议>建议</a></li></ul></li></ul></li><li><a href=#七使密码件-实现不需要输密码>七,使⽤密码⽂件， 实现不需要输⼊密码</a></li><li><a href=#八使用主机名>八.使用主机名</a></li><li><a href=#九使用脚本自动配置>九.使用脚本自动配置</a><ul><li><a href=#1安装使用的软件>1.安装使用的软件</a></li><li><a href=#2编写脚本>2.编写脚本</a></li><li><a href=#3给文件加权以及启动脚本文件>3给文件加权以及启动脚本文件</a></li><li><a href=#4最后测试一下>4.最后测试一下</a></li></ul></li></ul></nav></div></details><h2 id=一数据同步服务的基本介绍>一.数据同步服务的基本介绍<a hidden class=anchor aria-hidden=true href=#一数据同步服务的基本介绍>#</a></h2><h3 id=1什么是数据同步>1.什么是数据同步？<a hidden class=anchor aria-hidden=true href=#1什么是数据同步>#</a></h3><p><code>指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程</code></p><h3 id=2如何进行实时同步>2.如何进行实时同步<a hidden class=anchor aria-hidden=true href=#2如何进行实时同步>#</a></h3><pre tabindex=0><code>常⽤选项：
 • -v ：详细模式输出，显⽰传输过程中的⽂件信息。
 • -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。
 • -z ：对备份的⽂件在传输时进⾏压缩处理。
@@ -420,23 +121,13 @@ rsync -av /src/directory/ /dest/directory/
 rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/
 拉取远程数据到本地：
 rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
-</code></pre><h3 id="3特点">3.特点<a hidden class="anchor" aria-hidden="true" href="#3特点">#</a></h3>
-<p>• ⽀持增量同步：只传输发⽣变化的数据部分。
+</code></pre><h3 id=3特点>3.特点<a hidden class=anchor aria-hidden=true href=#3特点>#</a></h3><p>• ⽀持增量同步：只传输发⽣变化的数据部分。
 • ⽀持 SSH 加密传输。
-• 可保持⽂件权限、时间戳、连接和等元数据。</p>
-<h3 id="4怎么实现仅同步变化的数据呢">4.怎么实现仅同步变化的数据呢？<a hidden class="anchor" aria-hidden="true" href="#4怎么实现仅同步变化的数据呢">#</a></h3>
-<pre tabindex="0"><code>1.会对需要同步的数据文件进行分块(底层)
+• 可保持⽂件权限、时间戳、连接和等元数据。</p><h3 id=4怎么实现仅同步变化的数据呢>4.怎么实现仅同步变化的数据呢？<a hidden class=anchor aria-hidden=true href=#4怎么实现仅同步变化的数据呢>#</a></h3><pre tabindex=0><code>1.会对需要同步的数据文件进行分块(底层)
 2.每一个数据块会基于数据生成校验码，只要数据发生变化 这个校验码也会发生改变
 3.在同步文件的时候， 只需要监测哪些数据块的校验码发生变化， 就可以指定那个块数据改变了， 此时仅需要同步这些变化数据块即可
-</code></pre><h3 id="5同步方式">5.同步方式<a hidden class="anchor" aria-hidden="true" href="#5同步方式">#</a></h3>
-<p>手动同步–&gt; 定时同步</p>
-<p>实时同步</p>
-<h2 id="二如何安装数据同步服务-dnf--y-install-rsync">二.如何安装数据同步服务： dnf -y install rsync<a hidden class="anchor" aria-hidden="true" href="#二如何安装数据同步服务-dnf--y-install-rsync">#</a></h2>
-<pre tabindex="0"><code>dnf install rsync -y
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3797614224cc49d5a3fca322dfdf0d27.png"></p>
-<h2 id="三综合案例">三.综合案例<a hidden class="anchor" aria-hidden="true" href="#三综合案例">#</a></h2>
-<h3 id="1-本地同步操作">1. 本地同步操作:<a hidden class="anchor" aria-hidden="true" href="#1-本地同步操作">#</a></h3>
-<pre tabindex="0"><code>准备⼯作
+</code></pre><h3 id=5同步方式>5.同步方式<a hidden class=anchor aria-hidden=true href=#5同步方式>#</a></h3><p>手动同步–> 定时同步</p><p>实时同步</p><h2 id=二如何安装数据同步服务-dnf--y-install-rsync>二.如何安装数据同步服务： dnf -y install rsync<a hidden class=anchor aria-hidden=true href=#二如何安装数据同步服务-dnf--y-install-rsync>#</a></h2><pre tabindex=0><code>dnf install rsync -y
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3797614224cc49d5a3fca322dfdf0d27.png></p><h2 id=三综合案例>三.综合案例<a hidden class=anchor aria-hidden=true href=#三综合案例>#</a></h2><h3 id=1-本地同步操作>1. 本地同步操作:<a hidden class=anchor aria-hidden=true href=#1-本地同步操作>#</a></h3><pre tabindex=0><code>准备⼯作
 1- 在node1节点的 /usr/local⽬录下,创建⼀个nginx-1.8.0⽬录,并在此⽬录下构建⼀个
 html⽬录
 2- 在html⽬录下,创建index.html、favicon.ico、logo.png⽂件，以及assets⽬录
@@ -444,57 +135,32 @@ html⽬录
 4- 给各个⽂件随机写⼊⼀些内容
 需求：对html⽬录进⾏同步操作。 将其同步到/usr/local/nginx-1.8.0/backup/下，并且如果
 源⽬录下已经删除的，在⽬标⽬录下也应该被删除
-</code></pre><p><strong>我们应当用rsync命令进行相应的操作，下面就是我操作出来的</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f24199616bd64be2976432f00501fdf4.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ee2ff999ecb64ec7ba949b4a0a56e145.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8cc454aa2c71417ebc9f1743d69fef13.png"></p>
-<h3 id="2远程同步操作">2.远程同步操作:<a hidden class="anchor" aria-hidden="true" href="#2远程同步操作">#</a></h3>
-<pre tabindex="0"><code>需求：对/usr/local/nginx-1.8.0/html⽬录进⾏操作，将其同步到node2的家⽬录的backup的⽬
+</code></pre><p><strong>我们应当用rsync命令进行相应的操作，下面就是我操作出来的</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f24199616bd64be2976432f00501fdf4.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ee2ff999ecb64ec7ba949b4a0a56e145.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8cc454aa2c71417ebc9f1743d69fef13.png></p><h3 id=2远程同步操作>2.远程同步操作:<a hidden class=anchor aria-hidden=true href=#2远程同步操作>#</a></h3><pre tabindex=0><code>需求：对/usr/local/nginx-1.8.0/html⽬录进⾏操作，将其同步到node2的家⽬录的backup的⽬
 录中
 注意： 需要双⽅均安装rsync，同时配置了SSH密钥（否则需要输⼊密码）
-</code></pre><p><code>这个案例也是没有什么太大的问题的，下面是我在这个案例中做出的</code></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d911be837ebe4112a5553e21e165097d.png"></p>
-<h3 id="3综合案例实现定时与增量备份">3.综合案例,实现定时与增量备份<a hidden class="anchor" aria-hidden="true" href="#3综合案例实现定时与增量备份">#</a></h3>
-<pre tabindex="0"><code>需求说明：
+</code></pre><p><code>这个案例也是没有什么太大的问题的，下面是我在这个案例中做出的</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d911be837ebe4112a5553e21e165097d.png></p><h3 id=3综合案例实现定时与增量备份>3.综合案例,实现定时与增量备份<a hidden class=anchor aria-hidden=true href=#3综合案例实现定时与增量备份>#</a></h3><pre tabindex=0><code>需求说明：
 在centos stream 9的 /var/log⽬录下， 存储了⼤量的关于系统的⽇志：如messages⽂件存储⼤量
 的系统⽇志信息，secure⽇志⽂件存储了⼤量的与系统安全的⽇志。请对此⽬录中的messages、
 secure⽇志⽂件进⾏定时的备份到node2节点的/export/data/node1_backup_system_log⽬录中，
 要求每⽇凌晨2点进⾏备份⼀次。
-</code></pre><p>在这案例之中我们可以使用定时任务进行操作的</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/e43fc2f70dfe4cd6907dc89ceece0657.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f75359b85d11467499f187989fb51ff5.png"></p>
-<h2 id="四结合inotify实现数据实时同步">四.结合INOTIFY实现数据实时同步<a hidden class="anchor" aria-hidden="true" href="#四结合inotify实现数据实时同步">#</a></h2>
-<pre tabindex="0"><code>⾸先将⼆个路径分别创建出来， 便于后续演⽰
+</code></pre><p>在这案例之中我们可以使用定时任务进行操作的</p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/e43fc2f70dfe4cd6907dc89ceece0657.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f75359b85d11467499f187989fb51ff5.png></p><h2 id=四结合inotify实现数据实时同步>四.结合INOTIFY实现数据实时同步<a hidden class=anchor aria-hidden=true href=#四结合inotify实现数据实时同步>#</a></h2><pre tabindex=0><code>⾸先将⼆个路径分别创建出来， 便于后续演⽰
 node1执⾏： mkdir -p /export/data/logs
 node2执⾏： mkdir -p /export/data/node1_exe_backup_log
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/48b53dc5870544e39fc4c082d68c6b12.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/84ef413258f549afb18c49aaee593a27.png"></p>
-<ul>
-<li>优势：</li>
-</ul>
-<pre tabindex="0"><code>⾼效性: rsyncd 的守护进程模式可以避免每次连接都启动 SSH 进程，因此在某些情况下可能会⽐
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/48b53dc5870544e39fc4c082d68c6b12.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/84ef413258f549afb18c49aaee593a27.png></p><ul><li>优势：</li></ul><pre tabindex=0><code>⾼效性: rsyncd 的守护进程模式可以避免每次连接都启动 SSH 进程，因此在某些情况下可能会⽐
 SSH ⽅式略微提⾼性能。
 简化配置: ⼀旦配置好 rsyncd，⽆需每次都输⼊ SSH 密码，适合⽤于定时备份等⾃动化任务。
-</code></pre><ul>
-<li>缺点：</li>
-</ul>
-<pre tabindex="0"><code>安全性问题: rsyncd 是基于开放端⼝的⽅式进⾏⽂件同步，默认情况下并不加密传输的数据。这使
+</code></pre><ul><li>缺点：</li></ul><pre tabindex=0><code>安全性问题: rsyncd 是基于开放端⼝的⽅式进⾏⽂件同步，默认情况下并不加密传输的数据。这使
 得数据传输过程可能暴露给中间⼈攻击（MITM）。虽然可以配置 rsyncd 使⽤ --password-file
 来限制访问，但仍然不如 SSH 安全。
 需要开放端⼝: 您需要在防⽕墙上开放 rsync 服务使⽤的端⼝（通常是 873），这可能增加潜在的
 安全⻛险。
 配置复杂: 需要在服务器上配置 rsyncd.conf，并管理模块、权限、⽤⼾等细节。
-</code></pre><h3 id="1对node2进行配置">1.对node2进行配置<a hidden class="anchor" aria-hidden="true" href="#1对node2进行配置">#</a></h3>
-<h4 id="1创建用户">1.创建用户<a hidden class="anchor" aria-hidden="true" href="#1创建用户">#</a></h4>
-<p><code>在这里面呢，我们需要在node2中创建2个用户，一个是backup_user,一个是rsync用户</code></p>
-<pre tabindex="0"><code>useradd backup_user
+</code></pre><h3 id=1对node2进行配置>1.对node2进行配置<a hidden class=anchor aria-hidden=true href=#1对node2进行配置>#</a></h3><h4 id=1创建用户>1.创建用户<a hidden class=anchor aria-hidden=true href=#1创建用户>#</a></h4><p><code>在这里面呢，我们需要在node2中创建2个用户，一个是backup_user,一个是rsync用户</code></p><pre tabindex=0><code>useradd backup_user
 useradd rsync
 passwd backup_user
 passwd rsync
-</code></pre><p>注意密码，都设置为123456</p>
-<h4 id="2修改配置文件">2.修改配置文件<a hidden class="anchor" aria-hidden="true" href="#2修改配置文件">#</a></h4>
-<p><strong>注意，这个配置文件要是在node2中修改的，以下是修改命令</strong></p>
-<pre tabindex="0"><code># 全局设置
+</code></pre><p>注意密码，都设置为123456</p><h4 id=2修改配置文件>2.修改配置文件<a hidden class=anchor aria-hidden=true href=#2修改配置文件>#</a></h4><p><strong>注意，这个配置文件要是在node2中修改的，以下是修改命令</strong></p><pre tabindex=0><code># 全局设置
 uid = rsync
 gid = rsync
 use chroot = no
@@ -512,32 +178,20 @@ secrets file = /etc/rsyncd.passwd
 hosts allow = 192.168.149.0/24
 hosts deny = *
 auth users = backup_user
-</code></pre><h4 id="3创建密码件">3.创建密码⽂件<a hidden class="anchor" aria-hidden="true" href="#3创建密码件">#</a></h4>
-<pre tabindex="0"><code>echo &#34;backup_user:123456&#34; &gt; /etc/rsyncd.passwd
+</code></pre><h4 id=3创建密码件>3.创建密码⽂件<a hidden class=anchor aria-hidden=true href=#3创建密码件>#</a></h4><pre tabindex=0><code>echo &#34;backup_user:123456&#34; &gt; /etc/rsyncd.passwd
 # 设置密码⽂件的权限为600，确保该⽂件只有 RSYNC 服务可以读取
 chmod 600 /etc/rsyncd.passwd
-</code></pre><h4 id="4-启动rsync服务">4. 启动rsync服务<a hidden class="anchor" aria-hidden="true" href="#4-启动rsync服务">#</a></h4>
-<pre tabindex="0"><code>1 rsync --daemon
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/58dee05eaabd4dc49891471c76545a6b.png"></p>
-<pre tabindex="0"><code>测试是否可以正常访问： 在node1执⾏
+</code></pre><h4 id=4-启动rsync服务>4. 启动rsync服务<a hidden class=anchor aria-hidden=true href=#4-启动rsync服务>#</a></h4><pre tabindex=0><code>1 rsync --daemon
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/58dee05eaabd4dc49891471c76545a6b.png></p><pre tabindex=0><code>测试是否可以正常访问： 在node1执⾏
 rsync rsync://backup_user@192.168.88.102/node1_logs
 注意在node2需要开放端⼝：
 firewall-cmd --permanent --add-port=873/tcp
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d1989d021bb6426380e6f51e57bf0034.png"></p>
-<h2 id="五设置开机自启动">五.设置开机自启动<a hidden class="anchor" aria-hidden="true" href="#五设置开机自启动">#</a></h2>
-<h3 id="1杀死进程">1.杀死进程<a hidden class="anchor" aria-hidden="true" href="#1杀死进程">#</a></h3>
-<pre tabindex="0"><code>-- 查看进程
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d1989d021bb6426380e6f51e57bf0034.png></p><h2 id=五设置开机自启动>五.设置开机自启动<a hidden class=anchor aria-hidden=true href=#五设置开机自启动>#</a></h2><h3 id=1杀死进程>1.杀死进程<a hidden class=anchor aria-hidden=true href=#1杀死进程>#</a></h3><pre tabindex=0><code>-- 查看进程
 ps -ef | grep rsync -- 查看进程ID
 -- 杀死进程
 kill -9 rsync的进程ID
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/fcd3fe2f9e22479d8e444903657b882b.png"></p>
-<h3 id="2设置开机启动">2.设置开机⾃启动<a hidden class="anchor" aria-hidden="true" href="#2设置开机启动">#</a></h3>
-<p>由于rsync并不是⼀个系统服务（简单判断：通过systemctl启动和关闭的服务），故需要先
-设置为系统服务后才可以设置</p>
-<ul>
-<li>修改配置文件</li>
-</ul>
-<pre tabindex="0"><code>[Unit]
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/fcd3fe2f9e22479d8e444903657b882b.png></p><h3 id=2设置开机启动>2.设置开机⾃启动<a hidden class=anchor aria-hidden=true href=#2设置开机启动>#</a></h3><p>由于rsync并不是⼀个系统服务（简单判断：通过systemctl启动和关闭的服务），故需要先
+设置为系统服务后才可以设置</p><ul><li>修改配置文件</li></ul><pre tabindex=0><code>[Unit]
 Description=Rsync Daemon
 After=network.target
 [Service]
@@ -549,16 +203,7 @@ WantedBy=multi-user.target
 特殊说明：
 ExecReload=/bin/kill -HUP $MAINPID：通过发送 SIGHUP 信号，告诉 rsync 守护进程重新
 加载其配置⽂件，⽽⽆需停⽌并重新启动进程。
-</code></pre><ul>
-<li>这个时候，我们需要把旧的日志文件给删掉</li>
-</ul>
-<p><code>因为我们可能在操作的时候会产出一些错误的日志，就是由于这些错误的文件会导致，我们后续无法成功启动rsync服务</code></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/0f536eb514064a138a47535825883933.png"></p>
-<p><strong>就像我这样的错误一样，这个时候，我们就要学会查看日志文件了，因为一些错误会记录在日志里面</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/5022578e0a2041e0bf82f35ec95129eb.png"></p>
-<p><strong>其实，当我把旧的日志文件给删掉之后哦，成功了，应该是之前启动失败过一次，日志文件，没有删除，然后再次启动，通过对比这个日志文件，发现有问题，就无法启动，删除文件意思是把里面的的错误清理掉，之后相当于重新启动，所以可以成功启动后</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f9265c47416648689835d494fc49a1b0.png"></p>
-<pre tabindex="0"><code>总结这次成功的逻辑
+</code></pre><ul><li>这个时候，我们需要把旧的日志文件给删掉</li></ul><p><code>因为我们可能在操作的时候会产出一些错误的日志，就是由于这些错误的文件会导致，我们后续无法成功启动rsync服务</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/0f536eb514064a138a47535825883933.png></p><p><strong>就像我这样的错误一样，这个时候，我们就要学会查看日志文件了，因为一些错误会记录在日志里面</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/5022578e0a2041e0bf82f35ec95129eb.png></p><p><strong>其实，当我把旧的日志文件给删掉之后哦，成功了，应该是之前启动失败过一次，日志文件，没有删除，然后再次启动，通过对比这个日志文件，发现有问题，就无法启动，删除文件意思是把里面的的错误清理掉，之后相当于重新启动，所以可以成功启动后</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f9265c47416648689835d494fc49a1b0.png></p><pre tabindex=0><code>总结这次成功的逻辑
 
 这次能成功，其实是两个动作配合的结果：
 
@@ -579,48 +224,23 @@ ExecReload=/bin/kill -HUP $MAINPID：通过发送 SIGHUP 信号，告诉 rsync �
 重启服务：systemctl restart 服务名。
 
 记住，日志是你最好的朋友，它能告诉你服务到底是哪里不舒服。现在你的 rsync 服务已经稳稳运行了，可以去客户端测试同步啦！
-</code></pre><h2 id="六基于rsync服务完成动同步">六.基于RSYNC服务完成⼿动同步<a hidden class="anchor" aria-hidden="true" href="#六基于rsync服务完成动同步">#</a></h2>
-<h3 id="1格式">1.格式<a hidden class="anchor" aria-hidden="true" href="#1格式">#</a></h3>
-<pre tabindex="0"><code>⽤⼾名@主机地址::模块名称 或 rsync://⽤⼾名@主机地址/模块名称
+</code></pre><h2 id=六基于rsync服务完成动同步>六.基于RSYNC服务完成⼿动同步<a hidden class=anchor aria-hidden=true href=#六基于rsync服务完成动同步>#</a></h2><h3 id=1格式>1.格式<a hidden class=anchor aria-hidden=true href=#1格式>#</a></h3><pre tabindex=0><code>⽤⼾名@主机地址::模块名称 或 rsync://⽤⼾名@主机地址/模块名称
 说明：
 模块名： 指的是配置到rsync.conf 中 【】的内容
 ⽤⼾名： 指的是模块中指定的⽤⼾名， 如果没有指定， 可以是主机存在的⽤⼾名即可（前提
 是该⽤⼾需要有权限）
 例如：
 backup_user@192.168.88.102::node1_logs
-</code></pre><h3 id="2基于动同步式完成数据同步">2.基于⼿动同步⽅式完成数据同步<a hidden class="anchor" aria-hidden="true" href="#2基于动同步式完成数据同步">#</a></h3>
-<pre tabindex="0"><code>rsync -avz /export/data/logs/ backup_user@node2::node1_logs
-</code></pre><h2 id="3创建日志文件">3.创建日志文件<a hidden class="anchor" aria-hidden="true" href="#3创建日志文件">#</a></h2>
-<p><code>在创建的日志文件里面录入数据</code></p>
-<pre tabindex="0"><code>cd /export/data/logs
+</code></pre><h3 id=2基于动同步式完成数据同步>2.基于⼿动同步⽅式完成数据同步<a hidden class=anchor aria-hidden=true href=#2基于动同步式完成数据同步>#</a></h3><pre tabindex=0><code>rsync -avz /export/data/logs/ backup_user@node2::node1_logs
+</code></pre><h2 id=3创建日志文件>3.创建日志文件<a hidden class=anchor aria-hidden=true href=#3创建日志文件>#</a></h2><p><code>在创建的日志文件里面录入数据</code></p><pre tabindex=0><code>cd /export/data/logs
 touch log.txt &amp;&amp; echo &#34;2491 797 1243124 9127&#34;&gt;&gt;log.txt
-</code></pre><h3 id="4开始传输文件了">4.开始传输文件了<a hidden class="anchor" aria-hidden="true" href="#4开始传输文件了">#</a></h3>
-<p><strong>在这一步里面呢，我们需要注意上下文，把这个权限给关掉，否则，后面传输就像我一样不会成功的</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/26b6693e93574eaeb136bf6615bb7331.png"></p>
-<p><strong>大家可以看到，我通过传送指令，无法发送成功，但是文件的权限都是开的，是最大的权限</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/7bd43237e0a94a5e85851f1e8df8701f.png"></p>
-<p><strong>当时，我就比较迷了，不知道该如何办，然后我问了千问，它给予了我很大的帮助了，我明白了其实是我Linux的上下文的权限比较严格，需要将其关闭</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3145c85ef4da49e682952ce1a8cd7c91.png"></p>
-<h4 id="解决方案">解决方案<a hidden class="anchor" aria-hidden="true" href="#解决方案">#</a></h4>
-<p>以下是千问告诉我的</p>
-<h3 id="找到根本原因了">找到根本原因了！<a hidden class="anchor" aria-hidden="true" href="#找到根本原因了">#</a></h3>
-<p><strong>SELinux 处于 <code>Enforcing</code>（强制）模式</strong>，这就是 rsync 报 Permission denied 的真正原因。**</p>
-<p><strong>即使目录权限是 <code>drwxrwxrwx</code>（777），SELinux 的安全策略仍然会阻止 rsync 进程写入文件。</strong></p>
-<h3 id="解决方案-1">解决方案<a hidden class="anchor" aria-hidden="true" href="#解决方案-1">#</a></h3>
-<h4 id="方案1临时关闭-selinux快速验证">方案1：临时关闭 SELinux（快速验证）<a hidden class="anchor" aria-hidden="true" href="#方案1临时关闭-selinux快速验证">#</a></h4>
-<p>在远程服务器 <strong>192.168.149.131</strong> 上执行：</p>
-<pre tabindex="0"><code># 临时设置为 Permissive 模式（不需要重启）
+</code></pre><h3 id=4开始传输文件了>4.开始传输文件了<a hidden class=anchor aria-hidden=true href=#4开始传输文件了>#</a></h3><p><strong>在这一步里面呢，我们需要注意上下文，把这个权限给关掉，否则，后面传输就像我一样不会成功的</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/26b6693e93574eaeb136bf6615bb7331.png></p><p><strong>大家可以看到，我通过传送指令，无法发送成功，但是文件的权限都是开的，是最大的权限</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/7bd43237e0a94a5e85851f1e8df8701f.png></p><p><strong>当时，我就比较迷了，不知道该如何办，然后我问了千问，它给予了我很大的帮助了，我明白了其实是我Linux的上下文的权限比较严格，需要将其关闭</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3145c85ef4da49e682952ce1a8cd7c91.png></p><h4 id=解决方案>解决方案<a hidden class=anchor aria-hidden=true href=#解决方案>#</a></h4><p>以下是千问告诉我的</p><h3 id=找到根本原因了>找到根本原因了！<a hidden class=anchor aria-hidden=true href=#找到根本原因了>#</a></h3><p><strong>SELinux 处于 <code>Enforcing</code>（强制）模式</strong>，这就是 rsync 报 Permission denied 的真正原因。**</p><p><strong>即使目录权限是 <code>drwxrwxrwx</code>（777），SELinux 的安全策略仍然会阻止 rsync 进程写入文件。</strong></p><h3 id=解决方案-1>解决方案<a hidden class=anchor aria-hidden=true href=#解决方案-1>#</a></h3><h4 id=方案1临时关闭-selinux快速验证>方案1：临时关闭 SELinux（快速验证）<a hidden class=anchor aria-hidden=true href=#方案1临时关闭-selinux快速验证>#</a></h4><p>在远程服务器 <strong>192.168.149.131</strong> 上执行：</p><pre tabindex=0><code># 临时设置为 Permissive 模式（不需要重启）
 sudo setenforce 0
 
 # 验证
 getenforce
 # 应该输出: Permissive
-</code></pre><p>然后重新执行 rsync 命令，应该就能成功了。</p>
-<blockquote>
-</blockquote>
-<p>⚠️ 这只是临时生效，重启后会恢复为 Enforcing。</p>
-<h4 id="方案2永久关闭-selinux">方案2：永久关闭 SELinux<a hidden class="anchor" aria-hidden="true" href="#方案2永久关闭-selinux">#</a></h4>
-<pre tabindex="0"><code># 编辑 SELinux 配置文件
+</code></pre><p>然后重新执行 rsync 命令，应该就能成功了。</p><blockquote></blockquote><p>⚠️ 这只是临时生效，重启后会恢复为 Enforcing。</p><h4 id=方案2永久关闭-selinux>方案2：永久关闭 SELinux<a hidden class=anchor aria-hidden=true href=#方案2永久关闭-selinux>#</a></h4><pre tabindex=0><code># 编辑 SELinux 配置文件
 sudo vi /etc/selinux/config
 
 # 将 SELINUX=enforcing 改为：
@@ -628,9 +248,7 @@ SELINUX=disabled
 
 # 重启服务器生效
 sudo reboot
-</code></pre><h4 id="方案3设置正确的-selinux-上下文推荐更安全">方案3：设置正确的 SELinux 上下文（推荐，更安全）<a hidden class="anchor" aria-hidden="true" href="#方案3设置正确的-selinux-上下文推荐更安全">#</a></h4>
-<p>如果不想关闭 SELinux，可以给目录设置正确的标签：</p>
-<pre tabindex="0"><code># 查看当前目录的 SELinux 上下文
+</code></pre><h4 id=方案3设置正确的-selinux-上下文推荐更安全>方案3：设置正确的 SELinux 上下文（推荐，更安全）<a hidden class=anchor aria-hidden=true href=#方案3设置正确的-selinux-上下文推荐更安全>#</a></h4><p>如果不想关闭 SELinux，可以给目录设置正确的标签：</p><pre tabindex=0><code># 查看当前目录的 SELinux 上下文
 ls -Zd /export/data/node1_exe_backup_log/
 
 # 设置 rsync 可以写入的上下文
@@ -638,63 +256,21 @@ sudo chcon -Rt public_content_rw_t /export/data/node1_exe_backup_log/
 
 # 如果 rsync 以守护进程方式运行，还需要：
 sudo setsebool -P rsync_full_access on
-</code></pre><h4 id="建议">建议<a hidden class="anchor" aria-hidden="true" href="#建议">#</a></h4>
-<p><strong>先用方案1快速验证</strong>，确认是 SELinux 的问题后，再决定用方案2还是方案3长期解决。</p>
-<pre tabindex="0"><code># 在远程服务器上执行
+</code></pre><h4 id=建议>建议<a hidden class=anchor aria-hidden=true href=#建议>#</a></h4><p><strong>先用方案1快速验证</strong>，确认是 SELinux 的问题后，再决定用方案2还是方案3长期解决。</p><pre tabindex=0><code># 在远程服务器上执行
 sudo setenforce 0
-</code></pre><p>然后回到本地重新执行 rsync 命令即可。</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8ac5ac380cb84c8b830486665919aec8.png"></p>
-<p>这个是我按照，他的提示放权的步骤</p>
-<p>接下来，很明显，我再次发送文件，直接成功了</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/c0fe09d45589427297a0a688bc37e0c6.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ed077686afe346e781c59d27d34c3cde.png"></p>
-<p>注意，ai说的是下一次重启还会权限不足，因此我们需要修改配置文件</p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/7d67a5255e75406eb847e4906821e88e.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f92ca092e180417783c914bd90e3baee.png"></p>
-<p>将SELINUX修改为disabled就可以了</p>
-<p><strong>然后，我们重启一起机器，是配置生效，就可以了。</strong></p>
-<h2 id="七使密码件-实现不需要输密码">七,使⽤密码⽂件， 实现不需要输⼊密码<a hidden class="anchor" aria-hidden="true" href="#七使密码件-实现不需要输密码">#</a></h2>
-<ul>
-<li>步骤⼀： 配置密码⽂件</li>
-</ul>
-<pre tabindex="0"><code>echo &#39;123456&#39; &gt; /etc/rsync.password
+</code></pre><p>然后回到本地重新执行 rsync 命令即可。</p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8ac5ac380cb84c8b830486665919aec8.png></p><p>这个是我按照，他的提示放权的步骤</p><p>接下来，很明显，我再次发送文件，直接成功了</p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/c0fe09d45589427297a0a688bc37e0c6.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ed077686afe346e781c59d27d34c3cde.png></p><p>注意，ai说的是下一次重启还会权限不足，因此我们需要修改配置文件</p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/7d67a5255e75406eb847e4906821e88e.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f92ca092e180417783c914bd90e3baee.png></p><p>将SELINUX修改为disabled就可以了</p><p><strong>然后，我们重启一起机器，是配置生效，就可以了。</strong></p><h2 id=七使密码件-实现不需要输密码>七,使⽤密码⽂件， 实现不需要输⼊密码<a hidden class=anchor aria-hidden=true href=#七使密码件-实现不需要输密码>#</a></h2><ul><li>步骤⼀： 配置密码⽂件</li></ul><pre tabindex=0><code>echo &#39;123456&#39; &gt; /etc/rsync.password
 chmod 600 /etc/rsync.password
 注意： 权限必须是600，否则会报错
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/857d0a1c14e14c63a92ea65f3571f9c3.png">
-<img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ca3460eb710546a2931a082130f17f37.png"></p>
-<ul>
-<li>步骤⼆： 使⽤密码⽂件， 实现不需要输⼊密码</li>
-</ul>
-<pre tabindex="0"><code>rsync -avz --password-file=/etc/rsync.password /export/data/logs/
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/857d0a1c14e14c63a92ea65f3571f9c3.png>
+<img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/ca3460eb710546a2931a082130f17f37.png></p><ul><li>步骤⼆： 使⽤密码⽂件， 实现不需要输⼊密码</li></ul><pre tabindex=0><code>rsync -avz --password-file=/etc/rsync.password /export/data/logs/
 backup_user@node2::node1_logs
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/a048b4827a54434d90f3e299169ea317.png"></p>
-<p><strong>查看node2机器</strong></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8d3571647e68489d9f3a1b3b008bc18e.png"></p>
-<h2 id="八使用主机名">八.使用主机名<a hidden class="anchor" aria-hidden="true" href="#八使用主机名">#</a></h2>
-<p><code>这个应该修改配置文件hosts</code></p>
-<pre tabindex="0"><code>echo &#34;192.168.149.128 node1 node1.itcast.cn&#34;&gt;&gt;/etc/hosts
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/a048b4827a54434d90f3e299169ea317.png></p><p><strong>查看node2机器</strong></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/8d3571647e68489d9f3a1b3b008bc18e.png></p><h2 id=八使用主机名>八.使用主机名<a hidden class=anchor aria-hidden=true href=#八使用主机名>#</a></h2><p><code>这个应该修改配置文件hosts</code></p><pre tabindex=0><code>echo &#34;192.168.149.128 node1 node1.itcast.cn&#34;&gt;&gt;/etc/hosts
 echo &#34;192.168.149.131 node2 node2.itcast.cn&#34;&gt;&gt;/etc/hosts
-</code></pre><p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3303e84e3cbe403e9965e5879badb87e.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f1130277e6c8406db368a0cdefc6898c.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d1a4486386194c5abf53c8b1c2081410.png"></p>
-<h2 id="九使用脚本自动配置">九.使用脚本自动配置<a hidden class="anchor" aria-hidden="true" href="#九使用脚本自动配置">#</a></h2>
-<h3 id="1安装使用的软件">1.安装使用的软件<a hidden class="anchor" aria-hidden="true" href="#1安装使用的软件">#</a></h3>
-<ul>
-<li>安装第三方源</li>
-</ul>
-<pre tabindex="0"><code>⾸先启⽤EPEL仓库：
+</code></pre><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/3303e84e3cbe403e9965e5879badb87e.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/f1130277e6c8406db368a0cdefc6898c.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/d1a4486386194c5abf53c8b1c2081410.png></p><h2 id=九使用脚本自动配置>九.使用脚本自动配置<a hidden class=anchor aria-hidden=true href=#九使用脚本自动配置>#</a></h2><h3 id=1安装使用的软件>1.安装使用的软件<a hidden class=anchor aria-hidden=true href=#1安装使用的软件>#</a></h3><ul><li>安装第三方源</li></ul><pre tabindex=0><code>⾸先启⽤EPEL仓库：
 dnf install epel-release
-</code></pre><ul>
-<li>安装监视软件</li>
-</ul>
-<pre tabindex="0"><code>安装inotify-tools
+</code></pre><ul><li>安装监视软件</li></ul><pre tabindex=0><code>安装inotify-tools
 dnf install -y inotify-tools
-</code></pre><h3 id="2编写脚本">2.编写脚本<a hidden class="anchor" aria-hidden="true" href="#2编写脚本">#</a></h3>
-<ul>
-<li>1.vi /root/real_time_sync.sh</li>
-</ul>
-<p>创建sh脚本文件</p>
-<pre tabindex="0"><code>#!/bin/bash
+</code></pre><h3 id=2编写脚本>2.编写脚本<a hidden class=anchor aria-hidden=true href=#2编写脚本>#</a></h3><ul><li>1.vi /root/real_time_sync.sh</li></ul><p>创建sh脚本文件</p><pre tabindex=0><code>#!/bin/bash
 # 定义源⽬录和⽬标⽬录（⽬标⽬录是远程服务器的⽬录）
 SOURCE_DIR=&#34;/export/data/logs&#34;
 TARGET_DIR=&#34;root@192.168.88.102:/export/data/node1_exe_backup_log&#34; # 替换为⽬
@@ -711,368 +287,13 @@ rsync -avz --port=873 --delete -e ssh &#34;${SOURCE_DIR}/&#34; &#34;${TARGET_DIR
 &gt;&gt; &#34;$LOG_FILE&#34; 2&gt;&amp;1
 echo &#34;Sync completed for ${file} in ${path}.&#34; &gt;&gt; &#34;$LOG_FILE&#34;
 done
-</code></pre><h3 id="3给文件加权以及启动脚本文件">3给文件加权以及启动脚本文件<a hidden class="anchor" aria-hidden="true" href="#3给文件加权以及启动脚本文件">#</a></h3>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/de9435f016924ec7a193db2c87b0f598.png"></p>
-<h3 id="4最后测试一下">4.最后测试一下<a hidden class="anchor" aria-hidden="true" href="#4最后测试一下">#</a></h3>
-<p><code>在node1的/export/data/logs 里面上传几个文件，然后再打开一个node1服务器开启tail -100f监听文件，查看是否有修改，以及node2是否也跟着变化呢</code></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/bc1f71e8ed5b48b184532f40235ca967.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/00130a2aac85493ba709bdcd56ab6698.png"></p>
-<p><img alt="在这里插入图片描述" loading="lazy" src="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/983dcb33b3f14c33990ab42f6cabe000.png"></p>
-<p><strong>最后，发现成功在node2里面显示，这个实验就完成了</strong></p>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/">
-    <span class="title">« 上一页</span>
-    <span>数据结构链表当中的头结点问题</span>
-  </a>
-  <a class="next" href="https://dsduyopg-github-io.pages.dev/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/">
-    <span class="title">下一页 »</span>
-    <span>数学---等价无穷小问题</span>
-  </a>
-</nav>
-
-
-<ul class="share-buttons">
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 数据同步服务 on x"
-            href="https://x.com/intent/tweet/?text=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f&amp;hashtags=">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 数据同步服务 on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f&amp;title=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1&amp;summary=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1&amp;source=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 数据同步服务 on reddit"
-            href="https://reddit.com/submit?url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f&title=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 数据同步服务 on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 数据同步服务 on whatsapp"
-            href="https://api.whatsapp.com/send?text=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1%20-%20https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 数据同步服务 on telegram"
-            href="https://telegram.me/share/url?text=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f">
-            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share 数据同步服务 on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1&u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f">
-            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
-                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
-                <path
-                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
-            </svg>
-        </a>
-    </li>
-</ul>
-
-  </footer>
-<div class="comments">
-  <h2>评论</h2>
-  <div class="like-box">
-    <button class="like-btn" type="button" id="cf-like-btn" title="点赞">
-      <span class="like-heart">♡</span>
-      <span class="like-count">0</span>
-    </button>
-  </div>
-  <div class="giscus" id="giscus-container"></div>
-  <script src="https://giscus.app/client.js"
-          data-repo="dsduyopg/dsduyopg.github.io"
-          data-repo-id="R_kgDOT78MPw"
-          data-category="General"
-          data-category-id="DIC_kwDOT78MP84DEF4E"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="bottom"
-          data-theme="preferred_color_scheme"
-          data-lang="zh-CN"
-          crossorigin="anonymous"
-          async>
-  </script>
-  <noscript>请启用 JavaScript 查看评论。</noscript>
-</div>
-
-<script>
-  (function () {
-    
-    
-    
-    var API_BASE = 'https://blog-like.629017960.workers.dev/api/like';
-    
-
-    var btn = document.getElementById('cf-like-btn');
-    if (!btn) return;
-    var heart = btn.querySelector('.like-heart');
-    var num = btn.querySelector('.like-count');
-    var path = location.pathname;
-    var liked = false;
-
-    function setCount(n) {
-      num.textContent = n;
-      heart.textContent = liked ? '♥' : '♡';
-      btn.classList.toggle('liked', liked);
-    }
-
-    
-    function loadCount() {
-      fetch(API_BASE + '?path=' + encodeURIComponent(path))
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          if (typeof d.count === 'number') {
-            liked = !!d.liked;
-            setCount(d.count);
-          }
-        })
-        .catch(function () {});
-    }
-
-    
-    btn.addEventListener('click', function () {
-      fetch(API_BASE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ path: path })
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          if (typeof d.count === 'number') {
-            liked = !!d.liked;
-            setCount(d.count);
-          }
-          if (d.already) {
-            alert('你已经点过赞啦 ♥');
-          }
-        })
-        .catch(function () {
-          alert('点赞失败，请稍后再试');
-        });
-    });
-
-    loadCount();
-  })();
-</script>
-
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="https://dsduyopg-github-io.pages.dev/">My_blog</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-<div class="busuanzi">
-  本站访客 <span id="busuanzi_value_site_uv"></span> ·
-  访问量 <span id="busuanzi_value_site_pv"></span> · 本文阅读 <span id="busuanzi_value_page_pv"></span>
-</div>
-
-
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script>
-
-<script>
-  (function () {
-    var keyViews = 'blog_views';
-    var keyTitles = 'blog_titles';
-    var isArticle = !!document.querySelector('.post-single');
-    var hotEl = document.getElementById('hot-posts');
-
-    if (isArticle) {
-      var path = location.pathname;
-      var title = (document.title || '').replace(/\s*\|.*$/, '').trim();
-      if (!path || !title) return;
-      var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
-      var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
-      views[path] = (views[path] || 0) + 1;
-      titles[path] = title;
-      localStorage.setItem(keyViews, JSON.stringify(views));
-      localStorage.setItem(keyTitles, JSON.stringify(titles));
-      return;
-    }
-
-    if (!hotEl) return;
-    if (hotEl.children.length) return; 
-    var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
-    var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
-    var rows = Object.keys(views)
-      .filter(function (p) {
-        return p.indexOf('/posts/') === 0
-          && p.indexOf('/page/') === -1
-          && titles[p]
-          && titles[p] !== '我的博客';
-      })
-      .sort(function (a, b) { return views[b] - views[a]; })
-      .slice(0, 5);
-    if (!rows.length) return;
-
-    var html = '<h3>热门文章</h3><ol class="hot-list">';
-    rows.forEach(function (p) {
-      html += '<li><a href="' + p + '">' + titles[p] + '</a></li>';
-    });
-    html += '</ol>';
-    hotEl.innerHTML = html;
-  })();
-</script>
-
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = '复制';
-
-        function copyingDone() {
-            copybutton.innerHTML = '已复制！';
-            setTimeout(() => {
-                copybutton.innerHTML = '复制';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+</code></pre><h3 id=3给文件加权以及启动脚本文件>3给文件加权以及启动脚本文件<a hidden class=anchor aria-hidden=true href=#3给文件加权以及启动脚本文件>#</a></h3><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/de9435f016924ec7a193db2c87b0f598.png></p><h3 id=4最后测试一下>4.最后测试一下<a hidden class=anchor aria-hidden=true href=#4最后测试一下>#</a></h3><p><code>在node1的/export/data/logs 里面上传几个文件，然后再打开一个node1服务器开启tail -100f监听文件，查看是否有修改，以及node2是否也跟着变化呢</code></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/bc1f71e8ed5b48b184532f40235ca967.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/00130a2aac85493ba709bdcd56ab6698.png></p><p><img alt=在这里插入图片描述 loading=lazy src=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/images/983dcb33b3f14c33990ab42f6cabe000.png></p><p><strong>最后，发现成功在node2里面显示，这个实验就完成了</strong></p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%93%BE%E8%A1%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E5%A4%B4%E7%BB%93%E7%82%B9%E9%97%AE%E9%A2%98/><span class=title>« 上一页</span>
+<span>数据结构链表当中的头结点问题</span>
+</a><a class=next href=https://dsduyopg-github-io.pages.dev/posts/%E6%95%B0%E5%AD%A6---%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%97%AE%E9%A2%98/><span class=title>下一页 »</span>
+<span>数学---等价无穷小问题</span></a></nav><ul class=share-buttons><li><a target=_blank rel="noopener noreferrer" aria-label="share 数据同步服务 on x" href="https://x.com/intent/tweet/?text=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f&amp;hashtags="><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446C483.971.0 512 28.03 512 62.554zM269.951 190.75 182.567 75.216H56L207.216 272.95 63.9 436.783h61.366L235.9 310.383l96.667 126.4H456L298.367 228.367l134-153.151H371.033zM127.633 110h36.468l219.38 290.065H349.5z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 数据同步服务 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f&amp;title=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1&amp;summary=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1&amp;source=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 数据同步服务 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f&title=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 数据同步服务 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 数据同步服务 on whatsapp" href="https://api.whatsapp.com/send?text=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1%20-%20https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 数据同步服务 on telegram" href="https://telegram.me/share/url?text=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f"><svg viewBox="2 2 28 28" height="30" width="30" fill="currentColor"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share 数据同步服务 on ycombinator" href="https://news.ycombinator.com/submitlink?t=%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5%e6%9c%8d%e5%8a%a1&u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E4%25B8%2593%25E6%25A0%258F%2flinux%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25B8%2593%25E6%25A0%258F%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%2590%258C%25E6%25AD%25A5%25E6%259C%258D%25E5%258A%25A1%2f"><svg width="30" height="30" viewBox="0 0 512 512" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446zM183.8767 87.9921h-62.034L230.6673 292.4508V424.0079h50.6655V292.4508L390.1575 87.9921H328.1233L256 238.2489z"/></svg></a></li></ul></footer><div class=comments><h2>评论</h2><div class=like-box><button class=like-btn type=button id=cf-like-btn title=点赞>
+<span class=like-heart>♡</span>
+<span class=like-count>0</span></button></div><div class=giscus id=giscus-container></div><script src=https://giscus.app/client.js data-repo=dsduyopg/dsduyopg.github.io data-repo-id=R_kgDOT78MPw data-category=General data-category-id=DIC_kwDOT78MP84DEF4E data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=zh-CN crossorigin=anonymous async></script><noscript>请启用 JavaScript 查看评论。</noscript></div><script>(function(){var t,n,o,i,s="https://blog-like.629017960.workers.dev/api/like",e=document.getElementById("cf-like-btn");if(!e)return;o=e.querySelector(".like-heart"),i=e.querySelector(".like-count"),n=location.pathname,t=!1;function a(n){i.textContent=n,o.textContent=t?"♥":"♡",e.classList.toggle("liked",t)}function r(){fetch(s+"?path="+encodeURIComponent(n)).then(function(e){return e.json()}).then(function(e){typeof e.count=="number"&&(t=!!e.liked,a(e.count))}).catch(function(){})}e.addEventListener("click",function(){fetch(s,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({path:n})}).then(function(e){return e.json()}).then(function(e){typeof e.count=="number"&&(t=!!e.liked,a(e.count)),e.already&&alert("你已经点过赞啦 ♥")}).catch(function(){alert("点赞失败，请稍后再试")})}),r()})()</script></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg-github-io.pages.dev/>My_blog</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script><script>(function(){var e,t,n,s,r,c,o="blog_views",i="blog_titles",l=!!document.querySelector(".post-single"),a=document.getElementById("hot-posts");if(l){if(n=location.pathname,r=(document.title||"").replace(/\s*\|.*$/,"").trim(),!n||!r)return;e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),e[n]=(e[n]||0)+1,t[n]=r,localStorage.setItem(o,JSON.stringify(e)),localStorage.setItem(i,JSON.stringify(t));return}if(!a)return;if(a.children.length)return;if(e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),c=Object.keys(e).filter(function(e){return e.indexOf("/posts/")===0&&e.indexOf("/page/")===-1&&t[e]&&t[e]!=="我的博客"}).sort(function(t,n){return e[n]-e[t]}).slice(0,5),!c.length)return;s='<h3>热门文章</h3><ol class="hot-list">',c.forEach(function(e){s+='<li><a href="'+e+'">'+t[e]+"</a></li>"}),s+="</ol>",a.innerHTML=s})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

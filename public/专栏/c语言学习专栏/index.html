@@ -1,227 +1,28 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>C语言学习专栏 | My_blog</title>
-<meta name="keywords" content="">
-<meta name="description" content="C语言学习过程中的笔记与心得">
-<meta name="author" content="">
-<link rel="canonical" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css" integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://dsduyopg-github-io.pages.dev/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://dsduyopg-github-io.pages.dev/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://dsduyopg-github-io.pages.dev/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://dsduyopg-github-io.pages.dev/apple-touch-icon.png">
-<link rel="mask-icon" href="https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml" title="rss">
-<link rel="alternate" hreflang="zh-cn" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">
-  <meta property="og:site_name" content="My_blog">
-  <meta property="og:title" content="C语言学习专栏">
-  <meta property="og:description" content="C语言学习过程中的笔记与心得">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="C语言学习专栏">
-  <meta name="twitter:description" content="C语言学习过程中的笔记与心得">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "C语言学习专栏",
-      "item": "https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/"
-    }
-  ]
-}
-</script>
-</head>
-<body class="list" id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="https://dsduyopg-github-io.pages.dev/" accesskey="h" title="My_blog (Alt + H)">My_blog</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/" title="首页">
-                    <span>首页</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/posts/" title="文章">
-                    <span>文章</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/search/" title="搜索 (Alt &#43; /)" accesskey=/>
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/" title="专栏">
-                    <span>专栏</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/" title="草稿箱">
-                    <span>草稿箱</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main"> 
-<header class="page-header"><nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
-            <a href="/">主页</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/%E4%B8%93%E6%A0%8F/">专栏</a>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-</nav>
-  <h1>
-    C语言学习专栏
-    <a href="/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml" title="RSS" aria-label="RSS">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" height="23">
-        <path d="M4 11a9 9 0 0 1 9 9" />
-        <path d="M4 4a16 16 0 0 1 16 16" />
-        <circle cx="5" cy="19" r="1" />
-      </svg>
-    </a>
-  </h1>
-  <div class="post-description">
-    C语言学习过程中的笔记与心得
-  </div>
-</header>
-<div class="post-content md-content"><p>C语言学习笔记合集。这里收录 C 语言相关的学习文章，点击下面的文章标题即可查看全文。</p>
-
-
-</div>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">【分支和循环（下）】
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 1.分支和循环（下) 一.随机数生成 (1).rand (2).srand (3)time (4)设置随机数的范围 二.猜数字游戏实现 分支和循环（下) 一.随机数生成 (1).rand (2).srand (3)time (4)设置随机数的范围 二.猜数字游戏实现 1.分支和循环（下) 一.随机数生成 (1).rand (2).srand (3)time (4)设置随机数的范围 二.猜数字游戏实现 分支和循环（下) 在本节内容当中，主要讨论了关于随机函数相关的知识点并做一些应用，也就是说讨论关于猜数字的游戏。
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>C语言学习专栏 | My_blog</title><meta name=keywords content><meta name=description content="C语言学习过程中的笔记与心得"><meta name=author content><link rel=canonical href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/><link crossorigin=anonymous href=/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg-github-io.pages.dev/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg-github-io.pages.dev/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg-github-io.pages.dev/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg-github-io.pages.dev/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate type=application/rss+xml href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml title=rss><link rel=alternate hreflang=zh-cn href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/"><meta property="og:site_name" content="My_blog"><meta property="og:title" content="C语言学习专栏"><meta property="og:description" content="C语言学习过程中的笔记与心得"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="C语言学习专栏"><meta name=twitter:description content="C语言学习过程中的笔记与心得"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"C语言学习专栏","item":"https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/"}]}</script></head><body class=list id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg-github-io.pages.dev/ accesskey=h title="My_blog (Alt + H)">My_blog</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg-github-io.pages.dev/ title=首页><span>首页</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/posts/ title=文章><span>文章</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/search/ title="搜索 (Alt + /)" accesskey=/><span>搜索</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/ title=专栏><span>专栏</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/ title=草稿箱><span>草稿箱</span></a></li></ul></nav></header><main class=main><header class=page-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/%E4%B8%93%E6%A0%8F/>专栏</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1>C语言学习专栏
+<a href=/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml title=RSS aria-label=RSS><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" height="23"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></h1><div class=post-description>C语言学习过程中的笔记与心得</div></header><div class="post-content md-content"><p>C语言学习笔记合集。这里收录 C 语言相关的学习文章，点击下面的文章标题即可查看全文。</p></div><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>【分支和循环（下）】</h2></header><div class=entry-content><p>目录 1.分支和循环（下) 一.随机数生成 (1).rand (2).srand (3)time (4)设置随机数的范围 二.猜数字游戏实现 分支和循环（下) 一.随机数生成 (1).rand (2).srand (3)time (4)设置随机数的范围 二.猜数字游戏实现 1.分支和循环（下) 一.随机数生成 (1).rand (2).srand (3)time (4)设置随机数的范围 二.猜数字游戏实现 分支和循环（下) 在本节内容当中，主要讨论了关于随机函数相关的知识点并做一些应用，也就是说讨论关于猜数字的游戏。
 一.随机数生成 随机函数主要有rand,srand,函数，我们将会讨论什么是随机数种子，为何说rand函数不是我们的随机函数，以及用time函数实现srand的随机种子，进而实现了对于随机数的求解。
 (1).rand C语言提供了求解随机数的方法：
 int rand(void); 但是呢，由于rand函数是为随机函数是通过某种算法生成的随机数，不是真正的随机数，下面就为大家试一下:
-#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;int main(){printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());printf(&#34;%d\n&#34;, rand());return 0; )
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+int main()
+{
+printf("%d\n", rand());
+printf("%d\n", rand());
+printf("%d\n", rand());
+printf("%d\n", rand());
+printf("%d\n", rand());
+return 0; )
 由此可以知道的，是rand两次所生成的结果是一样的，那么可以说，rand不是一个正常的生成随机数的函数，因为他默认的随机种子数是1，如果要生成不同的随机数，就要让种子是变化的。
 (2).srand 下面我就介绍关于srand函数，只要在使用rand之前，使用srand函数，通过 srand函数的参数seed来设置rand函数生成随机数的时候的种子，只要种子在变化，每次生成的随机数序列也就变化起来了, 那也就是说给srand的种子是如果是随机的，rand就能生成随机数；在生成随机数的时候又需要一个随 机数，这就矛盾了.
 (3)time 因为时间是经常变化的，在c当中有一个函数是time,因此我们可以使用它时间作为随机数种子。在C当中的定义如下：
 time_t time (time_t* timer); 如果 timer 是NULL，就只返回这个时间的差值。time函数返回的这个时间差也被叫做：时间戳。 使用time函数的时候，需要包含头文件：time.h 书写生成随机函数的代码如下：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>314 字</span></footer>
-  <a class="entry-link" aria-label="post link to 【分支和循环（下）】" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言的分支与循环上
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 if语句 if语句 在if语句中他的语法是if(表达式)
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>314 字</span></footer><a class=entry-link aria-label="post link to 【分支和循环（下）】" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E4%B8%8B/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言的分支与循环上</h2></header><div class=entry-content><p>目录 if语句 if语句 在if语句中他的语法是if(表达式)
 语句
 表达式成立那么语句执行，不成立那么语句不执行。
 在if语句中只要是true就执行，false不执行。
@@ -230,49 +31,27 @@ time_t time (time_t* timer); 如果 timer 是NULL，就只返回这个时间的�
 在if语句中if语句只可以跟着一条语句，但是如果过于多的话可以调整为大括号
 由此我们可以知道这样的道理，else是在一些情况可以省略的，不必再写像
 if(num%2)
-printf(&#34;%d 是奇数&#34;，num);
-printf(&#34;%d 是偶数&#34;,num);
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>16 字</span></footer>
-  <a class="entry-link" aria-label="post link to C语言的分支与循环上" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之操作符（上）
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 C语言之操作符（上） 一.二进制，八进制，十六进制 1.二进制 2.八进制与十六进制 二.原码，反码，补码 1.原码 2.反码 3.补码 三.移位操作符 1.左移操作符 2.右移操作符 1.逻辑右移 2.算术右移 四.位操作符 1.按位与 2.按位或 3.按位异或 4.运用 五.逗号表达式 C语言之操作符（上） 在C语言之中，操作符也是极其重要的，不不仅仅C语言会用到，同时最为关键的是学会操作符，会对于我们学习单片机起到奠基石的作用，对于单片机的学习起到引领的作用，会非常有助于我们学习单片机的，会让我们对于单片机的一些基础操作可以看的懂。
+printf("%d 是奇数"，num);
+printf("%d 是偶数",num);</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>16 字</span></footer><a class=entry-link aria-label="post link to C语言的分支与循环上" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF%E4%B8%8A/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之操作符（上）</h2></header><div class=entry-content><p>目录 C语言之操作符（上） 一.二进制，八进制，十六进制 1.二进制 2.八进制与十六进制 二.原码，反码，补码 1.原码 2.反码 3.补码 三.移位操作符 1.左移操作符 2.右移操作符 1.逻辑右移 2.算术右移 四.位操作符 1.按位与 2.按位或 3.按位异或 4.运用 五.逗号表达式 C语言之操作符（上） 在C语言之中，操作符也是极其重要的，不不仅仅C语言会用到，同时最为关键的是学会操作符，会对于我们学习单片机起到奠基石的作用，对于单片机的学习起到引领的作用，会非常有助于我们学习单片机的，会让我们对于单片机的一些基础操作可以看的懂。
 一.二进制，八进制，十六进制 在计算机当中信息是以二进制的形式存储的，而我们在日常生活当中使用的最为多的，其实就是十进制，然而我们对于十进制的转化可以说是手到擒来。但是对于二进制相信一些伙伴，连听都没有听过，更不要说二进制之间的转化，不同进制之间的转化。由于二进制表达的数字太过于庞大了，我们不习惯使用二进制，因此我们需要学习八进制，十六进制，在接下来的讲解中我将为大家娓娓道来，并力求做到，看过我写的便学会，懂得了。
 1.二进制 1.首先，需要注意的是，二进制是什么。二进制是是计算机在存储信息之中时以1，0对信息加以存储和表达，满2进1对的。 2.其次我们需要注意的是，二进制的转化： 1.二进制同十进制之间的转化：首先需要明确一下的是权重，求值，以十进制数字：123为例。
 10进制的位 1 2 3 权重 10^2 10^1 10^0 权重值 100 10 1 求值 1*100 2*10 3*1 = 123 1.由此可以看出，权重，权重值,的关系，对这个概念可以运用到二进制·之上，对于二进制数如：110.
 二进制的位 1 1 0 权重 2^2 2^1 2^0 权重值 4 2 1 求值 4*1 2*1 0*1= 6 2.这样我们就完成了对二进制与十进制数相互进行转化。而对于十进制数转化为二进制数字，比如说一个十进制数字125将他转化成二进制数字，可以采用短除法，具体操作如下：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>228 字</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之操作符（上）" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之操作符【下】
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 C语言之操作符【下】 一.下标访问[],函数调用() 1.下标访问[] 1.什么是下标访问[] 2.下标访问操作符[]的应用与举例 2.函数调用() 二.操作符的属性：优先级、结合性 1.优先级 2.结合性 3.俩者之间的应用 三.整型提升 1.整型提升 2.整形提升的意义 3.如何进行整型提升 例子如下： 四.算术转换 五.表达式求值 C语言之操作符【下】 一.下标访问[],函数调用()
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>228 字</span></footer><a class=entry-link aria-label="post link to C语言之操作符（上）" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8A/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之操作符【下】</h2></header><div class=entry-content><p>目录 C语言之操作符【下】 一.下标访问[],函数调用() 1.下标访问[] 1.什么是下标访问[] 2.下标访问操作符[]的应用与举例 2.函数调用() 二.操作符的属性：优先级、结合性 1.优先级 2.结合性 3.俩者之间的应用 三.整型提升 1.整型提升 2.整形提升的意义 3.如何进行整型提升 例子如下： 四.算术转换 五.表达式求值 C语言之操作符【下】 一.下标访问[],函数调用()
 1.下标访问[]
 1.什么是下标访问[]
 2.下标访问操作符[]的应用与举例
 在上一节中，我们已经学习了操作符的一些相关知识，我们对C语言的操作符有了新的认识与理解，那么在本节C语言中，我们将继续上一次的讲解，为大家呈现更加有趣并且深刻的讲解，来开启我们的操作符之旅吧！
 一.下标访问[],函数调用() 1.下标访问[] 1.什么是下标访问[] 1.在C语言学习中，我们会经常用到下标访问操作符，那么相信在屏幕前的你们一定很想知道什么是下标访问操作符吧？下面我就为大家详细的道来：其实下标访问操作符，是数组里面的一个知识点，下标访问操作符是数组遍历当中经常使用的，数组在遍历[]里面会有一些数字，而那些数字其实就可以表示数组的内容，因此就可以对数组进行遍历了。 2.形式是[]里面的数字从数字0开始，到最后的数字结束。
 2.下标访问操作符[]的应用与举例 1.下标访问操作符的应用：下标访问操作符，应用到数组当中，对于数组内容的访问有着极其重要的意义。 2.下标访问操作符的举例：如在下面的函数当中，我们就用到了下标访问操作符。
-#include&lt;stdio.h&gt;int main(){int a[5]={1,2,3,4,5};for(int i=0; i&lt;5;i&#43;&#43;)printf(&#34;%d&#34;,a[i]);return 0;} 3.在上例当中，a[i]里面的i其实就是数组里面的内容，它的意思是说数组里面的的i-1个元素，因此我们通过这个方法对其进行遍历。
+#include&lt;stdio.h>
+int main()
+{
+int a[5]={1,2,3,4,5};
+for(int i=0; i&lt;5;i++)
+printf("%d",a[i]);
+return 0;
+} 3.在上例当中，a[i]里面的i其实就是数组里面的内容，它的意思是说数组里面的的i-1个元素，因此我们通过这个方法对其进行遍历。
 2.函数调用() 1.函数调用操作符是小括号。 2.形式如下：
 int add(int x,int y); 在上例之中，小括号之前的是，函数名；在小括号之后的是形参，可以看出该函数有两个形参：一个是int x，另一个是int y，该函数的返回类型是int形。
 二.操作符的属性：优先级、结合性 1.优先级 1.每种同类型的运算符都有内部的运算符优先级，不同类型的运算符之间也有相应的优先级顺序。一个表达式中既可以包括相同类型的运算符，也可以包括不同类型的运算符或者函数。当多种运算符出现在同一个表达式中时，应该先按照不同类型运算符间的优先级进行运算。各种运算符间的优先级如下：数值运算符、字符串运算符、关系运算符、逻辑运算符。可以用括号改变优先级顺序，使得括号内的运算优先于括号外的运算。对于多重括号，总是由内到外强制表达式的某些部分优先运行。括号内的运算总是最优先计算。 2.操作符的优先级如下： 2.结合性 结合性是，对于多个优先级是一样的操作符的一个表达式，此时他们的就需要用到，结合性，如下：
@@ -280,265 +59,125 @@ int add(int x,int y); 在上例之中，小括号之前的是，函数名；在�
 3.俩者之间的应用 因为在上文的优先级表格中，小括号的优先级是最高的，使用小括号可以提高算术的优先级。因此呢，当有一些表达式的优先级是一样的时候，我们就可以使用小括号，这样小括号括起来的地方，优先级是比较高的，可以达到我们想要的结果
 三.整型提升 1.整型提升 C语言中整型算术运算总是至少以缺省整型类型的精度来进行的。为了获得这个精度，表达式中的字符和短整型操作数在使用之前被转换为普通整型,这种转换称为整型提升。
 2.整形提升的意义 整型提升的意义是在表达式中，各种长度可能小于int长度的整型值，都必须先转换为int或unsigned int，然后才能送入CPU去执行运算12。C的整型算术运算总是至少以缺省整型类型的精度来进行的。为了获得这个精度，表达式中的字符和短整型操作数在使用之前被转换为普通整型，这种转换称为整型提升。比如：即使两个char类型（1个字节==8个比特字节）的相加，在CPU执行时实际上也要先转换为CPU内整型操作数的标准长度.
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>232 字</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之操作符【下】" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之讲解篇
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 例题：
-下面代码的结果是：#include &lt;stdio.h&gt;int i;int main(){i--;if (i &gt; sizeof(i)){printf(&#34;&gt;\n&#34;);}else{printf(&#34;&lt;\n&#34;);}return 0;} A.&gt;
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>232 字</span></footer><a class=entry-link aria-label="post link to C语言之操作符【下】" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8B/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇</h2></header><div class=entry-content><p>目录 例题：
+下面代码的结果是：
+#include &lt;stdio.h>
+int i;
+int main()
+{
+i--;
+if (i > sizeof(i))
+{
+printf(">\n");
+}
+else
+{
+printf("&lt;\n");
+}
+return 0;
+} A.>
 B.&lt;
 C.不输出
 D.程序有问题
 首先，我可以明确一点的是，这道题不选择D和C，在本函数中，由于int i 是一个全局变量，它存放的是静态区，
-C标准是要求全局变量要被初始化为零值，因此即使你没有初始化该值那么依然会被系统初始化为0，然而，sizeof类型是属于unsigned int 类型，也就是说，-1需要进行一拨转换，然而-1转换为无符号整形数字是比较大的，那么的话，明显是&gt;,那么就选则的是A
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>35 字</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之讲解篇" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%87/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之讲解篇2
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 例题：获取一个整数二进制序列中所有的偶数位和奇数位，分别打印出二进制序列。
-对于这个题我想的是，由于1&amp;二进制的数字，他的意思是判断最低位是否为1，是的话那么就是1，否则就不是1而是0，这样如果我在进行一番右移操做，那么的话，就可以把这个二进制打印出来。
+C标准是要求全局变量要被初始化为零值，因此即使你没有初始化该值那么依然会被系统初始化为0，然而，sizeof类型是属于unsigned int 类型，也就是说，-1需要进行一拨转换，然而-1转换为无符号整形数字是比较大的，那么的话，明显是>,那么就选则的是A</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>35 字</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%87/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇2</h2></header><div class=entry-content><p>目录 例题：获取一个整数二进制序列中所有的偶数位和奇数位，分别打印出二进制序列。
+对于这个题我想的是，由于1&二进制的数字，他的意思是判断最低位是否为1，是的话那么就是1，否则就不是1而是0，这样如果我在进行一番右移操做，那么的话，就可以把这个二进制打印出来。
 若是需要奇偶位打印的话，那么可能是在每次右移奇数个位或者是偶数个位，就可以求出二进制的奇数位，以及偶数位，下面我就为大家展示一番。
-#include&lt;stdio.h&gt;int main() {int num = 0;printf(&#34;请输入一个数:&#34;);scanf(&#34;%d&#34;, &amp;num);printf(&#34;奇数位：&#34;);for (int i = 31; i &gt;= 1; i -= 2) {printf(&#34;%d &#34;, (num &gt;&gt; i) &amp; 1);}printf(&#34;\n&#34;);printf(&#34;偶数位：&#34;);for (int i = 30; i &gt;= 0; i -= 2) {printf(&#34;%d &#34;, (num &gt;&gt; i) &amp; 1);}printf(&#34;\n&#34;);return 0;} 这个是运行结果：
-因此这就是本题的代码。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>64 字</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之讲解篇2" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之讲解篇3
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 例题：求两个数二进制中不同位的个数，写出C代码。
+#include&lt;stdio.h>
+int main() {
+int num = 0;
+printf("请输入一个数:");
+scanf("%d", &amp;num);
+printf("奇数位：");
+for (int i = 31; i >= 1; i -= 2) {
+printf("%d ", (num >> i) & 1);
+}
+printf("\n");
+printf("偶数位：");
+for (int i = 30; i >= 0; i -= 2) {
+printf("%d ", (num >> i) & 1);
+}
+printf("\n");
+return 0;
+} 这个是运行结果：
+因此这就是本题的代码。</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>64 字</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇2" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%872/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇3</h2></header><div class=entry-content><p>目录 例题：求两个数二进制中不同位的个数，写出C代码。
 在我的讲解篇2中可以看到：由于每次右移1位并对1按位与那么就可以将二进制位分离出来，得出与原来一样二进制位。
 思路一样，那么我们可以用上一篇中提到的方法，那么接下来我们就需要对每个二进制位进行比较就可以了，以此类推，若是不同的话统计其个数并将其统计的个数，返回，所求的便是其值，我所写的代码，如下：
-#include&lt;stdio.h&gt;int main(){int x = 0;int y = 0;int count = 0;printf(&#34;输入两个整数:&#34;);scanf(&#34;%d %d&#34;, &amp;x, &amp;y);for (int i = 0; i &lt; 32; i&#43;&#43;){if (((x &gt;&gt; i) &amp; 1) != ((y &gt;&gt; i) &amp; 1)){count&#43;&#43;;}}printf(&#34;有:%d位数不同&#34;, count);return 0;} 下面是我的代码的运行结果：
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>57 字</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之讲解篇3" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之讲解篇4
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 例题：
-下面代码的结果是：（ ）#include &lt;stdio.h&gt;int main(){int arr[] = {1,2,3,4,5};short *p = (short*)arr;int i = 0;for(i=0; i&lt;4; i&#43;&#43;){*(p&#43;i) = 0;}for(i=0; i&lt;5; i&#43;&#43;){printf(&#34;%d &#34;, arr[i]);}return 0;} 由于short是短整型的，那么其，因此p每次只能得到两个字节，而由于原来是4次循环那么其实是相当于4/2=2个数，也就是说对原来的前两个数赋值为0，那么打印出来得话，自然是：0,0，3,4，5
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>41 字</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之讲解篇4" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%874/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之讲解篇5
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 例题：
-下列程序段的输出结果为（ ）unsigned long pulArray[] = {6,7,8,9,10};unsigned long *pulPtr;pulPtr = pulArray;*(pulPtr &#43; 3) &#43;= 3;printf(&#34;%d,%d\n&#34;,*pulPtr, *(pulPtr &#43; 3)); 解释：pulPtr已经是数组的首元素6，而*(pulPtr &#43; 3)是指针向后移动3位所得到的结果，同时把该结果再加上3所得的值是12，接下来再把12赋值给*(pulPtr &#43; 3)，然后由于指针是数组的首地址那么的话，*pulPtr就是6，而(pulPtr &#43; 3)自然就是12，接下来我们就可以选择6 12了，本题11就这样结束了。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>32 字</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之讲解篇5" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">C语言之讲解篇6
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 例题：实现一个函数，可以左旋字符串中的k个字符，用C语言写出。
+#include&lt;stdio.h>
+int main()
+{
+int x = 0;
+int y = 0;
+int count = 0;
+printf("输入两个整数:");
+scanf("%d %d", &amp;x, &amp;y);
+for (int i = 0; i &lt; 32; i++)
+{
+if (((x >> i) & 1) != ((y >> i) & 1))
+{
+count++;
+}
+}
+printf("有:%d位数不同", count);
+return 0;
+} 下面是我的代码的运行结果：</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>57 字</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇3" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%873/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇4</h2></header><div class=entry-content><p>目录 例题：
+下面代码的结果是：（ ）
+#include &lt;stdio.h>
+int main()
+{
+int arr[] = {1,2,3,4,5};
+short *p = (short*)arr;
+int i = 0;
+for(i=0; i&lt;4; i++)
+{
+*(p+i) = 0;
+}
+for(i=0; i&lt;5; i++)
+{
+printf("%d ", arr[i]);
+}
+return 0;
+} 由于short是短整型的，那么其，因此p每次只能得到两个字节，而由于原来是4次循环那么其实是相当于4/2=2个数，也就是说对原来的前两个数赋值为0，那么打印出来得话，自然是：0,0，3,4，5</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>41 字</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇4" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%874/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇5</h2></header><div class=entry-content><p>目录 例题：
+下列程序段的输出结果为（ ）
+unsigned long pulArray[] = {6,7,8,9,10};
+unsigned long *pulPtr;
+pulPtr = pulArray;
+*(pulPtr + 3) += 3;
+printf("%d,%d\n",*pulPtr, *(pulPtr + 3)); 解释：pulPtr已经是数组的首元素6，而*(pulPtr + 3)是指针向后移动3位所得到的结果，同时把该结果再加上3所得的值是12，接下来再把12赋值给*(pulPtr + 3)，然后由于指针是数组的首地址那么的话，*pulPtr就是6，而(pulPtr + 3)自然就是12，接下来我们就可以选择6 12了，本题11就这样结束了。</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>32 字</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇5" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%875/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>C语言之讲解篇6</h2></header><div class=entry-content><p>目录 例题：实现一个函数，可以左旋字符串中的k个字符，用C语言写出。
 每次可以把第一个字符存下来，接下来可以以此把每个字符向前移动一个位置，最后把最后一个字符赋值为刚开始存下的值，这样每次做到的就是翻转就是一个字符，那么将总共的大循环，设定为翻转得个数，那么就可以轻轻松松解决问题了，下面是我的代码示例：
-#include&lt;stdio.h&gt;#include&lt;string.h&gt;void programming(char * a,int n,int num);int main(){char num[50];int n,a;printf(&#34;请输入一些内容：\n&#34;);gets(num);a=strlen(num);printf(&#34;请输入你n的数值\n&#34;);scanf(&#34;%d&#34;,&amp;n);printf(&#34;左旋字符串中的n个字符\n&#34;);programming(num,n,a);printf(&#34;%s\n&#34;,num);return 0;}void programming(char * a,int n,int num){int i=0;char temp;for(i=0;i&lt;n;i&#43;&#43;){temp=*a;for(int j=0;j&lt;num-1;j&#43;&#43;)*(a&#43;j)=*(a&#43;1&#43;j);*(a&#43;num-1)=temp;}} 该代码的运行结果，是如下：
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>50 字</span></footer>
-  <a class="entry-link" aria-label="post link to C语言之讲解篇6" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/"></a>
-</article>
-<footer class="page-footer">
-  <nav class="pagination" aria-label="分页">
-    <span class="page-btn prev disabled" title="上一页" aria-disabled="true">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </span>
-      <a class="page-btn num active" href="/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/" aria-label="第 1 页" aria-current="page">1</a>
-      <a class="page-btn num" href="/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/page/2/" aria-label="第 2 页">2</a>
-    <a class="page-btn next" href="/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/page/2/" title="下一页" aria-label="下一页">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </a>
-  </nav>
-</footer>
-
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="https://dsduyopg-github-io.pages.dev/">My_blog</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-<div class="busuanzi">
-  本站访客 <span id="busuanzi_value_site_uv"></span> ·
-  访问量 <span id="busuanzi_value_site_pv"></span>
-</div>
-
-
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script>
-
-<script>
-  (function () {
-    var keyViews = 'blog_views';
-    var keyTitles = 'blog_titles';
-    var isArticle = !!document.querySelector('.post-single');
-    var hotEl = document.getElementById('hot-posts');
-
-    if (isArticle) {
-      var path = location.pathname;
-      var title = (document.title || '').replace(/\s*\|.*$/, '').trim();
-      if (!path || !title) return;
-      var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
-      var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
-      views[path] = (views[path] || 0) + 1;
-      titles[path] = title;
-      localStorage.setItem(keyViews, JSON.stringify(views));
-      localStorage.setItem(keyTitles, JSON.stringify(titles));
-      return;
-    }
-
-    if (!hotEl) return;
-    if (hotEl.children.length) return; 
-    var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
-    var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
-    var rows = Object.keys(views)
-      .filter(function (p) {
-        return p.indexOf('/posts/') === 0
-          && p.indexOf('/page/') === -1
-          && titles[p]
-          && titles[p] !== '我的博客';
-      })
-      .sort(function (a, b) { return views[b] - views[a]; })
-      .slice(0, 5);
-    if (!rows.length) return;
-
-    var html = '<h3>热门文章</h3><ol class="hot-list">';
-    rows.forEach(function (p) {
-      html += '<li><a href="' + p + '">' + titles[p] + '</a></li>';
-    });
-    html += '</ol>';
-    hotEl.innerHTML = html;
-  })();
-</script>
-
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-</body>
-
-</html>
+#include&lt;stdio.h>
+#include&lt;string.h>
+void programming(char * a,int n,int num);
+int main()
+{
+char num[50];
+int n,a;
+printf("请输入一些内容：\n");
+gets(num);
+a=strlen(num);
+printf("请输入你n的数值\n");
+scanf("%d",&amp;n);
+printf("左旋字符串中的n个字符\n");
+programming(num,n,a);
+printf("%s\n",num);
+return 0;
+}
+void programming(char * a,int n,int num)
+{
+int i=0;
+char temp;
+for(i=0;i&lt;n;i++)
+{
+temp=*a;
+for(int j=0;j&lt;num-1;j++)
+*(a+j)=*(a+1+j);
+*(a+num-1)=temp;
+}
+} 该代码的运行结果，是如下：</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>50 字</span></footer><a class=entry-link aria-label="post link to C语言之讲解篇6" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%AE%B2%E8%A7%A3%E7%AF%876/></a></article><footer class=page-footer><nav class=pagination aria-label=分页><span class="page-btn prev disabled" title=上一页 aria-disabled=true><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+</span><a class="page-btn num active" href=/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ aria-label="第 1 页" aria-current=page>1</a>
+<a class="page-btn num" href=/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/page/2/ aria-label="第 2 页">2</a>
+<a class="page-btn next" href=/%E4%B8%93%E6%A0%8F/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/page/2/ title=下一页 aria-label=下一页><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a></nav></footer></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg-github-io.pages.dev/>My_blog</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span></div><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script><script>(function(){var e,t,n,s,r,c,o="blog_views",i="blog_titles",l=!!document.querySelector(".post-single"),a=document.getElementById("hot-posts");if(l){if(n=location.pathname,r=(document.title||"").replace(/\s*\|.*$/,"").trim(),!n||!r)return;e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),e[n]=(e[n]||0)+1,t[n]=r,localStorage.setItem(o,JSON.stringify(e)),localStorage.setItem(i,JSON.stringify(t));return}if(!a)return;if(a.children.length)return;if(e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),c=Object.keys(e).filter(function(e){return e.indexOf("/posts/")===0&&e.indexOf("/page/")===-1&&t[e]&&t[e]!=="我的博客"}).sort(function(t,n){return e[n]-e[t]}).slice(0,5),!c.length)return;s='<h3>热门文章</h3><ol class="hot-list">',c.forEach(function(e){s+='<li><a href="'+e+'">'+t[e]+"</a></li>"}),s+="</ol>",a.innerHTML=s})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>

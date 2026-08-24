@@ -1,262 +1,34 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="auto" data-theme="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>linux学习专栏 | My_blog</title>
-<meta name="keywords" content="">
-<meta name="description" content="linux学习专栏 - My_blog">
-<meta name="author" content="">
-<link rel="canonical" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css" integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://dsduyopg-github-io.pages.dev/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://dsduyopg-github-io.pages.dev/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://dsduyopg-github-io.pages.dev/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://dsduyopg-github-io.pages.dev/apple-touch-icon.png">
-<link rel="mask-icon" href="https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml" title="rss">
-<link rel="alternate" hreflang="zh-cn" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">
-  <meta property="og:site_name" content="My_blog">
-  <meta property="og:title" content="linux学习专栏">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="linux学习专栏">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "linux学习专栏",
-      "item": "https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/"
-    }
-  ]
-}
-</script>
-</head>
-<body class="list" id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="https://dsduyopg-github-io.pages.dev/" accesskey="h" title="My_blog (Alt + H)">My_blog</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/" title="首页">
-                    <span>首页</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/posts/" title="文章">
-                    <span>文章</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/search/" title="搜索 (Alt &#43; /)" accesskey=/>
-                    <span>搜索</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/" title="专栏">
-                    <span>专栏</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/" title="草稿箱">
-                    <span>草稿箱</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main"> 
-<header class="page-header"><nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
-            <a href="/">主页</a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-            <a href="/%E4%B8%93%E6%A0%8F/">专栏</a>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-</nav>
-  <h1>
-    linux学习专栏
-    <a href="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml" title="RSS" aria-label="RSS">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" height="23">
-        <path d="M4 11a9 9 0 0 1 9 9" />
-        <path d="M4 4a16 16 0 0 1 16 16" />
-        <circle cx="5" cy="19" r="1" />
-      </svg>
-    </a>
-  </h1>
-</header>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">磁盘的综合案例
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172
+<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>linux学习专栏 | My_blog</title><meta name=keywords content><meta name=description content="linux学习专栏 - My_blog"><meta name=author content><link rel=canonical href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/><link crossorigin=anonymous href=/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg-github-io.pages.dev/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg-github-io.pages.dev/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg-github-io.pages.dev/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg-github-io.pages.dev/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate type=application/rss+xml href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml title=rss><link rel=alternate hreflang=zh-cn href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/"><meta property="og:site_name" content="My_blog"><meta property="og:title" content="linux学习专栏"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="linux学习专栏"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"linux学习专栏","item":"https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/"}]}</script></head><body class=list id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg-github-io.pages.dev/ accesskey=h title="My_blog (Alt + H)">My_blog</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg-github-io.pages.dev/ title=首页><span>首页</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/posts/ title=文章><span>文章</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/search/ title="搜索 (Alt + /)" accesskey=/><span>搜索</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/ title=专栏><span>专栏</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/ title=草稿箱><span>草稿箱</span></a></li></ul></nav></header><main class=main><header class=page-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/%E4%B8%93%E6%A0%8F/>专栏</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1>linux学习专栏
+<a href=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml title=RSS aria-label=RSS><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" height="23"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></h1></header><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>磁盘的综合案例</h2></header><div class=entry-content><p>目录 磁盘的综合案例 1.修改网络配置 1.改成88网段 情况一：全局迁移至 88 网段（推荐彻底解决） 情况二：临时恢复连接（最省事） 2.ssh免密登录 0.对于hosts文件进行修改 1.生成私钥和公钥 2.发送公钥 3.测试一下 2.DNS配置 1.要求 2.配置 1.正解析文件的配置 3.反解析文件配置 3.测试 4.开放端口 5.开启服务 6.修改客户端dns 7.测试 3. 日志的配置 1. 要求 2. 修改rsyslog.conf 3. 重启服务与放行端口 4.测试 4.磁盘配置 0.需求 1.添加一个100G大容量磁盘 2.添加到物理卷 2.添加到卷组 3.添加到逻辑卷 4.格式化分区的格式 5.挂载到指定路径 6.添加剩下的15G 1.设置让扩容生效 2.查看是否配置生效 磁盘的综合案例 1.修改网络配置 我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172
 1.改成88网段 注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下 这个问题是因为 VMware 的虚拟交换机（VMnet8）底层网段 与 虚拟机操作系统内部配置的 IP 网段 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。
 情况一：全局迁移至 88 网段（推荐彻底解决） 如果你想把所有机器都规范到 88 网段，请按以下步骤操作：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>474 字</span></footer>
-  <a class="entry-link" aria-label="post link to 磁盘的综合案例" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">磁盘管理的相关知识
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 磁盘管理 1.文件系统 常见文件系统对比 一、主流文件系统横向对比 2.常用的磁盘管理命令 2.1 查看磁盘与分区信息 1. lsblk —— 查看块设备（推荐首选） 2. fdisk —— 查看分区表 3. parted —— 高级分区查看 4. blkid —— 查看 UUID 和文件系统类型 5. 其他硬件信息 2.2 分区管理命令 1. fdisk —— MBR 分区（交互式） 2. gdisk —— GPT 分区（交互式） 3. parted —— 高级分区工具 4. 刷新内核分区表 2.3 文件系统格式化 1. 创建文件系统 2. 格式化时指定参数 3. 查看文件系统信息 2.4 挂载与卸载 1. 临时挂载 2. 卸载 3. 查看挂载信息 2.5 磁盘空间监控 1. 查看磁盘使用情况 2. 查看目录大小 3. 找出占用空间最大的目录（实战排障） 2.6 LVM 逻辑卷管理 1. 物理卷（PV） 2. 卷组（VG） 3. 逻辑卷（LV） 4. 扩容后刷新文件系统 2.7 磁盘 I/O 性能排查 1. iostat —— 磁盘 I/O 统计 2. iotop —— 按进程查看 I/O 3. 其他 I/O 排查工具 2.8 磁盘故障排查 1. SMART 健康检测 2. 文件系统修复 3. 坏道检测 2.9 SWAP 交换分区管理 1. 查看 SWAP 2. 创建 SWAP 分区 3. 永久生效（写入 fstab） 4. 调整 SWAP 使用策略 2.10 fstab 配置文件详解 1. 文件格式 2. 示例 3. 常用挂载选项 4. 安全验证 fstab 📌 速查口诀 3.磁盘分区操作 1.准备工作 2.GPT分区 1.查看磁盘情况 2.使用parted命令开始分区操作 3.设置交换内存 1.分配4G的分区大小 2.使用mkswap格式化分区 3.设置swapon启动交换分区 4.查看交换分区大小 磁盘管理 1.文件系统 文件系统的主要作用是将存储设备（如硬盘、SSD）上的物理空间组织为逻辑单元，提供数据存储、检索和管理的标准方法。一般文件系统主要由超级块（Superblock）、inode、数据块、目录结构构成的
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>7 分钟</span>&nbsp;·&nbsp;<span>1415 字</span></footer>
-  <a class="entry-link" aria-label="post link to 磁盘管理的相关知识" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">关于ftp与SELinux的冲突问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 关于ftp与SELinux的冲突问题 1.问题背景 2.遇到的问题 3.问题解决的方法 1.ai的方法 为什么本地能写、FTP 不能写？ 嫌疑一：write_enable 没开（最常见！） 嫌疑二：SELinux 拦住了 ftpd 兜底：看日志，让服务器自己告诉你原因 建议的排查顺序 2.我看出了什么 第 2 步：临时关掉 SELinux 做隔离测试 第 3 步：回客户端 lftp 重试 看结果分支判断 3.我的解决方案 4.给我们的警示 关于ftp与SELinux的冲突问题 1.问题背景 首先这个问题诞生于如此条件下，我在跟随佳乐老师创建完lisi，zhangsan，wangwu之后呢，我就用lisi作为用户登录服务器node1，这里面设置了禁锢操作，路径是/export/public，而public里面拥有2个文件夹.一个是logs，另一个是src，同时设置了黑白名单,张三设置在黑名单，王五和李四设置在白名单
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>474 字</span></footer><a class=entry-link aria-label="post link to 磁盘的综合案例" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>磁盘管理的相关知识</h2></header><div class=entry-content><p>目录 磁盘管理 1.文件系统 常见文件系统对比 一、主流文件系统横向对比 2.常用的磁盘管理命令 2.1 查看磁盘与分区信息 1. lsblk —— 查看块设备（推荐首选） 2. fdisk —— 查看分区表 3. parted —— 高级分区查看 4. blkid —— 查看 UUID 和文件系统类型 5. 其他硬件信息 2.2 分区管理命令 1. fdisk —— MBR 分区（交互式） 2. gdisk —— GPT 分区（交互式） 3. parted —— 高级分区工具 4. 刷新内核分区表 2.3 文件系统格式化 1. 创建文件系统 2. 格式化时指定参数 3. 查看文件系统信息 2.4 挂载与卸载 1. 临时挂载 2. 卸载 3. 查看挂载信息 2.5 磁盘空间监控 1. 查看磁盘使用情况 2. 查看目录大小 3. 找出占用空间最大的目录（实战排障） 2.6 LVM 逻辑卷管理 1. 物理卷（PV） 2. 卷组（VG） 3. 逻辑卷（LV） 4. 扩容后刷新文件系统 2.7 磁盘 I/O 性能排查 1. iostat —— 磁盘 I/O 统计 2. iotop —— 按进程查看 I/O 3. 其他 I/O 排查工具 2.8 磁盘故障排查 1. SMART 健康检测 2. 文件系统修复 3. 坏道检测 2.9 SWAP 交换分区管理 1. 查看 SWAP 2. 创建 SWAP 分区 3. 永久生效（写入 fstab） 4. 调整 SWAP 使用策略 2.10 fstab 配置文件详解 1. 文件格式 2. 示例 3. 常用挂载选项 4. 安全验证 fstab 📌 速查口诀 3.磁盘分区操作 1.准备工作 2.GPT分区 1.查看磁盘情况 2.使用parted命令开始分区操作 3.设置交换内存 1.分配4G的分区大小 2.使用mkswap格式化分区 3.设置swapon启动交换分区 4.查看交换分区大小 磁盘管理 1.文件系统 文件系统的主要作用是将存储设备（如硬盘、SSD）上的物理空间组织为逻辑单元，提供数据存储、检索和管理的标准方法。一般文件系统主要由超级块（Superblock）、inode、数据块、目录结构构成的
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>7 分钟</span>&nbsp;·&nbsp;<span>1415 字</span></footer><a class=entry-link aria-label="post link to 磁盘管理的相关知识" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>关于ftp与SELinux的冲突问题</h2></header><div class=entry-content><p>目录 关于ftp与SELinux的冲突问题 1.问题背景 2.遇到的问题 3.问题解决的方法 1.ai的方法 为什么本地能写、FTP 不能写？ 嫌疑一：write_enable 没开（最常见！） 嫌疑二：SELinux 拦住了 ftpd 兜底：看日志，让服务器自己告诉你原因 建议的排查顺序 2.我看出了什么 第 2 步：临时关掉 SELinux 做隔离测试 第 3 步：回客户端 lftp 重试 看结果分支判断 3.我的解决方案 4.给我们的警示 关于ftp与SELinux的冲突问题 1.问题背景 首先这个问题诞生于如此条件下，我在跟随佳乐老师创建完lisi，zhangsan，wangwu之后呢，我就用lisi作为用户登录服务器node1，这里面设置了禁锢操作，路径是/export/public，而public里面拥有2个文件夹.一个是logs，另一个是src，同时设置了黑白名单,张三设置在黑名单，王五和李四设置在白名单
 2.遇到的问题 1.遇到的问题其实就是，在我用lisi把客户端的根目录下的a.log，发送给服务器的logs目录，无法操作 2.后来，我在logs目录下创建文件夹也是无法操作的，也是显示权限不足 但是呢，我在服务器的这个logs目录下创建文件夹是可以创建的 3.就很奇怪，再去服务器是可以搞定的，是可以创建文件夹的，但是在客户端是没有办法进行创建的，我当时以为是logs的权限设置的不对，用的是root创建，权限大的缘故，但是其实并不是如此的,后面我在服务器用了lisi照样是可以创建的 4.后来，我仔细检查了这些文件夹的权限，并再次赋权,这次显然也是不行的 3.问题解决的方法 解决的办法，后来，我把我的问题，这些比较奇怪的地方，我问了千文，后来，在他的帮助之下我成功了，在客户端我成功的在服务器的logs上面创建了文件夹，这意味着什么呢，显然这意味着，我可以把客户端家目录的a.log上传给服务器的logs里面，结果显然和我想的一样 下面是千文告诉我的解决方案，让我一步一步排查，最后成功找到了问题关键所咋
 1.ai的方法 这个对比信息非常关键！它直接帮我们排除了文件系统权限问题。
-为什么本地能写、FTP 不能写？ 本质区别在于执行写入的&#34;身份&#34;不同：
-场景 执行者 受什么约束 本地 mkdir lisi 自己的 shell 进程 只看文件系统的 rwx 权限 ✅ FTP mkdir vsftpd 守护进程代为执行 受 vsftpd.conf 开关 &#43; SELinux 对 ftpd 的策略双重约束 ❌ 所以本地能写，完全不能证明 FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>393 字</span></footer>
-  <a class="entry-link" aria-label="post link to 关于ftp与SELinux的冲突问题" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">数据同步服务
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
-2.如何进行实时同步 常⽤选项：• -v ：详细模式输出，显⽰传输过程中的⽂件信息。• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。• -z ：对备份的⽂件在传输时进⾏压缩处理。• -P ：显⽰进度条。• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh端⼝本地同步：rsync -av /src/directory/ /dest/directory/远程同步：rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/拉取远程数据到本地：rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span></footer>
-  <a class="entry-link" aria-label="post link to 数据同步服务" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">这个是关于ssh的相关问题这个是关于ssh的相关问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 目录 这个是关于ssh的相关问题这个是关于ssh的相关问题 一.首先问题是：局域网内的两台主机如何可以相互登录 一.检查网络的连通性 二. 检查了是否安装了ssh服务 二.如何配置SSH免密登录 一.root用户的登录配置 1.修改配置文件 2.重启ssh服务 二.免密钥登录 1.安装私钥和公钥 2.发送公钥 这个是关于ssh的相关问题这个是关于ssh的相关问题 一.首先问题是：局域网内的两台主机如何可以相互登录 在这里面的话，我们其实是分成了2步的步骤流程：
+为什么本地能写、FTP 不能写？ 本质区别在于执行写入的"身份"不同：
+场景 执行者 受什么约束 本地 mkdir lisi 自己的 shell 进程 只看文件系统的 rwx 权限 ✅ FTP mkdir vsftpd 守护进程代为执行 受 vsftpd.conf 开关 + SELinux 对 ftpd 的策略双重约束 ❌ 所以本地能写，完全不能证明 FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>393 字</span></footer><a class=entry-link aria-label="post link to 关于ftp与SELinux的冲突问题" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>数据同步服务</h2></header><div class=entry-content><p>目录 一.数据同步服务的基本介绍 1.什么是数据同步？ 2.如何进行实时同步 3.特点 4.怎么实现仅同步变化的数据呢？ 5.同步方式 二.如何安装数据同步服务： dnf -y install rsync 三.综合案例 1. 本地同步操作: 2.远程同步操作: 3.综合案例,实现定时与增量备份 四.结合INOTIFY实现数据实时同步 1.对node2进行配置 1.创建用户 2.修改配置文件 3.创建密码⽂件 4. 启动rsync服务 五.设置开机自启动 1.杀死进程 2.设置开机⾃启动 六.基于RSYNC服务完成⼿动同步 1.格式 2.基于⼿动同步⽅式完成数据同步 3.创建日志文件 4.开始传输文件了 解决方案 找到根本原因了！ 解决方案 方案1：临时关闭 SELinux（快速验证） 方案2：永久关闭 SELinux 方案3：设置正确的 SELinux 上下文（推荐，更安全） 建议 七,使⽤密码⽂件， 实现不需要输⼊密码 八.使用主机名 九.使用脚本自动配置 1.安装使用的软件 2.编写脚本 3给文件加权以及启动脚本文件 4.最后测试一下 一.数据同步服务的基本介绍 1.什么是数据同步？ 指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程
+2.如何进行实时同步 常⽤选项：
+• -v ：详细模式输出，显⽰传输过程中的⽂件信息。
+• -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。
+• -z ：对备份的⽂件在传输时进⾏压缩处理。
+• -P ：显⽰进度条。
+• --delete ：删除⽬标⽬录中源⽬录中没有的⽂件（可选，⽤于实现双向同步）
+• -e ：⽤于指定⽤于传输⽂件的远程 shell 程序 默认为 ssh，也可以选择其他如rsh或者⾃定义的ssh
+端⼝
+本地同步：
+rsync -av /src/directory/ /dest/directory/
+远程同步：
+rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/
+拉取远程数据到本地：
+rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/ 3.特点 • ⽀持增量同步：只传输发⽣变化的数据部分。 • ⽀持 SSH 加密传输。 • 可保持⽂件权限、时间戳、连接和等元数据。
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>649 字</span></footer><a class=entry-link aria-label="post link to 数据同步服务" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>这个是关于ssh的相关问题这个是关于ssh的相关问题</h2></header><div class=entry-content><p>目录 这个是关于ssh的相关问题这个是关于ssh的相关问题 一.首先问题是：局域网内的两台主机如何可以相互登录 一.检查网络的连通性 二. 检查了是否安装了ssh服务 二.如何配置SSH免密登录 一.root用户的登录配置 1.修改配置文件 2.重启ssh服务 二.免密钥登录 1.安装私钥和公钥 2.发送公钥 这个是关于ssh的相关问题这个是关于ssh的相关问题 一.首先问题是：局域网内的两台主机如何可以相互登录 在这里面的话，我们其实是分成了2步的步骤流程：
 首先第一步是检查是否我们局域网内的两台主机是否可以ping通
 第二步其实就是检查我们的这两台主机，是否安装了ssh服务
 接下来呢，我们将在这2个方面探究第一个的问题，这里面我会将我遇到的问题都写出来，并给予解决方案
@@ -268,159 +40,13 @@
 二. 检查了是否安装了ssh服务 在这里呢，我们开始进入Linux里面，开始真正意义上的操作的
 首先就是我们查询是否安装了ssh相关服务，相比大家都知道的是，我们要安装ssh的客户端和服务端两个服务的，以下是查询的命令 ssh -V # 这个是检查SSH客⼾端版本，如果安装会显⽰版本信息 systemctl status sshd # 这个是检查SSH服务状态，如果服务正在运⾏则说明已安装SSH服务器 如果提⽰： command not found或类似的， 说明SSH服务未安装， 需要安装服务
 此时呢，就需要安装这几个服务了
-1.安装客户端 dnf install -y openssh-clients 2.安装服务端 dnf install -y openssh-service 3.启动ssh服务 systemctl start sshd # 启动服务systemctl enable sshd # 将服务添加到⾃启动项，下次开机就⾃动启动了 这一步，到这里，我们也就结束了
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>113 字</span></footer>
-  <a class="entry-link" aria-label="post link to 这个是关于ssh的相关问题这个是关于ssh的相关问题" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/"></a>
-</article>
-<footer class="page-footer">
-  <nav class="pagination" aria-label="分页">
-    <a class="page-btn prev" href="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/" title="上一页" aria-label="上一页">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </a>
-      <a class="page-btn num" href="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/" aria-label="第 1 页">1</a>
-      <a class="page-btn num active" href="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/page/2/" aria-label="第 2 页" aria-current="page">2</a>
-    <span class="page-btn next disabled" title="下一页" aria-disabled="true">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </span>
-  </nav>
-</footer>
-
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="https://dsduyopg-github-io.pages.dev/">My_blog</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-<div class="busuanzi">
-  本站访客 <span id="busuanzi_value_site_uv"></span> ·
-  访问量 <span id="busuanzi_value_site_pv"></span>
-</div>
-
-
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script>
-
-<script>
-  (function () {
-    var keyViews = 'blog_views';
-    var keyTitles = 'blog_titles';
-    var isArticle = !!document.querySelector('.post-single');
-    var hotEl = document.getElementById('hot-posts');
-
-    if (isArticle) {
-      var path = location.pathname;
-      var title = (document.title || '').replace(/\s*\|.*$/, '').trim();
-      if (!path || !title) return;
-      var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
-      var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
-      views[path] = (views[path] || 0) + 1;
-      titles[path] = title;
-      localStorage.setItem(keyViews, JSON.stringify(views));
-      localStorage.setItem(keyTitles, JSON.stringify(titles));
-      return;
-    }
-
-    if (!hotEl) return;
-    if (hotEl.children.length) return; 
-    var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
-    var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
-    var rows = Object.keys(views)
-      .filter(function (p) {
-        return p.indexOf('/posts/') === 0
-          && p.indexOf('/page/') === -1
-          && titles[p]
-          && titles[p] !== '我的博客';
-      })
-      .sort(function (a, b) { return views[b] - views[a]; })
-      .slice(0, 5);
-    if (!rows.length) return;
-
-    var html = '<h3>热门文章</h3><ol class="hot-list">';
-    rows.forEach(function (p) {
-      html += '<li><a href="' + p + '">' + titles[p] + '</a></li>';
-    });
-    html += '</ol>';
-    hotEl.innerHTML = html;
-  })();
-</script>
-
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-</body>
-
-</html>
+1.安装客户端 dnf install -y openssh-clients 2.安装服务端 dnf install -y openssh-service 3.启动ssh服务 systemctl start sshd # 启动服务
+systemctl enable sshd # 将服务添加到⾃启动项，下次开机就⾃动启动了 这一步，到这里，我们也就结束了
+...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>113 字</span></footer><a class=entry-link aria-label="post link to 这个是关于ssh的相关问题这个是关于ssh的相关问题" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/></a></article><footer class=page-footer><nav class=pagination aria-label=分页><a class="page-btn prev" href=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ title=上一页 aria-label=上一页><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+</a><a class="page-btn num" href=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ aria-label="第 1 页">1</a>
+<a class="page-btn num active" href=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/page/2/ aria-label="第 2 页" aria-current=page>2</a>
+<span class="page-btn next disabled" title=下一页 aria-disabled=true><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span></nav></footer></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg-github-io.pages.dev/>My_blog</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
+访问量 <span id=busuanzi_value_site_pv></span></div><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script><script>(function(){var e,t,n,s,r,c,o="blog_views",i="blog_titles",l=!!document.querySelector(".post-single"),a=document.getElementById("hot-posts");if(l){if(n=location.pathname,r=(document.title||"").replace(/\s*\|.*$/,"").trim(),!n||!r)return;e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),e[n]=(e[n]||0)+1,t[n]=r,localStorage.setItem(o,JSON.stringify(e)),localStorage.setItem(i,JSON.stringify(t));return}if(!a)return;if(a.children.length)return;if(e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),c=Object.keys(e).filter(function(e){return e.indexOf("/posts/")===0&&e.indexOf("/page/")===-1&&t[e]&&t[e]!=="我的博客"}).sort(function(t,n){return e[n]-e[t]}).slice(0,5),!c.length)return;s='<h3>热门文章</h3><ol class="hot-list">',c.forEach(function(e){s+='<li><a href="'+e+'">'+t[e]+"</a></li>"}),s+="</ol>",a.innerHTML=s})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>
