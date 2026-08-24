@@ -2,16 +2,24 @@
 <div class="comments">
   <h2>评论</h2>
   <div class="like-box">
-    <button class="like-btn" type="button" data-like-path="{{ .RelPermalink }}">
+    <button class="like-btn" type="button" id="github-like-btn" title="登录 GitHub 点赞">
       <span class="like-heart">♡</span>
       <span class="like-count">0</span>
     </button>
   </div>
-  <script src="https://utteranc.es/client.js"
-          repo="dsduyopg/dsduyopg.github.io"
-          issue-term='{{ .Param "utterancesIssueTerm" | default "pathname" }}'
-          label="comment"
-          theme="preferred-color-scheme"
+  <div class="giscus" id="giscus-container"></div>
+  <script src="https://giscus.app/client.js"
+          data-repo="dsduyopg/dsduyopg.github.io"
+          data-repo-id="REPLACE_WITH_REPO_ID"
+          data-category="REPLACE_WITH_CATEGORY"
+          data-category-id="REPLACE_WITH_CATEGORY_ID"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="1"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="zh-CN"
           crossorigin="anonymous"
           async>
   </script>
@@ -21,24 +29,60 @@
 
 <script>
   (function () {
-    var btn = document.querySelector('.like-btn');
+    var btn = document.getElementById('github-like-btn');
     if (!btn) return;
-    var key = 'like:' + btn.getAttribute('data-like-path');
-    var count = parseInt(localStorage.getItem(key) || '0', 10);
-    var liked = count > 0;
     var heart = btn.querySelector('.like-heart');
     var num = btn.querySelector('.like-count');
-    function render() {
-      num.textContent = count;
-      heart.textContent = liked ? '♥' : '♡';
-      btn.classList.toggle('liked', liked);
+    var discussionNumber = null;
+    var likedByMe = false;
+
+    function setCount(n) {
+      num.textContent = n;
+      heart.textContent = likedByMe ? '♥' : '♡';
+      btn.classList.toggle('liked', likedByMe);
     }
-    btn.addEventListener('click', function () {
-      liked = !liked;
-      count = liked ? 1 : 0;
-      localStorage.setItem(key, String(count));
-      render();
+
+    // 从 giscus iframe 拿到当前文章的 discussion number
+    window.addEventListener('message', function (event) {
+      var data = event.data;
+      if (!data || typeof data !== 'object' || !data.giscus) return;
+      var g = data.giscus;
+      if (g.error) return;
+      if (g.discussion && g.discussion.number) {
+        discussionNumber = g.discussion.number;
+        loadCount();
+      }
     });
-    render();
+
+    // 读取 GitHub discussion 的 +1 数量（公开 API，无需登录）
+    function loadCount() {
+      if (!discussionNumber) return;
+      var url = 'https://api.github.com/repos/dsduyopg/dsduyopg.github.io/discussions/' +
+                discussionNumber + '/reactions?per_page=100';
+      fetch(url, { headers: { 'Accept': 'application/vnd.github.squirrel-girl-preview+json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (list) {
+          var n = 0;
+          if (Array.isArray(list)) {
+            list.forEach(function (re) { if (re.content === '+1') n++; });
+          }
+          setCount(n);
+        })
+        .catch(function () { /* 网络失败就保持 0 */ });
+    }
+
+    // 点赞：登录 GitHub 后跳转到该 discussion 点赞
+    btn.addEventListener('click', function () {
+      if (!discussionNumber) {
+        alert('评论区加载后才能点赞，请稍候再试。');
+        return;
+      }
+      window.open(
+        'https://github.com/dsduyopg/dsduyopg.github.io/discussions/' + discussionNumber,
+        '_blank'
+      );
+    });
+
+    setCount(0);
   })();
 </script>
