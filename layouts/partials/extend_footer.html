@@ -4,8 +4,10 @@
   访问量 <span id="busuanzi_value_site_pv"></span>
   {{- if eq .Kind "page" }} · 本文阅读 <span id="busuanzi_value_page_pv"></span>{{- end }}
 </div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 {{- end }}
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script>
 
 <script>
   (function () {
