@@ -1,5 +1,6 @@
 ---
 comments: true
+utterancesIssueTerm: "og:title"
 title: "VMware 仅主机 + NAT 模式下 iptables 转发失败的排错全过程（MASQUERADE 挂错网卡）"
 date: 2026-08-18
 lastmod: 2026-08-24

@@ -9,7 +9,7 @@
   </div>
   <script src="https://utteranc.es/client.js"
           repo="dsduyopg/dsduyopg.github.io"
-          issue-term="pathname"
+          issue-term='{{ .Param "utterancesIssueTerm" | default "pathname" }}'
           label="comment"
           theme="preferred-color-scheme"
           crossorigin="anonymous"
