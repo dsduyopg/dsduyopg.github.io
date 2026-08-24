@@ -1,4 +1,13 @@
-<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>My_blog</title><meta name=keywords content><meta name=description content='双通道自动备份系统实战：加密 + 明文 + 机器人取文件
+<!DOCTYPE html>
+<html lang="zh-cn" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>My_blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="双通道自动备份系统实战：加密 &#43; 明文 &#43; 机器人取文件
 
 本文为作者博客系列文章的精简版，内容已做匿名化处理。
 
@@ -6,13 +15,13 @@
 前言
 用云端私有存储搭了一套免费双通道自动备份系统：
 
-加密备份 + 明文直传
+加密备份 &#43; 明文直传
 文件变化后自动上传，每小时全量同步兜底
 机器人支持查目录、翻页、按序号取文件
 Windows 服务开机自启
 完整记录实施思路和踩坑排查，可封装成一键安装包
 
-需要准备：Windows 10/11 + Python 3.11+ + 合规的云存储账号
+需要准备：Windows 10/11 &#43; Python 3.11&#43; &#43; 合规的云存储账号
 声明：本文为 AI 辅助开发实践记录。代码由 AI 辅助生成，作者负责需求设计、方案选型、测试、部署和排障。文中出现的云服务、机器人、令牌、用户名均为匿名化占位符，请勿直接复制使用；落地时请结合合规的云存储产品和当地法律法规。
 1. 我为什么需要一个自动备份系统
 我最怕的事，是电脑突然坏了。博客、课件、代码、学习资料全都存在本地硬盘里，坏了就真的什么都没了。U 盘会丢、会坏；传统网盘要么容量小，要么限速，要么收费；而且大多需要手动上传，经常想不起来备份。
@@ -25,7 +34,7 @@ Windows 服务开机自启
 要异地保存——电脑坏了、U 盘丢了，文件还在别处
 成本要低——个人使用，不想年年交钱
 
-后来我发现，很多即时通讯软件自带"私有频道/私有空间"能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。
+后来我发现，很多即时通讯软件自带&quot;私有频道/私有空间&quot;能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。
 2. 最终做成了什么
 一套 Windows 上的双通道备份系统：
 
@@ -79,79 +88,991 @@ Windows 服务开机自启
 			
 	
 
-选型时主要考虑三件事：'><meta name=author content><link rel=canonical href=https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/csdn-%E5%8F%8C%E9%80%9A%E9%81%93%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98/><link crossorigin=anonymous href=/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg-github-io.pages.dev/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg-github-io.pages.dev/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg-github-io.pages.dev/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg-github-io.pages.dev/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh-cn href=https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/csdn-%E5%8F%8C%E9%80%9A%E9%81%93%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/csdn-%E5%8F%8C%E9%80%9A%E9%81%93%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98/"><meta property="og:site_name" content="My_blog"><meta property="og:title" content="My_blog"><meta property="og:description" content='双通道自动备份系统实战：加密 + 明文 + 机器人取文件 本文为作者博客系列文章的精简版，内容已做匿名化处理。
+选型时主要考虑三件事：">
+<meta name="author" content="">
+<link rel="canonical" href="https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/csdn-%E5%8F%8C%E9%80%9A%E9%81%93%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css" integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://dsduyopg-github-io.pages.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://dsduyopg-github-io.pages.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://dsduyopg-github-io.pages.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://dsduyopg-github-io.pages.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh-cn" href="https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/csdn-%E5%8F%8C%E9%80%9A%E9%81%93%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/csdn-%E5%8F%8C%E9%80%9A%E9%81%93%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98/">
+  <meta property="og:site_name" content="My_blog">
+  <meta property="og:title" content="My_blog">
+  <meta property="og:description" content="双通道自动备份系统实战：加密 &#43; 明文 &#43; 机器人取文件 本文为作者博客系列文章的精简版，内容已做匿名化处理。
 @[toc]
 前言 用云端私有存储搭了一套免费双通道自动备份系统：
-加密备份 + 明文直传 文件变化后自动上传，每小时全量同步兜底 机器人支持查目录、翻页、按序号取文件 Windows 服务开机自启 完整记录实施思路和踩坑排查，可封装成一键安装包 需要准备：Windows 10/11 + Python 3.11+ + 合规的云存储账号
+加密备份 &#43; 明文直传 文件变化后自动上传，每小时全量同步兜底 机器人支持查目录、翻页、按序号取文件 Windows 服务开机自启 完整记录实施思路和踩坑排查，可封装成一键安装包 需要准备：Windows 10/11 &#43; Python 3.11&#43; &#43; 合规的云存储账号
 声明：本文为 AI 辅助开发实践记录。代码由 AI 辅助生成，作者负责需求设计、方案选型、测试、部署和排障。文中出现的云服务、机器人、令牌、用户名均为匿名化占位符，请勿直接复制使用；落地时请结合合规的云存储产品和当地法律法规。
 1. 我为什么需要一个自动备份系统 我最怕的事，是电脑突然坏了。博客、课件、代码、学习资料全都存在本地硬盘里，坏了就真的什么都没了。U 盘会丢、会坏；传统网盘要么容量小，要么限速，要么收费；而且大多需要手动上传，经常想不起来备份。
 其实这个问题，我上一个项目就尝试解决过。当时我做了 Git 自动同步方案，先问了 AI 一个问题：远端仓库大小、单个仓库能存的文件数，到底有什么限制？得到的答案是：空间和单仓库大小都有明确上限。那时我就意识到，只靠 Git 一个小工具，解决不了所有备份问题。同步博客这种文件少、体积小的场景没什么压力，但一旦要同步课件、学习资料这类又多又大的文件，就很吃力了。Git 项目虽然也能备份，但只适合小文件。我需要探索一种新的备份范式。
 我把上面的痛点整理成了明确的需求：
-容量要大——能装下课件和学习资料 速度不能太慢——别像某些网盘一样上传下载都限速 要自动——文件一改，自动同步 要异地保存——电脑坏了、U 盘丢了，文件还在别处 成本要低——个人使用，不想年年交钱 后来我发现，很多即时通讯软件自带"私有频道/私有空间"能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。
+容量要大——能装下课件和学习资料 速度不能太慢——别像某些网盘一样上传下载都限速 要自动——文件一改，自动同步 要异地保存——电脑坏了、U 盘丢了，文件还在别处 成本要低——个人使用，不想年年交钱 后来我发现，很多即时通讯软件自带&#34;私有频道/私有空间&#34;能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。
 2. 最终做成了什么 一套 Windows 上的双通道备份系统：
 加密通道：文件先本地加密，再分片上传云端，内容不可直接查看 明文通道：文件以原始格式上传，可以在客户端直接查看、下载 实时同步：目录有变化，约 5~10 秒内自动上传；每小时还有全量同步兜底 机器人：发命令查总目录、今日更新，回复序号就能把对应文件发到私聊 后台服务：注册三个 Windows 服务，开机自启、崩溃自动重启 一键安装包：把整套系统封装成可以复制到其他电脑使用的安装包 电脑自动备份，手机也能直接传文件，两边数据互通。
-3. 技术选型思路 组件 作用 为什么选它 云端私有存储服务 文件分片、加密、上传 容量大、成本低、支持开放接口 PostgreSQL 保存文件索引、分片、空间信息 原生 Windows 服务，稳定直观 同步工具 加密备份的同步 支持远程后端，可命令行调用 直传客户端 明文直传和机器人逻辑 Python 生态成熟，接口灵活 机器人接口 目录检索、取文件 官方开放能力，天然跨设备 NSSM 注册 Windows 服务 开机自启、崩溃自动重启 选型时主要考虑三件事：'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="草稿箱"><meta name=twitter:card content="summary"><meta name=twitter:title content="My_blog"><meta name=twitter:description content='双通道自动备份系统实战：加密 + 明文 + 机器人取文件 本文为作者博客系列文章的精简版，内容已做匿名化处理。
+3. 技术选型思路 组件 作用 为什么选它 云端私有存储服务 文件分片、加密、上传 容量大、成本低、支持开放接口 PostgreSQL 保存文件索引、分片、空间信息 原生 Windows 服务，稳定直观 同步工具 加密备份的同步 支持远程后端，可命令行调用 直传客户端 明文直传和机器人逻辑 Python 生态成熟，接口灵活 机器人接口 目录检索、取文件 官方开放能力，天然跨设备 NSSM 注册 Windows 服务 开机自启、崩溃自动重启 选型时主要考虑三件事：">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="草稿箱">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="My_blog">
+  <meta name="twitter:description" content="双通道自动备份系统实战：加密 &#43; 明文 &#43; 机器人取文件 本文为作者博客系列文章的精简版，内容已做匿名化处理。
 @[toc]
 前言 用云端私有存储搭了一套免费双通道自动备份系统：
-加密备份 + 明文直传 文件变化后自动上传，每小时全量同步兜底 机器人支持查目录、翻页、按序号取文件 Windows 服务开机自启 完整记录实施思路和踩坑排查，可封装成一键安装包 需要准备：Windows 10/11 + Python 3.11+ + 合规的云存储账号
+加密备份 &#43; 明文直传 文件变化后自动上传，每小时全量同步兜底 机器人支持查目录、翻页、按序号取文件 Windows 服务开机自启 完整记录实施思路和踩坑排查，可封装成一键安装包 需要准备：Windows 10/11 &#43; Python 3.11&#43; &#43; 合规的云存储账号
 声明：本文为 AI 辅助开发实践记录。代码由 AI 辅助生成，作者负责需求设计、方案选型、测试、部署和排障。文中出现的云服务、机器人、令牌、用户名均为匿名化占位符，请勿直接复制使用；落地时请结合合规的云存储产品和当地法律法规。
 1. 我为什么需要一个自动备份系统 我最怕的事，是电脑突然坏了。博客、课件、代码、学习资料全都存在本地硬盘里，坏了就真的什么都没了。U 盘会丢、会坏；传统网盘要么容量小，要么限速，要么收费；而且大多需要手动上传，经常想不起来备份。
 其实这个问题，我上一个项目就尝试解决过。当时我做了 Git 自动同步方案，先问了 AI 一个问题：远端仓库大小、单个仓库能存的文件数，到底有什么限制？得到的答案是：空间和单仓库大小都有明确上限。那时我就意识到，只靠 Git 一个小工具，解决不了所有备份问题。同步博客这种文件少、体积小的场景没什么压力，但一旦要同步课件、学习资料这类又多又大的文件，就很吃力了。Git 项目虽然也能备份，但只适合小文件。我需要探索一种新的备份范式。
 我把上面的痛点整理成了明确的需求：
-容量要大——能装下课件和学习资料 速度不能太慢——别像某些网盘一样上传下载都限速 要自动——文件一改，自动同步 要异地保存——电脑坏了、U 盘丢了，文件还在别处 成本要低——个人使用，不想年年交钱 后来我发现，很多即时通讯软件自带"私有频道/私有空间"能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。
+容量要大——能装下课件和学习资料 速度不能太慢——别像某些网盘一样上传下载都限速 要自动——文件一改，自动同步 要异地保存——电脑坏了、U 盘丢了，文件还在别处 成本要低——个人使用，不想年年交钱 后来我发现，很多即时通讯软件自带&#34;私有频道/私有空间&#34;能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。
 2. 最终做成了什么 一套 Windows 上的双通道备份系统：
 加密通道：文件先本地加密，再分片上传云端，内容不可直接查看 明文通道：文件以原始格式上传，可以在客户端直接查看、下载 实时同步：目录有变化，约 5~10 秒内自动上传；每小时还有全量同步兜底 机器人：发命令查总目录、今日更新，回复序号就能把对应文件发到私聊 后台服务：注册三个 Windows 服务，开机自启、崩溃自动重启 一键安装包：把整套系统封装成可以复制到其他电脑使用的安装包 电脑自动备份，手机也能直接传文件，两边数据互通。
-3. 技术选型思路 组件 作用 为什么选它 云端私有存储服务 文件分片、加密、上传 容量大、成本低、支持开放接口 PostgreSQL 保存文件索引、分片、空间信息 原生 Windows 服务，稳定直观 同步工具 加密备份的同步 支持远程后端，可命令行调用 直传客户端 明文直传和机器人逻辑 Python 生态成熟，接口灵活 机器人接口 目录检索、取文件 官方开放能力，天然跨设备 NSSM 注册 Windows 服务 开机自启、崩溃自动重启 选型时主要考虑三件事：'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"","item":"https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/csdn-%E5%8F%8C%E9%80%9A%E9%81%93%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"","name":"","description":"双通道自动备份系统实战：加密 + 明文 + 机器人取文件 本文为作者博客系列文章的精简版，内容已做匿名化处理。\n@[toc]\n前言 用云端私有存储搭了一套免费双通道自动备份系统：\n加密备份 + 明文直传 文件变化后自动上传，每小时全量同步兜底 机器人支持查目录、翻页、按序号取文件 Windows 服务开机自启 完整记录实施思路和踩坑排查，可封装成一键安装包 需要准备：Windows 10/11 + Python 3.11+ + 合规的云存储账号\n声明：本文为 AI 辅助开发实践记录。代码由 AI 辅助生成，作者负责需求设计、方案选型、测试、部署和排障。文中出现的云服务、机器人、令牌、用户名均为匿名化占位符，请勿直接复制使用；落地时请结合合规的云存储产品和当地法律法规。\n1. 我为什么需要一个自动备份系统 我最怕的事，是电脑突然坏了。博客、课件、代码、学习资料全都存在本地硬盘里，坏了就真的什么都没了。U 盘会丢、会坏；传统网盘要么容量小，要么限速，要么收费；而且大多需要手动上传，经常想不起来备份。\n其实这个问题，我上一个项目就尝试解决过。当时我做了 Git 自动同步方案，先问了 AI 一个问题：远端仓库大小、单个仓库能存的文件数，到底有什么限制？得到的答案是：空间和单仓库大小都有明确上限。那时我就意识到，只靠 Git 一个小工具，解决不了所有备份问题。同步博客这种文件少、体积小的场景没什么压力，但一旦要同步课件、学习资料这类又多又大的文件，就很吃力了。Git 项目虽然也能备份，但只适合小文件。我需要探索一种新的备份范式。\n我把上面的痛点整理成了明确的需求：\n容量要大——能装下课件和学习资料 速度不能太慢——别像某些网盘一样上传下载都限速 要自动——文件一改，自动同步 要异地保存——电脑坏了、U 盘丢了，文件还在别处 成本要低——个人使用，不想年年交钱 后来我发现，很多即时通讯软件自带\u0026quot;私有频道/私有空间\u0026quot;能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。\n2. 最终做成了什么 一套 Windows 上的双通道备份系统：\n加密通道：文件先本地加密，再分片上传云端，内容不可直接查看 明文通道：文件以原始格式上传，可以在客户端直接查看、下载 实时同步：目录有变化，约 5~10 秒内自动上传；每小时还有全量同步兜底 机器人：发命令查总目录、今日更新，回复序号就能把对应文件发到私聊 后台服务：注册三个 Windows 服务，开机自启、崩溃自动重启 一键安装包：把整套系统封装成可以复制到其他电脑使用的安装包 电脑自动备份，手机也能直接传文件，两边数据互通。\n3. 技术选型思路 组件 作用 为什么选它 云端私有存储服务 文件分片、加密、上传 容量大、成本低、支持开放接口 PostgreSQL 保存文件索引、分片、空间信息 原生 Windows 服务，稳定直观 同步工具 加密备份的同步 支持远程后端，可命令行调用 直传客户端 明文直传和机器人逻辑 Python 生态成熟，接口灵活 机器人接口 目录检索、取文件 官方开放能力，天然跨设备 NSSM 注册 Windows 服务 开机自启、崩溃自动重启 选型时主要考虑三件事：\n","keywords":[],"articleBody":"双通道自动备份系统实战：加密 + 明文 + 机器人取文件 本文为作者博客系列文章的精简版，内容已做匿名化处理。\n@[toc]\n前言 用云端私有存储搭了一套免费双通道自动备份系统：\n加密备份 + 明文直传 文件变化后自动上传，每小时全量同步兜底 机器人支持查目录、翻页、按序号取文件 Windows 服务开机自启 完整记录实施思路和踩坑排查，可封装成一键安装包 需要准备：Windows 10/11 + Python 3.11+ + 合规的云存储账号\n声明：本文为 AI 辅助开发实践记录。代码由 AI 辅助生成，作者负责需求设计、方案选型、测试、部署和排障。文中出现的云服务、机器人、令牌、用户名均为匿名化占位符，请勿直接复制使用；落地时请结合合规的云存储产品和当地法律法规。\n1. 我为什么需要一个自动备份系统 我最怕的事，是电脑突然坏了。博客、课件、代码、学习资料全都存在本地硬盘里，坏了就真的什么都没了。U 盘会丢、会坏；传统网盘要么容量小，要么限速，要么收费；而且大多需要手动上传，经常想不起来备份。\n其实这个问题，我上一个项目就尝试解决过。当时我做了 Git 自动同步方案，先问了 AI 一个问题：远端仓库大小、单个仓库能存的文件数，到底有什么限制？得到的答案是：空间和单仓库大小都有明确上限。那时我就意识到，只靠 Git 一个小工具，解决不了所有备份问题。同步博客这种文件少、体积小的场景没什么压力，但一旦要同步课件、学习资料这类又多又大的文件，就很吃力了。Git 项目虽然也能备份，但只适合小文件。我需要探索一种新的备份范式。\n我把上面的痛点整理成了明确的需求：\n容量要大——能装下课件和学习资料 速度不能太慢——别像某些网盘一样上传下载都限速 要自动——文件一改，自动同步 要异地保存——电脑坏了、U 盘丢了，文件还在别处 成本要低——个人使用，不想年年交钱 后来我发现，很多即时通讯软件自带\"私有频道/私有空间\"能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。\n2. 最终做成了什么 一套 Windows 上的双通道备份系统：\n加密通道：文件先本地加密，再分片上传云端，内容不可直接查看 明文通道：文件以原始格式上传，可以在客户端直接查看、下载 实时同步：目录有变化，约 5~10 秒内自动上传；每小时还有全量同步兜底 机器人：发命令查总目录、今日更新，回复序号就能把对应文件发到私聊 后台服务：注册三个 Windows 服务，开机自启、崩溃自动重启 一键安装包：把整套系统封装成可以复制到其他电脑使用的安装包 电脑自动备份，手机也能直接传文件，两边数据互通。\n3. 技术选型思路 组件 作用 为什么选它 云端私有存储服务 文件分片、加密、上传 容量大、成本低、支持开放接口 PostgreSQL 保存文件索引、分片、空间信息 原生 Windows 服务，稳定直观 同步工具 加密备份的同步 支持远程后端，可命令行调用 直传客户端 明文直传和机器人逻辑 Python 生态成熟，接口灵活 机器人接口 目录检索、取文件 官方开放能力，天然跨设备 NSSM 注册 Windows 服务 开机自启、崩溃自动重启 选型时主要考虑三件事：\n为什么选云端私有空间？ 免费、容量大、跨设备（电脑和手机都能访问），不依赖本地磁盘。缺点是依赖第三方平台，所以只作为异地副本，本地保留原文件。\n为什么加密和明文两条通道？ 加密备份安全，文件加密后都是乱码，查看必须依赖服务端；一旦丢失密钥或配置文件，数据就成了死数据。明文直传恰好解决这些缺点：可以跨设备直接查看文件，下载恢复不再依赖电脑，但安全性低。所以两个都要：重要资料走加密，日常文件走明文。\n为什么分片设 500 MB、默认覆盖模式？ 分片越大，云端消息条数越少，方便管理；但又不能设得过大。日常备份不需要每次修改都留历史版本，默认覆盖只保留最新版，需要版本历史的目录可以单独开启 version 模式。\n4. 系统架构 所有程序都放在用户目录下，加密备份和明文直传两条链路各自独立：\n%USERPROFILE%\\.backup\\ ← 备份系统的\"家\" ├─ backup.ps1 加密备份服务（同步工具 + 云存储） ├─ rclone.conf 同步工具配置 ├─ backup-config.json 备份源、同步间隔、排除规则 ├─ logs\\ 同步日志 └─ direct\\ 明文直传 + 机器人 ├─ direct-watch.ps1 明文直传服务 ├─ direct_upload.py 上传与机器人核心 ├─ direct_config.json 空间、备份源配置 └─ bot_config.json 机器人配置（敏感，不展示） 整套系统分两条备份链路，外加一个检索机器人，跑在三个 Windows 服务上：\n本地目录 ├─ 加密备份: FileSystemWatcher -\u003e 同步工具 -\u003e 云存储（加密） └─ 明文直传: FileSystemWatcher -\u003e 直传客户端 -\u003e 云空间（可直接查看） 机器人 ├─ /start 开始 ├─ /status 查看状态 ├─ /today 今日更新 ├─ /all 全部目录 ├─ 翻页 / 跳页 / 回复序号取文件 └─ 每日更新 + 停止按钮 加密和明文两条链路互相独立，各自有空间、各自的锁和 manifest 日志，互不影响。\n5. 实施路线（通用版） 下面只保留通用的实施思路，具体账号、令牌、密钥的获取方式请按你所选云存储服务的官方文档执行。\n5.1 第 1 步：准备环境 安装 Python 3.11+，安装时勾选 “Add Python to PATH”，然后验证：\npython --version 能输出版本号就成功。\n5.2 第 2 步：安装数据库 使用原生 PostgreSQL 服务，而不是 Docker，减少一层依赖，也更方便开机自启。创建备份服务专用的数据库账号和库，密码使用随机生成的长密码，并妥善保管。\n5.3 第 3 步：搭建云端存储服务 部署一个支持文件分片、加密、上传的服务端，配置文件里放占位符：\n# 核心配置占位符 data-source = \"postgres://用户名:密码@地址:端口/数据库\" jwt-secret = \"JWT_SECRET\" encryption-key = \"ENCRYPTION_KEY\" 必须修改三处：\n配置项 说明 数据库连接串 换成真实密码和端口 JWT 签名密钥 换成随机长字符串，不要使用字面量 加密密钥 随机生成，长度建议 32B，丢失后无法解密 生成随机密钥的参考命令：\n$b = New-Object byte[] 32 [System.Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($b) [System.BitConverter]::ToString($b).Replace(\"-\", \"\") 服务启动后，用三层检查确认正常：\n第 1 层：进程正常、端口在听 第 2 层：Web 可访问（返回 200） 第 3 层：数据库连接能查到一行记录 5.4 第 4 步：配置同步工具 普通版同步工具不一定支持云存储后端，必须使用配套版本，并在 rclone.conf 中填写后端配置：\n[remote] type = cloud api_host = http://127.0.0.1:8080 access_token = PASTE_ACCESS_TOKEN chunk_size = 500M upload_concurrency = 4 encrypt_files = true random_chunk_name = true channel_id = 0 root_folder_id = 配置完成后，先列一次远端文件，能列出来就说明令牌填对了。\n5.5 第 5 步：安装 Python 依赖 先确认 pip 可用，再按所选平台安装依赖。依赖包用于直传上传、机器人交互和图片处理，平台专属 SDK 请以官方文档为准，包名不要照抄下面的示例：\npython -m pip install --upgrade pip # 以下为通用示例包，平台 SDK 请按官方文档替换包名 python -m pip install --upgrade requests Pillow python-dotenv # 验证安装是否成功 python -c \"import requests, PIL, dotenv; print('依赖安装成功')\" 示例中几个通用包的用途：\n包 用途 requests 调用云端开放接口（上传/下载/查询） Pillow 图片处理（如生成缩略图） python-dotenv 读取本地配置文件，令牌、密钥不写死在代码里 5.6 第 6 步：创建两个私有空间 在云服务中创建两个私有空间：\n一个加密空间，用于加密备份 一个明文空间，用于日常直传 把机器人添加进明文空间并设为管理员，方便后续取文件。\n5.7 第 7 步：登录并填写令牌 服务端登录后，会返回会话令牌。令牌不要填在网页里，而是填回本地配置文件的 access_token 位置。\n⚠️ 这个令牌等同于登录态，别泄露给别人；一旦泄露，请立即在服务端撤销并重新生成。\n5.8 第 8 步：注册三个 Windows 服务 使用 NSSM 把三个命令注册为服务：\n服务 1：云存储 Web 服务 + API 服务 2：加密备份监听 服务 3：明文直传监听 服务启动后，做一次初始扫描并上传 manifest，然后进入监听循环。\n5.9 第 9 步：添加备份目录 分别给加密通道和明文通道添加备份目录，设置前缀、频道/空间和覆盖模式。\n6. 验证思路 经过验证，脚本可以自动备份，随后我把两个脚本封装成一个菜单界面。备份时默认忽略隐藏文件和空文件：\n隐藏目录/隐藏文件默认跳过，例如以 . 开头的路径、.log 文件和 0 字节文件 普通文件正常备份，状态文件会记录每个文件的 size、mtime、message_id 我还在统计脚本里加入了隐藏文件和实际备份文件的数量统计，方便校对。同时，我在云端空间里加了 manifest.txt 统计文件。manifest 不是由本地备份的，所以不计入本地统计；验证后发现各备份源都能正常自动备份。\n然后我在机器人上也做了验证：\n/status 查看状态 /all 查看全部目录 回复序号取文件 修改文件后触发自动上传 经过校验，加密备份和明文备份都验证成功。从文件备份、读取，到灾备恢复和异常处理，这套系统都能覆盖；需要加密的重要资料可以走加密通道，同时必须妥善备份密钥。\n7. 技术原理 技术 解决什么问题 核心原理 FileSystemWatcher 监听目录变化 Windows 文件系统事件 Debounce 防抖 避免频繁触发上传 事件后等待 N 秒再执行 文件锁 防止多个同步同时执行 独占打开锁文件 同步工具 加密备份同步 对比本地和远端差异 云存储服务 分片、加密、上传 调用云端开放接口上传分片 PostgreSQL 保存文件索引 记录文件、分片、空间状态 直传客户端 明文直传 客户端库封装开放接口 状态文件 记住已上传文件 保存 size、mtime、message_id manifest 记录目录和日期 本地生成日志上传云端 长轮询 机器人接收消息 定时拉取更新 回调按钮 机器人交互 内联键盘 + 回调数据 NSSM 开机自启 把命令注册成 Windows 服务 7.1 文件监听 使用 System.IO.FileSystemWatcher 监听目录，事件包括 Changed、Created、Deleted、Renamed。只监听事件还不够，文件系统事件可能漏掉，所以服务里还会做短间隔轮询兜底。\n7.2 防抖 事件触发后不立即同步，而是记录最后变化时间；只有距离最后一次变化超过防抖时间才真正执行，避免频繁小修改反复上传。\n7.3 文件锁 两个进程不能同时执行同步或上传，否则会产生重复记录。锁的原理是独占打开锁文件：第二个进程尝试打开时被拒绝，表示另一个同步正在运行。\n7.4 手动同步优先级 手动同步时，如果后台正在同步，不能直接杀掉进程，否则可能留下半成品数据库记录。方案是：\n手动同步创建 priority 文件 后台循环发现该文件后，停止下一个任务 手动同步等待当前任务完成，然后获取锁执行 手动执行完成后删除 priority 文件 7.5 同步原理 同步命令让远端和本地一致，支持保留空目录、并发传输、断点续传。sync 会对比本地和远端差异，只上传变化部分。\n7.6 状态文件 状态文件记录每个文件的大小、修改时间、消息 ID。扫描时先对比状态：\n大小和修改时间一致 → 已上传，跳过 不一致或没有记录 → 加入待上传队列 overwrite 模式 → 更新同一条远端消息 version 模式 → 保留历史版本 7.7 manifest manifest 记录目录里的所有文件、更新时间、覆盖时间，上传到云端，方便手动核对本地和远端数量。超过最大体积自动轮替，保留最近若干份。\n7.8 机器人交互 机器人通过长轮询接收消息，支持文本命令和内联按钮。目录数据由本地生成，机器人只是查询和取文件的入口。\n8. 常见问题排查思路 问题 排查思路 网页端无法登录 多为浏览器缓存、Cookie 或扩展拦截，清理后重试，或换浏览器 数据库服务无法启动 检查端口占用、数据目录权限、服务账号；先看系统事件日志 云端显示文件数比本地多 多为本地已删除但远端仍保留，或手机/手工上传；用 manifest 对比 清空远端后再次同步只上传少量文件 索引和远端不一致，先清索引再重建 同步产生重复记录 锁未生效或并发执行，检查锁文件是否残留 同步工具报 HTTP 500 多为服务端配置、令牌或数据库连接问题，先看服务端日志 机器人按钮没有反应 检查机器人令牌、回调处理和更新偏移量 机器人把文件发错位置 检查发送目标 ID 和私聊判断逻辑 手机上传的文件在目录里看不到 目录只汇总本地文件，远端手工文件需要单独标记 0 字节文件无法上传 默认跳过空文件，这是设计行为 bat 双击一闪而过 bat 缺少 pause，或在执行后直接退出；检查编码和换行 后台服务找不到 Python 服务环境变量和普通用户环境变量不是一回事，需要显式设置 Python 路径 会话数据库被锁 另一个进程正在使用会话，等待完成或检查锁残留 manifest 每小时都更新 没有判断内容是否变化，加内容签名即可 manifest 和日志无限增长 设置最大体积轮替和日志保留天数 同步后端突然失效 多为版本不匹配，升级后必须重新验证后端 加密备份不实时同步 事件监听可能漏事件，用短间隔轮询兜底 手动同步中断后实时同步停止 priority 文件残留导致，超过时间自动清理 9. 总结 这次项目从最初的模糊想法到最终落地，带给我的收获比预期大得多。回头对照最初列的 5 个需求——容量大、速度够用、文件变化后自动上传、异地保存、低成本——全部达成了。加密通道保护重要资料，明文通道随时手机取文件，两者互补；再加上和 Git 自动同步项目配合，小文件走 Git、大文件走云端，算是真正解决了我的备份焦虑。\n整个过程中，代码由 AI 辅助生成，但需求拆解、方案选型、测试验证、问题定位、优先级裁定、锁机制设计都需要自己判断。即使不手写每一行代码，理解系统逻辑和排障思路依然是核心能力。这个项目比普通脚本项目难度大得多——日志轮替、冲突管理、密钥生成、格式问题、版本冲突，每一个坑背后都涉及操作系统、网络协议、数据库和并发编程的知识。边做边查、反复测试，最终把理论上可行的方案变成了能稳定运行的系统。\n如果你也想搭一套自己的备份系统，可以从环境检查开始，逐步安装、添加目录、测试恢复，最后再交给服务自动运行。遇到问题，优先看服务日志和 manifest 统计，往往比瞎猜更快。\n最后提醒两件事：加密密钥丢了，已加密的数据基本等于永久丢失；自己的令牌、配置和会话文件不要公开分享。备份的核心不是\"上传了多少\"，而是\"丢了之后能恢复多少\"。祝大家备份无忧。\n欢迎访问我的个人博客https://dsduyopg-github-io.pages.dev/，里面还有我写的其他文章，有什么问题欢迎大家给我提意见。\n","wordCount":"581","inLanguage":"zh-cn","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/csdn-%E5%8F%8C%E9%80%9A%E9%81%93%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98/"},"publisher":{"@type":"Organization","name":"My_blog","logo":{"@type":"ImageObject","url":"https://dsduyopg-github-io.pages.dev/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg-github-io.pages.dev/ accesskey=h title="My_blog (Alt + H)">My_blog</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg-github-io.pages.dev/ title=首页><span>首页</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/posts/ title=文章><span>文章</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/search/ title="搜索 (Alt + /)" accesskey=/><span>搜索</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/ title=专栏><span>专栏</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/ title=草稿箱><span>草稿箱</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
-<a href=/%E8%8D%89%E7%A8%BF%E7%AE%B1/>草稿箱</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent"></h1><div class=post-meta><span>3 分钟</span>&nbsp;·&nbsp;<span>581 字</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><ul><li><a href=#%e5%8f%8c%e9%80%9a%e9%81%93%e8%87%aa%e5%8a%a8%e5%a4%87%e4%bb%bd%e7%b3%bb%e7%bb%9f%e5%ae%9e%e6%88%98%e5%8a%a0%e5%af%86--%e6%98%8e%e6%96%87--%e6%9c%ba%e5%99%a8%e4%ba%ba%e5%8f%96%e6%96%87%e4%bb%b6 aria-label="双通道自动备份系统实战：加密 + 明文 + 机器人取文件">双通道自动备份系统实战：加密 + 明文 + 机器人取文件</a><ul><li><a href=#%e5%89%8d%e8%a8%80 aria-label=前言>前言</a></li><li><a href=#1-%e6%88%91%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81%e4%b8%80%e4%b8%aa%e8%87%aa%e5%8a%a8%e5%a4%87%e4%bb%bd%e7%b3%bb%e7%bb%9f aria-label="1. 我为什么需要一个自动备份系统">1. 我为什么需要一个自动备份系统</a></li><li><a href=#2-%e6%9c%80%e7%bb%88%e5%81%9a%e6%88%90%e4%ba%86%e4%bb%80%e4%b9%88 aria-label="2. 最终做成了什么">2. 最终做成了什么</a></li><li><a href=#3-%e6%8a%80%e6%9c%af%e9%80%89%e5%9e%8b%e6%80%9d%e8%b7%af aria-label="3. 技术选型思路">3. 技术选型思路</a></li><li><a href=#4-%e7%b3%bb%e7%bb%9f%e6%9e%b6%e6%9e%84 aria-label="4. 系统架构">4. 系统架构</a></li><li><a href=#5-%e5%ae%9e%e6%96%bd%e8%b7%af%e7%ba%bf%e9%80%9a%e7%94%a8%e7%89%88 aria-label="5. 实施路线（通用版）">5. 实施路线（通用版）</a><ul><li><a href=#51-%e7%ac%ac-1-%e6%ad%a5%e5%87%86%e5%a4%87%e7%8e%af%e5%a2%83 aria-label="5.1 第 1 步：准备环境">5.1 第 1 步：准备环境</a></li><li><a href=#52-%e7%ac%ac-2-%e6%ad%a5%e5%ae%89%e8%a3%85%e6%95%b0%e6%8d%ae%e5%ba%93 aria-label="5.2 第 2 步：安装数据库">5.2 第 2 步：安装数据库</a></li><li><a href=#53-%e7%ac%ac-3-%e6%ad%a5%e6%90%ad%e5%bb%ba%e4%ba%91%e7%ab%af%e5%ad%98%e5%82%a8%e6%9c%8d%e5%8a%a1 aria-label="5.3 第 3 步：搭建云端存储服务">5.3 第 3 步：搭建云端存储服务</a></li><li><a href=#54-%e7%ac%ac-4-%e6%ad%a5%e9%85%8d%e7%bd%ae%e5%90%8c%e6%ad%a5%e5%b7%a5%e5%85%b7 aria-label="5.4 第 4 步：配置同步工具">5.4 第 4 步：配置同步工具</a></li><li><a href=#55-%e7%ac%ac-5-%e6%ad%a5%e5%ae%89%e8%a3%85-python-%e4%be%9d%e8%b5%96 aria-label="5.5 第 5 步：安装 Python 依赖">5.5 第 5 步：安装 Python 依赖</a></li><li><a href=#56-%e7%ac%ac-6-%e6%ad%a5%e5%88%9b%e5%bb%ba%e4%b8%a4%e4%b8%aa%e7%a7%81%e6%9c%89%e7%a9%ba%e9%97%b4 aria-label="5.6 第 6 步：创建两个私有空间">5.6 第 6 步：创建两个私有空间</a></li><li><a href=#57-%e7%ac%ac-7-%e6%ad%a5%e7%99%bb%e5%bd%95%e5%b9%b6%e5%a1%ab%e5%86%99%e4%bb%a4%e7%89%8c aria-label="5.7 第 7 步：登录并填写令牌">5.7 第 7 步：登录并填写令牌</a></li><li><a href=#58-%e7%ac%ac-8-%e6%ad%a5%e6%b3%a8%e5%86%8c%e4%b8%89%e4%b8%aa-windows-%e6%9c%8d%e5%8a%a1 aria-label="5.8 第 8 步：注册三个 Windows 服务">5.8 第 8 步：注册三个 Windows 服务</a></li><li><a href=#59-%e7%ac%ac-9-%e6%ad%a5%e6%b7%bb%e5%8a%a0%e5%a4%87%e4%bb%bd%e7%9b%ae%e5%bd%95 aria-label="5.9 第 9 步：添加备份目录">5.9 第 9 步：添加备份目录</a></li></ul></li><li><a href=#6-%e9%aa%8c%e8%af%81%e6%80%9d%e8%b7%af aria-label="6. 验证思路">6. 验证思路</a></li><li><a href=#7-%e6%8a%80%e6%9c%af%e5%8e%9f%e7%90%86 aria-label="7. 技术原理">7. 技术原理</a><ul><li><a href=#71-%e6%96%87%e4%bb%b6%e7%9b%91%e5%90%ac aria-label="7.1 文件监听">7.1 文件监听</a></li><li><a href=#72-%e9%98%b2%e6%8a%96 aria-label="7.2 防抖">7.2 防抖</a></li><li><a href=#73-%e6%96%87%e4%bb%b6%e9%94%81 aria-label="7.3 文件锁">7.3 文件锁</a></li><li><a href=#74-%e6%89%8b%e5%8a%a8%e5%90%8c%e6%ad%a5%e4%bc%98%e5%85%88%e7%ba%a7 aria-label="7.4 手动同步优先级">7.4 手动同步优先级</a></li><li><a href=#75-%e5%90%8c%e6%ad%a5%e5%8e%9f%e7%90%86 aria-label="7.5 同步原理">7.5 同步原理</a></li><li><a href=#76-%e7%8a%b6%e6%80%81%e6%96%87%e4%bb%b6 aria-label="7.6 状态文件">7.6 状态文件</a></li><li><a href=#77-manifest aria-label="7.7 manifest">7.7 manifest</a></li><li><a href=#78-%e6%9c%ba%e5%99%a8%e4%ba%ba%e4%ba%a4%e4%ba%92 aria-label="7.8 机器人交互">7.8 机器人交互</a></li></ul></li><li><a href=#8-%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98%e6%8e%92%e6%9f%a5%e6%80%9d%e8%b7%af aria-label="8. 常见问题排查思路">8. 常见问题排查思路</a></li><li><a href=#9-%e6%80%bb%e7%bb%93 aria-label="9. 总结">9. 总结</a></li></ul></li></ul></div></details><div class="post-content md-content"><h1 id=双通道自动备份系统实战加密--明文--机器人取文件>双通道自动备份系统实战：加密 + 明文 + 机器人取文件<a hidden class=anchor aria-hidden=true href=#双通道自动备份系统实战加密--明文--机器人取文件>#</a></h1><blockquote><p>本文为作者博客系列文章的精简版，内容已做匿名化处理。</p></blockquote><p>@[toc]</p><h2 id=前言>前言<a hidden class=anchor aria-hidden=true href=#前言>#</a></h2><p>用云端私有存储搭了一套免费双通道自动备份系统：</p><ul><li>加密备份 + 明文直传</li><li>文件变化后自动上传，每小时全量同步兜底</li><li>机器人支持查目录、翻页、按序号取文件</li><li>Windows 服务开机自启</li><li>完整记录实施思路和踩坑排查，可封装成一键安装包</li></ul><p><strong>需要准备</strong>：Windows 10/11 + Python 3.11+ + 合规的云存储账号</p><p><strong>声明</strong>：本文为 AI 辅助开发实践记录。代码由 AI 辅助生成，作者负责需求设计、方案选型、测试、部署和排障。文中出现的云服务、机器人、令牌、用户名均为匿名化占位符，请勿直接复制使用；落地时请结合合规的云存储产品和当地法律法规。</p><h2 id=1-我为什么需要一个自动备份系统>1. 我为什么需要一个自动备份系统<a hidden class=anchor aria-hidden=true href=#1-我为什么需要一个自动备份系统>#</a></h2><p>我最怕的事，是电脑突然坏了。博客、课件、代码、学习资料全都存在本地硬盘里，坏了就真的什么都没了。U 盘会丢、会坏；传统网盘要么容量小，要么限速，要么收费；而且大多需要手动上传，经常想不起来备份。</p><p>其实这个问题，我上一个项目就尝试解决过。当时我做了 Git 自动同步方案，先问了 AI 一个问题：远端仓库大小、单个仓库能存的文件数，到底有什么限制？得到的答案是：空间和单仓库大小都有明确上限。那时我就意识到，只靠 Git 一个小工具，解决不了所有备份问题。同步博客这种文件少、体积小的场景没什么压力，但一旦要同步课件、学习资料这类又多又大的文件，就很吃力了。Git 项目虽然也能备份，但只适合小文件。我需要探索一种新的备份范式。</p><p>我把上面的痛点整理成了明确的需求：</p><ul><li>容量要大——能装下课件和学习资料</li><li>速度不能太慢——别像某些网盘一样上传下载都限速</li><li>要自动——文件一改，自动同步</li><li>要异地保存——电脑坏了、U 盘丢了，文件还在别处</li><li>成本要低——个人使用，不想年年交钱</li></ul><p>后来我发现，很多即时通讯软件自带"私有频道/私有空间"能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。</p><h2 id=2-最终做成了什么>2. 最终做成了什么<a hidden class=anchor aria-hidden=true href=#2-最终做成了什么>#</a></h2><p>一套 Windows 上的双通道备份系统：</p><ul><li><strong>加密通道</strong>：文件先本地加密，再分片上传云端，内容不可直接查看</li><li><strong>明文通道</strong>：文件以原始格式上传，可以在客户端直接查看、下载</li><li><strong>实时同步</strong>：目录有变化，约 5~10 秒内自动上传；每小时还有全量同步兜底</li><li><strong>机器人</strong>：发命令查总目录、今日更新，回复序号就能把对应文件发到私聊</li><li><strong>后台服务</strong>：注册三个 Windows 服务，开机自启、崩溃自动重启</li><li><strong>一键安装包</strong>：把整套系统封装成可以复制到其他电脑使用的安装包</li></ul><p>电脑自动备份，手机也能直接传文件，两边数据互通。</p><h2 id=3-技术选型思路>3. 技术选型思路<a hidden class=anchor aria-hidden=true href=#3-技术选型思路>#</a></h2><table><thead><tr><th>组件</th><th>作用</th><th>为什么选它</th></tr></thead><tbody><tr><td>云端私有存储服务</td><td>文件分片、加密、上传</td><td>容量大、成本低、支持开放接口</td></tr><tr><td>PostgreSQL</td><td>保存文件索引、分片、空间信息</td><td>原生 Windows 服务，稳定直观</td></tr><tr><td>同步工具</td><td>加密备份的同步</td><td>支持远程后端，可命令行调用</td></tr><tr><td>直传客户端</td><td>明文直传和机器人逻辑</td><td>Python 生态成熟，接口灵活</td></tr><tr><td>机器人接口</td><td>目录检索、取文件</td><td>官方开放能力，天然跨设备</td></tr><tr><td>NSSM</td><td>注册 Windows 服务</td><td>开机自启、崩溃自动重启</td></tr></tbody></table><p>选型时主要考虑三件事：</p><p><strong>为什么选云端私有空间？</strong> 免费、容量大、跨设备（电脑和手机都能访问），不依赖本地磁盘。缺点是依赖第三方平台，所以只作为异地副本，本地保留原文件。</p><p><strong>为什么加密和明文两条通道？</strong> 加密备份安全，文件加密后都是乱码，查看必须依赖服务端；一旦丢失密钥或配置文件，数据就成了死数据。明文直传恰好解决这些缺点：可以跨设备直接查看文件，下载恢复不再依赖电脑，但安全性低。所以两个都要：重要资料走加密，日常文件走明文。</p><p><strong>为什么分片设 500 MB、默认覆盖模式？</strong> 分片越大，云端消息条数越少，方便管理；但又不能设得过大。日常备份不需要每次修改都留历史版本，默认覆盖只保留最新版，需要版本历史的目录可以单独开启 version 模式。</p><h2 id=4-系统架构>4. 系统架构<a hidden class=anchor aria-hidden=true href=#4-系统架构>#</a></h2><p>所有程序都放在用户目录下，加密备份和明文直传两条链路各自独立：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>%USERPROFILE%\.backup\               ← 备份系统的&#34;家&#34;
-</span></span><span style=display:flex><span>├─ backup.ps1          加密备份服务（同步工具 + 云存储）
-</span></span><span style=display:flex><span>├─ rclone.conf         同步工具配置
-</span></span><span style=display:flex><span>├─ backup-config.json  备份源、同步间隔、排除规则
-</span></span><span style=display:flex><span>├─ logs\               同步日志
-</span></span><span style=display:flex><span>└─ direct\             明文直传 + 机器人
-</span></span><span style=display:flex><span>   ├─ direct-watch.ps1  明文直传服务
-</span></span><span style=display:flex><span>   ├─ direct_upload.py  上传与机器人核心
-</span></span><span style=display:flex><span>   ├─ direct_config.json 空间、备份源配置
-</span></span><span style=display:flex><span>   └─ bot_config.json   机器人配置（敏感，不展示）
-</span></span></code></pre></div><p>整套系统分两条备份链路，外加一个检索机器人，跑在三个 Windows 服务上：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>本地目录
-</span></span><span style=display:flex><span>  ├─ 加密备份: FileSystemWatcher -&gt; 同步工具 -&gt; 云存储（加密）
-</span></span><span style=display:flex><span>  └─ 明文直传: FileSystemWatcher -&gt; 直传客户端 -&gt; 云空间（可直接查看）
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>机器人
-</span></span><span style=display:flex><span>  ├─ /start 开始
-</span></span><span style=display:flex><span>  ├─ /status 查看状态
-</span></span><span style=display:flex><span>  ├─ /today 今日更新
-</span></span><span style=display:flex><span>  ├─ /all 全部目录
-</span></span><span style=display:flex><span>  ├─ 翻页 / 跳页 / 回复序号取文件
-</span></span><span style=display:flex><span>  └─ 每日更新 + 停止按钮
-</span></span></code></pre></div><p>加密和明文两条链路互相独立，各自有空间、各自的锁和 manifest 日志，互不影响。</p><h2 id=5-实施路线通用版>5. 实施路线（通用版）<a hidden class=anchor aria-hidden=true href=#5-实施路线通用版>#</a></h2><p>下面只保留通用的实施思路，具体账号、令牌、密钥的获取方式请按你所选云存储服务的官方文档执行。</p><h3 id=51-第-1-步准备环境>5.1 第 1 步：准备环境<a hidden class=anchor aria-hidden=true href=#51-第-1-步准备环境>#</a></h3><p>安装 Python 3.11+，安装时勾选 &ldquo;Add Python to PATH&rdquo;，然后验证：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>python --version
-</span></span></code></pre></div><p>能输出版本号就成功。</p><h3 id=52-第-2-步安装数据库>5.2 第 2 步：安装数据库<a hidden class=anchor aria-hidden=true href=#52-第-2-步安装数据库>#</a></h3><p>使用原生 PostgreSQL 服务，而不是 Docker，减少一层依赖，也更方便开机自启。创建备份服务专用的数据库账号和库，密码使用随机生成的长密码，并妥善保管。</p><h3 id=53-第-3-步搭建云端存储服务>5.3 第 3 步：搭建云端存储服务<a hidden class=anchor aria-hidden=true href=#53-第-3-步搭建云端存储服务>#</a></h3><p>部署一个支持文件分片、加密、上传的服务端，配置文件里放占位符：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#75715e># 核心配置占位符</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>data-source</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;postgres://用户名:密码@地址:端口/数据库&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>jwt-secret</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;JWT_SECRET&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>encryption-key</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;ENCRYPTION_KEY&#34;</span>
-</span></span></code></pre></div><p>必须修改三处：</p><table><thead><tr><th>配置项</th><th>说明</th></tr></thead><tbody><tr><td>数据库连接串</td><td>换成真实密码和端口</td></tr><tr><td>JWT 签名密钥</td><td>换成随机长字符串，不要使用字面量</td></tr><tr><td>加密密钥</td><td>随机生成，长度建议 32B，丢失后无法解密</td></tr></tbody></table><p>生成随机密钥的参考命令：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span>$b = New-Object byte[] <span style=color:#ae81ff>32</span>
-</span></span><span style=display:flex><span>[<span style=color:#66d9ef>System.Security.Cryptography.RandomNumberGenerator</span>]::Create().GetBytes($b)
-</span></span><span style=display:flex><span>[<span style=color:#66d9ef>System.BitConverter</span>]::ToString($b).Replace(<span style=color:#e6db74>&#34;-&#34;</span>, <span style=color:#e6db74>&#34;&#34;</span>)
-</span></span></code></pre></div><p>服务启动后，用三层检查确认正常：</p><ol><li>第 1 层：进程正常、端口在听</li><li>第 2 层：Web 可访问（返回 200）</li><li>第 3 层：数据库连接能查到一行记录</li></ol><h3 id=54-第-4-步配置同步工具>5.4 第 4 步：配置同步工具<a hidden class=anchor aria-hidden=true href=#54-第-4-步配置同步工具>#</a></h3><p>普通版同步工具不一定支持云存储后端，必须使用配套版本，并在 rclone.conf 中填写后端配置：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[remote]</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>type</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>cloud</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>api_host</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>http://127.0.0.1:8080</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>access_token</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>PASTE_ACCESS_TOKEN</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>chunk_size</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>500M</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>upload_concurrency</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>4</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>encrypt_files</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>true</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>random_chunk_name</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>true</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>channel_id</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>0</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>root_folder_id</span> <span style=color:#f92672>=</span>
-</span></span></code></pre></div><p>配置完成后，先列一次远端文件，能列出来就说明令牌填对了。</p><h3 id=55-第-5-步安装-python-依赖>5.5 第 5 步：安装 Python 依赖<a hidden class=anchor aria-hidden=true href=#55-第-5-步安装-python-依赖>#</a></h3><p>先确认 pip 可用，再按所选平台安装依赖。依赖包用于直传上传、机器人交互和图片处理，<strong>平台专属 SDK 请以官方文档为准，包名不要照抄下面的示例</strong>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>python -m pip install --upgrade pip
-</span></span><span style=display:flex><span><span style=color:#75715e># 以下为通用示例包，平台 SDK 请按官方文档替换包名</span>
-</span></span><span style=display:flex><span>python -m pip install --upgrade requests Pillow python-dotenv
-</span></span><span style=display:flex><span><span style=color:#75715e># 验证安装是否成功</span>
-</span></span><span style=display:flex><span>python -c <span style=color:#e6db74>&#34;import requests, PIL, dotenv; print(&#39;依赖安装成功&#39;)&#34;</span>
-</span></span></code></pre></div><p>示例中几个通用包的用途：</p><table><thead><tr><th>包</th><th>用途</th></tr></thead><tbody><tr><td>requests</td><td>调用云端开放接口（上传/下载/查询）</td></tr><tr><td>Pillow</td><td>图片处理（如生成缩略图）</td></tr><tr><td>python-dotenv</td><td>读取本地配置文件，令牌、密钥不写死在代码里</td></tr></tbody></table><h3 id=56-第-6-步创建两个私有空间>5.6 第 6 步：创建两个私有空间<a hidden class=anchor aria-hidden=true href=#56-第-6-步创建两个私有空间>#</a></h3><p>在云服务中创建两个私有空间：</p><ul><li>一个<strong>加密空间</strong>，用于加密备份</li><li>一个<strong>明文空间</strong>，用于日常直传</li></ul><p>把机器人添加进明文空间并设为管理员，方便后续取文件。</p><h3 id=57-第-7-步登录并填写令牌>5.7 第 7 步：登录并填写令牌<a hidden class=anchor aria-hidden=true href=#57-第-7-步登录并填写令牌>#</a></h3><p>服务端登录后，会返回会话令牌。令牌不要填在网页里，而是填回本地配置文件的 access_token 位置。</p><blockquote><p>⚠️ 这个令牌等同于登录态，别泄露给别人；一旦泄露，请立即在服务端撤销并重新生成。</p></blockquote><h3 id=58-第-8-步注册三个-windows-服务>5.8 第 8 步：注册三个 Windows 服务<a hidden class=anchor aria-hidden=true href=#58-第-8-步注册三个-windows-服务>#</a></h3><p>使用 NSSM 把三个命令注册为服务：</p><ol><li>服务 1：云存储 Web 服务 + API</li><li>服务 2：加密备份监听</li><li>服务 3：明文直传监听</li></ol><p>服务启动后，做一次初始扫描并上传 manifest，然后进入监听循环。</p><h3 id=59-第-9-步添加备份目录>5.9 第 9 步：添加备份目录<a hidden class=anchor aria-hidden=true href=#59-第-9-步添加备份目录>#</a></h3><p>分别给加密通道和明文通道添加备份目录，设置前缀、频道/空间和覆盖模式。</p><h2 id=6-验证思路>6. 验证思路<a hidden class=anchor aria-hidden=true href=#6-验证思路>#</a></h2><p>经过验证，脚本可以自动备份，随后我把两个脚本封装成一个菜单界面。备份时默认忽略隐藏文件和空文件：</p><ul><li>隐藏目录/隐藏文件默认跳过，例如以 <code>.</code> 开头的路径、<code>.log</code> 文件和 0 字节文件</li><li>普通文件正常备份，状态文件会记录每个文件的 size、mtime、message_id</li></ul><p>我还在统计脚本里加入了隐藏文件和实际备份文件的数量统计，方便校对。同时，我在云端空间里加了 manifest.txt 统计文件。manifest 不是由本地备份的，所以不计入本地统计；验证后发现各备份源都能正常自动备份。</p><p>然后我在机器人上也做了验证：</p><ul><li>/status 查看状态</li><li>/all 查看全部目录</li><li>回复序号取文件</li><li>修改文件后触发自动上传</li></ul><p>经过校验，加密备份和明文备份都验证成功。从文件备份、读取，到灾备恢复和异常处理，这套系统都能覆盖；需要加密的重要资料可以走加密通道，同时必须妥善备份密钥。</p><h2 id=7-技术原理>7. 技术原理<a hidden class=anchor aria-hidden=true href=#7-技术原理>#</a></h2><table><thead><tr><th>技术</th><th>解决什么问题</th><th>核心原理</th></tr></thead><tbody><tr><td>FileSystemWatcher</td><td>监听目录变化</td><td>Windows 文件系统事件</td></tr><tr><td>Debounce 防抖</td><td>避免频繁触发上传</td><td>事件后等待 N 秒再执行</td></tr><tr><td>文件锁</td><td>防止多个同步同时执行</td><td>独占打开锁文件</td></tr><tr><td>同步工具</td><td>加密备份同步</td><td>对比本地和远端差异</td></tr><tr><td>云存储服务</td><td>分片、加密、上传</td><td>调用云端开放接口上传分片</td></tr><tr><td>PostgreSQL</td><td>保存文件索引</td><td>记录文件、分片、空间状态</td></tr><tr><td>直传客户端</td><td>明文直传</td><td>客户端库封装开放接口</td></tr><tr><td>状态文件</td><td>记住已上传文件</td><td>保存 size、mtime、message_id</td></tr><tr><td>manifest</td><td>记录目录和日期</td><td>本地生成日志上传云端</td></tr><tr><td>长轮询</td><td>机器人接收消息</td><td>定时拉取更新</td></tr><tr><td>回调按钮</td><td>机器人交互</td><td>内联键盘 + 回调数据</td></tr><tr><td>NSSM</td><td>开机自启</td><td>把命令注册成 Windows 服务</td></tr></tbody></table><h3 id=71-文件监听>7.1 文件监听<a hidden class=anchor aria-hidden=true href=#71-文件监听>#</a></h3><p>使用 System.IO.FileSystemWatcher 监听目录，事件包括 Changed、Created、Deleted、Renamed。只监听事件还不够，文件系统事件可能漏掉，所以服务里还会做短间隔轮询兜底。</p><h3 id=72-防抖>7.2 防抖<a hidden class=anchor aria-hidden=true href=#72-防抖>#</a></h3><p>事件触发后不立即同步，而是记录最后变化时间；只有距离最后一次变化超过防抖时间才真正执行，避免频繁小修改反复上传。</p><h3 id=73-文件锁>7.3 文件锁<a hidden class=anchor aria-hidden=true href=#73-文件锁>#</a></h3><p>两个进程不能同时执行同步或上传，否则会产生重复记录。锁的原理是独占打开锁文件：第二个进程尝试打开时被拒绝，表示另一个同步正在运行。</p><h3 id=74-手动同步优先级>7.4 手动同步优先级<a hidden class=anchor aria-hidden=true href=#74-手动同步优先级>#</a></h3><p>手动同步时，如果后台正在同步，不能直接杀掉进程，否则可能留下半成品数据库记录。方案是：</p><ol><li>手动同步创建 priority 文件</li><li>后台循环发现该文件后，停止下一个任务</li><li>手动同步等待当前任务完成，然后获取锁执行</li><li>手动执行完成后删除 priority 文件</li></ol><h3 id=75-同步原理>7.5 同步原理<a hidden class=anchor aria-hidden=true href=#75-同步原理>#</a></h3><p>同步命令让远端和本地一致，支持保留空目录、并发传输、断点续传。sync 会对比本地和远端差异，只上传变化部分。</p><h3 id=76-状态文件>7.6 状态文件<a hidden class=anchor aria-hidden=true href=#76-状态文件>#</a></h3><p>状态文件记录每个文件的大小、修改时间、消息 ID。扫描时先对比状态：</p><ul><li>大小和修改时间一致 → 已上传，跳过</li><li>不一致或没有记录 → 加入待上传队列</li><li>overwrite 模式 → 更新同一条远端消息</li><li>version 模式 → 保留历史版本</li></ul><h3 id=77-manifest>7.7 manifest<a hidden class=anchor aria-hidden=true href=#77-manifest>#</a></h3><p>manifest 记录目录里的所有文件、更新时间、覆盖时间，上传到云端，方便手动核对本地和远端数量。超过最大体积自动轮替，保留最近若干份。</p><h3 id=78-机器人交互>7.8 机器人交互<a hidden class=anchor aria-hidden=true href=#78-机器人交互>#</a></h3><p>机器人通过长轮询接收消息，支持文本命令和内联按钮。目录数据由本地生成，机器人只是查询和取文件的入口。</p><h2 id=8-常见问题排查思路>8. 常见问题排查思路<a hidden class=anchor aria-hidden=true href=#8-常见问题排查思路>#</a></h2><table><thead><tr><th>问题</th><th>排查思路</th></tr></thead><tbody><tr><td>网页端无法登录</td><td>多为浏览器缓存、Cookie 或扩展拦截，清理后重试，或换浏览器</td></tr><tr><td>数据库服务无法启动</td><td>检查端口占用、数据目录权限、服务账号；先看系统事件日志</td></tr><tr><td>云端显示文件数比本地多</td><td>多为本地已删除但远端仍保留，或手机/手工上传；用 manifest 对比</td></tr><tr><td>清空远端后再次同步只上传少量文件</td><td>索引和远端不一致，先清索引再重建</td></tr><tr><td>同步产生重复记录</td><td>锁未生效或并发执行，检查锁文件是否残留</td></tr><tr><td>同步工具报 HTTP 500</td><td>多为服务端配置、令牌或数据库连接问题，先看服务端日志</td></tr><tr><td>机器人按钮没有反应</td><td>检查机器人令牌、回调处理和更新偏移量</td></tr><tr><td>机器人把文件发错位置</td><td>检查发送目标 ID 和私聊判断逻辑</td></tr><tr><td>手机上传的文件在目录里看不到</td><td>目录只汇总本地文件，远端手工文件需要单独标记</td></tr><tr><td>0 字节文件无法上传</td><td>默认跳过空文件，这是设计行为</td></tr><tr><td>bat 双击一闪而过</td><td>bat 缺少 pause，或在执行后直接退出；检查编码和换行</td></tr><tr><td>后台服务找不到 Python</td><td>服务环境变量和普通用户环境变量不是一回事，需要显式设置 Python 路径</td></tr><tr><td>会话数据库被锁</td><td>另一个进程正在使用会话，等待完成或检查锁残留</td></tr><tr><td>manifest 每小时都更新</td><td>没有判断内容是否变化，加内容签名即可</td></tr><tr><td>manifest 和日志无限增长</td><td>设置最大体积轮替和日志保留天数</td></tr><tr><td>同步后端突然失效</td><td>多为版本不匹配，升级后必须重新验证后端</td></tr><tr><td>加密备份不实时同步</td><td>事件监听可能漏事件，用短间隔轮询兜底</td></tr><tr><td>手动同步中断后实时同步停止</td><td>priority 文件残留导致，超过时间自动清理</td></tr></tbody></table><h2 id=9-总结>9. 总结<a hidden class=anchor aria-hidden=true href=#9-总结>#</a></h2><p>这次项目从最初的模糊想法到最终落地，带给我的收获比预期大得多。回头对照最初列的 5 个需求——容量大、速度够用、文件变化后自动上传、异地保存、低成本——全部达成了。加密通道保护重要资料，明文通道随时手机取文件，两者互补；再加上和 Git 自动同步项目配合，小文件走 Git、大文件走云端，算是真正解决了我的备份焦虑。</p><p>整个过程中，代码由 AI 辅助生成，但需求拆解、方案选型、测试验证、问题定位、优先级裁定、锁机制设计都需要自己判断。即使不手写每一行代码，理解系统逻辑和排障思路依然是核心能力。这个项目比普通脚本项目难度大得多——日志轮替、冲突管理、密钥生成、格式问题、版本冲突，每一个坑背后都涉及操作系统、网络协议、数据库和并发编程的知识。边做边查、反复测试，最终把理论上可行的方案变成了能稳定运行的系统。</p><p>如果你也想搭一套自己的备份系统，可以从环境检查开始，逐步安装、添加目录、测试恢复，最后再交给服务自动运行。遇到问题，优先看服务日志和 manifest 统计，往往比瞎猜更快。</p><p>最后提醒两件事：加密密钥丢了，已加密的数据基本等于永久丢失；自己的令牌、配置和会话文件不要公开分享。备份的核心不是"上传了多少"，而是"丢了之后能恢复多少"。祝大家备份无忧。</p><hr><p>欢迎访问我的个人博客https://dsduyopg-github-io.pages.dev/，里面还有我写的其他文章，有什么问题欢迎大家给我提意见。</p></div><footer class=post-footer><ul class=post-tags></ul><ul class=share-buttons><li><a target=_blank rel="noopener noreferrer" aria-label="share  on x" href="https://x.com/intent/tweet/?text=&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f&amp;hashtags="><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446C483.971.0 512 28.03 512 62.554zM269.951 190.75 182.567 75.216H56L207.216 272.95 63.9 436.783h61.366L235.9 310.383l96.667 126.4H456L298.367 228.367l134-153.151H371.033zM127.633 110h36.468l219.38 290.065H349.5z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f&amp;title=&amp;summary=&amp;source=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f&title="><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on whatsapp" href="https://api.whatsapp.com/send?text=%20-%20https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on telegram" href="https://telegram.me/share/url?text=&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f"><svg viewBox="2 2 28 28" height="30" width="30" fill="currentColor"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on ycombinator" href="https://news.ycombinator.com/submitlink?t=&u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f"><svg width="30" height="30" viewBox="0 0 512 512" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446zM183.8767 87.9921h-62.034L230.6673 292.4508V424.0079h50.6655V292.4508L390.1575 87.9921H328.1233L256 238.2489z"/></svg></a></li></ul></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg-github-io.pages.dev/>My_blog</a></span> ·
-<span>Powered by
-<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
-访问量 <span id=busuanzi_value_site_pv></span> · 本文阅读 <span id=busuanzi_value_page_pv></span></div><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script><script>(function(){var e,t,n,s,r,c,o="blog_views",i="blog_titles",l=!!document.querySelector(".post-single"),a=document.getElementById("hot-posts");if(l){if(n=location.pathname,r=(document.title||"").replace(/\s*\|.*$/,"").trim(),!n||!r)return;e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),e[n]=(e[n]||0)+1,t[n]=r,localStorage.setItem(o,JSON.stringify(e)),localStorage.setItem(i,JSON.stringify(t));return}if(!a)return;if(a.children.length)return;if(e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),c=Object.keys(e).filter(function(e){return e.indexOf("/posts/")===0&&e.indexOf("/page/")===-1&&t[e]&&t[e]!=="我的博客"}).sort(function(t,n){return e[n]-e[t]}).slice(0,5),!c.length)return;s='<h3>热门文章</h3><ol class="hot-list">',c.forEach(function(e){s+='<li><a href="'+e+'">'+t[e]+"</a></li>"}),s+="</ol>",a.innerHTML=s})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
+3. 技术选型思路 组件 作用 为什么选它 云端私有存储服务 文件分片、加密、上传 容量大、成本低、支持开放接口 PostgreSQL 保存文件索引、分片、空间信息 原生 Windows 服务，稳定直观 同步工具 加密备份的同步 支持远程后端，可命令行调用 直传客户端 明文直传和机器人逻辑 Python 生态成熟，接口灵活 机器人接口 目录检索、取文件 官方开放能力，天然跨设备 NSSM 注册 Windows 服务 开机自启、崩溃自动重启 选型时主要考虑三件事：">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "",
+      "item": "https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/csdn-%E5%8F%8C%E9%80%9A%E9%81%93%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "name": "",
+  "description": "双通道自动备份系统实战：加密 + 明文 + 机器人取文件 本文为作者博客系列文章的精简版，内容已做匿名化处理。\n@[toc]\n前言 用云端私有存储搭了一套免费双通道自动备份系统：\n加密备份 + 明文直传 文件变化后自动上传，每小时全量同步兜底 机器人支持查目录、翻页、按序号取文件 Windows 服务开机自启 完整记录实施思路和踩坑排查，可封装成一键安装包 需要准备：Windows 10/11 + Python 3.11+ + 合规的云存储账号\n声明：本文为 AI 辅助开发实践记录。代码由 AI 辅助生成，作者负责需求设计、方案选型、测试、部署和排障。文中出现的云服务、机器人、令牌、用户名均为匿名化占位符，请勿直接复制使用；落地时请结合合规的云存储产品和当地法律法规。\n1. 我为什么需要一个自动备份系统 我最怕的事，是电脑突然坏了。博客、课件、代码、学习资料全都存在本地硬盘里，坏了就真的什么都没了。U 盘会丢、会坏；传统网盘要么容量小，要么限速，要么收费；而且大多需要手动上传，经常想不起来备份。\n其实这个问题，我上一个项目就尝试解决过。当时我做了 Git 自动同步方案，先问了 AI 一个问题：远端仓库大小、单个仓库能存的文件数，到底有什么限制？得到的答案是：空间和单仓库大小都有明确上限。那时我就意识到，只靠 Git 一个小工具，解决不了所有备份问题。同步博客这种文件少、体积小的场景没什么压力，但一旦要同步课件、学习资料这类又多又大的文件，就很吃力了。Git 项目虽然也能备份，但只适合小文件。我需要探索一种新的备份范式。\n我把上面的痛点整理成了明确的需求：\n容量要大——能装下课件和学习资料 速度不能太慢——别像某些网盘一样上传下载都限速 要自动——文件一改，自动同步 要异地保存——电脑坏了、U 盘丢了，文件还在别处 成本要低——个人使用，不想年年交钱 后来我发现，很多即时通讯软件自带\u0026quot;私有频道/私有空间\u0026quot;能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。\n2. 最终做成了什么 一套 Windows 上的双通道备份系统：\n加密通道：文件先本地加密，再分片上传云端，内容不可直接查看 明文通道：文件以原始格式上传，可以在客户端直接查看、下载 实时同步：目录有变化，约 5~10 秒内自动上传；每小时还有全量同步兜底 机器人：发命令查总目录、今日更新，回复序号就能把对应文件发到私聊 后台服务：注册三个 Windows 服务，开机自启、崩溃自动重启 一键安装包：把整套系统封装成可以复制到其他电脑使用的安装包 电脑自动备份，手机也能直接传文件，两边数据互通。\n3. 技术选型思路 组件 作用 为什么选它 云端私有存储服务 文件分片、加密、上传 容量大、成本低、支持开放接口 PostgreSQL 保存文件索引、分片、空间信息 原生 Windows 服务，稳定直观 同步工具 加密备份的同步 支持远程后端，可命令行调用 直传客户端 明文直传和机器人逻辑 Python 生态成熟，接口灵活 机器人接口 目录检索、取文件 官方开放能力，天然跨设备 NSSM 注册 Windows 服务 开机自启、崩溃自动重启 选型时主要考虑三件事：\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "双通道自动备份系统实战：加密 + 明文 + 机器人取文件 本文为作者博客系列文章的精简版，内容已做匿名化处理。\n@[toc]\n前言 用云端私有存储搭了一套免费双通道自动备份系统：\n加密备份 + 明文直传 文件变化后自动上传，每小时全量同步兜底 机器人支持查目录、翻页、按序号取文件 Windows 服务开机自启 完整记录实施思路和踩坑排查，可封装成一键安装包 需要准备：Windows 10/11 + Python 3.11+ + 合规的云存储账号\n声明：本文为 AI 辅助开发实践记录。代码由 AI 辅助生成，作者负责需求设计、方案选型、测试、部署和排障。文中出现的云服务、机器人、令牌、用户名均为匿名化占位符，请勿直接复制使用；落地时请结合合规的云存储产品和当地法律法规。\n1. 我为什么需要一个自动备份系统 我最怕的事，是电脑突然坏了。博客、课件、代码、学习资料全都存在本地硬盘里，坏了就真的什么都没了。U 盘会丢、会坏；传统网盘要么容量小，要么限速，要么收费；而且大多需要手动上传，经常想不起来备份。\n其实这个问题，我上一个项目就尝试解决过。当时我做了 Git 自动同步方案，先问了 AI 一个问题：远端仓库大小、单个仓库能存的文件数，到底有什么限制？得到的答案是：空间和单仓库大小都有明确上限。那时我就意识到，只靠 Git 一个小工具，解决不了所有备份问题。同步博客这种文件少、体积小的场景没什么压力，但一旦要同步课件、学习资料这类又多又大的文件，就很吃力了。Git 项目虽然也能备份，但只适合小文件。我需要探索一种新的备份范式。\n我把上面的痛点整理成了明确的需求：\n容量要大——能装下课件和学习资料 速度不能太慢——别像某些网盘一样上传下载都限速 要自动——文件一改，自动同步 要异地保存——电脑坏了、U 盘丢了，文件还在别处 成本要低——个人使用，不想年年交钱 后来我发现，很多即时通讯软件自带\"私有频道/私有空间\"能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。\n2. 最终做成了什么 一套 Windows 上的双通道备份系统：\n加密通道：文件先本地加密，再分片上传云端，内容不可直接查看 明文通道：文件以原始格式上传，可以在客户端直接查看、下载 实时同步：目录有变化，约 5~10 秒内自动上传；每小时还有全量同步兜底 机器人：发命令查总目录、今日更新，回复序号就能把对应文件发到私聊 后台服务：注册三个 Windows 服务，开机自启、崩溃自动重启 一键安装包：把整套系统封装成可以复制到其他电脑使用的安装包 电脑自动备份，手机也能直接传文件，两边数据互通。\n3. 技术选型思路 组件 作用 为什么选它 云端私有存储服务 文件分片、加密、上传 容量大、成本低、支持开放接口 PostgreSQL 保存文件索引、分片、空间信息 原生 Windows 服务，稳定直观 同步工具 加密备份的同步 支持远程后端，可命令行调用 直传客户端 明文直传和机器人逻辑 Python 生态成熟，接口灵活 机器人接口 目录检索、取文件 官方开放能力，天然跨设备 NSSM 注册 Windows 服务 开机自启、崩溃自动重启 选型时主要考虑三件事：\n为什么选云端私有空间？ 免费、容量大、跨设备（电脑和手机都能访问），不依赖本地磁盘。缺点是依赖第三方平台，所以只作为异地副本，本地保留原文件。\n为什么加密和明文两条通道？ 加密备份安全，文件加密后都是乱码，查看必须依赖服务端；一旦丢失密钥或配置文件，数据就成了死数据。明文直传恰好解决这些缺点：可以跨设备直接查看文件，下载恢复不再依赖电脑，但安全性低。所以两个都要：重要资料走加密，日常文件走明文。\n为什么分片设 500 MB、默认覆盖模式？ 分片越大，云端消息条数越少，方便管理；但又不能设得过大。日常备份不需要每次修改都留历史版本，默认覆盖只保留最新版，需要版本历史的目录可以单独开启 version 模式。\n4. 系统架构 所有程序都放在用户目录下，加密备份和明文直传两条链路各自独立：\n%USERPROFILE%\\.backup\\ ← 备份系统的\"家\" ├─ backup.ps1 加密备份服务（同步工具 + 云存储） ├─ rclone.conf 同步工具配置 ├─ backup-config.json 备份源、同步间隔、排除规则 ├─ logs\\ 同步日志 └─ direct\\ 明文直传 + 机器人 ├─ direct-watch.ps1 明文直传服务 ├─ direct_upload.py 上传与机器人核心 ├─ direct_config.json 空间、备份源配置 └─ bot_config.json 机器人配置（敏感，不展示） 整套系统分两条备份链路，外加一个检索机器人，跑在三个 Windows 服务上：\n本地目录 ├─ 加密备份: FileSystemWatcher -\u003e 同步工具 -\u003e 云存储（加密） └─ 明文直传: FileSystemWatcher -\u003e 直传客户端 -\u003e 云空间（可直接查看） 机器人 ├─ /start 开始 ├─ /status 查看状态 ├─ /today 今日更新 ├─ /all 全部目录 ├─ 翻页 / 跳页 / 回复序号取文件 └─ 每日更新 + 停止按钮 加密和明文两条链路互相独立，各自有空间、各自的锁和 manifest 日志，互不影响。\n5. 实施路线（通用版） 下面只保留通用的实施思路，具体账号、令牌、密钥的获取方式请按你所选云存储服务的官方文档执行。\n5.1 第 1 步：准备环境 安装 Python 3.11+，安装时勾选 “Add Python to PATH”，然后验证：\npython --version 能输出版本号就成功。\n5.2 第 2 步：安装数据库 使用原生 PostgreSQL 服务，而不是 Docker，减少一层依赖，也更方便开机自启。创建备份服务专用的数据库账号和库，密码使用随机生成的长密码，并妥善保管。\n5.3 第 3 步：搭建云端存储服务 部署一个支持文件分片、加密、上传的服务端，配置文件里放占位符：\n# 核心配置占位符 data-source = \"postgres://用户名:密码@地址:端口/数据库\" jwt-secret = \"JWT_SECRET\" encryption-key = \"ENCRYPTION_KEY\" 必须修改三处：\n配置项 说明 数据库连接串 换成真实密码和端口 JWT 签名密钥 换成随机长字符串，不要使用字面量 加密密钥 随机生成，长度建议 32B，丢失后无法解密 生成随机密钥的参考命令：\n$b = New-Object byte[] 32 [System.Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($b) [System.BitConverter]::ToString($b).Replace(\"-\", \"\") 服务启动后，用三层检查确认正常：\n第 1 层：进程正常、端口在听 第 2 层：Web 可访问（返回 200） 第 3 层：数据库连接能查到一行记录 5.4 第 4 步：配置同步工具 普通版同步工具不一定支持云存储后端，必须使用配套版本，并在 rclone.conf 中填写后端配置：\n[remote] type = cloud api_host = http://127.0.0.1:8080 access_token = PASTE_ACCESS_TOKEN chunk_size = 500M upload_concurrency = 4 encrypt_files = true random_chunk_name = true channel_id = 0 root_folder_id = 配置完成后，先列一次远端文件，能列出来就说明令牌填对了。\n5.5 第 5 步：安装 Python 依赖 先确认 pip 可用，再按所选平台安装依赖。依赖包用于直传上传、机器人交互和图片处理，平台专属 SDK 请以官方文档为准，包名不要照抄下面的示例：\npython -m pip install --upgrade pip # 以下为通用示例包，平台 SDK 请按官方文档替换包名 python -m pip install --upgrade requests Pillow python-dotenv # 验证安装是否成功 python -c \"import requests, PIL, dotenv; print('依赖安装成功')\" 示例中几个通用包的用途：\n包 用途 requests 调用云端开放接口（上传/下载/查询） Pillow 图片处理（如生成缩略图） python-dotenv 读取本地配置文件，令牌、密钥不写死在代码里 5.6 第 6 步：创建两个私有空间 在云服务中创建两个私有空间：\n一个加密空间，用于加密备份 一个明文空间，用于日常直传 把机器人添加进明文空间并设为管理员，方便后续取文件。\n5.7 第 7 步：登录并填写令牌 服务端登录后，会返回会话令牌。令牌不要填在网页里，而是填回本地配置文件的 access_token 位置。\n⚠️ 这个令牌等同于登录态，别泄露给别人；一旦泄露，请立即在服务端撤销并重新生成。\n5.8 第 8 步：注册三个 Windows 服务 使用 NSSM 把三个命令注册为服务：\n服务 1：云存储 Web 服务 + API 服务 2：加密备份监听 服务 3：明文直传监听 服务启动后，做一次初始扫描并上传 manifest，然后进入监听循环。\n5.9 第 9 步：添加备份目录 分别给加密通道和明文通道添加备份目录，设置前缀、频道/空间和覆盖模式。\n6. 验证思路 经过验证，脚本可以自动备份，随后我把两个脚本封装成一个菜单界面。备份时默认忽略隐藏文件和空文件：\n隐藏目录/隐藏文件默认跳过，例如以 . 开头的路径、.log 文件和 0 字节文件 普通文件正常备份，状态文件会记录每个文件的 size、mtime、message_id 我还在统计脚本里加入了隐藏文件和实际备份文件的数量统计，方便校对。同时，我在云端空间里加了 manifest.txt 统计文件。manifest 不是由本地备份的，所以不计入本地统计；验证后发现各备份源都能正常自动备份。\n然后我在机器人上也做了验证：\n/status 查看状态 /all 查看全部目录 回复序号取文件 修改文件后触发自动上传 经过校验，加密备份和明文备份都验证成功。从文件备份、读取，到灾备恢复和异常处理，这套系统都能覆盖；需要加密的重要资料可以走加密通道，同时必须妥善备份密钥。\n7. 技术原理 技术 解决什么问题 核心原理 FileSystemWatcher 监听目录变化 Windows 文件系统事件 Debounce 防抖 避免频繁触发上传 事件后等待 N 秒再执行 文件锁 防止多个同步同时执行 独占打开锁文件 同步工具 加密备份同步 对比本地和远端差异 云存储服务 分片、加密、上传 调用云端开放接口上传分片 PostgreSQL 保存文件索引 记录文件、分片、空间状态 直传客户端 明文直传 客户端库封装开放接口 状态文件 记住已上传文件 保存 size、mtime、message_id manifest 记录目录和日期 本地生成日志上传云端 长轮询 机器人接收消息 定时拉取更新 回调按钮 机器人交互 内联键盘 + 回调数据 NSSM 开机自启 把命令注册成 Windows 服务 7.1 文件监听 使用 System.IO.FileSystemWatcher 监听目录，事件包括 Changed、Created、Deleted、Renamed。只监听事件还不够，文件系统事件可能漏掉，所以服务里还会做短间隔轮询兜底。\n7.2 防抖 事件触发后不立即同步，而是记录最后变化时间；只有距离最后一次变化超过防抖时间才真正执行，避免频繁小修改反复上传。\n7.3 文件锁 两个进程不能同时执行同步或上传，否则会产生重复记录。锁的原理是独占打开锁文件：第二个进程尝试打开时被拒绝，表示另一个同步正在运行。\n7.4 手动同步优先级 手动同步时，如果后台正在同步，不能直接杀掉进程，否则可能留下半成品数据库记录。方案是：\n手动同步创建 priority 文件 后台循环发现该文件后，停止下一个任务 手动同步等待当前任务完成，然后获取锁执行 手动执行完成后删除 priority 文件 7.5 同步原理 同步命令让远端和本地一致，支持保留空目录、并发传输、断点续传。sync 会对比本地和远端差异，只上传变化部分。\n7.6 状态文件 状态文件记录每个文件的大小、修改时间、消息 ID。扫描时先对比状态：\n大小和修改时间一致 → 已上传，跳过 不一致或没有记录 → 加入待上传队列 overwrite 模式 → 更新同一条远端消息 version 模式 → 保留历史版本 7.7 manifest manifest 记录目录里的所有文件、更新时间、覆盖时间，上传到云端，方便手动核对本地和远端数量。超过最大体积自动轮替，保留最近若干份。\n7.8 机器人交互 机器人通过长轮询接收消息，支持文本命令和内联按钮。目录数据由本地生成，机器人只是查询和取文件的入口。\n8. 常见问题排查思路 问题 排查思路 网页端无法登录 多为浏览器缓存、Cookie 或扩展拦截，清理后重试，或换浏览器 数据库服务无法启动 检查端口占用、数据目录权限、服务账号；先看系统事件日志 云端显示文件数比本地多 多为本地已删除但远端仍保留，或手机/手工上传；用 manifest 对比 清空远端后再次同步只上传少量文件 索引和远端不一致，先清索引再重建 同步产生重复记录 锁未生效或并发执行，检查锁文件是否残留 同步工具报 HTTP 500 多为服务端配置、令牌或数据库连接问题，先看服务端日志 机器人按钮没有反应 检查机器人令牌、回调处理和更新偏移量 机器人把文件发错位置 检查发送目标 ID 和私聊判断逻辑 手机上传的文件在目录里看不到 目录只汇总本地文件，远端手工文件需要单独标记 0 字节文件无法上传 默认跳过空文件，这是设计行为 bat 双击一闪而过 bat 缺少 pause，或在执行后直接退出；检查编码和换行 后台服务找不到 Python 服务环境变量和普通用户环境变量不是一回事，需要显式设置 Python 路径 会话数据库被锁 另一个进程正在使用会话，等待完成或检查锁残留 manifest 每小时都更新 没有判断内容是否变化，加内容签名即可 manifest 和日志无限增长 设置最大体积轮替和日志保留天数 同步后端突然失效 多为版本不匹配，升级后必须重新验证后端 加密备份不实时同步 事件监听可能漏事件，用短间隔轮询兜底 手动同步中断后实时同步停止 priority 文件残留导致，超过时间自动清理 9. 总结 这次项目从最初的模糊想法到最终落地，带给我的收获比预期大得多。回头对照最初列的 5 个需求——容量大、速度够用、文件变化后自动上传、异地保存、低成本——全部达成了。加密通道保护重要资料，明文通道随时手机取文件，两者互补；再加上和 Git 自动同步项目配合，小文件走 Git、大文件走云端，算是真正解决了我的备份焦虑。\n整个过程中，代码由 AI 辅助生成，但需求拆解、方案选型、测试验证、问题定位、优先级裁定、锁机制设计都需要自己判断。即使不手写每一行代码，理解系统逻辑和排障思路依然是核心能力。这个项目比普通脚本项目难度大得多——日志轮替、冲突管理、密钥生成、格式问题、版本冲突，每一个坑背后都涉及操作系统、网络协议、数据库和并发编程的知识。边做边查、反复测试，最终把理论上可行的方案变成了能稳定运行的系统。\n如果你也想搭一套自己的备份系统，可以从环境检查开始，逐步安装、添加目录、测试恢复，最后再交给服务自动运行。遇到问题，优先看服务日志和 manifest 统计，往往比瞎猜更快。\n最后提醒两件事：加密密钥丢了，已加密的数据基本等于永久丢失；自己的令牌、配置和会话文件不要公开分享。备份的核心不是\"上传了多少\"，而是\"丢了之后能恢复多少\"。祝大家备份无忧。\n欢迎访问我的个人博客https://dsduyopg-github-io.pages.dev/，里面还有我写的其他文章，有什么问题欢迎大家给我提意见。\n",
+  "wordCount" : "581",
+  "inLanguage": "zh-cn",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/csdn-%E5%8F%8C%E9%80%9A%E9%81%93%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "My_blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://dsduyopg-github-io.pages.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://dsduyopg-github-io.pages.dev/" accesskey="h" title="My_blog (Alt + H)">My_blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/posts/" title="文章">
+                    <span>文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/search/" title="搜索 (Alt &#43; /)" accesskey=/>
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/" title="专栏">
+                    <span>专栏</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/" title="草稿箱">
+                    <span>草稿箱</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">主页</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/%E8%8D%89%E7%A8%BF%E7%AE%B1/">草稿箱</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+<span>3 分钟</span>&nbsp;·&nbsp;<span>581 字</span>
+
+</div>
+  </header> <details class="toc" >
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">目录</span>
+    </summary>
+
+    <div class="inner"><ul>
+            <li>
+                <a href="#%e5%8f%8c%e9%80%9a%e9%81%93%e8%87%aa%e5%8a%a8%e5%a4%87%e4%bb%bd%e7%b3%bb%e7%bb%9f%e5%ae%9e%e6%88%98%e5%8a%a0%e5%af%86--%e6%98%8e%e6%96%87--%e6%9c%ba%e5%99%a8%e4%ba%ba%e5%8f%96%e6%96%87%e4%bb%b6" aria-label="双通道自动备份系统实战：加密 &#43; 明文 &#43; 机器人取文件">双通道自动备份系统实战：加密 + 明文 + 机器人取文件</a><ul>
+                    
+            <li>
+                <a href="#%e5%89%8d%e8%a8%80" aria-label="前言">前言</a></li>
+            <li>
+                <a href="#1-%e6%88%91%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81%e4%b8%80%e4%b8%aa%e8%87%aa%e5%8a%a8%e5%a4%87%e4%bb%bd%e7%b3%bb%e7%bb%9f" aria-label="1. 我为什么需要一个自动备份系统">1. 我为什么需要一个自动备份系统</a></li>
+            <li>
+                <a href="#2-%e6%9c%80%e7%bb%88%e5%81%9a%e6%88%90%e4%ba%86%e4%bb%80%e4%b9%88" aria-label="2. 最终做成了什么">2. 最终做成了什么</a></li>
+            <li>
+                <a href="#3-%e6%8a%80%e6%9c%af%e9%80%89%e5%9e%8b%e6%80%9d%e8%b7%af" aria-label="3. 技术选型思路">3. 技术选型思路</a></li>
+            <li>
+                <a href="#4-%e7%b3%bb%e7%bb%9f%e6%9e%b6%e6%9e%84" aria-label="4. 系统架构">4. 系统架构</a></li>
+            <li>
+                <a href="#5-%e5%ae%9e%e6%96%bd%e8%b7%af%e7%ba%bf%e9%80%9a%e7%94%a8%e7%89%88" aria-label="5. 实施路线（通用版）">5. 实施路线（通用版）</a><ul>
+                    
+            <li>
+                <a href="#51-%e7%ac%ac-1-%e6%ad%a5%e5%87%86%e5%a4%87%e7%8e%af%e5%a2%83" aria-label="5.1 第 1 步：准备环境">5.1 第 1 步：准备环境</a></li>
+            <li>
+                <a href="#52-%e7%ac%ac-2-%e6%ad%a5%e5%ae%89%e8%a3%85%e6%95%b0%e6%8d%ae%e5%ba%93" aria-label="5.2 第 2 步：安装数据库">5.2 第 2 步：安装数据库</a></li>
+            <li>
+                <a href="#53-%e7%ac%ac-3-%e6%ad%a5%e6%90%ad%e5%bb%ba%e4%ba%91%e7%ab%af%e5%ad%98%e5%82%a8%e6%9c%8d%e5%8a%a1" aria-label="5.3 第 3 步：搭建云端存储服务">5.3 第 3 步：搭建云端存储服务</a></li>
+            <li>
+                <a href="#54-%e7%ac%ac-4-%e6%ad%a5%e9%85%8d%e7%bd%ae%e5%90%8c%e6%ad%a5%e5%b7%a5%e5%85%b7" aria-label="5.4 第 4 步：配置同步工具">5.4 第 4 步：配置同步工具</a></li>
+            <li>
+                <a href="#55-%e7%ac%ac-5-%e6%ad%a5%e5%ae%89%e8%a3%85-python-%e4%be%9d%e8%b5%96" aria-label="5.5 第 5 步：安装 Python 依赖">5.5 第 5 步：安装 Python 依赖</a></li>
+            <li>
+                <a href="#56-%e7%ac%ac-6-%e6%ad%a5%e5%88%9b%e5%bb%ba%e4%b8%a4%e4%b8%aa%e7%a7%81%e6%9c%89%e7%a9%ba%e9%97%b4" aria-label="5.6 第 6 步：创建两个私有空间">5.6 第 6 步：创建两个私有空间</a></li>
+            <li>
+                <a href="#57-%e7%ac%ac-7-%e6%ad%a5%e7%99%bb%e5%bd%95%e5%b9%b6%e5%a1%ab%e5%86%99%e4%bb%a4%e7%89%8c" aria-label="5.7 第 7 步：登录并填写令牌">5.7 第 7 步：登录并填写令牌</a></li>
+            <li>
+                <a href="#58-%e7%ac%ac-8-%e6%ad%a5%e6%b3%a8%e5%86%8c%e4%b8%89%e4%b8%aa-windows-%e6%9c%8d%e5%8a%a1" aria-label="5.8 第 8 步：注册三个 Windows 服务">5.8 第 8 步：注册三个 Windows 服务</a></li>
+            <li>
+                <a href="#59-%e7%ac%ac-9-%e6%ad%a5%e6%b7%bb%e5%8a%a0%e5%a4%87%e4%bb%bd%e7%9b%ae%e5%bd%95" aria-label="5.9 第 9 步：添加备份目录">5.9 第 9 步：添加备份目录</a></li></ul>
+            </li>
+            <li>
+                <a href="#6-%e9%aa%8c%e8%af%81%e6%80%9d%e8%b7%af" aria-label="6. 验证思路">6. 验证思路</a></li>
+            <li>
+                <a href="#7-%e6%8a%80%e6%9c%af%e5%8e%9f%e7%90%86" aria-label="7. 技术原理">7. 技术原理</a><ul>
+                    
+            <li>
+                <a href="#71-%e6%96%87%e4%bb%b6%e7%9b%91%e5%90%ac" aria-label="7.1 文件监听">7.1 文件监听</a></li>
+            <li>
+                <a href="#72-%e9%98%b2%e6%8a%96" aria-label="7.2 防抖">7.2 防抖</a></li>
+            <li>
+                <a href="#73-%e6%96%87%e4%bb%b6%e9%94%81" aria-label="7.3 文件锁">7.3 文件锁</a></li>
+            <li>
+                <a href="#74-%e6%89%8b%e5%8a%a8%e5%90%8c%e6%ad%a5%e4%bc%98%e5%85%88%e7%ba%a7" aria-label="7.4 手动同步优先级">7.4 手动同步优先级</a></li>
+            <li>
+                <a href="#75-%e5%90%8c%e6%ad%a5%e5%8e%9f%e7%90%86" aria-label="7.5 同步原理">7.5 同步原理</a></li>
+            <li>
+                <a href="#76-%e7%8a%b6%e6%80%81%e6%96%87%e4%bb%b6" aria-label="7.6 状态文件">7.6 状态文件</a></li>
+            <li>
+                <a href="#77-manifest" aria-label="7.7 manifest">7.7 manifest</a></li>
+            <li>
+                <a href="#78-%e6%9c%ba%e5%99%a8%e4%ba%ba%e4%ba%a4%e4%ba%92" aria-label="7.8 机器人交互">7.8 机器人交互</a></li></ul>
+            </li>
+            <li>
+                <a href="#8-%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98%e6%8e%92%e6%9f%a5%e6%80%9d%e8%b7%af" aria-label="8. 常见问题排查思路">8. 常见问题排查思路</a></li>
+            <li>
+                <a href="#9-%e6%80%bb%e7%bb%93" aria-label="9. 总结">9. 总结</a>
+            </li>
+        </ul>
+        </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><h1 id="双通道自动备份系统实战加密--明文--机器人取文件">双通道自动备份系统实战：加密 + 明文 + 机器人取文件<a hidden class="anchor" aria-hidden="true" href="#双通道自动备份系统实战加密--明文--机器人取文件">#</a></h1>
+<blockquote>
+<p>本文为作者博客系列文章的精简版，内容已做匿名化处理。</p>
+</blockquote>
+<p>@[toc]</p>
+<h2 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h2>
+<p>用云端私有存储搭了一套免费双通道自动备份系统：</p>
+<ul>
+<li>加密备份 + 明文直传</li>
+<li>文件变化后自动上传，每小时全量同步兜底</li>
+<li>机器人支持查目录、翻页、按序号取文件</li>
+<li>Windows 服务开机自启</li>
+<li>完整记录实施思路和踩坑排查，可封装成一键安装包</li>
+</ul>
+<p><strong>需要准备</strong>：Windows 10/11 + Python 3.11+ + 合规的云存储账号</p>
+<p><strong>声明</strong>：本文为 AI 辅助开发实践记录。代码由 AI 辅助生成，作者负责需求设计、方案选型、测试、部署和排障。文中出现的云服务、机器人、令牌、用户名均为匿名化占位符，请勿直接复制使用；落地时请结合合规的云存储产品和当地法律法规。</p>
+<h2 id="1-我为什么需要一个自动备份系统">1. 我为什么需要一个自动备份系统<a hidden class="anchor" aria-hidden="true" href="#1-我为什么需要一个自动备份系统">#</a></h2>
+<p>我最怕的事，是电脑突然坏了。博客、课件、代码、学习资料全都存在本地硬盘里，坏了就真的什么都没了。U 盘会丢、会坏；传统网盘要么容量小，要么限速，要么收费；而且大多需要手动上传，经常想不起来备份。</p>
+<p>其实这个问题，我上一个项目就尝试解决过。当时我做了 Git 自动同步方案，先问了 AI 一个问题：远端仓库大小、单个仓库能存的文件数，到底有什么限制？得到的答案是：空间和单仓库大小都有明确上限。那时我就意识到，只靠 Git 一个小工具，解决不了所有备份问题。同步博客这种文件少、体积小的场景没什么压力，但一旦要同步课件、学习资料这类又多又大的文件，就很吃力了。Git 项目虽然也能备份，但只适合小文件。我需要探索一种新的备份范式。</p>
+<p>我把上面的痛点整理成了明确的需求：</p>
+<ul>
+<li>容量要大——能装下课件和学习资料</li>
+<li>速度不能太慢——别像某些网盘一样上传下载都限速</li>
+<li>要自动——文件一改，自动同步</li>
+<li>要异地保存——电脑坏了、U 盘丢了，文件还在别处</li>
+<li>成本要低——个人使用，不想年年交钱</li>
+</ul>
+<p>后来我发现，很多即时通讯软件自带&quot;私有频道/私有空间&quot;能力，可以存放大量文件，恰好符合容量大、成本低、跨设备访问的特点。于是我想：能不能用脚本把本地目录自动推送到云端私有空间，再通过机器人随时取文件？这就是这个项目的直接推动力。</p>
+<h2 id="2-最终做成了什么">2. 最终做成了什么<a hidden class="anchor" aria-hidden="true" href="#2-最终做成了什么">#</a></h2>
+<p>一套 Windows 上的双通道备份系统：</p>
+<ul>
+<li><strong>加密通道</strong>：文件先本地加密，再分片上传云端，内容不可直接查看</li>
+<li><strong>明文通道</strong>：文件以原始格式上传，可以在客户端直接查看、下载</li>
+<li><strong>实时同步</strong>：目录有变化，约 5~10 秒内自动上传；每小时还有全量同步兜底</li>
+<li><strong>机器人</strong>：发命令查总目录、今日更新，回复序号就能把对应文件发到私聊</li>
+<li><strong>后台服务</strong>：注册三个 Windows 服务，开机自启、崩溃自动重启</li>
+<li><strong>一键安装包</strong>：把整套系统封装成可以复制到其他电脑使用的安装包</li>
+</ul>
+<p>电脑自动备份，手机也能直接传文件，两边数据互通。</p>
+<h2 id="3-技术选型思路">3. 技术选型思路<a hidden class="anchor" aria-hidden="true" href="#3-技术选型思路">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>组件</th>
+					<th>作用</th>
+					<th>为什么选它</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>云端私有存储服务</td>
+					<td>文件分片、加密、上传</td>
+					<td>容量大、成本低、支持开放接口</td>
+			</tr>
+			<tr>
+					<td>PostgreSQL</td>
+					<td>保存文件索引、分片、空间信息</td>
+					<td>原生 Windows 服务，稳定直观</td>
+			</tr>
+			<tr>
+					<td>同步工具</td>
+					<td>加密备份的同步</td>
+					<td>支持远程后端，可命令行调用</td>
+			</tr>
+			<tr>
+					<td>直传客户端</td>
+					<td>明文直传和机器人逻辑</td>
+					<td>Python 生态成熟，接口灵活</td>
+			</tr>
+			<tr>
+					<td>机器人接口</td>
+					<td>目录检索、取文件</td>
+					<td>官方开放能力，天然跨设备</td>
+			</tr>
+			<tr>
+					<td>NSSM</td>
+					<td>注册 Windows 服务</td>
+					<td>开机自启、崩溃自动重启</td>
+			</tr>
+	</tbody>
+</table>
+<p>选型时主要考虑三件事：</p>
+<p><strong>为什么选云端私有空间？</strong> 免费、容量大、跨设备（电脑和手机都能访问），不依赖本地磁盘。缺点是依赖第三方平台，所以只作为异地副本，本地保留原文件。</p>
+<p><strong>为什么加密和明文两条通道？</strong> 加密备份安全，文件加密后都是乱码，查看必须依赖服务端；一旦丢失密钥或配置文件，数据就成了死数据。明文直传恰好解决这些缺点：可以跨设备直接查看文件，下载恢复不再依赖电脑，但安全性低。所以两个都要：重要资料走加密，日常文件走明文。</p>
+<p><strong>为什么分片设 500 MB、默认覆盖模式？</strong> 分片越大，云端消息条数越少，方便管理；但又不能设得过大。日常备份不需要每次修改都留历史版本，默认覆盖只保留最新版，需要版本历史的目录可以单独开启 version 模式。</p>
+<h2 id="4-系统架构">4. 系统架构<a hidden class="anchor" aria-hidden="true" href="#4-系统架构">#</a></h2>
+<p>所有程序都放在用户目录下，加密备份和明文直传两条链路各自独立：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>%USERPROFILE%\.backup\               ← 备份系统的&#34;家&#34;
+</span></span><span style="display:flex;"><span>├─ backup.ps1          加密备份服务（同步工具 + 云存储）
+</span></span><span style="display:flex;"><span>├─ rclone.conf         同步工具配置
+</span></span><span style="display:flex;"><span>├─ backup-config.json  备份源、同步间隔、排除规则
+</span></span><span style="display:flex;"><span>├─ logs\               同步日志
+</span></span><span style="display:flex;"><span>└─ direct\             明文直传 + 机器人
+</span></span><span style="display:flex;"><span>   ├─ direct-watch.ps1  明文直传服务
+</span></span><span style="display:flex;"><span>   ├─ direct_upload.py  上传与机器人核心
+</span></span><span style="display:flex;"><span>   ├─ direct_config.json 空间、备份源配置
+</span></span><span style="display:flex;"><span>   └─ bot_config.json   机器人配置（敏感，不展示）
+</span></span></code></pre></div><p>整套系统分两条备份链路，外加一个检索机器人，跑在三个 Windows 服务上：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>本地目录
+</span></span><span style="display:flex;"><span>  ├─ 加密备份: FileSystemWatcher -&gt; 同步工具 -&gt; 云存储（加密）
+</span></span><span style="display:flex;"><span>  └─ 明文直传: FileSystemWatcher -&gt; 直传客户端 -&gt; 云空间（可直接查看）
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>机器人
+</span></span><span style="display:flex;"><span>  ├─ /start 开始
+</span></span><span style="display:flex;"><span>  ├─ /status 查看状态
+</span></span><span style="display:flex;"><span>  ├─ /today 今日更新
+</span></span><span style="display:flex;"><span>  ├─ /all 全部目录
+</span></span><span style="display:flex;"><span>  ├─ 翻页 / 跳页 / 回复序号取文件
+</span></span><span style="display:flex;"><span>  └─ 每日更新 + 停止按钮
+</span></span></code></pre></div><p>加密和明文两条链路互相独立，各自有空间、各自的锁和 manifest 日志，互不影响。</p>
+<h2 id="5-实施路线通用版">5. 实施路线（通用版）<a hidden class="anchor" aria-hidden="true" href="#5-实施路线通用版">#</a></h2>
+<p>下面只保留通用的实施思路，具体账号、令牌、密钥的获取方式请按你所选云存储服务的官方文档执行。</p>
+<h3 id="51-第-1-步准备环境">5.1 第 1 步：准备环境<a hidden class="anchor" aria-hidden="true" href="#51-第-1-步准备环境">#</a></h3>
+<p>安装 Python 3.11+，安装时勾选 &ldquo;Add Python to PATH&rdquo;，然后验证：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python --version
+</span></span></code></pre></div><p>能输出版本号就成功。</p>
+<h3 id="52-第-2-步安装数据库">5.2 第 2 步：安装数据库<a hidden class="anchor" aria-hidden="true" href="#52-第-2-步安装数据库">#</a></h3>
+<p>使用原生 PostgreSQL 服务，而不是 Docker，减少一层依赖，也更方便开机自启。创建备份服务专用的数据库账号和库，密码使用随机生成的长密码，并妥善保管。</p>
+<h3 id="53-第-3-步搭建云端存储服务">5.3 第 3 步：搭建云端存储服务<a hidden class="anchor" aria-hidden="true" href="#53-第-3-步搭建云端存储服务">#</a></h3>
+<p>部署一个支持文件分片、加密、上传的服务端，配置文件里放占位符：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#75715e"># 核心配置占位符</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">data-source</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;postgres://用户名:密码@地址:端口/数据库&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jwt-secret</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;JWT_SECRET&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">encryption-key</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ENCRYPTION_KEY&#34;</span>
+</span></span></code></pre></div><p>必须修改三处：</p>
+<table>
+	<thead>
+			<tr>
+					<th>配置项</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>数据库连接串</td>
+					<td>换成真实密码和端口</td>
+			</tr>
+			<tr>
+					<td>JWT 签名密钥</td>
+					<td>换成随机长字符串，不要使用字面量</td>
+			</tr>
+			<tr>
+					<td>加密密钥</td>
+					<td>随机生成，长度建议 32B，丢失后无法解密</td>
+			</tr>
+	</tbody>
+</table>
+<p>生成随机密钥的参考命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$b = New-Object byte[] <span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">System.Security.Cryptography.RandomNumberGenerator</span>]::Create().GetBytes($b)
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">System.BitConverter</span>]::ToString($b).Replace(<span style="color:#e6db74">&#34;-&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span></code></pre></div><p>服务启动后，用三层检查确认正常：</p>
+<ol>
+<li>第 1 层：进程正常、端口在听</li>
+<li>第 2 层：Web 可访问（返回 200）</li>
+<li>第 3 层：数据库连接能查到一行记录</li>
+</ol>
+<h3 id="54-第-4-步配置同步工具">5.4 第 4 步：配置同步工具<a hidden class="anchor" aria-hidden="true" href="#54-第-4-步配置同步工具">#</a></h3>
+<p>普通版同步工具不一定支持云存储后端，必须使用配套版本，并在 rclone.conf 中填写后端配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#66d9ef">[remote]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">type</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">cloud</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">api_host</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">http://127.0.0.1:8080</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">access_token</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">PASTE_ACCESS_TOKEN</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">chunk_size</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">500M</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">upload_concurrency</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">encrypt_files</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">random_chunk_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">channel_id</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">root_folder_id</span> <span style="color:#f92672">=</span>
+</span></span></code></pre></div><p>配置完成后，先列一次远端文件，能列出来就说明令牌填对了。</p>
+<h3 id="55-第-5-步安装-python-依赖">5.5 第 5 步：安装 Python 依赖<a hidden class="anchor" aria-hidden="true" href="#55-第-5-步安装-python-依赖">#</a></h3>
+<p>先确认 pip 可用，再按所选平台安装依赖。依赖包用于直传上传、机器人交互和图片处理，<strong>平台专属 SDK 请以官方文档为准，包名不要照抄下面的示例</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python -m pip install --upgrade pip
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 以下为通用示例包，平台 SDK 请按官方文档替换包名</span>
+</span></span><span style="display:flex;"><span>python -m pip install --upgrade requests Pillow python-dotenv
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证安装是否成功</span>
+</span></span><span style="display:flex;"><span>python -c <span style="color:#e6db74">&#34;import requests, PIL, dotenv; print(&#39;依赖安装成功&#39;)&#34;</span>
+</span></span></code></pre></div><p>示例中几个通用包的用途：</p>
+<table>
+	<thead>
+			<tr>
+					<th>包</th>
+					<th>用途</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>requests</td>
+					<td>调用云端开放接口（上传/下载/查询）</td>
+			</tr>
+			<tr>
+					<td>Pillow</td>
+					<td>图片处理（如生成缩略图）</td>
+			</tr>
+			<tr>
+					<td>python-dotenv</td>
+					<td>读取本地配置文件，令牌、密钥不写死在代码里</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="56-第-6-步创建两个私有空间">5.6 第 6 步：创建两个私有空间<a hidden class="anchor" aria-hidden="true" href="#56-第-6-步创建两个私有空间">#</a></h3>
+<p>在云服务中创建两个私有空间：</p>
+<ul>
+<li>一个<strong>加密空间</strong>，用于加密备份</li>
+<li>一个<strong>明文空间</strong>，用于日常直传</li>
+</ul>
+<p>把机器人添加进明文空间并设为管理员，方便后续取文件。</p>
+<h3 id="57-第-7-步登录并填写令牌">5.7 第 7 步：登录并填写令牌<a hidden class="anchor" aria-hidden="true" href="#57-第-7-步登录并填写令牌">#</a></h3>
+<p>服务端登录后，会返回会话令牌。令牌不要填在网页里，而是填回本地配置文件的 access_token 位置。</p>
+<blockquote>
+<p>⚠️ 这个令牌等同于登录态，别泄露给别人；一旦泄露，请立即在服务端撤销并重新生成。</p>
+</blockquote>
+<h3 id="58-第-8-步注册三个-windows-服务">5.8 第 8 步：注册三个 Windows 服务<a hidden class="anchor" aria-hidden="true" href="#58-第-8-步注册三个-windows-服务">#</a></h3>
+<p>使用 NSSM 把三个命令注册为服务：</p>
+<ol>
+<li>服务 1：云存储 Web 服务 + API</li>
+<li>服务 2：加密备份监听</li>
+<li>服务 3：明文直传监听</li>
+</ol>
+<p>服务启动后，做一次初始扫描并上传 manifest，然后进入监听循环。</p>
+<h3 id="59-第-9-步添加备份目录">5.9 第 9 步：添加备份目录<a hidden class="anchor" aria-hidden="true" href="#59-第-9-步添加备份目录">#</a></h3>
+<p>分别给加密通道和明文通道添加备份目录，设置前缀、频道/空间和覆盖模式。</p>
+<h2 id="6-验证思路">6. 验证思路<a hidden class="anchor" aria-hidden="true" href="#6-验证思路">#</a></h2>
+<p>经过验证，脚本可以自动备份，随后我把两个脚本封装成一个菜单界面。备份时默认忽略隐藏文件和空文件：</p>
+<ul>
+<li>隐藏目录/隐藏文件默认跳过，例如以 <code>.</code> 开头的路径、<code>.log</code> 文件和 0 字节文件</li>
+<li>普通文件正常备份，状态文件会记录每个文件的 size、mtime、message_id</li>
+</ul>
+<p>我还在统计脚本里加入了隐藏文件和实际备份文件的数量统计，方便校对。同时，我在云端空间里加了 manifest.txt 统计文件。manifest 不是由本地备份的，所以不计入本地统计；验证后发现各备份源都能正常自动备份。</p>
+<p>然后我在机器人上也做了验证：</p>
+<ul>
+<li>/status 查看状态</li>
+<li>/all 查看全部目录</li>
+<li>回复序号取文件</li>
+<li>修改文件后触发自动上传</li>
+</ul>
+<p>经过校验，加密备份和明文备份都验证成功。从文件备份、读取，到灾备恢复和异常处理，这套系统都能覆盖；需要加密的重要资料可以走加密通道，同时必须妥善备份密钥。</p>
+<h2 id="7-技术原理">7. 技术原理<a hidden class="anchor" aria-hidden="true" href="#7-技术原理">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>技术</th>
+					<th>解决什么问题</th>
+					<th>核心原理</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>FileSystemWatcher</td>
+					<td>监听目录变化</td>
+					<td>Windows 文件系统事件</td>
+			</tr>
+			<tr>
+					<td>Debounce 防抖</td>
+					<td>避免频繁触发上传</td>
+					<td>事件后等待 N 秒再执行</td>
+			</tr>
+			<tr>
+					<td>文件锁</td>
+					<td>防止多个同步同时执行</td>
+					<td>独占打开锁文件</td>
+			</tr>
+			<tr>
+					<td>同步工具</td>
+					<td>加密备份同步</td>
+					<td>对比本地和远端差异</td>
+			</tr>
+			<tr>
+					<td>云存储服务</td>
+					<td>分片、加密、上传</td>
+					<td>调用云端开放接口上传分片</td>
+			</tr>
+			<tr>
+					<td>PostgreSQL</td>
+					<td>保存文件索引</td>
+					<td>记录文件、分片、空间状态</td>
+			</tr>
+			<tr>
+					<td>直传客户端</td>
+					<td>明文直传</td>
+					<td>客户端库封装开放接口</td>
+			</tr>
+			<tr>
+					<td>状态文件</td>
+					<td>记住已上传文件</td>
+					<td>保存 size、mtime、message_id</td>
+			</tr>
+			<tr>
+					<td>manifest</td>
+					<td>记录目录和日期</td>
+					<td>本地生成日志上传云端</td>
+			</tr>
+			<tr>
+					<td>长轮询</td>
+					<td>机器人接收消息</td>
+					<td>定时拉取更新</td>
+			</tr>
+			<tr>
+					<td>回调按钮</td>
+					<td>机器人交互</td>
+					<td>内联键盘 + 回调数据</td>
+			</tr>
+			<tr>
+					<td>NSSM</td>
+					<td>开机自启</td>
+					<td>把命令注册成 Windows 服务</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="71-文件监听">7.1 文件监听<a hidden class="anchor" aria-hidden="true" href="#71-文件监听">#</a></h3>
+<p>使用 System.IO.FileSystemWatcher 监听目录，事件包括 Changed、Created、Deleted、Renamed。只监听事件还不够，文件系统事件可能漏掉，所以服务里还会做短间隔轮询兜底。</p>
+<h3 id="72-防抖">7.2 防抖<a hidden class="anchor" aria-hidden="true" href="#72-防抖">#</a></h3>
+<p>事件触发后不立即同步，而是记录最后变化时间；只有距离最后一次变化超过防抖时间才真正执行，避免频繁小修改反复上传。</p>
+<h3 id="73-文件锁">7.3 文件锁<a hidden class="anchor" aria-hidden="true" href="#73-文件锁">#</a></h3>
+<p>两个进程不能同时执行同步或上传，否则会产生重复记录。锁的原理是独占打开锁文件：第二个进程尝试打开时被拒绝，表示另一个同步正在运行。</p>
+<h3 id="74-手动同步优先级">7.4 手动同步优先级<a hidden class="anchor" aria-hidden="true" href="#74-手动同步优先级">#</a></h3>
+<p>手动同步时，如果后台正在同步，不能直接杀掉进程，否则可能留下半成品数据库记录。方案是：</p>
+<ol>
+<li>手动同步创建 priority 文件</li>
+<li>后台循环发现该文件后，停止下一个任务</li>
+<li>手动同步等待当前任务完成，然后获取锁执行</li>
+<li>手动执行完成后删除 priority 文件</li>
+</ol>
+<h3 id="75-同步原理">7.5 同步原理<a hidden class="anchor" aria-hidden="true" href="#75-同步原理">#</a></h3>
+<p>同步命令让远端和本地一致，支持保留空目录、并发传输、断点续传。sync 会对比本地和远端差异，只上传变化部分。</p>
+<h3 id="76-状态文件">7.6 状态文件<a hidden class="anchor" aria-hidden="true" href="#76-状态文件">#</a></h3>
+<p>状态文件记录每个文件的大小、修改时间、消息 ID。扫描时先对比状态：</p>
+<ul>
+<li>大小和修改时间一致 → 已上传，跳过</li>
+<li>不一致或没有记录 → 加入待上传队列</li>
+<li>overwrite 模式 → 更新同一条远端消息</li>
+<li>version 模式 → 保留历史版本</li>
+</ul>
+<h3 id="77-manifest">7.7 manifest<a hidden class="anchor" aria-hidden="true" href="#77-manifest">#</a></h3>
+<p>manifest 记录目录里的所有文件、更新时间、覆盖时间，上传到云端，方便手动核对本地和远端数量。超过最大体积自动轮替，保留最近若干份。</p>
+<h3 id="78-机器人交互">7.8 机器人交互<a hidden class="anchor" aria-hidden="true" href="#78-机器人交互">#</a></h3>
+<p>机器人通过长轮询接收消息，支持文本命令和内联按钮。目录数据由本地生成，机器人只是查询和取文件的入口。</p>
+<h2 id="8-常见问题排查思路">8. 常见问题排查思路<a hidden class="anchor" aria-hidden="true" href="#8-常见问题排查思路">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>问题</th>
+					<th>排查思路</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>网页端无法登录</td>
+					<td>多为浏览器缓存、Cookie 或扩展拦截，清理后重试，或换浏览器</td>
+			</tr>
+			<tr>
+					<td>数据库服务无法启动</td>
+					<td>检查端口占用、数据目录权限、服务账号；先看系统事件日志</td>
+			</tr>
+			<tr>
+					<td>云端显示文件数比本地多</td>
+					<td>多为本地已删除但远端仍保留，或手机/手工上传；用 manifest 对比</td>
+			</tr>
+			<tr>
+					<td>清空远端后再次同步只上传少量文件</td>
+					<td>索引和远端不一致，先清索引再重建</td>
+			</tr>
+			<tr>
+					<td>同步产生重复记录</td>
+					<td>锁未生效或并发执行，检查锁文件是否残留</td>
+			</tr>
+			<tr>
+					<td>同步工具报 HTTP 500</td>
+					<td>多为服务端配置、令牌或数据库连接问题，先看服务端日志</td>
+			</tr>
+			<tr>
+					<td>机器人按钮没有反应</td>
+					<td>检查机器人令牌、回调处理和更新偏移量</td>
+			</tr>
+			<tr>
+					<td>机器人把文件发错位置</td>
+					<td>检查发送目标 ID 和私聊判断逻辑</td>
+			</tr>
+			<tr>
+					<td>手机上传的文件在目录里看不到</td>
+					<td>目录只汇总本地文件，远端手工文件需要单独标记</td>
+			</tr>
+			<tr>
+					<td>0 字节文件无法上传</td>
+					<td>默认跳过空文件，这是设计行为</td>
+			</tr>
+			<tr>
+					<td>bat 双击一闪而过</td>
+					<td>bat 缺少 pause，或在执行后直接退出；检查编码和换行</td>
+			</tr>
+			<tr>
+					<td>后台服务找不到 Python</td>
+					<td>服务环境变量和普通用户环境变量不是一回事，需要显式设置 Python 路径</td>
+			</tr>
+			<tr>
+					<td>会话数据库被锁</td>
+					<td>另一个进程正在使用会话，等待完成或检查锁残留</td>
+			</tr>
+			<tr>
+					<td>manifest 每小时都更新</td>
+					<td>没有判断内容是否变化，加内容签名即可</td>
+			</tr>
+			<tr>
+					<td>manifest 和日志无限增长</td>
+					<td>设置最大体积轮替和日志保留天数</td>
+			</tr>
+			<tr>
+					<td>同步后端突然失效</td>
+					<td>多为版本不匹配，升级后必须重新验证后端</td>
+			</tr>
+			<tr>
+					<td>加密备份不实时同步</td>
+					<td>事件监听可能漏事件，用短间隔轮询兜底</td>
+			</tr>
+			<tr>
+					<td>手动同步中断后实时同步停止</td>
+					<td>priority 文件残留导致，超过时间自动清理</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="9-总结">9. 总结<a hidden class="anchor" aria-hidden="true" href="#9-总结">#</a></h2>
+<p>这次项目从最初的模糊想法到最终落地，带给我的收获比预期大得多。回头对照最初列的 5 个需求——容量大、速度够用、文件变化后自动上传、异地保存、低成本——全部达成了。加密通道保护重要资料，明文通道随时手机取文件，两者互补；再加上和 Git 自动同步项目配合，小文件走 Git、大文件走云端，算是真正解决了我的备份焦虑。</p>
+<p>整个过程中，代码由 AI 辅助生成，但需求拆解、方案选型、测试验证、问题定位、优先级裁定、锁机制设计都需要自己判断。即使不手写每一行代码，理解系统逻辑和排障思路依然是核心能力。这个项目比普通脚本项目难度大得多——日志轮替、冲突管理、密钥生成、格式问题、版本冲突，每一个坑背后都涉及操作系统、网络协议、数据库和并发编程的知识。边做边查、反复测试，最终把理论上可行的方案变成了能稳定运行的系统。</p>
+<p>如果你也想搭一套自己的备份系统，可以从环境检查开始，逐步安装、添加目录、测试恢复，最后再交给服务自动运行。遇到问题，优先看服务日志和 manifest 统计，往往比瞎猜更快。</p>
+<p>最后提醒两件事：加密密钥丢了，已加密的数据基本等于永久丢失；自己的令牌、配置和会话文件不要公开分享。备份的核心不是&quot;上传了多少&quot;，而是&quot;丢了之后能恢复多少&quot;。祝大家备份无忧。</p>
+<hr>
+<p>欢迎访问我的个人博客https://dsduyopg-github-io.pages.dev/，里面还有我写的其他文章，有什么问题欢迎大家给我提意见。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on x"
+            href="https://x.com/intent/tweet/?text=&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f&amp;hashtags=">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f&amp;title=&amp;summary=&amp;source=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f&title=">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on whatsapp"
+            href="https://api.whatsapp.com/send?text=%20-%20https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on telegram"
+            href="https://telegram.me/share/url?text=&amp;url=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=&u=https%3a%2f%2fdsduyopg-github-io.pages.dev%2f%25E8%258D%2589%25E7%25A8%25BF%25E7%25AE%25B1%2fcsdn-%25E5%258F%258C%25E9%2580%259A%25E9%2581%2593%25E8%2587%25AA%25E5%258A%25A8%25E5%25A4%2587%25E4%25BB%25BD%25E7%25B3%25BB%25E7%25BB%259F%25E5%25AE%259E%25E6%2588%2598%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://dsduyopg-github-io.pages.dev/">My_blog</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+<div class="busuanzi">
+  本站访客 <span id="busuanzi_value_site_uv"></span> ·
+  访问量 <span id="busuanzi_value_site_pv"></span> · 本文阅读 <span id="busuanzi_value_page_pv"></span>
+</div>
+
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script>
+
+<script>
+  (function () {
+    var keyViews = 'blog_views';
+    var keyTitles = 'blog_titles';
+    var isArticle = !!document.querySelector('.post-single');
+    var hotEl = document.getElementById('hot-posts');
+
+    if (isArticle) {
+      var path = location.pathname;
+      var title = (document.title || '').replace(/\s*\|.*$/, '').trim();
+      if (!path || !title) return;
+      var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
+      var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
+      views[path] = (views[path] || 0) + 1;
+      titles[path] = title;
+      localStorage.setItem(keyViews, JSON.stringify(views));
+      localStorage.setItem(keyTitles, JSON.stringify(titles));
+      return;
+    }
+
+    if (!hotEl) return;
+    if (hotEl.children.length) return; 
+    var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
+    var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
+    var rows = Object.keys(views)
+      .filter(function (p) {
+        return p.indexOf('/posts/') === 0
+          && p.indexOf('/page/') === -1
+          && titles[p]
+          && titles[p] !== '我的博客';
+      })
+      .sort(function (a, b) { return views[b] - views[a]; })
+      .slice(0, 5);
+    if (!rows.length) return;
+
+    var html = '<h3>热门文章</h3><ol class="hot-list">';
+    rows.forEach(function (p) {
+      html += '<li><a href="' + p + '">' + titles[p] + '</a></li>';
+    });
+    html += '</ol>';
+    hotEl.innerHTML = html;
+  })();
+</script>
+
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

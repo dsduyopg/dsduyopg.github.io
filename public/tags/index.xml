@@ -1,1 +1,110 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tags on My_blog</title><link>https://dsduyopg-github-io.pages.dev/tags/</link><description>Recent content in Tags on My_blog</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://dsduyopg-github-io.pages.dev/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>NSSM</title><link>https://dsduyopg-github-io.pages.dev/tags/nssm/</link><pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/nssm/</guid><description/></item><item><title>PostgreSQL</title><link>https://dsduyopg-github-io.pages.dev/tags/postgresql/</link><pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/postgresql/</guid><description/></item><item><title>Windows</title><link>https://dsduyopg-github-io.pages.dev/tags/windows/</link><pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/windows/</guid><description/></item><item><title>AI辅助开发</title><link>https://dsduyopg-github-io.pages.dev/tags/ai%E8%BE%85%E5%8A%A9%E5%BC%80%E5%8F%91/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/ai%E8%BE%85%E5%8A%A9%E5%BC%80%E5%8F%91/</guid><description/></item><item><title>Git</title><link>https://dsduyopg-github-io.pages.dev/tags/git/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/git/</guid><description/></item><item><title>Iptables</title><link>https://dsduyopg-github-io.pages.dev/tags/iptables/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/iptables/</guid><description/></item><item><title>Linux</title><link>https://dsduyopg-github-io.pages.dev/tags/linux/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/linux/</guid><description/></item><item><title>NAT</title><link>https://dsduyopg-github-io.pages.dev/tags/nat/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/nat/</guid><description/></item><item><title>Teldrive</title><link>https://dsduyopg-github-io.pages.dev/tags/teldrive/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/teldrive/</guid><description/></item><item><title>Telegram</title><link>https://dsduyopg-github-io.pages.dev/tags/telegram/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/telegram/</guid><description/></item><item><title>VMware</title><link>https://dsduyopg-github-io.pages.dev/tags/vmware/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/vmware/</guid><description/></item><item><title>备份</title><link>https://dsduyopg-github-io.pages.dev/tags/%E5%A4%87%E4%BB%BD/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/%E5%A4%87%E4%BB%BD/</guid><description/></item><item><title>网络排错</title><link>https://dsduyopg-github-io.pages.dev/tags/%E7%BD%91%E7%BB%9C%E6%8E%92%E9%94%99/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/%E7%BD%91%E7%BB%9C%E6%8E%92%E9%94%99/</guid><description/></item><item><title>自动化</title><link>https://dsduyopg-github-io.pages.dev/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on My_blog</title>
+    <link>https://dsduyopg-github-io.pages.dev/tags/</link>
+    <description>Recent content in Tags on My_blog</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://dsduyopg-github-io.pages.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NSSM</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/nssm/</link>
+      <pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/nssm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PostgreSQL</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/postgresql/</link>
+      <pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/postgresql/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/windows/</link>
+      <pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/windows/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI辅助开发</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/ai%E8%BE%85%E5%8A%A9%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/ai%E8%BE%85%E5%8A%A9%E5%BC%80%E5%8F%91/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/git/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Iptables</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/iptables/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/iptables/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/linux/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NAT</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/nat/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/nat/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Teldrive</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/teldrive/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/teldrive/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Telegram</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/telegram/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/telegram/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VMware</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/vmware/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/vmware/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>备份</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/%E5%A4%87%E4%BB%BD/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/%E5%A4%87%E4%BB%BD/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>网络排错</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/%E7%BD%91%E7%BB%9C%E6%8E%92%E9%94%99/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/%E7%BD%91%E7%BB%9C%E6%8E%92%E9%94%99/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>自动化</title>
+      <link>https://dsduyopg-github-io.pages.dev/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

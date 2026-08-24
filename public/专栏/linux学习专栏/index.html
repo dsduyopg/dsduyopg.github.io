@@ -1,146 +1,506 @@
-<!doctype html><html lang=zh-cn dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>linux学习专栏 | My_blog</title><meta name=keywords content><meta name=description content="linux学习专栏 - My_blog"><meta name=author content><link rel=canonical href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/><link crossorigin=anonymous href=/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as=style><link rel=icon href=https://dsduyopg-github-io.pages.dev/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://dsduyopg-github-io.pages.dev/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://dsduyopg-github-io.pages.dev/favicon-32x32.png><link rel=apple-touch-icon href=https://dsduyopg-github-io.pages.dev/apple-touch-icon.png><link rel=mask-icon href=https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate type=application/rss+xml href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml title=rss><link rel=alternate hreflang=zh-cn href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/"><meta property="og:site_name" content="My_blog"><meta property="og:title" content="linux学习专栏"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="linux学习专栏"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"linux学习专栏","item":"https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/"}]}</script></head><body class=list id=top><header class=header><nav class=header-nav><div class=logo><a href=https://dsduyopg-github-io.pages.dev/ accesskey=h title="My_blog (Alt + H)">My_blog</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://dsduyopg-github-io.pages.dev/ title=首页><span>首页</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/posts/ title=文章><span>文章</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/archives/ title=归档><span>归档</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/tags/ title=标签><span>标签</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/search/ title="搜索 (Alt + /)" accesskey=/><span>搜索</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/ title=专栏><span>专栏</span></a></li><li><a href=https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/ title=草稿箱><span>草稿箱</span></a></li></ul></nav></header><main class=main><header class=page-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
-<a href=/%E4%B8%93%E6%A0%8F/>专栏</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1>linux学习专栏
-<a href=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml title=RSS aria-label=RSS><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" height="23"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></h1></header><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>【实战】DNS建设案例_</h2></header><div class=entry-content><p>目录 【实战】DNS建设案例: 0.需求 1.准备工作 2.进行标准化的服务器配置 1.修改ip 2.修改主机名 3.修改hosts文件 4.免密配置 3.实操流程 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 1.环境变量配置 2.任意目录测试一下 2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 2.解压这个包 3.运行这个软件，并在浏览器查看 2.在node2安装相关软件 1.安装NFS 3安装ftp软件 5.在node3中配置dns服务器 1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 3.修改/var/named/itcast.local.db 4.修改/var/named/192.168.149.rev文件 5.检测 6.启动服务以及开放端口 6.测试操作 6.总结 【实战】DNS建设案例: 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问
-NFS服务器域名： nfs.itcast.local
-FTP服务器域名： ftp.itcast.local
-tomcat服务器域名： www.itcast.local
-FTP服务器要求:
-1- 禁锢FTP目录： /export/ftp
-2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可
-3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器
-windows中，建议使用filezilla.exe 软件来连接
-NFS服务器：
-共享目录： /export/nfs
-要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可） 1.准备工作 我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了
+<!DOCTYPE html>
+<html lang="zh-cn" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>linux学习专栏 | My_blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="linux学习专栏 - My_blog">
+<meta name="author" content="">
+<link rel="canonical" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.85daf28b5b890470241f2842b76ca4d15d883fbb8eb6fff1f09f5c182ea23a8e.css" integrity="sha256-hdryi1uJBHAkHyhCt2yk0V2IP7uOtv/x8J9cGC6iOo4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://dsduyopg-github-io.pages.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://dsduyopg-github-io.pages.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://dsduyopg-github-io.pages.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://dsduyopg-github-io.pages.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://dsduyopg-github-io.pages.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml" title="rss">
+<link rel="alternate" hreflang="zh-cn" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/">
+  <meta property="og:site_name" content="My_blog">
+  <meta property="og:title" content="linux学习专栏">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="linux学习专栏">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "linux学习专栏",
+      "item": "https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/"
+    }
+  ]
+}
+</script>
+</head>
+<body class="list" id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://dsduyopg-github-io.pages.dev/" accesskey="h" title="My_blog (Alt + H)">My_blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/posts/" title="文章">
+                    <span>文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/search/" title="搜索 (Alt &#43; /)" accesskey=/>
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/" title="专栏">
+                    <span>专栏</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dsduyopg-github-io.pages.dev/%E8%8D%89%E7%A8%BF%E7%AE%B1/" title="草稿箱">
+                    <span>草稿箱</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+            <a href="/">主页</a>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="/%E4%B8%93%E6%A0%8F/">专栏</a>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</nav>
+  <h1>
+    linux学习专栏
+    <a href="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
+</header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">【实战】DNS建设案例_
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 【实战】DNS建设案例: 0.需求 1.准备工作 2.进行标准化的服务器配置 1.修改ip 2.修改主机名 3.修改hosts文件 4.免密配置 3.实操流程 4.在node1和node2中安装相关服务 1.node1上面安装相关软件 1.先在node1上面安装jdk软件包 1.环境变量配置 2.任意目录测试一下 2.最后安装tomcat服务器 1,从官网下载阿帕奇的tar的包 2.解压这个包 3.运行这个软件，并在浏览器查看 2.在node2安装相关软件 1.安装NFS 3安装ftp软件 5.在node3中配置dns服务器 1.修改named.conf这个文件 2.修改vi /etc/named.rfc1912.zones 3.修改/var/named/itcast.local.db 4.修改/var/named/192.168.149.rev文件 5.检测 6.启动服务以及开放端口 6.测试操作 6.总结 【实战】DNS建设案例: 0.需求 目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问
+NFS服务器域名： nfs.itcast.localFTP服务器域名： ftp.itcast.localtomcat服务器域名： www.itcast.localFTP服务器要求:1- 禁锢FTP目录： /export/ftp2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器windows中，建议使用filezilla.exe 软件来连接NFS服务器：共享目录： /export/nfs要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可） 1.准备工作 我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了
 2.进行标准化的服务器配置 因为node1和node2的之前配置过了免密ssh登录，以及用主机名可以ping通，因此我们只需要对node3进行修改就可以了
-ip： 192.168.149.129
-主机名： node3.itcast.cn
-hosts文件: 增加对node3的解析
-免密配置：增加对node3的免密 1.修改ip 我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效 这个是重启这个服务项 这个就是重启网卡这个服务了 最后我们查询一下，是否成功了呢 发现这修改是生效的
-...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>511 字</span></footer><a class=entry-link aria-label="post link to 【实战】DNS建设案例_" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>DNS服务器</h2></header><div class=entry-content><p>目录 一.DNS服务器软件介绍 1… DNS的基本概念 2.DNS结构 1.根域 .（root） 2.顶级域DNS服务器(TLD DNS Servers) 3.权威DNS服务器（Authoritative DNS Servers） 3.DNS服务器软件介绍 二.在DNS服务器上安装BIND 三.配置BIND主配置⽂件 四.配置内部区域注册⽂件 1.正向解析 1.添加正向解析声明 2.添加正向解析内容 2.反向解析 1.添加反向解析的声明 2.添加反向解析的内容 3.语法检测 五.启动BIND服务 六.配置防⽕墙 七.客⼾端配置操作【node1】 八.测试服务器是否正常 九.如何清空 十.总结 一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域
-名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址
-不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。
-作⽤：
-• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到
-⽬标服务器。
-• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故
-障排查等⾮常重要。
-• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠
-性。
-• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不
-直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。
-根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9
-台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务
-器的信息。
-例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```
-• 常⻅的顶级域及国家
-.com 商业机构
-.net ⽹络
-.org ⾮商业机构 www.centos.org www.kernel.org
-.edu 教育机构
-.gov 政府机关
-.cn 中国域名
-.us 美国域名
-.ai ⼈⼯智能
-.io 云计算
-.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等
-...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>754 字</span></footer><a class=entry-link aria-label="post link to DNS服务器" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>FTP服务</h2></header><div class=entry-content><p>目录 一.⽂件传输协议FTP 二.FTP的两种⼯作模式 主动模式 被动模式 三.FTP服务器搭建 1.准备 2.服务端配置 1.安装软件vsftp 2.启动并配置 vsftpd 服务 3. 配置防⽕墙 4.基本访问配置修改配置文件 准备工作 修改配置文件 3.客⼾端配置 1.安装软件 2.连接ftp服务器 4. windows浏览器访问 1根目录是不能放权的 四.禁⽌匿名⽤⼾访问 1.修改配置文件 2.创建⼀个普通⽤⼾⽤于后续访问FTP 3.node1 客⼾端访问查看 五.禁锢在指定的数据⽬录中 1.创建⼀个本地⽤⼾的数据⽬录 2.修改配置⽂件 3.创建⽤⼾， 指定⽤⼾的家⽬录为禁锢的数据⽬录下 4.客⼾端测试访问 七.⽤⼾名单列表使⽤ 一.⽂件传输协议FTP FTP（File Transfer Protocol） 是⼀种⽤于在⽹络上进⾏⽂件传输的协议，允许⽤⼾通过客⼾端和 服务器之间上传、下载⽂件.
+ip： 192.168.149.129主机名： node3.itcast.cnhosts文件: 增加对node3的解析免密配置：增加对node3的免密 1.修改ip 我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效 这个是重启这个服务项 这个就是重启网卡这个服务了 最后我们查询一下，是否成功了呢 发现这修改是生效的
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>3 分钟</span>&nbsp;·&nbsp;<span>511 字</span></footer>
+  <a class="entry-link" aria-label="post link to 【实战】DNS建设案例_" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">DNS服务器
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 一.DNS服务器软件介绍 1… DNS的基本概念 2.DNS结构 1.根域 .（root） 2.顶级域DNS服务器(TLD DNS Servers) 3.权威DNS服务器（Authoritative DNS Servers） 3.DNS服务器软件介绍 二.在DNS服务器上安装BIND 三.配置BIND主配置⽂件 四.配置内部区域注册⽂件 1.正向解析 1.添加正向解析声明 2.添加正向解析内容 2.反向解析 1.添加反向解析的声明 2.添加反向解析的内容 3.语法检测 五.启动BIND服务 六.配置防⽕墙 七.客⼾端配置操作【node1】 八.测试服务器是否正常 九.如何清空 十.总结 一.DNS服务器软件介绍 1… DNS的基本概念 DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。作⽤：• 域名映射到IP地址：DNS使得⽤⼾在浏览器中输⼊域名时，能够查询到相应的IP地址，从⽽连接到⽬标服务器。• 反向解析：除了域名到IP的正向解析，DNS 还⽀持 IP 地址到域名的反向解析，这对⽹络安全和故障排查等⾮常重要。• 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠性。• 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。 2.DNS结构 1.根域 .（root） 在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。） 2.顶级域DNS服务器(TLD DNS Servers) 顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务器的信息。例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```• 常⻅的顶级域及国家.com 商业机构.net ⽹络.org ⾮商业机构 www.centos.org www.kernel.org.edu 教育机构.gov 政府机关.cn 中国域名.us 美国域名.ai ⼈⼯智能.io 云计算.mil 军事机构 除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>754 字</span></footer>
+  <a class="entry-link" aria-label="post link to DNS服务器" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">FTP服务
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 一.⽂件传输协议FTP 二.FTP的两种⼯作模式 主动模式 被动模式 三.FTP服务器搭建 1.准备 2.服务端配置 1.安装软件vsftp 2.启动并配置 vsftpd 服务 3. 配置防⽕墙 4.基本访问配置修改配置文件 准备工作 修改配置文件 3.客⼾端配置 1.安装软件 2.连接ftp服务器 4. windows浏览器访问 1根目录是不能放权的 四.禁⽌匿名⽤⼾访问 1.修改配置文件 2.创建⼀个普通⽤⼾⽤于后续访问FTP 3.node1 客⼾端访问查看 五.禁锢在指定的数据⽬录中 1.创建⼀个本地⽤⼾的数据⽬录 2.修改配置⽂件 3.创建⽤⼾， 指定⽤⼾的家⽬录为禁锢的数据⽬录下 4.客⼾端测试访问 七.⽤⼾名单列表使⽤ 一.⽂件传输协议FTP FTP（File Transfer Protocol） 是⼀种⽤于在⽹络上进⾏⽂件传输的协议，允许⽤⼾通过客⼾端和 服务器之间上传、下载⽂件.
 二.FTP的两种⼯作模式 主动模式 主动模式，其实就是请求是由客户端发起的，但是数据传输过程则是由服务器发过来的
-1- 客⼾端与服务器之间建⽴ 控制连接，通常是通过端⼝ 21（即 FTP 的默认控制端⼝）
-2- 当客⼾端准备接收数据时，它会通过 随机端⼝（通常是 20 以外的端⼝）向服务器请求建⽴
-数据连接
-3- 服务器通过控制连接得知客⼾端的端⼝号后，从端⼝ 20（服务器的 FTP 数据端⼝） 发起⼀
-个连接到客⼾端指定的端⼝，⽤于数据传输 优势 1 服务器主动向客⼾端发起数据连接，通常对⼤多数服务器来说，这种⽅式较容易实现。 缺点 因为客⼾端通常位于防⽕墙或 NAT 后⾯，防⽕墙可能阻⽌来⾃服务器的外部连接，所以这种模式
-可能会受到⽹络环境的限制，尤其在客⼾端位于 NAT 后时，可能⽆法建⽴连接。 ...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>279 字</span></footer><a class=entry-link aria-label="post link to FTP服务" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>nfs服务器的相关知识</h2></header><div class=entry-content><p>目录 nfs服务器的相关知识 一.NFS基本介绍 二.安装软件包 三.在node2创建共享⽬录 四.修改配置文件 六.验证是否成功共享 七.挂载使⽤ 1.客户端下载软件包 2.建立挂载点 3.进行挂载 4.查看挂载是否成功 5.检查是否可以共享文件 nfs服务器的相关知识 一.NFS基本介绍 CentOS Stream 9中的NFS（⽹络⽂件系统）是⼀种允许不同计算机通过⽹络共享⽂件和⽬录的协 议，使得远程主机能够像本地磁盘⼀样访问和操作⽂件。 它基于客⼾端-服务器架构，NFS服务器将本地⽂件系统共享给客⼾端，客⼾端可以通过⽹络挂载 这些共享⽬录，像访问本地⽂件⼀样进⾏操作。 NFS主要应⽤于Linux/Unix系统之间的⽂件共享，虽然也⽀持跨操作系统，但其兼容性⼀般较差 二.安装软件包 node2 作为 NFS服务端 node1 作为客⼾端，获取共享⽬录信息
-客⼾端安装：
-dnf install nfs-utils
-服务端安装：
-dnf install nfs-utils
-在node2放行端口
-执⾏开放端⼝:
-firewall-cmd --add-service=nfs --permanent # 核⼼, 有了这个, NFS即可使⽤共享操作
-firewall-cmd --reload 三.在node2创建共享⽬录 mkdir -p /export/software 四.修改配置文件 vi /etc/exports 然后保存文件，并重启服务就可以了
-systemctl restart nfs-server
-systemctl status
-systemctl enable 六.验证是否成功共享 服务端执⾏: 查看服务端NFS共享信息
-showmount -e （早期版本兼容）
-exportfs ...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>92 字</span></footer><a class=entry-link aria-label="post link to nfs服务器的相关知识" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？</h2></header><div class=entry-content><p>目录 rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景 1.打开系统⽇志的配置⽂件 2.在规则模块中， 配置需求要求的内容 3.进行测试 1.测试优先级大于这个的 2.测试优先级小于这个的 2.出现问题 1.删除日志文件 2.出现问题 3.问题原因 4.解决问题 1.重启服务 2.测试 5.总结 我自己总结 我查阅资料总结 rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中
-1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log
-*.crit action(type="omfile" file="/var/log/alert.log")
-# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert "12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info "12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因
-1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 ...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>257 字</span></footer><a class=entry-link aria-label="post link to rm -rf 删掉日志文件后，为什么 service restart 才能恢复？" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>samba服务器</h2></header><div class=entry-content><p>目录 samba服务器 一.SAMBA基本介绍 二.安装SAMBA服务 一.服务端 二.客户端 三.创建共享⽬录 四.修改配置⽂件 五.配置⽤⼾信息 1.添加用户user01 2.把用户追加到samba 六.启动samba服务 1.启动samba服务 2.开放端口 七.在Linux主机访问 八. 在windows主机访问 samba服务器 一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访
-问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。
-它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是
-Windows 操作系统⽤于⽂件共享和打印服务的主要协议。
-Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家
-庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。
-...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>172 字</span></footer><a class=entry-link aria-label="post link to samba服务器" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>SSh的相关操作</h2></header><div class=entry-content><p>目录 一.基于SSH实现发送命令到远程服务器 二.基于SSH进⾏免密数据传输 三.综合案例基于JDK的安装和操作 一.台机器的jdk的安装和配置 二.把这个软件和相应的配置文件通过scp发送出去 四.基于Ubuntu完成SSH服务配置 一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器 二.第二步: 需要让三台服务器都要配置免密操作 三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码 综述 SSh的相关操作
+1- 客⼾端与服务器之间建⽴ 控制连接，通常是通过端⼝ 21（即 FTP 的默认控制端⼝）2- 当客⼾端准备接收数据时，它会通过 随机端⼝（通常是 20 以外的端⼝）向服务器请求建⽴数据连接3- 服务器通过控制连接得知客⼾端的端⼝号后，从端⼝ 20（服务器的 FTP 数据端⼝） 发起⼀个连接到客⼾端指定的端⼝，⽤于数据传输 优势 1 服务器主动向客⼾端发起数据连接，通常对⼤多数服务器来说，这种⽅式较容易实现。 缺点 因为客⼾端通常位于防⽕墙或 NAT 后⾯，防⽕墙可能阻⽌来⾃服务器的外部连接，所以这种模式可能会受到⽹络环境的限制，尤其在客⼾端位于 NAT 后时，可能⽆法建⽴连接。 ...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>279 字</span></footer>
+  <a class="entry-link" aria-label="post link to FTP服务" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">nfs服务器的相关知识
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 nfs服务器的相关知识 一.NFS基本介绍 二.安装软件包 三.在node2创建共享⽬录 四.修改配置文件 六.验证是否成功共享 七.挂载使⽤ 1.客户端下载软件包 2.建立挂载点 3.进行挂载 4.查看挂载是否成功 5.检查是否可以共享文件 nfs服务器的相关知识 一.NFS基本介绍 CentOS Stream 9中的NFS（⽹络⽂件系统）是⼀种允许不同计算机通过⽹络共享⽂件和⽬录的协 议，使得远程主机能够像本地磁盘⼀样访问和操作⽂件。 它基于客⼾端-服务器架构，NFS服务器将本地⽂件系统共享给客⼾端，客⼾端可以通过⽹络挂载 这些共享⽬录，像访问本地⽂件⼀样进⾏操作。 NFS主要应⽤于Linux/Unix系统之间的⽂件共享，虽然也⽀持跨操作系统，但其兼容性⼀般较差 二.安装软件包 node2 作为 NFS服务端 node1 作为客⼾端，获取共享⽬录信息
+客⼾端安装：dnf install nfs-utils服务端安装：dnf install nfs-utils在node2放行端口执⾏开放端⼝:firewall-cmd --add-service=nfs --permanent # 核⼼, 有了这个, NFS即可使⽤共享操作firewall-cmd --reload 三.在node2创建共享⽬录 mkdir -p /export/software 四.修改配置文件 vi /etc/exports 然后保存文件，并重启服务就可以了
+systemctl restart nfs-serversystemctl statussystemctl enable 六.验证是否成功共享 服务端执⾏: 查看服务端NFS共享信息showmount -e （早期版本兼容）exportfs ...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>92 字</span></footer>
+  <a class="entry-link" aria-label="post link to nfs服务器的相关知识" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">rm -rf 删掉日志文件后，为什么 service restart 才能恢复？
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景 1.打开系统⽇志的配置⽂件 2.在规则模块中， 配置需求要求的内容 3.进行测试 1.测试优先级大于这个的 2.测试优先级小于这个的 2.出现问题 1.删除日志文件 2.出现问题 3.问题原因 4.解决问题 1.重启服务 2.测试 5.总结 我自己总结 我查阅资料总结 rm -rf 删掉日志文件后，为什么重启服务能恢复？ 1.问题背景 把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中
+1.打开系统⽇志的配置⽂件 vi /etc/rsyslog.conf 2.在规则模块中， 配置需求要求的内容 # ALL SERVICE CRIT TO /var/log/alert.log*.crit action(type=&#34;omfile&#34; file=&#34;/var/log/alert.log&#34;)# 这个需要在本某块上面，规则模块下面 顺便给服务打开 3.进行测试 1.测试优先级大于这个的 logger -p alert &#34;12324 249nc90ju90nj-0 看测试结果 2.测试优先级小于这个的 logger -p info &#34;12324 249nc90ju90nj-0 2.出现问题 当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因
+1.删除日志文件 rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试 2.出现问题 问题1：是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同 ...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>257 字</span></footer>
+  <a class="entry-link" aria-label="post link to rm -rf 删掉日志文件后，为什么 service restart 才能恢复？" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">samba服务器
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 samba服务器 一.SAMBA基本介绍 二.安装SAMBA服务 一.服务端 二.客户端 三.创建共享⽬录 四.修改配置⽂件 五.配置⽤⼾信息 1.添加用户user01 2.把用户追加到samba 六.启动samba服务 1.启动samba服务 2.开放端口 七.在Linux主机访问 八. 在windows主机访问 samba服务器 一.SAMBA基本介绍 需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访问该共享⽬录 介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是Windows 操作系统⽤于⽂件共享和打印服务的主要协议。Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家庭、企业和跨平台环境中。 二.安装SAMBA服务 一.服务端 node2执⾏: dnf -y install samba 二.客户端 dnf install -y samba-client 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block) 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显 ⽰的能⼒，使其在⽹络浏览器中可⻅。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>172 字</span></footer>
+  <a class="entry-link" aria-label="post link to samba服务器" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">SSh的相关操作
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 一.基于SSH实现发送命令到远程服务器 二.基于SSH进⾏免密数据传输 三.综合案例基于JDK的安装和操作 一.台机器的jdk的安装和配置 二.把这个软件和相应的配置文件通过scp发送出去 四.基于Ubuntu完成SSH服务配置 一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器 二.第二步: 需要让三台服务器都要配置免密操作 三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码 综述 SSh的相关操作
 一.基于SSH实现发送命令到远程服务器 SSH远程执⾏命令是通过SSH协议连接到远程服务器，并在远程服务器上执⾏指定的命令或脚本， ⽽⽆需直接登录到服务器的终端
 相关的命令是
-ssh [选项] username@remote_host "command [&&] conmmad"
-说明：
-username：远程服务器的⽤⼾名。
-remote_host：远程服务器的IP地址或域名。
-command：要在远程服务器上执⾏的命令
-& ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接
-选项：
--t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项
--p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝
--o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）
--A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项
-需求⼀： 在node1中远程查看node2的主机名
-ssh root@192.168.88.102 "hostname"
-需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件
-说明：如果是执⾏多个命令，可以使⽤分号 或 && 来分隔命令
-分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏
-&& ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏
-ssh root@192.168.88.102 "cd ~ && touch a.txt" ``这里面我为大家看一下我所在操作过程之中遇到的问题`
-...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>298 字</span></footer><a class=entry-link aria-label="post link to SSh的相关操作" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>VMware 仅主机 + NAT 模式下 iptables 转发失败的排错全过程（MASQUERADE 挂错网卡）</h2></header><div class=entry-content><p>目录 1. 实验环境 2. 故障现象 3. 排查过程 3.1 检查默认网关 3.2 确认 node1 到 jumper 的内网连通性 3.3 确认 jumper 自己能上外网 3.4 确认内核转发已开启 3.5 确认 FORWARD 链放行 3.6 抓包定位（关键转折点） 3.7 查看 NAT 规则（真相浮出水面） 3.8 核对真实的外网网卡名 4. 根因分析 5. 正确配置（最终生效） 6. 避坑清单（收藏备用） 7. 写在最后 前言
+ssh [选项] username@remote_host &#34;command [&amp;&amp;] conmmad&#34;说明：username：远程服务器的⽤⼾名。remote_host：远程服务器的IP地址或域名。command：要在远程服务器上执⾏的命令&amp; ： 异步执⾏， 在远程服务器后台运⾏， SSH不会等待命令完成，会⽴即返回并关闭连接选项：-t： 如果远程命令需要交互式终端（例如 sudo 命令），可以使⽤ -t 选项-p： 如果远程服务器的SSH服务运⾏在⾮默认端⼝（默认是22），可以使⽤ -p 选项指定端⼝-o： 使⽤ -o 选项来指定SSH配置选项，例如禁⽤主机密钥检查（StrictHostKeyChecking=no）-A： 需要转发认证代理连接（例如使⽤SSH密钥进⾏跳板机连接），可以使⽤ -A 选项需求⼀： 在node1中远程查看node2的主机名ssh root@192.168.88.102 &#34;hostname&#34;需求⼆： 在node1中，远程执⾏进⼊root⽤⼾家⽬录，并在此⽬录下创建 a.txt⽂件说明：如果是执⾏多个命令，可以使⽤分号 或 &amp;&amp; 来分隔命令分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏&amp;&amp; ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏ssh root@192.168.88.102 &#34;cd ~ &amp;&amp; touch a.txt&#34; ``这里面我为大家看一下我所在操作过程之中遇到的问题`
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>298 字</span></footer>
+  <a class="entry-link" aria-label="post link to SSh的相关操作" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">VMware 仅主机 &#43; NAT 模式下 iptables 转发失败的排错全过程（MASQUERADE 挂错网卡）
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 1. 实验环境 2. 故障现象 3. 排查过程 3.1 检查默认网关 3.2 确认 node1 到 jumper 的内网连通性 3.3 确认 jumper 自己能上外网 3.4 确认内核转发已开启 3.5 确认 FORWARD 链放行 3.6 抓包定位（关键转折点） 3.7 查看 NAT 规则（真相浮出水面） 3.8 核对真实的外网网卡名 4. 根因分析 5. 正确配置（最终生效） 6. 避坑清单（收藏备用） 7. 写在最后 前言
 今天上午做 VMware 内网流量转外网的实验，照着教程一行一行敲命令，结果 node 能 ping 通网关，却死活 ping 不通百度。
 我查了路由表、翻了 iptables 规则、确认了内核转发、关了 firewalld……几乎把 Linux 网络栈翻了个底朝天，几度想直接跳过这个实验。直到最后敲下 ip route get 8.8.8.8，盯着输出沉默了三秒——教程里写的是 ens160，而我的外网网卡，叫 ens33。更讽刺的是，之前加过的重复规则把真正的问题掩盖了整整一上午。
-一个网卡名的错位，一次规则的冗余，让我怀疑人生了大半天。如果你也在做 NAT 转发实验，遇到"node 能 ping 通网关却上不了外网"，希望这篇排坑记录能帮你省下这几个小时——因为"低级错误"从来不低级，它只是隐蔽得恰到好处。
-...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>5 分钟</span>&nbsp;·&nbsp;<span>1005 字</span></footer><a class=entry-link aria-label="post link to VMware 仅主机 + NAT 模式下 iptables 转发失败的排错全过程（MASQUERADE 挂错网卡）" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/vmware-%E4%BB%85%E4%B8%BB%E6%9C%BA-+-nat-%E6%A8%A1%E5%BC%8F%E4%B8%8B-iptables-%E8%BD%AC%E5%8F%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%8E%92%E9%94%99%E5%85%A8%E8%BF%87%E7%A8%8Bmasquerade-%E6%8C%82%E9%94%99%E7%BD%91%E5%8D%A1/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>warp导致的日志发送node2失败</h2></header><div class=entry-content><p>目录 warp导致的日志发送node2失败 1.问题背景 1.案例内容 2.案例思路 2.出现的问题 1.node2配置文件 2.重启日志文件 3.node3文件 4.node3端口和服务放行 5.出现问题 3.问题原因 核心原因剖析：用了 TCP，日志为什么还会"凭空消失"？ 4.解决问题 解决对策 5.总结 写在最后 warp导致的日志发送node2失败 1.问题背景 这个是一个操作，以下是案例
-1.案例内容 需求：基于node1中的/var/log/下的messages和secure日志， 完成将日志发送到日志服务器（node3）， 进行统一保存，要求保存到node3服务器的/var/log/messages和/var/log/secure
-思路： 2.案例思路 第一步： 修改 node1的日志配置文件， 将对应写入到messages和secure日志对应规则配置， 将其目的地变更为发送到远端服务器方案 【建议选择：TCP方案】
-第二步： 重启node1的系统日志服务
-第三步： 修改 node3的日志配置文件， 将用于接收远程日志的模块打开【tcp模块】
-第四步： 重启node3的系统日志服务
-第五步： 在node3中开放端口号
-第六步：
-测试message日志： 在node1中通过logger生成日志数据， 分别观察node1的系统日志和node3的系统日志， 哪个日志文件中会产生新的日志【正常:node3打印】
-测试安全日志： 通过MX连接下node1，然后在关闭， 观察在这个过程中， node1和node3的安全日志谁会打印新的日志【正常:node3打印】 2.出现的问题 我当时用的是node2和node3，把node1替换成node2了
-1.node2配置文件 打开vi /etc/rsyslog.conf这个文件，然后修改一些地方，图中红圈有一个地方圈错了，应该圈的是有@@的那几行，也是要追加的 2.重启日志文件 systemctl restart rsyslog
-ststemctl status rsyslog 3.node3文件 和node1的文件是同一个，在模块中把tcp协议放行 4.node3端口和服务放行 firewall-cmd --add-port 514/tcp --permanent
-firewall-cmd --reload
-firewall-cmd --list-all
-systemctl restart rsyslog
-ststemctl status rsyslog ...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>287 字</span></footer><a class=entry-link aria-label="post link to warp导致的日志发送node2失败" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>磁盘的使用以及挂载</h2></header><div class=entry-content><p>目录 一.准备工作 二.查看新添加磁盘 三.分区 四.格式化 五.挂载 1.临时挂载 2.长期挂载 六.重启并查看 磁盘的使用以及挂载
+一个网卡名的错位，一次规则的冗余，让我怀疑人生了大半天。如果你也在做 NAT 转发实验，遇到&#34;node 能 ping 通网关却上不了外网&#34;，希望这篇排坑记录能帮你省下这几个小时——因为&#34;低级错误&#34;从来不低级，它只是隐蔽得恰到好处。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>5 分钟</span>&nbsp;·&nbsp;<span>1005 字</span></footer>
+  <a class="entry-link" aria-label="post link to VMware 仅主机 &#43; NAT 模式下 iptables 转发失败的排错全过程（MASQUERADE 挂错网卡）" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/vmware-%E4%BB%85%E4%B8%BB%E6%9C%BA-&#43;-nat-%E6%A8%A1%E5%BC%8F%E4%B8%8B-iptables-%E8%BD%AC%E5%8F%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%8E%92%E9%94%99%E5%85%A8%E8%BF%87%E7%A8%8Bmasquerade-%E6%8C%82%E9%94%99%E7%BD%91%E5%8D%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">warp导致的日志发送node2失败
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 warp导致的日志发送node2失败 1.问题背景 1.案例内容 2.案例思路 2.出现的问题 1.node2配置文件 2.重启日志文件 3.node3文件 4.node3端口和服务放行 5.出现问题 3.问题原因 核心原因剖析：用了 TCP，日志为什么还会&#34;凭空消失&#34;？ 4.解决问题 解决对策 5.总结 写在最后 warp导致的日志发送node2失败 1.问题背景 这个是一个操作，以下是案例
+1.案例内容 需求：基于node1中的/var/log/下的messages和secure日志， 完成将日志发送到日志服务器（node3）， 进行统一保存，要求保存到node3服务器的/var/log/messages和/var/log/secure思路： 2.案例思路 第一步： 修改 node1的日志配置文件， 将对应写入到messages和secure日志对应规则配置， 将其目的地变更为发送到远端服务器方案 【建议选择：TCP方案】第二步： 重启node1的系统日志服务第三步： 修改 node3的日志配置文件， 将用于接收远程日志的模块打开【tcp模块】第四步： 重启node3的系统日志服务第五步： 在node3中开放端口号第六步：测试message日志： 在node1中通过logger生成日志数据， 分别观察node1的系统日志和node3的系统日志， 哪个日志文件中会产生新的日志【正常:node3打印】测试安全日志： 通过MX连接下node1，然后在关闭， 观察在这个过程中， node1和node3的安全日志谁会打印新的日志【正常:node3打印】 2.出现的问题 我当时用的是node2和node3，把node1替换成node2了
+1.node2配置文件 打开vi /etc/rsyslog.conf这个文件，然后修改一些地方，图中红圈有一个地方圈错了，应该圈的是有@@的那几行，也是要追加的 2.重启日志文件 systemctl restart rsyslogststemctl status rsyslog 3.node3文件 和node1的文件是同一个，在模块中把tcp协议放行 4.node3端口和服务放行 firewall-cmd --add-port 514/tcp --permanentfirewall-cmd --reloadfirewall-cmd --list-allsystemctl restart rsyslogststemctl status rsyslog ...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>2 分钟</span>&nbsp;·&nbsp;<span>287 字</span></footer>
+  <a class="entry-link" aria-label="post link to warp导致的日志发送node2失败" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">磁盘的使用以及挂载
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 目录 一.准备工作 二.查看新添加磁盘 三.分区 四.格式化 五.挂载 1.临时挂载 2.长期挂载 六.重启并查看 磁盘的使用以及挂载
 一.准备工作 在这一步当中，我们应当先关闭虚拟机，从设置里面添加一块磁盘，并设置合理的磁盘大小,随后呢，我们重新开启虚拟机就可以了，并登录mx,进行下一步操作
 二.查看新添加磁盘 我们在这一步当中使用lsblk 查看新添加的磁盘
 lsblk #查看新添加的磁盘 三.分区 fdisk /dev/sdb 然后，我们使用n来追加磁盘
-注意，再最后一个扇区的时候我们也可以指定其特定大小+20G也是可以的
+注意，再最后一个扇区的时候我们也可以指定其特定大小&#43;20G也是可以的
 我们要使用w保存信息
 我们再次使用命令df -h 查看分区
 四.格式化 格式化，我们使用的是mkfs.格式
-#格式化所支持的格式有mkfs.ext4 是⼀个⽤来格式化分区为 EXT4 ⽂件系统 的命令。EXT4（第四代扩展⽂件系统）是
-#Linux 系统中使⽤最⼴泛的⽂件系统类型，兼具性能、可靠性和兼容性，适⽤于⼤多数场景。
-#XFS 是⼀种⾼性能的⽇志⽂件系统，⼴泛⽤于企业级场景，特别是对⼤⽂件和⾼并发 I/O 的处理有
-#明显优势。它是 CentOS Stream 9 等现代 Linux 发⾏版的默认⽂件系统类型
-mkfs.xfs /dev/sdb 五.挂载 这一步，比较麻烦了，需要修改配置文件,修改的方式有两种
+#格式化所支持的格式有mkfs.ext4 是⼀个⽤来格式化分区为 EXT4 ⽂件系统 的命令。EXT4（第四代扩展⽂件系统）是#Linux 系统中使⽤最⼴泛的⽂件系统类型，兼具性能、可靠性和兼容性，适⽤于⼤多数场景。#XFS 是⼀种⾼性能的⽇志⽂件系统，⼴泛⽤于企业级场景，特别是对⼤⽂件和⾼并发 I/O 的处理有#明显优势。它是 CentOS Stream 9 等现代 Linux 发⾏版的默认⽂件系统类型mkfs.xfs /dev/sdb 五.挂载 这一步，比较麻烦了，需要修改配置文件,修改的方式有两种
 1.临时挂载 我们使用mount进行临时挂载
-mount /dev/sdb1 /mnt/sdb1
-mount /dev/sdb2 /mnt/sdb2 2.长期挂载 uuid修改 如果我们需要一直挂载，就需要修改配置文件，/etc/fstab
-blkid /dev/sdb1
-blkid /dev/sdb2 先在，我们得到了他们的uuid，然后打开配置文件，进行修改就可以了
-...</p></div><footer class=entry-footer><span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>75 字</span></footer><a class=entry-link aria-label="post link to 磁盘的使用以及挂载" href=https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/></a></article><footer class=page-footer><nav class=pagination aria-label=分页><span class="page-btn prev disabled" title=上一页 aria-disabled=true><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-</span><a class="page-btn num active" href=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ aria-label="第 1 页" aria-current=page>1</a>
-<a class="page-btn num" href=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/page/2/ aria-label="第 2 页">2</a>
-<a class="page-btn next" href=/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/page/2/ title=下一页 aria-label=下一页><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a></nav></footer></main><footer class=footer><span>&copy; 2026 <a href=https://dsduyopg-github-io.pages.dev/>My_blog</a></span> ·
-<span>Powered by
-<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></a><div class=busuanzi>本站访客 <span id=busuanzi_value_site_uv></span> ·
-访问量 <span id=busuanzi_value_site_pv></span></div><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script><script>(function(){var e,t,n,s,r,c,o="blog_views",i="blog_titles",l=!!document.querySelector(".post-single"),a=document.getElementById("hot-posts");if(l){if(n=location.pathname,r=(document.title||"").replace(/\s*\|.*$/,"").trim(),!n||!r)return;e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),e[n]=(e[n]||0)+1,t[n]=r,localStorage.setItem(o,JSON.stringify(e)),localStorage.setItem(i,JSON.stringify(t));return}if(!a)return;if(a.children.length)return;if(e=JSON.parse(localStorage.getItem(o)||"{}"),t=JSON.parse(localStorage.getItem(i)||"{}"),c=Object.keys(e).filter(function(e){return e.indexOf("/posts/")===0&&e.indexOf("/page/")===-1&&t[e]&&t[e]!=="我的博客"}).sort(function(t,n){return e[n]-e[t]}).slice(0,5),!c.length)return;s='<h3>热门文章</h3><ol class="hot-list">',c.forEach(function(e){s+='<li><a href="'+e+'">'+t[e]+"</a></li>"}),s+="</ol>",a.innerHTML=s})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>
+mount /dev/sdb1 /mnt/sdb1mount /dev/sdb2 /mnt/sdb2 2.长期挂载 uuid修改 如果我们需要一直挂载，就需要修改配置文件，/etc/fstab
+blkid /dev/sdb1blkid /dev/sdb2 先在，我们得到了他们的uuid，然后打开配置文件，进行修改就可以了
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-08-18 00:00:00 +0000 UTC'>August 18, 2026</span>&nbsp;·&nbsp;<span>1 分钟</span>&nbsp;·&nbsp;<span>75 字</span></footer>
+  <a class="entry-link" aria-label="post link to 磁盘的使用以及挂载" href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination" aria-label="分页">
+    <span class="page-btn prev disabled" title="上一页" aria-disabled="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </span>
+      <a class="page-btn num active" href="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/" aria-label="第 1 页" aria-current="page">1</a>
+      <a class="page-btn num" href="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/page/2/" aria-label="第 2 页">2</a>
+    <a class="page-btn next" href="/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/page/2/" title="下一页" aria-label="下一页">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </a>
+  </nav>
+</footer>
+
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://dsduyopg-github-io.pages.dev/">My_blog</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+<div class="busuanzi">
+  本站访客 <span id="busuanzi_value_site_uv"></span> ·
+  访问量 <span id="busuanzi_value_site_pv"></span>
+</div>
+
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'></script>
+
+<script>
+  (function () {
+    var keyViews = 'blog_views';
+    var keyTitles = 'blog_titles';
+    var isArticle = !!document.querySelector('.post-single');
+    var hotEl = document.getElementById('hot-posts');
+
+    if (isArticle) {
+      var path = location.pathname;
+      var title = (document.title || '').replace(/\s*\|.*$/, '').trim();
+      if (!path || !title) return;
+      var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
+      var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
+      views[path] = (views[path] || 0) + 1;
+      titles[path] = title;
+      localStorage.setItem(keyViews, JSON.stringify(views));
+      localStorage.setItem(keyTitles, JSON.stringify(titles));
+      return;
+    }
+
+    if (!hotEl) return;
+    if (hotEl.children.length) return; 
+    var views = JSON.parse(localStorage.getItem(keyViews) || '{}');
+    var titles = JSON.parse(localStorage.getItem(keyTitles) || '{}');
+    var rows = Object.keys(views)
+      .filter(function (p) {
+        return p.indexOf('/posts/') === 0
+          && p.indexOf('/page/') === -1
+          && titles[p]
+          && titles[p] !== '我的博客';
+      })
+      .sort(function (a, b) { return views[b] - views[a]; })
+      .slice(0, 5);
+    if (!rows.length) return;
+
+    var html = '<h3>热门文章</h3><ol class="hot-list">';
+    rows.forEach(function (p) {
+      html += '<li><a href="' + p + '">' + titles[p] + '</a></li>';
+    });
+    html += '</ol>';
+    hotEl.innerHTML = html;
+  })();
+</script>
+
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,149 +1,177 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>linux学习专栏 on My_blog</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/</link><description>Recent content in linux学习专栏 on My_blog</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml" rel="self" type="application/rss+xml"/><item><title>【实战】DNS建设案例_</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#实战dns建设案例"&gt;【实战】DNS建设案例:&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#0需求"&gt;0.需求&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1准备工作"&gt;1.准备工作&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2进行标准化的服务器配置"&gt;2.进行标准化的服务器配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1修改ip"&gt;1.修改ip&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2修改主机名"&gt;2.修改主机名&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3修改hosts文件"&gt;3.修改hosts文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4免密配置"&gt;4.免密配置&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3实操流程"&gt;3.实操流程&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4在node1和node2中安装相关服务"&gt;4.在node1和node2中安装相关服务&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1node1上面安装相关软件"&gt;1.node1上面安装相关软件&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1先在node1上面安装jdk软件包"&gt;1.先在node1上面安装jdk软件包&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1环境变量配置"&gt;1.环境变量配置&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2任意目录测试一下"&gt;2.任意目录测试一下&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2最后安装tomcat服务器"&gt;2.最后安装tomcat服务器&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1从官网下载阿帕奇的tar的包"&gt;1,从官网下载阿帕奇的tar的包&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2解压这个包"&gt;2.解压这个包&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3运行这个软件并在浏览器查看"&gt;3.运行这个软件，并在浏览器查看&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2在node2安装相关软件"&gt;2.在node2安装相关软件&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1安装nfs"&gt;1.安装NFS&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3安装ftp软件"&gt;3安装ftp软件&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5在node3中配置dns服务器"&gt;5.在node3中配置dns服务器&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1修改namedconf这个文件"&gt;1.修改named.conf这个文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2修改vi-etcnamedrfc1912zones"&gt;2.修改vi /etc/named.rfc1912.zones&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3修改varnameditcastlocaldb"&gt;3.修改/var/named/itcast.local.db&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4修改varnamed192168149rev文件"&gt;4.修改/var/named/192.168.149.rev文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5检测"&gt;5.检测&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#6启动服务以及开放端口"&gt;6.启动服务以及开放端口&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#6测试操作"&gt;6.测试操作&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#6总结"&gt;6.总结&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>linux学习专栏 on My_blog</title>
+    <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/</link>
+    <description>Recent content in linux学习专栏 on My_blog</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【实战】DNS建设案例_</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#实战dns建设案例&#34;&gt;【实战】DNS建设案例:&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#0需求&#34;&gt;0.需求&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#1准备工作&#34;&gt;1.准备工作&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#2进行标准化的服务器配置&#34;&gt;2.进行标准化的服务器配置&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1修改ip&#34;&gt;1.修改ip&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2修改主机名&#34;&gt;2.修改主机名&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3修改hosts文件&#34;&gt;3.修改hosts文件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4免密配置&#34;&gt;4.免密配置&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3实操流程&#34;&gt;3.实操流程&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#4在node1和node2中安装相关服务&#34;&gt;4.在node1和node2中安装相关服务&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#1node1上面安装相关软件&#34;&gt;1.node1上面安装相关软件&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1先在node1上面安装jdk软件包&#34;&gt;1.先在node1上面安装jdk软件包&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1环境变量配置&#34;&gt;1.环境变量配置&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2任意目录测试一下&#34;&gt;2.任意目录测试一下&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2最后安装tomcat服务器&#34;&gt;2.最后安装tomcat服务器&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1从官网下载阿帕奇的tar的包&#34;&gt;1,从官网下载阿帕奇的tar的包&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2解压这个包&#34;&gt;2.解压这个包&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3运行这个软件并在浏览器查看&#34;&gt;3.运行这个软件，并在浏览器查看&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2在node2安装相关软件&#34;&gt;2.在node2安装相关软件&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1安装nfs&#34;&gt;1.安装NFS&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3安装ftp软件&#34;&gt;3安装ftp软件&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#5在node3中配置dns服务器&#34;&gt;5.在node3中配置dns服务器&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1修改namedconf这个文件&#34;&gt;1.修改named.conf这个文件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2修改vi-etcnamedrfc1912zones&#34;&gt;2.修改vi /etc/named.rfc1912.zones&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3修改varnameditcastlocaldb&#34;&gt;3.修改/var/named/itcast.local.db&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4修改varnamed192168149rev文件&#34;&gt;4.修改/var/named/192.168.149.rev文件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#5检测&#34;&gt;5.检测&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#6启动服务以及开放端口&#34;&gt;6.启动服务以及开放端口&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#6测试操作&#34;&gt;6.测试操作&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#6总结&#34;&gt;6.总结&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h4 id="实战dns建设案例"&gt;【实战】DNS建设案例:&lt;/h4&gt;
-&lt;h2 id="0需求"&gt;0.需求&lt;/h2&gt;
+
+&lt;h4 id=&#34;实战dns建设案例&#34;&gt;【实战】DNS建设案例:&lt;/h4&gt;
+&lt;h2 id=&#34;0需求&#34;&gt;0.需求&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;目前我们在node2节点中已经有FTP服务器、NFS服务器， 同时大家需要在node1中部署一个tomcat服务器。 请对三个服务设置对应得域名，并基于DNS进行内网解析，从而实现基于域名访问，要求DNS服务器架设至node3， 配置后， 不管是在node1还是node2都可以基于此DNS进行访问&lt;/code&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;NFS服务器域名： nfs.itcast.local
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NFS服务器域名： nfs.itcast.local
 FTP服务器域名： ftp.itcast.local
 tomcat服务器域名： www.itcast.local
+
+
 FTP服务器要求:
-1- 禁锢FTP目录： /export/ftp
-2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可
-3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器
-windows中，建议使用filezilla.exe 软件来连接
+    1- 禁锢FTP目录： /export/ftp
+    2- 禁止匿名用户访问，可以使用系统中任意存在用户访问即可
+    3- 不管在服务器还是在windows中， 都可以直接使用域名的方式访问到ftp服务器
+            windows中，建议使用filezilla.exe  软件来连接
+
 NFS服务器：
-共享目录： /export/nfs
-要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可）
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="1准备工作"&gt;1.准备工作&lt;/h2&gt;
+    共享目录： /export/nfs
+
+    要求 node1在挂载这个目录的时候，请使用域名方式进行挂载即可（测试 临时挂载即可）
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;1准备工作&#34;&gt;1.准备工作&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;我们在进行这个综合案例的时候，需要准备3台主机，分别是node1,node2,node3&lt;/code&gt;
 而node3的话，我们需要对node1克隆就可以得到了,开启这三台Linux主机就可以进行下一个步骤了&lt;/p&gt;
-&lt;h2 id="2进行标准化的服务器配置"&gt;2.进行标准化的服务器配置&lt;/h2&gt;
+&lt;h2 id=&#34;2进行标准化的服务器配置&#34;&gt;2.进行标准化的服务器配置&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;因为node1和node2的之前配置过了免密ssh登录，以及用主机名可以ping通，因此我们只需要对node3进行修改就可以了&lt;/code&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;ip： 192.168.149.129
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ip： 192.168.149.129
 主机名： node3.itcast.cn
 hosts文件: 增加对node3的解析
 免密配置：增加对node3的免密
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="1修改ip"&gt;1.修改ip&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效&lt;/code&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/434f5661479d41879041c66bda93b724.png"&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;1修改ip&#34;&gt;1.修改ip&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;我们需要打开 vim /etc/NetworkManager/system-connections/ens33.nmconnection这个文件，然后把主机修改为129网段就可以了，随后，我们重启这个服务，并把网卡也重启一下，是配置生效&lt;/code&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/434f5661479d41879041c66bda93b724.png&#34;&gt;
 &lt;strong&gt;这个是重启这个服务项&lt;/strong&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/c3d3ad3f3f5e4e5a84c4f518ebe362b4.png"&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/c3d3ad3f3f5e4e5a84c4f518ebe362b4.png&#34;&gt;
 &lt;strong&gt;这个就是重启网卡这个服务了&lt;/strong&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/95a1211387f64fd5945877c10f1fdde7.png"&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/95a1211387f64fd5945877c10f1fdde7.png&#34;&gt;
 最后我们查询一下，是否成功了呢
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e919556bbd7e4a81914e6292ce8504ae.png"&gt;
-&lt;code&gt;发现这修改是生效的&lt;/code&gt;&lt;/p&gt;</description></item><item><title>DNS服务器</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一dns服务器软件介绍"&gt;一.DNS服务器软件介绍&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-dns的基本概念"&gt;1… DNS的基本概念&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2dns结构"&gt;2.DNS结构&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1根域-root"&gt;1.根域 .（root）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2顶级域dns服务器tld-dns-servers"&gt;2.顶级域DNS服务器(TLD DNS Servers)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3权威dns服务器authoritative-dns-servers"&gt;3.权威DNS服务器（Authoritative DNS Servers）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3dns服务器软件介绍"&gt;3.DNS服务器软件介绍&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二在dns服务器上安装bind"&gt;二.在DNS服务器上安装BIND&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#三配置bind主配置件"&gt;三.配置BIND主配置⽂件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#四配置内部区域注册件"&gt;四.配置内部区域注册⽂件&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1正向解析"&gt;1.正向解析&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1添加正向解析声明"&gt;1.添加正向解析声明&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2添加正向解析内容"&gt;2.添加正向解析内容&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2反向解析"&gt;2.反向解析&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1添加反向解析的声明"&gt;1.添加反向解析的声明&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2添加反向解析的内容"&gt;2.添加反向解析的内容&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3语法检测"&gt;3.语法检测&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#五启动bind服务"&gt;五.启动BIND服务&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#六配置防墙"&gt;六.配置防⽕墙&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#七客端配置操作node1"&gt;七.客⼾端配置操作【node1】&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#八测试服务器是否正常"&gt;八.测试服务器是否正常&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#九如何清空"&gt;九.如何清空&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#十总结"&gt;十.总结&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%AE%9E%E6%88%98dns%E5%BB%BA%E8%AE%BE%E6%A1%88%E4%BE%8B_/images/e919556bbd7e4a81914e6292ce8504ae.png&#34;&gt;
+&lt;code&gt;发现这修改是生效的&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>DNS服务器</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#一dns服务器软件介绍&#34;&gt;一.DNS服务器软件介绍&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1-dns的基本概念&#34;&gt;1… DNS的基本概念&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2dns结构&#34;&gt;2.DNS结构&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1根域-root&#34;&gt;1.根域 .（root）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2顶级域dns服务器tld-dns-servers&#34;&gt;2.顶级域DNS服务器(TLD DNS Servers)&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3权威dns服务器authoritative-dns-servers&#34;&gt;3.权威DNS服务器（Authoritative DNS Servers）&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3dns服务器软件介绍&#34;&gt;3.DNS服务器软件介绍&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二在dns服务器上安装bind&#34;&gt;二.在DNS服务器上安装BIND&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#三配置bind主配置件&#34;&gt;三.配置BIND主配置⽂件&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#四配置内部区域注册件&#34;&gt;四.配置内部区域注册⽂件&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1正向解析&#34;&gt;1.正向解析&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1添加正向解析声明&#34;&gt;1.添加正向解析声明&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2添加正向解析内容&#34;&gt;2.添加正向解析内容&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2反向解析&#34;&gt;2.反向解析&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1添加反向解析的声明&#34;&gt;1.添加反向解析的声明&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2添加反向解析的内容&#34;&gt;2.添加反向解析的内容&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3语法检测&#34;&gt;3.语法检测&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#五启动bind服务&#34;&gt;五.启动BIND服务&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#六配置防墙&#34;&gt;六.配置防⽕墙&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#七客端配置操作node1&#34;&gt;七.客⼾端配置操作【node1】&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#八测试服务器是否正常&#34;&gt;八.测试服务器是否正常&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#九如何清空&#34;&gt;九.如何清空&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#十总结&#34;&gt;十.总结&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h2 id="一dns服务器软件介绍"&gt;一.DNS服务器软件介绍&lt;/h2&gt;
-&lt;h3 id="1-dns的基本概念"&gt;1… DNS的基本概念&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域
+
+&lt;h2 id=&#34;一dns服务器软件介绍&#34;&gt;一.DNS服务器软件介绍&lt;/h2&gt;
+&lt;h3 id=&#34;1-dns的基本概念&#34;&gt;1… DNS的基本概念&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;DNS（Domain Name System，域名系统）是互联⽹的“电话簿”，它⽤于将⼈类易于记忆的域
 名（如 www.baidu.com）转换为计算机能够理解的 IP 地址（如 192.0.2.1）。由于直接记住数字地址
 不如记住域名⽅便，DNS 使得⼈们能够通过域名访问⽹站，⽽不必关⼼背后的数字地址。
 作⽤：
@@ -154,15 +182,15 @@ hosts文件: 增加对node3的解析
 • 提供负载均衡：通过 DNS，可以实现不同 IP 地址的轮换，帮助分散流量，提升访问速度和可靠
 性。
 • 简化⽹络配置：通过 DNS，管理员只需使⽤域名管理服务，简化了⽹络配置和维护。
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2dns结构"&gt;2.DNS结构&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/172e794e0a404cd78fab9914d1449c84.png"&gt;&lt;/p&gt;
-&lt;h4 id="1根域-root"&gt;1.根域 .（root）&lt;/h4&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;2dns结构&#34;&gt;2.DNS结构&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/dns%E6%9C%8D%E5%8A%A1%E5%99%A8/images/172e794e0a404cd78fab9914d1449c84.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;1根域-root&#34;&gt;1.根域 .（root）&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;在整个 DNS 系统的最上⽅⼀定是 . (⼩数点) 这个 DNS 服务器 (称为 root)，也叫”根域“。它们不
 直接存储域名和IP地址的映射，⽽是存储指向顶级域（TLD）服务器的信息。
 根域 （13台 全世界只有13台。1台为主根服务器，放置在美国。其余12台均为辅根服务器，其中9
 台放置在美国，欧洲2台，位于英国和瑞典，亚洲1台，位于⽇本。）
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="2顶级域dns服务器tld-dns-servers"&gt;2.顶级域DNS服务器(TLD DNS Servers)&lt;/h4&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;2顶级域dns服务器tld-dns-servers&#34;&gt;2.顶级域DNS服务器(TLD DNS Servers)&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;顶级域（如 .com , .org , .net , .cn 等）的DNS服务器存储了关于某个域名下的权威DNS服务
 器的信息。
 例如， .com 域的TLD服务器会告诉你要去查找与某个 .com 域名相关的权威DNS服务器。```
 • 常⻅的顶级域及国家
@@ -176,66 +204,74 @@ hosts文件: 增加对node3的解析
 .ai ⼈⼯智能
 .io 云计算
 .mil 军事机构
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等&lt;/code&gt;&lt;/p&gt;</description></item><item><title>FTP服务</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一件传输协议ftp"&gt;一.⽂件传输协议FTP&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二ftp的两种作模式"&gt;二.FTP的两种⼯作模式&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#主动模式"&gt;主动模式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#被动模式"&gt;被动模式&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#三ftp服务器搭建"&gt;三.FTP服务器搭建&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1准备"&gt;1.准备&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2服务端配置"&gt;2.服务端配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1安装软件vsftp"&gt;1.安装软件vsftp&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2启动并配置-vsftpd-服务"&gt;2.启动并配置 vsftpd 服务&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-配置防墙"&gt;3. 配置防⽕墙&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4基本访问配置修改配置文件"&gt;4.基本访问配置修改配置文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#准备工作"&gt;准备工作&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#修改配置文件"&gt;修改配置文件&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3客端配置"&gt;3.客⼾端配置&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1安装软件"&gt;1.安装软件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2连接ftp服务器"&gt;2.连接ftp服务器&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4-windows浏览器访问"&gt;4. windows浏览器访问&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1根目录是不能放权的"&gt;1根目录是不能放权的&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#四禁匿名访问"&gt;四.禁⽌匿名⽤⼾访问&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1修改配置文件"&gt;1.修改配置文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2创建个普通于后续访问ftp"&gt;2.创建⼀个普通⽤⼾⽤于后续访问FTP&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3node1-客端访问查看"&gt;3.node1 客⼾端访问查看&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#五禁锢在指定的数据录中"&gt;五.禁锢在指定的数据⽬录中&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1创建个本地的数据录"&gt;1.创建⼀个本地⽤⼾的数据⽬录&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2修改配置件"&gt;2.修改配置⽂件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3创建-指定的家录为禁锢的数据录下"&gt;3.创建⽤⼾， 指定⽤⼾的家⽬录为禁锢的数据⽬录下&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4客端测试访问"&gt;4.客⼾端测试访问&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#七名单列表使"&gt;七.⽤⼾名单列表使⽤&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;除了顶级域名外， 还有⼆级域名（baidu.com）、三级域名（smartgo.net.cn）、四级域名 （it.smartgo.net.cn）等&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FTP服务</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#一件传输协议ftp&#34;&gt;一.⽂件传输协议FTP&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二ftp的两种作模式&#34;&gt;二.FTP的两种⼯作模式&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#主动模式&#34;&gt;主动模式&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#被动模式&#34;&gt;被动模式&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#三ftp服务器搭建&#34;&gt;三.FTP服务器搭建&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1准备&#34;&gt;1.准备&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2服务端配置&#34;&gt;2.服务端配置&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1安装软件vsftp&#34;&gt;1.安装软件vsftp&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2启动并配置-vsftpd-服务&#34;&gt;2.启动并配置 vsftpd 服务&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-配置防墙&#34;&gt;3. 配置防⽕墙&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4基本访问配置修改配置文件&#34;&gt;4.基本访问配置修改配置文件&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#准备工作&#34;&gt;准备工作&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#修改配置文件&#34;&gt;修改配置文件&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3客端配置&#34;&gt;3.客⼾端配置&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#1安装软件&#34;&gt;1.安装软件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2连接ftp服务器&#34;&gt;2.连接ftp服务器&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4-windows浏览器访问&#34;&gt;4. windows浏览器访问&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#1根目录是不能放权的&#34;&gt;1根目录是不能放权的&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#四禁匿名访问&#34;&gt;四.禁⽌匿名⽤⼾访问&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1修改配置文件&#34;&gt;1.修改配置文件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2创建个普通于后续访问ftp&#34;&gt;2.创建⼀个普通⽤⼾⽤于后续访问FTP&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3node1-客端访问查看&#34;&gt;3.node1 客⼾端访问查看&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#五禁锢在指定的数据录中&#34;&gt;五.禁锢在指定的数据⽬录中&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1创建个本地的数据录&#34;&gt;1.创建⼀个本地⽤⼾的数据⽬录&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2修改配置件&#34;&gt;2.修改配置⽂件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3创建-指定的家录为禁锢的数据录下&#34;&gt;3.创建⽤⼾， 指定⽤⼾的家⽬录为禁锢的数据⽬录下&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4客端测试访问&#34;&gt;4.客⼾端测试访问&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#七名单列表使&#34;&gt;七.⽤⼾名单列表使⽤&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h2 id="一件传输协议ftp"&gt;一.⽂件传输协议FTP&lt;/h2&gt;
+
+&lt;h2 id=&#34;一件传输协议ftp&#34;&gt;一.⽂件传输协议FTP&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;FTP（File Transfer Protocol） 是⼀种⽤于在⽹络上进⾏⽂件传输的协议，允许⽤⼾通过客⼾端和
 服务器之间上传、下载⽂件.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/images/83e9af719357492fa331d2d8183b5234.png"&gt;&lt;/p&gt;
-&lt;h2 id="二ftp的两种作模式"&gt;二.FTP的两种⼯作模式&lt;/h2&gt;
-&lt;h3 id="主动模式"&gt;主动模式&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/images/83e9af719357492fa331d2d8183b5234.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;二ftp的两种作模式&#34;&gt;二.FTP的两种⼯作模式&lt;/h2&gt;
+&lt;h3 id=&#34;主动模式&#34;&gt;主动模式&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;主动模式，其实就是请求是由客户端发起的，但是数据传输过程则是由服务器发过来的&lt;/code&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;1- 客⼾端与服务器之间建⽴ 控制连接，通常是通过端⼝ 21（即 FTP 的默认控制端⼝）
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1- 客⼾端与服务器之间建⽴ 控制连接，通常是通过端⼝ 21（即 FTP 的默认控制端⼝）
 2- 当客⼾端准备接收数据时，它会通过 随机端⼝（通常是 20 以外的端⼝）向服务器请求建⽴
 数据连接
 3- 服务器通过控制连接得知客⼾端的端⼝号后，从端⼝ 20（服务器的 FTP 数据端⼝） 发起⼀
@@ -243,245 +279,278 @@ hosts文件: 增加对node3的解析
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;优势&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;1 服务器主动向客⼾端发起数据连接，通常对⼤多数服务器来说，这种⽅式较容易实现。
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1 服务器主动向客⼾端发起数据连接，通常对⼤多数服务器来说，这种⽅式较容易实现。
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;缺点&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;因为客⼾端通常位于防⽕墙或 NAT 后⾯，防⽕墙可能阻⽌来⾃服务器的外部连接，所以这种模式
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;因为客⼾端通常位于防⽕墙或 NAT 后⾯，防⽕墙可能阻⽌来⾃服务器的外部连接，所以这种模式
 可能会受到⽹络环境的限制，尤其在客⼾端位于 NAT 后时，可能⽆法建⽴连接。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/images/9f4b1f259e854013a1bbd34c0f159f19.png"&gt;&lt;/p&gt;</description></item><item><title>nfs服务器的相关知识</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#nfs服务器的相关知识"&gt;nfs服务器的相关知识&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#一nfs基本介绍"&gt;一.NFS基本介绍&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二安装软件包"&gt;二.安装软件包&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#三在node2创建共享录"&gt;三.在node2创建共享⽬录&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#四修改配置文件"&gt;四.修改配置文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#六验证是否成功共享"&gt;六.验证是否成功共享&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#七挂载使"&gt;七.挂载使⽤&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1客户端下载软件包"&gt;1.客户端下载软件包&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2建立挂载点"&gt;2.建立挂载点&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3进行挂载"&gt;3.进行挂载&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4查看挂载是否成功"&gt;4.查看挂载是否成功&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5检查是否可以共享文件"&gt;5.检查是否可以共享文件&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ftp%E6%9C%8D%E5%8A%A1/images/9f4b1f259e854013a1bbd34c0f159f19.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>nfs服务器的相关知识</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#nfs服务器的相关知识&#34;&gt;nfs服务器的相关知识&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#一nfs基本介绍&#34;&gt;一.NFS基本介绍&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二安装软件包&#34;&gt;二.安装软件包&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#三在node2创建共享录&#34;&gt;三.在node2创建共享⽬录&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#四修改配置文件&#34;&gt;四.修改配置文件&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#六验证是否成功共享&#34;&gt;六.验证是否成功共享&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#七挂载使&#34;&gt;七.挂载使⽤&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1客户端下载软件包&#34;&gt;1.客户端下载软件包&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2建立挂载点&#34;&gt;2.建立挂载点&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3进行挂载&#34;&gt;3.进行挂载&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4查看挂载是否成功&#34;&gt;4.查看挂载是否成功&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#5检查是否可以共享文件&#34;&gt;5.检查是否可以共享文件&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h4 id="nfs服务器的相关知识"&gt;nfs服务器的相关知识&lt;/h4&gt;
-&lt;h2 id="一nfs基本介绍"&gt;一.NFS基本介绍&lt;/h2&gt;
+
+&lt;h4 id=&#34;nfs服务器的相关知识&#34;&gt;nfs服务器的相关知识&lt;/h4&gt;
+&lt;h2 id=&#34;一nfs基本介绍&#34;&gt;一.NFS基本介绍&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;CentOS Stream 9中的NFS（⽹络⽂件系统）是⼀种允许不同计算机通过⽹络共享⽂件和⽬录的协 议，使得远程主机能够像本地磁盘⼀样访问和操作⽂件。 它基于客⼾端-服务器架构，NFS服务器将本地⽂件系统共享给客⼾端，客⼾端可以通过⽹络挂载 这些共享⽬录，像访问本地⽂件⼀样进⾏操作。 NFS主要应⽤于Linux/Unix系统之间的⽂件共享，虽然也⽀持跨操作系统，但其兼容性⼀般较差&lt;/code&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/0b621a9d80f145c1beb3a56cd2072de8.png"&gt;&lt;/p&gt;
-&lt;h2 id="二安装软件包"&gt;二.安装软件包&lt;/h2&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/0b621a9d80f145c1beb3a56cd2072de8.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;二安装软件包&#34;&gt;二.安装软件包&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;node2 作为 NFS服务端 node1 作为客⼾端，获取共享⽬录信息&lt;/code&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt; 客⼾端安装：
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; 客⼾端安装：
 dnf install nfs-utils
 服务端安装：
 dnf install nfs-utils
+
 在node2放行端口
 执⾏开放端⼝:
 firewall-cmd --add-service=nfs --permanent # 核⼼, 有了这个, NFS即可使⽤共享操作
 firewall-cmd --reload
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="三在node2创建共享录"&gt;三.在node2创建共享⽬录&lt;/h2&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;mkdir -p /export/software
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="四修改配置文件"&gt;四.修改配置文件&lt;/h2&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;vi /etc/exports
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/5b6e57b0368a4dc6bb1e6c431f571d1f.png"&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;三在node2创建共享录&#34;&gt;三.在node2创建共享⽬录&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir -p /export/software
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;四修改配置文件&#34;&gt;四.修改配置文件&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vi /etc/exports
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/5b6e57b0368a4dc6bb1e6c431f571d1f.png&#34;&gt;
 &lt;code&gt;然后保存文件，并重启服务就可以了&lt;/code&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;systemctl restart nfs-server
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl restart nfs-server
 systemctl status
 systemctl enable
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/da2bd4cb8a90441b9c975405064020b6.png"&gt;&lt;/p&gt;
-&lt;h2 id="六验证是否成功共享"&gt;六.验证是否成功共享&lt;/h2&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;服务端执⾏: 查看服务端NFS共享信息
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/da2bd4cb8a90441b9c975405064020b6.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;六验证是否成功共享&#34;&gt;六.验证是否成功共享&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;服务端执⾏: 查看服务端NFS共享信息
 showmount -e （早期版本兼容）
 exportfs
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/698860533bf1417aaf5675d902e6e0a9.png"&gt;&lt;/p&gt;</description></item><item><title>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#rm--rf-删掉日志文件后为什么重启服务能恢复"&gt;rm -rf 删掉日志文件后，为什么重启服务能恢复？&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1问题背景"&gt;1.问题背景&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1打开系统志的配置件"&gt;1.打开系统⽇志的配置⽂件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2在规则模块中-配置需求要求的内容"&gt;2.在规则模块中， 配置需求要求的内容&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3进行测试"&gt;3.进行测试&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1测试优先级大于这个的"&gt;1.测试优先级大于这个的&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2测试优先级小于这个的"&gt;2.测试优先级小于这个的&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2出现问题"&gt;2.出现问题&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1删除日志文件"&gt;1.删除日志文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2出现问题-1"&gt;2.出现问题&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3问题原因"&gt;3.问题原因&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4解决问题"&gt;4.解决问题&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1重启服务"&gt;1.重启服务&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2测试"&gt;2.测试&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5总结"&gt;5.总结&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#我自己总结"&gt;我自己总结&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#我查阅资料总结"&gt;我查阅资料总结&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/nfs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/images/698860533bf1417aaf5675d902e6e0a9.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>rm -rf 删掉日志文件后，为什么 service restart 才能恢复？</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#rm--rf-删掉日志文件后为什么重启服务能恢复&#34;&gt;rm -rf 删掉日志文件后，为什么重启服务能恢复？&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#1问题背景&#34;&gt;1.问题背景&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1打开系统志的配置件&#34;&gt;1.打开系统⽇志的配置⽂件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2在规则模块中-配置需求要求的内容&#34;&gt;2.在规则模块中， 配置需求要求的内容&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3进行测试&#34;&gt;3.进行测试&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1测试优先级大于这个的&#34;&gt;1.测试优先级大于这个的&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2测试优先级小于这个的&#34;&gt;2.测试优先级小于这个的&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#2出现问题&#34;&gt;2.出现问题&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1删除日志文件&#34;&gt;1.删除日志文件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2出现问题-1&#34;&gt;2.出现问题&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3问题原因&#34;&gt;3.问题原因&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#4解决问题&#34;&gt;4.解决问题&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1重启服务&#34;&gt;1.重启服务&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2测试&#34;&gt;2.测试&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#5总结&#34;&gt;5.总结&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#我自己总结&#34;&gt;我自己总结&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#我查阅资料总结&#34;&gt;我查阅资料总结&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h4 id="rm--rf-删掉日志文件后为什么重启服务能恢复"&gt;rm -rf 删掉日志文件后，为什么重启服务能恢复？&lt;/h4&gt;
-&lt;h2 id="1问题背景"&gt;1.问题背景&lt;/h2&gt;
+
+&lt;h4 id=&#34;rm--rf-删掉日志文件后为什么重启服务能恢复&#34;&gt;rm -rf 删掉日志文件后，为什么重启服务能恢复？&lt;/h4&gt;
+&lt;h2 id=&#34;1问题背景&#34;&gt;1.问题背景&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;把所有服务的“临界点”以上的错误都保存在/var/log/alert.log ⽇志中&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="1打开系统志的配置件"&gt;1.打开系统⽇志的配置⽂件&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;vi /etc/rsyslog.conf
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2在规则模块中-配置需求要求的内容"&gt;2.在规则模块中， 配置需求要求的内容&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;# ALL SERVICE CRIT TO /var/log/alert.log
-*.crit action(type=&amp;#34;omfile&amp;#34; file=&amp;#34;/var/log/alert.log&amp;#34;)
+&lt;h3 id=&#34;1打开系统志的配置件&#34;&gt;1.打开系统⽇志的配置⽂件&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vi /etc/rsyslog.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;2在规则模块中-配置需求要求的内容&#34;&gt;2.在规则模块中， 配置需求要求的内容&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# ALL SERVICE CRIT TO /var/log/alert.log
+*.crit   action(type=&amp;#34;omfile&amp;#34; file=&amp;#34;/var/log/alert.log&amp;#34;)
 # 这个需要在本某块上面，规则模块下面
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/8124e4a0880a4a1eb2b8e77088e04fc0.png"&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/8124e4a0880a4a1eb2b8e77088e04fc0.png&#34;&gt;
 &lt;code&gt;顺便给服务打开&lt;/code&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/931446c550144ec692235d5db9a7145a.png"&gt;&lt;/p&gt;
-&lt;h3 id="3进行测试"&gt;3.进行测试&lt;/h3&gt;
-&lt;h4 id="1测试优先级大于这个的"&gt;1.测试优先级大于这个的&lt;/h4&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;logger -p alert &amp;#34;12324 249nc90ju90nj-0
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/931446c550144ec692235d5db9a7145a.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3进行测试&#34;&gt;3.进行测试&lt;/h3&gt;
+&lt;h4 id=&#34;1测试优先级大于这个的&#34;&gt;1.测试优先级大于这个的&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;logger -p alert &amp;#34;12324 249nc90ju90nj-0
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;看测试结果
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/ad4b49e551c343d7828f2a69afb8ffa5.png"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/a4e5830517654c02bc964f5ebaa704a8.png"&gt;&lt;/p&gt;
-&lt;h4 id="2测试优先级小于这个的"&gt;2.测试优先级小于这个的&lt;/h4&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;logger -p info &amp;#34;12324 249nc90ju90nj-0
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/e629038b05424584aa457685404be575.png"&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/268522bf9fa34ad485cd24ac8c1a94aa.png"&gt;&lt;/p&gt;
-&lt;h2 id="2出现问题"&gt;2.出现问题&lt;/h2&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/ad4b49e551c343d7828f2a69afb8ffa5.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/a4e5830517654c02bc964f5ebaa704a8.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;2测试优先级小于这个的&#34;&gt;2.测试优先级小于这个的&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;logger -p info &amp;#34;12324 249nc90ju90nj-0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/e629038b05424584aa457685404be575.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/268522bf9fa34ad485cd24ac8c1a94aa.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2出现问题&#34;&gt;2.出现问题&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;当时我把日志文件alert.log给删掉了，想要从空日志从优先级小的开始测试，再测试优先级高的，结果就出现问题了，怎么也无法找到这个日志文件，即使后面手动创建日志文件也是不可以的，因此呢，我当时就比较着急，因为佳乐老师并没有出现这种问题，我却出现了，不知道是我的配置文件出错了，还是怎么回事，我看了一番发现其实我写的 并没有任何问题，只不过后面我问ai，知道了原因&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="1删除日志文件"&gt;1.删除日志文件&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2出现问题-1"&gt;2.出现问题&lt;/h3&gt;
+&lt;h3 id=&#34;1删除日志文件&#34;&gt;1.删除日志文件&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rm -rf /var/log/alert.log #我用来清空日志文件，以便再次测试
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;2出现问题-1&#34;&gt;2.出现问题&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;问题1：&lt;strong&gt;是我无法找到这个日志文件，我听佳乐老师说使用logger这个命令是可以自动创建文件以及文件夹的,但是我的这个所展示的情况与佳乐老师所描述的有些不同&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/c62a8936613647339a8bd3d6e93b7120.png"&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/6777fb84f29d4548a854d0a07e7d8d50.png"&gt;&lt;/p&gt;</description></item><item><title>samba服务器</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#samba服务器"&gt;samba服务器&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#一samba基本介绍"&gt;一.SAMBA基本介绍&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二安装samba服务"&gt;二.安装SAMBA服务&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一服务端"&gt;一.服务端&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二客户端"&gt;二.客户端&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#三创建共享录"&gt;三.创建共享⽬录&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#四修改配置件"&gt;四.修改配置⽂件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#五配置信息"&gt;五.配置⽤⼾信息&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1添加用户user01"&gt;1.添加用户user01&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2把用户追加到samba"&gt;2.把用户追加到samba&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#六启动samba服务"&gt;六.启动samba服务&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1启动samba服务"&gt;1.启动samba服务&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2开放端口"&gt;2.开放端口&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#七在linux主机访问"&gt;七.在Linux主机访问&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#八-在windows主机访问"&gt;八. 在windows主机访问&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/c62a8936613647339a8bd3d6e93b7120.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/rm--rf-%E5%88%A0%E6%8E%89%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88-service-restart-%E6%89%8D%E8%83%BD%E6%81%A2%E5%A4%8D/images/6777fb84f29d4548a854d0a07e7d8d50.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>samba服务器</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#samba服务器&#34;&gt;samba服务器&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#一samba基本介绍&#34;&gt;一.SAMBA基本介绍&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二安装samba服务&#34;&gt;二.安装SAMBA服务&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#一服务端&#34;&gt;一.服务端&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#二客户端&#34;&gt;二.客户端&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#三创建共享录&#34;&gt;三.创建共享⽬录&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#四修改配置件&#34;&gt;四.修改配置⽂件&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#五配置信息&#34;&gt;五.配置⽤⼾信息&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1添加用户user01&#34;&gt;1.添加用户user01&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2把用户追加到samba&#34;&gt;2.把用户追加到samba&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#六启动samba服务&#34;&gt;六.启动samba服务&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1启动samba服务&#34;&gt;1.启动samba服务&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2开放端口&#34;&gt;2.开放端口&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#七在linux主机访问&#34;&gt;七.在Linux主机访问&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#八-在windows主机访问&#34;&gt;八. 在windows主机访问&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h4 id="samba服务器"&gt;samba服务器&lt;/h4&gt;
-&lt;h2 id="一samba基本介绍"&gt;一.SAMBA基本介绍&lt;/h2&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访
+
+&lt;h4 id=&#34;samba服务器&#34;&gt;samba服务器&lt;/h4&gt;
+&lt;h2 id=&#34;一samba基本介绍&#34;&gt;一.SAMBA基本介绍&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;需求:构建⼀个SAMBA服务，共享node2服务器中的 /sambda/share ⽬录，分别在Linux和Windows访
 问该共享⽬录
-&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;介绍：Samba 是⼀个开源的软件套件，允许 Linux 或 Unix 系统与 Windows 系统进⾏⽂件和打印共享。
 它实现了 SMB（Server Message Block）协议和 CIFS（Common Internet File System），这两者是
 Windows 操作系统⽤于⽂件共享和打印服务的主要协议。
 Samba 使 Linux/Unix 系统和 Windows 系统之间的⽂件共享和打印服务变得简单，⼴泛应⽤于家
 庭、企业和跨平台环境中。
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="二安装samba服务"&gt;二.安装SAMBA服务&lt;/h2&gt;
-&lt;h3 id="一服务端"&gt;一.服务端&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;node2执⾏: dnf -y install samba
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4e9cbe84fda6474ea45a60cfe7998596.png"&gt;&lt;/p&gt;
-&lt;h3 id="二客户端"&gt;二.客户端&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;dnf install -y samba-client
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c31cf89e084446b8a7b2703cdb5265b3.png"&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;二安装samba服务&#34;&gt;二.安装SAMBA服务&lt;/h2&gt;
+&lt;h3 id=&#34;一服务端&#34;&gt;一.服务端&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;node2执⾏: dnf -y install samba
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/4e9cbe84fda6474ea45a60cfe7998596.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;二客户端&#34;&gt;二.客户端&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;dnf install -y samba-client
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/samba%E6%9C%8D%E5%8A%A1%E5%99%A8/images/c31cf89e084446b8a7b2703cdb5265b3.png&#34;&gt;
 说明： SAMBA通常会有⼆个主要的服务，分别⽤于不同的⽬的
 Samba SMB/CIFS 服务 (smb) : 是Samba提供的主要服务，⽤于实现 SMB (Server Message Block)
 和 CIFS (Common Internet File System) 协议的⽂件共享和打印服务
 Samba NetBIOS 名称解析服务 (nmb) : 是Samba中另⼀个重要的服务，⽤于提供NetBIOS名称解析
 服务，它使得Samba服务器可以通过NetBIOS名称（⽽⾮IP地址）来识别和访问，即将计算机名（例
 如 server ）转换为IP地址，便于其他计算机通过名称访问，同时提供Samba服务器在局域⽹中显
-⽰的能⼒，使其在⽹络浏览器中可⻅。&lt;/p&gt;</description></item><item><title>SSh的相关操作</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一基于ssh实现发送命令到远程服务器"&gt;一.基于SSH实现发送命令到远程服务器&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二基于ssh进免密数据传输"&gt;二.基于SSH进⾏免密数据传输&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#三综合案例基于jdk的安装和操作"&gt;三.综合案例基于JDK的安装和操作&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一台机器的jdk的安装和配置"&gt;一.台机器的jdk的安装和配置&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二把这个软件和相应的配置文件通过scp发送出去"&gt;二.把这个软件和相应的配置文件通过scp发送出去&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#四基于ubuntu完成ssh服务配置"&gt;四.基于Ubuntu完成SSH服务配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一第步-需要让三个服务器全部都使itheima登录服务器"&gt;一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二第二步-需要让三台服务器都要配置免密操作"&gt;二.第二步: 需要让三台服务器都要配置免密操作&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#三第三步依次通过-ssh-主机地址-连接各个服务器-观察是否需要输密码"&gt;三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#综述"&gt;综述&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+⽰的能⼒，使其在⽹络浏览器中可⻅。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SSh的相关操作</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/ssh%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#一基于ssh实现发送命令到远程服务器&#34;&gt;一.基于SSH实现发送命令到远程服务器&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二基于ssh进免密数据传输&#34;&gt;二.基于SSH进⾏免密数据传输&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#三综合案例基于jdk的安装和操作&#34;&gt;三.综合案例基于JDK的安装和操作&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#一台机器的jdk的安装和配置&#34;&gt;一.台机器的jdk的安装和配置&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#二把这个软件和相应的配置文件通过scp发送出去&#34;&gt;二.把这个软件和相应的配置文件通过scp发送出去&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#四基于ubuntu完成ssh服务配置&#34;&gt;四.基于Ubuntu完成SSH服务配置&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#一第步-需要让三个服务器全部都使itheima登录服务器&#34;&gt;一.第⼀步： 需要让三个服务器全部都使⽤itheima⽤⼾登录服务器&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#二第二步-需要让三台服务器都要配置免密操作&#34;&gt;二.第二步: 需要让三台服务器都要配置免密操作&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#三第三步依次通过-ssh-主机地址-连接各个服务器-观察是否需要输密码&#34;&gt;三.第三步：依次通过： ssh 主机地址 连接各个服务器， 观察是否需要输⼊密码&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#综述&#34;&gt;综述&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
+
 &lt;p&gt;SSh的相关操作&lt;/p&gt;
-&lt;h2 id="一基于ssh实现发送命令到远程服务器"&gt;一.基于SSH实现发送命令到远程服务器&lt;/h2&gt;
+&lt;h2 id=&#34;一基于ssh实现发送命令到远程服务器&#34;&gt;一.基于SSH实现发送命令到远程服务器&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;SSH远程执⾏命令是通过SSH协议连接到远程服务器，并在远程服务器上执⾏指定的命令或脚本， ⽽⽆需直接登录到服务器的终端&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;相关的命令是&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;ssh [选项] username@remote_host &amp;#34;command [&amp;amp;&amp;amp;] conmmad&amp;#34;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh [选项] username@remote_host &amp;#34;command [&amp;amp;&amp;amp;] conmmad&amp;#34;
 说明：
 username：远程服务器的⽤⼾名。
 remote_host：远程服务器的IP地址或域名。
@@ -499,520 +568,586 @@ ssh root@192.168.88.102 &amp;#34;hostname&amp;#34;
 分号： 仅分隔命令， 不管前⾯得命令是否执⾏成功， 后⾯的命令依然会执⾏
 &amp;amp;&amp;amp; ： 将多个命令合并为⼀个命令， 前⾯得命令如果执⾏失败， 后⾯的命令就⽆法执⾏
 ssh root@192.168.88.102 &amp;#34;cd ~ &amp;amp;&amp;amp; touch a.txt&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;``这里面我为大家看一下我所在操作过程之中遇到的问题`&lt;/p&gt;</description></item><item><title>VMware 仅主机 + NAT 模式下 iptables 转发失败的排错全过程（MASQUERADE 挂错网卡）</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/vmware-%E4%BB%85%E4%B8%BB%E6%9C%BA-+-nat-%E6%A8%A1%E5%BC%8F%E4%B8%8B-iptables-%E8%BD%AC%E5%8F%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%8E%92%E9%94%99%E5%85%A8%E8%BF%87%E7%A8%8Bmasquerade-%E6%8C%82%E9%94%99%E7%BD%91%E5%8D%A1/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/vmware-%E4%BB%85%E4%B8%BB%E6%9C%BA-+-nat-%E6%A8%A1%E5%BC%8F%E4%B8%8B-iptables-%E8%BD%AC%E5%8F%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%8E%92%E9%94%99%E5%85%A8%E8%BF%87%E7%A8%8Bmasquerade-%E6%8C%82%E9%94%99%E7%BD%91%E5%8D%A1/</guid><description>照着教程敲了 MASQUERADE 却上不了外网？一个 ens160 和 ens33 的网卡名错位，加上重复规则掩盖问题，排查了一上午。本文完整还原抓包定位的全过程，并附上 10 分钟定位 NAT 转发故障的避坑清单。</description></item><item><title>warp导致的日志发送node2失败</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#warp导致的日志发送node2失败"&gt;warp导致的日志发送node2失败&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1问题背景"&gt;1.问题背景&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1案例内容"&gt;1.案例内容&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2案例思路"&gt;2.案例思路&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2出现的问题"&gt;2.出现的问题&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1node2配置文件"&gt;1.node2配置文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2重启日志文件"&gt;2.重启日志文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3node3文件"&gt;3.node3文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4node3端口和服务放行"&gt;4.node3端口和服务放行&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5出现问题"&gt;5.出现问题&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3问题原因"&gt;3.问题原因&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#核心原因剖析用了-tcp日志为什么还会凭空消失"&gt;核心原因剖析：用了 TCP，日志为什么还会&amp;quot;凭空消失&amp;quot;？&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4解决问题"&gt;4.解决问题&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#解决对策"&gt;解决对策&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5总结"&gt;5.总结&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#写在最后"&gt;写在最后&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;``这里面我为大家看一下我所在操作过程之中遇到的问题`&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VMware 仅主机 &#43; NAT 模式下 iptables 转发失败的排错全过程（MASQUERADE 挂错网卡）</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/vmware-%E4%BB%85%E4%B8%BB%E6%9C%BA-&#43;-nat-%E6%A8%A1%E5%BC%8F%E4%B8%8B-iptables-%E8%BD%AC%E5%8F%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%8E%92%E9%94%99%E5%85%A8%E8%BF%87%E7%A8%8Bmasquerade-%E6%8C%82%E9%94%99%E7%BD%91%E5%8D%A1/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/vmware-%E4%BB%85%E4%B8%BB%E6%9C%BA-&#43;-nat-%E6%A8%A1%E5%BC%8F%E4%B8%8B-iptables-%E8%BD%AC%E5%8F%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%8E%92%E9%94%99%E5%85%A8%E8%BF%87%E7%A8%8Bmasquerade-%E6%8C%82%E9%94%99%E7%BD%91%E5%8D%A1/</guid>
+      <description>照着教程敲了 MASQUERADE 却上不了外网？一个 ens160 和 ens33 的网卡名错位，加上重复规则掩盖问题，排查了一上午。本文完整还原抓包定位的全过程，并附上 10 分钟定位 NAT 转发故障的避坑清单。</description>
+    </item>
+    <item>
+      <title>warp导致的日志发送node2失败</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#warp导致的日志发送node2失败&#34;&gt;warp导致的日志发送node2失败&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#1问题背景&#34;&gt;1.问题背景&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1案例内容&#34;&gt;1.案例内容&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2案例思路&#34;&gt;2.案例思路&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#2出现的问题&#34;&gt;2.出现的问题&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1node2配置文件&#34;&gt;1.node2配置文件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2重启日志文件&#34;&gt;2.重启日志文件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3node3文件&#34;&gt;3.node3文件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4node3端口和服务放行&#34;&gt;4.node3端口和服务放行&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#5出现问题&#34;&gt;5.出现问题&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3问题原因&#34;&gt;3.问题原因&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#核心原因剖析用了-tcp日志为什么还会凭空消失&#34;&gt;核心原因剖析：用了 TCP，日志为什么还会&amp;quot;凭空消失&amp;quot;？&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#4解决问题&#34;&gt;4.解决问题&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#解决对策&#34;&gt;解决对策&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#5总结&#34;&gt;5.总结&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#写在最后&#34;&gt;写在最后&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h4 id="warp导致的日志发送node2失败"&gt;warp导致的日志发送node2失败&lt;/h4&gt;
-&lt;h2 id="1问题背景"&gt;1.问题背景&lt;/h2&gt;
+
+&lt;h4 id=&#34;warp导致的日志发送node2失败&#34;&gt;warp导致的日志发送node2失败&lt;/h4&gt;
+&lt;h2 id=&#34;1问题背景&#34;&gt;1.问题背景&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;这个是一个操作，以下是案例&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="1案例内容"&gt;1.案例内容&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;需求：基于node1中的/var/log/下的messages和secure日志， 完成将日志发送到日志服务器（node3）， 进行统一保存，要求保存到node3服务器的/var/log/messages和/var/log/secure
+&lt;h3 id=&#34;1案例内容&#34;&gt;1.案例内容&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;需求：基于node1中的/var/log/下的messages和secure日志， 完成将日志发送到日志服务器（node3）， 进行统一保存，要求保存到node3服务器的/var/log/messages和/var/log/secure
 思路：
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2案例思路"&gt;2.案例思路&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;第一步： 修改 node1的日志配置文件， 将对应写入到messages和secure日志对应规则配置， 将其目的地变更为发送到远端服务器方案 【建议选择：TCP方案】
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;2案例思路&#34;&gt;2.案例思路&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;第一步： 修改 node1的日志配置文件， 将对应写入到messages和secure日志对应规则配置， 将其目的地变更为发送到远端服务器方案 【建议选择：TCP方案】
+
 第二步： 重启node1的系统日志服务
+
+
 第三步： 修改 node3的日志配置文件， 将用于接收远程日志的模块打开【tcp模块】
+
 第四步： 重启node3的系统日志服务
+
 第五步： 在node3中开放端口号
+
+
 第六步：
-测试message日志： 在node1中通过logger生成日志数据， 分别观察node1的系统日志和node3的系统日志， 哪个日志文件中会产生新的日志【正常:node3打印】
-测试安全日志： 通过MX连接下node1，然后在关闭， 观察在这个过程中， node1和node3的安全日志谁会打印新的日志【正常:node3打印】
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="2出现的问题"&gt;2.出现的问题&lt;/h2&gt;
+    测试message日志： 在node1中通过logger生成日志数据， 分别观察node1的系统日志和node3的系统日志， 哪个日志文件中会产生新的日志【正常:node3打印】
+
+    测试安全日志： 通过MX连接下node1，然后在关闭， 观察在这个过程中， node1和node3的安全日志谁会打印新的日志【正常:node3打印】
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;2出现的问题&#34;&gt;2.出现的问题&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;我当时用的是node2和node3，把node1替换成node2了&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="1node2配置文件"&gt;1.node2配置文件&lt;/h3&gt;
+&lt;h3 id=&#34;1node2配置文件&#34;&gt;1.node2配置文件&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;打开vi /etc/rsyslog.conf这个文件，然后修改一些地方，图中红圈有一个地方圈错了，应该圈的是有@@的那几行，也是要追加的&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/f2c4680116e04c009aceb90192dcf5d1.png"&gt;&lt;/p&gt;
-&lt;h3 id="2重启日志文件"&gt;2.重启日志文件&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;systemctl restart rsyslog
-ststemctl status rsyslog
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/cd2a18ecf0fa4b0fb43fdd7ca4db01a2.png"&gt;&lt;/p&gt;
-&lt;h3 id="3node3文件"&gt;3.node3文件&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/f2c4680116e04c009aceb90192dcf5d1.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2重启日志文件&#34;&gt;2.重启日志文件&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl restart rsyslog
+
+ststemctl status  rsyslog
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/cd2a18ecf0fa4b0fb43fdd7ca4db01a2.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3node3文件&#34;&gt;3.node3文件&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;和node1的文件是同一个，在模块中把tcp协议放行&lt;/code&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/328eb6fe34f2489b880e5754d93e6dd6.png"&gt;&lt;/p&gt;
-&lt;h3 id="4node3端口和服务放行"&gt;4.node3端口和服务放行&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;firewall-cmd --add-port 514/tcp --permanent
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/328eb6fe34f2489b880e5754d93e6dd6.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4node3端口和服务放行&#34;&gt;4.node3端口和服务放行&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;firewall-cmd --add-port 514/tcp --permanent
 firewall-cmd --reload
 firewall-cmd --list-all
+
 systemctl restart rsyslog
-ststemctl status rsyslog
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/305a880673d84819930f0a5c64f62a6a.png"&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/1eeacc31b74c42bdb5bf7b26e2bf8e35.png"&gt;&lt;/p&gt;</description></item><item><title>磁盘的使用以及挂载</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一准备工作"&gt;一.准备工作&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二查看新添加磁盘"&gt;二.查看新添加磁盘&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#三分区"&gt;三.分区&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#四格式化"&gt;四.格式化&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#五挂载"&gt;五.挂载&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1临时挂载"&gt;1.临时挂载&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2长期挂载"&gt;2.长期挂载&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#六重启并查看"&gt;六.重启并查看&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+
+ststemctl status  rsyslog
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/305a880673d84819930f0a5c64f62a6a.png&#34;&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/warp%E5%AF%BC%E8%87%B4%E7%9A%84%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81node2%E5%A4%B1%E8%B4%A5/images/1eeacc31b74c42bdb5bf7b26e2bf8e35.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>磁盘的使用以及挂载</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#一准备工作&#34;&gt;一.准备工作&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二查看新添加磁盘&#34;&gt;二.查看新添加磁盘&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#三分区&#34;&gt;三.分区&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#四格式化&#34;&gt;四.格式化&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#五挂载&#34;&gt;五.挂载&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1临时挂载&#34;&gt;1.临时挂载&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2长期挂载&#34;&gt;2.长期挂载&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#六重启并查看&#34;&gt;六.重启并查看&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
+
 &lt;p&gt;磁盘的使用以及挂载&lt;/p&gt;
-&lt;h2 id="一准备工作"&gt;一.准备工作&lt;/h2&gt;
+&lt;h2 id=&#34;一准备工作&#34;&gt;一.准备工作&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;在这一步当中，我们应当先关闭虚拟机，从设置里面添加一块磁盘，并设置合理的磁盘大小,随后呢，我们重新开启虚拟机就可以了，并登录mx,进行下一步操作&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="二查看新添加磁盘"&gt;二.查看新添加磁盘&lt;/h2&gt;
+&lt;h2 id=&#34;二查看新添加磁盘&#34;&gt;二.查看新添加磁盘&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;我们在这一步当中使用lsblk 查看新添加的磁盘&lt;/code&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;lsblk #查看新添加的磁盘
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/0a99a6fc298341e9a3b5cc8b878f6d21.png"&gt;&lt;/p&gt;
-&lt;h2 id="三分区"&gt;三.分区&lt;/h2&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;fdisk /dev/sdb
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/4f9b3037f8e041279e65509f0090bd81.png"&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;lsblk  #查看新添加的磁盘
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/0a99a6fc298341e9a3b5cc8b878f6d21.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;三分区&#34;&gt;三.分区&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;fdisk /dev/sdb
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/4f9b3037f8e041279e65509f0090bd81.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;然后，我们使用n来追加磁盘&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/69de7f653f474ada8fbe882760c9884e.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/69de7f653f474ada8fbe882760c9884e.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;注意，再最后一个扇区的时候我们也可以指定其特定大小+20G也是可以的&lt;/p&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/ed070ba2ef934f5a80de0302d402764c.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/ed070ba2ef934f5a80de0302d402764c.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;我们要使用w保存信息&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/6a2aa4daa1ab49708199f3963dfae6f9.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/6a2aa4daa1ab49708199f3963dfae6f9.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;我们再次使用命令df -h 查看分区&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="四格式化"&gt;四.格式化&lt;/h2&gt;
+&lt;h2 id=&#34;四格式化&#34;&gt;四.格式化&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;格式化，我们使用的是mkfs.格式&lt;/code&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;#格式化所支持的格式有mkfs.ext4 是⼀个⽤来格式化分区为 EXT4 ⽂件系统 的命令。EXT4（第四代扩展⽂件系统）是
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#格式化所支持的格式有mkfs.ext4 是⼀个⽤来格式化分区为 EXT4 ⽂件系统 的命令。EXT4（第四代扩展⽂件系统）是
 #Linux 系统中使⽤最⼴泛的⽂件系统类型，兼具性能、可靠性和兼容性，适⽤于⼤多数场景。
 #XFS 是⼀种⾼性能的⽇志⽂件系统，⼴泛⽤于企业级场景，特别是对⼤⽂件和⾼并发 I/O 的处理有
 #明显优势。它是 CentOS Stream 9 等现代 Linux 发⾏版的默认⽂件系统类型
 mkfs.xfs /dev/sdb
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="五挂载"&gt;五.挂载&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;五挂载&#34;&gt;五.挂载&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;这一步，比较麻烦了，需要修改配置文件,修改的方式有两种&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="1临时挂载"&gt;1.临时挂载&lt;/h3&gt;
+&lt;h3 id=&#34;1临时挂载&#34;&gt;1.临时挂载&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;我们使用mount进行临时挂载&lt;/code&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;mount /dev/sdb1 /mnt/sdb1
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mount /dev/sdb1 /mnt/sdb1
 mount /dev/sdb2 /mnt/sdb2
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2长期挂载"&gt;2.长期挂载&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;2长期挂载&#34;&gt;2.长期挂载&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;uuid修改&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;如果我们需要一直挂载，就需要修改配置文件，/etc/fstab&lt;/code&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;blkid /dev/sdb1
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;blkid /dev/sdb1
 blkid /dev/sdb2
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/f18c10da20b64c668081bb8480ce2afa.png"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;先在，我们得到了他们的uuid，然后打开配置文件，进行修改就可以了&lt;/code&gt;&lt;/p&gt;</description></item><item><title>磁盘的综合案例</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#磁盘的综合案例"&gt;磁盘的综合案例&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1修改网络配置"&gt;1.修改网络配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1改成88网段"&gt;1.改成88网段&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#情况一全局迁移至-88-网段推荐彻底解决"&gt;情况一：全局迁移至 88 网段（推荐彻底解决）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#情况二临时恢复连接最省事"&gt;情况二：临时恢复连接（最省事）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2ssh免密登录"&gt;2.ssh免密登录&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#0对于hosts文件进行修改"&gt;0.对于hosts文件进行修改&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1生成私钥和公钥"&gt;1.生成私钥和公钥&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2发送公钥"&gt;2.发送公钥&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3测试一下"&gt;3.测试一下&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2dns配置"&gt;2.DNS配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1要求"&gt;1.要求&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2配置"&gt;2.配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1正解析文件的配置"&gt;1.正解析文件的配置&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3反解析文件配置"&gt;3.反解析文件配置&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3测试"&gt;3.测试&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4开放端口"&gt;4.开放端口&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5开启服务"&gt;5.开启服务&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#6修改客户端dns"&gt;6.修改客户端dns&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#7测试"&gt;7.测试&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-日志的配置"&gt;3. 日志的配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-要求"&gt;1. 要求&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-修改rsyslogconf"&gt;2. 修改rsyslog.conf&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-重启服务与放行端口"&gt;3. 重启服务与放行端口&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4测试"&gt;4.测试&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4磁盘配置"&gt;4.磁盘配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#0需求"&gt;0.需求&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1添加一个100g大容量磁盘"&gt;1.添加一个100G大容量磁盘&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2添加到物理卷"&gt;2.添加到物理卷&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2添加到卷组"&gt;2.添加到卷组&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3添加到逻辑卷"&gt;3.添加到逻辑卷&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4格式化分区的格式"&gt;4.格式化分区的格式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5挂载到指定路径"&gt;5.挂载到指定路径&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#6添加剩下的15g"&gt;6.添加剩下的15G&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1设置让扩容生效"&gt;1.设置让扩容生效&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2查看是否配置生效"&gt;2.查看是否配置生效&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%8C%82%E8%BD%BD/images/f18c10da20b64c668081bb8480ce2afa.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;先在，我们得到了他们的uuid，然后打开配置文件，进行修改就可以了&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>磁盘的综合案例</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#磁盘的综合案例&#34;&gt;磁盘的综合案例&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#1修改网络配置&#34;&gt;1.修改网络配置&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1改成88网段&#34;&gt;1.改成88网段&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#情况一全局迁移至-88-网段推荐彻底解决&#34;&gt;情况一：全局迁移至 88 网段（推荐彻底解决）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#情况二临时恢复连接最省事&#34;&gt;情况二：临时恢复连接（最省事）&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2ssh免密登录&#34;&gt;2.ssh免密登录&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#0对于hosts文件进行修改&#34;&gt;0.对于hosts文件进行修改&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#1生成私钥和公钥&#34;&gt;1.生成私钥和公钥&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2发送公钥&#34;&gt;2.发送公钥&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3测试一下&#34;&gt;3.测试一下&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#2dns配置&#34;&gt;2.DNS配置&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1要求&#34;&gt;1.要求&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2配置&#34;&gt;2.配置&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1正解析文件的配置&#34;&gt;1.正解析文件的配置&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3反解析文件配置&#34;&gt;3.反解析文件配置&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3测试&#34;&gt;3.测试&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4开放端口&#34;&gt;4.开放端口&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#5开启服务&#34;&gt;5.开启服务&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#6修改客户端dns&#34;&gt;6.修改客户端dns&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#7测试&#34;&gt;7.测试&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3-日志的配置&#34;&gt;3. 日志的配置&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1-要求&#34;&gt;1. 要求&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2-修改rsyslogconf&#34;&gt;2. 修改rsyslog.conf&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3-重启服务与放行端口&#34;&gt;3. 重启服务与放行端口&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4测试&#34;&gt;4.测试&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#4磁盘配置&#34;&gt;4.磁盘配置&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#0需求&#34;&gt;0.需求&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#1添加一个100g大容量磁盘&#34;&gt;1.添加一个100G大容量磁盘&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2添加到物理卷&#34;&gt;2.添加到物理卷&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2添加到卷组&#34;&gt;2.添加到卷组&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3添加到逻辑卷&#34;&gt;3.添加到逻辑卷&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4格式化分区的格式&#34;&gt;4.格式化分区的格式&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#5挂载到指定路径&#34;&gt;5.挂载到指定路径&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#6添加剩下的15g&#34;&gt;6.添加剩下的15G&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1设置让扩容生效&#34;&gt;1.设置让扩容生效&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2查看是否配置生效&#34;&gt;2.查看是否配置生效&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h4 id="磁盘的综合案例"&gt;磁盘的综合案例&lt;/h4&gt;
-&lt;h2 id="1修改网络配置"&gt;1.修改网络配置&lt;/h2&gt;
+
+&lt;h4 id=&#34;磁盘的综合案例&#34;&gt;磁盘的综合案例&lt;/h4&gt;
+&lt;h2 id=&#34;1修改网络配置&#34;&gt;1.修改网络配置&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;我们这里修改网络配置其实需要，进行对于ip的更改以及对于ssh的相关配置，ip要以此修改为192.168.88.170 171 172&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="1改成88网段"&gt;1.改成88网段&lt;/h3&gt;
+&lt;h3 id=&#34;1改成88网段&#34;&gt;1.改成88网段&lt;/h3&gt;
 &lt;p&gt;注意。这里可能我使用88网段的话，还需要对于网卡进行修改，因为我虚拟机的之前的网段其实是149网段，如果不修改的话，会导致ping的时候没有反应，这是我第一次操作时遇到的一个问题，这里写出来给大家说明一下
 这个问题是因为 &lt;strong&gt;VMware 的虚拟交换机（VMnet8）底层网段&lt;/strong&gt; 与 &lt;strong&gt;虚拟机操作系统内部配置的 IP 网段&lt;/strong&gt; 不一致导致的。只改虚拟机内部 IP 而不改 VMware 配置，数据包是发不出去的。&lt;/p&gt;
-&lt;h4 id="情况一全局迁移至-88-网段推荐彻底解决"&gt;情况一：全局迁移至 88 网段（推荐彻底解决）&lt;/h4&gt;
-&lt;p&gt;如果你想把所有机器都规范到 88 网段，请按以下步骤操作：&lt;/p&gt;</description></item><item><title>磁盘管理的相关知识</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#磁盘管理"&gt;磁盘管理&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1文件系统"&gt;1.文件系统&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#常见文件系统对比"&gt;常见文件系统对比&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一主流文件系统横向对比"&gt;一、主流文件系统横向对比&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2常用的磁盘管理命令"&gt;2.常用的磁盘管理命令&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#21-查看磁盘与分区信息"&gt;2.1 查看磁盘与分区信息&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-lsblk--查看块设备推荐首选"&gt;1. lsblk —— 查看块设备（推荐首选）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-fdisk--查看分区表"&gt;2. fdisk —— 查看分区表&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-parted--高级分区查看"&gt;3. parted —— 高级分区查看&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4-blkid--查看-uuid-和文件系统类型"&gt;4. blkid —— 查看 UUID 和文件系统类型&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5-其他硬件信息"&gt;5. 其他硬件信息&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#22-分区管理命令"&gt;2.2 分区管理命令&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-fdisk--mbr-分区交互式"&gt;1. fdisk —— MBR 分区（交互式）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-gdisk--gpt-分区交互式"&gt;2. gdisk —— GPT 分区（交互式）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-parted--高级分区工具"&gt;3. parted —— 高级分区工具&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4-刷新内核分区表"&gt;4. 刷新内核分区表&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#23-文件系统格式化"&gt;2.3 文件系统格式化&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-创建文件系统"&gt;1. 创建文件系统&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-格式化时指定参数"&gt;2. 格式化时指定参数&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-查看文件系统信息"&gt;3. 查看文件系统信息&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#24-挂载与卸载"&gt;2.4 挂载与卸载&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-临时挂载"&gt;1. 临时挂载&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-卸载"&gt;2. 卸载&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-查看挂载信息"&gt;3. 查看挂载信息&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#25-磁盘空间监控"&gt;2.5 磁盘空间监控&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-查看磁盘使用情况"&gt;1. 查看磁盘使用情况&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-查看目录大小"&gt;2. 查看目录大小&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-找出占用空间最大的目录实战排障"&gt;3. 找出占用空间最大的目录（实战排障）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#26-lvm-逻辑卷管理"&gt;2.6 LVM 逻辑卷管理&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-物理卷pv"&gt;1. 物理卷（PV）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-卷组vg"&gt;2. 卷组（VG）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-逻辑卷lv"&gt;3. 逻辑卷（LV）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4-扩容后刷新文件系统"&gt;4. 扩容后刷新文件系统&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#27-磁盘-io-性能排查"&gt;2.7 磁盘 I/O 性能排查&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-iostat--磁盘-io-统计"&gt;1. iostat —— 磁盘 I/O 统计&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-iotop--按进程查看-io"&gt;2. iotop —— 按进程查看 I/O&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-其他-io-排查工具"&gt;3. 其他 I/O 排查工具&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#28-磁盘故障排查"&gt;2.8 磁盘故障排查&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-smart-健康检测"&gt;1. SMART 健康检测&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-文件系统修复"&gt;2. 文件系统修复&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-坏道检测"&gt;3. 坏道检测&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#29-swap-交换分区管理"&gt;2.9 SWAP 交换分区管理&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-查看-swap"&gt;1. 查看 SWAP&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-创建-swap-分区"&gt;2. 创建 SWAP 分区&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-永久生效写入-fstab"&gt;3. 永久生效（写入 fstab）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4-调整-swap-使用策略"&gt;4. 调整 SWAP 使用策略&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#210-fstab-配置文件详解"&gt;2.10 fstab 配置文件详解&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-文件格式"&gt;1. 文件格式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-示例"&gt;2. 示例&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-常用挂载选项"&gt;3. 常用挂载选项&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4-安全验证-fstab"&gt;4. 安全验证 fstab&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#-速查口诀"&gt;📌 速查口诀&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3磁盘分区操作"&gt;3.磁盘分区操作&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1准备工作"&gt;1.准备工作&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2gpt分区"&gt;2.GPT分区&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1查看磁盘情况"&gt;1.查看磁盘情况&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2使用parted命令开始分区操作"&gt;2.使用parted命令开始分区操作&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3设置交换内存"&gt;3.设置交换内存&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1分配4g的分区大小"&gt;1.分配4G的分区大小&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2使用mkswap格式化分区"&gt;2.使用mkswap格式化分区&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3设置swapon启动交换分区"&gt;3.设置swapon启动交换分区&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4查看交换分区大小"&gt;4.查看交换分区大小&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h4 id=&#34;情况一全局迁移至-88-网段推荐彻底解决&#34;&gt;情况一：全局迁移至 88 网段（推荐彻底解决）&lt;/h4&gt;
+&lt;p&gt;如果你想把所有机器都规范到 88 网段，请按以下步骤操作：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>磁盘管理的相关知识</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#磁盘管理&#34;&gt;磁盘管理&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#1文件系统&#34;&gt;1.文件系统&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#常见文件系统对比&#34;&gt;常见文件系统对比&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#一主流文件系统横向对比&#34;&gt;一、主流文件系统横向对比&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#2常用的磁盘管理命令&#34;&gt;2.常用的磁盘管理命令&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#21-查看磁盘与分区信息&#34;&gt;2.1 查看磁盘与分区信息&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1-lsblk--查看块设备推荐首选&#34;&gt;1. lsblk —— 查看块设备（推荐首选）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2-fdisk--查看分区表&#34;&gt;2. fdisk —— 查看分区表&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-parted--高级分区查看&#34;&gt;3. parted —— 高级分区查看&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4-blkid--查看-uuid-和文件系统类型&#34;&gt;4. blkid —— 查看 UUID 和文件系统类型&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#5-其他硬件信息&#34;&gt;5. 其他硬件信息&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#22-分区管理命令&#34;&gt;2.2 分区管理命令&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1-fdisk--mbr-分区交互式&#34;&gt;1. fdisk —— MBR 分区（交互式）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2-gdisk--gpt-分区交互式&#34;&gt;2. gdisk —— GPT 分区（交互式）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-parted--高级分区工具&#34;&gt;3. parted —— 高级分区工具&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4-刷新内核分区表&#34;&gt;4. 刷新内核分区表&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#23-文件系统格式化&#34;&gt;2.3 文件系统格式化&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1-创建文件系统&#34;&gt;1. 创建文件系统&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2-格式化时指定参数&#34;&gt;2. 格式化时指定参数&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-查看文件系统信息&#34;&gt;3. 查看文件系统信息&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#24-挂载与卸载&#34;&gt;2.4 挂载与卸载&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1-临时挂载&#34;&gt;1. 临时挂载&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2-卸载&#34;&gt;2. 卸载&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-查看挂载信息&#34;&gt;3. 查看挂载信息&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#25-磁盘空间监控&#34;&gt;2.5 磁盘空间监控&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1-查看磁盘使用情况&#34;&gt;1. 查看磁盘使用情况&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2-查看目录大小&#34;&gt;2. 查看目录大小&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-找出占用空间最大的目录实战排障&#34;&gt;3. 找出占用空间最大的目录（实战排障）&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#26-lvm-逻辑卷管理&#34;&gt;2.6 LVM 逻辑卷管理&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1-物理卷pv&#34;&gt;1. 物理卷（PV）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2-卷组vg&#34;&gt;2. 卷组（VG）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-逻辑卷lv&#34;&gt;3. 逻辑卷（LV）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4-扩容后刷新文件系统&#34;&gt;4. 扩容后刷新文件系统&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#27-磁盘-io-性能排查&#34;&gt;2.7 磁盘 I/O 性能排查&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1-iostat--磁盘-io-统计&#34;&gt;1. iostat —— 磁盘 I/O 统计&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2-iotop--按进程查看-io&#34;&gt;2. iotop —— 按进程查看 I/O&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-其他-io-排查工具&#34;&gt;3. 其他 I/O 排查工具&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#28-磁盘故障排查&#34;&gt;2.8 磁盘故障排查&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1-smart-健康检测&#34;&gt;1. SMART 健康检测&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2-文件系统修复&#34;&gt;2. 文件系统修复&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-坏道检测&#34;&gt;3. 坏道检测&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#29-swap-交换分区管理&#34;&gt;2.9 SWAP 交换分区管理&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1-查看-swap&#34;&gt;1. 查看 SWAP&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2-创建-swap-分区&#34;&gt;2. 创建 SWAP 分区&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-永久生效写入-fstab&#34;&gt;3. 永久生效（写入 fstab）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4-调整-swap-使用策略&#34;&gt;4. 调整 SWAP 使用策略&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#210-fstab-配置文件详解&#34;&gt;2.10 fstab 配置文件详解&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1-文件格式&#34;&gt;1. 文件格式&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2-示例&#34;&gt;2. 示例&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3-常用挂载选项&#34;&gt;3. 常用挂载选项&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4-安全验证-fstab&#34;&gt;4. 安全验证 fstab&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#-速查口诀&#34;&gt;📌 速查口诀&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3磁盘分区操作&#34;&gt;3.磁盘分区操作&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1准备工作&#34;&gt;1.准备工作&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2gpt分区&#34;&gt;2.GPT分区&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1查看磁盘情况&#34;&gt;1.查看磁盘情况&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2使用parted命令开始分区操作&#34;&gt;2.使用parted命令开始分区操作&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3设置交换内存&#34;&gt;3.设置交换内存&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1分配4g的分区大小&#34;&gt;1.分配4G的分区大小&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2使用mkswap格式化分区&#34;&gt;2.使用mkswap格式化分区&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3设置swapon启动交换分区&#34;&gt;3.设置swapon启动交换分区&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4查看交换分区大小&#34;&gt;4.查看交换分区大小&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h4 id="磁盘管理"&gt;磁盘管理&lt;/h4&gt;
-&lt;h2 id="1文件系统"&gt;1.文件系统&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;文件系统的主要作用是将存储设备（如硬盘、SSD）上的物理空间组织为逻辑单元，提供数据存储、检索和管理的标准方法。一般文件系统主要由超级块（Superblock）、inode、数据块、目录结构构成的&lt;/code&gt;&lt;/p&gt;</description></item><item><title>关于ftp与SELinux的冲突问题</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#关于ftp与selinux的冲突问题"&gt;关于ftp与SELinux的冲突问题&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#1问题背景"&gt;1.问题背景&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2遇到的问题"&gt;2.遇到的问题&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3问题解决的方法"&gt;3.问题解决的方法&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1ai的方法"&gt;1.ai的方法&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#为什么本地能写ftp-不能写"&gt;为什么本地能写、FTP 不能写？&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#嫌疑一write_enable-没开最常见"&gt;嫌疑一：&lt;code&gt;write_enable&lt;/code&gt; 没开（最常见！）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#嫌疑二selinux-拦住了-ftpd"&gt;嫌疑二：SELinux 拦住了 ftpd&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#兜底看日志让服务器自己告诉你原因"&gt;兜底：看日志，让服务器自己告诉你原因&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#建议的排查顺序"&gt;建议的排查顺序&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2我看出了什么"&gt;2.我看出了什么&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#第-2-步临时关掉-selinux-做隔离测试"&gt;第 2 步：临时关掉 SELinux 做隔离测试&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#第-3-步回客户端-lftp-重试"&gt;第 3 步：回客户端 lftp 重试&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#看结果分支判断"&gt;看结果分支判断&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3我的解决方案"&gt;3.我的解决方案&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4给我们的警示"&gt;4.给我们的警示&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+
+&lt;h4 id=&#34;磁盘管理&#34;&gt;磁盘管理&lt;/h4&gt;
+&lt;h2 id=&#34;1文件系统&#34;&gt;1.文件系统&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;文件系统的主要作用是将存储设备（如硬盘、SSD）上的物理空间组织为逻辑单元，提供数据存储、检索和管理的标准方法。一般文件系统主要由超级块（Superblock）、inode、数据块、目录结构构成的&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>关于ftp与SELinux的冲突问题</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#关于ftp与selinux的冲突问题&#34;&gt;关于ftp与SELinux的冲突问题&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#1问题背景&#34;&gt;1.问题背景&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#2遇到的问题&#34;&gt;2.遇到的问题&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3问题解决的方法&#34;&gt;3.问题解决的方法&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1ai的方法&#34;&gt;1.ai的方法&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#为什么本地能写ftp-不能写&#34;&gt;为什么本地能写、FTP 不能写？&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#嫌疑一write_enable-没开最常见&#34;&gt;嫌疑一：&lt;code&gt;write_enable&lt;/code&gt; 没开（最常见！）&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#嫌疑二selinux-拦住了-ftpd&#34;&gt;嫌疑二：SELinux 拦住了 ftpd&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#兜底看日志让服务器自己告诉你原因&#34;&gt;兜底：看日志，让服务器自己告诉你原因&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#建议的排查顺序&#34;&gt;建议的排查顺序&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2我看出了什么&#34;&gt;2.我看出了什么&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#第-2-步临时关掉-selinux-做隔离测试&#34;&gt;第 2 步：临时关掉 SELinux 做隔离测试&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#第-3-步回客户端-lftp-重试&#34;&gt;第 3 步：回客户端 lftp 重试&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#看结果分支判断&#34;&gt;看结果分支判断&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3我的解决方案&#34;&gt;3.我的解决方案&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#4给我们的警示&#34;&gt;4.给我们的警示&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h4 id="关于ftp与selinux的冲突问题"&gt;关于ftp与SELinux的冲突问题&lt;/h4&gt;
-&lt;h2 id="1问题背景"&gt;1.问题背景&lt;/h2&gt;
+
+&lt;h4 id=&#34;关于ftp与selinux的冲突问题&#34;&gt;关于ftp与SELinux的冲突问题&lt;/h4&gt;
+&lt;h2 id=&#34;1问题背景&#34;&gt;1.问题背景&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;首先这个问题诞生于如此条件下，我在跟随佳乐老师创建完lisi，zhangsan，wangwu之后呢，我就用lisi作为用户登录服务器node1，这里面设置了禁锢操作，路径是/export/public，而public里面拥有2个文件夹.一个是logs，另一个是src，同时设置了黑白名单,张三设置在黑名单，王五和李四设置在白名单&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id="2遇到的问题"&gt;2.遇到的问题&lt;/h2&gt;
+&lt;h2 id=&#34;2遇到的问题&#34;&gt;2.遇到的问题&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;1.遇到的问题其实就是，在我用lisi把客户端的根目录下的a.log，发送给服务器的logs目录，无法操作&lt;/strong&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/31d543a0e0d74a2facd0b57caacd8359.png"&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/31d543a0e0d74a2facd0b57caacd8359.png&#34;&gt;
 &lt;strong&gt;2.后来，我在logs目录下创建文件夹也是无法操作的，也是显示权限不足&lt;/strong&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/55c072190ed842009aa2962c3868c3fc.png"&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/55c072190ed842009aa2962c3868c3fc.png&#34;&gt;
 但是呢，我在服务器的这个logs目录下创建文件夹是可以创建的
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/96f60e65512b4a38be2d95aa4d888fd8.png"&gt;&lt;/p&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/96f60e65512b4a38be2d95aa4d888fd8.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;3.就很奇怪，再去服务器是可以搞定的，是可以创建文件夹的，但是在客户端是没有办法进行创建的，我当时以为是logs的权限设置的不对，用的是root创建，权限大的缘故，但是其实并不是如此的,后面我在服务器用了lisi照样是可以创建的&lt;/code&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/5596133494e8476a96424bbf30353246.png"&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/5596133494e8476a96424bbf30353246.png&#34;&gt;
 4.&lt;code&gt;后来，我仔细检查了这些文件夹的权限，并再次赋权,这次显然也是不行的&lt;/code&gt;
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/ed81cf0aff1743229e25473bf7b232d7.png"&gt;&lt;/p&gt;
-&lt;h2 id="3问题解决的方法"&gt;3.问题解决的方法&lt;/h2&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E5%85%B3%E4%BA%8Eftp%E4%B8%8Eselinux%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/images/ed81cf0aff1743229e25473bf7b232d7.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3问题解决的方法&#34;&gt;3.问题解决的方法&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;解决的办法，后来，我把我的问题，这些比较奇怪的地方，我问了千文，后来，在他的帮助之下我成功了，在客户端我成功的在服务器的logs上面创建了文件夹，这意味着什么呢，显然这意味着，我可以把客户端家目录的a.log上传给服务器的logs里面，结果显然和我想的一样&lt;/code&gt;
 &lt;strong&gt;下面是千文告诉我的解决方案，让我一步一步排查，最后成功找到了问题关键所咋&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id="1ai的方法"&gt;1.ai的方法&lt;/h3&gt;
+&lt;h3 id=&#34;1ai的方法&#34;&gt;1.ai的方法&lt;/h3&gt;
 &lt;p&gt;这个对比信息非常关键！它直接帮我们&lt;strong&gt;排除了文件系统权限问题&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id="为什么本地能写ftp-不能写"&gt;为什么本地能写、FTP 不能写？&lt;/h3&gt;
+&lt;h3 id=&#34;为什么本地能写ftp-不能写&#34;&gt;为什么本地能写、FTP 不能写？&lt;/h3&gt;
 &lt;p&gt;本质区别在于&lt;strong&gt;执行写入的&amp;quot;身份&amp;quot;不同&lt;/strong&gt;：&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;场景&lt;/th&gt;
-&lt;th&gt;执行者&lt;/th&gt;
-&lt;th&gt;受什么约束&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;本地 mkdir&lt;/td&gt;
-&lt;td&gt;lisi 自己的 shell 进程&lt;/td&gt;
-&lt;td&gt;只看文件系统的 rwx 权限 ✅&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;FTP mkdir&lt;/td&gt;
-&lt;td&gt;vsftpd 守护进程代为执行&lt;/td&gt;
-&lt;td&gt;受 vsftpd.conf 开关 + SELinux 对 ftpd 的策略双重约束 ❌&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;场景&lt;/th&gt;
+					&lt;th&gt;执行者&lt;/th&gt;
+					&lt;th&gt;受什么约束&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;本地 mkdir&lt;/td&gt;
+					&lt;td&gt;lisi 自己的 shell 进程&lt;/td&gt;
+					&lt;td&gt;只看文件系统的 rwx 权限 ✅&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;FTP mkdir&lt;/td&gt;
+					&lt;td&gt;vsftpd 守护进程代为执行&lt;/td&gt;
+					&lt;td&gt;受 vsftpd.conf 开关 + SELinux 对 ftpd 的策略双重约束 ❌&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;所以本地能写，&lt;strong&gt;完全不能证明&lt;/strong&gt; FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。&lt;/p&gt;</description></item><item><title>数据同步服务</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一数据同步服务的基本介绍"&gt;一.数据同步服务的基本介绍&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1什么是数据同步"&gt;1.什么是数据同步？&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2如何进行实时同步"&gt;2.如何进行实时同步&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3特点"&gt;3.特点&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4怎么实现仅同步变化的数据呢"&gt;4.怎么实现仅同步变化的数据呢？&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5同步方式"&gt;5.同步方式&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二如何安装数据同步服务-dnf--y-install-rsync"&gt;二.如何安装数据同步服务： dnf -y install rsync&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#三综合案例"&gt;三.综合案例&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-本地同步操作"&gt;1. 本地同步操作:&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2远程同步操作"&gt;2.远程同步操作:&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3综合案例实现定时与增量备份"&gt;3.综合案例,实现定时与增量备份&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#四结合inotify实现数据实时同步"&gt;四.结合INOTIFY实现数据实时同步&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1对node2进行配置"&gt;1.对node2进行配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1创建用户"&gt;1.创建用户&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2修改配置文件"&gt;2.修改配置文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3创建密码件"&gt;3.创建密码⽂件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4-启动rsync服务"&gt;4. 启动rsync服务&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#五设置开机自启动"&gt;五.设置开机自启动&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1杀死进程"&gt;1.杀死进程&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2设置开机启动"&gt;2.设置开机⾃启动&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#六基于rsync服务完成动同步"&gt;六.基于RSYNC服务完成⼿动同步&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1格式"&gt;1.格式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2基于动同步式完成数据同步"&gt;2.基于⼿动同步⽅式完成数据同步&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3创建日志文件"&gt;3.创建日志文件&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#4开始传输文件了"&gt;4.开始传输文件了&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#解决方案"&gt;解决方案&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#找到根本原因了"&gt;找到根本原因了！&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#解决方案-1"&gt;解决方案&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#方案1临时关闭-selinux快速验证"&gt;方案1：临时关闭 SELinux（快速验证）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#方案2永久关闭-selinux"&gt;方案2：永久关闭 SELinux&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#方案3设置正确的-selinux-上下文推荐更安全"&gt;方案3：设置正确的 SELinux 上下文（推荐，更安全）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#建议"&gt;建议&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#七使密码件-实现不需要输密码"&gt;七,使⽤密码⽂件， 实现不需要输⼊密码&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#八使用主机名"&gt;八.使用主机名&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#九使用脚本自动配置"&gt;九.使用脚本自动配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1安装使用的软件"&gt;1.安装使用的软件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2编写脚本"&gt;2.编写脚本&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3给文件加权以及启动脚本文件"&gt;3给文件加权以及启动脚本文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4最后测试一下"&gt;4.最后测试一下&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;所以本地能写，&lt;strong&gt;完全不能证明&lt;/strong&gt; FTP 也能写。问题 100% 卡在 FTP 守护进程这一层。下面两个是头号嫌疑。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>数据同步服务</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#一数据同步服务的基本介绍&#34;&gt;一.数据同步服务的基本介绍&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1什么是数据同步&#34;&gt;1.什么是数据同步？&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2如何进行实时同步&#34;&gt;2.如何进行实时同步&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3特点&#34;&gt;3.特点&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4怎么实现仅同步变化的数据呢&#34;&gt;4.怎么实现仅同步变化的数据呢？&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#5同步方式&#34;&gt;5.同步方式&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二如何安装数据同步服务-dnf--y-install-rsync&#34;&gt;二.如何安装数据同步服务： dnf -y install rsync&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#三综合案例&#34;&gt;三.综合案例&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1-本地同步操作&#34;&gt;1. 本地同步操作:&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2远程同步操作&#34;&gt;2.远程同步操作:&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3综合案例实现定时与增量备份&#34;&gt;3.综合案例,实现定时与增量备份&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#四结合inotify实现数据实时同步&#34;&gt;四.结合INOTIFY实现数据实时同步&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1对node2进行配置&#34;&gt;1.对node2进行配置&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1创建用户&#34;&gt;1.创建用户&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2修改配置文件&#34;&gt;2.修改配置文件&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#3创建密码件&#34;&gt;3.创建密码⽂件&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#4-启动rsync服务&#34;&gt;4. 启动rsync服务&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#五设置开机自启动&#34;&gt;五.设置开机自启动&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1杀死进程&#34;&gt;1.杀死进程&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2设置开机启动&#34;&gt;2.设置开机⾃启动&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#六基于rsync服务完成动同步&#34;&gt;六.基于RSYNC服务完成⼿动同步&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1格式&#34;&gt;1.格式&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2基于动同步式完成数据同步&#34;&gt;2.基于⼿动同步⽅式完成数据同步&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3创建日志文件&#34;&gt;3.创建日志文件&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#4开始传输文件了&#34;&gt;4.开始传输文件了&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#解决方案&#34;&gt;解决方案&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#找到根本原因了&#34;&gt;找到根本原因了！&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#解决方案-1&#34;&gt;解决方案&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#方案1临时关闭-selinux快速验证&#34;&gt;方案1：临时关闭 SELinux（快速验证）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#方案2永久关闭-selinux&#34;&gt;方案2：永久关闭 SELinux&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#方案3设置正确的-selinux-上下文推荐更安全&#34;&gt;方案3：设置正确的 SELinux 上下文（推荐，更安全）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#建议&#34;&gt;建议&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#七使密码件-实现不需要输密码&#34;&gt;七,使⽤密码⽂件， 实现不需要输⼊密码&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#八使用主机名&#34;&gt;八.使用主机名&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#九使用脚本自动配置&#34;&gt;九.使用脚本自动配置&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#1安装使用的软件&#34;&gt;1.安装使用的软件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#2编写脚本&#34;&gt;2.编写脚本&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#3给文件加权以及启动脚本文件&#34;&gt;3给文件加权以及启动脚本文件&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#4最后测试一下&#34;&gt;4.最后测试一下&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h2 id="一数据同步服务的基本介绍"&gt;一.数据同步服务的基本介绍&lt;/h2&gt;
-&lt;h3 id="1什么是数据同步"&gt;1.什么是数据同步？&lt;/h3&gt;
+
+&lt;h2 id=&#34;一数据同步服务的基本介绍&#34;&gt;一.数据同步服务的基本介绍&lt;/h2&gt;
+&lt;h3 id=&#34;1什么是数据同步&#34;&gt;1.什么是数据同步？&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;指的将业务中数据，定时 或者实时的将其备份到其他目录或者其他服务器的目录下过程&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="2如何进行实时同步"&gt;2.如何进行实时同步&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;常⽤选项：
+&lt;h3 id=&#34;2如何进行实时同步&#34;&gt;2.如何进行实时同步&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;常⽤选项：
 • -v ：详细模式输出，显⽰传输过程中的⽂件信息。
 • -a ：归档模式，表⽰递归传输⽂件，并保持所有⽂件属性。
 • -z ：对备份的⽂件在传输时进⾏压缩处理。
@@ -1026,51 +1161,59 @@ rsync -av /src/directory/ /dest/directory/
 rsync -avz /src/directory/ root@192.168.88.102:/dest/directory/
 拉取远程数据到本地：
 rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="3特点"&gt;3.特点&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;3特点&#34;&gt;3.特点&lt;/h3&gt;
 &lt;p&gt;• ⽀持增量同步：只传输发⽣变化的数据部分。
 • ⽀持 SSH 加密传输。
-• 可保持⽂件权限、时间戳、连接和等元数据。&lt;/p&gt;</description></item><item><title>这个是关于ssh的相关问题这个是关于ssh的相关问题</title><link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#这个是关于ssh的相关问题这个是关于ssh的相关问题"&gt;这个是关于ssh的相关问题这个是关于ssh的相关问题&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#一首先问题是局域网内的两台主机如何可以相互登录"&gt;一.首先问题是：局域网内的两台主机如何可以相互登录&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一检查网络的连通性"&gt;一.检查网络的连通性&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二-检查了是否安装了ssh服务"&gt;二. 检查了是否安装了ssh服务&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二如何配置ssh免密登录"&gt;二.如何配置SSH免密登录&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#一root用户的登录配置"&gt;一.root用户的登录配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1修改配置文件"&gt;1.修改配置文件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2重启ssh服务"&gt;2.重启ssh服务&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#二免密钥登录"&gt;二.免密钥登录&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1安装私钥和公钥"&gt;1.安装私钥和公钥&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2发送公钥"&gt;2.发送公钥&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+• 可保持⽂件权限、时间戳、连接和等元数据。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>这个是关于ssh的相关问题这个是关于ssh的相关问题</title>
+      <link>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#这个是关于ssh的相关问题这个是关于ssh的相关问题&#34;&gt;这个是关于ssh的相关问题这个是关于ssh的相关问题&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#一首先问题是局域网内的两台主机如何可以相互登录&#34;&gt;一.首先问题是：局域网内的两台主机如何可以相互登录&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#一检查网络的连通性&#34;&gt;一.检查网络的连通性&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#二-检查了是否安装了ssh服务&#34;&gt;二. 检查了是否安装了ssh服务&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#二如何配置ssh免密登录&#34;&gt;二.如何配置SSH免密登录&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#一root用户的登录配置&#34;&gt;一.root用户的登录配置&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1修改配置文件&#34;&gt;1.修改配置文件&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2重启ssh服务&#34;&gt;2.重启ssh服务&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#二免密钥登录&#34;&gt;二.免密钥登录&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#1安装私钥和公钥&#34;&gt;1.安装私钥和公钥&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#2发送公钥&#34;&gt;2.发送公钥&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
-&lt;h4 id="这个是关于ssh的相关问题这个是关于ssh的相关问题"&gt;这个是关于ssh的相关问题这个是关于ssh的相关问题&lt;/h4&gt;
-&lt;h2 id="一首先问题是局域网内的两台主机如何可以相互登录"&gt;一.首先问题是：局域网内的两台主机如何可以相互登录&lt;/h2&gt;
+
+&lt;h4 id=&#34;这个是关于ssh的相关问题这个是关于ssh的相关问题&#34;&gt;这个是关于ssh的相关问题这个是关于ssh的相关问题&lt;/h4&gt;
+&lt;h2 id=&#34;一首先问题是局域网内的两台主机如何可以相互登录&#34;&gt;一.首先问题是：局域网内的两台主机如何可以相互登录&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;在这里面的话，我们其实是分成了2步的步骤流程：&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1081,40 +1224,43 @@ rsync -avz user@192.168.88.102:/src/directory/ /dest/directory/
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;接下来呢，我们将在这2个方面探究第一个的问题，这里面我会将我遇到的问题都写出来，并给予解决方案&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="一检查网络的连通性"&gt;一.检查网络的连通性&lt;/h3&gt;
+&lt;h3 id=&#34;一检查网络的连通性&#34;&gt;一.检查网络的连通性&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;其实，在这里面，大家务必要小心，不要觉得这个简单，就不好好看了，这个也是开始的时候困扰了我很久，后来才知道，了是这个问题没有解决，以下我就为大家详细的说一下吧：&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;首先呢，大家务必确定两台Linux是NAT模式，这个模式对于后续操作是有帮助的，否则的话，后面大家就会遇到各种各样的麻烦的，这里我就给大家说一下给如何进行NAT设置吧&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;首先呢，大家要点击虚拟机里面的主机当中的设置按钮&lt;/p&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/3d39734c50c845b1a3dca94f9d54d26d.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/3d39734c50c845b1a3dca94f9d54d26d.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;接下来，在里面出现的界面我们选择网络适配器，选择NAT就可以了&lt;/p&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/dc4cf5b90f0745e4adcce11cd8f03886.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/dc4cf5b90f0745e4adcce11cd8f03886.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;然后，接下来的一台Linux的系统也是同理的，在这里我就不赘述了，操作到这里，其实两台主机就具有连通行了，我们可以ping一下的
-&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/3ddf11ca5ee34c9faa74d73d95b0bf6c.png"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/8357eaf939444b7bae739442e507c10a.png"&gt;
+&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/3ddf11ca5ee34c9faa74d73d95b0bf6c.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/8357eaf939444b7bae739442e507c10a.png&#34;&gt;
 这一步，到这里就结束了，然后我们进行下一步操作的的.&lt;/p&gt;
-&lt;h3 id="二-检查了是否安装了ssh服务"&gt;二. 检查了是否安装了ssh服务&lt;/h3&gt;
+&lt;h3 id=&#34;二-检查了是否安装了ssh服务&#34;&gt;二. 检查了是否安装了ssh服务&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt; 在这里呢，我们开始进入Linux里面，开始真正意义上的操作的&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;首先就是我们查询是否安装了ssh相关服务，相比大家都知道的是，我们要安装ssh的客户端和服务端两个服务的，以下是查询的命令&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;ssh -V # 这个是检查SSH客⼾端版本，如果安装会显⽰版本信息
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/ba6760b2476d4378a5896bca27def448.png"&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;systemctl status sshd # 这个是检查SSH服务状态，如果服务正在运⾏则说明已安装SSH服务器
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt="在这里插入图片描述" loading="lazy" src="https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/50c753ae2698405ab406a8ae7dd025c4.png"&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh -V   # 这个是检查SSH客⼾端版本，如果安装会显⽰版本信息
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/ba6760b2476d4378a5896bca27def448.png&#34;&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl status sshd # 这个是检查SSH服务状态，如果服务正在运⾏则说明已安装SSH服务器
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;在这里插入图片描述&#34; loading=&#34;lazy&#34; src=&#34;https://dsduyopg-github-io.pages.dev/%E4%B8%93%E6%A0%8F/linux%E5%AD%A6%E4%B9%A0%E4%B8%93%E6%A0%8F/%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%BF%99%E4%B8%AA%E6%98%AF%E5%85%B3%E4%BA%8Essh%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/images/50c753ae2698405ab406a8ae7dd025c4.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;如果提⽰： command not found或类似的， 说明SSH服务未安装， 需要安装服务&lt;/p&gt;
-&lt;p&gt;&lt;img alt="![[Pasted image 20260712225903.png]]" loading="lazy" src="https://i-blog.csdnimg.cn/direct/8df8e7b8cc384d2883e169ae05d52064.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;![[Pasted image 20260712225903.png]]&#34; loading=&#34;lazy&#34; src=&#34;https://i-blog.csdnimg.cn/direct/8df8e7b8cc384d2883e169ae05d52064.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt; 此时呢，就需要安装这几个服务了&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;1.安装客户端&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;dnf install -y openssh-clients
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;dnf install -y openssh-clients
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;2.安装服务端&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;dnf install -y openssh-service
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;dnf install -y openssh-service
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;3.启动ssh服务&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;systemctl start sshd # 启动服务
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl start sshd # 启动服务
 systemctl enable sshd # 将服务添加到⾃启动项，下次开机就⾃动启动了
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;这一步，到这里，我们也就结束了&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;这一步，到这里，我们也就结束了&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

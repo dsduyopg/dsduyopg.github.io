@@ -1,88 +1,107 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Git on My_blog</title><link>https://dsduyopg-github-io.pages.dev/tags/git/</link><description>Recent content in Git on My_blog</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Tue, 18 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://dsduyopg-github-io.pages.dev/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows 上让 Git 自动同步：NSSM 服务 + 实时监听实战</title><link>https://dsduyopg-github-io.pages.dev/posts/ai-%E8%BE%85%E5%8A%A9%E4%B8%8Bwindows-%E4%B8%8A%E8%AE%A9-git-%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5nssm-%E6%9C%8D%E5%8A%A1-+-%E5%AE%9E%E6%97%B6%E7%9B%91%E5%90%AC%E5%AE%9E%E6%88%98/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://dsduyopg-github-io.pages.dev/posts/ai-%E8%BE%85%E5%8A%A9%E4%B8%8Bwindows-%E4%B8%8A%E8%AE%A9-git-%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5nssm-%E6%9C%8D%E5%8A%A1-+-%E5%AE%9E%E6%97%B6%E7%9B%91%E5%90%AC%E5%AE%9E%E6%88%98/</guid><description>&lt;details class="toc" open&gt;
-&lt;summary accesskey="c" title="(Alt + C)"&gt;
-&lt;span class="title"&gt;目录&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class="inner"&gt;&lt;nav id="TableOfContents"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#1-引言"&gt;1. 引言&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#11-自动化-git-的介绍"&gt;1.1 自动化 Git 的介绍&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#12-传统手动推送痛点"&gt;1.2 传统手动推送痛点&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#13-我为何需要自动同步"&gt;1.3 我为何需要自动同步&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#2-如何想到这个方案"&gt;2. 如何想到这个方案&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#21-背景linux-学习带来的启发"&gt;2.1 背景：Linux 学习带来的启发&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#22-一段经历用-openclaw-部署-nssm-服务"&gt;2.2 一段经历：用 OpenClaw 部署 NSSM 服务&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#221-原因"&gt;2.2.1 原因&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#222-解决问题"&gt;2.2.2 解决问题&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#223-开始执行步骤"&gt;2.2.3 开始执行步骤&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#3-思路与方案定型"&gt;3. 思路与方案定型&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#4-需求分析"&gt;4. 需求分析&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#5-验证方案可行性"&gt;5. 验证方案可行性&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#6-列出可行的方案"&gt;6. 列出可行的方案&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#7-项目实施的大纲"&gt;7. 项目实施的大纲&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#8-详细步骤"&gt;8. 详细步骤&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#81-一次性准备"&gt;8.1 一次性准备&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#811-在本地建一个仓库"&gt;8.1.1 在本地建一个仓库&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#812-安装-git"&gt;8.1.2 安装 Git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#813-ssh-准备"&gt;8.1.3 SSH 准备&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#82-底层一步一步是怎么实现的"&gt;8.2 底层一步一步是怎么实现的&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#821-监听文件变化"&gt;8.2.1 监听文件变化&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#822-事件泵--防抖"&gt;8.2.2 事件泵 + 防抖&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#823-自动提交推送"&gt;8.2.3 自动提交推送&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#824-服务化nssm"&gt;8.2.4 服务化（NSSM）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#825-定时拉取"&gt;8.2.5 定时拉取&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#9-核心脚本设计powershell"&gt;9. 核心脚本设计（PowerShell）&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#91-脚本文件构成"&gt;9.1 脚本文件构成&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#92-推送守护脚本设计git_sync_realtime_xxxps1"&gt;9.2 推送守护脚本设计（git_sync_realtime_xxx.ps1）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#93-定时拉取脚本设计change_fetcher_genericps1"&gt;9.3 定时拉取脚本设计（change_fetcher_generic.ps1）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#94-设计上的几个关键决定"&gt;9.4 设计上的几个关键决定&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#10-遇到的问题与解决方法最重要的关键部分"&gt;10. 遇到的问题与解决方法（最重要的关键部分）&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#101-bat-中文乱码"&gt;10.1 bat 中文乱码&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#102-ssh-私钥带口令自动化服务无法使用"&gt;10.2 SSH 私钥带口令，自动化服务无法使用&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#103-git-的-dubious-ownership-安全保护"&gt;10.3 git 的 “dubious ownership” 安全保护&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#104-github-端口-22-被拦截"&gt;10.4 GitHub 端口 22 被拦截&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#105-服务已标记为删除错误-1072"&gt;10.5 服务“已标记为删除”（错误 1072）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#106-定时拉取间隔写死"&gt;10.6 定时拉取间隔写死&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#107-filesystemwatcher-实时监听不触发"&gt;10.7 FileSystemWatcher 实时监听不触发&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#108-服务-paused启动失败循环"&gt;10.8 服务 PAUSED（启动失败循环）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#11-安全设计主仓库只推送--镜像区"&gt;11. 安全设计：主仓库只推送 + 镜像区&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#111-为什么这样设计"&gt;11.1 为什么这样设计&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#112-两条线分别怎么做"&gt;11.2 两条线分别怎么做&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#113-安全边界一定要分清"&gt;11.3 安全边界（一定要分清）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#114-配套安全措施"&gt;11.4 配套安全措施&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#115-结论"&gt;11.5 结论&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#12-验证结果"&gt;12. 验证结果&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#13-下载与体验"&gt;13. 下载与体验&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#14-总结与展望"&gt;14. 总结与展望&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Git on My_blog</title>
+    <link>https://dsduyopg-github-io.pages.dev/tags/git/</link>
+    <description>Recent content in Git on My_blog</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 18 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://dsduyopg-github-io.pages.dev/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows 上让 Git 自动同步：NSSM 服务 &#43; 实时监听实战</title>
+      <link>https://dsduyopg-github-io.pages.dev/posts/ai-%E8%BE%85%E5%8A%A9%E4%B8%8Bwindows-%E4%B8%8A%E8%AE%A9-git-%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5nssm-%E6%9C%8D%E5%8A%A1-&#43;-%E5%AE%9E%E6%97%B6%E7%9B%91%E5%90%AC%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://dsduyopg-github-io.pages.dev/posts/ai-%E8%BE%85%E5%8A%A9%E4%B8%8Bwindows-%E4%B8%8A%E8%AE%A9-git-%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5nssm-%E6%9C%8D%E5%8A%A1-&#43;-%E5%AE%9E%E6%97%B6%E7%9B%91%E5%90%AC%E5%AE%9E%E6%88%98/</guid>
+      <description>&lt;details class=&#34;toc&#34; open&gt;
+  &lt;summary accesskey=&#34;c&#34; title=&#34;(Alt + C)&#34;&gt;
+    &lt;span class=&#34;title&#34;&gt;目录&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;inner&#34;&gt;&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#1-引言&#34;&gt;1. 引言&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#11-自动化-git-的介绍&#34;&gt;1.1 自动化 Git 的介绍&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#12-传统手动推送痛点&#34;&gt;1.2 传统手动推送痛点&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#13-我为何需要自动同步&#34;&gt;1.3 我为何需要自动同步&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#2-如何想到这个方案&#34;&gt;2. 如何想到这个方案&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#21-背景linux-学习带来的启发&#34;&gt;2.1 背景：Linux 学习带来的启发&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#22-一段经历用-openclaw-部署-nssm-服务&#34;&gt;2.2 一段经历：用 OpenClaw 部署 NSSM 服务&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#221-原因&#34;&gt;2.2.1 原因&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#222-解决问题&#34;&gt;2.2.2 解决问题&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#223-开始执行步骤&#34;&gt;2.2.3 开始执行步骤&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3-思路与方案定型&#34;&gt;3. 思路与方案定型&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#4-需求分析&#34;&gt;4. 需求分析&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#5-验证方案可行性&#34;&gt;5. 验证方案可行性&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#6-列出可行的方案&#34;&gt;6. 列出可行的方案&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#7-项目实施的大纲&#34;&gt;7. 项目实施的大纲&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#8-详细步骤&#34;&gt;8. 详细步骤&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#81-一次性准备&#34;&gt;8.1 一次性准备&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#811-在本地建一个仓库&#34;&gt;8.1.1 在本地建一个仓库&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#812-安装-git&#34;&gt;8.1.2 安装 Git&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#813-ssh-准备&#34;&gt;8.1.3 SSH 准备&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#82-底层一步一步是怎么实现的&#34;&gt;8.2 底层一步一步是怎么实现的&lt;/a&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&#34;#821-监听文件变化&#34;&gt;8.2.1 监听文件变化&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#822-事件泵--防抖&#34;&gt;8.2.2 事件泵 + 防抖&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#823-自动提交推送&#34;&gt;8.2.3 自动提交推送&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#824-服务化nssm&#34;&gt;8.2.4 服务化（NSSM）&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;#825-定时拉取&#34;&gt;8.2.5 定时拉取&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#9-核心脚本设计powershell&#34;&gt;9. 核心脚本设计（PowerShell）&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#91-脚本文件构成&#34;&gt;9.1 脚本文件构成&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#92-推送守护脚本设计git_sync_realtime_xxxps1&#34;&gt;9.2 推送守护脚本设计（git_sync_realtime_xxx.ps1）&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#93-定时拉取脚本设计change_fetcher_genericps1&#34;&gt;9.3 定时拉取脚本设计（change_fetcher_generic.ps1）&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#94-设计上的几个关键决定&#34;&gt;9.4 设计上的几个关键决定&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#10-遇到的问题与解决方法最重要的关键部分&#34;&gt;10. 遇到的问题与解决方法（最重要的关键部分）&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#101-bat-中文乱码&#34;&gt;10.1 bat 中文乱码&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#102-ssh-私钥带口令自动化服务无法使用&#34;&gt;10.2 SSH 私钥带口令，自动化服务无法使用&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#103-git-的-dubious-ownership-安全保护&#34;&gt;10.3 git 的 “dubious ownership” 安全保护&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#104-github-端口-22-被拦截&#34;&gt;10.4 GitHub 端口 22 被拦截&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#105-服务已标记为删除错误-1072&#34;&gt;10.5 服务“已标记为删除”（错误 1072）&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#106-定时拉取间隔写死&#34;&gt;10.6 定时拉取间隔写死&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#107-filesystemwatcher-实时监听不触发&#34;&gt;10.7 FileSystemWatcher 实时监听不触发&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#108-服务-paused启动失败循环&#34;&gt;10.8 服务 PAUSED（启动失败循环）&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#11-安全设计主仓库只推送--镜像区&#34;&gt;11. 安全设计：主仓库只推送 + 镜像区&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#111-为什么这样设计&#34;&gt;11.1 为什么这样设计&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#112-两条线分别怎么做&#34;&gt;11.2 两条线分别怎么做&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#113-安全边界一定要分清&#34;&gt;11.3 安全边界（一定要分清）&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#114-配套安全措施&#34;&gt;11.4 配套安全措施&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#115-结论&#34;&gt;11.5 结论&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#12-验证结果&#34;&gt;12. 验证结果&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#13-下载与体验&#34;&gt;13. 下载与体验&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#14-总结与展望&#34;&gt;14. 总结与展望&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/nav&gt;&lt;/div&gt;
 &lt;/details&gt;
+
 &lt;blockquote&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;摘要&lt;/strong&gt;：本文记录我从“AI 机器人老挂机”的痛点出发，到用 NSSM 把 OpenClaw 网关变成 Windows 服务，再到把“Git 自动同步”做成一个完整工具包并打包发布的完整过程。全文包含：方案对比、详细步骤、核心脚本设计、8 个真实踩坑记录、安全设计、验证结果。全程由我提出需求、检查验证、确定改进方向，代码与排错由 AI 辅助完成。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;strong&gt;摘要&lt;/strong&gt;：本文记录我从“AI 机器人老挂机”的痛点出发，到用 NSSM 把 OpenClaw 网关变成 Windows 服务，再到把“Git 自动同步”做成一个完整工具包并打包发布的完整过程。全文包含：方案对比、详细步骤、核心脚本设计、8 个真实踩坑记录、安全设计、验证结果。全程由我提出需求、检查验证、确定改进方向，代码与排错由 AI 辅助完成。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
