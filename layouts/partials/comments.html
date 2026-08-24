@@ -29,60 +29,60 @@
 
 <script>
   (function () {
-    var btn = document.getElementById('github-like-btn');
+    // ===== 配置 =====
+    // 部署 Worker 后把下面这个地址换成你的真实地址:
+    // https://你的worker名.你的子域.workers.dev/api/like
+    var API_BASE = 'https://REPLACE_WITH_YOUR_WORKER.workers.dev/api/like';
+    // ================
+
+    var btn = document.getElementById('cf-like-btn');
     if (!btn) return;
     var heart = btn.querySelector('.like-heart');
     var num = btn.querySelector('.like-count');
-    var discussionNumber = null;
-    var likedByMe = false;
+    var path = location.pathname;
+    var liked = false;
 
     function setCount(n) {
       num.textContent = n;
-      heart.textContent = likedByMe ? '♥' : '♡';
-      btn.classList.toggle('liked', likedByMe);
+      heart.textContent = liked ? '♥' : '♡';
+      btn.classList.toggle('liked', liked);
     }
 
-    // 从 giscus iframe 拿到当前文章的 discussion number
-    window.addEventListener('message', function (event) {
-      var data = event.data;
-      if (!data || typeof data !== 'object' || !data.giscus) return;
-      var g = data.giscus;
-      if (g.error) return;
-      if (g.discussion && g.discussion.number) {
-        discussionNumber = g.discussion.number;
-        loadCount();
-      }
-    });
-
-    // 读取 GitHub discussion 的 +1 数量（公开 API，无需登录）
+    // 读取当前文章的点赞数（匿名，无需登录）
     function loadCount() {
-      if (!discussionNumber) return;
-      var url = 'https://api.github.com/repos/dsduyopg/dsduyopg.github.io/discussions/' +
-                discussionNumber + '/reactions?per_page=100';
-      fetch(url, { headers: { 'Accept': 'application/vnd.github.squirrel-girl-preview+json' } })
+      fetch(API_BASE + '?path=' + encodeURIComponent(path))
         .then(function (r) { return r.json(); })
-        .then(function (list) {
-          var n = 0;
-          if (Array.isArray(list)) {
-            list.forEach(function (re) { if (re.content === '+1') n++; });
+        .then(function (d) {
+          if (typeof d.count === 'number') {
+            liked = !!d.liked;
+            setCount(d.count);
           }
-          setCount(n);
         })
-        .catch(function () { /* 网络失败就保持 0 */ });
+        .catch(function () {});
     }
 
-    // 点赞：登录 GitHub 后跳转到该 discussion 点赞
+    // 点赞：调用 Worker，防刷（同一 IP 限一次）
     btn.addEventListener('click', function () {
-      if (!discussionNumber) {
-        alert('评论区加载后才能点赞，请稍候再试。');
-        return;
-      }
-      window.open(
-        'https://github.com/dsduyopg/dsduyopg.github.io/discussions/' + discussionNumber,
-        '_blank'
-      );
+      fetch(API_BASE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path: path })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (typeof d.count === 'number') {
+            liked = !!d.liked;
+            setCount(d.count);
+          }
+          if (d.already) {
+            alert('你已经点过赞啦 ♥');
+          }
+        })
+        .catch(function () {
+          alert('点赞失败，请稍后再试');
+        });
     });
 
-    setCount(0);
+    loadCount();
   })();
 </script>
