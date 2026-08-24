@@ -8,4 +8,4 @@ compatibility_date = "2024-01-01"
 # KV namespace(先在 CF 控制台创建,再替换 id)
 [[kv_namespaces]]
 binding = "LIKE_KV"
-id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+id = "b2f263aad6a646eb87c498329cbac12e"
