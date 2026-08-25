@@ -50,6 +50,37 @@ export default {
       return json({ ok: true, url: img });
     }
 
+    // POST /save —— 把当前生效背景保存为「原始风景图」存档
+    if (request.method === "POST" && url.pathname === "/save") {
+      const p = await request.json().catch(() => ({}));
+      if (p.key !== ADMIN_KEY) return json({ error: "密钥错误" }, 403);
+      let current = null;
+      try { current = await env.KV.get("bg_override"); } catch (e) {}
+      if (!current) {
+        const list = await bingList(1);
+        current = (list[0] && list[0].url) || "";
+      }
+      if (!current) return json({ error: "获取当前背景失败" }, 500);
+      await env.KV.put("bg_saved", current, { expirationTtl: 60 * 60 * 24 * 365 });
+      return json({ ok: true, url: current });
+    }
+
+    // POST /restore —— 恢复到「原始风景图」存档
+    if (request.method === "POST" && url.pathname === "/restore") {
+      const p = await request.json().catch(() => ({}));
+      if (p.key !== ADMIN_KEY) return json({ error: "密钥错误" }, 403);
+      const saved = await env.KV.get("bg_saved");
+      if (!saved) return json({ error: "还没有保存过原始风景图，请先保存" }, 404);
+      await env.KV.put("bg_override", saved, { expirationTtl: 60 * 60 * 24 * 365 });
+      return json({ ok: true, url: saved });
+    }
+
+    // GET /saved —— 返回原始风景图存档（公开只读，只有图片 URL）
+    if (url.pathname === "/saved") {
+      const saved = await env.KV.get("bg_saved");
+      return json({ saved: saved || null });
+    }
+
     // POST /reset —— 恢复自动
     if (request.method === "POST" && url.pathname === "/reset") {
       const p = await request.json().catch(() => ({}));
