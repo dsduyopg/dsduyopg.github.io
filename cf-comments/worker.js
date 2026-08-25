@@ -79,7 +79,7 @@ export default {
 
     // DELETE /api/comments  { id, adminToken }  —— 博主删除
     if (request.method === "DELETE" && url.pathname === "/api/comments") {
-      if (!env.ADMIN_TOKEN) {
+      if (!env.ADMIN_PWD) {
         return json({ error: "服务端未配置管理员密码" }, 500, corsHeaders);
       }
       let payload;
@@ -93,7 +93,7 @@ export default {
       if (!Number.isInteger(id)) {
         return json({ error: "invalid id" }, 400, corsHeaders);
       }
-      if (token !== env.ADMIN_TOKEN) {
+      if (token !== env.ADMIN_PWD) {
         return json({ error: "密码错误，无权删除" }, 403, corsHeaders);
       }
       const info = await env.DB.prepare("DELETE FROM comments WHERE id = ?").bind(id).run();
