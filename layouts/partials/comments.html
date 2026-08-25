@@ -24,108 +24,270 @@
           async>
   </script>
 
-  {{/* ===== CF 自建评论区（匿名 + GitHub 轻量登录，免登录提交，Turnstile 防机器人） ===== */}}
-  <hr>
-  <div class="cf-comments" id="cf-comments">
-    <h3>CF 评论区（免登录）</h3>
-    <p class="cf-hint">填个昵称就能发，不用注册。也可用 GitHub 登录自动填昵称。</p>
-    <div class="cf-login-row">
-      <button type="button" id="cf-gh-login" class="cf-gh-btn">用 GitHub 登录</button>
-      <span id="cf-login-status" class="cf-login-status"></span>
+  {{/* ===== CF 自建评论区（优雅版） ===== */}}
+  <section class="cf-comments" id="cf-comments">
+    <header class="cf-comments__head">
+      <h3>留言</h3>
+      <p class="cf-comments__sub">无需注册，留个名字即可。理性发言，彼此尊重。</p>
+    </header>
+
+    {{/* 登录态（GitHub 轻量登录，可选） */}}
+    <div class="cf-login" id="cf-login" hidden>
+      <span class="cf-login__avatar" id="cf-login-avatar">G</span>
+      <span class="cf-login__name" id="cf-login-name"></span>
+      <button type="button" class="cf-login__out" id="cf-login-out">退出</button>
     </div>
-    <div class="cf-form">
-      <input type="text" id="cf-author" maxlength="40" placeholder="昵称（默认：匿名）" class="cf-author">
-      <textarea id="cf-body" maxlength="2000" placeholder="说点什么…（≤2000字）" class="cf-body"></textarea>
-      <div class="cf-turnstile" id="cf-turnstile"></div>
-      <div class="cf-submit-row">
-        <button type="button" id="cf-submit" class="cf-submit-btn">提交评论</button>
-        <span id="cf-msg" class="cf-msg"></span>
+
+    {{/* 输入卡片 */}}
+    <form class="cf-card" id="cf-form" autocomplete="off">
+      <input type="text" id="cf-author" class="cf-input cf-input--author"
+             maxlength="40" placeholder="你的昵称（留空则显示「匿名」）">
+      <textarea id="cf-body" class="cf-input cf-input--body"
+                maxlength="2000" placeholder="写下你的想法…" rows="3"></textarea>
+      <div class="cf-card__foot">
+        <div class="cf-turnstile" id="cf-turnstile" title="人机验证"></div>
+        <div class="cf-card__actions">
+          <span class="cf-msg" id="cf-msg"></span>
+          <button type="submit" class="cf-submit" id="cf-submit">发布</button>
+        </div>
       </div>
-    </div>
+    </form>
+
+    {{/* 评论列表 */}}
     <div class="cf-list" id="cf-list">
-      <p class="cf-loading">加载评论中…</p>
+      <p class="cf-list__loading">正在载入留言…</p>
     </div>
-  </div>
-  {{/* Turnstile 脚本（必须加载，提交时取 token） */}}
+  </section>
+
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-  <noscript>请启用 JavaScript 查看评论。</noscript>
+  <noscript>请启用 JavaScript 以查看与发表留言。</noscript>
 </div>
+
+<style>
+  /* ---------- CF 评论区：优雅风 ---------- */
+  .cf-comments {
+    margin-top: var(--content-gap);
+    padding-top: var(--content-gap);
+    border-top: 1px solid var(--border);
+    color: var(--content);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .cf-comments__head h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: .02em;
+  }
+  .cf-comments__sub {
+    margin: .35rem 0 1.1rem;
+    color: var(--secondary);
+    font-size: .85rem;
+  }
+
+  /* 登录态 */
+  .cf-login {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-bottom: 1rem;
+    padding: .5rem .75rem;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: .9rem;
+  }
+  .cf-login[hidden] { display: none; }
+  .cf-login__avatar {
+    width: 26px; height: 26px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--theme);
+    font-size: .8rem; font-weight: 700;
+  }
+  .cf-login__name { color: var(--primary); font-weight: 600; }
+  .cf-login__out {
+    margin-left: auto;
+    background: none; border: none; cursor: pointer;
+    color: var(--secondary); font-size: .8rem;
+    text-decoration: underline;
+  }
+
+  /* 输入卡片 */
+  .cf-card {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .cf-card:focus-within {
+    border-color: var(--tertiary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--tertiary) 35%, transparent);
+  }
+  .cf-input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: var(--content);
+    font: inherit;
+    outline: none;
+    resize: vertical;
+  }
+  .cf-input--author {
+    padding: .2rem 0 .55rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: .6rem;
+    font-weight: 500;
+  }
+  .cf-input--author::placeholder { color: var(--secondary); font-weight: 400; }
+  .cf-input--body {
+    min-height: 64px;
+    line-height: 1.7;
+  }
+  .cf-input--body::placeholder { color: var(--secondary); }
+
+  .cf-card__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: .9rem;
+    flex-wrap: wrap;
+  }
+  .cf-card__actions {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-left: auto;
+  }
+  .cf-submit {
+    border: none;
+    background: var(--primary);
+    color: var(--theme);
+    font: inherit;
+    font-weight: 600;
+    padding: .5rem 1.4rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: opacity .2s ease, transform .1s ease;
+  }
+  .cf-submit:hover { opacity: .88; }
+  .cf-submit:active { transform: translateY(1px); }
+  .cf-msg {
+    font-size: .82rem;
+    color: var(--secondary);
+    min-height: 1em;
+  }
+  .cf-msg.is-err { color: #e5484d; }
+  .cf-msg.is-ok  { color: #2e9e5b; }
+
+  /* 列表 */
+  .cf-list {
+    margin-top: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  .cf-item {
+    position: relative;
+    padding-left: .95rem;
+    border-left: 2px solid var(--border);
+  }
+  .cf-item__meta {
+    display: flex;
+    align-items: baseline;
+    gap: .6rem;
+    margin-bottom: .2rem;
+  }
+  .cf-item__author {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: .92rem;
+  }
+  .cf-item__time {
+    color: var(--secondary);
+    font-size: .76rem;
+  }
+  .cf-item__text {
+    color: var(--content);
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+  }
+  .cf-empty, .cf-list__loading {
+    color: var(--secondary);
+    font-size: .9rem;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin: 0;
+  }
+
+  /* 响应式 */
+  @media (max-width: 600px) {
+    .cf-card__foot { flex-direction: column; align-items: stretch; }
+    .cf-card__actions { margin-left: 0; justify-content: flex-end; }
+  }
+</style>
 {{- end }}
 
 <script>
   (function () {
-    // ===== 配置 =====
-    // 部署 Worker 后把下面这个地址换成你的真实地址:
-    // https://你的worker名.你的子域.workers.dev/api/like
+    // ===== 点赞（CF Worker） =====
     var API_BASE = 'https://blog-like.629017960.workers.dev/api/like';
-    // ================
-
     var btn = document.getElementById('cf-like-btn');
-    if (!btn) return;
-    var heart = btn.querySelector('.like-heart');
-    var num = btn.querySelector('.like-count');
-    var path = location.pathname;
-    var liked = false;
-
-    function setCount(n) {
-      num.textContent = n;
-      heart.textContent = liked ? '♥' : '♡';
-      btn.classList.toggle('liked', liked);
-    }
-
-    // 读取当前文章的点赞数（匿名，无需登录）
-    function loadCount() {
-      fetch(API_BASE + '?path=' + encodeURIComponent(path))
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          if (typeof d.count === 'number') {
-            liked = !!d.liked;
-            setCount(d.count);
-          }
+    if (btn) {
+      var heart = btn.querySelector('.like-heart');
+      var num = btn.querySelector('.like-count');
+      var path = location.pathname;
+      var liked = false;
+      function setCount(n) {
+        num.textContent = n;
+        heart.textContent = liked ? '♥' : '♡';
+        btn.classList.toggle('liked', liked);
+      }
+      function loadCount() {
+        fetch(API_BASE + '?path=' + encodeURIComponent(path))
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (typeof d.count === 'number') { liked = !!d.liked; setCount(d.count); }
+          }).catch(function () {});
+      }
+      btn.addEventListener('click', function () {
+        fetch(API_BASE, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: path })
         })
-        .catch(function () {});
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (typeof d.count === 'number') { liked = !!d.liked; setCount(d.count); }
+            if (d.already) alert('你已经点过赞啦 ♥');
+          })
+          .catch(function () { alert('点赞失败，请稍后再试'); });
+      });
+      loadCount();
     }
-
-    // 点赞：调用 Worker，防刷（同一 IP 限一次）
-    btn.addEventListener('click', function () {
-      fetch(API_BASE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ path: path })
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          if (typeof d.count === 'number') {
-            liked = !!d.liked;
-            setCount(d.count);
-          }
-          if (d.already) {
-            alert('你已经点过赞啦 ♥');
-          }
-        })
-        .catch(function () {
-          alert('点赞失败，请稍后再试');
-        });
-    });
-
-    loadCount();
   })();
 </script>
 
-{{/* ===== CF 评论区前端逻辑 ===== */}}
+{{/* ===== CF 评论区逻辑 ===== */}}
 <script>
 (function () {
   var API = 'https://blog-comments.629017960.workers.dev/api/comments';
-  var TURNSTILE_SITE_KEY = '0x4AAAAAAEbQyomn8vBPNjw4'; // 部署后替换为真实 site key
-  var GH_CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID';          // 部署前替换为 GitHub OAuth App 的 Client ID
+  var TURNSTILE_SITE_KEY = '0x4AAAAAAEbQyomn8vBPNjw4';
+  var GH_CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID';
   var slug = location.pathname;
-  var listEl = document.getElementById('cf-list');
+
+  var listEl   = document.getElementById('cf-list');
+  var formEl   = document.getElementById('cf-form');
   var authorEl = document.getElementById('cf-author');
-  var bodyEl = document.getElementById('cf-body');
-  var msgEl = document.getElementById('cf-msg');
-  var submitBtn = document.getElementById('cf-submit');
-  var loginBtn = document.getElementById('cf-gh-login');
-  var loginStatus = document.getElementById('cf-login-status');
+  var bodyEl   = document.getElementById('cf-body');
+  var msgEl    = document.getElementById('cf-msg');
+  var loginBox = document.getElementById('cf-login');
+  var loginName = document.getElementById('cf-login-name');
+  var loginOut = document.getElementById('cf-login-out');
 
   function escapeHtml(s) {
     return s.replace(/[&<>"']/g, function (c) {
@@ -133,10 +295,15 @@
     });
   }
   function fmtTime(ts) {
-    var d = new Date(ts);
+    var d = new Date(Number(ts));
     if (isNaN(d)) return '';
     var p = function (n) { return n < 10 ? '0' + n : '' + n; };
-    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate())
+         + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+  function showMsg(text, kind) {
+    msgEl.textContent = text;
+    msgEl.className = 'cf-msg' + (kind ? ' is-' + kind : '');
   }
 
   function loadComments() {
@@ -144,49 +311,43 @@
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (!d.comments || !d.comments.length) {
-          listEl.innerHTML = '<p class="cf-empty">还没有评论，来抢沙发～</p>';
+          listEl.innerHTML = '<p class="cf-empty">还没有留言，来做第一个吧。</p>';
           return;
         }
-        var html = '';
-        d.comments.forEach(function (c) {
-          html += '<div class="cf-item">'
-            + '<div class="cf-meta"><b>' + escapeHtml(c.author) + '</b> <span>' + fmtTime(c.created_at) + '</span></div>'
-            + '<div class="cf-text">' + escapeHtml(c.body).replace(/\n/g, '<br>') + '</div>'
+        listEl.innerHTML = d.comments.map(function (c) {
+          return '<div class="cf-item">'
+            + '<div class="cf-item__meta">'
+            +   '<span class="cf-item__author">' + escapeHtml(c.author) + '</span>'
+            +   '<span class="cf-item__time">' + fmtTime(c.created_at) + '</span>'
+            + '</div>'
+            + '<p class="cf-item__text">' + escapeHtml(c.body).replace(/\n/g, '<br>') + '</p>'
             + '</div>';
-        });
-        listEl.innerHTML = html;
+        }).join('');
       })
-      .catch(function () { listEl.innerHTML = '<p class="cf-empty">评论加载失败</p>'; });
+      .catch(function () { listEl.innerHTML = '<p class="cf-empty">留言载入失败，请刷新重试。</p>'; });
   }
 
-  function showMsg(text, isErr) {
-    msgEl.textContent = text;
-    msgEl.style.color = isErr ? '#e74c3c' : '#27ae60';
-  }
-
-  // 渲染 Turnstile 组件（成功回调把 token 存到全局变量）
+  // Turnstile
   window._cfTurnstileToken = '';
   function renderTurnstile() {
     if (!window.turnstile || typeof window.turnstile.render !== 'function') {
-      setTimeout(renderTurnstile, 300);
-      return;
+      setTimeout(renderTurnstile, 300); return;
     }
     window.turnstile.render('#cf-turnstile', {
       sitekey: TURNSTILE_SITE_KEY,
-      callback: function (token) { window._cfTurnstileToken = token; },
+      callback: function (t) { window._cfTurnstileToken = t; },
       'expired-callback': function () { window._cfTurnstileToken = ''; },
       'error-callback': function () { window._cfTurnstileToken = ''; }
     });
   }
   renderTurnstile();
 
-  submitBtn.addEventListener('click', function () {
+  // 提交
+  formEl.addEventListener('submit', function (e) {
+    e.preventDefault();
     var body = bodyEl.value.trim();
-    if (!body) { showMsg('评论内容不能为空', true); return; }
-    showMsg('提交中…', false);
-
-    // 取 Turnstile token（渲染组件回调写入）
-    var token = window._cfTurnstileToken || '';
+    if (!body) { showMsg('请先写下点什么', 'err'); return; }
+    showMsg('发布中…', '');
 
     fetch(API, {
       method: 'POST',
@@ -195,7 +356,7 @@
         slug: slug,
         author: authorEl.value.trim() || '匿名',
         body: body,
-        'cf-turnstile-response': token
+        'cf-turnstile-response': window._cfTurnstileToken || ''
       })
     })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
@@ -203,49 +364,57 @@
         if (res.ok && res.d.ok) {
           bodyEl.value = '';
           window._cfTurnstileToken = '';
-          showMsg('评论成功！', false);
           if (window.turnstile) window.turnstile.reset();
+          showMsg('已发布 ✓', 'ok');
+          setTimeout(function () { showMsg('', ''); }, 2500);
           loadComments();
         } else {
-          showMsg(res.d.error || '提交失败', true);
+          showMsg(res.d.error || '发布失败，请重试', 'err');
           if (window.turnstile) window.turnstile.reset();
         }
       })
-      .catch(function () { showMsg('网络错误，请重试', true); });
+      .catch(function () { showMsg('网络异常，请稍后重试', 'err'); });
   });
 
-  // GitHub 轻量登录：OAuth 弹窗拿用户名，自动填昵称
-  loginBtn.addEventListener('click', function () {
-    if (GH_CLIENT_ID === 'YOUR_GITHUB_CLIENT_ID') {
-      loginStatus.textContent = '（未配置 GitHub Client ID）';
-      return;
-    }
-    var redirect = location.origin + location.pathname;
-    var url = 'https://github.com/login/oauth/authorize?client_id=' + GH_CLIENT_ID
-      + '&redirect_uri=' + encodeURIComponent(redirect)
-      + '&scope=read:user';
-    var popup = window.open(url, 'ghlogin', 'width=600,height=700');
-    if (!popup) { loginStatus.textContent = '弹窗被拦截，请允许后重试'; return; }
-    loginStatus.textContent = '等待 GitHub 授权…';
-
-    // 监听回调（回调页需把 ?code= 通过 postMessage 发回来，或此处轮询）
-    var timer = setInterval(function () {
-      try {
-        if (popup.closed) {
-          clearInterval(timer);
-          loginStatus.textContent = '未获取到授权';
-        }
-      } catch (e) {}
-    }, 1000);
-    window.addEventListener('message', function (ev) {
-      if (ev.origin !== location.origin) return;
-      if (ev.data && ev.data.ghUser) {
-        authorEl.value = ev.data.ghUser;
-        loginStatus.textContent = '已登录：' + ev.data.ghUser;
-        clearInterval(timer);
-        if (popup) popup.close();
-      }
+  // GitHub 轻量登录
+  if (GH_CLIENT_ID !== 'YOUR_GITHUB_CLIENT_ID') {
+    // 由 gh-callback 写入会话
+    try {
+      var saved = sessionStorage.getItem('cf_gh_user');
+      if (saved) applyLogin(saved);
+    } catch (e) {}
+    loginOut.addEventListener('click', function () {
+      try { sessionStorage.removeItem('cf_gh_user'); } catch (e) {}
+      loginBox.hidden = true;
+      authorEl.value = '';
     });
+    // 触发登录入口：在标题旁加一个细按钮（仅配了 client id 时）
+    var head = document.querySelector('.cf-comments__head h3');
+    if (head) {
+      var gh = document.createElement('button');
+      gh.type = 'button'; gh.textContent = 'GitHub 登录';
+      gh.style.cssText = 'float:right;background:none;border:1px solid var(--border);'
+        + 'color:var(--secondary);font-size:.78rem;padding:.25rem .7rem;border-radius:999px;cursor:pointer;';
+      gh.addEventListener('click', function () {
+        var url = 'https://github.com/login/oauth/authorize?client_id=' + GH_CLIENT_ID
+          + '&redirect_uri=' + encodeURIComponent(location.origin + '/gh-callback.html')
+          + '&scope=read:user';
+        window.open(url, 'ghlogin', 'width=600,height=700');
+      });
+      head.appendChild(gh);
+    }
+  }
+  function applyLogin(name) {
+    loginBox.hidden = false;
+    loginName.textContent = name;
+    authorEl.value = name;
+  }
+  window.addEventListener('message', function (ev) {
+    if (ev.origin !== location.origin) return;
+    if (ev.data && ev.data.ghUser) {
+      try { sessionStorage.setItem('cf_gh_user', ev.data.ghUser); } catch (e) {}
+      applyLogin(ev.data.ghUser);
+    }
   });
 
   loadComments();
