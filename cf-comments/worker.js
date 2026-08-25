@@ -6,15 +6,6 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // DEBUG（临时排查用，上线稳定后可删除）
-    if (url.pathname === "/api/debug") {
-      return json({
-        hasPwd: typeof env.ADMIN_KEY,
-        pwdLen: env.ADMIN_KEY ? env.ADMIN_KEY.length : 0,
-        hasTurn: typeof env.TURNSTALL_SECRET
-      }, 200, {});
-    }
-
     // CORS（允许你的站点调用）
     const ALLOWED_ORIGINS = [
       "https://dsduyopg-github-io.pages.dev",
