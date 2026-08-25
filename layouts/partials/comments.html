@@ -576,4 +576,12 @@
     }
   });
 
-  // 已登录过则自动解锁�
+  // 已登录过则自动解锁博主面板
+  if (_adminToken) {
+    document.getElementById('cf-admin').hidden = false;
+    document.getElementById('cf-admin-enter').hidden = true;
+  }
+
+  loadComments();
+})();
+</script>
