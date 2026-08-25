@@ -36,6 +36,7 @@
     <div class="cf-form">
       <input type="text" id="cf-author" maxlength="40" placeholder="昵称（默认：匿名）" class="cf-author">
       <textarea id="cf-body" maxlength="2000" placeholder="说点什么…（≤2000字）" class="cf-body"></textarea>
+      <div class="cf-turnstile" id="cf-turnstile"></div>
       <div class="cf-submit-row">
         <button type="button" id="cf-submit" class="cf-submit-btn">提交评论</button>
         <span id="cf-msg" class="cf-msg"></span>
@@ -115,7 +116,7 @@
 <script>
 (function () {
   var API = 'https://blog-comments.629017960.workers.dev/api/comments';
-  var TURNSTILE_SITE_KEY = 'YOUR_TURNSTILE_SITE_KEY'; // 部署前替换为真实 site key
+  var TURNSTILE_SITE_KEY = '0x4AAAAAAEbQyomn8vBPNjw4'; // 部署后替换为真实 site key
   var GH_CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID';          // 部署前替换为 GitHub OAuth App 的 Client ID
   var slug = location.pathname;
   var listEl = document.getElementById('cf-list');
