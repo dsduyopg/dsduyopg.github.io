@@ -79,6 +79,20 @@ function Sync-Now {
         Clear-StaleLock
         $addOut = git -C $RepoPath add -A 2>&1
         if ($LASTEXITCODE -ne 0) { Write-Log "git add 失败：$addOut"; return }
+        # 保护子模块：撤销对 themes/* 等子模块的意外改动，只同步博客自身内容
+        $subs = git -C $RepoPath submodule status 2>$null
+        foreach ($line in $subs) {
+            if ($line -match '^\s*([+-U])\s+(\S+)') {
+                $subPath = $matches[2]
+                $gitDir = Join-Path $RepoPath $subPath
+                if (Test-Path (Join-Path $gitDir '.git')) {
+                    git -C $gitDir checkout . 2>$null
+                    git -C $gitDir clean -fd 2>$null
+                    Write-Log "已还原子模块意外改动：$subPath"
+                }
+            }
+        }
+        git -C $RepoPath submodule update --init --recursive 2>$null
         $status = git -C $RepoPath status --porcelain
         if ([string]::IsNullOrWhiteSpace($status)) { Write-Log '无实际文件变动，跳过提交'; return }
         $msg = "auto-sync: {0}" -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
