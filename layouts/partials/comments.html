@@ -110,3 +110,130 @@
     loadCount();
   })();
 </script>
+
+{{/* ===== CF 评论区前端逻辑 ===== */}}
+<script>
+(function () {
+  var API = 'https://blog-comments.629017960.workers.dev/api/comments';
+  var TURNSTILE_SITE_KEY = 'YOUR_TURNSTILE_SITE_KEY'; // 部署前替换为真实 site key
+  var GH_CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID';          // 部署前替换为 GitHub OAuth App 的 Client ID
+  var slug = location.pathname;
+  var listEl = document.getElementById('cf-list');
+  var authorEl = document.getElementById('cf-author');
+  var bodyEl = document.getElementById('cf-body');
+  var msgEl = document.getElementById('cf-msg');
+  var submitBtn = document.getElementById('cf-submit');
+  var loginBtn = document.getElementById('cf-gh-login');
+  var loginStatus = document.getElementById('cf-login-status');
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmtTime(ts) {
+    var d = new Date(ts);
+    if (isNaN(d)) return '';
+    var p = function (n) { return n < 10 ? '0' + n : '' + n; };
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+
+  function loadComments() {
+    fetch(API + '?slug=' + encodeURIComponent(slug))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d.comments || !d.comments.length) {
+          listEl.innerHTML = '<p class="cf-empty">还没有评论，来抢沙发～</p>';
+          return;
+        }
+        var html = '';
+        d.comments.forEach(function (c) {
+          html += '<div class="cf-item">'
+            + '<div class="cf-meta"><b>' + escapeHtml(c.author) + '</b> <span>' + fmtTime(c.created_at) + '</span></div>'
+            + '<div class="cf-text">' + escapeHtml(c.body).replace(/\n/g, '<br>') + '</div>'
+            + '</div>';
+        });
+        listEl.innerHTML = html;
+      })
+      .catch(function () { listEl.innerHTML = '<p class="cf-empty">评论加载失败</p>'; });
+  }
+
+  function showMsg(text, isErr) {
+    msgEl.textContent = text;
+    msgEl.style.color = isErr ? '#e74c3c' : '#27ae60';
+  }
+
+  submitBtn.addEventListener('click', function () {
+    var body = bodyEl.value.trim();
+    if (!body) { showMsg('评论内容不能为空', true); return; }
+    showMsg('提交中…', false);
+
+    // 取 Turnstile token（若有组件）
+    var tokenInput = document.querySelector('input[name="cf-turnstile-response"]');
+    var token = tokenInput ? tokenInput.value : '';
+
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        slug: slug,
+        author: authorEl.value.trim() || '匿名',
+        body: body,
+        'cf-turnstile-response': token
+      })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (res.ok && res.d.ok) {
+          bodyEl.value = '';
+          showMsg('评论成功！', false);
+          // 重置 Turnstile（如有）
+          if (window.turnstile) {
+            var w = document.querySelector('.cf-turnstile-widget, [data-turnstile-widget]');
+          }
+          loadComments();
+        } else {
+          showMsg(res.d.error || '提交失败', true);
+          if (window.turnstile) window.turnstile.reset();
+        }
+      })
+      .catch(function () { showMsg('网络错误，请重试', true); });
+  });
+
+  // GitHub 轻量登录：OAuth 弹窗拿用户名，自动填昵称
+  loginBtn.addEventListener('click', function () {
+    if (GH_CLIENT_ID === 'YOUR_GITHUB_CLIENT_ID') {
+      loginStatus.textContent = '（未配置 GitHub Client ID）';
+      return;
+    }
+    var redirect = location.origin + location.pathname;
+    var url = 'https://github.com/login/oauth/authorize?client_id=' + GH_CLIENT_ID
+      + '&redirect_uri=' + encodeURIComponent(redirect)
+      + '&scope=read:user';
+    var popup = window.open(url, 'ghlogin', 'width=600,height=700');
+    if (!popup) { loginStatus.textContent = '弹窗被拦截，请允许后重试'; return; }
+    loginStatus.textContent = '等待 GitHub 授权…';
+
+    // 监听回调（回调页需把 ?code= 通过 postMessage 发回来，或此处轮询）
+    var timer = setInterval(function () {
+      try {
+        if (popup.closed) {
+          clearInterval(timer);
+          loginStatus.textContent = '未获取到授权';
+        }
+      } catch (e) {}
+    }, 1000);
+    window.addEventListener('message', function (ev) {
+      if (ev.origin !== location.origin) return;
+      if (ev.data && ev.data.ghUser) {
+        authorEl.value = ev.data.ghUser;
+        loginStatus.textContent = '已登录：' + ev.data.ghUser;
+        clearInterval(timer);
+        if (popup) popup.close();
+      }
+    });
+  });
+
+  loadComments();
+})();
+</script>
