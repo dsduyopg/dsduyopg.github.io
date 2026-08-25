@@ -164,14 +164,29 @@
     msgEl.style.color = isErr ? '#e74c3c' : '#27ae60';
   }
 
+  // 渲染 Turnstile 组件（成功回调把 token 存到全局变量）
+  window._cfTurnstileToken = '';
+  function renderTurnstile() {
+    if (!window.turnstile || typeof window.turnstile.render !== 'function') {
+      setTimeout(renderTurnstile, 300);
+      return;
+    }
+    window.turnstile.render('#cf-turnstile', {
+      sitekey: TURNSTILE_SITE_KEY,
+      callback: function (token) { window._cfTurnstileToken = token; },
+      'expired-callback': function () { window._cfTurnstileToken = ''; },
+      'error-callback': function () { window._cfTurnstileToken = ''; }
+    });
+  }
+  renderTurnstile();
+
   submitBtn.addEventListener('click', function () {
     var body = bodyEl.value.trim();
     if (!body) { showMsg('评论内容不能为空', true); return; }
     showMsg('提交中…', false);
 
-    // 取 Turnstile token（若有组件）
-    var tokenInput = document.querySelector('input[name="cf-turnstile-response"]');
-    var token = tokenInput ? tokenInput.value : '';
+    // 取 Turnstile token（渲染组件回调写入）
+    var token = window._cfTurnstileToken || '';
 
     fetch(API, {
       method: 'POST',
@@ -187,11 +202,9 @@
       .then(function (res) {
         if (res.ok && res.d.ok) {
           bodyEl.value = '';
+          window._cfTurnstileToken = '';
           showMsg('评论成功！', false);
-          // 重置 Turnstile（如有）
-          if (window.turnstile) {
-            var w = document.querySelector('.cf-turnstile-widget, [data-turnstile-widget]');
-          }
+          if (window.turnstile) window.turnstile.reset();
           loadComments();
         } else {
           showMsg(res.d.error || '提交失败', true);
