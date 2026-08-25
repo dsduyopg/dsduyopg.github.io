@@ -23,6 +23,30 @@
           crossorigin="anonymous"
           async>
   </script>
+
+  {{/* ===== CF 自建评论区（匿名 + GitHub 轻量登录，免登录提交，Turnstile 防机器人） ===== */}}
+  <hr>
+  <div class="cf-comments" id="cf-comments">
+    <h3>CF 评论区（免登录）</h3>
+    <p class="cf-hint">填个昵称就能发，不用注册。也可用 GitHub 登录自动填昵称。</p>
+    <div class="cf-login-row">
+      <button type="button" id="cf-gh-login" class="cf-gh-btn">用 GitHub 登录</button>
+      <span id="cf-login-status" class="cf-login-status"></span>
+    </div>
+    <div class="cf-form">
+      <input type="text" id="cf-author" maxlength="40" placeholder="昵称（默认：匿名）" class="cf-author">
+      <textarea id="cf-body" maxlength="2000" placeholder="说点什么…（≤2000字）" class="cf-body"></textarea>
+      <div class="cf-submit-row">
+        <button type="button" id="cf-submit" class="cf-submit-btn">提交评论</button>
+        <span id="cf-msg" class="cf-msg"></span>
+      </div>
+    </div>
+    <div class="cf-list" id="cf-list">
+      <p class="cf-loading">加载评论中…</p>
+    </div>
+  </div>
+  {{/* Turnstile 脚本（必须加载，提交时取 token） */}}
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <noscript>请启用 JavaScript 查看评论。</noscript>
 </div>
 {{- end }}
