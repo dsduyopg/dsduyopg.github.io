@@ -77,6 +77,32 @@ export default {
       return json({ ok: true }, 201, corsHeaders);
     }
 
+    // DELETE /api/comments  { id, adminToken }  —— 博主删除
+    if (request.method === "DELETE" && url.pathname === "/api/comments") {
+      if (!env.ADMIN_TOKEN) {
+        return json({ error: "服务端未配置管理员密码" }, 500, corsHeaders);
+      }
+      let payload;
+      try {
+        payload = await request.json();
+      } catch {
+        return json({ error: "invalid json" }, 400, corsHeaders);
+      }
+      const id = parseInt(payload.id, 10);
+      const token = payload.adminToken || "";
+      if (!Number.isInteger(id)) {
+        return json({ error: "invalid id" }, 400, corsHeaders);
+      }
+      if (token !== env.ADMIN_TOKEN) {
+        return json({ error: "密码错误，无权删除" }, 403, corsHeaders);
+      }
+      const info = await env.DB.prepare("DELETE FROM comments WHERE id = ?").bind(id).run();
+      if (info.success) {
+        return json({ ok: true }, 200, corsHeaders);
+      }
+      return json({ error: "删除失败" }, 500, corsHeaders);
+    }
+
     return json({ error: "not found" }, 404, corsHeaders);
   },
 };
