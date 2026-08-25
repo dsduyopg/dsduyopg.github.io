@@ -207,6 +207,23 @@
     font-weight: 600;
     font-size: .92rem;
   }
+  .cf-del {
+    margin-left: auto;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--secondary);
+    font-size: .72rem;
+    padding: .1rem .55rem;
+    border-radius: 999px;
+    cursor: pointer;
+    opacity: .65;
+    transition: color .15s ease, border-color .15s ease, opacity .15s ease;
+  }
+  .cf-del:hover {
+    color: #e5484d;
+    border-color: #e5484d;
+    opacity: 1;
+  }
   .cf-item__time {
     color: var(--secondary);
     font-size: .76rem;
@@ -304,6 +321,35 @@
   function showMsg(text, kind) {
     msgEl.textContent = text;
     msgEl.className = 'cf-msg' + (kind ? ' is-' + kind : '');
+  }
+
+  // 博主删除（密码仅缓存在本次会话，不持久化）
+  var _adminToken = sessionStorage.getItem('cf_admin_token') || '';
+  function deleteComment(id) {
+    if (!confirm('确定删除这条留言？此操作不可撤销。')) return;
+    var token = _adminToken;
+    if (!token) {
+      token = prompt('请输入博主管理密码：');
+      if (token === null) return;
+    }
+    fetch(API, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: Number(id), adminToken: token })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (res.ok && res.d.ok) {
+          if (!_adminToken) { _adminToken = token; try { sessionStorage.setItem('cf_admin_token', token); } catch (e) {} }
+          showMsg('已删除 ✓', 'ok');
+          setTimeout(function () { showMsg('', ''); }, 2000);
+          loadComments();
+        } else {
+          showMsg(res.d.error || '删除失败', 'err');
+          if (res.d.error && res.d.error.indexOf('密码') >= 0) { _adminToken = ''; try { sessionStorage.removeItem('cf_admin_token'); } catch (e) {} }
+        }
+      })
+      .catch(function () { showMsg('网络异常，删除失败', 'err'); });
   }
 
   function loadComments() {
