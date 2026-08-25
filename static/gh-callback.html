@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta charset="utf-8"><title>GitHub 登录中…</title></head>
+<body>
+<script>
+// GitHub OAuth 回调：拿 URL 里的 ?code=，换用户名，postMessage 给父窗口
+(async function () {
+  var code = new URLSearchParams(location.search).get('code');
+  if (!code) { window.close(); return; }
+  try {
+    // 用一个无后端的代理思路：直接调 GitHub API 拿 user，但需 token，
+    // 轻量方案改为：把 code 交给后端 Worker 换 token（后端需加 /api/gh-user?code=）。
+    // 这里简单演示：若你后端已实现 /api/gh-user，则：
+    var r = await fetch('https://blog-comments.629017960.workers.dev/api/gh-user?code=' + encodeURIComponent(code));
+    var d = await r.json();
+    if (d.user) {
+      window.opener.postMessage({ ghUser: d.user }, location.origin);
+    }
+  } catch (e) {}
+  window.close();
+})();
+</script>
+</body>
+</html>
