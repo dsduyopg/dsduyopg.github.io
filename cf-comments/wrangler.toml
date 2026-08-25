@@ -1,0 +1,19 @@
+name = "blog-comments"
+main = "worker.js"
+compatibility_date = "2024-09-23"
+
+# D1 数据库绑定（部署前需先创建：wrangler d1 create blog-comments-db）
+[[d1_databases]]
+binding = "DB"
+database_name = "blog-comments-db"
+database_id = "在此填入你的D1数据库ID"
+
+# KV 命名空间绑定（频率限制用，部署前需先创建：wrangler kv namespace create blog-comments-kv）
+[[kv_namespaces]]
+binding = "KV"
+id = "在此填入你的KV命名空间ID"
+
+# 环境变量：Turnstile 密钥（也可在 wrangler secret 里设置，更安全）
+# 把下面这行替换成你的 Turnstile secret
+[vars]
+TURNSTALL_SECRET = "在此填入你的TURNSTILE_SECRET"
