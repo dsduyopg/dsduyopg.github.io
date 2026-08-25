@@ -374,15 +374,70 @@
     msgEl.className = 'cf-msg' + (kind ? ' is-' + kind : '');
   }
 
-  // 博主删除（密码仅缓存在本次会话，不持久化）
+  // ===== 博主统一管理（密钥：删评论 + 换壁纸） =====
+  var BG_API = 'https://bing-daily-bg.629017960.workers.dev';
   var _adminToken = sessionStorage.getItem('cf_admin_token') || '';
+
+  function enterAdmin() {
+    var token = _adminToken || prompt('请输入博主管理密钥：');
+    if (!token) return;
+    // 简单校验：调壁纸 GET 不需要密钥，但用 /set 试一次空操作不可行；
+    // 这里直接接受，错误会在具体操作时返回。为体验，先记住并解锁 UI。
+    _adminToken = token;
+    try { sessionStorage.setItem('cf_admin_token', token); } catch (e) {}
+    document.getElementById('cf-admin').hidden = false;
+    document.getElementById('cf-admin-enter').hidden = true;
+  }
+  function exitAdmin() {
+    _adminToken = '';
+    try { sessionStorage.removeItem('cf_admin_token'); } catch (e) {}
+    document.getElementById('cf-admin').hidden = true;
+    document.getElementById('cf-admin-enter').hidden = false;
+  }
+  document.getElementById('cf-admin-enter').addEventListener('click', enterAdmin);
+  document.getElementById('cf-admin-lock').addEventListener('click', exitAdmin);
+
+  // 应用背景图
+  var bgMsg = document.getElementById('cf-bg-msg');
+  document.getElementById('cf-bg-apply').addEventListener('click', function () {
+    var url = document.getElementById('cf-bg-url').value.trim();
+    if (!/^https?:\/\/.+/i.test(url)) { bgMsg.textContent = '请输入有效的图片地址'; bgMsg.className = 'cf-msg is-err'; return; }
+    bgMsg.textContent = '应用中…'; bgMsg.className = 'cf-msg';
+    fetch(BG_API + '/set', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: _adminToken, url: url })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (res.ok && res.d.ok) {
+          bgMsg.textContent = '已应用，刷新页面即可看到 ✓'; bgMsg.className = 'cf-msg is-ok';
+          try { localStorage.removeItem('daily_bg_' + new Date().toISOString().slice(0, 10)); } catch (e) {}
+        } else { bgMsg.textContent = res.d.error || '应用失败'; bgMsg.className = 'cf-msg is-err'; }
+      })
+      .catch(function () { bgMsg.textContent = '网络异常'; bgMsg.className = 'cf-msg is-err'; });
+  });
+  // 恢复自动
+  document.getElementById('cf-bg-reset').addEventListener('click', function () {
+    bgMsg.textContent = '恢复中…'; bgMsg.className = 'cf-msg';
+    fetch(BG_API + '/reset', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: _adminToken })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (res.ok && res.d.ok) {
+          bgMsg.textContent = '已恢复每日自动壁纸 ✓'; bgMsg.className = 'cf-msg is-ok';
+          try { localStorage.removeItem('daily_bg_' + new Date().toISOString().slice(0, 10)); } catch (e) {}
+        } else { bgMsg.textContent = res.d.error || '恢复失败'; bgMsg.className = 'cf-msg is-err'; }
+      })
+      .catch(function () { bgMsg.textContent = '网络异常'; bgMsg.className = 'cf-msg is-err'; });
+  });
+
+  // 博主删除
   function deleteComment(id) {
     if (!confirm('确定删除这条留言？此操作不可撤销。')) return;
     var token = _adminToken;
-    if (!token) {
-      token = prompt('请输入博主管理密码：');
-      if (token === null) return;
-    }
+    if (!token) { token = prompt('请输入博主管理密码：'); if (token === null) return; }
     fetch(API, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -521,6 +576,4 @@
     }
   });
 
-  loadComments();
-})();
-</script>
+  // 已登录过则自动解锁�
