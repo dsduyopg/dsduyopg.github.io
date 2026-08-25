@@ -315,14 +315,21 @@
           return;
         }
         listEl.innerHTML = d.comments.map(function (c) {
-          return '<div class="cf-item">'
+          return '<div class="cf-item" data-id="' + c.id + '">'
             + '<div class="cf-item__meta">'
             +   '<span class="cf-item__author">' + escapeHtml(c.author) + '</span>'
             +   '<span class="cf-item__time">' + fmtTime(c.created_at) + '</span>'
+            +   '<button type="button" class="cf-del" data-id="' + c.id + '">删除</button>'
             + '</div>'
             + '<p class="cf-item__text">' + escapeHtml(c.body).replace(/\n/g, '<br>') + '</p>'
             + '</div>';
         }).join('');
+        Array.prototype.forEach.call(listEl.querySelectorAll('.cf-del'), function (b) {
+          b.addEventListener('click', function () {
+            var id = b.getAttribute('data-id');
+            deleteComment(id);
+          });
+        });
       })
       .catch(function () { listEl.innerHTML = '<p class="cf-empty">留言载入失败，请刷新重试。</p>'; });
   }
