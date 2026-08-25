@@ -43,6 +43,18 @@
         <button type="button" class="wp-btn wp-btn--solid" id="wp-url-apply">应用</button>
       </div>
 
+      <!-- 原始风景图存档 -->
+      <h2>原始风景图</h2>
+      <p class="wp-desc">存档当前背景，Bing 换图后仍可一键恢复这张原始风景图。</p>
+      <div class="wp-preview wp-preview--small" id="wp-saved-box" hidden>
+        <img id="wp-saved-img" alt="原始风景图" />
+        <div class="wp-preview-meta" id="wp-saved-meta"></div>
+      </div>
+      <div class="wp-row">
+        <button type="button" class="wp-btn wp-btn--ghost" id="wp-save">保存当前背景为原始图</button>
+        <button type="button" class="wp-btn wp-btn--solid" id="wp-restore" disabled>恢复此图为全站背景</button>
+      </div>
+
       <!-- 恢复自动 -->
       <h2>恢复每日自动</h2>
       <p class="wp-desc">清除固定背景，恢复每天自动跟随 Bing 当日壁纸。</p>
@@ -206,6 +218,45 @@
         }
       }).catch(function () { showMsg('网络异常', 'err'); });
     }
+
+    // 原始风景图存档
+    function loadSaved() {
+      fetch(API + '/saved').then(function (r) { return r.json(); }).then(function (d) {
+        if (d && d.saved) {
+          $('wp-saved-box').hidden = false;
+          $('wp-saved-img').src = d.saved;
+          $('wp-saved-meta').textContent = '已存档';
+          $('wp-restore').disabled = false;
+        } else {
+          $('wp-saved-box').hidden = true;
+          $('wp-restore').disabled = true;
+        }
+      }).catch(function () {});
+    }
+    $('wp-save').addEventListener('click', function () {
+      var btn = $('wp-save');
+      btn.disabled = true;
+      fetch(API + '/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: key })
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        if (d.ok) {
+          showMsg('已保存为原始风景图 ✓', 'ok');
+          loadSaved();
+        } else { showMsg(d.error || '保存失败', 'err'); }
+      }).catch(function () { showMsg('网络异常', 'err'); }).finally(function () { btn.disabled = false; });
+    });
+    $('wp-restore').addEventListener('click', function () {
+      fetch(API + '/restore', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: key })
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        if (d.ok) { showMsg('已恢复原始风景图 ✓', 'ok'); loadCurrent(); }
+        else { showMsg(d.error || '恢复失败', 'err'); }
+      }).catch(function () { showMsg('网络异常', 'err'); });
+    });
 
     // 恢复自动
     $('wp-reset').addEventListener('click', function () {
