@@ -1,3 +1,7 @@
 name = "bing-daily-bg"
 main = "worker.js"
 compatibility_date = "2024-09-23"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "b32c0812c5744777a835d2d17ce5e197"
