@@ -1,0 +1,16 @@
+{{- /* 每日 Bing 壁纸（生产环境才加载；每次加载都取当前生效背景，Worker 自带缓存不浪费 Bing 抓取） */}}
+{{- if hugo.IsProduction | or (eq site.Params.env "production") }}
+<script>
+  (function () {
+    var API = 'https://bing-daily-bg.629017960.workers.dev';
+    fetch(API)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d && d.url) {
+          document.documentElement.style.setProperty('--daily-bg', 'url("' + d.url + '")');
+        }
+      })
+      .catch(function () {});
+  })();
+</script>
+{{- end }}
