@@ -6,6 +6,15 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    // DEBUG（临时排查用，上线稳定后可删除）
+    if (url.pathname === "/api/debug") {
+      return json({
+        hasPwd: typeof env.ADMIN_PWD,
+        pwdLen: env.ADMIN_PWD ? env.ADMIN_PWD.length : 0,
+        hasTurn: typeof env.TURNSTALL_SECRET
+      }, 200, {});
+    }
+
     // CORS（允许你的站点调用）
     const ALLOWED_ORIGINS = [
       "https://dsduyopg-github-io.pages.dev",
@@ -14,7 +23,7 @@ export default {
     const origin = request.headers.get("Origin") || "";
     const corsHeaders = {
       "Access-Control-Allow-Origin": ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0],
-      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
       "Vary": "Origin",
     };
@@ -130,5 +139,4 @@ function json(obj, status, headers) {
   return new Response(JSON.stringify(obj), {
     status,
     headers: { "Content-Type": "application/json; charset=utf-8", ...headers },
-  });
-}
+  
