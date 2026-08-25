@@ -1,0 +1,240 @@
+{{- define "main" }}
+<header class="page-header">
+  <h1>🖼 每日壁纸</h1>
+  <div class="post-description">从 Bing 获取每日高清风景壁纸，设为全站背景；也可以粘贴任意图片链接。</div>
+</header>
+
+<div class="post-content md-content">
+  <div id="wp-app" class="wp-app">
+    <!-- 博主登录 -->
+    <div class="wp-login" id="wp-login">
+      <input type="password" id="wp-key" class="wp-input" placeholder="输入博主密钥以管理全站背景" />
+      <button type="button" class="wp-btn wp-btn--primary" id="wp-login-btn">解锁</button>
+      <span class="wp-msg" id="wp-login-msg"></span>
+    </div>
+
+    <!-- 已解锁 -->
+    <div class="wp-panel" id="wp-panel" hidden>
+      <button type="button" class="wp-btn wp-btn--ghost" id="wp-logout">退出管理</button>
+
+      <!-- 当前背景 -->
+      <h2>当前背景</h2>
+      <div class="wp-preview" id="wp-preview">
+        <img id="wp-current-img" alt="当前背景" />
+        <div class="wp-preview-meta" id="wp-current-meta"></div>
+      </div>
+
+      <!-- Bing 获取 -->
+      <h2>从 Bing 获取每日壁纸</h2>
+      <p class="wp-desc">每点一次「获取」就往前翻一天，获得一张不同的 Bing 风景图。</p>
+      <div class="wp-row">
+        <button type="button" class="wp-btn wp-btn--primary" id="wp-bing-next">获取壁纸</button>
+        <button type="button" class="wp-btn wp-btn--solid" id="wp-bing-apply" disabled>应用此图为全站背景</button>
+      </div>
+      <div class="wp-preview wp-preview--small" id="wp-bing-preview" hidden>
+        <img id="wp-bing-img" alt="Bing 壁纸预览" />
+        <div class="wp-preview-meta" id="wp-bing-meta"></div>
+      </div>
+
+      <!-- URL 自定义 -->
+      <h2>粘贴图片链接</h2>
+      <div class="wp-row">
+        <input type="text" id="wp-url" class="wp-input" placeholder="https://.../风景图.jpg" />
+        <button type="button" class="wp-btn wp-btn--solid" id="wp-url-apply">应用</button>
+      </div>
+
+      <!-- 恢复自动 -->
+      <h2>恢复每日自动</h2>
+      <p class="wp-desc">清除固定背景，恢复每天自动跟随 Bing 当日壁纸。</p>
+      <button type="button" class="wp-btn wp-btn--ghost" id="wp-reset">恢复每日自动</button>
+
+      <span class="wp-msg" id="wp-msg"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .wp-app { max-width: 640px; margin: 0 auto; }
+  .wp-app h2 { font-size: 1.05rem; margin: 1.4rem 0 .5rem; }
+  .wp-login { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+  .wp-row { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+  .wp-input {
+    flex: 1; min-width: 220px;
+    background: transparent; border: none; border-bottom: 1px solid var(--border);
+    padding: .35rem .1rem; color: var(--content); font: inherit;
+  }
+  .wp-btn {
+    border-radius: 8px; padding: .45rem 1.1rem; font: inherit; cursor: pointer;
+    border: 1px solid var(--border); background: var(--code-bg); color: var(--primary);
+  }
+  .wp-btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .wp-btn--solid { background: var(--accent-2); border-color: var(--accent-2); color: #fff; }
+  .wp-btn--ghost { background: none; color: var(--secondary); }
+  .wp-btn:disabled { opacity: .45; cursor: not-allowed; }
+  .wp-msg { display: block; margin: .4rem 0; font-size: .82rem; min-height: 1em; }
+  .wp-msg.is-ok { color: var(--accent-2); }
+  .wp-msg.is-err { color: var(--accent); }
+  .wp-preview { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+  .wp-preview img { width: 100%; display: block; }
+  .wp-preview--small { max-width: 320px; margin-top: .6rem; }
+  .wp-preview-meta {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,.65));
+    color: #fff; font-size: .8rem; padding: 1.2rem .6rem .45rem;
+  }
+  .wp-desc { font-size: .85rem; color: var(--secondary); margin: 0 0 .4rem; }
+</style>
+
+<script>
+  (function () {
+    var API = 'https://bing-daily-bg.629017960.workers.dev';
+    var $ = function (id) { return document.getElementById(id); };
+    var key = sessionStorage.getItem('cf_admin_token') || '';
+
+    var bingList = [];   // 历史壁纸列表
+    var bingIdx = 0;     // 当前翻到第几张
+    var bingPending = null; // 待应用的 bing 图 url
+
+    function showMsg(text, cls) {
+      var el = $('wp-msg');
+      el.textContent = text;
+      el.className = 'wp-msg' + (cls ? ' is-' + cls : '');
+    }
+    function showLoginMsg(text, cls) {
+      var el = $('wp-login-msg');
+      el.textContent = text;
+      el.className = 'wp-msg' + (cls ? ' is-' + cls : '');
+    }
+
+    // 解锁/退出
+    function unlock() {
+      var k = key || $('wp-key').value.trim();
+      if (!k) { showLoginMsg('请输入博主密钥', 'err'); return; }
+      // 用 /set 试探密钥（发一个空操作验证），不行则报错
+      fetch(API + '/set', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: k, url: '' })
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        if (d.error && d.error.indexOf('密钥') >= 0) { showLoginMsg(d.error, 'err'); return; }
+        key = k;
+        try { sessionStorage.setItem('cf_admin_token', k); } catch (e) {}
+        $('wp-login').hidden = true;
+        $('wp-panel').hidden = false;
+        loadCurrent();
+      }).catch(function () { showLoginMsg('网络异常', 'err'); });
+    }
+    function logout() {
+      key = '';
+      try { sessionStorage.removeItem('cf_admin_token'); } catch (e) {}
+      $('wp-login').hidden = false;
+      $('wp-panel').hidden = true;
+      $('wp-key').value = '';
+    }
+    $('wp-login-btn').addEventListener('click', unlock);
+    $('wp-logout').addEventListener('click', logout);
+    $('wp-key').addEventListener('keydown', function (e) { if (e.key === 'Enter') unlock(); });
+
+    // 当前背景
+    function loadCurrent() {
+      fetch(API).then(function (r) { return r.json(); }).then(function (d) {
+        if (d && d.url) {
+          $('wp-current-img').src = d.url;
+          $('wp-current-meta').textContent = d.mode === 'override' ? '固定背景（自定义）' : '每日自动';
+        }
+      }).catch(function () {});
+    }
+
+    // 翻历史壁纸
+    function nextBing() {
+      var btn = $('wp-bing-next');
+      btn.disabled = true;
+      btn.textContent = '加载中…';
+      if (!bingList.length) {
+        fetch(API + '/list?n=10').then(function (r) { return r.json(); }).then(function (d) {
+          bingList = (d.images || []).slice();
+          bingIdx = 0;
+          showBing(bingList[0]);
+        }).catch(function () {
+          showMsg('获取失败', 'err');
+        }).finally(function () {
+          btn.disabled = false;
+          btn.textContent = '获取壁纸';
+        });
+      } else {
+        bingIdx = (bingIdx + 1) % bingList.length;
+        showBing(bingList[bingIdx]);
+        btn.disabled = false;
+        btn.textContent = '获取壁纸';
+      }
+    }
+    function showBing(item) {
+      if (!item) { showMsg('没有更多壁纸了', 'err'); return; }
+      bingPending = item.url;
+      $('wp-bing-preview').hidden = false;
+      $('wp-bing-img').src = item.url;
+      $('wp-bing-meta').textContent = (item.date || '') + (item.title ? ' · ' + item.title : '');
+      $('wp-bing-apply').disabled = false;
+    }
+    $('wp-bing-next').addEventListener('click', nextBing);
+
+    // 应用 bing 图为全站背景
+    $('wp-bing-apply').addEventListener('click', function () {
+      if (!bingPending) return;
+      applyBg(bingPending);
+    });
+
+    // 应用 URL
+    $('wp-url-apply').addEventListener('click', function () {
+      var u = $('wp-url').value.trim();
+      if (!/^https?:\/\/.+/i.test(u)) { showMsg('请输入有效的图片地址', 'err'); return; }
+      applyBg(u);
+    });
+
+    function applyBg(url) {
+      showMsg('应用中…', '');
+      fetch(API + '/set', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: key, url: url })
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        if (d.ok) {
+          showMsg('已设为全站背景 ✓', 'ok');
+          loadCurrent();
+        } else {
+          showMsg(d.error || '应用失败', 'err');
+        }
+      }).catch(function () { showMsg('网络异常', 'err'); });
+    }
+
+    // 恢复自动
+    $('wp-reset').addEventListener('click', function () {
+      fetch(API + '/reset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: key })
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        if (d.ok) { showMsg('已恢复每日自动壁纸 ✓', 'ok'); loadCurrent(); }
+        else { showMsg(d.error || '恢复失败', 'err'); }
+      }).catch(function () { showMsg('网络异常', 'err'); });
+    });
+
+    // 已登录过则直接解锁
+    if (key) {
+      $('wp-login').hidden = true;
+      $('wp-panel').hidden = false;
+      loadCurrent();
+    } else {
+      loadCurrentPreview();
+    }
+    function loadCurrentPreview() {
+      fetch(API).then(function (r) { return r.json(); }).then(function (d) {
+        if (d && d.url) {
+          $('wp-current-img').src = d.url;
+          $('wp-current-meta').textContent = d.mode === 'override' ? '固定背景（自定义）' : '每日自动';
+        }
+      }).catch(function () {});
+    }
+  })();
+</script>
+{{- end }}
