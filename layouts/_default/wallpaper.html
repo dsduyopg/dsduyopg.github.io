@@ -134,6 +134,7 @@
         $('wp-login').hidden = true;
         $('wp-panel').hidden = false;
         loadCurrent();
+        loadSaved();
       }).catch(function () { showLoginMsg('网络异常', 'err'); });
     }
     function logout() {
@@ -275,6 +276,7 @@
       $('wp-login').hidden = true;
       $('wp-panel').hidden = false;
       loadCurrent();
+      loadSaved();
     } else {
       loadCurrentPreview();
     }
