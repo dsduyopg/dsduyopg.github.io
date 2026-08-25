@@ -13,8 +13,10 @@ database_id = "ef9fe6b5-6194-45d1-96c5-9d90001e9c17"
 binding = "KV"
 id = "b32c0812c5744777a835d2d17ce5e197"
 
-# 环境变量（部署前请先通过 `wrangler secret put ADMIN_TOKEN` 设置为你的管理员密码，
-# 这里仅作占位，正式部署请用 secret 覆盖，避免密码明文留在文件里）
+# 环境变量
+# Turnstile 密钥（明文可接受，非极高敏感）
 [vars]
 TURNSTALL_SECRET = "0x4AAAAAAEbQytqXnhBr4EwLSrmgfHwCrqc"
-ADMIN_TOKEN = "changeme-admin-token"
+
+# 管理员密码（ADMIN_TOKEN）已通过 `wrangler secret put` 设置为加密 secret，
+# 不写在文件里，避免明文泄露。
