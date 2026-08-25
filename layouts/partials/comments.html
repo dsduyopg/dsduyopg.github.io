@@ -117,6 +117,39 @@
     font-size: .9rem;
   }
   .cf-login[hidden] { display: none; }
+
+  /* 博主面板 */
+  .cf-admin__enter {
+    margin: 0 0 1rem;
+    background: none;
+    border: 1px dashed var(--border);
+    color: var(--secondary);
+    font: inherit; font-size: .8rem;
+    padding: .35rem .9rem; border-radius: 999px; cursor: pointer;
+  }
+  .cf-admin__enter:hover { color: var(--primary); border-color: var(--primary); }
+  .cf-admin { margin-bottom: 1.1rem; }
+  .cf-admin[hidden] { display: none; }
+  .cf-admin__bar {
+    display: flex; align-items: center; gap: .6rem;
+    margin-bottom: .7rem;
+  }
+  .cf-admin__badge {
+    font-size: .72rem; font-weight: 600; letter-spacing: .05em;
+    color: var(--theme); background: var(--primary);
+    padding: .15rem .6rem; border-radius: 999px;
+  }
+  .cf-admin__lock {
+    margin-left: auto; background: none; border: none; cursor: pointer;
+    color: var(--secondary); font-size: .78rem; text-decoration: underline;
+  }
+  .cf-admin__bg { padding: .8rem 1rem; background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius); }
+  .cf-admin__label { display: block; font-size: .8rem; color: var(--secondary); margin-bottom: .4rem; }
+  .cf-admin__bg-row { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+  .cf-input--bg { flex: 1; min-width: 200px; border-bottom: 1px solid var(--border); padding: .3rem 0; color: var(--content); }
+  .cf-submit--ghost { background: none; border: 1px solid var(--border); color: var(--secondary); }
+  .cf-submit--ghost:hover { opacity: 1; color: var(--primary); border-color: var(--primary); }
+  #cf-bg-msg { display: block; margin-top: .4rem; font-size: .78rem; min-height: 1em; }
   .cf-login__avatar {
     width: 26px; height: 26px;
     display: grid; place-items: center;
