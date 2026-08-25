@@ -9,8 +9,8 @@ export default {
     // DEBUG（临时排查用，上线稳定后可删除）
     if (url.pathname === "/api/debug") {
       return json({
-        hasPwd: typeof env.ADMIN_PWD,
-        pwdLen: env.ADMIN_PWD ? env.ADMIN_PWD.length : 0,
+        hasPwd: typeof env.ADMIN_KEY,
+        pwdLen: env.ADMIN_KEY ? env.ADMIN_KEY.length : 0,
         hasTurn: typeof env.TURNSTALL_SECRET
       }, 200, {});
     }
