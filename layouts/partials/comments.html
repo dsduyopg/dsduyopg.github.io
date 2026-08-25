@@ -38,6 +38,24 @@
       <button type="button" class="cf-login__out" id="cf-login-out">退出</button>
     </div>
 
+    {{/* 博主面板（输入密钥后解锁） */}}
+    <div class="cf-admin" id="cf-admin" hidden>
+      <div class="cf-admin__bar">
+        <span class="cf-admin__badge">博主模式</span>
+        <button type="button" class="cf-admin__lock" id="cf-admin-lock">退出管理</button>
+      </div>
+      <div class="cf-admin__bg">
+        <label class="cf-admin__label">背景图 URL</label>
+        <div class="cf-admin__bg-row">
+          <input type="text" id="cf-bg-url" class="cf-input cf-input--bg" placeholder="粘贴图片直链，如 https://.../xxx.jpg">
+          <button type="button" class="cf-submit" id="cf-bg-apply">应用</button>
+          <button type="button" class="cf-submit cf-submit--ghost" id="cf-bg-reset">恢复每日自动</button>
+        </div>
+        <span class="cf-msg" id="cf-bg-msg"></span>
+      </div>
+    </div>
+    <button type="button" class="cf-admin__enter" id="cf-admin-enter">博主登录</button>
+
     {{/* 输入卡片 */}}
     <form class="cf-card" id="cf-form" autocomplete="off">
       <input type="text" id="cf-author" class="cf-input cf-input--author"
