@@ -13,7 +13,7 @@ tags: ["Linux", "VMware", "chrony", "NTP", "网络排错", "仅主机"]
 
 ---
 
-{{< toc >}}
+
 
 ---
 
@@ -492,5 +492,3 @@ chronyc sources                          # 源状态（最快判断）
 **参考**：chrony 官方 FAQ「An unreachable source is selected?」<https://chrony-project.org/faq.html>
 
 > 最后说句题外话：这次排错最有价值的地方，不是「删了一行配置」，而是搞懂了 chrony 的设计哲学——**时间同步系统里，稳定比反应快更重要**。很多「看起来不合理」的行为，背后都有它自己的设计理由。理解设计意图，比记住命令本身，能让你走得更远。
-
-
