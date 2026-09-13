@@ -1,9 +1,13 @@
 ---
 comments: true
+giscusMapping: "og:title"
+utterancesIssueTerm: "og:title"
 title: "grep的相关问题以及解决手段"
 date: 2026-09-13
+lastmod: 2026-09-13
 draft: false
 ShowToc: false
+description: "复习 grep 时踩的一串坑：引号加不加到底有没有区别、反斜杠什么时候被 Shell 吃掉、/example/ 为什么在 grep 里不管用、命令为什么卡在标准输入，以及 BRE / ERE / PCRE 三套方言的差别。全文按「现象 → 原因 → 结论」写，末尾附速查表。"
 tags: ["Linux", "grep", "正则表达式", "Shell", "三剑客"]
 ---
 {{< toc >}}
