@@ -2,7 +2,8 @@
 comments: true
 giscusMapping: "og:title"
 utterancesIssueTerm: "og:title"
-title: "grep的相关问题以及解决手段"
+title: "grep 的引号、反斜杠与正则方言：一次讲清我踩过的坑"
+slug: "grep-quotes-backslash-regex"
 date: 2026-09-13
 lastmod: 2026-09-13
 draft: false
@@ -394,6 +395,8 @@ num42
 
 但要记住：**`\w`、`\s`、`\b` 这些都是 GNU 自己扩展的**，POSIX 标准以及 BSD/macOS 上的 grep 并不认。如果要写能在别的机器上跑的脚本，老老实实用 POSIX 字符类：`[[:digit:]]`、`[[:space:]]`、`[[:alpha:]]`。
 
+再补一句：**`-P` 本身也是 GNU 专有的**——BSD / macOS 自带的 grep 根本没有 `-P` 这个选项，敲下去会直接报错。所以 `\d` 这条路在 macOS 上走不通，跨平台脚本里还是老老实实用 `[[:digit:]]`。
+
 一句话记住：**`-E` 只是换方言，`-P` 才是换引擎；`\d` 属于引擎级的东西。**
 
 ---
@@ -446,6 +449,8 @@ exam
 | `[example]+` | 集合内任意字母连续重复 | `ell`、`eaxmple` | 几乎没有匹配不了的 |
 
 这里最容易记错的是 `example+`：`+` 只修饰**紧挨着它的那一个字符**（也就是末尾的 `e`），不是修饰整个单词。想匹配"一个或多个 e 后接 xample"，得写 `e+xample`；想匹配"整个单词重复"，才写 `(example)+`。
+
+另外补一句：如果你只是要匹配、不打算在替换或提取里引用这个分组，可以写成 **`(?:example)+`**（非捕获组）——效果完全一样，只是不额外保存分组内容。
 
 ### 7.3 照妖镜 `-o`：把藏起来的差别照出来
 
