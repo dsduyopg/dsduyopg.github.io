@@ -218,7 +218,14 @@ def main():
     if not note.exists():
         sys.exit("找不到文件: {0}".format(note))
     note_dir = note.parent
-    slug = args.slug or note.stem
+    # slug 推导规则：
+    #   Obsidian 笔记   20260912_xxx/grep的相关问题.md   → 用笔记名
+    #   Hugo page bundle  content/posts/《标题》/index.md → 用父文件夹名（不然会得到 "index"）
+    if note.stem.lower() in ("index", "readme", "_index"):
+        slug = note_dir.name
+    else:
+        slug = note.stem
+    slug = args.slug or slug
     base, prefix = args.base.rstrip("/"), args.prefix
 
     text = note.read_text(encoding="utf-8-sig")
