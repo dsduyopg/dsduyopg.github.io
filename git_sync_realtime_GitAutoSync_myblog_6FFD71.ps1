@@ -1,4 +1,4 @@
-﻿# ============================================================
+# ============================================================
 # Git 实时自动同步脚本 - 自动生成
 # 路径: D:\my-blog  ->  ssh://git@ssh.github.com:443/dsduyopg/dsduyopg.github.io.git (origin/main)
 # ============================================================
@@ -9,7 +9,7 @@ $RepoPath      = 'D:\my-blog'
 $Branch        = 'main'
 $Remote        = 'origin'
 $LogFile       = Join-Path $RepoPath 'git_sync.log'
-$DebounceMs    = 3000
+$DebounceMs    = 30000
 $RetryTimes    = 3
 $RetryWaitSec  = 5
 
