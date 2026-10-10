@@ -21,7 +21,7 @@ tags: ["Linux", "Tailscale", "WSL", "阿里云", "Nginx", "Tomcat"]
 > 
 > 开头那张"任务单"是课程交给运维的真实需求（**我按工单形式整理**），后面是我的方案、实施和踩过的坑。
 > 
-> 文中 IP、密码、Webhook 均已打码。
+> 文中内网 IP、Tailscale IP、密码、Webhook 均已打码；公网访问入口是真实地址。
 
 ------------
 
@@ -156,8 +156,9 @@ tags: ["Linux", "Tailscale", "WSL", "阿里云", "Nginx", "Tomcat"]
 
 ```text
 用户浏览器
-├── http://<公网IP>:8080 ──────────► node2 Tomcat A :8080          主入口（直连云主机）
-└── http://<node1>:80 ──► node1 nginx :80 ──► node2 Tomcat :8080   反代入口（走 Tailscale）
+├── http://47.101.221.134:8080 ──────► node2 Tomcat A :8080                     主入口（直连云主机）
+├── http://100.89.x.x:8080 ──────────► node2 Tomcat A :8080                     内网入口（Tailscale 直连）
+└── http://<node1>:80 ───────────────► node1 nginx :80 ──► node2 Tomcat :8080   反代入口（走 Tailscale）
 两节点之间：Tailscale 虚拟内网（WireGuard 加密，100.x 网段）
 ```
 
