@@ -493,80 +493,195 @@ WantedBy=multi-user.target
 
 ### 4.1 拼写问题
 
+这个实验里，我因为急着往下做，犯了不止一次拼写错误。它们看起来都是小问题，但每一个都能让服务直接失效。
 
+| 文件 | 我的错误写法 | 正确写法 | 结果 |
+| --- | --- | --- | --- |
+| `rsyncd.conf` | `host allow` | `hosts allow` | 参数可能被 rsync 静默忽略 |
+| systemd 单元 | `multi-user.targer` | `multi-user.target` | 开机启动目标无效 |
+| systemd 单元 | `Restart=on-faliure` | `Restart=on-failure` | 自动重启策略被忽略 |
+| systemd 单元 | `/etc/rsyncd.config` | `/etc/rsyncd.conf` | daemon 找不到配置文件 |
+| 客户端脚本 | `while read -r dir action:` | `while read -r dir action; do` | `read` 语法错误，循环体不执行 |
 
-这里我将配置文件的hosts allow写成了host allow,然后在服务项里将Install写成小写了，WantedBy也都写成小写了，将multi-user.target我拼成了multi-user.targer Service模块里的
+其中服务端的配置文件路径错误最直接：
 
-```shell
+```ini
 ExecStart=/usr/bin/rsync --daemon --config=/etc/rsyncd.conf --no-detach
 ```
 
-我写成了
+我最初写成了：
 
-```shell
+```ini
 ExecStart=/usr/bin/rsync --daemon --config=/etc/rsyncd.config --no-detach
 ```
 
-也就是给conf文件写成了config，这里是服务器的拼写错误
+把 `conf` 写成了 `config`，服务就一直无法正常启动。
+
+客户端的问题更隐蔽：我把 `while read` 后面的分号 `;` 写成了冒号 `:`。分号是 shell 用来分隔命令的，冒号会被当成变量名的一部分，导致 `read` 失败；但 `inotifywait -m` 仍在运行，所以 systemd 看起来还可能显示服务正常。
+
+这些错误让我意识到，写完配置、脚本和 systemd 单元后不能马上假设它已经正确。至少应该停下来检查文件名、参数名、路径和标点，再执行语法检查或查看服务日志。
 
 
 
-在客户端的拼写错误也不遑多让，这里是将符号写错了
+### 4.2 权限和文件格式问题
 
-```shell
- while read -r dir action;
+这个实验中，我在密码文件和脚本权限上反复踩坑。
+
+客户端密码文件必须只保存密码，并且只有所有者可以读取：
+
+```text
+内容：123456
+路径：/etc/rsync.passwd
+权限：600
 ```
 
-这里原来就是；可是我将其写成了：
+我一开始忘了执行 `chmod 600`，rsync 直接拒绝使用密码文件。
 
-以及也是在服务项里把
+服务端密码文件则必须保存“用户名:密码”：
 
-
-
-```shell
-Restart=on-failure
+```text
+backup_user:123456
 ```
 
-写成了Restart=on-faliure,这些拼写的错误，多的很，其实此类问题也是最好规避的，我写完文件的时候，没有仔细检查，觉得写完就是写完了，其实不是这样的，写完也要看一下，代码书否逻辑实现了最重要的就是检查是否拼写错了，每次写完配置文件，脚本文件，服务文件，都要停下来，多看看，我可能太急躁了，不能静下心来，不断有拼写错误，这是不能容忍的，检查完核对完，发现和自己的思路一致，字母没有一点问题，就可以点击:x了，这类问题也是最好规避的。
+我最初把冒号写成了空格，后来虽然改对了格式，又忘记给文件设置 `600` 权限。服务端的认证依赖 `auth users`、密码文件内容和密码文件权限三者同时正确，少一项都可能出现 `auth failed`。
 
+另一个容易漏掉的是模块目录的属主。配置中声明了：
 
-
-### 4.2 然后就是格式问题了
-
-
-
-这是一个老大难的问题了，我在完成这个实验的时候，会忘记给密码本赋予600 路径赋予专门的用户，我是在客户端忘记给我的密码本rsyncd.paswd授予600，同时呢，脚本的执行权柄我也没有授予，我当时看到bash ok呀，可以直接正常的执行该脚本，这是最为重要的一点，然后我就没有授予，客户端其他的倒是没有什么了
-
-然后就是服务器了，这里当然也是没有正确的授予600给密码本，rsnyc的用户和组授予本地的相应目录，然后我的密码本格式也是问题原来应该是backup_user：·123456但是呢，我写成了backup_user 123456将：写成了 空格，这里出现的问题，我觉得也是可以尽量避免的，虽然有些格式如此设置有底层的要求，但是呢可以做完一个实验记下来一个，有些格式的设置也是比较的容易的，理解起来比较简单，比如node2设置的路径，因为我在本地配置文件声明了只能由rsynd访问，所以必须设置为rsync 这些仔细一想，自己就是会明白的，不需要知道如此多的依赖
-
-
-
-### 4.3 然后就是防火墙的问题了
-
-
-
-对于端口设置的防火墙比较容易，这里讨论就是深层防火墙，首先呢，在客户端要尽量避免设置在家目录，`ExecStart` 直接执行家目录脚本时，systemd 的 `init_t` 进程域需要获得对 `admin_home_t` 文件的 `execute` 权限。默认 SELinux 策略不授予该权限，因此服务报 `203/EXEC`。将脚本安装到 `/usr/local/bin` 后，文件通常继承 `bin_t` 类型，同时设置 `755` 权限，systemd 才能按预期执行。普通权限检查和无害的 SELinux 标签检查必须分别处理。所以这个就要放置在/usr/local/bin/下面的
-
-
-
-对于服务器的话，sel是会阻止这个同步服务传送文件的，需要将服务器的rsync在sel的权限也放开，我服务端其也没有很好的设置sel策略。导致同步出现了问题
-
-```shell
-setsebool -P 'rsync_full_access' on
+```ini
+uid = rsync
+gid = rsync
 ```
 
+因此 node2 的接收目录必须允许 `rsync` 用户写入。否则 daemon 能启动，但上传文件或删除文件时会出现 `Permission denied`。
+
+脚本权限也让我迷惑过。使用：
+
+```shell
+bash /usr/local/bin/real_time_rsync.sh
+```
+
+可以运行，是因为真正执行的是 bash，脚本只需要读权限。但 systemd 的 `ExecStart` 直接执行脚本时，脚本本身必须具有执行权限。因此不能因为 bash 能运行就忽略 `chmod`。
 
 
-其实这就是我遇到的这三了问题，第三类问题也最问难以理解上下文，我知道的也不多 布尔值我也是看网上资料设置的，这个其实也是我这几天遇到的问题，我将其归纳为3类，但是这里面的每一个问题，当时都困住了我好长时间，非常烦躁，我正是靠着codex给我一点一点排查我的虚拟机问题，给出改进方案，我才得以将这个实验完成
+
+### 4.3 防火墙和 SELinux 问题
+
+这里需要先区分两件事：
+
+- firewalld 负责放行 TCP 873。
+- SELinux 负责控制进程可以执行、读取或写入哪些文件和端口。
+
+我习惯把它叫作“深层防火墙”，但它实际是 SELinux。
+
+客户端最初把脚本放在 `/root`，`ExecStart` 直接执行该脚本时，systemd 报出 `203/EXEC`。SELinux 日志中的关键记录是：
+
+```text
+avc: denied { execute }
+scontext=system_u:system_r:init_t:s0
+tcontext=unconfined_u:object_r:admin_home_t:s0
+tclass=file permissive=0
+```
+
+这说明 systemd 的 `init_t` 进程域不能直接执行家目录中的 `admin_home_t` 文件。后来把脚本放到 `/usr/local/bin`，该位置通常使用更适合执行的 `bin_t` 标签，同时给脚本设置执行权限，服务才能正常启动。
+
+因此，这里需要分别检查两件事：
+
+```shell
+chmod 755 /usr/local/bin/real_time_rsync.sh
+ls -Z /usr/local/bin/real_time_rsync.sh
+```
+
+普通 Linux 权限检查和 SELinux 类型检查会同时发生，两者不能互相替代。
+
+服务端也会遇到 SELinux 问题：daemon 可以启动并监听 873，但在接收文件时可能因为不能写入目标目录而失败。本实验使用了：
+
+```shell
+setsebool -P rsync_full_access on
+```
+
+这个布尔值可以放宽 rsync 的访问范围，适合当前实验验证；生产环境应根据实际目录设置更精细的 SELinux 文件上下文。
+
+第三类问题涉及的进程域、文件类型和布尔值比较抽象。我一开始也没完全理解，只能通过 AVC 日志、`getenforce` 和实际同步结果逐项排查。它也是整个实验最耗时间的一类问题。
 
 
 
 
+
+### 4.4 服务 active 但文件没有同步
+
+这个实验中还有一个很容易误判的地方：`systemctl status rsync_real.service` 显示 `active`，但 node1 修改文件后，node2 一直没有收到。
+
+原因是 `inotifywait -m` 会持续监控目录，它本身不会因为循环体执行失败而立即退出。所以服务看起来一直在运行，但真正处理事件的 `while read` 可能已经失败，rsync 根本没有被调用。
+
+正确的循环写法是：
+
+```bash
+inotifywait -r -m \
+  -e delete,modify,create,attrib \
+  --format '%w%f %e' \
+  "$DIR" |
+while IFS= read -r dir action; do
+    rsync -avz --delete \
+      --password-file=/etc/rsync.passwd \
+      "$DIR" "$TARGET" >>"$LOG" 2>&1
+done
+```
+
+这里的分号是 shell 的命令分隔符。如果误写成冒号：
+
+```bash
+while read -r dir action:
+```
+
+`read` 会把 `action:` 当成非法变量名，循环体不执行，但 `inotifywait` 仍然继续运行。
+
+排查时可以按下面顺序检查：
+
+```shell
+systemctl status rsync_real.service --no-pager
+journalctl -u rsync_real.service -n 100 --no-pager
+tail -n 100 /var/log/rsync.log
+```
+
+然后在 node1 手工创建文件：
+
+```shell
+touch /export/rsync_share/debug.txt
+```
+
+如果 `inotifywait` 收到了事件，但日志里没有 rsync 的执行结果，就要检查 `while read` 的语法和脚本是否已经重新加载。修改脚本后还应执行：
+
+```shell
+systemctl restart rsync_real.service
+```
+
+这个问题的关键在于：**服务 active 只说明监控进程没有退出，不能证明事件处理循环和 rsync 都执行成功。**
 
 ## 5. 总结
 
-这个实验，其实也是比较麻烦的，我做了好几天，关键的是，每天都有新的错误诞生，我极其的烦躁，每天都不断练习这个实验项目，但终究是搞定了这个实验，我昨天终于独立搞定了，其中的每个错误都是不小的挑战，极其麻烦，比如深层防火墙，我服务开起来了，就忘记开放这个深层防火墙了，好多东西写着写着，我都突然忘记了，直接进入下一步，准备工作我没有做好，我都开始，写入配置文件，脚本了，所以我觉得，以后再做此类实验的时候，应当首先完成的是，基于准备工作的完成，准备工作完成之后，可以开启下一项的目标，我可能当时操作的顺序太乱了，想到哪，我就操作到哪里，没有一点顺序可言，这样操作一定会导致忘记应该完成的基本工作，比如创建目录，安装软件包
+这个实验我连续做了好几天，几乎每天都会遇到新的错误，中间也确实非常烦躁。最后我从快照恢复环境，重新按步骤做了一遍，才真正独立完成。
 
+现在回头看，真正麻烦的并不是某一条 rsync 命令，而是很难判断问题出在哪一层：
 
+```text
+systemd 服务没有起来
+→ 脚本没有执行权限，或者被 SELinux 阻止
+inotifywait 正常运行，但文件没有同步
+→ while read 或 rsync 命令没有真正执行
+daemon 正常运行，但目标端没有文件
+→ 认证、目录属主、firewalld 或 SELinux 有问题
+```
 
-   其他的都没有什么，这是我这几天做实验的一些心得体会吧，写出来，希望对于大家有些帮助，可以帮助大家节约一些时间。
+所以以后再做这类实验，我会先按顺序完成准备工作，而不是想到哪做到哪：
+
+1. 安装软件包。
+2. 创建用户和目录。
+3. 设置目录属主和密码文件权限。
+4. 编写并检查配置、脚本和 systemd 单元。
+5. 启动服务并检查实际状态。
+6. 分别验证新增、修改和删除。
+7. 最后在 SELinux Enforcing 模式下再测一次。
+
+这次实验让我最深的体会是：**服务显示 `active` 不代表功能一定成功，配置写完也不代表已经生效。** 只有逐层检查日志、权限和实际文件结果，才能确认整条同步链路真的可用。
+
+这些就是我几天做实验积累下来的经验和体会，希望能帮助大家少走一些弯路。
