@@ -1,0 +1,1233 @@
+{{- define "main" }}
+<div id="rgx-app" class="rgx-app">
+
+  <header class="page-header rgx-hero">
+    <span class="rgx-hero-badge">✨ 在线工具</span>
+    <h1>🔍 正则测试器</h1>
+    <div class="post-description">离线可用 · 实时高亮 · 支持 <code>grep</code> / <code>sed</code> / <code>awk</code> 及 JS·Python·Java·Go 等正则方言</div>
+  </header>
+
+  <div class="post-content md-content">
+
+    <!-- 正则表达式 -->
+    <section class="rgx-card">
+      <div class="rgx-card-head">
+        <h2>正则表达式</h2>
+        <span class="rgx-dialect-wrap">
+          <select id="dialect" class="rgx-dialect">
+            <option value="grepE">grep -E（ERE）</option>
+            <option value="grepP">grep -P（PCRE）</option>
+            <option value="sed">sed 替换</option>
+            <option value="awk">awk 模式/字段</option>
+            <option value="js">JavaScript</option>
+            <option value="python">Python re</option>
+            <option value="java">Java</option>
+            <option value="go">Go（RE2）</option>
+            <option value="dotnet">.NET</option>
+          </select>
+        </span>
+      </div>
+      <input type="text" id="pattern" class="rgx-input rgx-input--pattern" placeholder="例如: [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" autofocus>
+      <div id="flags-row" class="rgx-flags-row">
+        <label class="rgx-flag"><input type="checkbox" id="flag-g" checked><span>全局 <b>g</b></span></label>
+        <label class="rgx-flag"><input type="checkbox" id="flag-i"><span>忽略大小写 <b>i</b></span></label>
+        <label class="rgx-flag"><input type="checkbox" id="flag-m"><span>多行 <b>m</b></span></label>
+        <label class="rgx-flag"><input type="checkbox" id="flag-s"><span>dotall <b>s</b></span></label>
+        <label class="rgx-flag"><input type="checkbox" id="flag-o" checked><span>只输出匹配 <b>-o</b></span></label>
+      </div>
+      <div id="dialect-hint" class="rgx-dialect-hint"></div>
+      <div class="rgx-examples">
+        <span class="rgx-examples-label">快速示例</span>
+        <button type="button" data-example="email">✉ 邮箱</button>
+        <button type="button" data-example="ip">🌐 IPv4</button>
+        <button type="button" data-example="url">🔗 URL</button>
+        <button type="button" data-example="mac">📟 MAC</button>
+        <button type="button" data-example="phone">📱 手机号</button>
+        <button type="button" data-example="date">🕒 日期时间</button>
+        <button type="button" data-example="hexcolor">🎨 十六进制/颜色</button>
+        <button type="button" data-example="sedDemo">🔧 sed 替换</button>
+        <button type="button" data-example="awkDemo">🧮 awk 字段</button>
+      </div>
+    </section>
+
+    <!-- 测试文本 -->
+    <section class="rgx-card">
+      <div class="rgx-card-head">
+        <h2>测试文本</h2>
+        <span class="rgx-hint">每行一个数据，或直接粘贴大文件内容</span>
+      </div>
+      <textarea id="text" class="rgx-textarea" placeholder="在这里粘贴要测试的文本...&#10;&#10;每行一个数据，或直接粘贴大文件内容。"></textarea>
+    </section>
+
+    <!-- 结果 -->
+    <section class="rgx-card">
+      <div class="rgx-toolbar">
+        <div class="rgx-stats">
+          <div class="rgx-stat"><b id="match-count">0</b><span>匹配</span></div>
+          <div class="rgx-stat"><b id="line-count">0</b><span>行</span></div>
+        </div>
+        <div class="rgx-actions">
+          <button type="button" id="btn-load" class="rgx-btn rgx-btn--primary">📂 加载文件</button>
+          <button type="button" id="btn-clear" class="rgx-btn rgx-btn--ghost">🗑 清空</button>
+        </div>
+      </div>
+      <div id="error-msg" class="rgx-error"></div>
+      <div id="warn-msg" class="rgx-warn"></div>
+      <div id="output" class="rgx-output"><span class="rgx-empty">输入正则和文本后，这里实时显示匹配结果...</span></div>
+      <div class="rgx-groups">
+        <h3>分组捕获 · 每个匹配</h3>
+        <p class="rgx-groups-note">被量词重复的分组（如 <code>(...){3}</code>）只保留<b>最后一次</b>迭代的捕获。每一行 = 一处匹配 + 它的各分组。</p>
+        <div id="groups" class="rgx-groups-list"><span class="rgx-empty">无</span></div>
+      </div>
+    </section>
+
+    <!-- 可视化 -->
+    <section class="rgx-card">
+      <div class="rgx-card-head">
+        <h2>👁 可视化</h2>
+        <span class="rgx-hint">结构图随输入实时更新 · <span class="rgx-vis-dot rgx-vis-dot--s"></span> 起点 · <span class="rgx-vis-dot rgx-vis-dot--e"></span> 终点</span>
+      </div>
+      <div id="vs-body"></div>
+    </section>
+
+    <!-- 语法参考 -->
+    <details class="rgx-card rgx-ref" open>
+      <summary>📚 语法参考 · <span id="ref-title">grep -E（ERE）</span></summary>
+      <div id="ref-body" class="rgx-ref-body"></div>
+    </details>
+
+  </div>
+
+  <div class="rgx-shortcuts">
+    <span><kbd>Ctrl</kbd>+<kbd>Enter</kbd> 测试</span>
+    <span><kbd>Ctrl</kbd>+<kbd>L</kbd> 加载文件</span>
+    <span><kbd>Esc</kbd> 清空</span>
+  </div>
+</div>
+
+<input type="file" id="file-input" accept=".txt,.log,.csv,.md" style="display:none">
+
+<style>
+  #rgx-app{max-width:900px;margin:0 auto;font-family:inherit}
+  #rgx-app *{box-sizing:border-box}
+
+  /* ---------- Hero ---------- */
+  #rgx-app .rgx-hero{padding:6px 0 14px;margin:0 0 6px}
+  #rgx-app .rgx-hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-1,#6366f1);background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--brand-1,#6366f1) 30%,transparent);padding:.3rem .85rem;border-radius:999px;margin-bottom:.85rem}
+  #rgx-app .rgx-hero h1{font-size:2rem;font-weight:800;margin:0 0 .35rem;background:linear-gradient(120deg,var(--brand-1,#6366f1),var(--brand-2,#a855f7) 55%,var(--brand-3,#22d3ee));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;letter-spacing:-.02em}
+  #rgx-app .rgx-hero .post-description{color:var(--secondary);font-size:.92rem;margin:0;font-family:inherit}
+  #rgx-app .rgx-hero .post-description code{background:var(--code-bg);border:1px solid var(--border);border-radius:6px;padding:.05rem .4rem;font-size:.85em;color:var(--accent-2)}
+
+  /* ---------- Content width ---------- */
+  #rgx-app .post-content{max-width:860px;margin:0 auto}
+
+  /* ---------- Card ---------- */
+  #rgx-app .rgx-card{background:var(--entry);border:1px solid var(--border);border-radius:var(--card-radius,18px);padding:20px 22px;margin-bottom:18px;box-shadow:0 8px 24px rgba(0,0,0,.07);position:relative;overflow:hidden}
+  #rgx-app .rgx-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brand-1,#6366f1),var(--brand-2,#a855f7),var(--brand-3,#22d3ee));opacity:.85}
+  #rgx-app .rgx-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  #rgx-app .rgx-card-head h2{font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin:0;color:var(--primary);font-family:inherit}
+  #rgx-app .rgx-card-head h2::before{content:"";display:inline-block;width:8px;height:8px;border-radius:3px;background:linear-gradient(135deg,var(--brand-1,#6366f1),var(--brand-2,#a855f7));margin-right:8px;vertical-align:1px}
+  #rgx-app .rgx-hint{font-size:.75rem;color:var(--secondary)}
+
+  /* ---------- Inputs ---------- */
+  #rgx-app .rgx-input,#rgx-app .rgx-textarea{width:100%;background:color-mix(in srgb,var(--code-bg) 75%,transparent);border:1px solid var(--border);border-radius:12px;color:var(--content);padding:12px 14px;font-family:ui-monospace,"SF Mono","Cascadia Code",Consolas,monospace;font-size:.92rem;transition:border-color .18s,box-shadow .18s}
+  #rgx-app .rgx-input:focus,#rgx-app .rgx-textarea:focus{outline:none;border-color:var(--brand-1,#6366f1);box-shadow:0 0 0 4px var(--accent-soft)}
+  #rgx-app .rgx-input--pattern{font-size:1rem}
+  #rgx-app .rgx-textarea{min-height:170px;resize:vertical;line-height:1.7}
+
+  /* ---------- Dialect select ---------- */
+  #rgx-app .rgx-dialect-wrap{position:relative;flex-shrink:0}
+  #rgx-app .rgx-dialect{appearance:none;-webkit-appearance:none;background:var(--code-bg);border:1px solid var(--border);border-radius:999px;color:var(--content);padding:8px 34px 8px 14px;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;transition:border-color .18s,box-shadow .18s}
+  #rgx-app .rgx-dialect:focus{outline:none;border-color:var(--brand-1,#6366f1);box-shadow:0 0 0 4px var(--accent-soft)}
+  #rgx-app .rgx-dialect-wrap::after{content:"▾";position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--secondary);pointer-events:none;font-size:.85rem}
+  #rgx-app .rgx-dialect-hint{margin-top:12px;font-size:.75rem;color:var(--secondary);background:color-mix(in srgb,var(--code-bg) 55%,transparent);border:1px dashed var(--border);border-radius:10px;padding:9px 13px;line-height:1.7}
+  #rgx-app .rgx-dialect-hint code{background:var(--code-bg);border-radius:5px;padding:0 5px;color:var(--accent-2);font-family:ui-monospace,Consolas,monospace;font-size:.92em;border:1px solid var(--border)}
+
+  /* ---------- Flags ---------- */
+  #rgx-app .rgx-flags-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  #rgx-app .rgx-flag{position:relative;display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--secondary);cursor:pointer;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:color-mix(in srgb,var(--code-bg) 60%,transparent);transition:all .16s;margin:0}
+  #rgx-app .rgx-flag input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
+  #rgx-app .rgx-flag b{font-family:ui-monospace,Consolas,monospace;font-weight:700;font-size:.72rem}
+  #rgx-app .rgx-flag:has(input:checked){border-color:var(--brand-1,#6366f1);background:var(--accent-soft);color:var(--primary)}
+  #rgx-app .rgx-flag:has(input:checked) b{color:var(--brand-1,#6366f1)}
+  #rgx-app .rgx-flag:has(input:focus-visible){outline:2px solid var(--brand-1,#6366f1);outline-offset:2px}
+
+  /* ---------- Examples ---------- */
+  #rgx-app .rgx-examples{margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  #rgx-app .rgx-examples-label{font-size:.72rem;color:var(--secondary);letter-spacing:.06em}
+  #rgx-app .rgx-examples button{background:color-mix(in srgb,var(--code-bg) 70%,transparent);border:1px solid var(--border);color:var(--content);padding:5px 12px;border-radius:999px;cursor:pointer;font-family:inherit;font-size:.78rem;font-weight:500;transition:all .16s}
+  #rgx-app .rgx-examples button:hover{border-color:var(--brand-2,#a855f7);color:var(--brand-1,#6366f1);transform:translateY(-1px);box-shadow:0 4px 10px var(--accent-soft)}
+
+  /* ---------- Toolbar / stats ---------- */
+  #rgx-app .rgx-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+  #rgx-app .rgx-stats{display:flex;gap:10px;flex-wrap:wrap}
+  #rgx-app .rgx-stat{display:flex;align-items:baseline;gap:6px;background:color-mix(in srgb,var(--code-bg) 70%,transparent);border:1px solid var(--border);border-radius:12px;padding:8px 14px;font-size:.8rem;color:var(--secondary)}
+  #rgx-app .rgx-stat b{font-size:1.15rem;font-weight:800;background:linear-gradient(135deg,var(--brand-1,#6366f1),var(--brand-2,#a855f7));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  #rgx-app .rgx-actions{display:flex;gap:8px}
+  #rgx-app .rgx-btn{border:none;border-radius:999px;padding:9px 18px;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .18s}
+  #rgx-app .rgx-btn--primary{background:linear-gradient(135deg,var(--brand-1,#6366f1),var(--brand-2,#a855f7));color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--brand-1,#6366f1) 35%,transparent)}
+  #rgx-app .rgx-btn--primary:hover{transform:translateY(-2px);box-shadow:0 10px 22px color-mix(in srgb,var(--brand-2,#a855f7) 45%,transparent)}
+  #rgx-app .rgx-btn--ghost{background:transparent;color:var(--secondary);border:1px solid var(--border)}
+  #rgx-app .rgx-btn--ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* ---------- Error ---------- */
+  #rgx-app .rgx-error{color:var(--accent);font-size:.82rem;margin:0 0 10px;display:none;white-space:pre-wrap;background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);border-radius:10px;padding:10px 14px}
+  #rgx-app .rgx-warn{color:#b45309;font-size:.82rem;margin:0 0 10px;display:none;white-space:pre-wrap;background:color-mix(in srgb,#f59e0b 14%,transparent);border:1px solid color-mix(in srgb,#f59e0b 45%,transparent);border-radius:10px;padding:10px 14px}
+  #rgx-app .rgx-warn b{color:#92400e}
+
+  /* ---------- Output ---------- */
+  #rgx-app .rgx-output{background:color-mix(in srgb,var(--code-block-bg) 92%,var(--entry) 8%);border:1px solid var(--border);border-radius:14px;padding:6px 8px;min-height:220px;line-height:1.75;font-size:.85rem;white-space:pre-wrap;word-break:break-all;max-height:420px;overflow-y:auto;color:var(--content);font-family:ui-monospace,"SF Mono","Cascadia Code",Consolas,monospace}
+  #rgx-app .rgx-output>div{padding:5px 10px;border-bottom:1px dashed color-mix(in srgb,var(--border) 65%,transparent)}
+  #rgx-app .rgx-output>div:last-child{border-bottom:none}
+  #rgx-app .rgx-output mark{background:linear-gradient(135deg,var(--brand-1,#6366f1),var(--brand-2,#a855f7));color:#fff;border-radius:5px;padding:1px 4px;font-weight:700;box-shadow:0 2px 6px color-mix(in srgb,var(--brand-2,#a855f7) 30%,transparent)}
+  #rgx-app .rgx-empty{color:var(--secondary);font-style:italic;opacity:.8}
+
+  /* ---------- Groups ---------- */
+  #rgx-app .rgx-groups{margin-top:16px}
+  #rgx-app .rgx-groups h3{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin:0 0 8px;font-family:inherit}
+  #rgx-app .rgx-groups h3::before{content:"";display:inline-block;width:8px;height:8px;border-radius:3px;background:linear-gradient(135deg,var(--accent-2),var(--brand-3,#22d3ee));margin-right:8px;vertical-align:1px}
+  #rgx-app .rgx-groups-note{font-size:.72rem;color:var(--secondary);margin:0 0 10px;line-height:1.6}
+  #rgx-app .rgx-groups-note code{background:var(--code-bg);border:1px solid var(--border);border-radius:5px;padding:0 5px;color:var(--accent-2);font-family:ui-monospace,Consolas,monospace;font-size:.9em}
+  #rgx-app .rgx-groups-note b{color:var(--brand-1,#6366f1)}
+  #rgx-app .rgx-groups-list{display:flex;flex-direction:column;gap:6px}
+  #rgx-app .rgx-group-item{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;background:color-mix(in srgb,var(--code-bg) 70%,transparent);border:1px solid var(--border);border-radius:10px;padding:8px 12px;font-size:.82rem}
+  #rgx-app .rgx-gmatch{font-weight:700;color:var(--brand-2,#a855f7);flex-shrink:0;font-family:ui-monospace,Consolas,monospace;word-break:break-all}
+  #rgx-app .rgx-gcell{color:var(--secondary);font-family:ui-monospace,Consolas,monospace;word-break:break-all}
+  #rgx-app .rgx-gcell b{color:var(--brand-1,#6366f1);font-weight:700;margin-right:4px}
+
+  /* ---------- 可视化 ---------- */
+  #rgx-app .rgx-vis-wrap{overflow-x:auto;background:color-mix(in srgb,var(--code-bg) 55%,transparent);border:1px solid var(--border);border-radius:12px;padding:14px}
+  #rgx-app svg.rgx-vis{display:block;font-family:ui-monospace,"SF Mono","Cascadia Code",Consolas,monospace}
+  #rgx-app .rgx-vis-lit{fill:color-mix(in srgb,var(--brand-1,#6366f1) 16%,var(--entry));stroke:var(--brand-1,#6366f1);stroke-width:1.4}
+  #rgx-app .rgx-vis-class{fill:color-mix(in srgb,var(--accent-2) 22%,var(--entry));stroke:var(--accent-2);stroke-width:1.4}
+  #rgx-app .rgx-vis-anchor{fill:color-mix(in srgb,var(--brand-3,#22d3ee) 24%,var(--entry));stroke:var(--brand-3,#22d3ee);stroke-width:1.4}
+  #rgx-app .rgx-vis-backref{fill:color-mix(in srgb,var(--accent) 22%,var(--entry));stroke:var(--accent);stroke-width:1.4}
+  #rgx-app .rgx-vis-edge{fill:none;stroke:var(--secondary);stroke-width:1.5}
+  #rgx-app .rgx-vis-arrowhead{fill:var(--secondary)}
+  #rgx-app .rgx-vis-loop{fill:none;stroke:var(--accent);stroke-width:1.4;stroke-dasharray:4 3}
+  #rgx-app .rgx-vis-group{fill:none;stroke:var(--secondary);stroke-width:1.2}
+  #rgx-app .rgx-vis-group--named{stroke:var(--brand-2,#a855f7);stroke-width:1.5}
+  #rgx-app .rgx-vis-diamond{fill:none;stroke:var(--secondary);stroke-width:1.4}
+  #rgx-app .rgx-vis-txt{font-size:12px;fill:var(--primary)}
+  #rgx-app .rgx-vis-qty{font-size:12px;font-weight:700;fill:var(--accent)}
+  #rgx-app .rgx-vis-glabel{font-size:10px;fill:var(--secondary)}
+  #rgx-app .rgx-vis-dot{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;margin-right:3px}
+  #rgx-app .rgx-vis-dot--s{background:radial-gradient(circle at 35% 30%,#a8f0a8,#3ecf3e 45%,#1a8a1a)}
+  #rgx-app .rgx-vis-dot--e{background:radial-gradient(circle at 35% 30%,#9a9a9a,#4a4a4a 45%,#141414)}
+  #rgx-app .rgx-vis-empty,#rgx-app .rgx-vis-err{font-size:.82rem;padding:18px;text-align:center;color:var(--secondary);border:1px dashed var(--border);border-radius:12px}
+  #rgx-app .rgx-vis-err{color:var(--accent)}
+
+  /* ---------- Syntax reference ---------- */
+  #rgx-app details.rgx-ref{list-style:none}
+  #rgx-app details.rgx-ref summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:700;font-size:.9rem;color:var(--primary);margin:0;padding:0}
+  #rgx-app details.rgx-ref summary::-webkit-details-marker{display:none}
+  #rgx-app details.rgx-ref summary::after{content:"▾";margin-left:auto;color:var(--secondary);transition:transform .2s}
+  #rgx-app details.rgx-ref[open] summary::after{transform:rotate(180deg)}
+  #rgx-app .rgx-ref-body{margin-top:14px}
+  #rgx-app .rgx-ref-grid{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:.8rem;margin-bottom:14px;background:color-mix(in srgb,var(--code-bg) 50%,transparent);border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+  #rgx-app .rgx-ref-grid b{color:var(--primary);white-space:nowrap}
+  #rgx-app .rgx-ref-grid code{font-family:ui-monospace,Consolas,monospace;background:var(--code-bg);border-radius:5px;padding:1px 6px;color:var(--accent-2);font-size:.85em;border:1px solid var(--border)}
+  #rgx-app .rgx-ref-table{width:100%;border-collapse:collapse;font-size:.78rem}
+  #rgx-app .rgx-ref-table th,#rgx-app .rgx-ref-table td{border:1px solid var(--border);padding:5px 10px;text-align:left;vertical-align:top}
+  #rgx-app .rgx-ref-table th{background:color-mix(in srgb,var(--code-bg) 70%,transparent);color:var(--secondary);font-weight:700;font-size:.72rem;letter-spacing:.04em}
+  #rgx-app .rgx-ref-table td code{font-family:ui-monospace,Consolas,monospace;color:var(--accent-2)}
+  #rgx-app .rgx-ref-table .rgx-y{color:var(--accent-2);font-weight:700}
+  #rgx-app .rgx-ref-table .rgx-n{color:var(--accent);font-weight:700}
+  #rgx-app .rgx-ref-table .rgx-a{color:var(--accent-3);font-weight:700}
+  #rgx-app .rgx-ref-legend{margin-top:10px;font-size:.72rem;color:var(--secondary)}
+
+  /* ---------- Shortcuts ---------- */
+  #rgx-app .rgx-shortcuts{display:flex;gap:16px;flex-wrap:wrap;font-size:.75rem;color:var(--secondary);margin:2px 4px 24px}
+  #rgx-app .rgx-shortcuts kbd{font-family:ui-monospace,Consolas,monospace;background:var(--code-bg);border:1px solid var(--border);border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:.72rem;color:var(--primary)}
+
+  @media (max-width:640px){
+    #rgx-app .rgx-card{padding:16px}
+    #rgx-app .rgx-hero h1{font-size:1.5rem}
+    #rgx-app .rgx-toolbar{flex-direction:column;align-items:stretch}
+    #rgx-app .rgx-actions{justify-content:flex-end}
+    #rgx-app .rgx-shortcuts{gap:10px}
+  }
+</style>
+
+<script>
+  (function () {
+    var dialect = 'grepE';
+
+    var examples = {
+      email: { dialect: 'grepE', pattern: '[A-Za-z0-9][A-Za-z0-9._%+-]*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*\\.[A-Za-z]{2,}', text: '# 邮箱测试\nadmin@example.com\nsupport@company.co.uk\njohn.doe+news@gmail.com\nfirst.last@sub.domain.io\ninvalid-email\nuser@\n@domain.com\nbob@localhost\nroot@192.168.1.1\ntest.email+tag@example.co.jp' },
+      ip: { dialect: 'grepE', pattern: '\\b((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\b', text: '192.168.88.129\n10.0.0.15\n172.16.254.3\n999.999.999.999\n256.0.0.1\n192.168.1\n8.8.8.8\n203.0.113.7' },
+      url: { dialect: 'grepE', pattern: 'https?://[^\\s]+', text: 'https://www.example.com\nhttp://192.168.88.129:8080/admin\nftp://files.example.org/pub/file.tar.gz\nhttps://gitlab.com/group/proj?ref=main\nnot a url' },
+      mac: { dialect: 'grepE', pattern: '([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}', text: '00:1A:2B:3C:4D:5E\nAA:BB:CC:DD:EE:FF\n00:1A:2B:3C:4D\ninvalid-mac\n12:34:56:78:90:ab' },
+      phone: { dialect: 'grepE', pattern: '1[3-9][0-9]{9}', text: '13800138000\n+86 138 0013 8000\n010-12345678\n15912345678\n12345678901' },
+      date: { dialect: 'grepE', pattern: '[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}', text: '2026-11-15 10:23:45 ERROR connection refused\n2026-11-15 10:24:01 INFO user logged in\n2026/11/15 10:23:45\n10:23:45\n2026-11-15' },
+      hexcolor: { dialect: 'grepE', pattern: '#[0-9A-Fa-f]{6}|0[xX][0-9A-Fa-f]+', text: '#AABBCC\n#FFF\n0xFF\ndeadbeef\n#12\n0x1A2B3C' },
+      sedDemo: { dialect: 'sed', pattern: 's/\\b(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\b/IP/g', text: '访问 192.168.1.1 成功\n尝试 10.0.0.2 失败\n来源 172.16.254.3\n本地 127.0.0.1\n内网 192.168.1.100' },
+      awkDemo: { dialect: 'awk', pattern: '/ERROR/ {print $1, $NF}', text: '2026-11-15 10:23:45 ERROR connection refused\n2026-11-15 10:24:01 INFO user logged in\n2026-11-15 10:25:12 ERROR timeout\n2026-11-15 10:26:30 ERROR host unreachable' }
+    };
+
+    var hints = {
+      grepE: 'grep -E 扩展正则（ERE），由浏览器 JS 引擎近似执行。示例：<code>[0-9]{3}-[0-9]{4}</code>',
+      grepP: 'grep -P（PCRE）由 JS 引擎近似：支持 <code>\\d\\w\\s</code>、前瞻/后顾、命名组；不支持 <code>\\K</code>、子程序调用。示例：<code>(?&lt;=\\$)\\d+</code>',
+      sed: 'sed 替换：<code>s/旧/新/[gip]</code>；或用地址 <code>/正则/</code> 只显示匹配行。替换里支持 <code>&amp;</code>（整体匹配）与 <code>\\1..\\9</code>（分组）。示例：<code>s/\\b\\d+\\b/NUMBER/g</code>',
+      awk: 'awk 模式/动作：<code>/正则/</code>、<code>/正则/ {print $1, $NF}</code>、<code>{gsub(/旧/, "新")}</code>；字段默认按空白分隔。示例：<code>/error/ {print $1, $NF}</code>',
+      js: '原生 JavaScript <code>RegExp</code>（与浏览器完全一致）。示例：<code>/\\b\\w+@\\w+\\.\\w+\\b/g</code>',
+      python: 'Python <code>re</code> 近似：已转换 <code>(?P&lt;name&gt;)</code>→<code>(?&lt;name&gt;)</code>、<code>\\A</code>/<code>\\Z</code>；不支持 <code>(?P=name)</code>。示例：<code>(?P&lt;y&gt;\\d{4})-(?P&lt;m&gt;\\d{2})</code>',
+      java: 'Java 近似：支持 <code>\\p{L}</code>、<code>\\d</code> 等；不支持 <code>\\Q...\\E</code>、<code>\\R</code>。示例：<code>\\p{Lu}[a-z]+</code>',
+      go: 'Go <code>regexp</code>（RE2）近似：无回溯，不支持反向引用/前瞻/后顾。示例：<code>^[A-Za-z_][A-Za-z0-9_]*$</code>',
+      dotnet: '.NET 近似：支持命名组 <code>(?&lt;name&gt;)</code>、<code>\\p{L}</code>；不支持平衡组。示例：<code>(?&lt;date&gt;\\d{4}-\\d{2}-\\d{2})</code>'
+    };
+
+    var placeholders = {
+      grepE: '例如: [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}',
+      grepP: '例如: (?<=\\$)\\d+',
+      sed: '例如: s/\\b\\d+\\b/NUMBER/g',
+      awk: '例如: /error/ {print $1, $NF}',
+      js: '例如: /\\b\\w+@\\w+\\.\\w+\\b/g',
+      python: '例如: (?P<year>\\d{4})-(?P<month>\\d{2})',
+      java: '例如: \\p{Lu}[a-z]+',
+      go: '例如: ^[A-Za-z_][A-Za-z0-9_]*$',
+      dotnet: '例如: (?<date>\\d{4}-\\d{2}-\\d{2})'
+    };
+
+    // ---- 语法参考数据 ----
+    var CONSTRUCTS = [
+      ['\\d', '数字', '\\d{3}', 'digit'],
+      ['\\w', '单词字符', '\\w+', 'word'],
+      ['\\s', '空白', '\\s+', 'space'],
+      ['.', '任意字符(除换行)', 'a.c', 'dot'],
+      ['[abc]', '字符集', '[0-9a-f]', 'class'],
+      ['[^abc]', '取反字符集', '[^0-9]', 'negclass'],
+      ['[a-z]', '范围', '[a-zA-Z]', 'range'],
+      ['^', '行首', '^GET ', 'start'],
+      ['$', '行尾', 'end$', 'end'],
+      ['\\b', '单词边界', '\\bword\\b', 'boundary'],
+      ['*', '0次以上', 'ab*c', 'star'],
+      ['+', '1次以上', 'ab+c', 'plus'],
+      ['?', '0或1次', 'colou?r', 'qmark'],
+      ['{n,m}', 'n到m次', '\\d{2,4}', 'repeat'],
+      ['(...)', '捕获分组', '(\\d+)-(\\d+)', 'capture'],
+      ['(?:...)', '非捕获分组', '(?:\\d+)-', 'noncap'],
+      ['(?&lt;n&gt;...)', '命名分组', '(?&lt;year&gt;\\d{4})', 'named'],
+      ['|', '或', 'cat|dog', 'alt'],
+      ['(?=...)', '前瞻', '\\d+(?=px)', 'lookahead'],
+      ['(?&lt;=...)', '后顾', '(?&lt;=\\$)\\d+', 'lookbehind'],
+      ['\\1', '反向引用', '(\\w+)\\s+\\1', 'backref'],
+      ['\\p{L}', 'Unicode字母', '\\p{L}+', 'unicode']
+    ];
+    var SUPPORT = {
+      grepE: { named: '✗', lookahead: '✗', lookbehind: '✗', backref: '✗', unicode: '✗' },
+      grepP: { unicode: '≈' },
+      sed: { plus: '≈', qmark: '≈', alt: '≈', capture: '≈', noncap: '✗', named: '✗', lookahead: '✗', lookbehind: '✗', backref: '✗', unicode: '✗' },
+      awk: { named: '✗', lookahead: '✗', lookbehind: '✗', backref: '✗', unicode: '✗' },
+      js: {},
+      python: { lookbehind: '≈' },
+      java: {},
+      go: { lookahead: '✗', lookbehind: '✗', backref: '✗', named: '≈' },
+      dotnet: {}
+    };
+    var DIALECT_INFO = {
+      grepE: { label: 'grep -E（ERE）', cmd: 'grep -E \'正则\' 文件', note: 'POSIX 扩展正则。真实引擎<b>不支持</b>命名组、前瞻/后顾、反向引用、<code>\\p{}</code>；<code>\\d \\w \\s</code> 也非标准写法（建议 <code>[0-9] [[:alnum:]_] [[:space:]]</code>）。表格里的 ✗ 指真实 grep -E 不支持。' },
+      grepP: { label: 'grep -P（PCRE）', cmd: 'grep -P \'正则\' 文件', note: 'Perl 兼容正则，能力最全，支持命名组、前瞻/后顾、反向引用。真实 grep -P 还支持 <code>\\K</code>、原子组、递归；本工具用浏览器 JS 引擎<b>近似</b>执行，故 <code>\\K</code> 与子程序调用标为 ≈。' },
+      sed: { label: 'sed（BRE 默认）', cmd: 'sed -E \'s/正则/替换/g\' 文件', note: '默认 BRE：分组写 <code>\\(...\\)</code>，<code>+</code> 写 <code>\\+</code>，<code>?</code> 写 <code>\\?</code>，<code>|</code> 写 <code>\\|</code>；加 <code>-E</code> 切 ERE 免转义。真实 GNU sed <b>不支持</b>前瞻/后顾、命名组；替换串里 <code>&amp;</code> 为整体匹配、<code>\\1..\\9</code> 为分组引用（已支持）。' },
+      awk: { label: 'awk（ERE）', cmd: 'awk \'/正则/ {print $1}\' 文件', note: '字段 <code>$1..$n</code>、<code>$0</code> 整行、<code>NF</code> 字段数；<code>FS</code> 可改分隔符；<code>gsub(旧,新)</code> 全局替换。真实 awk 用 ERE，<b>不支持</b>前瞻/后顾与命名组。本工具只实现 <code>print</code>/<code>gsub</code> 子集。' },
+      js: { label: 'JavaScript', cmd: '/正则/g 或 new RegExp("正则","g")', note: '浏览器原生 RegExp，本工具与其<b>完全一致</b>。命名组、<code>\\k&lt;name&gt;</code>、<code>\\p{L}</code> 会自动补上必需的 <code>u</code> 标志。' },
+      python: { label: 'Python re', cmd: 're.findall(r"正则", 文本)', note: '命名组 <code>(?P&lt;name&gt;...)</code> 已自动转 <code>(?&lt;name&gt;...)</code>；<code>(?P=name)</code> 转 <code>\\k&lt;name&gt;</code>；<code>\\A→^</code>、<code>\\Z→$</code> 已转换。JS 的后顾为近似实现，边界情况可能不同。' },
+      java: { label: 'Java', cmd: 'Pattern.compile("正则")', note: 'Java 语法与 PCRE 很接近，表格全部标 ✓。差异：不支持 <code>\\Q...\\E</code>、<code>\\R</code>，本工具按近似处理。' },
+      go: { label: 'Go regexp', cmd: 'regexp.MustCompile("正则")', note: 'RE2 引擎无回溯：真实 Go <b>不支持</b>反向引用、前瞻/后顾；命名组写法是 <code>(?P&lt;name&gt;...)</code>，故标 ≈。本工具仍用 JS 引擎近似高亮。' },
+      dotnet: { label: '.NET', cmd: 'new Regex("正则")', note: '.NET 语法与 PCRE 很接近，表格全部标 ✓。差异：不支持平衡组，本工具按近似处理。' }
+    };
+
+    function renderRef(d) {
+      var info = DIALECT_INFO[d] || DIALECT_INFO.grepE;
+      var sup = SUPPORT[d] || {};
+      document.getElementById('ref-title').textContent = info.label;
+      var rows = CONSTRUCTS.map(function (c) {
+        var v = Object.prototype.hasOwnProperty.call(sup, c[3]) ? sup[c[3]] : '✓';
+        var cls = v === '✓' ? 'rgx-y' : (v === '≈' ? 'rgx-a' : 'rgx-n');
+        return '<tr><td><code>' + c[0] + '</code></td><td>' + c[1] + '</td><td><code>' + c[2] + '</code></td><td class="' + cls + '">' + v + '</td></tr>';
+      }).join('');
+      document.getElementById('ref-body').innerHTML =
+        '<div class="rgx-ref-grid">'
+        + '<div><b>调用格式</b><code>' + info.cmd + '</code></div>'
+        + '<div><b>说明</b><span>' + info.note + '</span></div>'
+        + '</div>'
+        + '<table class="rgx-ref-table"><thead><tr><th>元字符</th><th>含义</th><th>示例</th><th>本引擎</th></tr></thead><tbody>' + rows + '</tbody></table>'
+        + '<div class="rgx-ref-legend">图例：✓ 支持 · ≈ 近似/写法不同 · ✗ 不支持（由浏览器 JS 引擎执行）</div>';
+    }
+
+    function setDialect(d) {
+      dialect = d;
+      var sel = document.getElementById('dialect');
+      if (sel && sel.value !== d) sel.value = d;
+      var hintEl = document.getElementById('dialect-hint');
+      if (hintEl) hintEl.innerHTML = hints[d] || '';
+      var pat = document.getElementById('pattern');
+      if (pat) pat.placeholder = placeholders[d] || '';
+      var flagsRow = document.getElementById('flags-row');
+      if (flagsRow) flagsRow.style.display = (d === 'sed' || d === 'awk') ? 'none' : '';
+      renderRef(d);
+      test();
+    }
+
+    function loadExample(name) {
+      var ex = examples[name];
+      if (!ex) return;
+      setDialect(ex.dialect || 'grepE');
+      document.getElementById('pattern').value = ex.pattern;
+      document.getElementById('text').value = ex.text;
+      test();
+    }
+
+    function getFlags() {
+      var flags = '';
+      if (document.getElementById('flag-g').checked) flags += 'g';
+      if (document.getElementById('flag-i').checked) flags += 'i';
+      if (document.getElementById('flag-m').checked) flags += 'm';
+      if (document.getElementById('flag-s').checked) flags += 's';
+      return flags;
+    }
+
+    // 凡是 while(exec) 全量遍历的循环，正则必须带 g：否则 lastIndex 不推进，
+    // 非零长度匹配会无限返回同一结果，把页面卡死（未勾选「全局 g」时的经典陷阱）。
+    function withG(flags) {
+      return flags.indexOf('g') < 0 ? flags + 'g' : flags;
+    }
+
+    function nonEmptyCount(text) {
+      return text.split('\n').filter(function (l) { return l.trim() !== ''; }).length;
+    }
+
+    function clearAll() {
+      document.getElementById('pattern').value = '';
+      document.getElementById('text').value = '';
+      test();
+    }
+
+    function loadFile() {
+      document.getElementById('file-input').click();
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // ---- 方言转换（尽量贴合目标语言的 JS 写法）----
+    function translatePattern(p) {
+      if (dialect === 'python') {
+        p = p.replace(/\(\?P<([A-Za-z_][A-Za-z0-9_]*)>/g, '(?<$1>');
+        p = p.replace(/\(\?P=([A-Za-z_][A-Za-z0-9_]*)\)/g, '\\k<$1>');
+        // Python \Z 是「绝对字符串末尾」（不像 $ 在换行前也算），JS 用 $(?!\n) 精确等价
+        // Python \A 是「字符串开头」，JS 无对应符号，用 ^ 近似（开 m 标志时语义会变宽）
+        p = p.replace(/\\A/g, '^').replace(/\\Z/g, '$(?!\\n)');
+      }
+      return p;
+    }
+
+    // ---- 匹配模式（grep / JS / Python / Java / Go / .NET）----
+    function runMatch(patternStr, text) {
+      var output = document.getElementById('output');
+      var errorMsg = document.getElementById('error-msg');
+      var matchCountEl = document.getElementById('match-count');
+      var lineCountEl = document.getElementById('line-count');
+      lineCountEl.textContent = nonEmptyCount(text);
+
+      var p = translatePattern(patternStr);
+      if (!p) {
+        output.innerHTML = '<span class="rgx-empty">输入正则表达式后，这里实时显示匹配结果...</span>';
+        errorMsg.style.display = 'none';
+        matchCountEl.textContent = '0';
+        document.getElementById('groups').innerHTML = '<span class="rgx-empty">无</span>';
+        return;
+      }
+      // JS 里命名组 (?<name>...)、命名反向引用 \k<name> 以及 \p{}/\P{} 必须带 u 标志才合法，自动补上
+      var flags = getFlags();
+      if (flags.indexOf('u') < 0 && (/\\[pP]\{/.test(p) || /\(\?<[A-Za-z_]/.test(p) || /\\k</.test(p))) flags += 'u';
+      var re;
+      try { re = new RegExp(p, flags); }
+      catch (e) {
+        errorMsg.style.display = 'block';
+        errorMsg.textContent = '⚠ 正则错误: ' + e.message;
+        output.innerHTML = '<span class="rgx-empty">正则有误，请检查语法...</span>';
+        matchCountEl.textContent = '0';
+        document.getElementById('groups').innerHTML = '<span class="rgx-empty">无</span>';
+        return;
+      }
+      errorMsg.style.display = 'none';
+
+      var onlyMatch = document.getElementById('flag-o').checked;
+      var html = '';
+      var count = 0;
+      var lines = text.split('\n');
+
+      for (var li = 0; li < lines.length; li++) {
+        var line = lines[li];
+        var lineHtml = '';
+        if (onlyMatch) {
+          var matches = [];
+          var re2 = new RegExp(p, withG(flags));
+          var mm;
+          while ((mm = re2.exec(line)) !== null) {
+            matches.push(mm[0]);
+            if (mm[0].length === 0) re2.lastIndex++;
+          }
+          if (matches.length > 0) {
+            count += matches.length;
+            // 只输出匹配模式：无匹配的行整行省略，大文本下不再刷满「(无匹配)」噪音
+            html += '<div>' + matches.map(function (m) { return '<mark>' + escapeHtml(m) + '</mark>'; }).join(' ') + '</div>';
+          }
+          continue;
+        } else {
+          var lastIdx = 0;
+          var re3 = new RegExp(p, withG(flags));
+          var m3;
+          var found = false;
+          while ((m3 = re3.exec(line)) !== null) {
+            count++;
+            found = true;
+            lineHtml += escapeHtml(line.slice(lastIdx, m3.index));
+            lineHtml += '<mark>' + escapeHtml(m3[0]) + '</mark>';
+            lastIdx = m3.index + m3[0].length;
+            if (m3[0].length === 0) re3.lastIndex++;
+          }
+          lineHtml += escapeHtml(line.slice(lastIdx));
+          if (!found) lineHtml = '<span class="rgx-empty">(无匹配)</span>';
+        }
+        html += '<div>' + lineHtml + '</div>';
+      }
+      output.innerHTML = html || '<span class="rgx-empty">无匹配</span>';
+      matchCountEl.textContent = count;
+      showGroups(p, text, flags);
+    }
+
+    function showGroups(p, text, flags) {
+      var groupsDiv = document.getElementById('groups');
+      var re;
+      try { re = new RegExp(p, flags); }
+      catch (e) { groupsDiv.innerHTML = '<span class="rgx-empty">无</span>'; return; }
+      var html = '';
+      var count = 0;
+      var MAX = 50;
+      var re2 = new RegExp(p, withG(flags));
+      var m;
+      while ((m = re2.exec(text)) !== null) {
+        count++;
+        if (count <= MAX && m.length > 1) {
+          var gs = '';
+          for (var gi = 1; gi < m.length; gi++) {
+            gs += '<span class="rgx-gcell"><b>组' + gi + '</b>' + escapeHtml(m[gi] || '(未匹配)') + '</span>';
+          }
+          html += '<div class="rgx-group-item"><span class="rgx-gmatch">' + escapeHtml(m[0]) + '</span>' + gs + '</div>';
+        }
+        if (m[0].length === 0) re2.lastIndex++;
+      }
+      if (!html) html = '<span class="rgx-empty">无</span>';
+      else if (count > MAX) html += '<span class="rgx-empty">… 共 ' + count + ' 个匹配，仅显示前 ' + MAX + ' 个</span>';
+      groupsDiv.innerHTML = html;
+    }
+
+    // ---- sed：解析与替换 ----
+    function parseSedCommand(cmd) {
+      if (typeof cmd !== 'string' || cmd.charAt(0) !== 's') return null;
+      var sep = cmd.charAt(1);
+      if (!sep || sep === '\\' || /[A-Za-z0-9]/.test(sep)) return null;
+      var parts = [], cur = '', esc = false;
+      for (var i = 2; i < cmd.length; i++) {
+        var ch = cmd.charAt(i);
+        if (esc) { cur += ch; esc = false; }
+        else if (ch === '\\') { cur += ch; esc = true; }
+        else if (ch === sep) { parts.push(cur); cur = ''; }
+        else cur += ch;
+      }
+      parts.push(cur);
+      if (parts.length < 2) return null;
+      return { pattern: parts[0], repl: parts[1], flags: parts.slice(2).join('') };
+    }
+
+    function sedReplToJs(repl) {
+      var out = '', i = 0;
+      while (i < repl.length) {
+        var ch = repl.charAt(i);
+        if (ch === '\\' && i + 1 < repl.length) {
+          var n = repl.charAt(i + 1);
+          if (n >= '1' && n <= '9') { out += '$' + n; i += 2; continue; }
+          if (n === '&') { out += '&'; i += 2; continue; }
+          if (n === 'n') { out += '\n'; i += 2; continue; }
+          if (n === '\\') { out += '\\'; i += 2; continue; }
+          out += n; i += 2; continue;
+        }
+        if (ch === '&') { out += '$&'; i++; continue; }
+        if (ch === '$') { out += '$$'; i++; continue; }
+        out += ch; i++;
+      }
+      return out;
+    }
+
+    function sedFlagsToJs(f) {
+      var js = '';
+      if (f.indexOf('g') >= 0) js += 'g';
+      if (f.indexOf('i') >= 0) js += 'i';
+      return js;
+    }
+
+    function expandRepl(jsRepl, m) {
+      return jsRepl.replace(/\$(\$|\d+|\&)/g, function (_, t) {
+        if (t === '$') return '$';
+        if (t === '&') return m[0] != null ? m[0] : '';
+        var idx = +t;
+        return (m[idx] != null) ? m[idx] : '';
+      });
+    }
+
+    // firstOnly = sed 命令未带 g：真实 sed 每行只替换第一处，因此替换一次即停（避免死循环）
+    function sedHighlight(line, re, jsRepl, counter, firstOnly) {
+      var out = '', lastIdx = 0, m, re2 = new RegExp(re.source, withG(re.flags));
+      while ((m = re2.exec(line)) !== null) {
+        if (m[0].length === 0) { re2.lastIndex++; continue; }
+        counter.n++;
+        var repl = expandRepl(jsRepl, m);
+        out += escapeHtml(line.slice(lastIdx, m.index));
+        out += '<mark>' + escapeHtml(repl) + '</mark>';
+        lastIdx = m.index + m[0].length;
+        if (firstOnly) break;
+      }
+      out += escapeHtml(line.slice(lastIdx));
+      return out;
+    }
+
+    function runSed(prog, text) {
+      var output = document.getElementById('output');
+      var errorMsg = document.getElementById('error-msg');
+      var matchCountEl = document.getElementById('match-count');
+      var lineCountEl = document.getElementById('line-count');
+      lineCountEl.textContent = nonEmptyCount(text);
+
+      var cmd = parseSedCommand(prog);
+      if (!cmd) {
+        var addr = prog.trim();
+        var reSrc = null;
+        if (addr.length >= 2 && addr.charAt(0) === '/' && addr.charAt(addr.length - 1) === '/') reSrc = addr.slice(1, -1);
+        else if (addr) reSrc = addr;
+        if (reSrc) { runMatch(reSrc, text); return; }
+        errorMsg.style.display = 'block';
+        errorMsg.textContent = '⚠ sed 语法：请输入 s/旧/新/[gip]，或用地址 /正则/ 只显示匹配行';
+        output.innerHTML = '<span class="rgx-empty">等待有效的 sed 命令...</span>';
+        matchCountEl.textContent = '0';
+        document.getElementById('groups').innerHTML = '<span class="rgx-empty">无</span>';
+        return;
+      }
+      var jsFlags = sedFlagsToJs(cmd.flags);
+      // 真实 sed：s/旧/新/ 不带 g 时每行只替换第一处；不带 g 的 exec 无法推进 lastIndex，故遍历用 withG
+      var firstOnly = cmd.flags.indexOf('g') < 0;
+      var re;
+      try { re = new RegExp(cmd.pattern, withG(jsFlags)); }
+      catch (e) {
+        errorMsg.style.display = 'block';
+        errorMsg.textContent = '⚠ sed 正则错误: ' + e.message;
+        output.innerHTML = '<span class="rgx-empty">正则有误，请检查语法...</span>';
+        matchCountEl.textContent = '0';
+        document.getElementById('groups').innerHTML = '<span class="rgx-empty">无</span>';
+        return;
+      }
+      errorMsg.style.display = 'none';
+      var jsRepl = sedReplToJs(cmd.repl);
+      var counter = { n: 0 };
+      var html = '';
+      var lines = text.split('\n');
+      for (var li = 0; li < lines.length; li++) {
+        var shown = sedHighlight(lines[li], re, jsRepl, counter, firstOnly);
+        html += '<div>' + (shown || '&nbsp;') + '</div>';
+      }
+      output.innerHTML = html;
+      matchCountEl.textContent = counter.n;
+      showGroups(cmd.pattern, text, jsFlags);
+    }
+
+    // ---- awk：解析与执行 ----
+    function awkFields(line) {
+      var t = String(line).replace(/^\s+|\s+$/g, '');
+      return t.length ? t.split(/\s+/) : [];
+    }
+
+    function awkPrint(tokens, fields, line) {
+      var parts = [];
+      for (var i = 0; i < tokens.length; i++) {
+        var t = tokens[i];
+        if (t === '$0') parts.push(line);
+        else if (t === '$NF') parts.push(fields.length ? fields[fields.length - 1] : '');
+        else if (t === 'NF') parts.push(String(fields.length));
+        else if (/^\$\d+$/.test(t)) {
+          var idx = +t.slice(1);
+          parts.push(idx > 0 && idx <= fields.length ? fields[idx - 1] : '');
+        } else parts.push(t);
+      }
+      return parts.join(' ');
+    }
+
+    function parseAwk(prog) {
+      var s = String(prog).trim();
+      if (!s) return { patternRe: null, mode: 'print', fieldList: ['$0'] };
+      var patternPart = '', action = null;
+      var b = s.indexOf('{');
+      if (b >= 0) {
+        var e = s.lastIndexOf('}');
+        if (e > b) { patternPart = s.slice(0, b).trim(); action = s.slice(b + 1, e).trim(); }
+        else { patternPart = s; }
+      } else { patternPart = s; }
+      var patternRe = null;
+      if (patternPart) {
+        var p = patternPart;
+        if (p.length >= 2 && p.charAt(0) === '/' && p.charAt(p.length - 1) === '/') p = p.slice(1, -1);
+        else if (p.charAt(0) === '/') p = p.slice(1);
+        patternRe = p;
+      }
+      if (action === null || action === '') return { patternRe: patternRe, mode: 'print', fieldList: ['$0'] };
+      if (/^print\b/.test(action)) {
+        var rest = action.slice(5).trim();
+        var tokens = [];
+        if (rest) tokens = rest.split(',').map(function (x) { return x.trim(); });
+        else tokens = ['$0'];
+        return { patternRe: patternRe, mode: 'print', fieldList: tokens };
+      }
+      // gsub(旧, "新")：按「后面紧跟引号的逗号」切分，才能容纳模式里的 / 或转义斜杠，如 gsub(/a\/b/, "x")
+      var gm = action.match(/^gsub\s*\(([\s\S]+)\)$/);
+      if (gm) {
+        var inner = gm[1].trim().replace(/;\s*$/, '').trim();
+        var splitIdx = -1;
+        for (var ti = 0; ti < inner.length; ti++) {
+          if (inner.charAt(ti) === ',' && (ti + 1 >= inner.length || /["'\s]/.test(inner.charAt(ti + 1)))) { splitIdx = ti; break; }
+        }
+        if (splitIdx > 0) {
+          var gsubRe = inner.slice(0, splitIdx).trim();
+          if (gsubRe.length >= 2 && gsubRe.charAt(0) === '/' && gsubRe.charAt(gsubRe.length - 1) === '/') gsubRe = gsubRe.slice(1, -1);
+          else if (gsubRe.charAt(0) === '/') gsubRe = gsubRe.slice(1);
+          var gsubRepl = inner.slice(splitIdx + 1).trim().replace(/^["']|["']\s*$/g, '');
+          return { patternRe: patternRe, mode: 'gsub', gsubRe: gsubRe, gsubRepl: gsubRepl };
+        }
+      }
+      return null;
+    }
+
+    function awkGsub(line, parsed, counter) {
+      var re;
+      try { re = new RegExp(parsed.gsubRe, 'g'); }
+      catch (e) { return escapeHtml(line); }
+      var out = '', lastIdx = 0, m, n = 0;
+      while ((m = re.exec(line)) !== null) {
+        if (m[0].length === 0) { re.lastIndex++; continue; }
+        n++;
+        out += escapeHtml(line.slice(lastIdx, m.index));
+        out += '<mark>' + escapeHtml(parsed.gsubRepl) + '</mark>';
+        lastIdx = m.index + m[0].length;
+      }
+      out += escapeHtml(line.slice(lastIdx));
+      counter.n += n;
+      return out;
+    }
+
+    function runAwk(prog, text) {
+      var output = document.getElementById('output');
+      var errorMsg = document.getElementById('error-msg');
+      var matchCountEl = document.getElementById('match-count');
+      var lineCountEl = document.getElementById('line-count');
+      lineCountEl.textContent = nonEmptyCount(text);
+
+      var parsed = parseAwk(prog);
+      if (!parsed) {
+        errorMsg.style.display = 'block';
+        errorMsg.textContent = '⚠ awk 语法：/正则/，或 /正则/ {print $1, $NF}，或 {gsub(/旧/, "新")}';
+        output.innerHTML = '<span class="rgx-empty">等待有效的 awk 程序...</span>';
+        matchCountEl.textContent = '0';
+        document.getElementById('groups').innerHTML = '<span class="rgx-empty">无</span>';
+        return;
+      }
+      var re = null;
+      if (parsed.patternRe) {
+        try { re = new RegExp(parsed.patternRe, 'g'); }
+        catch (e) {
+          errorMsg.style.display = 'block';
+          errorMsg.textContent = '⚠ awk 正则错误: ' + e.message;
+          output.innerHTML = '<span class="rgx-empty">正则有误，请检查语法...</span>';
+          matchCountEl.textContent = '0';
+          document.getElementById('groups').innerHTML = '<span class="rgx-empty">无</span>';
+          return;
+        }
+      }
+      errorMsg.style.display = 'none';
+      var html = '', count = 0, counter = { n: 0 };
+      var lines = text.split('\n');
+      for (var li = 0; li < lines.length; li++) {
+        var line = lines[li];
+        var matched = true;
+        if (re) { re.lastIndex = 0; matched = !!re.exec(line); }
+        if (!matched) continue;
+        count++;
+        var disp;
+        if (parsed.mode === 'print') {
+          disp = escapeHtml(awkPrint(parsed.fieldList, awkFields(line), line));
+        } else if (parsed.mode === 'gsub') {
+          disp = awkGsub(line, parsed, counter);
+        } else {
+          disp = escapeHtml(line);
+        }
+        html += '<div>' + (disp || '&nbsp;') + '</div>';
+      }
+      output.innerHTML = html || '<span class="rgx-empty">无匹配行</span>';
+      matchCountEl.textContent = (parsed.mode === 'gsub') ? counter.n : count;
+      // 空模式时跳过：空正则会在每个位置产生零宽匹配，把分组面板刷满噪音
+      if (parsed.patternRe) showGroups(parsed.patternRe, text, 'g');
+      else document.getElementById('groups').innerHTML = '<span class="rgx-empty">无</span>';
+    }
+
+    // 悬空反向引用诊断：\N / \k<name> 引用了不存在的分组时，JS 不会给出可用信号——
+    // 无 u 标志会静默退化成匹配控制字符（永远 0 匹配），带 u 则直接 Invalid escape。
+    // 两种情况用户都看不出原因，这里主动提示。
+    function diagBackrefs(p) {
+      var out = [], i = 0, inClass = false, esc = false, groups = 0, names = [], refs = [];
+      while (i < p.length) {
+        var c = p.charAt(i);
+        if (esc) {
+          if (!inClass && c >= '1' && c <= '9') refs.push({ num: parseInt(c, 10), pos: i });
+          else if (!inClass && c === 'k' && i + 1 < p.length && p.charAt(i + 1) === '<') {
+            var j = p.indexOf('>', i + 2);
+            if (j > 0) refs.push({ name: p.slice(i + 2, j), pos: i });
+          }
+          esc = false; i++; continue;
+        }
+        if (c === '\\') { esc = true; i++; continue; }
+        if (inClass) { if (c === ']') inClass = false; i++; continue; }
+        if (c === '[') { inClass = true; i++; continue; }
+        if (c === '(') {
+          if (i + 1 < p.length && p.charAt(i + 1) === '?') {
+            var nx = p.charAt(i + 2);
+            if (nx === ':' || nx === '=' || nx === '!') { i += 3; continue; }
+            if (nx === '<') {
+              var isLook = (i + 3 < p.length && p.charAt(i + 3) === '=');
+              var k = p.indexOf('>', i + (isLook ? 4 : 3));
+              if (k > 0) {
+                var nm = p.slice(i + (isLook ? 4 : 3), k);
+                if (!isLook && !/^\d+$/.test(nm)) { names.push(nm); groups++; }
+                i = k + 1; continue;
+              }
+              i++; continue;
+            }
+            i += 2; continue;
+          }
+          groups++; i++; continue;
+        }
+        i++;
+      }
+      refs.forEach(function (r) {
+        if (r.num != null && r.num > groups) out.push('\\' + r.num + ' 引用了不存在的第 ' + r.num + ' 组（当前只有 ' + groups + ' 个分组）');
+        if (r.name != null && names.indexOf(r.name) < 0) out.push('\\k<' + r.name + '> 引用了不存在的命名组（已定义：' + (names.length ? names.join('、') : '无') + '）');
+      });
+      return out;
+    }
+
+    function test() {
+      var patternStr = document.getElementById('pattern').value;
+      var text = document.getElementById('text').value;
+      var warnMsg = document.getElementById('warn-msg');
+      var diags = diagBackrefs(patternStr);
+      if (diags.length) {
+        var tip = diags.some(function (d) { return d.indexOf('引用了不存在的第') >= 0; })
+          ? '；提示：\\N 是「反向引用」，需先用括号定义第 N 组，例如 <b>(\\d)(\\d)\\1\\2</b>'
+          : '';
+        warnMsg.innerHTML = '⚠ <b>引用警告</b>：' + diags.join('；') + tip;
+        warnMsg.style.display = 'block';
+      } else {
+        warnMsg.innerHTML = '';
+        warnMsg.style.display = 'none';
+      }
+      if (dialect === 'sed') runSed(patternStr, text);
+      else if (dialect === 'awk') runAwk(patternStr, text);
+      else runMatch(patternStr, text);
+      vsRender(vsExtractPattern());
+    }
+
+    // ================= 正则可视化 =================
+    var VS = { GAP: 16, BH: 26, VROW: 12, DIAMOND: 22, PAD: 10, LOOP: 26 };
+    var VS_DEFS = '<defs>'
+      + '<marker id="rgx-vis-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="rgx-vis-arrowhead" d="M0 0 L10 5 L0 10 z"/></marker>'
+      + '<radialGradient id="rgx-vis-gstart" cx="35%" cy="30%" r="75%"><stop offset="0%" stop-color="#b6f3b6"/><stop offset="45%" stop-color="#3ecf3e"/><stop offset="100%" stop-color="#157a15"/></radialGradient>'
+      + '<radialGradient id="rgx-vis-gend" cx="35%" cy="30%" r="75%"><stop offset="0%" stop-color="#a6a6a6"/><stop offset="45%" stop-color="#4a4a4a"/><stop offset="100%" stop-color="#111111"/></radialGradient>'
+      + '</defs>';
+
+    function vsMeasure(text) {
+      var w = 18, i;
+      for (i = 0; i < text.length; i++) w += (text.charCodeAt(i) > 255) ? 12.5 : 7.4;
+      return Math.max(30, w);
+    }
+
+    function vsHasQuant(n) {
+      if (!n) return false;
+      switch (n.t) {
+        case 'branch': return !!n.quant;
+        case 'cat':
+        case 'alt':
+          for (var i = 0; i < n.items.length; i++) if (vsHasQuant(n.items[i])) return true;
+          return false;
+        case 'group': return vsHasQuant(n.body);
+        default: return false;
+      }
+    }
+
+    function vsHeight(n) {
+      if (!n) return VS.BH;
+      switch (n.t) {
+        case 'cat': return Math.max.apply(null, n.items.map(vsHeight).concat([VS.BH]));
+        case 'branch': return vsHeight(n.body);
+        case 'group': return vsHeight(n.body) + VS.PAD * 2 + (vsHasQuant(n.body) ? VS.LOOP : 0);
+        case 'alt':
+          return n.items.reduce(function (s, it) { return s + vsHeight(it); }, 0)
+            + (n.items.length - 1) * VS.VROW + VS.DIAMOND;
+        default: return VS.BH;
+      }
+    }
+
+    function vsLine(ctx, x1, y1, x2, y2) {
+      var d;
+      if (Math.abs(y1 - y2) < 1.5) {
+        d = 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2;
+      } else {
+        var mx = (x1 + x2) / 2;
+        d = 'M ' + x1 + ' ' + y1 + ' C ' + mx + ' ' + y1 + ' ' + mx + ' ' + y2 + ' ' + x2 + ' ' + y2;
+      }
+      ctx.els.push('<path class="rgx-vis-edge" d="' + d + '" marker-end="url(#rgx-vis-arrow)"/>');
+    }
+
+    function vsDiamond(ctx, cx, cy) {
+      var r = VS.DIAMOND / 2;
+      ctx.els.push('<path class="rgx-vis-diamond" d="M ' + cx + ' ' + (cy - r) + ' L ' + (cx + r) + ' ' + cy + ' L ' + cx + ' ' + (cy + r) + ' L ' + (cx - r) + ' ' + cy + ' z"/>');
+    }
+
+    function vsLoop(ctx, x1, x2, cy, label) {
+      var y0 = cy - VS.BH / 2 + 3;
+      var ax = (x1 + x2) / 2;
+      var span = Math.min(26, (x2 - x1) / 2);
+      ctx.els.push('<path class="rgx-vis-loop" d="M ' + (ax + span) + ' ' + y0 + ' Q ' + ax + ' ' + (y0 - 18) + ' ' + (ax - span) + ' ' + y0 + '" marker-end="url(#rgx-vis-arrow)"/>');
+      ctx.els.push('<text class="rgx-vis-qty" x="' + ax + '" y="' + (y0 - 21) + '" text-anchor="middle">' + label + '</text>');
+    }
+
+    function vsGroupLabel(n) {
+      if (n.kind === 'named') return n.name || '组';
+      if (n.kind === 'capture') return '组';
+      if (n.kind === 'noncap') return '(?:';
+      if (n.kind === 'look') {
+        return n.look === 'negate' ? '(?!' : (n.look === 'nbehind' ? '(?<!' : (n.look === 'behind' ? '(?<=' : '(?='));
+      }
+      return '';
+    }
+
+    function vsLayout(n, x, cy, ctx) {
+      if (!n) return { w: 0, cx: x, cy: cy };
+      switch (n.t) {
+        case 'cat': {
+          var cx = x, prev = null;
+          for (var i = 0; i < n.items.length; i++) {
+            var r = vsLayout(n.items[i], cx, cy, ctx);
+            if (prev) vsLine(ctx, prev.cx, prev.cy, cx, r.cy);
+            prev = { cx: r.cx, cy: r.cy };
+            cx += r.w + VS.GAP;
+          }
+          return { w: cx - x - VS.GAP, cx: prev.cx, cy: cy };
+        }
+        case 'branch': {
+          var r2 = vsLayout(n.body, x, cy, ctx);
+          if (n.quant) vsLoop(ctx, x, r2.cx, cy, n.quant.label);
+          return { w: r2.w, cx: r2.cx, cy: cy };
+        }
+        case 'group': {
+          var shift = vsHasQuant(n.body) ? VS.LOOP / 2 : 0;
+          var r3 = vsLayout(n.body, x + VS.PAD, cy + shift, ctx);
+          var bodyH = vsHeight(n.body) + (shift ? VS.LOOP : 0);
+          var gy = cy + shift - bodyH / 2 - VS.PAD;
+          var h = bodyH + VS.PAD * 2;
+          var w = r3.w + VS.PAD * 2;
+          var named = (n.kind === 'named' || n.kind === 'capture' || n.kind === 'look');
+          ctx.els.push('<rect class="rgx-vis-group' + (named ? ' rgx-vis-group--named' : '') + '" x="' + x + '" y="' + gy + '" width="' + w + '" height="' + h + '" rx="' + (named ? h / 2 : 8) + '"/>');
+          var lbl = vsGroupLabel(n);
+          if (lbl) ctx.els.push('<text class="rgx-vis-glabel" x="' + (x + 7) + '" y="' + (gy + 11) + '">' + escapeHtml(lbl) + '</text>');
+          return { w: w, cx: r3.cx, cy: cy + shift };
+        }
+        case 'alt': {
+          var tot = 0, i2, hh;
+          for (i2 = 0; i2 < n.items.length; i2++) tot += vsHeight(n.items[i2]);
+          var rowsH = tot + (n.items.length - 1) * VS.VROW + VS.DIAMOND;
+          var blockTop = cy - rowsH / 2;
+          var cur = blockTop + VS.DIAMOND;
+          var centers = [], exits = [];
+          for (i2 = 0; i2 < n.items.length; i2++) {
+            hh = vsHeight(n.items[i2]);
+            centers.push(cur + hh / 2);
+            cur += hh + VS.VROW;
+          }
+          var leftC = blockTop + VS.DIAMOND / 2;
+          var xRow = x + VS.DIAMOND + 12;
+          for (i2 = 0; i2 < n.items.length; i2++) {
+            var r4 = vsLayout(n.items[i2], xRow, centers[i2], ctx);
+            exits.push(r4.cx);
+          }
+          var maxExit = Math.max.apply(null, exits);
+          var rightC = maxExit + 12 + VS.DIAMOND / 2;
+          vsDiamond(ctx, leftC, cy);
+          vsDiamond(ctx, rightC, cy);
+          for (i2 = 0; i2 < n.items.length; i2++) {
+            vsLine(ctx, leftC + VS.DIAMOND / 2, cy, xRow, centers[i2]);
+            vsLine(ctx, exits[i2], centers[i2], rightC - VS.DIAMOND / 2, cy);
+          }
+          return { w: (rightC + VS.DIAMOND / 2) - x, cx: rightC, cy: cy };
+        }
+        default: {
+          var bw = vsMeasure(n.label);
+          var cls = n.t === 'lit' ? 'lit' : (n.t === 'class' ? 'class' : (n.t === 'anchor' ? 'anchor' : 'backref'));
+          ctx.els.push('<rect class="rgx-vis-' + cls + '" x="' + x + '" y="' + (cy - VS.BH / 2) + '" width="' + bw + '" height="' + VS.BH + '" rx="6"/>');
+          ctx.els.push('<text class="rgx-vis-txt" x="' + (x + bw / 2) + '" y="' + cy + '" text-anchor="middle" dominant-baseline="central">' + escapeHtml(n.label) + '</text>');
+          return { w: bw, cx: x + bw, cy: cy };
+        }
+      }
+    }
+
+    function vsMerge(n) {
+      if (!n) return n;
+      switch (n.t) {
+        case 'cat': {
+          var merged = [], i;
+          for (i = 0; i < n.items.length; i++) {
+            var it = vsMerge(n.items[i]);
+            if (!it) continue;
+            var last = merged[merged.length - 1];
+            if (it.t === 'lit' && last && last.t === 'lit') last.label += it.label;
+            else merged.push(it);
+          }
+          if (merged.length === 0) return { t: 'lit', label: '(空)' };
+          if (merged.length === 1) return merged[0];
+          return { t: 'cat', items: merged };
+        }
+        case 'branch': return { t: 'branch', body: vsMerge(n.body), quant: n.quant };
+        case 'group': return { t: 'group', kind: n.kind, name: n.name, look: n.look, body: vsMerge(n.body) };
+        case 'alt': return { t: 'alt', items: n.items.map(vsMerge) };
+        default: return n;
+      }
+    }
+
+    function vsParse(src) {
+      var s = String(src), pos = 0;
+
+      function ch() { return s.charAt(pos); }
+      function eof() { return pos >= s.length; }
+
+      function parseAlt(term) {
+        var items = [parseConcat(term)];
+        while (!eof() && ch() === '|' && ch() !== term) { pos++; items.push(parseConcat(term)); }
+        return items.length > 1 ? { t: 'alt', items: items } : items[0];
+      }
+
+      function parseConcat(term) {
+        var items = [];
+        while (!eof()) {
+          var c = ch();
+          if (c === '|' || (term && c === term)) break;
+          var node = parseBranch();
+          if (!node) break;
+          items.push(node);
+        }
+        if (items.length === 0) return { t: 'lit', label: '(空)' };
+        return items.length > 1 ? { t: 'cat', items: items } : items[0];
+      }
+
+      function parseBranch() {
+        var body = parseRepeat();
+        if (!body || eof()) return body;
+        var q = parseQuant();
+        if (!q) return body;
+        return { t: 'branch', body: body, quant: q };
+      }
+
+      function parseQuant() {
+        var c = ch();
+        if (c === '*' || c === '+' || c === '?') {
+          pos++;
+          var lbl = c;
+          if (!eof() && ch() === '?') { pos++; lbl += '?'; }
+          return { label: lbl };
+        }
+        if (c === '{') {
+          var m = /^\{(\d+)(,(\d*))?\}/.exec(s.slice(pos));
+          if (m) { pos += m[0].length; return { label: m[0] }; }
+        }
+        return null;
+      }
+
+      function parseRepeat() {
+        var c = ch();
+        if (c === '(') return parseGroup();
+        if (c === '[') return parseClass();
+        if (c === '\\') return parseEscape();
+        if (c === '^') { pos++; return { t: 'anchor', label: '行首' }; }
+        if (c === '$') { pos++; return { t: 'anchor', label: '行尾' }; }
+        if (c === '.') { pos++; return { t: 'class', label: '任意' }; }
+        pos++;
+        return { t: 'lit', label: escapeSafe(c) };
+      }
+
+      function parseGroup() {
+        pos++;
+        var kind = 'capture', name = null, look = null;
+        if (ch() === '?') {
+          pos++;
+          var c = ch();
+          if (c === ':') { pos++; kind = 'noncap'; }
+          else if (c === '<') {
+            pos++;
+            var c2 = ch();
+            if (c2 === '=') { pos++; kind = 'look'; look = 'ahead'; }
+            else if (c2 === '!') { pos++; kind = 'look'; look = 'negate'; }
+            else if (c2 === '=') { pos++; kind = 'look'; look = 'behind'; }
+            else if (c2 === '!') { pos++; kind = 'look'; look = 'nbehind'; }
+            else {
+              var nm = /^[A-Za-z_][A-Za-z0-9_]*\>/.exec(s.slice(pos));
+              if (nm) { pos += nm[0].length; kind = 'named'; name = nm[0].slice(0, -1); }
+              else kind = 'noncap';
+            }
+          } else kind = 'noncap';
+        }
+        var body = parseAlt(')');
+        if (ch() === ')') pos++;
+        return { t: 'group', kind: kind, name: name, look: look, body: body };
+      }
+
+      function parseClass() {
+        pos++;
+        var txt = '[';
+        if (ch() === '^') { txt += '^'; pos++; }
+        var allowClose = false;
+        while (!eof()) {
+          if (ch() === ']' && allowClose) break;
+          if (ch() === '\\') {
+            txt += ch(); pos++;
+            if (!eof()) { txt += ch(); pos++; }
+            allowClose = true; continue;
+          }
+          if (s.slice(pos, pos + 2) === '[[') {
+            var pm = /^\[\[:[a-z]+:\]\]/.exec(s.slice(pos));
+            if (pm) { txt += pm[0]; pos += pm[0].length; allowClose = true; continue; }
+          }
+          txt += ch(); pos++; allowClose = true;
+        }
+        if (ch() === ']') { txt += ']'; pos++; }
+        var label = txt;
+        if (txt.indexOf('[[:digit:]]') >= 0) label = '数字';
+        else if (txt.indexOf('[[:alpha:]]') >= 0) label = '字母';
+        else if (txt.indexOf('[[:alnum:]]') >= 0) label = '字母数字';
+        else if (txt.indexOf('[[:space:]]') >= 0) label = '空白';
+        else if (txt === '[^\\s]') label = '非空白';
+        else if (txt === '[^\\S]') label = '空白';
+        return { t: 'class', label: label };
+      }
+
+      function parseEscape() {
+        pos++;
+        if (eof()) return { t: 'lit', label: '\\' };
+        var c = ch();
+        pos++;
+        if (c >= '1' && c <= '9') return { t: 'backref', label: '\\' + c };
+        var map = {
+          d: '数字', w: '单词', s: '空白',
+          D: '非数字', W: '非单词', S: '非空白',
+          b: '边界', B: '非边界',
+          A: '字符串首', Z: '字符串尾', z: '字符串尾',
+          n: '换行', r: '回车', t: '制表', v: '垂直制表', f: '换页'
+        };
+        if (map[c]) return { t: 'class', label: map[c] };
+        return { t: 'lit', label: c };
+      }
+
+      function escapeSafe(c) { return c; }
+
+      return vsMerge(parseAlt(null));
+    }
+
+    function vsRender(pattern) {
+      var el = document.getElementById('vs-body');
+      if (!el) return;
+      if (!pattern) {
+        el.innerHTML = '<div class="rgx-vis-empty">在上方输入正则表达式，这里显示它的结构图…</div>';
+        return;
+      }
+      var ast;
+      try { ast = vsParse(pattern); }
+      catch (e) {
+        el.innerHTML = '<div class="rgx-vis-err">⚠ 无法可视化：' + escapeHtml(e.message) + '</div>';
+        return;
+      }
+      var ctx = { els: [] };
+      var rootCy = 40 + vsHeight(ast) / 2;
+      var startX = 14, startR = 9, endR = 9;
+      var res = vsLayout(ast, 40, rootCy, ctx);
+      var endX = res.cx + 18;
+      ctx.els.push('<circle cx="' + startX + '" cy="' + res.cy + '" r="' + startR + '" fill="url(#rgx-vis-gstart)" stroke="#157a15" stroke-width="1"/>');
+      vsLine(ctx, startX + startR + 1, res.cy, 40, res.cy);
+      ctx.els.push('<circle cx="' + endX + '" cy="' + res.cy + '" r="' + endR + '" fill="url(#rgx-vis-gend)" stroke="#0d0d0d" stroke-width="1"/>');
+      vsLine(ctx, res.cx, res.cy, endX - endR - 1, res.cy);
+      var W = endX + endR + 16;
+      var H = 2 * (rootCy + 24);
+      el.innerHTML = '<div class="rgx-vis-wrap"><svg class="rgx-vis" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="正则结构图">' + VS_DEFS + '<g>' + ctx.els.join('') + '</g></svg></div>';
+    }
+
+    function vsExtractPattern() {
+      var p = document.getElementById('pattern').value;
+      if (dialect === 'sed') {
+        var cmd = parseSedCommand(p);
+        if (cmd) return cmd.pattern;
+        var a = p.trim();
+        if (a.length >= 2 && a.charAt(0) === '/' && a.charAt(a.length - 1) === '/') return a.slice(1, -1);
+        return p;
+      }
+      if (dialect === 'awk') {
+        var pa = parseAwk(p);
+        return (pa && pa.patternRe) ? pa.patternRe : '';
+      }
+      return p;
+    }
+
+    // ---- 事件 ----
+    document.getElementById('dialect').addEventListener('change', function () { setDialect(this.value); });
+    document.getElementById('btn-load').addEventListener('click', loadFile);
+    document.getElementById('btn-clear').addEventListener('click', clearAll);
+    document.getElementById('file-input').addEventListener('change', function (e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (ev) {
+        document.getElementById('text').value = ev.target.result;
+        test();
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
+    document.getElementById('pattern').addEventListener('input', test);
+    document.getElementById('text').addEventListener('input', test);
+
+    var flagCbs = document.querySelectorAll('.rgx-flags-row input');
+    for (var fi = 0; fi < flagCbs.length; fi++) {
+      flagCbs[fi].addEventListener('change', test);
+    }
+
+    var exBtns = document.querySelectorAll('.rgx-examples button');
+    for (var bi = 0; bi < exBtns.length; bi++) {
+      (function (btn) {
+        btn.addEventListener('click', function () { loadExample(btn.getAttribute('data-example')); });
+      })(exBtns[bi]);
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); test(); }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l') { e.preventDefault(); loadFile(); }
+      if (e.key === 'Escape') { clearAll(); }
+    });
+
+    setDialect('grepE');
+    loadExample('email');
+  })();
+</script>
+{{- end }}

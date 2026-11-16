@@ -189,7 +189,7 @@ tags: ["Linux", "Cloudflare R2", "商汤", "Spring Boot", "MySQL", "Redis", "低
 ```
 
 5. **IDEA 里再调三处**：① Maven 路径和 `settings.xml` 指向刚配的；② 编码改成 **UTF-8**；③ 项目 JDK 调成 **11**；最后**刷新 Maven**。刷新后**没有红色波浪线报错**，说明依赖都下来了。
-   
+
 ![Maven 配置完成、依赖已下载](https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev/blog_images/%E4%B8%AD%E5%B7%9E%E5%85%BB%E8%80%81%E5%8D%95%E4%BD%93%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0/pictures/65868821-3090-4633-99ef-a867d3d62980.png)
 
 ![Maven 本地仓库与镜像设置](https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev/blog_images/%E4%B8%AD%E5%B7%9E%E5%85%BB%E8%80%81%E5%8D%95%E4%BD%93%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0/pictures/7e6ec8cb-5de2-4a3a-8fe5-3c6dd19a8f0c.png)
@@ -445,7 +445,7 @@ npm run dev
 - 文件真的进了 **R2 的 bucket**（去 Cloudflare 控制台能看到文件）；
 - 下载/预览能正常取回（说明 `S3Client` 的 `putObject`/`getObject` 都通了）；
 - **不报** `NoSuchBeanDefinitionException`（OSS Bean 问题已解决）。
-  
+
 ![R2 上传下载验证成功](https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev/blog_images/%E4%B8%AD%E5%B7%9E%E5%85%BB%E8%80%81%E5%8D%95%E4%BD%93%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0/pictures/fa31d2ab-7f9c-41ac-ac77-940b58a2e00c.png)
 
 ### 4.4 商汤 API 配置就位

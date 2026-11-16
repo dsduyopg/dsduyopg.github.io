@@ -70,6 +70,11 @@ enableRobotsTXT = true
     name = "草稿箱"
     url = "/草稿箱/"
     weight = 7
+  [[menu.main]]
+    identifier = "regex"
+    name = "正则测试"
+    url = "/regex-tester/"
+    weight = 8
 
 [markup]
   [markup.goldmark]

@@ -15,9 +15,9 @@ tags: ["Linux", "Nginx", "Tomcat", "MySQL", "Redis", "SELinux", "DNS"]
 {{< toc >}}
 
 > **前言**
->
+> 
 > 这是“类若依项目低成本改造”系列的第二篇。**第一篇**《基于 Cloudflare R2 + 商汤大模型的类若依项目低成本改造》在本机把后端、前端，以及两个外部依赖——对象存储（Cloudflare R2）和大模型（商汤日日新）——全部跑通；**本篇**把整套服务搬到服务器：三台 Linux 分工，打 jar 和 war 两种包，配 Nginx 反向代理，最后让域名解析生效。**第三篇**再写后期的日志与运维。
->
+> 
 > 这一篇的难点不在写代码，而在“装完之后跑不起来”：端口放行了却返回 403、标签打完了却 502、`dig` 配完仍然解析不出来。正文按我实际动手的顺序写，每层做完给一个验收点，踩过的坑原样保留。
 
 部署真正费时间的从来不是“装软件”，而是装完之后页面打不开的那一段。我这次踩的坑集中在两处：**SELinux 与防火墙的边界**，以及 **DNS 的细枝末节**。前者会让“端口明明放行了、进程也在跑”的服务返回 403 或 502；后者会因为一个文件名、一个单词、一个权限位，让整套解析直接失效。
@@ -33,11 +33,11 @@ tags: ["Linux", "Nginx", "Tomcat", "MySQL", "Redis", "SELinux", "DNS"]
 
 ## 0. 先把三台机器的分工钉死
 
-| 节点 | IP | 角色 | 主要软件 |
-| --- | --- | --- | --- |
-| node1 | 192.168.88.170 | 接入层 | Nginx（静态页 + 反向代理）、named（DNS） |
+| 节点    | IP             | 角色  | 主要软件                          |
+| ----- | -------------- | --- | ----------------------------- |
+| node1 | 192.168.88.170 | 接入层 | Nginx（静态页 + 反向代理）、named（DNS）  |
 | node2 | 192.168.88.171 | 数据层 | MySQL 8、Redis、chrony（时间源）、日志盘 |
-| node3 | 192.168.88.172 | 应用层 | JDK 11 + jar、Tomcat + war |
+| node3 | 192.168.88.172 | 应用层 | JDK 11 + jar、Tomcat + war     |
 
 请求链路是这样的：
 
@@ -58,13 +58,13 @@ node3（jar 或 war）
 
 **实施顺序与验收点**
 
-| 顺序 | 在哪台 | 做什么 | 通过标准 |
-| --- | --- | --- | --- |
-| 1 | 三台 | 主机名、`/etc/hosts`、SSH 免密、看清防火墙与 SELinux | 三台互 ping 都通、ssh 免密可登 |
-| 2 | node2 | MySQL、导数据、Redis、chrony、日志盘 | node3 上能连 3306 和 6379 |
-| 3 | node3 | 打包、JDK 11、jar / war 启动 | 本机 8080 打开正常 |
-| 4 | node1 | 前端 dist、Nginx、SELinux 放行 | 浏览器进首页，接口有数据 |
-| 5 | node1 | DNS 正向/反向解析 | `dig` 正常、域名可访问 |
+| 顺序  | 在哪台   | 做什么                                    | 通过标准                  |
+| --- | ----- | -------------------------------------- | --------------------- |
+| 1   | 三台    | 主机名、`/etc/hosts`、SSH 免密、看清防火墙与 SELinux | 三台互 ping 都通、ssh 免密可登  |
+| 2   | node2 | MySQL、导数据、Redis、chrony、日志盘             | node3 上能连 3306 和 6379 |
+| 3   | node3 | 打包、JDK 11、jar / war 启动                 | 本机 8080 打开正常          |
+| 4   | node1 | 前端 dist、Nginx、SELinux 放行               | 浏览器进首页，接口有数据          |
+| 5   | node1 | DNS 正向/反向解析                            | `dig` 正常、域名可访问        |
 
 先把“每层做完怎么算过”想清楚，比装完十来个软件再一起调要省事得多。
 
@@ -103,7 +103,7 @@ sed -i -e '$a 192.168.88.170 node1 node1.itacast.cn\n192.168.88.171 node2 node2.
 而 `a` 追加的文本是**排队输出**的：先把文本排进输出队列，等这一轮结束时再打印。所以只要 `$a` 排在 `d` 前面，就算这一行随后被 `d` 删掉，排队的文本依然会输出——这正是“先加后删”能成立的原因。
 
 > **坑：** `d` 是“终止本轮”而不是“继续往下执行”。同一个 `sed` 里既有 `d` 又有 `a`/`i`/`c` 时，先想清楚谁在前。
->
+> 
 > **提示：** 命令里的 `3` 不是固定的——看你 `hosts` 里第一条要清掉的旧记录在第几行，就换成几，例如 `5,$d`。
 
 配置完验证：
@@ -134,7 +134,7 @@ cat ~/.ssh/authorized_keys
 ![node2 上确认公钥已写入](https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev/blog_images/%E4%B8%AD%E5%B7%9E%E5%85%BB%E8%80%81%E7%AC%AC%E4%BA%8C%E6%AC%A1%E5%AE%9E%E9%AA%8C/pictures/1561875b-6414-4b73-aa1c-fceba14e629c.png)
 
 > **坑：** 这条命令**不幂等**。`ssh-keygen -f ~/.ssh/id_rsa` 遇到已存在的同名文件会重新生成，旧私钥就被覆盖，之前配好的免密全白费。跑之前先 `ls -l ~/.ssh/id_rsa` 确认有没有密钥、是不是你要用的那一把。
->
+> 
 > **提示：** `sshpass -p '123456'` 把密码明文写在命令行里，只适合实验环境。生产上老老实实 `ssh-copy-id` 交互输入，或者上密钥托管。
 
 说实话，这一行命令的价值不在“技术含量”，而在于免去三台机器来回翻上键、敲 `yes` 的烦躁。免密通了以后，往 node1 传 `dist`、往 node3 传 `jar` 都是一条 `scp` 的事。
@@ -143,10 +143,10 @@ cat ~/.ssh/authorized_keys
 
 这一节是后面所有 403、502 的根源。**firewalld 和 SELinux 管的是两件不同的事**，很多人（包括当时的我）只放行了端口，然后对着“端口通了但服务报错”百思不得其解：
 
-| 门 | 管什么 | 典型表现 | 怎么开 |
-| --- | --- | --- | --- |
-| firewalld | 外部能不能连上这个**端口** | 浏览器一直转圈、`curl` 超时 | `firewall-cmd --add-port` |
-| SELinux | 进程能不能**读这个文件 / 连这个端口** | 403 Forbidden、502 Bad Gateway，端口和进程都正常 | `semanage fcontext`、`setsebool` |
+| 门         | 管什么                    | 典型表现                                   | 怎么开                             |
+| --------- | ---------------------- | -------------------------------------- | ------------------------------- |
+| firewalld | 外部能不能连上这个**端口**        | 浏览器一直转圈、`curl` 超时                      | `firewall-cmd --add-port`       |
+| SELinux   | 进程能不能**读这个文件 / 连这个端口** | 403 Forbidden、502 Bad Gateway，端口和进程都正常 | `semanage fcontext`、`setsebool` |
 
 判断依据是日志：
 
@@ -183,7 +183,7 @@ setsebool -P httpd_can_network_connect on   # 允许 httpd 主动外连（-P 持
 ```
 
 > **提示：** 如果提示 `semanage: command not found`，先装 `dnf install -y policycoreutils-python-utils`。
->
+> 
 > **提示：** `semanage fcontext` 只是**写规则**，不动文件。很多人加完规则就以为生效了，其实还得 `restorecon` 把规则真正盖到文件上（或者 `touch /.autorelabel` 后重启）。这是 SELinux 最常见的“我明明设了却没反应”。
 
 ## 2. 数据层部署（node2）
@@ -376,7 +376,7 @@ mount -a && df -h /mnt/zzyl_logs
 ![同样的流程得到的 jar](https://pub-aee2c40b7d9a4adca3ba6ad7e73a693e.r2.dev/blog_images/%E4%B8%AD%E5%B7%9E%E5%85%BB%E8%80%81%E7%AC%AC%E4%BA%8C%E6%AC%A1%E5%AE%9E%E9%AA%8C/pictures/21f29a2c-d6d3-4c66-a0e9-040dec402a46.png)
 
 > **注意：** 打包前先把配置改对。`application-prod.yml` 这次至少要动四处：数据库地址（node2）、Redis 地址（node2）、R2 对象存储的桶与密钥、商汤人脸识别的 appId 与密钥。**地址全部用域名或 node2 的 IP，绝不能留 `localhost`**——包是在 Windows 上打的，那里的 `localhost` 指的是你自己的电脑。
->
+> 
 > **提示：** 密钥不要提交进仓库。实验里直接写在 `yml` 里没问题，正式项目用环境变量或配置中心；写进仓库的密钥迟早会跟着代码泄漏出去。
 
 ### 3.2 JDK 11：能显示版本，不代表版本对
@@ -422,7 +422,7 @@ source /etc/profile
 ```
 
 > **坑：** 我最初是“追加 + 删最后两行”一条命令搞定的，写法近似 `sed -i -e '$a ...' -e '$-2,$d'`。`$-2` 不是合法的 sed 地址；就算换成能删最后两行的写法，也很容易把**刚追加的两行**一起删掉。改 `/etc/profile` 这类文件，先 `cat -n` 看清行号、按行号删，比“删最后 N 行”安全得多。
->
+> 
 > **提示：** `JAVA_HOME` 要换成自己机器上的真实路径，`ls /usr/lib/jvm/` 确认目录名。`<<'EOF'` 里的单引号也不能去掉——去掉之后 `$JAVA_HOME` 会在写入时被当前 shell 展开成旧值，写进文件就成了死路径。
 
 验证：
@@ -460,12 +460,12 @@ java -jar /export/zzyl-admin.jar
 
 但前台一关终端进程就没了，所以要挂到后台。可选方案就这么几种：
 
-| 方式 | 写法 | 适合场景 |
-| --- | --- | --- |
-| `nohup` | `nohup java -jar xx.jar > /export/zzyl-admin.log 2>&1 &` | 简单后台运行，日志落到指定文件 |
-| `screen` | `screen -S zzyl` 里直接跑 | 想要一个能回看的交互终端 |
-| `screen` + `nohup` | 两者叠加 | 没有收益，别这么干 |
-| systemd | 写 unit 文件 | 真要长期维护时 |
+| 方式                 | 写法                                                       | 适合场景            |
+| ------------------ | -------------------------------------------------------- | --------------- |
+| `nohup`            | `nohup java -jar xx.jar > /export/zzyl-admin.log 2>&1 &` | 简单后台运行，日志落到指定文件 |
+| `screen`           | `screen -S zzyl` 里直接跑                                    | 想要一个能回看的交互终端    |
+| `screen` + `nohup` | 两者叠加                                                     | 没有收益，别这么干       |
+| systemd            | 写 unit 文件                                                | 真要长期维护时         |
 
 nohup 最省事：
 
@@ -649,10 +649,10 @@ setsebool -P httpd_can_network_connect on
 
 这一段的经验可以直接背下来：
 
-| 现象 | 先查什么 | 处置 |
-| --- | --- | --- |
-| 403 Forbidden | `ls -Z` 看文件上下文、audit 里 `denied { read }` | `semanage fcontext` + `restorecon` |
-| 502 Bad Gateway | audit 里 `denied { name_connect }` | `setsebool -P httpd_can_network_connect on` |
+| 现象              | 先查什么                                     | 处置                                          |
+| --------------- | ---------------------------------------- | ------------------------------------------- |
+| 403 Forbidden   | `ls -Z` 看文件上下文、audit 里 `denied { read }` | `semanage fcontext` + `restorecon`          |
+| 502 Bad Gateway | audit 里 `denied { name_connect }`        | `setsebool -P httpd_can_network_connect on` |
 
 两个都是“防火墙已经放行、进程也在跑”却不通，区别只在 SELinux 拦的环节不同：一个拦“读文件”，一个拦“连端口”。
 
@@ -809,20 +809,20 @@ EOF
 
 折腾完把散落的坑收成一张表，下次照着查比翻正文快：
 
-| 现象 | 大概率原因 | 处置 |
-| --- | --- | --- |
-| 浏览器一直转圈 / 超时 | firewalld 没放行端口 | `firewall-cmd --permanent --add-port=N/tcp` 后 reload |
-| 403 Forbidden | SELinux 静态文件上下文不对 | `semanage fcontext` + `restorecon -Rv` |
-| 502 Bad Gateway | SELinux 不允许 httpd 主动连后端 | `setsebool -P httpd_can_network_connect on` |
-| 接口 404，静态页正常 | `proxy_pass` 少了末尾斜杠 | 改成 `.../zzyl-admin/` |
-| 刷新深层路由 404 | 单页应用没回落 | `try_files $uri $uri/ /index.html` |
-| `java -version` 还是 8 | `JAVA_HOME`/`PATH` 指向旧 JDK | 按行号删旧行，重写 `/etc/profile` |
-| 打包后连不上数据库 | 配置里还留着 `localhost` | 改成 node2 的地址 + 建远程账号 |
-| `Can't connect to MySQL` | 只监听 127.0.0.1 | `bind-address = 0.0.0.0` |
-| Redis `protected mode` 拒绝 | 没配 `requirepass` | 设密码后重启 |
-| 验证码不显示、令牌校验失败 | 三台时间不同步 | `chronyc sources` 确认出现 `^*` |
-| named 报 `file not found` | zone 文件名和配置不一致 | `ls /var/named` 对照 `named-checkconf -z` |
-| named 报 `permission denied` | `cp` 模板文件带来的权限/上下文 | `chown root:named` + `chmod 640` + `restorecon` |
+| 现象                          | 大概率原因                      | 处置                                                   |
+| --------------------------- | -------------------------- | ---------------------------------------------------- |
+| 浏览器一直转圈 / 超时                | firewalld 没放行端口            | `firewall-cmd --permanent --add-port=N/tcp` 后 reload |
+| 403 Forbidden               | SELinux 静态文件上下文不对          | `semanage fcontext` + `restorecon -Rv`               |
+| 502 Bad Gateway             | SELinux 不允许 httpd 主动连后端    | `setsebool -P httpd_can_network_connect on`          |
+| 接口 404，静态页正常                | `proxy_pass` 少了末尾斜杠        | 改成 `.../zzyl-admin/`                                 |
+| 刷新深层路由 404                  | 单页应用没回落                    | `try_files $uri $uri/ /index.html`                   |
+| `java -version` 还是 8        | `JAVA_HOME`/`PATH` 指向旧 JDK | 按行号删旧行，重写 `/etc/profile`                             |
+| 打包后连不上数据库                   | 配置里还留着 `localhost`         | 改成 node2 的地址 + 建远程账号                                 |
+| `Can't connect to MySQL`    | 只监听 127.0.0.1              | `bind-address = 0.0.0.0`                             |
+| Redis `protected mode` 拒绝   | 没配 `requirepass`           | 设密码后重启                                               |
+| 验证码不显示、令牌校验失败               | 三台时间不同步                    | `chronyc sources` 确认出现 `^*`                          |
+| named 报 `file not found`    | zone 文件名和配置不一致             | `ls /var/named` 对照 `named-checkconf -z`              |
+| named 报 `permission denied` | `cp` 模板文件带来的权限/上下文         | `chown root:named` + `chmod 640` + `restorecon`      |
 
 ## 7. 小结
 
